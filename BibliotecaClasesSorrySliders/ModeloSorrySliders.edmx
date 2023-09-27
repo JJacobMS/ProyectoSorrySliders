@@ -1,0 +1,517 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="SorrySlidersBDModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Cuenta">
+          <Key>
+            <PropertyRef Name="CorreoElectronico" />
+          </Key>
+          <Property Name="CorreoElectronico" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Avatar" Type="image" />
+          <Property Name="Contrasena" Type="nvarchar" MaxLength="64" />
+          <Property Name="Nickname" Type="nvarchar" MaxLength="50" />
+          <Property Name="IDUsuario" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Notificacion">
+          <Key>
+            <PropertyRef Name="IDNotificacion" />
+          </Key>
+          <Property Name="IDNotificacion" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AceptacionNotificacion" Type="bit" />
+          <Property Name="FechaNotificacion" Type="date" />
+          <Property Name="Remitente" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Destinatario" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Partida">
+          <Key>
+            <PropertyRef Name="CodigoPartida" />
+          </Key>
+          <Property Name="CodigoPartida" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="CantidadJugadores" Type="int" />
+          <Property Name="Host" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="RelacionAmigos">
+          <Key>
+            <PropertyRef Name="JugadorPrincipal" />
+            <PropertyRef Name="JugadorAmigo" />
+          </Key>
+          <Property Name="JugadorPrincipal" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="JugadorAmigo" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="RelacionBaneados">
+          <Key>
+            <PropertyRef Name="JugadorPrincipal" />
+            <PropertyRef Name="JugadorBaneado" />
+          </Key>
+          <Property Name="JugadorPrincipal" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="JugadorBaneado" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="RelacionPartidaCuenta">
+          <Key>
+            <PropertyRef Name="CodigoPartida" />
+            <PropertyRef Name="CorreoElectronico" />
+          </Key>
+          <Property Name="CodigoPartida" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="CorreoElectronico" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Posicion" Type="int" />
+        </EntityType>
+        <EntityType Name="Usuario">
+          <Key>
+            <PropertyRef Name="IDUsuario" />
+          </Key>
+          <Property Name="IDUsuario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombres" Type="nvarchar" MaxLength="60" />
+          <Property Name="Apellidos" Type="nvarchar" MaxLength="30" />
+        </EntityType>
+        <Association Name="FK__Cuenta__IDUsuari__398D8EEE">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
+          <End Role="Cuenta" Type="Self.Cuenta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="IDUsuario" />
+            </Principal>
+            <Dependent Role="Cuenta">
+              <PropertyRef Name="IDUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Notificac__Desti__44FF419A">
+          <End Role="Cuenta" Type="Self.Cuenta" Multiplicity="1" />
+          <End Role="Notificacion" Type="Self.Notificacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cuenta">
+              <PropertyRef Name="CorreoElectronico" />
+            </Principal>
+            <Dependent Role="Notificacion">
+              <PropertyRef Name="Destinatario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Notificac__Remit__440B1D61">
+          <End Role="Cuenta" Type="Self.Cuenta" Multiplicity="1" />
+          <End Role="Notificacion" Type="Self.Notificacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cuenta">
+              <PropertyRef Name="CorreoElectronico" />
+            </Principal>
+            <Dependent Role="Notificacion">
+              <PropertyRef Name="Remitente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Partida__Host__47DBAE45">
+          <End Role="Cuenta" Type="Self.Cuenta" Multiplicity="1" />
+          <End Role="Partida" Type="Self.Partida" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cuenta">
+              <PropertyRef Name="CorreoElectronico" />
+            </Principal>
+            <Dependent Role="Partida">
+              <PropertyRef Name="Host" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__RelacionA__Jugad__403A8C7D">
+          <End Role="Cuenta" Type="Self.Cuenta" Multiplicity="1" />
+          <End Role="RelacionAmigos" Type="Self.RelacionAmigos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cuenta">
+              <PropertyRef Name="CorreoElectronico" />
+            </Principal>
+            <Dependent Role="RelacionAmigos">
+              <PropertyRef Name="JugadorPrincipal" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__RelacionA__Jugad__412EB0B6">
+          <End Role="Cuenta" Type="Self.Cuenta" Multiplicity="1" />
+          <End Role="RelacionAmigos" Type="Self.RelacionAmigos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cuenta">
+              <PropertyRef Name="CorreoElectronico" />
+            </Principal>
+            <Dependent Role="RelacionAmigos">
+              <PropertyRef Name="JugadorAmigo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__RelacionB__Jugad__3C69FB99">
+          <End Role="Cuenta" Type="Self.Cuenta" Multiplicity="1" />
+          <End Role="RelacionBaneados" Type="Self.RelacionBaneados" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cuenta">
+              <PropertyRef Name="CorreoElectronico" />
+            </Principal>
+            <Dependent Role="RelacionBaneados">
+              <PropertyRef Name="JugadorPrincipal" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__RelacionB__Jugad__3D5E1FD2">
+          <End Role="Cuenta" Type="Self.Cuenta" Multiplicity="1" />
+          <End Role="RelacionBaneados" Type="Self.RelacionBaneados" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cuenta">
+              <PropertyRef Name="CorreoElectronico" />
+            </Principal>
+            <Dependent Role="RelacionBaneados">
+              <PropertyRef Name="JugadorBaneado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__RelacionP__Codig__4BAC3F29">
+          <End Role="Partida" Type="Self.Partida" Multiplicity="1" />
+          <End Role="RelacionPartidaCuenta" Type="Self.RelacionPartidaCuenta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Partida">
+              <PropertyRef Name="CodigoPartida" />
+            </Principal>
+            <Dependent Role="RelacionPartidaCuenta">
+              <PropertyRef Name="CodigoPartida" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__RelacionP__Corre__4AB81AF0">
+          <End Role="Cuenta" Type="Self.Cuenta" Multiplicity="1" />
+          <End Role="RelacionPartidaCuenta" Type="Self.RelacionPartidaCuenta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cuenta">
+              <PropertyRef Name="CorreoElectronico" />
+            </Principal>
+            <Dependent Role="RelacionPartidaCuenta">
+              <PropertyRef Name="CorreoElectronico" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="SorrySlidersBDModelStoreContainer">
+          <EntitySet Name="Cuenta" EntityType="Self.Cuenta" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Notificacion" EntityType="Self.Notificacion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Partida" EntityType="Self.Partida" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RelacionAmigos" EntityType="Self.RelacionAmigos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RelacionBaneados" EntityType="Self.RelacionBaneados" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RelacionPartidaCuenta" EntityType="Self.RelacionPartidaCuenta" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Cuenta__IDUsuari__398D8EEE" Association="Self.FK__Cuenta__IDUsuari__398D8EEE">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Cuenta" EntitySet="Cuenta" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Notificac__Desti__44FF419A" Association="Self.FK__Notificac__Desti__44FF419A">
+            <End Role="Cuenta" EntitySet="Cuenta" />
+            <End Role="Notificacion" EntitySet="Notificacion" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Notificac__Remit__440B1D61" Association="Self.FK__Notificac__Remit__440B1D61">
+            <End Role="Cuenta" EntitySet="Cuenta" />
+            <End Role="Notificacion" EntitySet="Notificacion" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Partida__Host__47DBAE45" Association="Self.FK__Partida__Host__47DBAE45">
+            <End Role="Cuenta" EntitySet="Cuenta" />
+            <End Role="Partida" EntitySet="Partida" />
+          </AssociationSet>
+          <AssociationSet Name="FK__RelacionA__Jugad__403A8C7D" Association="Self.FK__RelacionA__Jugad__403A8C7D">
+            <End Role="Cuenta" EntitySet="Cuenta" />
+            <End Role="RelacionAmigos" EntitySet="RelacionAmigos" />
+          </AssociationSet>
+          <AssociationSet Name="FK__RelacionA__Jugad__412EB0B6" Association="Self.FK__RelacionA__Jugad__412EB0B6">
+            <End Role="Cuenta" EntitySet="Cuenta" />
+            <End Role="RelacionAmigos" EntitySet="RelacionAmigos" />
+          </AssociationSet>
+          <AssociationSet Name="FK__RelacionB__Jugad__3C69FB99" Association="Self.FK__RelacionB__Jugad__3C69FB99">
+            <End Role="Cuenta" EntitySet="Cuenta" />
+            <End Role="RelacionBaneados" EntitySet="RelacionBaneados" />
+          </AssociationSet>
+          <AssociationSet Name="FK__RelacionB__Jugad__3D5E1FD2" Association="Self.FK__RelacionB__Jugad__3D5E1FD2">
+            <End Role="Cuenta" EntitySet="Cuenta" />
+            <End Role="RelacionBaneados" EntitySet="RelacionBaneados" />
+          </AssociationSet>
+          <AssociationSet Name="FK__RelacionP__Codig__4BAC3F29" Association="Self.FK__RelacionP__Codig__4BAC3F29">
+            <End Role="Partida" EntitySet="Partida" />
+            <End Role="RelacionPartidaCuenta" EntitySet="RelacionPartidaCuenta" />
+          </AssociationSet>
+          <AssociationSet Name="FK__RelacionP__Corre__4AB81AF0" Association="Self.FK__RelacionP__Corre__4AB81AF0">
+            <End Role="Cuenta" EntitySet="Cuenta" />
+            <End Role="RelacionPartidaCuenta" EntitySet="RelacionPartidaCuenta" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="SorrySlidersBDModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Cuenta">
+          <Key>
+            <PropertyRef Name="CorreoElectronico" />
+          </Key>
+          <Property Name="CorreoElectronico" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Avatar" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="Contrasena" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="Nickname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IDUsuario" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Usuario" Relationship="Self.FK__Cuenta__IDUsuari__398D8EEE" FromRole="Cuenta" ToRole="Usuario" />
+          <NavigationProperty Name="Notificacion" Relationship="Self.FK__Notificac__Desti__44FF419A" FromRole="Cuenta" ToRole="Notificacion" />
+          <NavigationProperty Name="Notificacion1" Relationship="Self.FK__Notificac__Remit__440B1D61" FromRole="Cuenta" ToRole="Notificacion" />
+          <NavigationProperty Name="Partida" Relationship="Self.FK__Partida__Host__47DBAE45" FromRole="Cuenta" ToRole="Partida" />
+          <NavigationProperty Name="RelacionPartidaCuenta" Relationship="Self.FK__RelacionP__Corre__4AB81AF0" FromRole="Cuenta" ToRole="RelacionPartidaCuenta" />
+          <NavigationProperty Name="Cuenta1" Relationship="Self.RelacionAmigos" FromRole="Cuenta" ToRole="Cuenta1" />
+          <NavigationProperty Name="Cuenta2" Relationship="Self.RelacionAmigos" FromRole="Cuenta1" ToRole="Cuenta" />
+          <NavigationProperty Name="Cuenta11" Relationship="Self.RelacionBaneados" FromRole="Cuenta" ToRole="Cuenta1" />
+          <NavigationProperty Name="Cuenta3" Relationship="Self.RelacionBaneados" FromRole="Cuenta1" ToRole="Cuenta" />
+        </EntityType>
+        <EntityType Name="Notificacion">
+          <Key>
+            <PropertyRef Name="IDNotificacion" />
+          </Key>
+          <Property Name="IDNotificacion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AceptacionNotificacion" Type="Boolean" />
+          <Property Name="FechaNotificacion" Type="DateTime" Precision="0" />
+          <Property Name="Remitente" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Destinatario" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Cuenta" Relationship="Self.FK__Notificac__Desti__44FF419A" FromRole="Notificacion" ToRole="Cuenta" />
+          <NavigationProperty Name="Cuenta1" Relationship="Self.FK__Notificac__Remit__440B1D61" FromRole="Notificacion" ToRole="Cuenta" />
+        </EntityType>
+        <EntityType Name="Partida">
+          <Key>
+            <PropertyRef Name="CodigoPartida" />
+          </Key>
+          <Property Name="CodigoPartida" Type="Guid" Nullable="false" />
+          <Property Name="CantidadJugadores" Type="Int32" />
+          <Property Name="Host" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Cuenta" Relationship="Self.FK__Partida__Host__47DBAE45" FromRole="Partida" ToRole="Cuenta" />
+          <NavigationProperty Name="RelacionPartidaCuenta" Relationship="Self.FK__RelacionP__Codig__4BAC3F29" FromRole="Partida" ToRole="RelacionPartidaCuenta" />
+        </EntityType>
+        <EntityType Name="RelacionPartidaCuenta">
+          <Key>
+            <PropertyRef Name="CodigoPartida" />
+            <PropertyRef Name="CorreoElectronico" />
+          </Key>
+          <Property Name="CodigoPartida" Type="Guid" Nullable="false" />
+          <Property Name="CorreoElectronico" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Posicion" Type="Int32" />
+          <NavigationProperty Name="Cuenta" Relationship="Self.FK__RelacionP__Corre__4AB81AF0" FromRole="RelacionPartidaCuenta" ToRole="Cuenta" />
+          <NavigationProperty Name="Partida" Relationship="Self.FK__RelacionP__Codig__4BAC3F29" FromRole="RelacionPartidaCuenta" ToRole="Partida" />
+        </EntityType>
+        <EntityType Name="Usuario">
+          <Key>
+            <PropertyRef Name="IDUsuario" />
+          </Key>
+          <Property Name="IDUsuario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombres" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
+          <Property Name="Apellidos" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Cuenta" Relationship="Self.FK__Cuenta__IDUsuari__398D8EEE" FromRole="Usuario" ToRole="Cuenta" />
+        </EntityType>
+        <Association Name="FK__Cuenta__IDUsuari__398D8EEE">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
+          <End Role="Cuenta" Type="Self.Cuenta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="IDUsuario" />
+            </Principal>
+            <Dependent Role="Cuenta">
+              <PropertyRef Name="IDUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Notificac__Desti__44FF419A">
+          <End Role="Cuenta" Type="Self.Cuenta" Multiplicity="1" />
+          <End Role="Notificacion" Type="Self.Notificacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cuenta">
+              <PropertyRef Name="CorreoElectronico" />
+            </Principal>
+            <Dependent Role="Notificacion">
+              <PropertyRef Name="Destinatario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Notificac__Remit__440B1D61">
+          <End Role="Cuenta" Type="Self.Cuenta" Multiplicity="1" />
+          <End Role="Notificacion" Type="Self.Notificacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cuenta">
+              <PropertyRef Name="CorreoElectronico" />
+            </Principal>
+            <Dependent Role="Notificacion">
+              <PropertyRef Name="Remitente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Partida__Host__47DBAE45">
+          <End Role="Cuenta" Type="Self.Cuenta" Multiplicity="1" />
+          <End Role="Partida" Type="Self.Partida" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cuenta">
+              <PropertyRef Name="CorreoElectronico" />
+            </Principal>
+            <Dependent Role="Partida">
+              <PropertyRef Name="Host" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__RelacionP__Corre__4AB81AF0">
+          <End Role="Cuenta" Type="Self.Cuenta" Multiplicity="1" />
+          <End Role="RelacionPartidaCuenta" Type="Self.RelacionPartidaCuenta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cuenta">
+              <PropertyRef Name="CorreoElectronico" />
+            </Principal>
+            <Dependent Role="RelacionPartidaCuenta">
+              <PropertyRef Name="CorreoElectronico" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__RelacionP__Codig__4BAC3F29">
+          <End Role="Partida" Type="Self.Partida" Multiplicity="1" />
+          <End Role="RelacionPartidaCuenta" Type="Self.RelacionPartidaCuenta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Partida">
+              <PropertyRef Name="CodigoPartida" />
+            </Principal>
+            <Dependent Role="RelacionPartidaCuenta">
+              <PropertyRef Name="CodigoPartida" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="RelacionAmigos">
+          <End Role="Cuenta" Type="Self.Cuenta" Multiplicity="*" />
+          <End Role="Cuenta1" Type="Self.Cuenta" Multiplicity="*" />
+        </Association>
+        <Association Name="RelacionBaneados">
+          <End Role="Cuenta" Type="Self.Cuenta" Multiplicity="*" />
+          <End Role="Cuenta1" Type="Self.Cuenta" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="SorrySlidersBDEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Cuenta" EntityType="Self.Cuenta" />
+          <EntitySet Name="Notificacion" EntityType="Self.Notificacion" />
+          <EntitySet Name="Partida" EntityType="Self.Partida" />
+          <EntitySet Name="RelacionPartidaCuenta" EntityType="Self.RelacionPartidaCuenta" />
+          <EntitySet Name="Usuario" EntityType="Self.Usuario" />
+          <AssociationSet Name="FK__Cuenta__IDUsuari__398D8EEE" Association="Self.FK__Cuenta__IDUsuari__398D8EEE">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Cuenta" EntitySet="Cuenta" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Notificac__Desti__44FF419A" Association="Self.FK__Notificac__Desti__44FF419A">
+            <End Role="Cuenta" EntitySet="Cuenta" />
+            <End Role="Notificacion" EntitySet="Notificacion" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Notificac__Remit__440B1D61" Association="Self.FK__Notificac__Remit__440B1D61">
+            <End Role="Cuenta" EntitySet="Cuenta" />
+            <End Role="Notificacion" EntitySet="Notificacion" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Partida__Host__47DBAE45" Association="Self.FK__Partida__Host__47DBAE45">
+            <End Role="Cuenta" EntitySet="Cuenta" />
+            <End Role="Partida" EntitySet="Partida" />
+          </AssociationSet>
+          <AssociationSet Name="FK__RelacionP__Corre__4AB81AF0" Association="Self.FK__RelacionP__Corre__4AB81AF0">
+            <End Role="Cuenta" EntitySet="Cuenta" />
+            <End Role="RelacionPartidaCuenta" EntitySet="RelacionPartidaCuenta" />
+          </AssociationSet>
+          <AssociationSet Name="FK__RelacionP__Codig__4BAC3F29" Association="Self.FK__RelacionP__Codig__4BAC3F29">
+            <End Role="Partida" EntitySet="Partida" />
+            <End Role="RelacionPartidaCuenta" EntitySet="RelacionPartidaCuenta" />
+          </AssociationSet>
+          <AssociationSet Name="RelacionAmigos" Association="Self.RelacionAmigos">
+            <End Role="Cuenta" EntitySet="Cuenta" />
+            <End Role="Cuenta1" EntitySet="Cuenta" />
+          </AssociationSet>
+          <AssociationSet Name="RelacionBaneados" Association="Self.RelacionBaneados">
+            <End Role="Cuenta" EntitySet="Cuenta" />
+            <End Role="Cuenta1" EntitySet="Cuenta" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="SorrySlidersBDModelStoreContainer" CdmEntityContainer="SorrySlidersBDEntities">
+          <EntitySetMapping Name="Cuenta">
+            <EntityTypeMapping TypeName="SorrySlidersBDModel.Cuenta">
+              <MappingFragment StoreEntitySet="Cuenta">
+                <ScalarProperty Name="CorreoElectronico" ColumnName="CorreoElectronico" />
+                <ScalarProperty Name="Avatar" ColumnName="Avatar" />
+                <ScalarProperty Name="Contrasena" ColumnName="Contrasena" />
+                <ScalarProperty Name="Nickname" ColumnName="Nickname" />
+                <ScalarProperty Name="IDUsuario" ColumnName="IDUsuario" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Notificacion">
+            <EntityTypeMapping TypeName="SorrySlidersBDModel.Notificacion">
+              <MappingFragment StoreEntitySet="Notificacion">
+                <ScalarProperty Name="IDNotificacion" ColumnName="IDNotificacion" />
+                <ScalarProperty Name="AceptacionNotificacion" ColumnName="AceptacionNotificacion" />
+                <ScalarProperty Name="FechaNotificacion" ColumnName="FechaNotificacion" />
+                <ScalarProperty Name="Remitente" ColumnName="Remitente" />
+                <ScalarProperty Name="Destinatario" ColumnName="Destinatario" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Partida">
+            <EntityTypeMapping TypeName="SorrySlidersBDModel.Partida">
+              <MappingFragment StoreEntitySet="Partida">
+                <ScalarProperty Name="CodigoPartida" ColumnName="CodigoPartida" />
+                <ScalarProperty Name="CantidadJugadores" ColumnName="CantidadJugadores" />
+                <ScalarProperty Name="Host" ColumnName="Host" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RelacionPartidaCuenta">
+            <EntityTypeMapping TypeName="SorrySlidersBDModel.RelacionPartidaCuenta">
+              <MappingFragment StoreEntitySet="RelacionPartidaCuenta">
+                <ScalarProperty Name="CodigoPartida" ColumnName="CodigoPartida" />
+                <ScalarProperty Name="CorreoElectronico" ColumnName="CorreoElectronico" />
+                <ScalarProperty Name="Posicion" ColumnName="Posicion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Usuario">
+            <EntityTypeMapping TypeName="SorrySlidersBDModel.Usuario">
+              <MappingFragment StoreEntitySet="Usuario">
+                <ScalarProperty Name="IDUsuario" ColumnName="IDUsuario" />
+                <ScalarProperty Name="Nombres" ColumnName="Nombres" />
+                <ScalarProperty Name="Apellidos" ColumnName="Apellidos" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="RelacionAmigos" TypeName="SorrySlidersBDModel.RelacionAmigos" StoreEntitySet="RelacionAmigos">
+            <EndProperty Name="Cuenta">
+              <ScalarProperty Name="CorreoElectronico" ColumnName="JugadorPrincipal" />
+            </EndProperty>
+            <EndProperty Name="Cuenta1">
+              <ScalarProperty Name="CorreoElectronico" ColumnName="JugadorAmigo" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="RelacionBaneados" TypeName="SorrySlidersBDModel.RelacionBaneados" StoreEntitySet="RelacionBaneados">
+            <EndProperty Name="Cuenta">
+              <ScalarProperty Name="CorreoElectronico" ColumnName="JugadorPrincipal" />
+            </EndProperty>
+            <EndProperty Name="Cuenta1">
+              <ScalarProperty Name="CorreoElectronico" ColumnName="JugadorBaneado" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
