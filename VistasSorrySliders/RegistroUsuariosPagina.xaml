@@ -18,7 +18,8 @@
                 <Grid.Background>
                     <ImageBrush ImageSource="/Recursos/TableroLanzamientoFondo.png"/>
                 </Grid.Background>
-                <Label Grid.Column="0" Grid.Row="0" Content="Bienvenido" Style="{StaticResource estiloInicioSesion}"></Label>
+                <Image Grid.Column="0" Grid.Row="0" Source="/Recursos/Banner.png" Width="100" Height="50"></Image>
+                <Label Grid.Column="0" Grid.Row="0" Content="Bienvenido" FontSize="50" Style="{StaticResource estiloInicioSesion}"></Label>
                 <Border Grid.Column="0" Grid.Row="1" BorderBrush="Black" BorderThickness="2" Margin="5,10,5,10">
                     <Grid Margin="5">
                         <Grid.RowDefinitions>
@@ -36,32 +37,33 @@
                         <Label Grid.Column="0" Grid.Row="0" Content="Datos Cuenta" Margin="20,0,20,0" FontSize="30"></Label>
                         <StackPanel Grid.Column="0" Grid.Row="1" Margin="20,0,20,0" VerticalAlignment="Center">
                             <Label Content="Nombre/s"></Label>
-                            <TextBox x:Name="txtBoxNombre" Width="200" Height="30"></TextBox>
+                            <TextBox x:Name="txtBoxNombre" Style="{StaticResource estiloTxtBoxCuenta}"></TextBox>
                         </StackPanel>
                         <Grid Grid.Column="1" Grid.Row="1">
                             <StackPanel Grid.Column="1" Grid.Row="1" Margin="20,0,20,0" VerticalAlignment="Center">
                                 <Label Content="Apellido/s"></Label>
-                                <TextBox x:Name="txtBoxApellidos" Width="200" Height="30"></TextBox>
+                                <TextBox x:Name="txtBoxApellidos" Style="{StaticResource estiloTxtBoxCuenta}"></TextBox>
                             </StackPanel>
                         </Grid>
                         <StackPanel Grid.Column="2" Grid.Row="0"  Grid.RowSpan="2" Margin="20,0,20,0" VerticalAlignment="Center">
-                            <Ellipse Width="150" Height="150" Stroke="Black" StrokeThickness="1" MouseLeftButtonDown="SeleccionarImagen">
+                            <Ellipse Width="150" Height="150" Stroke="Black" StrokeThickness="1" MouseLeftButtonDown="SeleccionarImagen" >
                                 <Ellipse.Fill>
                                     <ImageBrush x:Name="mgAvatar" Stretch="UniformToFill"></ImageBrush>
                                 </Ellipse.Fill>
                             </Ellipse>
                         </StackPanel>
+                        <Label Grid.Column="2" Grid.Row="2" HorizontalAlignment="Center" Content="Avatar"></Label>
                         <StackPanel Grid.Column="0" Grid.Row="2" Margin="20,0,20,0" VerticalAlignment="Center">
                             <Label Content="Nickname/Apodo"></Label>
-                            <TextBox x:Name="txtBoxNickname" Width="200" Height="30"></TextBox>
+                            <TextBox x:Name="txtBoxNickname" Style="{StaticResource estiloTxtBoxCuenta}"></TextBox>
                         </StackPanel>
                         <StackPanel Grid.Column="0" Grid.Row="3" Margin="20,0,20,0" VerticalAlignment="Center">
                             <Label Content="Correo Electrónico"></Label>
-                            <TextBox x:Name="txtBoxCorreoElectronico" Width="200" Height="30"></TextBox>
+                            <TextBox x:Name="txtBoxCorreoElectronico" Style="{StaticResource estiloTxtBoxCuenta}"></TextBox>
                         </StackPanel>
                         <StackPanel Grid.Column="0" Grid.Row="4" Margin="20,0,20,0" VerticalAlignment="Center">
                             <Label Content="Contraseña"></Label>
-                            <TextBox x:Name="txtBoxContrasena" Width="200" Height="30"></TextBox>
+                            <TextBox x:Name="txtBoxContrasena" Style="{StaticResource estiloTxtBoxCuenta}"></TextBox>
                         </StackPanel>
                         <StackPanel Grid.Column="1" Grid.Row="4" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Right">
                             <Button Margin="50,20,50,20" Width="100" Height="30" Content="Crear Cuenta" Click="ClicCrearCuenta"></Button>
