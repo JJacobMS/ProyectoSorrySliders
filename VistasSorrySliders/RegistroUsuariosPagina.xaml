@@ -19,7 +19,7 @@
                     <ImageBrush ImageSource="/Recursos/TableroLanzamientoFondo.png"/>
                 </Grid.Background>
                 <Image Grid.Column="0" Grid.Row="0" Source="/Recursos/Banner.png" Width="100" Height="50"></Image>
-                <Label Grid.Column="0" Grid.Row="0" Content="Bienvenido" FontSize="50" Style="{StaticResource estiloInicioSesion}"></Label>
+                <Label Grid.Column="0" Grid.Row="0" Content="Bienvenido" FontSize="50" Style="{StaticResource estiloLblInicioSesion}"></Label>
                 <Border Grid.Column="0" Grid.Row="1" BorderBrush="Black" BorderThickness="2" Margin="5,10,5,10">
                     <Grid Margin="5">
                         <Grid.RowDefinitions>
