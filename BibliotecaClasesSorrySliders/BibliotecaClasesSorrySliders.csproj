@@ -51,65 +51,69 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Class1.cs" />
-    <Compile Include="Cuenta.cs">
-      <DependentUpon>ModeloSorrySliders.tt</DependentUpon>
+    <Compile Include="CuentaSet.cs">
+      <DependentUpon>SorrySlidersModelo.tt</DependentUpon>
     </Compile>
-    <Compile Include="ModeloSorrySliders.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ModeloSorrySliders.Context.tt</DependentUpon>
+    <Compile Include="NotificaciónSet.cs">
+      <DependentUpon>SorrySlidersModelo.tt</DependentUpon>
     </Compile>
-    <Compile Include="ModeloSorrySliders.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ModeloSorrySliders.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ModeloSorrySliders.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ModeloSorrySliders.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="Notificacion.cs">
-      <DependentUpon>ModeloSorrySliders.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Partida.cs">
-      <DependentUpon>ModeloSorrySliders.tt</DependentUpon>
+    <Compile Include="PartidaSet.cs">
+      <DependentUpon>SorrySlidersModelo.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RelacionPartidaCuenta.cs">
-      <DependentUpon>ModeloSorrySliders.tt</DependentUpon>
+    <Compile Include="RelacionBaneadosSet.cs">
+      <DependentUpon>SorrySlidersModelo.tt</DependentUpon>
     </Compile>
-    <Compile Include="Usuario.cs">
-      <DependentUpon>ModeloSorrySliders.tt</DependentUpon>
+    <Compile Include="RelacionPartidaCuentaSet.cs">
+      <DependentUpon>SorrySlidersModelo.tt</DependentUpon>
     </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <EntityDeploy Include="ModeloSorrySliders.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>ModeloSorrySliders.Designer.cs</LastGenOutput>
-    </EntityDeploy>
+    <Compile Include="RelaciónAmigosSet.cs">
+      <DependentUpon>SorrySlidersModelo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SorrySlidersModelo.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SorrySlidersModelo.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SorrySlidersModelo.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SorrySlidersModelo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SorrySlidersModelo.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SorrySlidersModelo.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="UsuarioSet.cs">
+      <DependentUpon>SorrySlidersModelo.tt</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.Config" />
-    <None Include="ModeloSorrySliders.edmx.diagram">
-      <DependentUpon>ModeloSorrySliders.edmx</DependentUpon>
-    </None>
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="ModeloSorrySliders.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>ModeloSorrySliders.Context.cs</LastGenOutput>
-      <DependentUpon>ModeloSorrySliders.edmx</DependentUpon>
-    </Content>
-    <Content Include="ModeloSorrySliders.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>ModeloSorrySliders.edmx</DependentUpon>
-      <LastGenOutput>ModeloSorrySliders.cs</LastGenOutput>
-    </Content>
+    <EntityDeploy Include="SorrySlidersModelo.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>SorrySlidersModelo.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="SorrySlidersModelo.edmx.diagram">
+      <DependentUpon>SorrySlidersModelo.edmx</DependentUpon>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="SorrySlidersModelo.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>SorrySlidersModelo.edmx</DependentUpon>
+      <LastGenOutput>SorrySlidersModelo.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="SorrySlidersModelo.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>SorrySlidersModelo.edmx</DependentUpon>
+      <LastGenOutput>SorrySlidersModelo.cs</LastGenOutput>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

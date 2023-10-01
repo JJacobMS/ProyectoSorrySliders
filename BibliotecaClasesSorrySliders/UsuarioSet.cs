@@ -12,20 +12,19 @@ namespace BibliotecaClasesSorrySliders
     using System;
     using System.Collections.Generic;
     
-    public partial class Partida
+    public partial class UsuarioSet
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Partida()
+        public UsuarioSet()
         {
-            this.RelacionPartidaCuenta = new HashSet<RelacionPartidaCuenta>();
+            this.CuentaSet = new HashSet<CuentaSet>();
         }
     
-        public System.Guid CodigoPartida { get; set; }
-        public Nullable<int> CantidadJugadores { get; set; }
-        public string Host { get; set; }
+        public int IdUsuario { get; set; }
+        public string Nombre { get; set; }
+        public string Apellido { get; set; }
     
-        public virtual Cuenta Cuenta { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<RelacionPartidaCuenta> RelacionPartidaCuenta { get; set; }
+        public virtual ICollection<CuentaSet> CuentaSet { get; set; }
     }
 }

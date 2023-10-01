@@ -7,6 +7,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VistasSorrySliders", "Vista
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BibliotecaClasesSorrySliders", "BibliotecaClasesSorrySliders\BibliotecaClasesSorrySliders.csproj", "{A86C07BF-07AD-4FB6-B70A-146D6F56996E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServidorSorrySliders", "ServidorSorrySliders\ServidorSorrySliders.csproj", "{A8568801-EB9F-4E4D-BD89-1D14F6325CD8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HostSorrySliders", "HostSorrySliders\HostSorrySliders.csproj", "{926576C2-4FD9-449E-9A14-EE1E2020F074}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +25,14 @@ Global
 		{A86C07BF-07AD-4FB6-B70A-146D6F56996E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A86C07BF-07AD-4FB6-B70A-146D6F56996E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A86C07BF-07AD-4FB6-B70A-146D6F56996E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A8568801-EB9F-4E4D-BD89-1D14F6325CD8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A8568801-EB9F-4E4D-BD89-1D14F6325CD8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A8568801-EB9F-4E4D-BD89-1D14F6325CD8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A8568801-EB9F-4E4D-BD89-1D14F6325CD8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{926576C2-4FD9-449E-9A14-EE1E2020F074}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{926576C2-4FD9-449E-9A14-EE1E2020F074}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{926576C2-4FD9-449E-9A14-EE1E2020F074}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{926576C2-4FD9-449E-9A14-EE1E2020F074}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

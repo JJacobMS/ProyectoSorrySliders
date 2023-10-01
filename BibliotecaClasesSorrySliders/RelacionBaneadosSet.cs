@@ -12,15 +12,13 @@ namespace BibliotecaClasesSorrySliders
     using System;
     using System.Collections.Generic;
     
-    public partial class Notificacion
+    public partial class RelacionBaneadosSet
     {
-        public int IDNotificacion { get; set; }
-        public Nullable<bool> AceptacionNotificacion { get; set; }
-        public Nullable<System.DateTime> FechaNotificacion { get; set; }
-        public string Remitente { get; set; }
-        public string Destinatario { get; set; }
+        public int IdRelacionBaneados { get; set; }
+        public string CorreoElectronicoJugadorPrincipal { get; set; }
+        public string CorreoElectronicoJugadorBaneado { get; set; }
     
-        public virtual Cuenta Cuenta { get; set; }
-        public virtual Cuenta Cuenta1 { get; set; }
+        public virtual CuentaSet CuentaSet { get; set; }
+        public virtual CuentaSet CuentaSet1 { get; set; }
     }
 }
