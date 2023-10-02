@@ -127,16 +127,16 @@ namespace VistasSorrySliders.ServicioInicioSesion {
     public interface IInicioSesion {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IInicioSesion/VerificarExistenciaCorreoCuenta", ReplyAction="http://tempuri.org/IInicioSesion/VerificarExistenciaCorreoCuentaResponse")]
-        string VerificarExistenciaCorreoCuenta(string correoElectronico);
+        System.ValueTuple<string, int> VerificarExistenciaCorreoCuenta(string correoElectronico);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IInicioSesion/VerificarExistenciaCorreoCuenta", ReplyAction="http://tempuri.org/IInicioSesion/VerificarExistenciaCorreoCuentaResponse")]
-        System.Threading.Tasks.Task<string> VerificarExistenciaCorreoCuentaAsync(string correoElectronico);
+        System.Threading.Tasks.Task<System.ValueTuple<string, int>> VerificarExistenciaCorreoCuentaAsync(string correoElectronico);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IInicioSesion/VerificarContrasenaDeCuenta", ReplyAction="http://tempuri.org/IInicioSesion/VerificarContrasenaDeCuentaResponse")]
-        VistasSorrySliders.ServicioInicioSesion.CuentaSet VerificarContrasenaDeCuenta(VistasSorrySliders.ServicioInicioSesion.CuentaSet cuentaPorVerificar);
+        System.ValueTuple<VistasSorrySliders.ServicioInicioSesion.CuentaSet, int> VerificarContrasenaDeCuenta(VistasSorrySliders.ServicioInicioSesion.CuentaSet cuentaPorVerificar);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IInicioSesion/VerificarContrasenaDeCuenta", ReplyAction="http://tempuri.org/IInicioSesion/VerificarContrasenaDeCuentaResponse")]
-        System.Threading.Tasks.Task<VistasSorrySliders.ServicioInicioSesion.CuentaSet> VerificarContrasenaDeCuentaAsync(VistasSorrySliders.ServicioInicioSesion.CuentaSet cuentaPorVerificar);
+        System.Threading.Tasks.Task<System.ValueTuple<VistasSorrySliders.ServicioInicioSesion.CuentaSet, int>> VerificarContrasenaDeCuentaAsync(VistasSorrySliders.ServicioInicioSesion.CuentaSet cuentaPorVerificar);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -166,19 +166,19 @@ namespace VistasSorrySliders.ServicioInicioSesion {
                 base(binding, remoteAddress) {
         }
         
-        public string VerificarExistenciaCorreoCuenta(string correoElectronico) {
+        public System.ValueTuple<string, int> VerificarExistenciaCorreoCuenta(string correoElectronico) {
             return base.Channel.VerificarExistenciaCorreoCuenta(correoElectronico);
         }
         
-        public System.Threading.Tasks.Task<string> VerificarExistenciaCorreoCuentaAsync(string correoElectronico) {
+        public System.Threading.Tasks.Task<System.ValueTuple<string, int>> VerificarExistenciaCorreoCuentaAsync(string correoElectronico) {
             return base.Channel.VerificarExistenciaCorreoCuentaAsync(correoElectronico);
         }
         
-        public VistasSorrySliders.ServicioInicioSesion.CuentaSet VerificarContrasenaDeCuenta(VistasSorrySliders.ServicioInicioSesion.CuentaSet cuentaPorVerificar) {
+        public System.ValueTuple<VistasSorrySliders.ServicioInicioSesion.CuentaSet, int> VerificarContrasenaDeCuenta(VistasSorrySliders.ServicioInicioSesion.CuentaSet cuentaPorVerificar) {
             return base.Channel.VerificarContrasenaDeCuenta(cuentaPorVerificar);
         }
         
-        public System.Threading.Tasks.Task<VistasSorrySliders.ServicioInicioSesion.CuentaSet> VerificarContrasenaDeCuentaAsync(VistasSorrySliders.ServicioInicioSesion.CuentaSet cuentaPorVerificar) {
+        public System.Threading.Tasks.Task<System.ValueTuple<VistasSorrySliders.ServicioInicioSesion.CuentaSet, int>> VerificarContrasenaDeCuentaAsync(VistasSorrySliders.ServicioInicioSesion.CuentaSet cuentaPorVerificar) {
             return base.Channel.VerificarContrasenaDeCuentaAsync(cuentaPorVerificar);
         }
     }

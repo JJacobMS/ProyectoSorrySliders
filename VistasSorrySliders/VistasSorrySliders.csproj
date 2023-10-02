@@ -146,6 +146,9 @@
     <None Include="Connected Services\ServicioInicioSesion\item2.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Connected Services\ServicioInicioSesion\item3.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Connected Services\ServicioInicioSesion\VistasSorrySliders.ServicioInicioSesion.CuentaSet.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>

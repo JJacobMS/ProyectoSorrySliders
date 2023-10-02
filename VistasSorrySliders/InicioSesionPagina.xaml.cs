@@ -23,6 +23,7 @@ namespace VistasSorrySliders
     /// </summary>
     public partial class InicioSesionPagina : Page
     {
+        
         public InicioSesionPagina()
         {
             InitializeComponent();
@@ -66,16 +67,24 @@ namespace VistasSorrySliders
             if (datosCompletos)
             {
                 string correoVerificado = "";
+                int resultado = 0;
                 try
                 {
                     ServicioInicioSesion.InicioSesionClient proxyInicioSesion = new ServicioInicioSesion.InicioSesionClient();
-                    correoVerificado = proxyInicioSesion.VerificarExistenciaCorreoCuenta(correoIngresado);
+                    (correoVerificado, resultado) = proxyInicioSesion.VerificarExistenciaCorreoCuenta(correoIngresado);
+                    proxyInicioSesion.Close();
                 }
                 catch (CommunicationException excepcion) 
                 {
                     MessageBox.Show(Properties.Resources.msgErrorConexion);
                     Console.WriteLine(excepcion);
                 }
+
+                switch (resultado)
+                {
+                    //case 0:
+                }
+
                 
                 if (correoVerificado == null)
                 {
@@ -98,12 +107,14 @@ namespace VistasSorrySliders
         private void VerificarContrasena(CuentaSet cuentaPorVerificar)
         {
             CuentaSet cuentaVerificada = new CuentaSet();
+            int resultado;
             try
             {
                 ServicioInicioSesion.InicioSesionClient proxyInicioSesion = new ServicioInicioSesion.InicioSesionClient();
-                cuentaVerificada = proxyInicioSesion.VerificarContrasenaDeCuenta(cuentaPorVerificar);
+                (cuentaVerificada, resultado) = proxyInicioSesion.VerificarContrasenaDeCuenta(cuentaPorVerificar);
+                proxyInicioSesion.Close();
             }
-            catch (CommunicationException excepcion)
+            catch (CommunicationException excepcion)    
             {
                 MessageBox.Show(Properties.Resources.msgErrorConexion);
                 Console.WriteLine(excepcion);
