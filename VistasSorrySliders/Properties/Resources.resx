@@ -165,6 +165,12 @@
   <data name="lblNombres" xml:space="preserve">
     <value>Nombre/s</value>
   </data>
+  <data name="msgErrorBaseDatos" xml:space="preserve">
+    <value>Hubo un error de conexión con la base de datos</value>
+  </data>
+  <data name="msgErrorConexion" xml:space="preserve">
+    <value>Hubo un error de conexión con el servidor</value>
+  </data>
   <data name="txtBlockContrasenaInvalida" xml:space="preserve">
     <value>La contraseña no es correcta. Verifica tu contraseña e inténtalo de nuevo</value>
   </data>

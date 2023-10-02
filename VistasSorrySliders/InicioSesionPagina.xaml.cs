@@ -1,7 +1,7 @@
-﻿using BibliotecaClasesSorrySliders;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -14,6 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using VistasSorrySliders.DAO;
+using VistasSorrySliders.ServicioInicioSesion;
 
 namespace VistasSorrySliders
 {
@@ -47,10 +48,10 @@ namespace VistasSorrySliders
         {
             ReiniciarPantalla();
             Boolean datosCompletos = true;
-            string correo = txtBoxCorreo.Text;
+            string correoIngresado = txtBoxCorreo.Text;
             string contrasena = pssBoxContrasena.Password;
 
-            if (string.IsNullOrWhiteSpace(correo))
+            if (string.IsNullOrWhiteSpace(correoIngresado))
             {
                 datosCompletos = false;
                 txtBoxCorreo.Style = (Style)FindResource("estiloTxtBoxDatosRojo");
@@ -64,40 +65,58 @@ namespace VistasSorrySliders
 
             if (datosCompletos)
             {
-                Cuenta cuentaPorVerificar = new Cuenta { CorreoElectronico = correo };
-                CuentaDAO cuentaDAO = new CuentaDAO();
-                List<Cuenta> cuentaVerificada = cuentaDAO.VerificarExistenciaCorreoCuenta(cuentaPorVerificar);
-                
-                if (cuentaVerificada == null)
+                string correoVerificado = "";
+                try
                 {
-                    MessageBox.Show("ERROR BD 1");
+                    ServicioInicioSesion.InicioSesionClient proxyInicioSesion = new ServicioInicioSesion.InicioSesionClient();
+                    correoVerificado = proxyInicioSesion.VerificarExistenciaCorreoCuenta(correoIngresado);
+                }
+                catch (CommunicationException excepcion) 
+                {
+                    MessageBox.Show(Properties.Resources.msgErrorConexion);
+                    Console.WriteLine(excepcion);
+                }
+                
+                if (correoVerificado == null)
+                {
+                    MessageBox.Show(Properties.Resources.msgErrorBaseDatos);
                     return;
                 }
-                if (cuentaVerificada.Count < 0)
+                if (correoVerificado == "")
                 {
                     txtBlockCorreoInvalido.Visibility = Visibility.Visible;
                 }
                 else
                 {
-                    cuentaVerificada[0].Contrasena = contrasena;
-                    VerificarContrasena(cuentaVerificada[0]);
+                    CuentaSet cuentaVerificada = new CuentaSet { CorreoElectronico = correoVerificado, Contraseña = contrasena };
+                    VerificarContrasena(cuentaVerificada);
                 }
             }
 
         }
 
-        private void VerificarContrasena(Cuenta cuentaPorVerificar)
+        private void VerificarContrasena(CuentaSet cuentaPorVerificar)
         {
-            CuentaDAO cuentaDAO = new CuentaDAO();
-            List<string> cuentaVerificada = cuentaDAO.VerificarContrasenaDeCuenta(cuentaPorVerificar);
+            CuentaSet cuentaVerificada = new CuentaSet();
+            try
+            {
+                ServicioInicioSesion.InicioSesionClient proxyInicioSesion = new ServicioInicioSesion.InicioSesionClient();
+                cuentaVerificada = proxyInicioSesion.VerificarContrasenaDeCuenta(cuentaPorVerificar);
+            }
+            catch (CommunicationException excepcion)
+            {
+                MessageBox.Show(Properties.Resources.msgErrorConexion);
+                Console.WriteLine(excepcion);
+            }
 
             if (cuentaVerificada == null)
             {
-                MessageBox.Show("ERROR BD 2");
+                MessageBox.Show(Properties.Resources.msgErrorBaseDatos);
                 return;
             }
-            if (cuentaVerificada.Count < 0)
+            if (cuentaVerificada.CorreoElectronico == null)
             {
+                
                 txtBlockContrasenaInvalida.Visibility = Visibility.Visible;
             }
             else

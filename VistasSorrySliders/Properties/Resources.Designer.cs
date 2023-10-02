@@ -205,6 +205,24 @@ namespace VistasSorrySliders.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Hubo un error de conexión con la base de datos.
+        /// </summary>
+        public static string msgErrorBaseDatos {
+            get {
+                return ResourceManager.GetString("msgErrorBaseDatos", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Hubo un error de conexión con el servidor.
+        /// </summary>
+        public static string msgErrorConexion {
+            get {
+                return ResourceManager.GetString("msgErrorConexion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a La contraseña no es correcta. Verifica tu contraseña e inténtalo de nuevo.
         /// </summary>
         public static string txtBlockContrasenaInvalida {

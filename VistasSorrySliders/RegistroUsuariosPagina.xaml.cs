@@ -42,7 +42,7 @@ namespace VistasSorrySliders
         }
         private void AñadirCuenta() 
         {
-            using (var context = new SorrySlidersBDEntities())
+            /*using (var context = new SorrySlidersBDEntities())
             {
                 context.Usuario.Add(new Usuario()
                 {
@@ -64,7 +64,7 @@ namespace VistasSorrySliders
                 txtBoxNickname.Text = "";
                 System.Windows.Forms.MessageBox.Show("La cuenta se ha registrado exitosamente", "Cuenta creada", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-            }
+            }*/
         }
 
         private void ClicCrearCuenta(object sender, RoutedEventArgs e)

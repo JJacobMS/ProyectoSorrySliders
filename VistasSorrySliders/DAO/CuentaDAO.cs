@@ -11,7 +11,7 @@ using VistasSorrySliders.InterfacesDAO;
 namespace VistasSorrySliders.DAO
 {
     public class CuentaDAO: ICuentaDAO
-    {
+    {/*
         //Cheacr existencia correo
         //Cehcar existencia contraseña del correo
         public List<Cuenta> VerificarExistenciaCorreoCuenta(Cuenta cuentaPorVerificar)
@@ -53,6 +53,6 @@ namespace VistasSorrySliders.DAO
                 Console.WriteLine(ex.ToString());
                 return null;
             }
-        }
+        }*/
     }
 }

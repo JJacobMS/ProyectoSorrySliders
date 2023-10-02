@@ -8,8 +8,8 @@ using System.Threading.Tasks;
 namespace VistasSorrySliders.InterfacesDAO
 {
     public interface ICuentaDAO
-    {
+    {/*
         List<Cuenta> VerificarExistenciaCorreoCuenta(Cuenta cuentaPorVerificar);
-        List<string> VerificarContrasenaDeCuenta(Cuenta cuentaPorVerificar);
+        List<string> VerificarContrasenaDeCuenta(Cuenta cuentaPorVerificar);*/
     }
 }
