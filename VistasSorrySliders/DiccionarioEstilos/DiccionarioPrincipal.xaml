@@ -3,13 +3,13 @@
     <FontFamily x:Key="FuentesTitulo">/Fuentes/Economica-Bold.ttf #Economica</FontFamily>
     <FontFamily x:Key="FuentesTexto">/Fuentes/Prompt-Medium.ttf #Prompt</FontFamily>
 
-    <Style x:Key="estiloLabelTituloTextos" TargetType="Label">
+    <Style x:Key="estiloLblTituloTextos" TargetType="Label">
         <Setter Property="FontFamily" Value="{StaticResource FuentesTitulo}"/>
         <Setter Property="FontSize" Value="30"/>
         <Setter Property="HorizontalAlignment" Value="Center"/>
     </Style>
 
-    <Style x:Key="estiloBotonDeshabilitadoTablero" TargetType="Button">
+    <Style x:Key="estiloBtnDeshabilitadoTablero" TargetType="Button">
         <Setter Property="Height" Value="30"/>
         <Setter Property="Width" Value="90"/>
         <Setter Property="FontFamily" Value="{StaticResource FuentesTitulo}"/>
@@ -99,7 +99,7 @@
     </Style>
 
 
-    <Style x:Key="estiloBotonTableroAmarillo" TargetType="Button" BasedOn="{StaticResource estiloBotonDeshabilitadoTablero}">
+    <Style x:Key="estiloBtnTableroAmarillo" TargetType="Button" BasedOn="{StaticResource estiloBtnDeshabilitadoTablero}">
         <Setter Property="Foreground" Value="#F6DE7B"/>
         <Setter Property="Template">
             <Setter.Value>
@@ -129,7 +129,7 @@
 
     </Style>
 
-    <Style x:Key="estiloBotonTableroAzul" TargetType="Button" BasedOn="{StaticResource estiloBotonDeshabilitadoTablero}">
+    <Style x:Key="estiloBtnTableroAzul" TargetType="Button" BasedOn="{StaticResource estiloBtnDeshabilitadoTablero}">
         <Setter Property="Foreground" Value="#85C4E8"/>
         <Setter Property="Template">
             <Setter.Value>
@@ -159,7 +159,7 @@
 
     </Style>
 
-    <Style x:Key="estiloBotonTableroRojo" TargetType="Button" BasedOn="{StaticResource estiloBotonDeshabilitadoTablero}">
+    <Style x:Key="estiloBtnTableroRojo" TargetType="Button" BasedOn="{StaticResource estiloBtnDeshabilitadoTablero}">
         <Setter Property="Foreground" Value="#FAA3AC"/>
         <Setter Property="Template">
             <Setter.Value>
@@ -188,7 +188,7 @@
         </Style.Triggers>
     </Style>
 
-    <Style x:Key="estiloBotonTableroVerde" TargetType="Button" BasedOn="{StaticResource estiloBotonDeshabilitadoTablero}">
+    <Style x:Key="estiloBtnTableroVerde" TargetType="Button" BasedOn="{StaticResource estiloBtnDeshabilitadoTablero}">
         <Setter Property="Foreground" Value="#48FFA6"/>
         <Setter Property="Template">
             <Setter.Value>
@@ -217,7 +217,7 @@
         </Style.Triggers>
     </Style>
 
-    <Style x:Key="estiloDataCellEstadoInternet" TargetType="DataGridCell">
+    <Style x:Key="estiloDtCellEstadoInternet" TargetType="DataGridCell">
         <Setter Property="ContentTemplate">
             <Setter.Value>
                 <DataTemplate>
@@ -247,7 +247,7 @@
         </Style.Triggers>
     </Style>
 
-    <Style x:Key="estiloDataCellRolPartida" TargetType="DataGridCell">
+    <Style x:Key="estiloDtCellRolPartida" TargetType="DataGridCell">
         <Setter Property="ContentTemplate">
             <Setter.Value>
                 <DataTemplate>

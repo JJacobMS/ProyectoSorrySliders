@@ -1,6 +1,6 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-    <Style x:Key="estiloInicioSesion" TargetType="Label">
+    <Style x:Key="estiloLblInicioSesion" TargetType="Label">
         <Setter Property="VerticalAlignment" Value="Top"/>
         <Setter Property="HorizontalAlignment" Value="Center"/>
         <Setter Property="FontSize" Value="38"/>
@@ -9,7 +9,7 @@
         <Setter Property="FontFamily" Value="{StaticResource FuentesTitulo}"/>
     </Style>
 
-    <Style x:Key="estiloBotonContinuar" TargetType="Button" BasedOn="{StaticResource estiloBotonTableroAzul}">
+    <Style x:Key="estiloBtnContinuar" TargetType="Button" BasedOn="{StaticResource estiloBtnTableroAzul}">
         <Setter Property="Height" Value="40"/>
         <Setter Property="Width" Value="120"/>
         <Setter Property="FontFamily" Value="{StaticResource FuentesTitulo}"/>
@@ -17,7 +17,7 @@
         <Setter Property="Foreground" Value="#EAF6FD"/>
     </Style>
 
-    <Style x:Key="estiloBotonCancelar" TargetType="Button" BasedOn="{StaticResource estiloBotonTableroRojo}">
+    <Style x:Key="estiloBtnCancelar" TargetType="Button" BasedOn="{StaticResource estiloBtnTableroRojo}">
         <Setter Property="Height" Value="40"/>
         <Setter Property="Width" Value="120"/>
         <Setter Property="FontFamily" Value="{StaticResource FuentesTitulo}"/>
@@ -25,7 +25,7 @@
         <Setter Property="Foreground" Value="#EAF6FD"/>
     </Style>
 
-    <Style TargetType="TextBox" x:Key="estiloTextBoxDatosAzul">
+    <Style TargetType="TextBox" x:Key="estiloTxtBoxDatosAzul">
         <Setter Property="Height" Value="45"/>
         <Setter Property="Margin" Value="25,5,25,5"/>
         <Setter Property="FontSize" Value="16"/>
@@ -45,7 +45,27 @@
         </Setter>
     </Style>
 
-    <Style TargetType="PasswordBox" x:Key="estiloTextBoxContrasenaAzul">
+    <Style TargetType="TextBox" x:Key="estiloTxtBoxDatosRojo">
+        <Setter Property="Height" Value="45"/>
+        <Setter Property="Margin" Value="25,5,25,5"/>
+        <Setter Property="FontSize" Value="16"/>
+        <Setter Property="FontFamily" Value="{StaticResource FuentesTexto}"/>
+        <Setter Property="Foreground" Value="#5B0F16"/>
+        <Setter Property="HorizontalContentAlignment" Value="Left"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="Padding" Value="10,0,0,0"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <Border CornerRadius="5" BorderThickness="3" BorderBrush="#5B0F16" Background="#FAE4CF">
+                        <ScrollViewer Margin="0" x:Name="PART_ContentHost" />
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="PasswordBox" x:Key="estiloPssBoxContrasenaAzul">
         <Setter Property="Height" Value="45"/>
         <Setter Property="Margin" Value="25,5,25,5"/>
         <Setter Property="FontSize" Value="16"/>
@@ -65,7 +85,27 @@
         </Setter>
     </Style>
 
-    <Style x:Key="estiloBotonMorado" TargetType="Button" BasedOn="{StaticResource estiloBotonDeshabilitadoTablero}">
+    <Style TargetType="PasswordBox" x:Key="estiloPssBoxContrasenaRojo">
+        <Setter Property="Height" Value="45"/>
+        <Setter Property="Margin" Value="25,5,25,5"/>
+        <Setter Property="FontSize" Value="16"/>
+        <Setter Property="FontFamily" Value="{StaticResource FuentesTexto}"/>
+        <Setter Property="Foreground" Value="#5B0F16"/>
+        <Setter Property="HorizontalContentAlignment" Value="Left"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="Padding" Value="10,0,0,0"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <Border CornerRadius="5" BorderThickness="3" BorderBrush="#5B0F16" Background="#FAE4CF">
+                        <ScrollViewer Margin="0" x:Name="PART_ContentHost" />
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="estiloBtnMorado" TargetType="Button" BasedOn="{StaticResource estiloBtnDeshabilitadoTablero}">
         <Setter Property="Height" Value="35"/>
         <Setter Property="Width" Value="150"/>
         <Setter Property="FontSize" Value="18"/>
@@ -112,7 +152,7 @@
         <Setter Property="Foreground" Value="#5B0F16"/>
     </Style>
 
-    <Style x:Key="estiloBotonSalir" TargetType="Button">
+    <Style x:Key="estiloBtnSalir" TargetType="Button">
         <Setter Property="Height" Value="45"/>
         <Setter Property="Width" Value="125"/>
         <Setter Property="FontFamily" Value="{StaticResource FuentesTitulo}"/>
@@ -157,7 +197,7 @@
         </Style.Triggers>
     </Style>
 
-    <Style x:Key="estiloBotonUnirsePartida" TargetType="Button" BasedOn="{StaticResource estiloBotonDeshabilitadoTablero}">
+    <Style x:Key="estiloBtnUnirsePartida" TargetType="Button" BasedOn="{StaticResource estiloBtnDeshabilitadoTablero}">
         <Setter Property="Height" Value="45"/>
         <Setter Property="Width" Value="210"/>
         <Setter Property="FontSize" Value="25"/>
@@ -188,7 +228,7 @@
         </Style.Triggers>
     </Style>
 
-    <Style x:Key="estilotxtBlockErrorUnirsePartida" TargetType="TextBlock" BasedOn="{StaticResource estiloTxtBlockMensajeError}">
+    <Style x:Key="estiloTxtBlockErrorUnirsePartida" TargetType="TextBlock" BasedOn="{StaticResource estiloTxtBlockMensajeError}">
         <Setter Property="FontSize" Value="16"/>
         <Setter Property="Width" Value="380"/>
         <Setter Property="Height" Value="24"/>
