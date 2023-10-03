@@ -44,6 +44,8 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
@@ -63,6 +65,18 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Connected Services\ServicioInicioSesion\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="DAO\CuentaDAO.cs" />
+    <Compile Include="DAO\UsuarioDAO.cs" />
+    <Compile Include="InicioSesionPagina.xaml.cs">
+      <DependentUpon>InicioSesionPagina.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="InterfacesDAO\ICuentaDAO.cs" />
+    <Compile Include="InterfacesDAO\IUsuarioDAO.cs" />
     <Compile Include="RegistroUsuariosPagina.xaml.cs">
       <DependentUpon>RegistroUsuariosPagina.xaml</DependentUpon>
     </Compile>
@@ -77,6 +91,10 @@
     <Page Include="DiccionarioEstilos\DiccionarioPrincipal.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="InicioSesionPagina.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -110,7 +128,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
+      <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <Resource Include="Fuentes\Economica-Bold.ttf" />
@@ -118,6 +136,22 @@
     <Resource Include="Fuentes\Prompt-Medium.ttf" />
     <Resource Include="Fuentes\WixMadeforText-Bold.ttf" />
     <Resource Include="Fuentes\WixMadeforText-Regular.ttf" />
+    <None Include="Connected Services\ServicioInicioSesion\InicioSesionServicio.wsdl" />
+    <None Include="Connected Services\ServicioInicioSesion\item.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\ServicioInicioSesion\item1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\ServicioInicioSesion\item2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\ServicioInicioSesion\item3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\ServicioInicioSesion\VistasSorrySliders.ServicioInicioSesion.CuentaSet.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -133,7 +167,9 @@
       <Name>BibliotecaClasesSorrySliders</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
   <ItemGroup>
     <Resource Include="Recursos\Banner.png" />
     <Resource Include="Recursos\botonSalir.png" />
@@ -153,6 +189,24 @@
     <Resource Include="Recursos\TableroCuatro.png" />
     <Resource Include="Recursos\TableroCuatroConFondo.png" />
     <Resource Include="Recursos\TableroLanzamientoFondo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Connected Services\ServicioInicioSesion\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\ServicioInicioSesion\item.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\ServicioInicioSesion\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\ServicioInicioSesion\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\ServicioInicioSesion\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
