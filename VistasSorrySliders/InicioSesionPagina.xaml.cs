@@ -14,7 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using VistasSorrySliders.DAO;
-using VistasSorrySliders.ServicioInicioSesion;
+using VistasSorrySliders.ServicioSorrySliders;
 
 namespace VistasSorrySliders
 {
@@ -67,10 +67,10 @@ namespace VistasSorrySliders
             if (datosCompletos)
             {
                 string correoVerificado = "";
-                int resultado = 0;
+                Constantes resultado = Constantes.OPERACION_EXITOSA;
                 try
                 {
-                    ServicioInicioSesion.InicioSesionClient proxyInicioSesion = new ServicioInicioSesion.InicioSesionClient();
+                    InicioSesionClient proxyInicioSesion = new InicioSesionClient();
                     (correoVerificado, resultado) = proxyInicioSesion.VerificarExistenciaCorreoCuenta(correoIngresado);
                     proxyInicioSesion.Close();
                 }
@@ -107,10 +107,10 @@ namespace VistasSorrySliders
         private void VerificarContrasena(CuentaSet cuentaPorVerificar)
         {
             CuentaSet cuentaVerificada = new CuentaSet();
-            int resultado;
+            Constantes resultado = Constantes.OPERACION_EXITOSA;
             try
             {
-                ServicioInicioSesion.InicioSesionClient proxyInicioSesion = new ServicioInicioSesion.InicioSesionClient();
+                InicioSesionClient proxyInicioSesion = new InicioSesionClient();
                 (cuentaVerificada, resultado) = proxyInicioSesion.VerificarContrasenaDeCuenta(cuentaPorVerificar);
                 proxyInicioSesion.Close();
             }

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/DatosSorrySliders" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/DatosSorrySliders" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:simpleType name="Constantes">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="ERROR_CONEXION_BD" />
+      <xs:enumeration value="ERROR_CONSULTA" />
+      <xs:enumeration value="ERROR_CONEXION_SERVIDOR" />
+      <xs:enumeration value="OPERACION_EXITOSA" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="Constantes" nillable="true" type="tns:Constantes" />
+  <xs:complexType name="CuentaSet">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Avatar" nillable="true" type="xs:base64Binary" />
+      <xs:element minOccurs="0" name="Contraseña" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CorreoElectronico" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="IdUsuario" type="xs:int" />
+      <xs:element minOccurs="0" name="Nickname" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="CuentaSet" nillable="true" type="tns:CuentaSet" />
+  <xs:complexType name="UsuarioSet">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Apellido" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CuentaSet" nillable="true" type="tns:ArrayOfCuentaSet" />
+      <xs:element minOccurs="0" name="IdUsuario" type="xs:int" />
+      <xs:element minOccurs="0" name="Nombre" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="UsuarioSet" nillable="true" type="tns:UsuarioSet" />
+  <xs:complexType name="ArrayOfCuentaSet">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="CuentaSet" nillable="true" type="tns:CuentaSet" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfCuentaSet" nillable="true" type="tns:ArrayOfCuentaSet" />
+</xs:schema>
