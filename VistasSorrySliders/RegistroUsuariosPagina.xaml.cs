@@ -26,19 +26,90 @@ namespace VistasSorrySliders
         public RegistroUsuariosPagina()
         {
             InitializeComponent();
+            EstablecerImagenPorDefecto();
+        }
+
+        private void EstablecerImagenPorDefecto() 
+        {
+            mgAvatar.ImageSource = new BitmapImage(new Uri("pack://application:,,,/Recursos/avatarPredefinido.png"));
         }
 
         byte[] avatarByte;
-        private void ValidarCampos() 
+        private bool ValidarCampos()
         {
-            String nombre, apellidos, correoElectronico, contraseña, nickname;
-            nombre = txtBoxNombre.Text;
-            apellidos = txtBoxApellidos.Text;
-            correoElectronico = txtBoxCorreoElectronico.Text;
-            contraseña = txtBoxContrasena.Text;
-            nickname = txtBoxNickname.Text;
+            bool validacionCampos = true;
+            Style estiloTxtBoxRojo = (Style)System.Windows.Application.Current.FindResource("estiloTxtBoxRojo");
+            Style estiloTxtBoxAzul = (Style)System.Windows.Application.Current.FindResource("estiloTxtBoxAzul");
+
+           
+            if (!string.IsNullOrEmpty(txtBoxNombre.Text))
+            {
+                String nombre = txtBoxNombre.Text;
+                txtBoxNombre.Style = estiloTxtBoxAzul;
+            }
+            else
+            {
+                txtBoxNombre.Style = estiloTxtBoxRojo;
+                validacionCampos = false;
+            }
+
+            if (!string.IsNullOrEmpty(txtBoxApellidos.Text))
+            {
+                String apellidos = txtBoxApellidos.Text;
+                txtBoxApellidos.Style = estiloTxtBoxAzul;
+            }
+            else
+            {
+                txtBoxApellidos.Style = estiloTxtBoxRojo;
+                validacionCampos = false;
+            }
+
+            if (!string.IsNullOrEmpty(txtBoxCorreoElectronico.Text) && ValidarCorreo(txtBoxCorreoElectronico.Text))
+            {
+                String correoElectronico = txtBoxCorreoElectronico.Text;
+                txtBoxCorreoElectronico.Style = estiloTxtBoxAzul;
+            }
+            else
+            {
+                txtBoxCorreoElectronico.Style = estiloTxtBoxRojo;
+                validacionCampos = false;
+            }
+
+            if (!string.IsNullOrEmpty(txtBoxContrasena.Text) && ValidarContraseña(txtBoxContrasena.Text))
+            {
+                String contraseña = txtBoxContrasena.Text;
+                txtBoxContrasena.Style = estiloTxtBoxAzul;
+            }
+            else
+            {
+                txtBoxContrasena.Style = estiloTxtBoxRojo;
+                validacionCampos = false;
+            }
+
+            if(!string.IsNullOrEmpty(txtBoxNickname.Text))
+            {
+                String nickname = txtBoxNickname.Text;
+                txtBoxNickname.Style = estiloTxtBoxAzul;
+            }
+            else
+            {
+                txtBoxNickname.Style = estiloTxtBoxRojo;
+                validacionCampos = false;
+            }
+            return validacionCampos;
+        }
+
+        private bool ValidarCorreo(string correo)
+        {
 
 
+            return true;
+        }
+        private bool ValidarContraseña(string contraseña)
+        {
+
+
+            return true;
         }
         private void AñadirCuenta() 
         {
@@ -71,21 +142,30 @@ namespace VistasSorrySliders
         {
             //Validar texto, validar correo y contraseña
             //Excepciones
-            ValidarCampos();
-            try
+            if (ValidarCampos())
             {
-                AñadirCuenta();
-            }
-            catch (System.Data.SqlClient.SqlException ex)
-            {
-                System.Windows.Forms.MessageBox.Show("No se puede establecer una conexión con el servidor SQL Server", "Error con la Base de Datos", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                try
+                {
+                    AñadirCuenta();
+                    IrInicioSesion();
+                }
+                catch (System.Data.SqlClient.SqlException ex)
+                {
+                    System.Windows.Forms.MessageBox.Show("No se puede establecer una conexión con el servidor SQL Server", "Error con la Base de Datos", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
 
-
+        }
+        private void IrInicioSesion() 
+        {
+            InicioSesionPagina paginaSesionPagina = new InicioSesionPagina();
+            this.NavigationService.Navigate(paginaSesionPagina);
         }
         private void ClicCancelar(object sender, RoutedEventArgs e)
         {
 
+            InicioSesionPagina paginaSesionPagina = new InicioSesionPagina();
+            this.NavigationService.Navigate(paginaSesionPagina);
         }
 
         private void SeleccionarImagen(object sender, MouseButtonEventArgs e)
