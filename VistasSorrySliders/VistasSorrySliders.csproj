@@ -65,7 +65,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Connected Services\ServicioInicioSesion\Reference.cs">
+    <Compile Include="Connected Services\ServicioSorrySliders\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
@@ -136,20 +136,23 @@
     <Resource Include="Fuentes\Prompt-Medium.ttf" />
     <Resource Include="Fuentes\WixMadeforText-Bold.ttf" />
     <Resource Include="Fuentes\WixMadeforText-Regular.ttf" />
-    <None Include="Connected Services\ServicioInicioSesion\InicioSesionServicio.wsdl" />
-    <None Include="Connected Services\ServicioInicioSesion\item.xsd">
+    <None Include="Connected Services\ServicioSorrySliders\item.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\ServicioInicioSesion\item1.xsd">
+    <None Include="Connected Services\ServicioSorrySliders\item1.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\ServicioInicioSesion\item2.xsd">
+    <None Include="Connected Services\ServicioSorrySliders\item2.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\ServicioInicioSesion\item3.xsd">
+    <None Include="Connected Services\ServicioSorrySliders\item3.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\ServicioInicioSesion\VistasSorrySliders.ServicioInicioSesion.CuentaSet.datasource">
+    <None Include="Connected Services\ServicioSorrySliders\ServicioComunicacionSorrySliders.wsdl" />
+    <None Include="Connected Services\ServicioSorrySliders\VistasSorrySliders.ServicioSorrySliders.Constantes.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ServicioSorrySliders\VistasSorrySliders.ServicioSorrySliders.CuentaSet.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="packages.config" />
@@ -191,19 +194,19 @@
     <Resource Include="Recursos\TableroLanzamientoFondo.png" />
   </ItemGroup>
   <ItemGroup>
-    <WCFMetadataStorage Include="Connected Services\ServicioInicioSesion\" />
+    <WCFMetadataStorage Include="Connected Services\ServicioSorrySliders\" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Connected Services\ServicioInicioSesion\item.disco" />
+    <None Include="Connected Services\ServicioSorrySliders\item.disco" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Connected Services\ServicioInicioSesion\configuration91.svcinfo" />
+    <None Include="Connected Services\ServicioSorrySliders\configuration91.svcinfo" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Connected Services\ServicioInicioSesion\configuration.svcinfo" />
+    <None Include="Connected Services\ServicioSorrySliders\configuration.svcinfo" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Connected Services\ServicioInicioSesion\Reference.svcmap">
+    <None Include="Connected Services\ServicioSorrySliders\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
