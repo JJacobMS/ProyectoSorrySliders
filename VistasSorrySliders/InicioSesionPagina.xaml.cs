@@ -23,7 +23,6 @@ namespace VistasSorrySliders
     /// </summary>
     public partial class InicioSesionPagina : Page
     {
-        
         public InicioSesionPagina()
         {
             InitializeComponent();
@@ -36,7 +35,7 @@ namespace VistasSorrySliders
 
         private void ClicCancelar(object sender, RoutedEventArgs e)
         {
-
+            this.NavigationService.GoBack();
         }
 
         private void ClicRegistrarCuenta(object sender, RoutedEventArgs e)
@@ -66,39 +65,35 @@ namespace VistasSorrySliders
 
             if (datosCompletos)
             {
-                string correoVerificado = "";
                 Constantes resultado = Constantes.OPERACION_EXITOSA;
                 try
                 {
                     InicioSesionClient proxyInicioSesion = new InicioSesionClient();
-                    (correoVerificado, resultado) = proxyInicioSesion.VerificarExistenciaCorreoCuenta(correoIngresado);
+                    resultado = proxyInicioSesion.VerificarExistenciaCorreoCuenta(correoIngresado);
                     proxyInicioSesion.Close();
                 }
                 catch (CommunicationException excepcion) 
                 {
-                    MessageBox.Show(Properties.Resources.msgErrorConexion);
+                    resultado = Constantes.ERROR_CONEXION_SERVIDOR;
                     Console.WriteLine(excepcion);
                 }
 
                 switch (resultado)
                 {
-                    //case 0:
-                }
-
-                
-                if (correoVerificado == null)
-                {
-                    MessageBox.Show(Properties.Resources.msgErrorBaseDatos);
-                    return;
-                }
-                if (correoVerificado == "")
-                {
-                    txtBlockCorreoInvalido.Visibility = Visibility.Visible;
-                }
-                else
-                {
-                    CuentaSet cuentaVerificada = new CuentaSet { CorreoElectronico = correoVerificado, Contraseña = contrasena };
-                    VerificarContrasena(cuentaVerificada);
+                    case Constantes.OPERACION_EXITOSA:
+                        CuentaSet cuentaVerificada = new CuentaSet { CorreoElectronico = correoIngresado, Contraseña = contrasena };
+                        VerificarContrasena(cuentaVerificada);
+                        break;
+                    case Constantes.OPERACION_EXITOSA_VACIA:
+                        txtBlockCorreoInvalido.Visibility = Visibility.Visible;
+                        break;
+                    case Constantes.ERROR_CONEXION_BD:
+                    case Constantes.ERROR_CONSULTA:
+                        MessageBox.Show(Properties.Resources.msgErrorBaseDatos);
+                        break;
+                    case Constantes.ERROR_CONEXION_SERVIDOR:
+                        MessageBox.Show(Properties.Resources.msgErrorConexion);
+                        break;
                 }
             }
 
@@ -106,33 +101,34 @@ namespace VistasSorrySliders
 
         private void VerificarContrasena(CuentaSet cuentaPorVerificar)
         {
-            CuentaSet cuentaVerificada = new CuentaSet();
             Constantes resultado = Constantes.OPERACION_EXITOSA;
             try
             {
                 InicioSesionClient proxyInicioSesion = new InicioSesionClient();
-                (cuentaVerificada, resultado) = proxyInicioSesion.VerificarContrasenaDeCuenta(cuentaPorVerificar);
+                resultado = proxyInicioSesion.VerificarContrasenaDeCuenta(cuentaPorVerificar);
                 proxyInicioSesion.Close();
             }
             catch (CommunicationException excepcion)    
             {
-                MessageBox.Show(Properties.Resources.msgErrorConexion);
+                resultado = Constantes.ERROR_CONEXION_SERVIDOR;
                 Console.WriteLine(excepcion);
             }
 
-            if (cuentaVerificada == null)
+            switch (resultado)
             {
-                MessageBox.Show(Properties.Resources.msgErrorBaseDatos);
-                return;
-            }
-            if (cuentaVerificada.CorreoElectronico == null)
-            {
-                
-                txtBlockContrasenaInvalida.Visibility = Visibility.Visible;
-            }
-            else
-            {
-                MessageBox.Show("ENTRAR AL SISTEMA");
+                case Constantes.OPERACION_EXITOSA:
+                    MessageBox.Show("ENTRAR AL SISTEMA");
+                    break;
+                case Constantes.OPERACION_EXITOSA_VACIA:
+                    txtBlockContrasenaInvalida.Visibility = Visibility.Visible;
+                    break;
+                case Constantes.ERROR_CONEXION_BD:
+                case Constantes.ERROR_CONSULTA:
+                    MessageBox.Show(Properties.Resources.msgErrorBaseDatos);
+                    break;
+                case Constantes.ERROR_CONEXION_SERVIDOR:
+                    MessageBox.Show(Properties.Resources.msgErrorConexion);
+                    break;
             }
         }
 

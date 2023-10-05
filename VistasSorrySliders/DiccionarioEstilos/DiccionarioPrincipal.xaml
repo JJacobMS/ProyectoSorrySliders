@@ -100,7 +100,7 @@
 
 
     <Style x:Key="estiloBtnTableroAmarillo" TargetType="Button" BasedOn="{StaticResource estiloBtnDeshabilitadoTablero}">
-        <Setter Property="Foreground" Value="#F6DE7B"/>
+        <Setter Property="Foreground" Value="#FEF09B"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Button}">
