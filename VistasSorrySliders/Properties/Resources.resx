@@ -123,6 +123,9 @@
   <data name="btnContinuar" xml:space="preserve">
     <value>CONTINUAR</value>
   </data>
+  <data name="btnContinuarInvitado" xml:space="preserve">
+    <value>CONTINUAR COMO INVITADO</value>
+  </data>
   <data name="btnCrearCuenta" xml:space="preserve">
     <value>Crear cuenta</value>
   </data>

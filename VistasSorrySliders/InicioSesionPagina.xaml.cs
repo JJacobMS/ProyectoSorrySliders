@@ -23,7 +23,6 @@ namespace VistasSorrySliders
     /// </summary>
     public partial class InicioSesionPagina : Page
     {
-        
         public InicioSesionPagina()
         {
             InitializeComponent();
@@ -36,7 +35,7 @@ namespace VistasSorrySliders
 
         private void ClicCancelar(object sender, RoutedEventArgs e)
         {
-
+            this.NavigationService.GoBack();
         }
 
         private void ClicRegistrarCuenta(object sender, RoutedEventArgs e)

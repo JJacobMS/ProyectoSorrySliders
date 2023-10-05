@@ -79,6 +79,15 @@ namespace VistasSorrySliders.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a CONTINUAR COMO INVITADO.
+        /// </summary>
+        public static string btnContinuarInvitado {
+            get {
+                return ResourceManager.GetString("btnContinuarInvitado", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Crear cuenta.
         /// </summary>
         public static string btnCrearCuenta {
