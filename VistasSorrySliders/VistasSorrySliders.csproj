@@ -142,17 +142,11 @@
     <None Include="Connected Services\ServicioSorrySliders\item1.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\ServicioSorrySliders\item2.xsd">
-      <SubType>Designer</SubType>
-    </None>
     <None Include="Connected Services\ServicioSorrySliders\item3.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Connected Services\ServicioSorrySliders\ServicioComunicacionSorrySliders.wsdl" />
     <None Include="Connected Services\ServicioSorrySliders\VistasSorrySliders.ServicioSorrySliders.Constantes.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Connected Services\ServicioSorrySliders\VistasSorrySliders.ServicioSorrySliders.CuentaSet.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="packages.config" />
