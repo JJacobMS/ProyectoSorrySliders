@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.ServiceModel;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -36,7 +37,6 @@ namespace VistasSorrySliders
         {
             rutaImagen = "pack://application:,,,/Recursos/avatarPredefinido.png";
             mgBrushAvatar.ImageSource = new BitmapImage(new Uri(rutaImagen));
-            
         }
 
         private bool ValidarCampos()
@@ -123,12 +123,10 @@ namespace VistasSorrySliders
             }
             catch (RegexMatchTimeoutException e)
             {
-                System.Windows.Forms.MessageBox.Show("La correo es invalido", "Correo invalido", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return false;
             }
             catch (ArgumentException e)
             {
-                System.Windows.Forms.MessageBox.Show("La correo es invalido", "Correo invalido", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return false;
             }
             try
@@ -137,7 +135,6 @@ namespace VistasSorrySliders
             }
             catch (RegexMatchTimeoutException)
             {
-                System.Windows.Forms.MessageBox.Show("La correo es invalido", "Correo invalido", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return false;
             }
         }
@@ -197,7 +194,7 @@ namespace VistasSorrySliders
         }
         private void ClicCrearCuenta(object sender, RoutedEventArgs e)
         {
-            //validar correo y contraseña
+            //validar y contraseña
             //Excepciones
             if (ValidarCampos() && ValidarExistenciaImagen())
             {
@@ -206,7 +203,7 @@ namespace VistasSorrySliders
                     AñadirCuenta();
                     IrInicioSesion();
                 }
-                catch (System.Data.SqlClient.SqlException ex)
+                catch (CommunicationException ex)
                 {
                     System.Windows.Forms.MessageBox.Show("No se puede establecer una conexión con el servidor SQL Server", "Error con la Base de Datos", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
@@ -215,14 +212,12 @@ namespace VistasSorrySliders
         }
         private void IrInicioSesion() 
         {
-            InicioSesionPagina paginaSesionPagina = new InicioSesionPagina();
-            this.NavigationService.Navigate(paginaSesionPagina);
+            this.NavigationService.GoBack();
         }
         private void ClicCancelar(object sender, RoutedEventArgs e)
         {
 
-            InicioSesionPagina paginaSesionPagina = new InicioSesionPagina();
-            this.NavigationService.Navigate(paginaSesionPagina);
+            IrInicioSesion();
         }
 
         private void SeleccionarImagen(object sender, MouseButtonEventArgs e)
