@@ -1,9 +1,11 @@
 ﻿using BibliotecaClasesSorrySliders;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -15,6 +17,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 
 namespace VistasSorrySliders
 {
@@ -28,13 +31,14 @@ namespace VistasSorrySliders
             InitializeComponent();
             EstablecerImagenPorDefecto();
         }
-
+        String rutaImagen;
         private void EstablecerImagenPorDefecto() 
         {
-            mgAvatar.ImageSource = new BitmapImage(new Uri("pack://application:,,,/Recursos/avatarPredefinido.png"));
+            rutaImagen = "pack://application:,,,/Recursos/avatarPredefinido.png";
+            mgBrushAvatar.ImageSource = new BitmapImage(new Uri(rutaImagen));
+            
         }
 
-        byte[] avatarByte;
         private bool ValidarCampos()
         {
             bool validacionCampos = true;
@@ -102,8 +106,40 @@ namespace VistasSorrySliders
         private bool ValidarCorreo(string correo)
         {
 
-
-            return true;
+            if (string.IsNullOrWhiteSpace(correo))
+            {
+                System.Windows.Forms.MessageBox.Show("La correo es invalido", "Correo invalido", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return false;
+            }
+            try
+            {
+                correo = Regex.Replace(correo, @"(@)(.+)$", DomainMapper,RegexOptions.None, TimeSpan.FromMilliseconds(200));
+                string DomainMapper(Match match)
+                {
+                    var idn = new IdnMapping();
+                    string domainName = idn.GetAscii(match.Groups[2].Value);
+                    return match.Groups[1].Value + domainName;
+                }
+            }
+            catch (RegexMatchTimeoutException e)
+            {
+                System.Windows.Forms.MessageBox.Show("La correo es invalido", "Correo invalido", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return false;
+            }
+            catch (ArgumentException e)
+            {
+                System.Windows.Forms.MessageBox.Show("La correo es invalido", "Correo invalido", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return false;
+            }
+            try
+            {
+                return Regex.IsMatch(correo,@"^[^@\s]+@[^@\s]+\.[^@\s]+$",RegexOptions.IgnoreCase, TimeSpan.FromMilliseconds(250));
+            }
+            catch (RegexMatchTimeoutException)
+            {
+                System.Windows.Forms.MessageBox.Show("La correo es invalido", "Correo invalido", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return false;
+            }
         }
         private bool ValidarContraseña(string contraseña)
         {
@@ -138,11 +174,32 @@ namespace VistasSorrySliders
             }*/
         }
 
+        private bool ValidarExistenciaImagen() 
+        {
+            bool archivoExiste = false;
+            if (mgBrushAvatar.ImageSource is BitmapImage bitmapImage)
+            {
+                Uri uri = bitmapImage.UriSource;
+                if (uri.IsAbsoluteUri)
+                {
+                    if (uri.IsFile)
+                    {
+                        string rutaArchivo = uri.LocalPath;
+                        archivoExiste = File.Exists(rutaArchivo);
+                    }
+                    else
+                    {
+                        archivoExiste = true;
+                    }
+                }
+            }
+            return archivoExiste;
+        }
         private void ClicCrearCuenta(object sender, RoutedEventArgs e)
         {
-            //Validar texto, validar correo y contraseña
+            //validar correo y contraseña
             //Excepciones
-            if (ValidarCampos())
+            if (ValidarCampos() && ValidarExistenciaImagen())
             {
                 try
                 {
@@ -174,10 +231,24 @@ namespace VistasSorrySliders
             abrirBiblioteca.Filter = "Archivos de imagen|*.jpg;*.jpeg;*.png";
             if (abrirBiblioteca.ShowDialog() == DialogResult.OK)
             {
-                string rutaImagen = abrirBiblioteca.FileName;
+                /*
+                rutaImagen = abrirBiblioteca.FileName;
                 BitmapImage mapaBits = new BitmapImage(new Uri(rutaImagen));
-                mgAvatar.ImageSource = mapaBits;
+                mgBrushAvatar.ImageSource = mapaBits;
                 avatarByte = File.ReadAllBytes(rutaImagen);
+                */
+                rutaImagen = abrirBiblioteca.FileName;
+                string[] formatosSoportados = { ".jpg", ".jpeg", ".png" }; //////////////
+                if (formatosSoportados.Any(ext => rutaImagen.EndsWith(ext, StringComparison.OrdinalIgnoreCase)))
+                {
+                    BitmapImage mapaBits = new BitmapImage(new Uri(rutaImagen));
+                    mgBrushAvatar.ImageSource = mapaBits;
+                }
+                else
+                {
+                    System.Windows.Forms.MessageBox.Show("Por favor, seleccione un archivo de imagen válido.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                
             }
         }
     }

@@ -55,7 +55,7 @@
                             
                             <Ellipse Width="150" Height="150" Stroke="Black" StrokeThickness="3" MouseLeftButtonDown="SeleccionarImagen"  >
                                 <Ellipse.Fill>
-                                    <ImageBrush x:Name="mgAvatar" Stretch="Uniform"></ImageBrush>
+                                    <ImageBrush x:Name="mgBrushAvatar" Stretch="Uniform"></ImageBrush>
                                 </Ellipse.Fill>
                             </Ellipse>
                         </StackPanel>
