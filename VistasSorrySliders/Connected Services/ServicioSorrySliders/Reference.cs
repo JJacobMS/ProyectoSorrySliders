@@ -301,10 +301,10 @@ namespace VistasSorrySliders.ServicioSorrySliders {
     public interface IRegistroUsuario {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRegistroUsuario/AgregarUsuario", ReplyAction="http://tempuri.org/IRegistroUsuario/AgregarUsuarioResponse")]
-        int AgregarUsuario(VistasSorrySliders.ServicioSorrySliders.UsuarioSet usuarioPorGuardar, VistasSorrySliders.ServicioSorrySliders.CuentaSet cuentaPorGuardar);
+        VistasSorrySliders.ServicioSorrySliders.Constantes AgregarUsuario(VistasSorrySliders.ServicioSorrySliders.UsuarioSet usuarioPorGuardar, VistasSorrySliders.ServicioSorrySliders.CuentaSet cuentaPorGuardar);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRegistroUsuario/AgregarUsuario", ReplyAction="http://tempuri.org/IRegistroUsuario/AgregarUsuarioResponse")]
-        System.Threading.Tasks.Task<int> AgregarUsuarioAsync(VistasSorrySliders.ServicioSorrySliders.UsuarioSet usuarioPorGuardar, VistasSorrySliders.ServicioSorrySliders.CuentaSet cuentaPorGuardar);
+        System.Threading.Tasks.Task<VistasSorrySliders.ServicioSorrySliders.Constantes> AgregarUsuarioAsync(VistasSorrySliders.ServicioSorrySliders.UsuarioSet usuarioPorGuardar, VistasSorrySliders.ServicioSorrySliders.CuentaSet cuentaPorGuardar);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -334,11 +334,11 @@ namespace VistasSorrySliders.ServicioSorrySliders {
                 base(binding, remoteAddress) {
         }
         
-        public int AgregarUsuario(VistasSorrySliders.ServicioSorrySliders.UsuarioSet usuarioPorGuardar, VistasSorrySliders.ServicioSorrySliders.CuentaSet cuentaPorGuardar) {
+        public VistasSorrySliders.ServicioSorrySliders.Constantes AgregarUsuario(VistasSorrySliders.ServicioSorrySliders.UsuarioSet usuarioPorGuardar, VistasSorrySliders.ServicioSorrySliders.CuentaSet cuentaPorGuardar) {
             return base.Channel.AgregarUsuario(usuarioPorGuardar, cuentaPorGuardar);
         }
         
-        public System.Threading.Tasks.Task<int> AgregarUsuarioAsync(VistasSorrySliders.ServicioSorrySliders.UsuarioSet usuarioPorGuardar, VistasSorrySliders.ServicioSorrySliders.CuentaSet cuentaPorGuardar) {
+        public System.Threading.Tasks.Task<VistasSorrySliders.ServicioSorrySliders.Constantes> AgregarUsuarioAsync(VistasSorrySliders.ServicioSorrySliders.UsuarioSet usuarioPorGuardar, VistasSorrySliders.ServicioSorrySliders.CuentaSet cuentaPorGuardar) {
             return base.Channel.AgregarUsuarioAsync(usuarioPorGuardar, cuentaPorGuardar);
         }
     }
