@@ -3,6 +3,7 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:p="clr-namespace:VistasSorrySliders.Properties"
       xmlns:local="clr-namespace:VistasSorrySliders"
       mc:Ignorable="d" 
       d:DesignHeight="576" d:DesignWidth="1024"
@@ -24,7 +25,7 @@
                         <ImageBrush ImageSource="/Recursos/bannerColorRojo.png"/>
                     </Rectangle.Fill>
                 </Rectangle>
-                <Label Grid.Column="0" Grid.Row="0" Content="Bienvenido" FontSize="50" Style="{StaticResource estiloLblInicioSesion}"></Label>
+                <Label Grid.Column="0" Grid.Row="0" Content="{x:Static p:Resources.lblBienvenido}" FontSize="50" Style="{StaticResource estiloLblInicioSesion}"></Label>
                 <Border Grid.Column="0" Grid.Row="1" BorderBrush="Black" BorderThickness="2" Margin="4,10,4,5">
                     <Grid Margin="5">
                         <Grid.RowDefinitions>
@@ -39,14 +40,14 @@
                             <ColumnDefinition/>
                             <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
-                        <Label Grid.Column="0" Grid.Row="0" Content="Datos de la Cuenta" Margin="20,0,20,0" FontSize="30" Foreground="#052B42" FontFamily="{StaticResource FuentesTexto}"></Label>
+                        <Label Grid.Column="0" Grid.Row="0" Content="{x:Static p:Resources.lblDatosCuenta}" Margin="20,0,20,0" FontSize="30" Foreground="#052B42" FontFamily="{StaticResource FuentesTexto}"></Label>
                         <StackPanel Grid.Column="0" Grid.Row="1" Margin="20,0,20,0" VerticalAlignment="Center">
-                            <Label Content="Nombre/s" Style="{StaticResource estiloLblFormularioCuenta}"></Label>
+                            <Label Content="{x:Static p:Resources.lblNombres}" Style="{StaticResource estiloLblFormularioCuenta}"></Label>
                             <TextBox x:Name="txtBoxNombre" Style="{StaticResource estiloTxtBoxAzul}"></TextBox>
                         </StackPanel>
                         <Grid Grid.Column="1" Grid.Row="1">
                             <StackPanel Grid.Column="1" Grid.Row="1" Margin="20,0,20,0" VerticalAlignment="Center">
-                                <Label Content="Apellido/s" Style="{StaticResource estiloLblFormularioCuenta}"></Label>
+                                <Label Content="{x:Static p:Resources.lblApellidos}" Style="{StaticResource estiloLblFormularioCuenta}"></Label>
                                 <TextBox x:Name="txtBoxApellidos" Style="{StaticResource estiloTxtBoxAzul}"></TextBox>
                             </StackPanel>
                         </Grid>
@@ -54,31 +55,31 @@
                         <StackPanel Grid.Column="2" Grid.Row="0"  Grid.RowSpan="2" Margin="20,0,20,0" VerticalAlignment="Center">
                             <Ellipse Width="150" Height="150" Stroke="Black" StrokeThickness="3" MouseLeftButtonDown="SeleccionarImagen"  >
                                 <Ellipse.Fill>
-                                    <ImageBrush x:Name="mgBrushAvatar" Stretch="Uniform"></ImageBrush>
+                                    <ImageBrush x:Name="imgBrushAvatar" Stretch="Uniform"></ImageBrush>
                                 </Ellipse.Fill>
                             </Ellipse>
                         </StackPanel>
                         <StackPanel Grid.Column="2" Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center">
-                            <Label VerticalAlignment="Top" HorizontalAlignment="Center" Content="Avatar" Margin="50,0,10,0" 
+                            <Label VerticalAlignment="Top" HorizontalAlignment="Center" Content="{x:Static p:Resources.lblAvatar}" Margin="50,0,10,0" 
                                Foreground="#052B42" FontFamily="{StaticResource FuentesTexto}" FontSize="20" ></Label>
                             <Button Content="X" FontSize="17" VerticalAlignment="Top" Width="35" Height="35"  Click="ClicRemoverImagen" Style="{StaticResource estiloBtnQuitarAvatar}"></Button>
                         </StackPanel>
 
                         <StackPanel Grid.Column="0" Grid.Row="2" Margin="20,0,20,0" VerticalAlignment="Center">
-                            <Label Content="Nickname/Apodo" Style="{StaticResource estiloLblFormularioCuenta}"></Label>
+                            <Label Content="{x:Static p:Resources.lblNickname}" Style="{StaticResource estiloLblFormularioCuenta}"></Label>
                             <TextBox x:Name="txtBoxNickname" Style="{StaticResource estiloTxtBoxAzul}"></TextBox>
                         </StackPanel>
-                        <StackPanel Grid.Column="0" Grid.Row="3" Margin="20,0,20,0" VerticalAlignment="Center">
-                            <Label Content="Correo Electrónico" Style="{StaticResource estiloLblFormularioCuenta}"></Label>
-                            <TextBox x:Name="txtBoxCorreoElectronico" Style="{StaticResource estiloTxtBoxAzul}"></TextBox>
+                        <StackPanel Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="2" Margin="40,0,20,0" VerticalAlignment="Center" HorizontalAlignment="Left">
+                            <Label Content="{x:Static p:Resources.lblCorreoElectronico}" Style="{StaticResource estiloLblFormularioCuenta}" HorizontalAlignment="Left"></Label>
+                            <TextBox x:Name="txtBoxCorreoElectronico" Width="325" Style="{StaticResource estiloTxtBoxAzul}"></TextBox>
                         </StackPanel>
-                        <StackPanel Grid.Column="0" Grid.Row="4" Margin="20,0,20,0" VerticalAlignment="Center">
-                            <Label Content="Contraseña" Style="{StaticResource estiloLblFormularioCuenta}"></Label>
-                            <PasswordBox  x:Name="pssBoxContrasena" Style="{StaticResource estiloPssBoxAzul}"></PasswordBox>
+                        <StackPanel Grid.Column="0" Grid.Row="4" Grid.ColumnSpan="2" Margin="40,0,20,0" VerticalAlignment="Center" HorizontalAlignment="Left">
+                            <Label Content="{x:Static p:Resources.lblContrasena}" Style="{StaticResource estiloLblFormularioCuenta}" HorizontalAlignment="Left"></Label>
+                            <PasswordBox  x:Name="pssBoxContrasena"  Width="290"  Style="{StaticResource estiloPssBoxAzul}"></PasswordBox>
                         </StackPanel>
                         <StackPanel Grid.Column="1" Grid.Row="4" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Right">
-                            <Button Content="Crear cuenta" Click="ClicCrearCuenta" Width="160" Height="45" Style="{StaticResource estiloBtnCrearCuenta}"></Button>
-                            <Button  Content="Cancelar" Margin="50,20,50,20" Width="160" Height="45" Style="{StaticResource estiloBtnCancelar}" Click="ClicCancelar"></Button>
+                            <Button Content="{x:Static p:Resources.btnCrearCuenta}" Click="ClicCrearCuenta" Width="160" Height="45" Style="{StaticResource estiloBtnCrearCuenta}"></Button>
+                            <Button  Content="{x:Static p:Resources.btnCancelar}" Margin="50,20,50,20" Width="160" Height="45" Style="{StaticResource estiloBtnCancelar}" Click="ClicCancelar"></Button>
                         </StackPanel>
                         <StackPanel Grid.Column="1" Grid.Row="2" Grid.RowSpan="3" Orientation="Horizontal" HorizontalAlignment="Center" Margin="-10,20,20,20">
                             <Image x:Name="mgDadosRojos" Source="/Recursos/dadoRojo.png" Stretch="UniformToFill"/>

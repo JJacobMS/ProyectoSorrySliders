@@ -80,6 +80,9 @@
     </Compile>
     <Compile Include="InterfacesDAO\ICuentaDAO.cs" />
     <Compile Include="InterfacesDAO\IUsuarioDAO.cs" />
+    <Compile Include="MenuPrincipalPagina.xaml.cs">
+      <DependentUpon>MenuPrincipalPagina.xaml</DependentUpon>
+    </Compile>
     <Compile Include="RegistroUsuariosPagina.xaml.cs">
       <DependentUpon>RegistroUsuariosPagina.xaml</DependentUpon>
     </Compile>
@@ -115,6 +118,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="MenuPrincipalPagina.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="RegistroUsuariosPagina.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -164,12 +171,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\BibliotecaClasesSorrySliders\BibliotecaClasesSorrySliders.csproj">
-      <Project>{A86C07BF-07AD-4FB6-B70A-146D6F56996E}</Project>
-      <Name>BibliotecaClasesSorrySliders</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
