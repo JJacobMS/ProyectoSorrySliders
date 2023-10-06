@@ -44,9 +44,6 @@
     </Page.Resources>
 
     <Grid>
-        <Grid.Background>
-            <ImageBrush ImageSource="/Recursos/pantallaSorrySlidersPrincipal.png"/>
-        </Grid.Background>
         <Button Style="{StaticResource estiloBtnPaginaPrincipal}" Content="{x:Static p:Resources.btnContinuar}" Click="ClicIniciarJuego"></Button>
     </Grid>
 </Page>

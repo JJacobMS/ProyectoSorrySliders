@@ -80,6 +80,9 @@
                             <Button Content="Crear cuenta" Click="ClicCrearCuenta" Width="160" Height="45" Style="{StaticResource estiloBtnCrearCuenta}"></Button>
                             <Button  Content="Cancelar" Margin="50,20,50,20" Width="160" Height="45" Style="{StaticResource estiloBtnCancelar}" Click="ClicCancelar"></Button>
                         </StackPanel>
+                        <StackPanel Grid.Column="1" Grid.Row="2" Grid.RowSpan="3" Orientation="Horizontal" HorizontalAlignment="Center" Margin="-10,20,20,20">
+                            <Image x:Name="mgDadosRojos" Source="/Recursos/dadoRojo.png" Stretch="UniformToFill"/>
+                        </StackPanel>
                         
                     </Grid>
                 </Border>
