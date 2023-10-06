@@ -35,20 +35,29 @@ namespace VistasSorrySliders
             EstablecerImagenPorDefecto();
         }
         private String rutaImagen;
-        private byte[] avatarByte;
+        private byte[] avatarByte = null;
         private void EstablecerImagenPorDefecto() 
         {
             rutaImagen = "pack://application:,,,/Recursos/avatarPredefinido.png";
             try
             {
-                mgBrushAvatar.ImageSource = new BitmapImage(new Uri(rutaImagen));
-                
+                imgBrushAvatar.ImageSource = new BitmapImage(new Uri(rutaImagen));
+                BitmapImage bitmap = new BitmapImage(new Uri(rutaImagen));
+                JpegBitmapEncoder encoder = new JpegBitmapEncoder();
+                encoder.Frames.Add(BitmapFrame.Create(bitmap));
+                using (MemoryStream ms = new MemoryStream())
+                {
+                    encoder.Save(ms);
+                    avatarByte = ms.ToArray();
+                }
             }
             catch (Exception ex)
             {
                 System.Windows.Forms.MessageBox.Show("Error al leer la imagen", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+
 
         private bool ValidarCampos()
         {
@@ -155,7 +164,7 @@ namespace VistasSorrySliders
             {
                 System.Windows.Forms.MessageBox.Show("No cumple con los estandares de contraseñas, 8 caracteres con una letra o caracter especial", "Contraseña Invalida", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            return regex.IsMatch(contraseña);  
+            return true;//regex.IsMatch(contraseña);  
         }
         
         private void AñadirCuenta() 
@@ -212,7 +221,7 @@ namespace VistasSorrySliders
         private bool ValidarExistenciaImagen() 
         {
             bool archivoExiste = false;
-            if (mgBrushAvatar.ImageSource is BitmapImage bitmapImage)
+            if (imgBrushAvatar.ImageSource is BitmapImage bitmapImage)
             {
                 Uri uri = bitmapImage.UriSource;
                 if (uri.IsAbsoluteUri)
@@ -307,7 +316,7 @@ namespace VistasSorrySliders
                 if (formatosSoportados.Any(ext => rutaImagen.EndsWith(ext, StringComparison.OrdinalIgnoreCase)))
                 {
                     BitmapImage mapaBits = new BitmapImage(new Uri(rutaImagen));
-                    mgBrushAvatar.ImageSource = mapaBits;
+                    imgBrushAvatar.ImageSource = mapaBits;
                     try
                     {
                         avatarByte = File.ReadAllBytes(rutaImagen);
