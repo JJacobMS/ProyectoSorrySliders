@@ -27,8 +27,10 @@ namespace VistasSorrySliders
 
         private void ClicIniciarJuego(object sender, RoutedEventArgs e)
         {
-            InicioSesionPagina inicioSesion = new InicioSesionPagina();
-            this.NavigationService.Navigate(inicioSesion);
+            AjustesVentana ajustes = new AjustesVentana();
+            ajustes.Show();
+            /*InicioSesionPagina inicioSesion = new InicioSesionPagina();
+            this.NavigationService.Navigate(inicioSesion);*/
         }
     }
 }

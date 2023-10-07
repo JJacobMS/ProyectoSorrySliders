@@ -13,5 +13,14 @@ namespace VistasSorrySliders
     /// </summary>
     public partial class App : Application
     {
+        public App()
+        {
+            //System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("en");
+        }
+
+        public static void CambiarIdioma(string idiomaCambio)
+        {
+            System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo(idiomaCambio);
+        }
     }
 }

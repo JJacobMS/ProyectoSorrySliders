@@ -118,81 +118,81 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="btnCancelar" xml:space="preserve">
-    <value>CANCELAR</value>
+    <value>CANCEL</value>
   </data>
   <data name="btnContinuar" xml:space="preserve">
-    <value>CONTINUAR</value>
+    <value>CONTINUE</value>
   </data>
   <data name="btnContinuarInvitado" xml:space="preserve">
-    <value>CONTINUAR COMO INVITADO</value>
+    <value>CONTINUE AS GUEST</value>
   </data>
   <data name="btnCrearCuenta" xml:space="preserve">
-    <value>CREAR CUENTA</value>
+    <value>CREATE ACCOUNT</value>
   </data>
   <data name="btnGuardarCambios" xml:space="preserve">
-    <value>GUARDAR CAMBIOS</value>
+    <value>SAVE CHANGES</value>
   </data>
   <data name="btnRegistrarCuenta" xml:space="preserve">
-    <value>REGISTRAR CUENTA</value>
+    <value>REGISTER ACCOUNT</value>
   </data>
   <data name="btnSalir" xml:space="preserve">
-    <value>SALIR</value>
+    <value>EXIT</value>
   </data>
   <data name="lblAjustes" xml:space="preserve">
-    <value>Ajustes</value>
+    <value>Settings</value>
   </data>
   <data name="lblApellidos" xml:space="preserve">
-    <value>Apellido/s</value>
+    <value>Last Name/s</value>
   </data>
   <data name="lblAvatar" xml:space="preserve">
     <value>Avatar</value>
   </data>
   <data name="lblBienvenido" xml:space="preserve">
-    <value>Bienvenido</value>
+    <value>Welcome</value>
   </data>
   <data name="lblBienvenidoNuevo" xml:space="preserve">
-    <value>Bienvenido de nuevo</value>
+    <value>Welcome again</value>
   </data>
   <data name="lblContrasena" xml:space="preserve">
-    <value>Contraseña:</value>
+    <value>Password:</value>
   </data>
   <data name="lblCorreo" xml:space="preserve">
-    <value>Correo:</value>
+    <value>Email:</value>
   </data>
   <data name="lblCorreoElectronico" xml:space="preserve">
-    <value>Correo electrónico</value>
+    <value>Email Address:</value>
   </data>
   <data name="lblDatosCuenta" xml:space="preserve">
-    <value>Datos de la cuenta</value>
+    <value>Account Details</value>
   </data>
   <data name="lblEspanol" xml:space="preserve">
-    <value>Español</value>
+    <value>Spanish</value>
   </data>
   <data name="lblIdioma" xml:space="preserve">
-    <value>IDIOMA:</value>
+    <value>LANGUAGE:</value>
   </data>
   <data name="lblIngles" xml:space="preserve">
-    <value>Inglés</value>
+    <value>English</value>
   </data>
   <data name="lblInicioSesion" xml:space="preserve">
-    <value>INICIAR SESIÓN</value>
+    <value>LOGIN</value>
   </data>
   <data name="lblNickname" xml:space="preserve">
-    <value>Nickname/apodo</value>
+    <value>Nickname</value>
   </data>
   <data name="lblNombres" xml:space="preserve">
-    <value>Nombre/s</value>
+    <value>Name/s</value>
   </data>
   <data name="msgErrorBaseDatos" xml:space="preserve">
-    <value>Hubo un error de conexión con la base de datos</value>
+    <value>There has been a connection error with the database</value>
   </data>
   <data name="msgErrorConexion" xml:space="preserve">
-    <value>Hubo un error de conexión con el servidor</value>
+    <value>There has been a connection error with the server</value>
   </data>
   <data name="txtBlockContrasenaInvalida" xml:space="preserve">
-    <value>La contraseña no es correcta. Verifica tu contraseña e inténtalo de nuevo</value>
+    <value>The password is not valid. Verify your password and try again</value>
   </data>
   <data name="txtBlockCorreoInvalido" xml:space="preserve">
-    <value>El correo electrónico no se encuentra registrado en el sistema</value>
+    <value>The email address isn´t register in the sistem</value>
   </data>
 </root>

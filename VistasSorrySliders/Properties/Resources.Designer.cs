@@ -88,7 +88,7 @@ namespace VistasSorrySliders.Properties {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Crear cuenta.
+        ///   Busca una cadena traducida similar a CREAR CUENTA.
         /// </summary>
         public static string btnCrearCuenta {
             get {
@@ -97,7 +97,7 @@ namespace VistasSorrySliders.Properties {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Guardar cambios.
+        ///   Busca una cadena traducida similar a GUARDAR CAMBIOS.
         /// </summary>
         public static string btnGuardarCambios {
             get {
@@ -111,6 +111,24 @@ namespace VistasSorrySliders.Properties {
         public static string btnRegistrarCuenta {
             get {
                 return ResourceManager.GetString("btnRegistrarCuenta", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a SALIR.
+        /// </summary>
+        public static string btnSalir {
+            get {
+                return ResourceManager.GetString("btnSalir", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Ajustes.
+        /// </summary>
+        public static string lblAjustes {
+            get {
+                return ResourceManager.GetString("lblAjustes", resourceCulture);
             }
         }
         
@@ -183,6 +201,33 @@ namespace VistasSorrySliders.Properties {
         public static string lblDatosCuenta {
             get {
                 return ResourceManager.GetString("lblDatosCuenta", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Español.
+        /// </summary>
+        public static string lblEspanol {
+            get {
+                return ResourceManager.GetString("lblEspanol", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a IDIOMA:.
+        /// </summary>
+        public static string lblIdioma {
+            get {
+                return ResourceManager.GetString("lblIdioma", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Inglés.
+        /// </summary>
+        public static string lblIngles {
+            get {
+                return ResourceManager.GetString("lblIngles", resourceCulture);
             }
         }
         
