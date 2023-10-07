@@ -70,16 +70,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
-    <Compile Include="DAO\CuentaDAO.cs" />
-    <Compile Include="DAO\UsuarioDAO.cs" />
     <Compile Include="InicioPagina.xaml.cs">
       <DependentUpon>InicioPagina.xaml</DependentUpon>
     </Compile>
     <Compile Include="InicioSesionPagina.xaml.cs">
       <DependentUpon>InicioSesionPagina.xaml</DependentUpon>
     </Compile>
-    <Compile Include="InterfacesDAO\ICuentaDAO.cs" />
-    <Compile Include="InterfacesDAO\IUsuarioDAO.cs" />
     <Compile Include="MenuPrincipalPagina.xaml.cs">
       <DependentUpon>MenuPrincipalPagina.xaml</DependentUpon>
     </Compile>
@@ -229,6 +225,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Recursos\avatarPredefinido.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Recursos\pantallaSorrySlidersPrincipal.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

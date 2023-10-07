@@ -140,7 +140,7 @@
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:5455/ServidorSorrySliders</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>LAPTOP-SF103ATP\monti</Upn>
+          <Upn>LAPTOP-H4AE1QJ9\sulem</Upn>
         </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>
@@ -149,7 +149,7 @@
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:5455/ServidorSorrySliders</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>LAPTOP-SF103ATP\monti</Upn>
+          <Upn>LAPTOP-H4AE1QJ9\sulem</Upn>
         </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>

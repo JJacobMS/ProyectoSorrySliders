@@ -13,7 +13,6 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using VistasSorrySliders.DAO;
 using VistasSorrySliders.ServicioSorrySliders;
 
 namespace VistasSorrySliders
@@ -117,6 +116,7 @@ namespace VistasSorrySliders
             switch (resultado)
             {
                 case Constantes.OPERACION_EXITOSA:
+                    CambiarPantallaMenuPrincipal();
                     MessageBox.Show("ENTRAR AL SISTEMA");
                     break;
                 case Constantes.OPERACION_EXITOSA_VACIA:
@@ -130,6 +130,12 @@ namespace VistasSorrySliders
                     MessageBox.Show(Properties.Resources.msgErrorConexion);
                     break;
             }
+        }
+
+        private void CambiarPantallaMenuPrincipal()
+        {
+            MenuPrincipalPagina menuPrincipal = new MenuPrincipalPagina();
+            this.NavigationService.Navigate(menuPrincipal);
         }
 
         private void ReiniciarPantalla()
