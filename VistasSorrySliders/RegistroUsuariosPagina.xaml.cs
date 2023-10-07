@@ -1,5 +1,4 @@
-﻿using BibliotecaClasesSorrySliders;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
@@ -214,6 +213,11 @@ namespace VistasSorrySliders
             {
                 resultado = Constantes.ERROR_CONEXION_SERVIDOR;
                 System.Windows.Forms.MessageBox.Show("Error de conexion añadirCuenta "+excepcion, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (TimeoutException excepcion)
+            {
+                resultado = Constantes.ERROR_CONEXION_SERVIDOR;
+                System.Windows.Forms.MessageBox.Show("Error de conexion añadirCuenta " + excepcion, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
         }
