@@ -29,8 +29,8 @@ namespace VistasSorrySliders
         {
             AjustesVentana ajustes = new AjustesVentana();
             ajustes.Show();
-            /*InicioSesionPagina inicioSesion = new InicioSesionPagina();
-            this.NavigationService.Navigate(inicioSesion);*/
+            //InicioSesionPagina inicioSesion = new InicioSesionPagina();
+            //this.NavigationService.Navigate(inicioSesion);
         }
     }
 }

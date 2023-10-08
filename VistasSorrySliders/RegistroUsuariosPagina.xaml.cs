@@ -157,13 +157,15 @@ namespace VistasSorrySliders
         }
         private bool ValidarContraseña(string contraseña)
         {
-            string patron = @"^(?=.*[0-9!@#$%^&*()-=_+])[A-Za-z0-9!@#$%^&*()-=_+]{8,}$";
+            string patron = @"^(?=.*[0-9!@#$%^&*()\-=_+.,:;])[A-Za-z0-9!@#$%^&*()\-=_+.,:;]{8,}$";
             Regex regex = new Regex(patron);
-            if (!regex.IsMatch(contraseña))
+            bool correoValidado = regex.IsMatch(contraseña);
+            if (correoValidado)
             {
-                System.Windows.Forms.MessageBox.Show("No cumple con los estandares de contraseñas, 8 caracteres con una letra o caracter especial", "Contraseña Invalida", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return correoValidado;
             }
-            return true;//regex.IsMatch(contraseña);  
+            System.Windows.Forms.MessageBox.Show("No cumple con los estandares de contraseñas, 8 caracteres minimo con una letra o caracter especial", "Contraseña Invalida", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            return correoValidado;  
         }
         
         private void AñadirCuenta() 
