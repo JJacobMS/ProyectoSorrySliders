@@ -43,6 +43,10 @@ namespace VistasSorrySliders
                     break;
             }
             CambiarIdioma(idiomaCambio);
+            ActualizarVentana();
+        }
+        public void ActualizarVentana() 
+        {
             lblAjustes.Content = Properties.Resources.lblAjustes;
             btnSalir.Content = Properties.Resources.btnSalir;
             lblIdioma.Content = Properties.Resources.lblIdioma;

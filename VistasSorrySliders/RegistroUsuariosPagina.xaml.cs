@@ -52,7 +52,7 @@ namespace VistasSorrySliders
             }
             catch (Exception ex)
             {
-                System.Windows.Forms.MessageBox.Show("Error al leer la imagen", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorAvatarDefecto, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -179,7 +179,7 @@ namespace VistasSorrySliders
             var nuevaCuenta = new CuentaSet
             {
                 CorreoElectronico = correoElectronico,
-                Avatar = avatarByte, //Error por limite de tamaño de mensajes appcofig de servidor
+                Avatar = avatarByte, 
                 Nickname = nickname,
                 Contraseña = contraseña
             };
@@ -202,7 +202,8 @@ namespace VistasSorrySliders
                     case Constantes.OPERACION_EXITOSA_VACIA:
                         break;
                     case Constantes.ERROR_CONEXION_BD:
-
+                        System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorBaseDatos);
+                        break;
                     case Constantes.ERROR_CONSULTA:
                         System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorBaseDatos);
                         break;
