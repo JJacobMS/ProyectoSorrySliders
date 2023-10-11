@@ -51,7 +51,7 @@ namespace VistasSorrySliders
             btnSalir.Content = Properties.Resources.btnSalir;
             lblIdioma.Content = Properties.Resources.lblIdioma;
             lblEspanol.Content = Properties.Resources.lblEspanol;
-            lblIngles.Content = Properties.Resources.lblIngles;
+            lblIngles.Content = Properties.Resources.lblIngles;   
         }
 
         private void CambiarIdioma(string idiomaCambio)

@@ -52,7 +52,7 @@ namespace VistasSorrySliders
             }
             catch (Exception ex)
             {
-                System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorAvatarDefecto, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorAvatarDefault,Properties.Resources.msgTituloErrorAvatarDefault, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -66,7 +66,7 @@ namespace VistasSorrySliders
             Style estiloPssBoxRojo = (Style)System.Windows.Application.Current.FindResource("estiloPssBoxRojo");
             Style estiloPssBoxAzul = (Style)System.Windows.Application.Current.FindResource("estiloPssBoxAzul");
 
-            if (!string.IsNullOrEmpty(txtBoxNombre.Text))
+            if (!string.IsNullOrWhiteSpace(txtBoxNombre.Text))
             {
                 txtBoxNombre.Style = estiloTxtBoxAzul;
             }
@@ -76,7 +76,7 @@ namespace VistasSorrySliders
                 validacionCampos = false;
             }
 
-            if (!string.IsNullOrEmpty(txtBoxApellidos.Text))
+            if (!string.IsNullOrWhiteSpace(txtBoxApellidos.Text))
             {
                 txtBoxApellidos.Style = estiloTxtBoxAzul;
             }
@@ -86,7 +86,7 @@ namespace VistasSorrySliders
                 validacionCampos = false;
             }
 
-            if (!string.IsNullOrEmpty(txtBoxCorreoElectronico.Text) && ValidarCorreo(txtBoxCorreoElectronico.Text) && ValidarExistenciaCorreo())
+            if (!string.IsNullOrWhiteSpace(txtBoxCorreoElectronico.Text) && ValidarCorreo(txtBoxCorreoElectronico.Text) && ValidarExistenciaCorreo())
             {
                 txtBoxCorreoElectronico.Style = estiloTxtBoxAzul;
             }
@@ -96,7 +96,7 @@ namespace VistasSorrySliders
                 validacionCampos = false;
             }
 
-            if (!string.IsNullOrEmpty(pssBoxContrasena.Password) && ValidarContraseña(pssBoxContrasena.Password))
+            if (!string.IsNullOrWhiteSpace(pssBoxContrasena.Password) && ValidarContraseña(pssBoxContrasena.Password))
             {
                 pssBoxContrasena.Style = estiloPssBoxAzul;
             }
@@ -106,7 +106,7 @@ namespace VistasSorrySliders
                 validacionCampos = false;
             }
 
-            if(!string.IsNullOrEmpty(txtBoxNickname.Text))
+            if(!string.IsNullOrWhiteSpace(txtBoxNickname.Text))
             {
                 txtBoxNickname.Style = estiloTxtBoxAzul;
             }
@@ -133,24 +133,22 @@ namespace VistasSorrySliders
                     string domainName = idn.GetAscii(match.Groups[2].Value);
                     return match.Groups[1].Value + domainName;
                 }
+                bool correoValido = Regex.IsMatch(correo, @"^[^@\s]+@[^@\s]+\.[^@\s]+$", RegexOptions.IgnoreCase, TimeSpan.FromMilliseconds(250));
+                if (correoValido)
+                {
+                    return true;
+                }
+                else
+                {
+                    System.Windows.Forms.MessageBox.Show(Properties.Resources.msgCorreoInvalido, Properties.Resources.msgTituloCorreoInvalido, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return false;
+                }
             }
             catch (RegexMatchTimeoutException e)
             {
                 return false;
             }
             catch (ArgumentException e)
-            {
-                return false;
-            }
-            try
-            {
-                return Regex.IsMatch(correo,@"^[^@\s]+@[^@\s]+\.[^@\s]+$",RegexOptions.IgnoreCase, TimeSpan.FromMilliseconds(250));
-            }
-            catch (RegexMatchTimeoutException)
-            {
-                return false;
-            }
-            catch (ArgumentException)
             {
                 return false;
             }
@@ -164,7 +162,7 @@ namespace VistasSorrySliders
             {
                 return correoValidado;
             }
-            System.Windows.Forms.MessageBox.Show("No cumple con los estandares de contraseñas, 8 caracteres minimo con una letra o caracter especial", "Contraseña Invalida", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorContrasenaInvalida, Properties.Resources.msgTituloContraseñaInvalida, MessageBoxButtons.OK, MessageBoxIcon.Error);
             return correoValidado;  
         }
         
@@ -197,7 +195,7 @@ namespace VistasSorrySliders
                 switch (resultado)
                 {
                     case Constantes.OPERACION_EXITOSA:
-                        System.Windows.Forms.MessageBox.Show("Cuenta registrada", "Cuenta registrada", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        System.Windows.Forms.MessageBox.Show(Properties.Resources.msgCuentaCreada, Properties.Resources.msgTituloCuentaCreada, MessageBoxButtons.OK, MessageBoxIcon.Information);
                         break;
                     case Constantes.OPERACION_EXITOSA_VACIA:
                         break;
@@ -215,12 +213,13 @@ namespace VistasSorrySliders
             catch (CommunicationException excepcion)
             {
                 resultado = Constantes.ERROR_CONEXION_SERVIDOR;
-                System.Windows.Forms.MessageBox.Show("Error de conexion añadirCuenta "+excepcion, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorConexion);
             }
             catch (TimeoutException excepcion)
             {
                 resultado = Constantes.ERROR_CONEXION_SERVIDOR;
-                System.Windows.Forms.MessageBox.Show("Error de conexion añadirCuenta " + excepcion, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorConexion);
+
             }
 
         }
@@ -244,12 +243,19 @@ namespace VistasSorrySliders
                     }
                 }
             }
-            return archivoExiste;
+            if (archivoExiste)
+            {
+                return archivoExiste;
+            }
+            else 
+            {
+                System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorImagen, Properties.Resources.msgTituloErrorImagen, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return archivoExiste;
+            }
         }
 
         private bool ValidarExistenciaCorreo() 
         {
-            bool correoExiste = false;
             string correoIngresado = txtBoxCorreoElectronico.Text;
             Constantes resultado = Constantes.OPERACION_EXITOSA_VACIA;
             try
@@ -267,27 +273,23 @@ namespace VistasSorrySliders
             switch (resultado)
             {
                 case Constantes.OPERACION_EXITOSA:
-                    System.Windows.Forms.MessageBox.Show("Este correo ya ha sido registrado", "Cuenta registrada", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    
-                    return correoExiste = false;
+                    System.Windows.Forms.MessageBox.Show(Properties.Resources.msgCorreoEncontrado, Properties.Resources.msgTituloCorreoEncontrado, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return false;
                 case Constantes.OPERACION_EXITOSA_VACIA:
                     return true;
                 case Constantes.ERROR_CONEXION_BD:
-                    
-                    return correoExiste = false;
+                    return false;
                 case Constantes.ERROR_CONSULTA:
                     System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorBaseDatos);
-                    return correoExiste = false;
+                    return false;
                 case Constantes.ERROR_CONEXION_SERVIDOR:
                     System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorConexion);
-                    return correoExiste = false;
+                    return false;
             }
-            return correoExiste = false;
+            return false;
         }
         private void ClicCrearCuenta(object sender, RoutedEventArgs e)
         {
-            //validar y contraseña
-            //Excepciones
             if (ValidarCampos() && ValidarExistenciaImagen())
             {
                 try
@@ -297,7 +299,7 @@ namespace VistasSorrySliders
                 }
                 catch (CommunicationException ex)
                 {
-                    System.Windows.Forms.MessageBox.Show("No se puede establecer una conexión con el servidor SQL Server", "Error con la Base de Datos", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorConexion);
                 }
             }
 
@@ -308,18 +310,17 @@ namespace VistasSorrySliders
         }
         private void ClicCancelar(object sender, RoutedEventArgs e)
         {
-
             IrInicioSesion();
         }
 
         private void SeleccionarImagen(object sender, MouseButtonEventArgs e)
         {
             OpenFileDialog abrirBiblioteca = new OpenFileDialog();
-            abrirBiblioteca.Filter = "Archivos de imagen|*.jpg;*.jpeg;*.png";
+            abrirBiblioteca.Filter = "Archivos de imagen|*.jpg;*.jpeg";
             if (abrirBiblioteca.ShowDialog() == DialogResult.OK)
             {
                 rutaImagen = abrirBiblioteca.FileName;
-                string[] formatosSoportados = { ".jpg", ".jpeg", ".png" };
+                string[] formatosSoportados = { ".jpg", ".jpeg"};
                 if (formatosSoportados.Any(ext => rutaImagen.EndsWith(ext, StringComparison.OrdinalIgnoreCase)))
                 {
                     BitmapImage mapaBits = new BitmapImage(new Uri(rutaImagen));
@@ -330,12 +331,12 @@ namespace VistasSorrySliders
                     }
                     catch (Exception ex)
                     {
-                        System.Windows.Forms.MessageBox.Show("Error al leer la imagen", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorImagen, Properties.Resources.msgTituloErrorImagen, MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
                 else
                 {
-                    System.Windows.Forms.MessageBox.Show("Por favor, seleccione un archivo de imagen válida.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    System.Windows.Forms.MessageBox.Show(Properties.Resources.msgImagenInvalida, Properties.Resources.msgTituloErrorImagen, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }
@@ -343,6 +344,42 @@ namespace VistasSorrySliders
         private void ClicRemoverImagen(object sender, RoutedEventArgs e)
         {
             EstablecerImagenPorDefecto();
+        }
+
+        private void txtBoxNombre_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (txtBoxNombre.Text.Length > 60)
+            {
+                txtBoxNombre.Text = txtBoxNombre.Text.Substring(0, 60);
+                txtBoxNombre.SelectionStart = txtBoxNombre.Text.Length;
+            }
+        }
+
+        private void txtBoxNickname_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (txtBoxNickname.Text.Length > 50)
+            {
+                txtBoxNickname.Text = txtBoxNickname.Text.Substring(0, 50);
+                txtBoxNickname.SelectionStart = txtBoxNickname.Text.Length;
+            }
+        }
+
+        private void txtBoxApellidos_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (txtBoxApellidos.Text.Length > 30)
+            {
+                txtBoxApellidos.Text = txtBoxApellidos.Text.Substring(0, 30);
+                txtBoxApellidos.SelectionStart = txtBoxApellidos.Text.Length;
+            }
+        }
+
+        private void txtBoxCorreoElectronico_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (txtBoxCorreoElectronico.Text.Length > 100)
+            {
+                txtBoxCorreoElectronico.Text = txtBoxCorreoElectronico.Text.Substring(0, 100);
+                txtBoxCorreoElectronico.SelectionStart = txtBoxCorreoElectronico.Text.Length;
+            }
         }
     }
 }

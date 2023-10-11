@@ -183,11 +183,50 @@
   <data name="lblNombres" xml:space="preserve">
     <value>Name/s</value>
   </data>
+  <data name="msgCorreoEncontrado" xml:space="preserve">
+    <value>The input email is registered in the system</value>
+  </data>
+  <data name="msgCorreoInvalido" xml:space="preserve">
+    <value>The email is invalid, please enter a valid address</value>
+  </data>
+  <data name="msgCuentaCreada" xml:space="preserve">
+    <value>The account has been successfully registered</value>
+  </data>
+  <data name="msgErrorAvatarDefault" xml:space="preserve">
+    <value>Error loading default avatar image</value>
+  </data>
   <data name="msgErrorBaseDatos" xml:space="preserve">
     <value>There has been a connection error with the database</value>
   </data>
   <data name="msgErrorConexion" xml:space="preserve">
     <value>There has been a connection error with the server</value>
+  </data>
+  <data name="msgErrorContrasenaInvalida" xml:space="preserve">
+    <value>La contraseña debe contar con: Mínimo 8 caracteres, con un número o un carácter especial</value>
+  </data>
+  <data name="msgErrorImagen" xml:space="preserve">
+    <value>The image cannot be loaded</value>
+  </data>
+  <data name="msgImagenInvalida" xml:space="preserve">
+    <value>Please select a valid image file</value>
+  </data>
+  <data name="msgTituloContraseñaInvalida" xml:space="preserve">
+    <value>Contraseña invalida</value>
+  </data>
+  <data name="msgTituloCorreoEncontrado" xml:space="preserve">
+    <value>Previously registered account</value>
+  </data>
+  <data name="msgTituloCorreoInvalido" xml:space="preserve">
+    <value>Invalid email</value>
+  </data>
+  <data name="msgTituloCuentaCreada" xml:space="preserve">
+    <value>Account created</value>
+  </data>
+  <data name="msgTituloErrorAvatarDefault" xml:space="preserve">
+    <value>Error loading the image</value>
+  </data>
+  <data name="msgTituloErrorImagen" xml:space="preserve">
+    <value>Image Error</value>
   </data>
   <data name="txtBlockContrasenaInvalida" xml:space="preserve">
     <value>The password is not valid. Verify your password and try again</value>

@@ -111,6 +111,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="DiccionarioEstilos\DiccionarioMenuPrincipal.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="DiccionarioEstilos\DiccionarioPrincipal.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -201,7 +205,7 @@
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Recursos\Banner.png" />
+    <Resource Include="Recursos\banner.png" />
     <Resource Include="Recursos\botonSalir.png" />
     <Resource Include="Recursos\dado.png" />
     <Resource Include="Recursos\gato1.png" />
@@ -210,15 +214,15 @@
     <Resource Include="Recursos\gato4.png" />
     <Resource Include="Recursos\gato5.png" />
     <Resource Include="Recursos\gato6.png" />
-    <Resource Include="Recursos\ImagenesLogo.png" />
-    <Resource Include="Recursos\LogoSliders.png" />
+    <Resource Include="Recursos\imagenesLogo.png" />
+    <Resource Include="Recursos\logoSliders.png" />
     <Resource Include="Recursos\peones.png" />
-    <Resource Include="Recursos\RielAzul.png" />
-    <Resource Include="Recursos\RielRojo.png" />
-    <Resource Include="Recursos\TableroCentral.png" />
-    <Resource Include="Recursos\TableroCuatro.png" />
-    <Resource Include="Recursos\TableroCuatroConFondo.png" />
-    <Resource Include="Recursos\TableroLanzamientoFondo.png" />
+    <Resource Include="Recursos\rielAzul.png" />
+    <Resource Include="Recursos\rielRojo.png" />
+    <Resource Include="Recursos\tableroCentral.png" />
+    <Resource Include="Recursos\tableroCuatro.png" />
+    <Resource Include="Recursos\tableroCuatroConFondo.png" />
+    <Resource Include="Recursos\tableroLanzamientoFondo.png" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadataStorage Include="Connected Services\ServicioSorrySliders\" />
@@ -242,7 +246,7 @@
     <Resource Include="Recursos\ajustesIcono.png" />
     <Resource Include="Recursos\crearLobbyIcono.png" />
     <Resource Include="Recursos\dadoRojo.png" />
-    <Resource Include="Recursos\jugadoreAmigosIcono.png" />
+    <Resource Include="Recursos\jugadoresAmigosIcono.png" />
     <Resource Include="Recursos\puntuacionIcono.png" />
     <Resource Include="Recursos\salirIcono.png" />
     <Resource Include="Recursos\tableroDosConFondo.png" />
