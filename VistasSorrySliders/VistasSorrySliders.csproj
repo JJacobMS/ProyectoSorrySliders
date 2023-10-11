@@ -95,6 +95,9 @@
     <Compile Include="RegistroUsuariosPagina.xaml.cs">
       <DependentUpon>RegistroUsuariosPagina.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UnirsePartidaPagina.xaml.cs">
+      <DependentUpon>UnirsePartidaPagina.xaml</DependentUpon>
+    </Compile>
     <Page Include="AjustesVentana.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -140,6 +143,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="RegistroUsuariosPagina.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UnirsePartidaPagina.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
