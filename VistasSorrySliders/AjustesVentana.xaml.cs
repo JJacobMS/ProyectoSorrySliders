@@ -22,7 +22,7 @@ namespace VistasSorrySliders
         public AjustesVentana()
         {
             InitializeComponent();
-            SeleccionarIdioma(System.Threading.Thread.CurrentThread.CurrentUICulture.ToString());
+            SeleccionarIdioma(System.Threading.Thread.CurrentThread.CurrentUICulture.Name);
         }
 
         private void ClicSalir(object sender, RoutedEventArgs e)
@@ -43,6 +43,15 @@ namespace VistasSorrySliders
                     break;
             }
             CambiarIdioma(idiomaCambio);
+            ActualizarVentana();
+        }
+        public void ActualizarVentana() 
+        {
+            lblAjustes.Content = Properties.Resources.lblAjustes;
+            btnSalir.Content = Properties.Resources.btnSalir;
+            lblIdioma.Content = Properties.Resources.lblIdioma;
+            lblEspanol.Content = Properties.Resources.lblEspanol;
+            lblIngles.Content = Properties.Resources.lblIngles;   
         }
 
         private void CambiarIdioma(string idiomaCambio)
@@ -50,6 +59,8 @@ namespace VistasSorrySliders
             switch (idiomaCambio)
             {
                 case "es-MX":
+                    App.CambiarIdioma(idiomaCambio);
+                    break;
                 case "en":
                     App.CambiarIdioma(idiomaCambio);
                     break;
@@ -68,5 +79,7 @@ namespace VistasSorrySliders
                     break;
             }
         }
+
+       
     }
 }

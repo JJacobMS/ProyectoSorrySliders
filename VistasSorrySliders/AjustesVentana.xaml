@@ -14,9 +14,9 @@
         </Grid.RowDefinitions>
         <Border Background="#422C0A">
             <Grid>
-                <Label Content="{x:Static p:Resources.lblAjustes}" 
+                <Label x:Name="lblAjustes" Content="{x:Static p:Resources.lblAjustes}" 
                         Style="{StaticResource estiloLblInicioSesion}" FontSize="60"/>
-                <Button Content="{x:Static p:Resources.btnSalir}" 
+                    <Button x:Name="btnSalir" Content="{x:Static p:Resources.btnSalir}" 
                         Style="{StaticResource estiloBtnSalir}" HorizontalAlignment="Left" Margin="10,0,0,0" Click="ClicSalir"/>
             </Grid>
         </Border>
@@ -28,7 +28,7 @@
                 <ColumnDefinition/>
                 <ColumnDefinition Width="2*"/>
             </Grid.ColumnDefinitions>
-            <Label Content="{x:Static p:Resources.lblIdioma}" 
+            <Label x:Name="lblIdioma" Content="{x:Static p:Resources.lblIdioma}" 
                    Style="{StaticResource estiloLblTituloTextos}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                 <ComboBox Name="cmbBoxAjustesIdioma" Grid.Column="2" Height="50" Width="250" HorizontalAlignment="Left" SelectionChanged="ClicCambiarIdioma"
                       Style="{StaticResource estiloCmbBoxAjustes}">
@@ -36,10 +36,10 @@
                     <Style TargetType="ComboBoxItem" BasedOn="{StaticResource estiloCmbBoxItemAjustes}"/>
                 </ComboBox.ItemContainerStyle>
                 <ComboBoxItem>
-                    <Label Content="{x:Static p:Resources.lblEspanol}"/>
+                    <Label x:Name="lblEspanol" Content="{x:Static p:Resources.lblEspanol}"/>
                 </ComboBoxItem>
                 <ComboBoxItem>
-                    <Label Content="{x:Static p:Resources.lblIngles}"/>
+                    <Label x:Name="lblIngles" Content="{x:Static p:Resources.lblIngles}"/>
                 </ComboBoxItem>
             </ComboBox>
         </Grid>

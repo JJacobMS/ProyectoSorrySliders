@@ -183,11 +183,50 @@
   <data name="lblNombres" xml:space="preserve">
     <value>Nombre/s</value>
   </data>
+  <data name="msgCorreoEncontrado" xml:space="preserve">
+    <value>El correo ingresado se encuentra registrado en el sistema</value>
+  </data>
+  <data name="msgCorreoInvalido" xml:space="preserve">
+    <value>El correo electrónico es inválido, ingresa una dirección valida</value>
+  </data>
+  <data name="msgCuentaCreada" xml:space="preserve">
+    <value>La cuenta se ha registrado exitosamente</value>
+  </data>
+  <data name="msgErrorAvatarDefault" xml:space="preserve">
+    <value>Error al cargar la imagen del avatar por defecto</value>
+  </data>
   <data name="msgErrorBaseDatos" xml:space="preserve">
     <value>Hubo un error de conexión con la base de datos</value>
   </data>
   <data name="msgErrorConexion" xml:space="preserve">
     <value>Hubo un error de conexión con el servidor</value>
+  </data>
+  <data name="msgErrorContrasenaInvalida" xml:space="preserve">
+    <value>Password must have: Minimum of 8 characters with one number or one special character</value>
+  </data>
+  <data name="msgErrorImagen" xml:space="preserve">
+    <value>La imagen no se puede cargar</value>
+  </data>
+  <data name="msgImagenInvalida" xml:space="preserve">
+    <value>Por favor, seleccione un archivo de imagen válida</value>
+  </data>
+  <data name="msgTituloContraseñaInvalida" xml:space="preserve">
+    <value>Invalid password</value>
+  </data>
+  <data name="msgTituloCorreoEncontrado" xml:space="preserve">
+    <value>Cuenta previamente registrada</value>
+  </data>
+  <data name="msgTituloCorreoInvalido" xml:space="preserve">
+    <value>Correo invalido</value>
+  </data>
+  <data name="msgTituloCuentaCreada" xml:space="preserve">
+    <value>Cuenta creada</value>
+  </data>
+  <data name="msgTituloErrorAvatarDefault" xml:space="preserve">
+    <value>Error al cargar la imagen</value>
+  </data>
+  <data name="msgTituloErrorImagen" xml:space="preserve">
+    <value>Error de imagen</value>
   </data>
   <data name="txtBlockContrasenaInvalida" xml:space="preserve">
     <value>La contraseña no es correcta. Verifica tu contraseña e inténtalo de nuevo</value>

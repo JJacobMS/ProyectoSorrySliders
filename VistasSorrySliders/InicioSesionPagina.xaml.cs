@@ -116,7 +116,7 @@ namespace VistasSorrySliders
             switch (resultado)
             {
                 case Constantes.OPERACION_EXITOSA:
-                    CambiarPantallaMenuPrincipal();
+                    CambiarPantallaMenuPrincipal(cuentaPorVerificar.CorreoElectronico);
                     MessageBox.Show("ENTRAR AL SISTEMA");
                     break;
                 case Constantes.OPERACION_EXITOSA_VACIA:
@@ -132,9 +132,9 @@ namespace VistasSorrySliders
             }
         }
 
-        private void CambiarPantallaMenuPrincipal()
+        private void CambiarPantallaMenuPrincipal(string correoVerificado)
         {
-            MenuPrincipalPagina menuPrincipal = new MenuPrincipalPagina();
+            MenuPrincipalPagina menuPrincipal = new MenuPrincipalPagina(correoVerificado);
             this.NavigationService.Navigate(menuPrincipal);
         }
 

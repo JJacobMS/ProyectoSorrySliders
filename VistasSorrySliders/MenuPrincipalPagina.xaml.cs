@@ -20,9 +20,25 @@ namespace VistasSorrySliders
     /// </summary>
     public partial class MenuPrincipalPagina : Page
     {
-        public MenuPrincipalPagina()
+        public MenuPrincipalPagina(string correoUsuario)
         {
             InitializeComponent();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void ClicMostrarAjustes(object sender, RoutedEventArgs e)
+        {
+            AjustesVentana ajustes = new AjustesVentana();
+            ajustes.Show();
+        }
+
+        private void ClicSalirMenuPrincipal(object sender, RoutedEventArgs e)
+        {
+            this.NavigationService.GoBack();
         }
     }
 }
