@@ -27,17 +27,17 @@ namespace VistasSorrySliders
             InitializeComponent();
         }
 
-        private void ClicContinuar(object sender, RoutedEventArgs e)
+        private void ClickContinuar(object sender, RoutedEventArgs e)
         {
             VerificarCuenta();
         }
 
-        private void ClicCancelar(object sender, RoutedEventArgs e)
+        private void ClickCancelar(object sender, RoutedEventArgs e)
         {
             this.NavigationService.GoBack();
         }
 
-        private void ClicRegistrarCuenta(object sender, RoutedEventArgs e)
+        private void ClickRegistrarCuenta(object sender, RoutedEventArgs e)
         {
             RegistroUsuariosPagina paginaRegistroUsuarios = new RegistroUsuariosPagina();
             this.NavigationService.Navigate(paginaRegistroUsuarios);
@@ -145,5 +145,15 @@ namespace VistasSorrySliders
             txtBoxCorreo.Style = (Style)FindResource("estiloTxtBoxDatosAzul");
             pssBoxContrasena.Style = (Style)FindResource("estiloPssBoxContrasenaAzul");
         }
+
+        private void TextChagedCambiarTextoDeCorreo(object sender, TextChangedEventArgs e)
+        {
+            if (txtBoxCorreo.Text.Length > 100)
+            {
+                txtBoxCorreo.Text = txtBoxCorreo.Text.Substring(0, 100);
+                txtBoxCorreo.SelectionStart = txtBoxCorreo.Text.Length;
+            }
+        }
+
     }
 }

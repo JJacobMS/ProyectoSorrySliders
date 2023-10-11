@@ -25,12 +25,12 @@ namespace VistasSorrySliders
             SeleccionarIdioma(System.Threading.Thread.CurrentThread.CurrentUICulture.Name);
         }
 
-        private void ClicSalir(object sender, RoutedEventArgs e)
+        private void ClickSalir(object sender, RoutedEventArgs e)
         {
             this.Close();
         }
 
-        private void ClicCambiarIdioma(object sender, SelectionChangedEventArgs e)
+        private void SelectionChangedCambiarIdioma(object sender, SelectionChangedEventArgs e)
         {
             string idiomaCambio = "";
             switch (cmbBoxAjustesIdioma.SelectedIndex)
