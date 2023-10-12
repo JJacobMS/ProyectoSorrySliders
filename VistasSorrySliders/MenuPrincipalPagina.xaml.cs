@@ -23,20 +23,19 @@ namespace VistasSorrySliders
         public MenuPrincipalPagina(string correoUsuario)
         {
             InitializeComponent();
+            //Metodo BuscarUsuarioPorCorreo Puedo reutilizar la consulta de buscar correo, debe regresar Nickname y Avatar
+            //Metodo settear datos usuario txtBlockCorreo, txtBlockNickname y imgBrushAvatar
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
 
-        }
 
-        private void ClicMostrarAjustes(object sender, RoutedEventArgs e)
+        private void ClickMostrarAjustes(object sender, RoutedEventArgs e)
         {
             AjustesVentana ajustes = new AjustesVentana();
             ajustes.Show();
         }
 
-        private void ClicSalirMenuPrincipal(object sender, RoutedEventArgs e)
+        private void ClickSalirMenuPrincipal(object sender, RoutedEventArgs e)
         {
             this.NavigationService.GoBack();
         }

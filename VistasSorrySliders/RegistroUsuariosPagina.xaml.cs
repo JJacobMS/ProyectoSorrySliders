@@ -288,7 +288,7 @@ namespace VistasSorrySliders
             }
             return false;
         }
-        private void ClicCrearCuenta(object sender, RoutedEventArgs e)
+        private void ClickCrearCuenta(object sender, RoutedEventArgs e)
         {
             if (ValidarCampos() && ValidarExistenciaImagen())
             {
@@ -308,7 +308,7 @@ namespace VistasSorrySliders
         {
             this.NavigationService.GoBack();
         }
-        private void ClicCancelar(object sender, RoutedEventArgs e)
+        private void ClickCancelar(object sender, RoutedEventArgs e)
         {
             IrInicioSesion();
         }
@@ -341,12 +341,12 @@ namespace VistasSorrySliders
             }
         }
 
-        private void ClicRemoverImagen(object sender, RoutedEventArgs e)
+        private void ClickRemoverImagen(object sender, RoutedEventArgs e)
         {
             EstablecerImagenPorDefecto();
         }
 
-        private void txtBoxNombre_TextChanged(object sender, TextChangedEventArgs e)
+        private void TextChangedTamañoNombre(object sender, TextChangedEventArgs e)
         {
             if (txtBoxNombre.Text.Length > 60)
             {
@@ -355,16 +355,16 @@ namespace VistasSorrySliders
             }
         }
 
-        private void txtBoxNickname_TextChanged(object sender, TextChangedEventArgs e)
+        private void TextChangedTamañoNickname(object sender, TextChangedEventArgs e)
         {
-            if (txtBoxNickname.Text.Length > 50)
+            if (txtBoxNickname.Text.Length > 30)
             {
-                txtBoxNickname.Text = txtBoxNickname.Text.Substring(0, 50);
+                txtBoxNickname.Text = txtBoxNickname.Text.Substring(0, 30);
                 txtBoxNickname.SelectionStart = txtBoxNickname.Text.Length;
             }
         }
 
-        private void txtBoxApellidos_TextChanged(object sender, TextChangedEventArgs e)
+        private void TextChangedTamañoApellidos(object sender, TextChangedEventArgs e)
         {
             if (txtBoxApellidos.Text.Length > 30)
             {
@@ -373,7 +373,7 @@ namespace VistasSorrySliders
             }
         }
 
-        private void txtBoxCorreoElectronico_TextChanged(object sender, TextChangedEventArgs e)
+        private void TextChangedTamañoCorreoElectronico(object sender, TextChangedEventArgs e)
         {
             if (txtBoxCorreoElectronico.Text.Length > 100)
             {
