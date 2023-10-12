@@ -1,0 +1,19 @@
+﻿<Page x:Class="VistasSorrySliders.ListaAmigosPagina"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:VistasSorrySliders"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="409"
+      Title="ListaAmigosPagina">
+
+    <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="/Recursos/TableroLanzamientoFondo.png"/>
+        </Grid.Background>
+        <Border BorderBrush="#17033B" BorderThickness="3" CornerRadius="10" Margin="15">
+
+        </Border>
+    </Grid>
+</Page>

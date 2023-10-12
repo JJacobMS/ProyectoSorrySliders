@@ -37,7 +37,8 @@ namespace VistasSorrySliders
 
         private void ClickSalirMenuPrincipal(object sender, RoutedEventArgs e)
         {
-            this.NavigationService.GoBack();
+            InicioSesionPagina inicio = new InicioSesionPagina();
+            this.NavigationService.Navigate(inicio);
         }
     }
 }

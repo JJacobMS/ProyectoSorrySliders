@@ -39,6 +39,9 @@
                             <ColumnDefinition/>
                             <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
+                        <StackPanel Grid.Column="1" Grid.Row="2" Grid.RowSpan="3" Orientation="Horizontal" HorizontalAlignment="Center" Margin="-10,20,20,20">
+                            <Image x:Name="mgDadosRojos" Source="/Recursos/dadoRojo.png" Stretch="UniformToFill"/>
+                        </StackPanel>
                         <Label Grid.Column="0" Grid.Row="0" Content="{x:Static p:Resources.lblDatosCuenta}" Margin="20,0,20,0" FontSize="30" Foreground="#052B42" FontFamily="{StaticResource FuentesTexto}"></Label>
                         <StackPanel Grid.Column="0" Grid.Row="1" Margin="20,0,20,0" VerticalAlignment="Center">
                             <Label Content="{x:Static p:Resources.lblNombres}" Style="{StaticResource estiloLblFormularioCuenta}"></Label>
@@ -80,9 +83,7 @@
                             <Button Content="{x:Static p:Resources.btnCrearCuenta}" Click="ClickCrearCuenta" Width="160" Height="45" Style="{StaticResource estiloBtnCrearCuenta}"></Button>
                             <Button  Content="{x:Static p:Resources.btnCancelar}" Margin="50,20,50,20" Width="160" Height="45" Style="{StaticResource estiloBtnCancelar}" Click="ClickCancelar"></Button>
                         </StackPanel>
-                        <StackPanel Grid.Column="1" Grid.Row="2" Grid.RowSpan="3" Orientation="Horizontal" HorizontalAlignment="Center" Margin="-10,20,20,20">
-                            <Image x:Name="mgDadosRojos" Source="/Recursos/dadoRojo.png" Stretch="UniformToFill"/>
-                        </StackPanel>
+                        
                         
                     </Grid>
                 </Border>
