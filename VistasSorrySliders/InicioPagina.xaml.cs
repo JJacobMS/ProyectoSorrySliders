@@ -25,13 +25,13 @@ namespace VistasSorrySliders
             InitializeComponent();
         }
 
-        private void ClicIniciarJuego(object sender, RoutedEventArgs e)
+        private void ClickIniciarJuego(object sender, RoutedEventArgs e)
         {
-            //AjustesVentana ajustes = new AjustesVentana();
-            //ajustes.Show();
-            RegistroUsuariosPagina usu = new RegistroUsuariosPagina();
-            MenuPrincipalPagina menuPrincipal = new MenuPrincipalPagina("correo");
+            InicioSesionPagina usu = new InicioSesionPagina();
             this.NavigationService.Navigate(usu);
+            /*RegistroUsuariosPagina usu = new RegistroUsuariosPagina();
+            MenuPrincipalPagina menuPrincipal = new MenuPrincipalPagina("correo");
+            this.NavigationService.Navigate(usu);*/
         }
     }
 }

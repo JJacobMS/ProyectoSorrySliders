@@ -17,7 +17,7 @@
                 <Label x:Name="lblAjustes" Content="{x:Static p:Resources.lblAjustes}" 
                         Style="{StaticResource estiloLblInicioSesion}" FontSize="60"/>
                     <Button x:Name="btnSalir" Content="{x:Static p:Resources.btnSalir}" 
-                        Style="{StaticResource estiloBtnSalir}" HorizontalAlignment="Left" Margin="10,0,0,0" Click="ClicSalir"/>
+                        Style="{StaticResource estiloBtnSalir}" HorizontalAlignment="Left" Margin="10,0,0,0" Click="ClickSalir"/>
             </Grid>
         </Border>
         <Grid Grid.Row="1">
@@ -30,7 +30,7 @@
             </Grid.ColumnDefinitions>
             <Label x:Name="lblIdioma" Content="{x:Static p:Resources.lblIdioma}" 
                    Style="{StaticResource estiloLblTituloTextos}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                <ComboBox Name="cmbBoxAjustesIdioma" Grid.Column="2" Height="50" Width="250" HorizontalAlignment="Left" SelectionChanged="ClicCambiarIdioma"
+                <ComboBox Name="cmbBoxAjustesIdioma" Grid.Column="2" Height="50" Width="250" HorizontalAlignment="Left" SelectionChanged="SelectionChangedCambiarIdioma"
                       Style="{StaticResource estiloCmbBoxAjustes}">
                 <ComboBox.ItemContainerStyle>
                     <Style TargetType="ComboBoxItem" BasedOn="{StaticResource estiloCmbBoxItemAjustes}"/>

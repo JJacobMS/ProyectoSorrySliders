@@ -35,22 +35,22 @@
                             <TextBlock Name="txtBlockCorreoInvalido" Visibility="Hidden"
                                     Style="{StaticResource estiloTxtBlockMensajeError}" Margin="50,0,0,0" Text="{x:Static p:Resources.txtBlockCorreoInvalido}"></TextBlock>
                         </StackPanel>
-                        <TextBox Name="txtBoxCorreo" Style="{StaticResource estiloTxtBoxDatosAzul}"></TextBox>
+                        <TextBox Name="txtBoxCorreo" Style="{StaticResource estiloTxtBoxDatosAzul}" TextChanged="TextChagedCambiarTextoDeCorreo"></TextBox>
                         <StackPanel Orientation="Horizontal">
                             <Label Style="{StaticResource estiloLblDatos}" Content="{x:Static p:Resources.lblContrasena}"></Label>
                             <TextBlock Name="txtBlockContrasenaInvalida" Visibility="Hidden"
                                 Style="{StaticResource estiloTxtBlockMensajeError}" Margin="5,0,0,0" Text="{x:Static p:Resources.txtBlockContrasenaInvalida}"></TextBlock>
                         </StackPanel>
-                        <PasswordBox Name="pssBoxContrasena" Style="{StaticResource estiloPssBoxContrasenaAzul}"></PasswordBox>
+                        <PasswordBox Name="pssBoxContrasena" Style="{StaticResource estiloPssBoxContrasenaAzul}" ></PasswordBox>
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Height="60">
-                            <Button Margin="10,0,20,0" Style="{StaticResource estiloBtnContinuar}" Content="{x:Static p:Resources.btnContinuar}" Click="ClicContinuar"></Button>
-                            <Button Margin="10,0,20,0" Style="{StaticResource estiloBtnCancelar}" Content="{x:Static p:Resources.btnCancelar}" Click="ClicCancelar"></Button>
+                            <Button Margin="10,0,20,0" Style="{StaticResource estiloBtnContinuar}" Content="{x:Static p:Resources.btnContinuar}" Click="ClickContinuar"></Button>
+                            <Button Margin="10,0,20,0" Style="{StaticResource estiloBtnCancelar}" Content="{x:Static p:Resources.btnCancelar}" Click="ClickCancelar"></Button>
                         </StackPanel>
                     </StackPanel>
                 </Border>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                     <Button Style="{StaticResource estiloBtnMorado}" Margin="10,0,10,0"
-                            Content="{x:Static p:Resources.btnRegistrarCuenta}" Click="ClicRegistrarCuenta"/>
+                            Content="{x:Static p:Resources.btnRegistrarCuenta}" Click="ClickRegistrarCuenta"/>
                     <Button Style="{StaticResource estiloBtnTableroAmarillo}" Height="35" Width="180" FontSize="18" Margin="10,0,10,0"
                             Content="{x:Static p:Resources.btnContinuarInvitado}"/>
                 </StackPanel>
