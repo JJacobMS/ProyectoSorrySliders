@@ -79,7 +79,16 @@ namespace VistasSorrySliders.Properties {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Crear cuenta.
+        ///   Busca una cadena traducida similar a CONTINUAR COMO INVITADO.
+        /// </summary>
+        public static string btnContinuarInvitado {
+            get {
+                return ResourceManager.GetString("btnContinuarInvitado", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a CREAR CUENTA.
         /// </summary>
         public static string btnCrearCuenta {
             get {
@@ -88,7 +97,7 @@ namespace VistasSorrySliders.Properties {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Guardar cambios.
+        ///   Busca una cadena traducida similar a GUARDAR CAMBIOS.
         /// </summary>
         public static string btnGuardarCambios {
             get {
@@ -102,6 +111,24 @@ namespace VistasSorrySliders.Properties {
         public static string btnRegistrarCuenta {
             get {
                 return ResourceManager.GetString("btnRegistrarCuenta", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a SALIR.
+        /// </summary>
+        public static string btnSalir {
+            get {
+                return ResourceManager.GetString("btnSalir", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Ajustes.
+        /// </summary>
+        public static string lblAjustes {
+            get {
+                return ResourceManager.GetString("lblAjustes", resourceCulture);
             }
         }
         
@@ -178,6 +205,33 @@ namespace VistasSorrySliders.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Español.
+        /// </summary>
+        public static string lblEspanol {
+            get {
+                return ResourceManager.GetString("lblEspanol", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a IDIOMA:.
+        /// </summary>
+        public static string lblIdioma {
+            get {
+                return ResourceManager.GetString("lblIdioma", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Inglés.
+        /// </summary>
+        public static string lblIngles {
+            get {
+                return ResourceManager.GetString("lblIngles", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a INICIAR SESIÓN.
         /// </summary>
         public static string lblInicioSesion {
@@ -201,6 +255,141 @@ namespace VistasSorrySliders.Properties {
         public static string lblNombres {
             get {
                 return ResourceManager.GetString("lblNombres", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a El correo ingresado se encuentra registrado en el sistema.
+        /// </summary>
+        public static string msgCorreoEncontrado {
+            get {
+                return ResourceManager.GetString("msgCorreoEncontrado", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a El correo electrónico es inválido, ingresa una dirección valida.
+        /// </summary>
+        public static string msgCorreoInvalido {
+            get {
+                return ResourceManager.GetString("msgCorreoInvalido", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a La cuenta se ha registrado exitosamente.
+        /// </summary>
+        public static string msgCuentaCreada {
+            get {
+                return ResourceManager.GetString("msgCuentaCreada", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Error al cargar la imagen del avatar por defecto.
+        /// </summary>
+        public static string msgErrorAvatarDefault {
+            get {
+                return ResourceManager.GetString("msgErrorAvatarDefault", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Hubo un error de conexión con la base de datos.
+        /// </summary>
+        public static string msgErrorBaseDatos {
+            get {
+                return ResourceManager.GetString("msgErrorBaseDatos", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Hubo un error de conexión con el servidor.
+        /// </summary>
+        public static string msgErrorConexion {
+            get {
+                return ResourceManager.GetString("msgErrorConexion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a La contraseña debe contar con: Mínimo 8 caracteres, con un número o un carácter especial.
+        /// </summary>
+        public static string msgErrorContrasenaInvalida {
+            get {
+                return ResourceManager.GetString("msgErrorContrasenaInvalida", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a La imagen no se puede cargar.
+        /// </summary>
+        public static string msgErrorImagen {
+            get {
+                return ResourceManager.GetString("msgErrorImagen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Por favor, seleccione un archivo de imagen válida.
+        /// </summary>
+        public static string msgImagenInvalida {
+            get {
+                return ResourceManager.GetString("msgImagenInvalida", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Contraseña invalida.
+        /// </summary>
+        public static string msgTituloContraseñaInvalida {
+            get {
+                return ResourceManager.GetString("msgTituloContraseñaInvalida", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Cuenta previamente registrada.
+        /// </summary>
+        public static string msgTituloCorreoEncontrado {
+            get {
+                return ResourceManager.GetString("msgTituloCorreoEncontrado", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Correo invalido.
+        /// </summary>
+        public static string msgTituloCorreoInvalido {
+            get {
+                return ResourceManager.GetString("msgTituloCorreoInvalido", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Cuenta creada.
+        /// </summary>
+        public static string msgTituloCuentaCreada {
+            get {
+                return ResourceManager.GetString("msgTituloCuentaCreada", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Error al cargar la imagen.
+        /// </summary>
+        public static string msgTituloErrorAvatarDefault {
+            get {
+                return ResourceManager.GetString("msgTituloErrorAvatarDefault", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Error de imagen.
+        /// </summary>
+        public static string msgTituloErrorImagen {
+            get {
+                return ResourceManager.GetString("msgTituloErrorImagen", resourceCulture);
             }
         }
         

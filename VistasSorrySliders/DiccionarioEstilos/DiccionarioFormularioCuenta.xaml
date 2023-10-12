@@ -1,9 +1,76 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-    <Style TargetType="TextBox" x:Key="estiloTxtBoxCuenta">
+   
+    <Style x:Key="estiloAzul" TargetType="Control">
         <Setter Property="Height" Value="45"/>
         <Setter Property="Width" Value="250"/>
-        <Setter Property="BorderBrush" Value="Black"/>
+        <Setter Property="BorderBrush" Value="#052B42"/>
+        <Setter Property="BorderThickness" Value="4"/>
+        <Setter Property="FontSize" Value="15"/>
+        <Setter Property="FontFamily" Value="{StaticResource FuentesTexto}"/>
+        <Setter Property="Foreground" Value="Black"/>
+    </Style>
+
+    <Style TargetType="TextBox" x:Key="estiloTxtBoxAzul" BasedOn="{StaticResource estiloAzul}"></Style>
+
+    <Style TargetType="PasswordBox" x:Key="estiloPssBoxAzul" BasedOn="{StaticResource estiloAzul}"></Style>
+
+    <Style x:Key="estiloRojo" TargetType="Control">
+        <Setter Property="Height" Value="45"/>
+        <Setter Property="Width" Value="250"/>
+        <Setter Property="BorderBrush" Value="Red"/>
         <Setter Property="BorderThickness" Value="4"/>
     </Style>
+
+    <Style TargetType="TextBox" x:Key="estiloTxtBoxRojo" BasedOn="{StaticResource estiloRojo}"></Style>
+
+    <Style TargetType="PasswordBox" x:Key="estiloPssBoxRojo" BasedOn="{StaticResource estiloRojo}"></Style>
+
+    <Style TargetType="Label" x:Key="estiloLblFormularioCuenta">
+        <Setter Property="Height" Value="45"/>
+        <Setter Property="Width" Value="250"/>
+        <Setter Property="FontSize" Value="20"/>
+        <Setter Property="Foreground" Value="#052B42"/>
+        <Setter Property="FontFamily" Value="{StaticResource FuentesTexto}"/>
+    </Style>
+
+    <Style x:Key="estiloBtnCrearCuenta" TargetType="Button" BasedOn="{StaticResource estiloBtnTableroVerde}">
+        <Setter Property="Height" Value="45"/>
+        <Setter Property="Width" Value="160"/>
+        <Setter Property="Foreground" Value="#14BB6A"/>
+        <Setter Property="FontFamily" Value="{StaticResource FuentesTitulo}"/>
+        <Setter Property="FontSize" Value="20"/>
+        <Setter Property="Foreground" Value="#FFFFFF"/>
+    </Style>
+
+    <Style x:Key="estiloBtnQuitarAvatar" TargetType="Button">
+        <Setter Property="Foreground" Value="#FAA3AC"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border CornerRadius="20" BorderThickness="0" Background="#6D0E18">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Cursor" Value="Hand"/>
+                <Setter Property="Foreground" Value="#F1CACE"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type Button}">
+                            <Border CornerRadius="20" BorderThickness="0" Background="#40080D">
+                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+
 </ResourceDictionary>

@@ -9,6 +9,8 @@
                 <ResourceDictionary Source="/DiccionarioEstilos/DiccionarioPrincipal.xaml"/>
                 <ResourceDictionary Source="/DiccionarioEstilos/DiccionarioInicioSesion.xaml"/>
                 <ResourceDictionary Source="/DiccionarioEstilos/DiccionarioFormularioCuenta.xaml"/>
+                <ResourceDictionary Source="/DiccionarioEstilos/DiccionarioAjustes.xaml"/>
+                <ResourceDictionary Source="/DiccionarioEstilos/DiccionarioMenuPrincipal.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

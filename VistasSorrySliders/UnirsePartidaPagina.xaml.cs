@@ -16,20 +16,13 @@ using System.Windows.Shapes;
 namespace VistasSorrySliders
 {
     /// <summary>
-    /// Lógica de interacción para MainWindow.xaml
+    /// Lógica de interacción para UnirsePartidaPagina.xaml
     /// </summary>
-    public partial class MainWindow : NavigationWindow
+    public partial class UnirsePartidaPagina : Page
     {
-        public MainWindow()
+        public UnirsePartidaPagina()
         {
             InitializeComponent();
         }
-        /*public void Ejemplo() 
-        {
-            using (var context = new SorrySlidersBDEntities())
-            {
-
-            }
-        }*/
     }
 }
