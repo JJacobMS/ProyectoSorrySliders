@@ -210,6 +210,9 @@
   <data name="msgImagenInvalida" xml:space="preserve">
     <value>Please select a valid image file</value>
   </data>
+  <data name="msgTamañoImagenError" xml:space="preserve">
+    <value>The image exceeds the 3MB limit</value>
+  </data>
   <data name="msgTituloContraseñaInvalida" xml:space="preserve">
     <value>Contraseña invalida</value>
   </data>
@@ -227,6 +230,9 @@
   </data>
   <data name="msgTituloErrorImagen" xml:space="preserve">
     <value>Image Error</value>
+  </data>
+  <data name="msgTituloTamañoImagenError" xml:space="preserve">
+    <value>Image too big</value>
   </data>
   <data name="txtBlockContrasenaInvalida" xml:space="preserve">
     <value>The password is not valid. Verify your password and try again</value>

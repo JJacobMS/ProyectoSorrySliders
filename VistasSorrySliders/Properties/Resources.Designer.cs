@@ -340,6 +340,15 @@ namespace VistasSorrySliders.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a La imagen supera el limite de 3MB.
+        /// </summary>
+        public static string msgTamañoImagenError {
+            get {
+                return ResourceManager.GetString("msgTamañoImagenError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Contraseña invalida.
         /// </summary>
         public static string msgTituloContraseñaInvalida {
@@ -390,6 +399,15 @@ namespace VistasSorrySliders.Properties {
         public static string msgTituloErrorImagen {
             get {
                 return ResourceManager.GetString("msgTituloErrorImagen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Imagen demasiado grande.
+        /// </summary>
+        public static string msgTituloTamañoImagenError {
+            get {
+                return ResourceManager.GetString("msgTituloTamañoImagenError", resourceCulture);
             }
         }
         
