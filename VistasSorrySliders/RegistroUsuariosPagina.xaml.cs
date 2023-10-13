@@ -395,11 +395,11 @@ namespace VistasSorrySliders
             {
                 using (FileStream flujoArchivo = new FileStream(ruta, FileMode.Open, FileAccess.Read))
                 {
-                    int TamañoenBytes = (int)flujoArchivo.Length;
-                    int TamañoEnKB = TamañoenBytes / 1024;
-                    int TamañoEnMB = TamañoEnKB / 1024;
+                    int tamañoenBytes = (int)flujoArchivo.Length;
+                    int tamañoEnKB = tamañoenBytes / 1024;
+                    int tamañoEnMB = tamañoEnKB / 1024;
 
-                    if (TamañoEnMB >= 3)
+                    if (tamañoEnMB >= 3)
                     {
                         return true;
                     }

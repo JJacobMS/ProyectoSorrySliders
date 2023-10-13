@@ -24,6 +24,10 @@ namespace VistasSorrySliders
     /// </summary>
     public partial class MenuPrincipalPagina : Page
     {
+        private CuentaSet _cuentaUsuario;
+
+        public CuentaSet CuentaUsuario { get => _cuentaUsuario; set => _cuentaUsuario = value; }
+
         public MenuPrincipalPagina(string correoUsuario)
         {
             InitializeComponent();
@@ -52,17 +56,25 @@ namespace VistasSorrySliders
                         txtBlockNickname.Text = nickname;
                         txtBlockCorreoElectronico.Text = correoUsuario;
                         IngresarImagen(avatar);
+
+                        CuentaUsuario.CorreoElectronico = correoUsuario;
+                        CuentaUsuario.Nickname = nickname;
+                        CuentaUsuario.Avatar = avatar;
                         break;
                     case Constantes.OPERACION_EXITOSA_VACIA:
+                        this.NavigationService.GoBack();
                         break;
                     case Constantes.ERROR_CONEXION_BD:
                         System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorBaseDatos);
+                        this.NavigationService.GoBack();
                         break;
                     case Constantes.ERROR_CONSULTA:
                         System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorBaseDatos);
+                        this.NavigationService.GoBack();
                         break;
                     case Constantes.ERROR_CONEXION_SERVIDOR:
                         System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorConexion);
+                        this.NavigationService.GoBack();
                         break;
                 }
             }
@@ -121,6 +133,11 @@ namespace VistasSorrySliders
         {
             InicioSesionPagina inicio = new InicioSesionPagina();
             this.NavigationService.Navigate(inicio);
+        }
+        private void ClickMostrarConfiguracionLobby(object sender, RoutedEventArgs e)
+        {
+            ConfiguracionLobby configuracionLobby = new ConfiguracionLobby(CuentaUsuario);
+            this.NavigationService.Navigate(configuracionLobby);
         }
     }
 }

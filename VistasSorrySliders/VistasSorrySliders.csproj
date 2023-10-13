@@ -68,6 +68,9 @@
     <Compile Include="AjustesVentana.xaml.cs">
       <DependentUpon>AjustesVentana.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ConfiguracionLobbyPagina.xaml.cs">
+      <DependentUpon>ConfiguracionLobbyPagina.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Connected Services\ServicioSorrySliders\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -108,6 +111,10 @@
       <DependentUpon>UnirsePartidaPagina.xaml</DependentUpon>
     </Compile>
     <Page Include="AjustesVentana.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ConfiguracionLobbyPagina.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

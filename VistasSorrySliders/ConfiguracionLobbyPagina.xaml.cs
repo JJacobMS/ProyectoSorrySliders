@@ -12,23 +12,29 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using VistasSorrySliders.ServicioSorrySliders;
 
 namespace VistasSorrySliders
 {
     /// <summary>
-    /// Lógica de interacción para InicioPagina.xaml
+    /// Lógica de interacción para ConfiguracionLobby.xaml
     /// </summary>
-    public partial class InicioPagina : Page
+    public partial class ConfiguracionLobby : Page
     {
-        public InicioPagina()
+        public ConfiguracionLobby(CuentaSet cuentaUsuario)
         {
             InitializeComponent();
         }
 
-        private void ClickIniciarJuego(object sender, RoutedEventArgs e)
+        private void ClickCrearLobby(object sender, RoutedEventArgs e)
         {
-            InicioSesionPagina inicioSesion = new InicioSesionPagina();
-            this.NavigationService.Navigate(inicioSesion);
+
+        }
+
+        private void ClickSalirConfigurarLobby(object sender, RoutedEventArgs e)
+        {
+            MenuPrincipalPagina menu = new MenuPrincipalPagina(cuentaUsuario.Cor);
+            this.NavigationService.Navigate(menu);
         }
     }
 }
