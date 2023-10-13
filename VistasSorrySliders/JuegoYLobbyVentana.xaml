@@ -13,7 +13,8 @@
             <ColumnDefinition Width=".6*"/>
             <ColumnDefinition Width=".4*"/>
         </Grid.ColumnDefinitions>
-        <Frame Grid.Column="0" x:Name="framePrincipal" NavigationUIVisibility="Hidden" Source="LobbyPagina.xaml"/>
-        <Frame Grid.Column="1" x:Name="frameSecundario" NavigationUIVisibility="Hidden" Source="ListaAmigosPagina.xaml"/>
+        <Frame Grid.Column="0" x:Name="frameLobby" NavigationUIVisibility="Hidden" />
+        <Frame Grid.Column="1" x:Name="frameListaAmigos" NavigationUIVisibility="Hidden"/>
+        
     </Grid>
 </Window>

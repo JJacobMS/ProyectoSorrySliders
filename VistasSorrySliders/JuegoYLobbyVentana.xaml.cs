@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using VistasSorrySliders.ServicioSorrySliders;
 
 namespace VistasSorrySliders
 {
@@ -19,9 +20,11 @@ namespace VistasSorrySliders
     /// </summary>
     public partial class JuegoYLobbyVentana : Window
     {
-        public JuegoYLobbyVentana()
+        public JuegoYLobbyVentana(int numeroJugadores, CuentaSet cuentaUsuario)
         {
             InitializeComponent();
+            frameLobby.Content = new LobbyPagina();
+            frameListaAmigos.Content = new ListaAmigosPagina();
         }
     }
 }

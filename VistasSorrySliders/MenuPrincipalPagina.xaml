@@ -55,7 +55,7 @@
                             <Image Grid.Column="1" Source="/Recursos/puntuacionIcono.png" VerticalAlignment="Center" Margin="-36,0,-30,0"/>
                         </Grid>
                     </Button>
-                    <Button Grid.Column="3" Grid.Row="2"  Height="60" Width="380">
+                    <Button Grid.Column="3" Grid.Row="2"  Height="60" Width="380" Click="ClickMostrarConfiguracionLobby">
                         <Grid Height="60" Width="380">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="330"/>
@@ -85,7 +85,7 @@
                             <Image Grid.Column="1" Source="/Recursos/jugadoresAmigosIcono.png" VerticalAlignment="Center" Margin="-55,-5,-25,-5"/>
                         </Grid>
                     </Button>
-                    <Rectangle Grid.Column="1" Grid.Row="5" Height="85" Width="410" Fill="Blue" RadiusX="10" RadiusY="10" VerticalAlignment="Top"/>
+                    <Rectangle Grid.Column="1" Grid.Row="5" Height="85" Width="410" Fill="#D19028" RadiusX="10" RadiusY="10" VerticalAlignment="Top"/>
                     <Grid Grid.Column="1" Grid.Row="5" Height="85" Width="410" VerticalAlignment="Top">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="315"/>
@@ -96,7 +96,7 @@
                             <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
                         <TextBlock x:Name="txtBlockNickname" Grid.Column="0" Grid.Row="0" FontSize="15" Style="{StaticResource estilotxtBoxBotonesMenuPrincipal}" Margin="10,10,10,10"/>
-                        <TextBlock x:Name="txtBlockCorreoElectronico" Grid.Column="0" Grid.Row="1" Text="montielsalasjesus@gmail.com" FontSize="15" Style="{StaticResource estilotxtBoxBotonesMenuPrincipal}" Margin="10,10,10,10"/>
+                        <TextBlock x:Name="txtBlockCorreoElectronico" Grid.Column="0" Grid.Row="1" FontSize="15" Style="{StaticResource estilotxtBoxBotonesMenuPrincipal}" Margin="10,10,10,10"/>
                         <Ellipse Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" Width="70" Height="70" Fill="White"></Ellipse>
                         <StackPanel Grid.Column="1" Grid.Row="0"  Grid.RowSpan="2" VerticalAlignment="Center">
                             <Ellipse Width="70" Height="70" Stroke="Black" StrokeThickness="5">

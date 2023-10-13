@@ -28,6 +28,10 @@ namespace VistasSorrySliders
     /// </summary>
     public partial class MenuPrincipalPagina : Page
     {
+        private CuentaSet _cuentaUsuario;
+
+        public CuentaSet CuentaUsuario { get => _cuentaUsuario; set => _cuentaUsuario = value; }
+
         public MenuPrincipalPagina(string correoUsuario)
         {
             InitializeComponent();
@@ -132,6 +136,11 @@ namespace VistasSorrySliders
         {
             InicioSesionPagina inicio = new InicioSesionPagina();
             this.NavigationService.Navigate(inicio);
+        }
+        private void ClickMostrarConfiguracionLobby(object sender, RoutedEventArgs e)
+        {
+            ConfiguracionLobby configuracionLobby = new ConfiguracionLobby(CuentaUsuario);
+            this.NavigationService.Navigate(configuracionLobby);
         }
     }
 }
