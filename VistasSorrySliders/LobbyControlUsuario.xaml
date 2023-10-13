@@ -1,13 +1,13 @@
-﻿<Page x:Class="VistasSorrySliders.LobbyPagina"
-      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:VistasSorrySliders"
-      mc:Ignorable="d" 
-      d:DesignHeight="576" d:DesignWidth="615"
-      Title="LobbyPagina">
-    <Page.Resources>
+﻿<UserControl x:Class="VistasSorrySliders.LobbyControlUsuario"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:VistasSorrySliders"
+             mc:Ignorable="d" 
+             d:DesignHeight="576" d:DesignWidth="615">
+
+    <UserControl.Resources>
         <Style x:Key="estiloLblNumeroJugadores" TargetType="Label">
             <Setter Property="FontSize" Value="14"/>
             <Setter Property="FontFamily" Value="{StaticResource FuentesTitulo}"/>
@@ -15,12 +15,9 @@
             <Setter Property="Height" Value="25"/>
             <Setter Property="Foreground" Value="#ffffff"/>
         </Style>
-    </Page.Resources>
+    </UserControl.Resources>
 
     <Grid>
-        <Grid.Background>
-            <ImageBrush ImageSource="/Recursos/TableroLanzamientoFondo.png"/>
-        </Grid.Background>
 
         <Border BorderBrush="#604111" BorderThickness="3" CornerRadius="10" Margin="15">
             <Grid>
@@ -64,7 +61,7 @@
                                 <Label Style="{StaticResource estiloLblDatos}" 
                                    Margin="0" FontSize="12" VerticalAlignment="Center">Número de Jugadores:</Label>
                                 <TextBox Grid.Column="1" Style="{StaticResource estiloTxtBoxDatosAzul}" 
-                                     Margin="5" Height="28" IsEnabled="False">4 Jugadores</TextBox>
+                                     Margin="5" Height="28">4 Jugadores</TextBox>
                             </Grid>
                             <Grid>
                                 <Grid.ColumnDefinitions>
@@ -74,7 +71,7 @@
                                 <Label Style="{StaticResource estiloLblDatos}" 
                                    Margin="0" FontSize="12" VerticalAlignment="Center">Host de la partida:</Label>
                                 <TextBox Grid.Column="1" Style="{StaticResource estiloTxtBoxDatosAzul}" 
-                                     Margin="5" Height="28" IsEnabled="False">melus_1</TextBox>
+                                     Margin="5" Height="28">melus_1</TextBox>
                             </Grid>
                             <Grid>
                                 <Grid.ColumnDefinitions>
@@ -84,7 +81,7 @@
                                 <Label Style="{StaticResource estiloLblDatos}" 
                                    Margin="0" FontSize="12" VerticalAlignment="Center">Código de la partida:</Label>
                                 <TextBox Grid.Column="1" Style="{StaticResource estiloTxtBoxDatosAzul}" 
-                                     Margin="5" Height="28" IsEnabled="False">1234567</TextBox>
+                                     Margin="5" Height="28">1234567</TextBox>
                             </Grid>
                         </StackPanel>
                     </Grid>
@@ -93,4 +90,5 @@
         </Border>
 
     </Grid>
-</Page>
+
+</UserControl>

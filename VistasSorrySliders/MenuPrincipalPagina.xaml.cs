@@ -56,7 +56,7 @@ namespace VistasSorrySliders
                         txtBlockNickname.Text = nickname;
                         txtBlockCorreoElectronico.Text = correoUsuario;
                         IngresarImagen(avatar);
-
+                        CuentaUsuario = new CuentaSet();
                         CuentaUsuario.CorreoElectronico = correoUsuario;
                         CuentaUsuario.Nickname = nickname;
                         CuentaUsuario.Avatar = avatar;
@@ -92,37 +92,43 @@ namespace VistasSorrySliders
                 
         }
 
-        public void IngresarImagen(byte[] avatar) 
+        public void IngresarImagen(byte[] avatar)
         {
             try
             {
                 BitmapImage bitmapImage = new BitmapImage();
                 using (MemoryStream stream = new MemoryStream(avatar))
                 {
-                    BitmapDecoder decoder = BitmapDecoder.Create(stream, BitmapCreateOptions.None, BitmapCacheOption.OnLoad);
+
                     bitmapImage.BeginInit();
+                    bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
                     bitmapImage.StreamSource = stream;
+                    bitmapImage.DecodePixelWidth = 100;
                     bitmapImage.EndInit();
+                    mgBrushAvatar.ImageSource = bitmapImage;
                 }
             }
             catch (ArgumentException ex)
             {
+                Console.WriteLine(ex);
                 Console.WriteLine("Argumento no válido al cargar la imagen");
             }
             catch (OutOfMemoryException ex)
             {
+                Console.WriteLine(ex);
                 Console.WriteLine("Error de memoria al cargar la imagen");
             }
             catch (System.IO.IOException ex)
             {
+                Console.WriteLine(ex);
                 Console.WriteLine("Error de lectura en el MemoryStream");
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Error de lectura al cargar la imagen"+ex.Message);
+                Console.WriteLine(ex);
+                Console.WriteLine("Error de lectura al cargar la imagen");
             }
         }
-
         private void ClickMostrarAjustes(object sender, RoutedEventArgs e)
         {
             AjustesVentana ajustes = new AjustesVentana();

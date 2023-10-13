@@ -85,8 +85,14 @@
     <Compile Include="JuegoYLobbyVentana.xaml.cs">
       <DependentUpon>JuegoYLobbyVentana.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ListaAmigosControlUsuario.xaml.cs">
+      <DependentUpon>ListaAmigosControlUsuario.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ListaAmigosPagina.xaml.cs">
       <DependentUpon>ListaAmigosPagina.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="LobbyControlUsuario.xaml.cs">
+      <DependentUpon>LobbyControlUsuario.xaml</DependentUpon>
     </Compile>
     <Compile Include="LobbyPagina.xaml.cs">
       <DependentUpon>LobbyPagina.xaml</DependentUpon>
@@ -150,7 +156,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="ListaAmigosControlUsuario.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="ListaAmigosPagina.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="LobbyControlUsuario.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

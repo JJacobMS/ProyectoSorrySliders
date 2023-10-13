@@ -10,21 +10,19 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
-using VistasSorrySliders.ServicioSorrySliders;
 
 namespace VistasSorrySliders
 {
     /// <summary>
-    /// Lógica de interacción para JuegoYLobbyVentana.xaml
+    /// Lógica de interacción para ListaAmigosControlUsuario.xaml
     /// </summary>
-    public partial class JuegoYLobbyVentana : Window
+    public partial class ListaAmigosControlUsuario : UserControl
     {
-        public JuegoYLobbyVentana(int numeroJugadores, CuentaSet cuentaUsuario)
+        public ListaAmigosControlUsuario()
         {
             InitializeComponent();
-            frameLobby.Content = new LobbyPagina();
-            frameListaAmigos.Content = new ListaAmigosPagina();
         }
     }
 }
