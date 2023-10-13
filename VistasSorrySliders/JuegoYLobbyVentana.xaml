@@ -6,6 +6,9 @@
         xmlns:local="clr-namespace:VistasSorrySliders"
         mc:Ignorable="d" Height="576" Width="1024">
     <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="/Recursos/tableroLanzamientoFondo.png"></ImageBrush>
+        </Grid.Background>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width=".6*"/>
             <ColumnDefinition Width=".4*"/>
