@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.Drawing.Imaging;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.ServiceModel;
@@ -11,6 +14,7 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Forms;
 using System.Windows.Input;
+using System.Windows.Markup;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
@@ -26,8 +30,6 @@ namespace VistasSorrySliders
     {
         private CuentaSet _cuentaUsuario;
 
-        public CuentaSet CuentaUsuario { get => _cuentaUsuario; set => _cuentaUsuario = value; }
-
         public MenuPrincipalPagina(string correoUsuario)
         {
             InitializeComponent();
@@ -40,59 +42,54 @@ namespace VistasSorrySliders
 
         public void RecuperarDatosUsuario(String correoUsuario) 
         {
-            Constantes resultado = Constantes.OPERACION_EXITOSA_VACIA;
-            string nickname;
-            byte[] avatar;
+            Constantes resultado;
+            string nickname = "";
+            byte[] avatar = null;
 
             try
             {
-
                 MenuPrincipalClient proxyRegistrarUsuario = new MenuPrincipalClient();
                 (resultado, nickname, avatar) = proxyRegistrarUsuario.RecuperarDatosUsuario(correoUsuario);
-                proxyRegistrarUsuario.Close();
-                switch (resultado)
+                _cuentaUsuario = new CuentaSet
                 {
-                    case Constantes.OPERACION_EXITOSA:
-                        txtBlockNickname.Text = nickname;
-                        txtBlockCorreoElectronico.Text = correoUsuario;
-                        IngresarImagen(avatar);
-                        CuentaUsuario = new CuentaSet();
-                        CuentaUsuario.CorreoElectronico = correoUsuario;
-                        CuentaUsuario.Nickname = nickname;
-                        CuentaUsuario.Avatar = avatar;
-                        break;
-                    case Constantes.OPERACION_EXITOSA_VACIA:
-                        this.NavigationService.GoBack();
-                        break;
-                    case Constantes.ERROR_CONEXION_BD:
-                        System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorBaseDatos);
-                        this.NavigationService.GoBack();
-                        break;
-                    case Constantes.ERROR_CONSULTA:
-                        System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorBaseDatos);
-                        this.NavigationService.GoBack();
-                        break;
-                    case Constantes.ERROR_CONEXION_SERVIDOR:
-                        System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorConexion);
-                        this.NavigationService.GoBack();
-                        break;
-                }
+                    Nickname = nickname, Avatar = avatar, CorreoElectronico = correoUsuario
+                };
+                proxyRegistrarUsuario.Close();
             }
             catch (CommunicationException excepcion)
             {
                 resultado = Constantes.ERROR_CONEXION_SERVIDOR;
-                System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorConexion);
+                Console.WriteLine(excepcion);
             }
             catch (TimeoutException excepcion)
             {
                 resultado = Constantes.ERROR_CONEXION_SERVIDOR;
-                System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorConexion);
-
+                Console.WriteLine(excepcion);
             }
-                
+
+            switch (resultado)
+            {
+                case Constantes.OPERACION_EXITOSA:
+                    txtBlockNickname.Text = nickname;
+                    txtBlockCorreoElectronico.Text = correoUsuario;
+                    IngresarImagen(avatar);
+                    break;
+                case Constantes.OPERACION_EXITOSA_VACIA:
+                    break;
+                case Constantes.ERROR_CONEXION_BD:
+                    System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorBaseDatos);
+                    break;
+                case Constantes.ERROR_CONSULTA:
+                    System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorBaseDatos);
+                    break;
+                case Constantes.ERROR_CONEXION_SERVIDOR:
+                    System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorConexion);
+                    break;
+            }
+
         }
 
-        public void IngresarImagen(byte[] avatar)
+        public void IngresarImagen(byte[] avatar) 
         {
             try
             {
@@ -129,6 +126,8 @@ namespace VistasSorrySliders
                 Console.WriteLine("Error de lectura al cargar la imagen");
             }
         }
+
+
         private void ClickMostrarAjustes(object sender, RoutedEventArgs e)
         {
             AjustesVentana ajustes = new AjustesVentana();
@@ -142,7 +141,7 @@ namespace VistasSorrySliders
         }
         private void ClickMostrarConfiguracionLobby(object sender, RoutedEventArgs e)
         {
-            ConfiguracionLobby configuracionLobby = new ConfiguracionLobby(CuentaUsuario);
+            ConfiguracionLobby configuracionLobby = new ConfiguracionLobby(_cuentaUsuario);
             this.NavigationService.Navigate(configuracionLobby);
         }
     }

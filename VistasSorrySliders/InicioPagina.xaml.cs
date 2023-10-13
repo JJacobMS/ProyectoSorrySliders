@@ -27,6 +27,8 @@ namespace VistasSorrySliders
 
         private void ClickIniciarJuego(object sender, RoutedEventArgs e)
         {
+            /*MenuPrincipalPagina pagina = new MenuPrincipalPagina("trescuatro1234@gmail.com");
+            this.NavigationService.Navigate(pagina);*/
             InicioSesionPagina inicioSesion = new InicioSesionPagina();
             this.NavigationService.Navigate(inicioSesion);
         }
