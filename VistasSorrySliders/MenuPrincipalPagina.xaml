@@ -101,7 +101,7 @@
                         <StackPanel Grid.Column="1" Grid.Row="0"  Grid.RowSpan="2" VerticalAlignment="Center">
                             <Ellipse Width="70" Height="70" Stroke="Black" StrokeThickness="5">
                                 <Ellipse.Fill>
-                                    <ImageBrush x:Name="imgBrushAvatar" Stretch="Uniform"></ImageBrush>
+                                    <ImageBrush x:Name="mgBrushAvatar" Stretch="Uniform"></ImageBrush>
                                 </Ellipse.Fill>
                             </Ellipse>
                         </StackPanel>

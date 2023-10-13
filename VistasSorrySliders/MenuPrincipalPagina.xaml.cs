@@ -30,8 +30,6 @@ namespace VistasSorrySliders
     {
         private CuentaSet _cuentaUsuario;
 
-        public CuentaSet CuentaUsuario { get => _cuentaUsuario; set => _cuentaUsuario = value; }
-
         public MenuPrincipalPagina(string correoUsuario)
         {
             InitializeComponent();
@@ -52,6 +50,10 @@ namespace VistasSorrySliders
             {
                 MenuPrincipalClient proxyRegistrarUsuario = new MenuPrincipalClient();
                 (resultado, nickname, avatar) = proxyRegistrarUsuario.RecuperarDatosUsuario(correoUsuario);
+                _cuentaUsuario = new CuentaSet
+                {
+                    Nickname = nickname, Avatar = avatar, CorreoElectronico = correoUsuario
+                };
                 proxyRegistrarUsuario.Close();
             }
             catch (CommunicationException excepcion)
@@ -100,7 +102,7 @@ namespace VistasSorrySliders
                     bitmapImage.StreamSource = stream;
                     bitmapImage.DecodePixelWidth = 100;
                     bitmapImage.EndInit();
-                    imgBrushAvatar.ImageSource = bitmapImage;
+                    mgBrushAvatar.ImageSource = bitmapImage;
                 }
             }
             catch (ArgumentException ex)
@@ -139,7 +141,7 @@ namespace VistasSorrySliders
         }
         private void ClickMostrarConfiguracionLobby(object sender, RoutedEventArgs e)
         {
-            ConfiguracionLobby configuracionLobby = new ConfiguracionLobby(CuentaUsuario);
+            ConfiguracionLobby configuracionLobby = new ConfiguracionLobby(_cuentaUsuario);
             this.NavigationService.Navigate(configuracionLobby);
         }
     }

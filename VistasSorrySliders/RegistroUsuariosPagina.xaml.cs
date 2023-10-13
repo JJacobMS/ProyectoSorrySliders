@@ -399,7 +399,7 @@ namespace VistasSorrySliders
                     int tamañoEnKB = tamañoenBytes / 1024;
                     int tamañoEnMB = tamañoEnKB / 1024;
 
-                    if (TamañoEnMB <= 3)
+                    if (tamañoEnMB <= 3)
                     {
                         return true;
                     }
