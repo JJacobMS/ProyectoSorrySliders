@@ -100,7 +100,7 @@ namespace VistasSorrySliders
 
         private void VerificarContrasena(CuentaSet cuentaPorVerificar)
         {
-            Constantes resultado = Constantes.OPERACION_EXITOSA;
+            Constantes resultado;
             try
             {
                 InicioSesionClient proxyInicioSesion = new InicioSesionClient();
