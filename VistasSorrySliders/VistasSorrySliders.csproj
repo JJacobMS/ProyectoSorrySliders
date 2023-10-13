@@ -44,6 +44,8 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
@@ -63,16 +65,56 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="DAO\CuentaDAO.cs" />
-    <Compile Include="DAO\UsuarioDAO.cs" />
+    <Compile Include="AjustesVentana.xaml.cs">
+      <DependentUpon>AjustesVentana.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Connected Services\ServicioSorrySliders\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="InicioPagina.xaml.cs">
+      <DependentUpon>InicioPagina.xaml</DependentUpon>
+    </Compile>
     <Compile Include="InicioSesionPagina.xaml.cs">
       <DependentUpon>InicioSesionPagina.xaml</DependentUpon>
     </Compile>
-    <Compile Include="InterfacesDAO\ICuentaDAO.cs" />
-    <Compile Include="InterfacesDAO\IUsuarioDAO.cs" />
+    <Compile Include="JuegoYLobbyVentana.xaml.cs">
+      <DependentUpon>JuegoYLobbyVentana.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ListaAmigosPagina.xaml.cs">
+      <DependentUpon>ListaAmigosPagina.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="LobbyPagina.xaml.cs">
+      <DependentUpon>LobbyPagina.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MenuPrincipalPagina.xaml.cs">
+      <DependentUpon>MenuPrincipalPagina.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Resources.en.Designer.cs">
+      <DependentUpon>Resources.en.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Properties\Resources.es-MX.Designer.cs">
+      <DependentUpon>Resources.es-MX.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="RegistroUsuariosPagina.xaml.cs">
       <DependentUpon>RegistroUsuariosPagina.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UnirsePartidaPagina.xaml.cs">
+      <DependentUpon>UnirsePartidaPagina.xaml</DependentUpon>
+    </Compile>
+    <Page Include="AjustesVentana.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="DiccionarioEstilos\DiccionarioAjustes.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="DiccionarioEstilos\DiccionarioFormularioCuenta.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -81,11 +123,31 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="DiccionarioEstilos\DiccionarioMenuPrincipal.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="DiccionarioEstilos\DiccionarioPrincipal.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="InicioPagina.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="InicioSesionPagina.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="JuegoYLobbyVentana.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ListaAmigosPagina.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="LobbyPagina.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -101,7 +163,15 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="MenuPrincipalPagina.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="RegistroUsuariosPagina.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UnirsePartidaPagina.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -120,6 +190,14 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <EmbeddedResource Include="Properties\Resources.en.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.en.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.es-MX.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.es-MX.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -129,6 +207,22 @@
     <Resource Include="Fuentes\Prompt-Medium.ttf" />
     <Resource Include="Fuentes\WixMadeforText-Bold.ttf" />
     <Resource Include="Fuentes\WixMadeforText-Regular.ttf" />
+    <None Include="Connected Services\ServicioSorrySliders\item.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\ServicioSorrySliders\item1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\ServicioSorrySliders\item2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\ServicioSorrySliders\item3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\ServicioSorrySliders\ServicioComunicacionSorrySliders.wsdl" />
+    <None Include="Connected Services\ServicioSorrySliders\VistasSorrySliders.ServicioSorrySliders.Constantes.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -139,14 +233,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\BibliotecaClasesSorrySliders\BibliotecaClasesSorrySliders.csproj">
-      <Project>{A86C07BF-07AD-4FB6-B70A-146D6F56996E}</Project>
-      <Name>BibliotecaClasesSorrySliders</Name>
-    </ProjectReference>
+    <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
-    <Resource Include="Recursos\Banner.png" />
+    <Resource Include="Recursos\banner.png" />
     <Resource Include="Recursos\botonSalir.png" />
     <Resource Include="Recursos\dado.png" />
     <Resource Include="Recursos\gato1.png" />
@@ -155,15 +245,53 @@
     <Resource Include="Recursos\gato4.png" />
     <Resource Include="Recursos\gato5.png" />
     <Resource Include="Recursos\gato6.png" />
-    <Resource Include="Recursos\ImagenesLogo.png" />
-    <Resource Include="Recursos\LogoSliders.png" />
+    <Resource Include="Recursos\imagenesLogo.png" />
+    <Resource Include="Recursos\logoSliders.png" />
     <Resource Include="Recursos\peones.png" />
-    <Resource Include="Recursos\RielAzul.png" />
-    <Resource Include="Recursos\RielRojo.png" />
-    <Resource Include="Recursos\TableroCentral.png" />
-    <Resource Include="Recursos\TableroCuatro.png" />
-    <Resource Include="Recursos\TableroCuatroConFondo.png" />
-    <Resource Include="Recursos\TableroLanzamientoFondo.png" />
+    <Resource Include="Recursos\rielAzul.png" />
+    <Resource Include="Recursos\rielRojo.png" />
+    <Resource Include="Recursos\tableroCentral.png" />
+    <Resource Include="Recursos\tableroCuatro.png" />
+    <Resource Include="Recursos\tableroCuatroConFondo.png" />
+    <Resource Include="Recursos\tableroLanzamientoFondo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Connected Services\ServicioSorrySliders\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\ServicioSorrySliders\item.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\ServicioSorrySliders\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\ServicioSorrySliders\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\ServicioSorrySliders\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Recursos\ajustesIcono.png" />
+    <Resource Include="Recursos\crearLobbyIcono.png" />
+    <Resource Include="Recursos\dadoRojo.png" />
+    <Resource Include="Recursos\jugadoresAmigosIcono.png" />
+    <Resource Include="Recursos\puntuacionIcono.png" />
+    <Resource Include="Recursos\salirIcono.png" />
+    <Resource Include="Recursos\tableroDosConFondo.png" />
+    <Resource Include="Recursos\tableroTresConFondo.png" />
+    <Resource Include="Recursos\unirsePartidaIcono.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Recursos\bannerColorRojo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Recursos\avatarPredefinido.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Recursos\pantallaSorrySlidersPrincipal.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

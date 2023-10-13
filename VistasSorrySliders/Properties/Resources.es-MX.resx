@@ -202,7 +202,7 @@
     <value>Hubo un error de conexión con el servidor</value>
   </data>
   <data name="msgErrorContrasenaInvalida" xml:space="preserve">
-    <value>La contraseña debe contar con: Mínimo 8 caracteres, con un número o un carácter especial</value>
+    <value>Password must have: Minimum of 8 characters with one number or one special character</value>
   </data>
   <data name="msgErrorImagen" xml:space="preserve">
     <value>La imagen no se puede cargar</value>
@@ -211,7 +211,7 @@
     <value>Por favor, seleccione un archivo de imagen válida</value>
   </data>
   <data name="msgTituloContraseñaInvalida" xml:space="preserve">
-    <value>Contraseña invalida</value>
+    <value>Invalid password</value>
   </data>
   <data name="msgTituloCorreoEncontrado" xml:space="preserve">
     <value>Cuenta previamente registrada</value>

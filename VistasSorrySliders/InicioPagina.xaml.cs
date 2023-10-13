@@ -16,20 +16,21 @@ using System.Windows.Shapes;
 namespace VistasSorrySliders
 {
     /// <summary>
-    /// Lógica de interacción para MainWindow.xaml
+    /// Lógica de interacción para InicioPagina.xaml
     /// </summary>
-    public partial class MainWindow : NavigationWindow
+    public partial class InicioPagina : Page
     {
-        public MainWindow()
+        public InicioPagina()
         {
             InitializeComponent();
         }
-        /*public void Ejemplo() 
-        {
-            using (var context = new SorrySlidersBDEntities())
-            {
 
-            }
-        }*/
+        private void ClickIniciarJuego(object sender, RoutedEventArgs e)
+        {
+            InicioSesionPagina inicioSesion = new InicioSesionPagina();
+            this.NavigationService.Navigate(inicioSesion);
+            JuegoYLobbyVentana juego = new JuegoYLobbyVentana();
+            juego.Show();
+        }
     }
 }

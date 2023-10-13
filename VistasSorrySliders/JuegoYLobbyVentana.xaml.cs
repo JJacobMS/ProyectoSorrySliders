@@ -10,26 +10,18 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace VistasSorrySliders
 {
     /// <summary>
-    /// Lógica de interacción para MainWindow.xaml
+    /// Lógica de interacción para JuegoYLobbyVentana.xaml
     /// </summary>
-    public partial class MainWindow : NavigationWindow
+    public partial class JuegoYLobbyVentana : Window
     {
-        public MainWindow()
+        public JuegoYLobbyVentana()
         {
             InitializeComponent();
         }
-        /*public void Ejemplo() 
-        {
-            using (var context = new SorrySlidersBDEntities())
-            {
-
-            }
-        }*/
     }
 }
