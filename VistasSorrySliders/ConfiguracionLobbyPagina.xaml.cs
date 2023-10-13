@@ -33,7 +33,7 @@ namespace VistasSorrySliders
 
         private void ClickSalirConfigurarLobby(object sender, RoutedEventArgs e)
         {
-            MenuPrincipalPagina menu = new MenuPrincipalPagina(cuentaUsuario.Cor);
+            MenuPrincipalPagina menu = new MenuPrincipalPagina("");
             this.NavigationService.Navigate(menu);
         }
     }
