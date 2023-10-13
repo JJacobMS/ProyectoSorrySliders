@@ -37,7 +37,7 @@ namespace VistasSorrySliders
         private byte[] avatarByte = null;
         private void EstablecerImagenPorDefecto() 
         {
-            rutaImagen = "pack://application:,,,/Recursos/avatarPredefinido.png";
+            rutaImagen = "pack://application:,,,/Recursos/avatarPredefinido.jpg";
             try
             {
                 imgBrushAvatar.ImageSource = new BitmapImage(new Uri(rutaImagen));

@@ -296,10 +296,10 @@
     <Resource Include="Recursos\bannerColorRojo.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Recursos\avatarPredefinido.png" />
+    <Resource Include="Recursos\pantallaSorrySlidersPrincipal.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Recursos\pantallaSorrySlidersPrincipal.png" />
+    <Resource Include="Recursos\avatarPredefinido.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
