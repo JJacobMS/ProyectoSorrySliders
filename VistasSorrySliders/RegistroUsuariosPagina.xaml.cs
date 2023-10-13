@@ -315,29 +315,36 @@ namespace VistasSorrySliders
 
         private void SeleccionarImagen(object sender, MouseButtonEventArgs e)
         {
-            OpenFileDialog abrirBiblioteca = new OpenFileDialog();
-            abrirBiblioteca.Filter = "Archivos de imagen|*.jpg;*.jpeg";
-            if (abrirBiblioteca.ShowDialog() == DialogResult.OK)
+            try
             {
-                rutaImagen = abrirBiblioteca.FileName;
-                string[] formatosSoportados = { ".jpg", ".jpeg"};
-                if (formatosSoportados.Any(ext => rutaImagen.EndsWith(ext, StringComparison.OrdinalIgnoreCase)))
+                OpenFileDialog abrirBiblioteca = new OpenFileDialog();
+                abrirBiblioteca.Filter = "Archivos de imagen|*.jpg;*.jpeg";
+                if (abrirBiblioteca.ShowDialog() == DialogResult.OK)
                 {
-                    BitmapImage mapaBits = new BitmapImage(new Uri(rutaImagen));
-                    imgBrushAvatar.ImageSource = mapaBits;
-                    try
+                    rutaImagen = abrirBiblioteca.FileName;
+                    string[] formatosSoportados = { ".jpg", ".jpeg" };
+                    if (formatosSoportados.Any(ext => rutaImagen.EndsWith(ext, StringComparison.OrdinalIgnoreCase)))
                     {
-                        avatarByte = File.ReadAllBytes(rutaImagen);
+                        BitmapImage mapaBits = new BitmapImage(new Uri(rutaImagen));
+                        if(ValidarTamañoImagen(rutaImagen)) 
+                        {
+                            imgBrushAvatar.ImageSource = mapaBits;
+                            avatarByte = File.ReadAllBytes(rutaImagen);
+                        }   
                     }
-                    catch (Exception ex)
+                    else
                     {
-                        System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorImagen, Properties.Resources.msgTituloErrorImagen, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        System.Windows.Forms.MessageBox.Show(Properties.Resources.msgImagenInvalida, Properties.Resources.msgTituloErrorImagen, MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
-                else
-                {
-                    System.Windows.Forms.MessageBox.Show(Properties.Resources.msgImagenInvalida, Properties.Resources.msgTituloErrorImagen, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
+            }
+            catch (UnauthorizedAccessException ex)
+            {
+                Console.WriteLine("No se tienen permisos para acceder al archivo", "Sin permisos para el archivo");
+            }
+            catch (Exception ex)
+            {
+                System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorImagen, Properties.Resources.msgTituloErrorImagen, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -381,5 +388,35 @@ namespace VistasSorrySliders
                 txtBoxCorreoElectronico.SelectionStart = txtBoxCorreoElectronico.Text.Length;
             }
         }
+
+        static bool ValidarTamañoImagen(string ruta)
+        {
+            try
+            {
+                using (FileStream flujoArchivo = new FileStream(ruta, FileMode.Open, FileAccess.Read))
+                {
+                    int TamañoenBytes = (int)flujoArchivo.Length;
+                    int TamañoEnKB = TamañoenBytes / 1024;
+                    int TamañoEnMB = TamañoEnKB / 1024;
+
+                    if (TamañoEnMB >= 3)
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        System.Windows.Forms.MessageBox.Show("La imagen supera el limite de 3MB", "Imagen demasiado grande", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                        return false;
+                    }
+                }
+            }
+            catch (IOException e)
+            {
+                System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorImagen, Properties.Resources.msgTituloErrorImagen, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+        }
     }
+
 }

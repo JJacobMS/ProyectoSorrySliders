@@ -95,13 +95,13 @@
                             <RowDefinition Height="*"/>
                             <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
-                        <TextBlock x:Name="txtBlockNickname" Grid.Column="0" Grid.Row="0" Text="Jacobobo" FontSize="15" Style="{StaticResource estilotxtBoxBotonesMenuPrincipal}" Margin="10,10,10,10"/>
+                        <TextBlock x:Name="txtBlockNickname" Grid.Column="0" Grid.Row="0" FontSize="15" Style="{StaticResource estilotxtBoxBotonesMenuPrincipal}" Margin="10,10,10,10"/>
                         <TextBlock x:Name="txtBlockCorreoElectronico" Grid.Column="0" Grid.Row="1" Text="montielsalasjesus@gmail.com" FontSize="15" Style="{StaticResource estilotxtBoxBotonesMenuPrincipal}" Margin="10,10,10,10"/>
                         <Ellipse Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" Width="70" Height="70" Fill="White"></Ellipse>
                         <StackPanel Grid.Column="1" Grid.Row="0"  Grid.RowSpan="2" VerticalAlignment="Center">
                             <Ellipse Width="70" Height="70" Stroke="Black" StrokeThickness="5">
                                 <Ellipse.Fill>
-                                    <ImageBrush x:Name="imgBrushAvatar" Stretch="Uniform"></ImageBrush>
+                                    <ImageBrush x:Name="mgBrushAvatar" Stretch="Uniform"></ImageBrush>
                                 </Ellipse.Fill>
                             </Ellipse>
                         </StackPanel>

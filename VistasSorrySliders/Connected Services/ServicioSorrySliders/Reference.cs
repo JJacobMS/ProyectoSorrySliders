@@ -297,6 +297,53 @@ namespace VistasSorrySliders.ServicioSorrySliders {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServicioSorrySliders.IMenuPrincipal")]
+    public interface IMenuPrincipal {
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMenuPrincipal/RecuperarDatosUsuario", ReplyAction="http://tempuri.org/IMenuPrincipal/RecuperarDatosUsuarioResponse")]
+        System.ValueTuple<VistasSorrySliders.ServicioSorrySliders.Constantes, string, byte[]> RecuperarDatosUsuario(string correoElectronico);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMenuPrincipal/RecuperarDatosUsuario", ReplyAction="http://tempuri.org/IMenuPrincipal/RecuperarDatosUsuarioResponse")]
+        System.Threading.Tasks.Task<System.ValueTuple<VistasSorrySliders.ServicioSorrySliders.Constantes, string, byte[]>> RecuperarDatosUsuarioAsync(string correoElectronico);
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public interface IMenuPrincipalChannel : VistasSorrySliders.ServicioSorrySliders.IMenuPrincipal, System.ServiceModel.IClientChannel {
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class MenuPrincipalClient : System.ServiceModel.ClientBase<VistasSorrySliders.ServicioSorrySliders.IMenuPrincipal>, VistasSorrySliders.ServicioSorrySliders.IMenuPrincipal {
+        
+        public MenuPrincipalClient() {
+        }
+        
+        public MenuPrincipalClient(string endpointConfigurationName) : 
+                base(endpointConfigurationName) {
+        }
+        
+        public MenuPrincipalClient(string endpointConfigurationName, string remoteAddress) : 
+                base(endpointConfigurationName, remoteAddress) {
+        }
+        
+        public MenuPrincipalClient(string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(endpointConfigurationName, remoteAddress) {
+        }
+        
+        public MenuPrincipalClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(binding, remoteAddress) {
+        }
+        
+        public System.ValueTuple<VistasSorrySliders.ServicioSorrySliders.Constantes, string, byte[]> RecuperarDatosUsuario(string correoElectronico) {
+            return base.Channel.RecuperarDatosUsuario(correoElectronico);
+        }
+        
+        public System.Threading.Tasks.Task<System.ValueTuple<VistasSorrySliders.ServicioSorrySliders.Constantes, string, byte[]>> RecuperarDatosUsuarioAsync(string correoElectronico) {
+            return base.Channel.RecuperarDatosUsuarioAsync(correoElectronico);
+        }
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServicioSorrySliders.IRegistroUsuario")]
     public interface IRegistroUsuario {
         

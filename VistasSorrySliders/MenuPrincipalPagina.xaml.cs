@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.ServiceModel;
 using System.Text;
@@ -35,17 +36,22 @@ namespace VistasSorrySliders
 
         public void RecuperarDatosUsuario(String correoUsuario) 
         {
-            Constantes resultado = Constantes.OPERACION_EXITOSA;
+            Constantes resultado = Constantes.OPERACION_EXITOSA_VACIA;
+            string nickname;
+            byte[] avatar;
+
             try
             {
-                /*
-                RecuperarDatosUsuarioClient proxyRegistrarUsuario = new RecuperarDatosUsuarioClient();
-                resultado = proxyRegistrarUsuario.AgregarUsuario(correoUsuario);
+
+                MenuPrincipalClient proxyRegistrarUsuario = new MenuPrincipalClient();
+                (resultado, nickname, avatar) = proxyRegistrarUsuario.RecuperarDatosUsuario(correoUsuario);
                 proxyRegistrarUsuario.Close();
                 switch (resultado)
                 {
                     case Constantes.OPERACION_EXITOSA:
-                            
+                        txtBlockNickname.Text = nickname;
+                        txtBlockCorreoElectronico.Text = correoUsuario;
+                        IngresarImagen(avatar);
                         break;
                     case Constantes.OPERACION_EXITOSA_VACIA:
                         break;
@@ -71,7 +77,38 @@ namespace VistasSorrySliders
                 System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorConexion);
 
             }
-                */
+                
+        }
+
+        public void IngresarImagen(byte[] avatar) 
+        {
+            try
+            {
+                BitmapImage bitmapImage = new BitmapImage();
+                using (MemoryStream stream = new MemoryStream(avatar))
+                {
+                    BitmapDecoder decoder = BitmapDecoder.Create(stream, BitmapCreateOptions.None, BitmapCacheOption.OnLoad);
+                    bitmapImage.BeginInit();
+                    bitmapImage.StreamSource = stream;
+                    bitmapImage.EndInit();
+                }
+            }
+            catch (ArgumentException ex)
+            {
+                Console.WriteLine("Argumento no válido al cargar la imagen");
+            }
+            catch (OutOfMemoryException ex)
+            {
+                Console.WriteLine("Error de memoria al cargar la imagen");
+            }
+            catch (System.IO.IOException ex)
+            {
+                Console.WriteLine("Error de lectura en el MemoryStream");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error de lectura al cargar la imagen"+ex.Message);
+            }
         }
 
         private void ClickMostrarAjustes(object sender, RoutedEventArgs e)
