@@ -202,7 +202,7 @@
     <value>Hubo un error de conexión con el servidor</value>
   </data>
   <data name="msgErrorContrasenaInvalida" xml:space="preserve">
-    <value>Password must have: Minimum of 8 characters with one number or one special character</value>
+    <value>La contraseña debe contar con: Mínimo 8 caracteres, con un número o un carácter especial</value>
   </data>
   <data name="msgErrorImagen" xml:space="preserve">
     <value>La imagen no se puede cargar</value>
@@ -234,10 +234,25 @@
   <data name="msgTituloTamañoImagenError" xml:space="preserve">
     <value>Imagen demasiado grande</value>
   </data>
+  <data name="txtBlockAjustes" xml:space="preserve">
+    <value>AJUSTES</value>
+  </data>
   <data name="txtBlockContrasenaInvalida" xml:space="preserve">
     <value>La contraseña no es correcta. Verifica tu contraseña e inténtalo de nuevo</value>
   </data>
   <data name="txtBlockCorreoInvalido" xml:space="preserve">
     <value>El correo electrónico no se encuentra registrado en el sistema</value>
+  </data>
+  <data name="txtBlockCrearLobby" xml:space="preserve">
+    <value>CREAR LOBBY</value>
+  </data>
+  <data name="txtBlockJugadoresAmigos" xml:space="preserve">
+    <value>JUGADORES Y AMIGOS</value>
+  </data>
+  <data name="txtBlockTablaPuntuaciones" xml:space="preserve">
+    <value>TABLA DE PUNTUACIONES</value>
+  </data>
+  <data name="txtBlockUnirsePartida" xml:space="preserve">
+    <value>UNIRSE A PARTIDA</value>
   </data>
 </root>

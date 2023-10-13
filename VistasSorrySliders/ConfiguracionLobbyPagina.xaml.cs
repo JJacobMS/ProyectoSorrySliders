@@ -22,17 +22,16 @@ namespace VistasSorrySliders
     public partial class ConfiguracionLobby : Page
     {
         private CuentaSet _cuentaUsuario;
-        public CuentaSet CuentaUsuario { get => _cuentaUsuario; set => _cuentaUsuario = value; }
 
         public ConfiguracionLobby(CuentaSet cuentaUsuario)
         {
             InitializeComponent();
-            CuentaUsuario = new CuentaSet();
-            CuentaUsuario.CorreoElectronico = cuentaUsuario.CorreoElectronico;
-            CuentaUsuario.Nickname = cuentaUsuario.Nickname;
-            CuentaUsuario.Avatar = cuentaUsuario.Avatar;
+            _cuentaUsuario = new CuentaSet();
+            _cuentaUsuario.CorreoElectronico = cuentaUsuario.CorreoElectronico;
+            _cuentaUsuario.Nickname = cuentaUsuario.Nickname;
+            _cuentaUsuario.Avatar = cuentaUsuario.Avatar;
             txtBlockNickname.Text = cuentaUsuario.Nickname;
-            Console.WriteLine("Clic");
+            Utilidades.IngresarImagen(_cuentaUsuario.Avatar, this.mgBrushAvatar);
         }
 
         private Border selectedBorder;
@@ -72,14 +71,14 @@ namespace VistasSorrySliders
                 {
                     numeroJugadores = 2;
                 }
-                JuegoYLobbyVentana juegolobby = new JuegoYLobbyVentana(numeroJugadores, CuentaUsuario);
+                JuegoYLobbyVentana juegolobby = new JuegoYLobbyVentana(numeroJugadores, _cuentaUsuario);
                 juegolobby.Show();
             }
         }
 
         private void ClickSalirConfigurarLobby(object sender, RoutedEventArgs e)
         {
-            MenuPrincipalPagina menu = new MenuPrincipalPagina(CuentaUsuario.CorreoElectronico);
+            MenuPrincipalPagina menu = new MenuPrincipalPagina(_cuentaUsuario.CorreoElectronico);
             this.NavigationService.Navigate(menu);
         }
     }

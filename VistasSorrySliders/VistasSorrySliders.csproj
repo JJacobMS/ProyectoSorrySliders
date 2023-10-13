@@ -111,6 +111,7 @@
     <Compile Include="UnirsePartidaPagina.xaml.cs">
       <DependentUpon>UnirsePartidaPagina.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Utilidades.cs" />
     <Page Include="AjustesVentana.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

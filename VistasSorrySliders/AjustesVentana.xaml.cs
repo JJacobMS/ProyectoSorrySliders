@@ -19,6 +19,7 @@ namespace VistasSorrySliders
     /// </summary>
     public partial class AjustesVentana : Window
     {
+        public event Action IdiomaCambiado;
         public AjustesVentana()
         {
             InitializeComponent();
@@ -45,7 +46,7 @@ namespace VistasSorrySliders
             CambiarIdioma(idiomaCambio);
             ActualizarVentana();
         }
-        public void ActualizarVentana() 
+        private void ActualizarVentana() 
         {
             lblAjustes.Content = Properties.Resources.lblAjustes;
             btnSalir.Content = Properties.Resources.btnSalir;
@@ -59,12 +60,14 @@ namespace VistasSorrySliders
             switch (idiomaCambio)
             {
                 case "es-MX":
-                    App.CambiarIdioma(idiomaCambio);
+                    idiomaCambio = "es-MX";
                     break;
                 case "en":
-                    App.CambiarIdioma(idiomaCambio);
+                    idiomaCambio = "en";
                     break;
             }
+            App.CambiarIdioma(idiomaCambio);
+            IdiomaCambiado?.Invoke();
         }
 
         private void SeleccionarIdioma(string idiomaCambio)
