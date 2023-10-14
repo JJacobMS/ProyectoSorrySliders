@@ -40,7 +40,7 @@ namespace VistasSorrySliders
             RecuperarDatosUsuario(correoUsuario);
         }
 
-        public void RecuperarDatosUsuario(String correoUsuario) 
+        private void RecuperarDatosUsuario(String correoUsuario) 
         {
             Constantes resultado;
             string nickname = "";
@@ -70,9 +70,9 @@ namespace VistasSorrySliders
             switch (resultado)
             {
                 case Constantes.OPERACION_EXITOSA:
-                    txtBlockNickname.Text = nickname;
-                    txtBlockCorreoElectronico.Text = correoUsuario;
-                    IngresarImagen(avatar);
+                    txtBlockNickname.Text = _cuentaUsuario.Nickname;
+                    txtBlockCorreoElectronico.Text = _cuentaUsuario.CorreoElectronico;
+                    Utilidades.IngresarImagen(_cuentaUsuario.Avatar, this.mgBrushAvatar);
                     break;
                 case Constantes.OPERACION_EXITOSA_VACIA:
                     break;
@@ -89,49 +89,23 @@ namespace VistasSorrySliders
 
         }
 
-        public void IngresarImagen(byte[] avatar) 
-        {
-            try
-            {
-                BitmapImage bitmapImage = new BitmapImage();
-                using (MemoryStream stream = new MemoryStream(avatar))
-                {
-
-                    bitmapImage.BeginInit();
-                    bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
-                    bitmapImage.StreamSource = stream;
-                    bitmapImage.DecodePixelWidth = 100;
-                    bitmapImage.EndInit();
-                    mgBrushAvatar.ImageSource = bitmapImage;
-                }
-            }
-            catch (ArgumentException ex)
-            {
-                Console.WriteLine(ex);
-                Console.WriteLine("Argumento no válido al cargar la imagen");
-            }
-            catch (OutOfMemoryException ex)
-            {
-                Console.WriteLine(ex);
-                Console.WriteLine("Error de memoria al cargar la imagen");
-            }
-            catch (System.IO.IOException ex)
-            {
-                Console.WriteLine(ex);
-                Console.WriteLine("Error de lectura en el MemoryStream");
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex);
-                Console.WriteLine("Error de lectura al cargar la imagen");
-            }
-        }
 
 
         private void ClickMostrarAjustes(object sender, RoutedEventArgs e)
         {
             AjustesVentana ajustes = new AjustesVentana();
+            ajustes.IdiomaCambiado += ActualizarVentanaMenuPrincipal;
             ajustes.Show();
+        }
+
+        private void ActualizarVentanaMenuPrincipal()
+        {
+            txtBlockAjustes.Text = Properties.Resources.txtBlockAjustes;
+            txtBlockUnirsePartida.Text = Properties.Resources.txtBlockUnirsePartida;
+            txtBlockAjustes.Text = Properties.Resources.txtBlockAjustes;
+            txtBlockAjustes.Text = Properties.Resources.txtBlockAjustes;
+            txtBlockAjustes.Text = Properties.Resources.txtBlockAjustes;
+
         }
 
         private void ClickSalirMenuPrincipal(object sender, RoutedEventArgs e)
