@@ -31,57 +31,57 @@
                     <Image Grid.Column="0" Grid.Row="0" Grid.RowSpan="3" Source="/Recursos/logoSliders.png"></Image>
                     <Image Grid.Column="0" Grid.Row="3" Grid.RowSpan="4" Source="/Recursos/imagenesLogo.png" Margin="-5,-20,-5,-5"></Image>
                     <WrapPanel Grid.Column="3" Grid.Row="0">
-                        <Button Height="45" Width="200" VerticalAlignment="Top" Margin="5,25,5,5" Click="ClickMostrarAjustes">
+                        <Button VerticalAlignment="Top" Margin="5,25,5,5" Click="ClickMostrarAjustes" Style="{StaticResource estiloBtnAjustes}">
                             <Grid Height="45" Width="200">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="125"/>
                                     <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
-                                <TextBlock Grid.Column="0"  Style="{StaticResource estilotxtBoxBotonesMenuPrincipal}" Text="{x:Static p:Resources.lblAjustes}"/>
+                                <TextBlock x:Name="txtBlockAjustes" Grid.Column="0"  Style="{StaticResource estiloTxtBoxBotonesMenuPrincipal}" Text="{x:Static p:Resources.txtBlockAjustes}"/>
                                 <Image Grid.Column="1" Source="/Recursos/ajustesIcono.png" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="-12,-10,-30,-5"/>
                             </Grid>
                         </Button>
                         <Button Height="45" Width="200" VerticalAlignment="Top" Margin="5,25,5,5" Style="{StaticResource estiloBtnSalir}" Click="ClickSalirMenuPrincipal">
-                            <TextBlock Text="{x:Static p:Resources.btnSalir}" Style="{StaticResource estilotxtBoxBotonesMenuPrincipal}" Margin="-10,10,10,10"/>
+                            <TextBlock Text="{x:Static p:Resources.btnSalir}" Style="{StaticResource estiloTxtBoxBotonesMenuPrincipal}" Margin="-10,10,10,10"/>
                         </Button>
                     </WrapPanel>
-                    <Button Grid.Column="3" Grid.Row="1" Height="60" Width="380">
+                    <Button Grid.Column="3" Grid.Row="1" Style="{StaticResource estiloBtnTablaPuntuaciones}">
                         <Grid Height="60" Width="380">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="330"/>
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
-                            <TextBlock Grid.Column="0" Text="TABLA DE PUNTUACIONES" Style="{StaticResource estilotxtBoxBotonesMenuPrincipal}"/>
+                            <TextBlock x:Name="txtBlockTablaPuntuaciones" Grid.Column="0" Text="{x:Static p:Resources.txtBlockTablaPuntuaciones}" Style="{StaticResource estiloTxtBoxBotonesMenuPrincipal}"/>
                             <Image Grid.Column="1" Source="/Recursos/puntuacionIcono.png" VerticalAlignment="Center" Margin="-36,0,-30,0"/>
                         </Grid>
                     </Button>
-                    <Button Grid.Column="3" Grid.Row="2"  Height="60" Width="380" Click="ClickMostrarConfiguracionLobby">
+                    <Button Grid.Column="3" Grid.Row="2" Click="ClickMostrarConfiguracionLobby" Style="{StaticResource estiloBtnCrearLobby}">
                         <Grid Height="60" Width="380">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="330"/>
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
-                            <TextBlock  Grid.Column="0" Text="CREAR LOBBY" Style="{StaticResource estilotxtBoxBotonesMenuPrincipal}" Margin="10,10,10,10"/>
+                            <TextBlock x:Name="txtBlockCrearLobby" Grid.Column="0" Text="{x:Static p:Resources.txtBlockCrearLobby}" Style="{StaticResource estiloTxtBoxBotonesMenuPrincipal}" Margin="10,10,10,10"/>
                             <Image Grid.Column="1" Source="/Recursos/crearLobbyIcono.png" VerticalAlignment="Center" Margin="-55,-20,-40,-20"/>
                         </Grid>
                     </Button>
-                    <Button Grid.Column="3" Grid.Row="3"  Height="60" Width="380">
+                    <Button Grid.Column="3" Grid.Row="3" Style="{StaticResource estiloBtnUnirsePartida}">
                         <Grid Height="60" Width="380">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="330"/>
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
-                            <TextBlock Grid.Column="0" Text="UNIRSE A PARTIDA" Style="{StaticResource estilotxtBoxBotonesMenuPrincipal}" Margin="10,10,10,10"/>
+                            <TextBlock x:Name="txtBlockUnirsePartida" Grid.Column="0" Text="{x:Static p:Resources.txtBlockUnirsePartida}" Style="{StaticResource estiloTxtBoxBotonesMenuPrincipal}" Margin="10,10,10,10"/>
                             <Image Grid.Column="1" Source="/Recursos/unirsePartidaIcono.png" VerticalAlignment="Center" Margin="-60,-10,-45,0"/>
                         </Grid>
                     </Button>
-                    <Button Grid.Column="3" Grid.Row="4"  Height="60" Width="380">
+                    <Button Grid.Column="3" Grid.Row="4"  Style="{StaticResource estiloBtnJugadoresYAmigos}">
                         <Grid Height="60" Width="380">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="330"/>
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
-                            <TextBlock Grid.Column="0" Text="JUGADORES Y AMIGOS" Style="{StaticResource estilotxtBoxBotonesMenuPrincipal}" Margin="10,10,10,10"/>
+                            <TextBlock x:Name="txtBlockJugadoresAmigos" Grid.Column="0" Text="{x:Static p:Resources.txtBlockJugadoresAmigos}" Style="{StaticResource estiloTxtBoxBotonesMenuPrincipal}" Margin="10,10,10,10"/>
                             <Image Grid.Column="1" Source="/Recursos/jugadoresAmigosIcono.png" VerticalAlignment="Center" Margin="-55,-5,-25,-5"/>
                         </Grid>
                     </Button>
@@ -95,8 +95,8 @@
                             <RowDefinition Height="*"/>
                             <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
-                        <TextBlock x:Name="txtBlockNickname" Grid.Column="0" Grid.Row="0" FontSize="15" Style="{StaticResource estilotxtBoxBotonesMenuPrincipal}" Margin="10,10,10,10"/>
-                        <TextBlock x:Name="txtBlockCorreoElectronico" Grid.Column="0" Grid.Row="1" FontSize="15" Style="{StaticResource estilotxtBoxBotonesMenuPrincipal}" Margin="10,10,10,10"/>
+                        <TextBlock x:Name="txtBlockNickname" Grid.Column="0" Grid.Row="0" FontSize="15" Style="{StaticResource estiloTxtBoxBotonesMenuPrincipal}" Margin="10,10,10,10"/>
+                        <TextBlock x:Name="txtBlockCorreoElectronico" Grid.Column="0" Grid.Row="1" FontSize="15" Style="{StaticResource estiloTxtBoxBotonesMenuPrincipal}" Margin="10,10,10,10"/>
                         <Ellipse Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" Width="70" Height="70" Fill="White"></Ellipse>
                         <StackPanel Grid.Column="1" Grid.Row="0"  Grid.RowSpan="2" VerticalAlignment="Center">
                             <Ellipse Width="70" Height="70" Stroke="Black" StrokeThickness="5">
