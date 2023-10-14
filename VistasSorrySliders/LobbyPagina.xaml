@@ -7,15 +7,7 @@
       mc:Ignorable="d" 
       d:DesignHeight="576" d:DesignWidth="615"
       Title="LobbyPagina">
-    <Page.Resources>
-        <Style x:Key="estiloLblNumeroJugadores" TargetType="Label">
-            <Setter Property="FontSize" Value="14"/>
-            <Setter Property="FontFamily" Value="{StaticResource FuentesTitulo}"/>
-            <Setter Property="HorizontalAlignment" Value="Center"/>
-            <Setter Property="Height" Value="25"/>
-            <Setter Property="Foreground" Value="#ffffff"/>
-        </Style>
-    </Page.Resources>
+    
 
     <Grid>
         <Grid.Background>
