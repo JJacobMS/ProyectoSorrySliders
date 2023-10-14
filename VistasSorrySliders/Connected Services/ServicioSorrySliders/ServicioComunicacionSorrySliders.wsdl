@@ -3,6 +3,10 @@
   <wsp:Policy wsu:Id="NetTcpBinding_IInicioSesion_policy">
     <wsp:ExactlyOne>
       <wsp:All>
+        <wsrm:RMAssertion xmlns:wsrm="http://schemas.xmlsoap.org/ws/2005/02/rm/policy">
+          <wsrm:InactivityTimeout Milliseconds="600000" />
+          <wsrm:AcknowledgementInterval Milliseconds="200" />
+        </wsrm:RMAssertion>
         <msb:BinaryEncoding xmlns:msb="http://schemas.microsoft.com/ws/06/2004/mspolicy/netbinary1" />
         <sp:TransportBinding xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
           <wsp:Policy>
@@ -32,6 +36,10 @@
   <wsp:Policy wsu:Id="NetTcpBinding_IMenuPrincipal_policy">
     <wsp:ExactlyOne>
       <wsp:All>
+        <wsrm:RMAssertion xmlns:wsrm="http://schemas.xmlsoap.org/ws/2005/02/rm/policy">
+          <wsrm:InactivityTimeout Milliseconds="600000" />
+          <wsrm:AcknowledgementInterval Milliseconds="200" />
+        </wsrm:RMAssertion>
         <msb:BinaryEncoding xmlns:msb="http://schemas.microsoft.com/ws/06/2004/mspolicy/netbinary1" />
         <sp:TransportBinding xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
           <wsp:Policy>
@@ -61,6 +69,76 @@
   <wsp:Policy wsu:Id="NetTcpBinding_IRegistroUsuario_policy">
     <wsp:ExactlyOne>
       <wsp:All>
+        <wsrm:RMAssertion xmlns:wsrm="http://schemas.xmlsoap.org/ws/2005/02/rm/policy">
+          <wsrm:InactivityTimeout Milliseconds="600000" />
+          <wsrm:AcknowledgementInterval Milliseconds="200" />
+        </wsrm:RMAssertion>
+        <msb:BinaryEncoding xmlns:msb="http://schemas.microsoft.com/ws/06/2004/mspolicy/netbinary1" />
+        <sp:TransportBinding xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <wsp:Policy>
+            <sp:TransportToken>
+              <wsp:Policy>
+                <msf:WindowsTransportSecurity xmlns:msf="http://schemas.microsoft.com/ws/2006/05/framing/policy">
+                  <msf:ProtectionLevel>EncryptAndSign</msf:ProtectionLevel>
+                </msf:WindowsTransportSecurity>
+              </wsp:Policy>
+            </sp:TransportToken>
+            <sp:AlgorithmSuite>
+              <wsp:Policy>
+                <sp:Basic256 />
+              </wsp:Policy>
+            </sp:AlgorithmSuite>
+            <sp:Layout>
+              <wsp:Policy>
+                <sp:Strict />
+              </wsp:Policy>
+            </sp:Layout>
+          </wsp:Policy>
+        </sp:TransportBinding>
+        <wsaw:UsingAddressing />
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="NetTcpBinding_ILobby_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <wsrm:RMAssertion xmlns:wsrm="http://schemas.xmlsoap.org/ws/2005/02/rm/policy">
+          <wsrm:InactivityTimeout Milliseconds="600000" />
+          <wsrm:AcknowledgementInterval Milliseconds="200" />
+        </wsrm:RMAssertion>
+        <msb:BinaryEncoding xmlns:msb="http://schemas.microsoft.com/ws/06/2004/mspolicy/netbinary1" />
+        <sp:TransportBinding xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <wsp:Policy>
+            <sp:TransportToken>
+              <wsp:Policy>
+                <msf:WindowsTransportSecurity xmlns:msf="http://schemas.microsoft.com/ws/2006/05/framing/policy">
+                  <msf:ProtectionLevel>EncryptAndSign</msf:ProtectionLevel>
+                </msf:WindowsTransportSecurity>
+              </wsp:Policy>
+            </sp:TransportToken>
+            <sp:AlgorithmSuite>
+              <wsp:Policy>
+                <sp:Basic256 />
+              </wsp:Policy>
+            </sp:AlgorithmSuite>
+            <sp:Layout>
+              <wsp:Policy>
+                <sp:Strict />
+              </wsp:Policy>
+            </sp:Layout>
+          </wsp:Policy>
+        </sp:TransportBinding>
+        <wsaw:UsingAddressing />
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="NetTcpBinding_IUnirsePartida_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <wsrm:RMAssertion xmlns:wsrm="http://schemas.xmlsoap.org/ws/2005/02/rm/policy">
+          <wsrm:InactivityTimeout Milliseconds="600000" />
+          <wsrm:AcknowledgementInterval Milliseconds="200" />
+        </wsrm:RMAssertion>
         <msb:BinaryEncoding xmlns:msb="http://schemas.microsoft.com/ws/06/2004/mspolicy/netbinary1" />
         <sp:TransportBinding xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
           <wsp:Policy>
@@ -119,6 +197,24 @@
   <wsdl:message name="IRegistroUsuario_AgregarUsuario_OutputMessage">
     <wsdl:part name="parameters" element="tns:AgregarUsuarioResponse" />
   </wsdl:message>
+  <wsdl:message name="ILobby_EntrarPartida_InputMessage">
+    <wsdl:part name="parameters" element="tns:EntrarPartida" />
+  </wsdl:message>
+  <wsdl:message name="ILobby_JugadorEntroPartida_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:JugadorEntroPartida" />
+  </wsdl:message>
+  <wsdl:message name="IUnirsePartida_UnirseAlLobby_InputMessage">
+    <wsdl:part name="parameters" element="tns:UnirseAlLobby" />
+  </wsdl:message>
+  <wsdl:message name="IUnirsePartida_UnirseAlLobby_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UnirseAlLobbyResponse" />
+  </wsdl:message>
+  <wsdl:message name="IUnirsePartida_RecuperarJugadoresLobby_InputMessage">
+    <wsdl:part name="parameters" element="tns:RecuperarJugadoresLobby" />
+  </wsdl:message>
+  <wsdl:message name="IUnirsePartida_RecuperarJugadoresLobby_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RecuperarJugadoresLobbyResponse" />
+  </wsdl:message>
   <wsdl:portType name="IInicioSesion">
     <wsdl:operation name="VerificarExistenciaCorreoCuenta">
       <wsdl:input wsaw:Action="http://tempuri.org/IInicioSesion/VerificarExistenciaCorreoCuenta" message="tns:IInicioSesion_VerificarExistenciaCorreoCuenta_InputMessage" />
@@ -139,6 +235,24 @@
     <wsdl:operation name="AgregarUsuario">
       <wsdl:input wsaw:Action="http://tempuri.org/IRegistroUsuario/AgregarUsuario" message="tns:IRegistroUsuario_AgregarUsuario_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IRegistroUsuario/AgregarUsuarioResponse" message="tns:IRegistroUsuario_AgregarUsuario_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="ILobby">
+    <wsdl:operation name="EntrarPartida">
+      <wsdl:input wsaw:Action="http://tempuri.org/ILobby/EntrarPartida" message="tns:ILobby_EntrarPartida_InputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="JugadorEntroPartida">
+      <wsdl:output wsaw:Action="http://tempuri.org/ILobby/JugadorEntroPartida" message="tns:ILobby_JugadorEntroPartida_OutputCallbackMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="IUnirsePartida">
+    <wsdl:operation name="UnirseAlLobby">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUnirsePartida/UnirseAlLobby" message="tns:IUnirsePartida_UnirseAlLobby_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUnirsePartida/UnirseAlLobbyResponse" message="tns:IUnirsePartida_UnirseAlLobby_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="RecuperarJugadoresLobby">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUnirsePartida/RecuperarJugadoresLobby" message="tns:IUnirsePartida_RecuperarJugadoresLobby_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUnirsePartida/RecuperarJugadoresLobbyResponse" message="tns:IUnirsePartida_RecuperarJugadoresLobby_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="NetTcpBinding_IInicioSesion" type="tns:IInicioSesion">
@@ -189,6 +303,44 @@
       </wsdl:output>
     </wsdl:operation>
   </wsdl:binding>
+  <wsdl:binding name="NetTcpBinding_ILobby" type="tns:ILobby">
+    <wsp:PolicyReference URI="#NetTcpBinding_ILobby_policy" />
+    <soap12:binding transport="http://schemas.microsoft.com/soap/tcp" />
+    <wsdl:operation name="EntrarPartida">
+      <soap12:operation soapAction="http://tempuri.org/ILobby/EntrarPartida" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="JugadorEntroPartida">
+      <soap12:operation soapAction="http://tempuri.org/ILobby/JugadorEntroPartida" style="document" />
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="NetTcpBinding_IUnirsePartida" type="tns:IUnirsePartida">
+    <wsp:PolicyReference URI="#NetTcpBinding_IUnirsePartida_policy" />
+    <soap12:binding transport="http://schemas.microsoft.com/soap/tcp" />
+    <wsdl:operation name="UnirseAlLobby">
+      <soap12:operation soapAction="http://tempuri.org/IUnirsePartida/UnirseAlLobby" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RecuperarJugadoresLobby">
+      <soap12:operation soapAction="http://tempuri.org/IUnirsePartida/RecuperarJugadoresLobby" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
   <wsdl:service name="ServicioComunicacionSorrySliders">
     <wsdl:port name="NetTcpBinding_IInicioSesion" binding="tns:NetTcpBinding_IInicioSesion">
       <soap12:address location="net.tcp://localhost:5455/ServidorSorrySliders" />
@@ -209,6 +361,24 @@
       </wsa10:EndpointReference>
     </wsdl:port>
     <wsdl:port name="NetTcpBinding_IRegistroUsuario" binding="tns:NetTcpBinding_IRegistroUsuario">
+      <soap12:address location="net.tcp://localhost:5455/ServidorSorrySliders" />
+      <wsa10:EndpointReference>
+        <wsa10:Address>net.tcp://localhost:5455/ServidorSorrySliders</wsa10:Address>
+        <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
+          <Upn>LAPTOP-H4AE1QJ9\sulem</Upn>
+        </Identity>
+      </wsa10:EndpointReference>
+    </wsdl:port>
+    <wsdl:port name="NetTcpBinding_ILobby" binding="tns:NetTcpBinding_ILobby">
+      <soap12:address location="net.tcp://localhost:5455/ServidorSorrySliders" />
+      <wsa10:EndpointReference>
+        <wsa10:Address>net.tcp://localhost:5455/ServidorSorrySliders</wsa10:Address>
+        <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
+          <Upn>LAPTOP-H4AE1QJ9\sulem</Upn>
+        </Identity>
+      </wsa10:EndpointReference>
+    </wsdl:port>
+    <wsdl:port name="NetTcpBinding_IUnirsePartida" binding="tns:NetTcpBinding_IUnirsePartida">
       <soap12:address location="net.tcp://localhost:5455/ServidorSorrySliders" />
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:5455/ServidorSorrySliders</wsa10:Address>

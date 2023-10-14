@@ -397,15 +397,14 @@ namespace VistasSorrySliders
                 {
                     int tamañoenBytes = (int)flujoArchivo.Length;
                     int tamañoEnKB = tamañoenBytes / 1024;
-                    int tamañoEnMB = tamañoEnKB / 1024;
 
-                    if (tamañoEnMB <= 3)
+                    if (tamañoEnKB <= 700)
                     {
                         return true;
                     }
                     else
                     {
-                        System.Windows.Forms.MessageBox.Show("La imagen supera el limite de 3MB", "Imagen demasiado grande", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        System.Windows.Forms.MessageBox.Show("La imagen supera el limite de 700KB", "Imagen demasiado grande", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
                         return false;
                     }
