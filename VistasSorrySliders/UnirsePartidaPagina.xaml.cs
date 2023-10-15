@@ -94,8 +94,8 @@ namespace VistasSorrySliders
 
         private void EntrarLobby(int numeroMaximoJugadores)
         {
-            JuegoYLobbyVentana ventanaJuego = new JuegoYLobbyVentana(numeroMaximoJugadores, _cuentaActual);
-            ventanaJuego.Show();
+            //JuegoYLobbyVentana ventanaJuego = new JuegoYLobbyVentana(numeroMaximoJugadores, _cuentaActual);
+            //ventanaJuego.Show();
         }
 
         private void MostrarErrorJugadores(int numeroMaximoJugadores)
