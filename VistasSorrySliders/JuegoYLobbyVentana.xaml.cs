@@ -32,10 +32,6 @@ namespace VistasSorrySliders
             frameListaAmigos.Content = new ListaAmigosPagina();
         }
 
-        public JuegoYLobbyVentana(NavigationService navigationService) : this()
-        {
-            _navigationService = navigationService;
-        }
 
     }
 }

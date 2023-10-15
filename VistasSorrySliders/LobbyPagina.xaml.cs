@@ -22,7 +22,8 @@ namespace VistasSorrySliders
     public partial class LobbyPagina : Page
     {
         private CuentaSet _cuentaUsuario;
-        public LobbyPagina()
+
+        public LobbyPagina(NavigationService navegacion)
         {
             InitializeComponent();
         }
@@ -34,6 +35,7 @@ namespace VistasSorrySliders
             txtBoxJugadores.Text = numeroJugadores;
             _cuentaUsuario = new CuentaSet(); 
             _cuentaUsuario = cuentaHost;
+
         }
 
         private void ClickSalirLobbyJugadores(object sender, RoutedEventArgs e)
