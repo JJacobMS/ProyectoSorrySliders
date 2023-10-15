@@ -23,7 +23,7 @@ namespace VistasSorrySliders
     {
         private CuentaSet _cuentaUsuario;
 
-        public LobbyPagina(NavigationService navegacion)
+        public LobbyPagina()
         {
             InitializeComponent();
         }
