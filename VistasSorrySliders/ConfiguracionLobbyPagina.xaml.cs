@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -58,22 +60,74 @@ namespace VistasSorrySliders
         {
             if (selectedBorder != null)
             {
-                int numeroJugadores = 0;
+                int numeroJugadoresInt = 0;
+                string numeroJugadoresString = "";
                 if (selectedBorder.Name == "brdTablero4Jugadores")
                 {
-                    numeroJugadores = 4;
+                    numeroJugadoresInt = 4;
+                    numeroJugadoresString = "4";
                 }
                 else if (selectedBorder.Name == "brdTablero3Jugadores")
                 {
-                    numeroJugadores = 3;
+                    numeroJugadoresInt = 3;
+                    numeroJugadoresString = "3";
+
                 }
                 else if (selectedBorder.Name == "brdTablero2Jugadores")
                 {
-                    numeroJugadores = 2;
+                    numeroJugadoresInt = 2;
+                    numeroJugadoresString = "2";
                 }
-                JuegoYLobbyVentana juegolobby = new JuegoYLobbyVentana(numeroJugadores, _cuentaUsuario);
-                juegolobby.Show();
+                Constantes respuesta = Constantes.OPERACION_EXITOSA_VACIA;
+                string codigoPartida = "";
+                try
+                {
+                    CrearLobbyClient proxyCrearLobby = new CrearLobbyClient();
+                    (respuesta, codigoPartida) = proxyCrearLobby.CrearPartida(_cuentaUsuario.CorreoElectronico, numeroJugadoresInt);
+                }
+                catch (CommunicationException excepcion)
+                {
+                    respuesta = Constantes.ERROR_CONEXION_SERVIDOR;
+                    System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorConexion);
+                }
+                catch (TimeoutException excepcion)
+                {
+                    respuesta = Constantes.ERROR_CONEXION_SERVIDOR;
+                    System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorConexion);
+
+                }
+                switch (respuesta)
+                    {
+                        case Constantes.ERROR_CONEXION_BD:
+                            MessageBox.Show(Properties.Resources.msgErrorBaseDatos);
+                            break;
+                        case Constantes.ERROR_CONSULTA:
+                            MessageBox.Show(Properties.Resources.msgErrorBaseDatos);
+                            break;
+                        case Constantes.ERROR_CONEXION_SERVIDOR:
+                            MessageBox.Show(Properties.Resources.msgErrorConexion);
+                            break;
+                        case Constantes.OPERACION_EXITOSA:
+                            CrearVentanaLobby(numeroJugadoresString, _cuentaUsuario, codigoPartida);
+                            Window.GetWindow(this).Close();
+                        break;
+                        case Constantes.OPERACION_EXITOSA_VACIA:
+                            break;
+                        default:
+                            break;
+                    }
+                    
+                
             }
+        }
+
+        private void CrearVentanaLobby(string numeroJugadoresString, CuentaSet _cuentaUsuario, string codigoPartida) 
+        {
+            LobbyPagina lobby = new LobbyPagina();
+            JuegoYLobbyVentana lobbyUnirse = new JuegoYLobbyVentana(lobby);
+            lobby.InicializarDatos(numeroJugadoresString, _cuentaUsuario, codigoPartida);
+            lobbyUnirse.Show();
+
         }
 
         private void ClickSalirConfigurarLobby(object sender, RoutedEventArgs e)

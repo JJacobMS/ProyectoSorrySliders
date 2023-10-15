@@ -20,10 +20,10 @@ namespace VistasSorrySliders
     /// </summary>
     public partial class JuegoYLobbyVentana : Window
     {
-        public JuegoYLobbyVentana(int numeroJugadores, CuentaSet cuentaUsuario)
+        public JuegoYLobbyVentana(LobbyPagina lobby)
         {
             InitializeComponent();
-            frameLobby.Content = new LobbyPagina();
+            frameLobby.Content = lobby;
             frameListaAmigos.Content = new ListaAmigosPagina();
         }
     }

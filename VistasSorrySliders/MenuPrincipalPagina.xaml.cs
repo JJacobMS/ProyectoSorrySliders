@@ -40,7 +40,7 @@ namespace VistasSorrySliders
             RecuperarDatosUsuario(correoUsuario);
         }
 
-        private void RecuperarDatosUsuario(String correoUsuario) 
+        private void RecuperarDatosUsuario(string correoUsuario) 
         {
             Constantes resultado;
             string nickname = "";
@@ -116,6 +116,7 @@ namespace VistasSorrySliders
         private void ClickMostrarConfiguracionLobby(object sender, RoutedEventArgs e)
         {
             ConfiguracionLobby configuracionLobby = new ConfiguracionLobby(_cuentaUsuario);
+            
             this.NavigationService.Navigate(configuracionLobby);
         }
     }
