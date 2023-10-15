@@ -40,7 +40,8 @@ namespace VistasSorrySliders
 
         private void ClickSalirLobbyJugadores(object sender, RoutedEventArgs e)
         {
-            var ventanaPrincipal = new Window();
+            var ventanaPrincipal = new MainWindow();
+            
             MenuPrincipalPagina menu = new MenuPrincipalPagina(_cuentaUsuario.CorreoElectronico);
             ventanaPrincipal.Content = menu;
             ventanaPrincipal.Show();
