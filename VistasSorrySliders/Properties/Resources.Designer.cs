@@ -340,6 +340,15 @@ namespace VistasSorrySliders.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a La imagen supera el limite de 3MB.
+        /// </summary>
+        public static string msgTamañoImagenError {
+            get {
+                return ResourceManager.GetString("msgTamañoImagenError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Contraseña invalida.
         /// </summary>
         public static string msgTituloContraseñaInvalida {
@@ -394,6 +403,24 @@ namespace VistasSorrySliders.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Imagen demasiado grande.
+        /// </summary>
+        public static string msgTituloTamañoImagenError {
+            get {
+                return ResourceManager.GetString("msgTituloTamañoImagenError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a AJUSTES.
+        /// </summary>
+        public static string txtBlockAjustes {
+            get {
+                return ResourceManager.GetString("txtBlockAjustes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a La contraseña no es correcta. Verifica tu contraseña e inténtalo de nuevo.
         /// </summary>
         public static string txtBlockContrasenaInvalida {
@@ -408,6 +435,42 @@ namespace VistasSorrySliders.Properties {
         public static string txtBlockCorreoInvalido {
             get {
                 return ResourceManager.GetString("txtBlockCorreoInvalido", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a CREAR LOBBY.
+        /// </summary>
+        public static string txtBlockCrearLobby {
+            get {
+                return ResourceManager.GetString("txtBlockCrearLobby", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a JUGADORES Y AMIGOS.
+        /// </summary>
+        public static string txtBlockJugadoresAmigos {
+            get {
+                return ResourceManager.GetString("txtBlockJugadoresAmigos", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a TABLA DE PUNTUACIONES.
+        /// </summary>
+        public static string txtBlockTablaPuntuaciones {
+            get {
+                return ResourceManager.GetString("txtBlockTablaPuntuaciones", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a UNIRSE A PARTIDA.
+        /// </summary>
+        public static string txtBlockUnirsePartida {
+            get {
+                return ResourceManager.GetString("txtBlockUnirsePartida", resourceCulture);
             }
         }
     }

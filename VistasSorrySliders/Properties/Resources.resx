@@ -210,6 +210,9 @@
   <data name="msgImagenInvalida" xml:space="preserve">
     <value>Por favor, seleccione un archivo de imagen válida</value>
   </data>
+  <data name="msgTamañoImagenError" xml:space="preserve">
+    <value>La imagen supera el limite de 3MB</value>
+  </data>
   <data name="msgTituloContraseñaInvalida" xml:space="preserve">
     <value>Contraseña invalida</value>
   </data>
@@ -228,10 +231,28 @@
   <data name="msgTituloErrorImagen" xml:space="preserve">
     <value>Error de imagen</value>
   </data>
+  <data name="msgTituloTamañoImagenError" xml:space="preserve">
+    <value>Imagen demasiado grande</value>
+  </data>
+  <data name="txtBlockAjustes" xml:space="preserve">
+    <value>AJUSTES</value>
+  </data>
   <data name="txtBlockContrasenaInvalida" xml:space="preserve">
     <value>La contraseña no es correcta. Verifica tu contraseña e inténtalo de nuevo</value>
   </data>
   <data name="txtBlockCorreoInvalido" xml:space="preserve">
     <value>El correo electrónico no se encuentra registrado en el sistema</value>
+  </data>
+  <data name="txtBlockCrearLobby" xml:space="preserve">
+    <value>CREAR LOBBY</value>
+  </data>
+  <data name="txtBlockJugadoresAmigos" xml:space="preserve">
+    <value>JUGADORES Y AMIGOS</value>
+  </data>
+  <data name="txtBlockTablaPuntuaciones" xml:space="preserve">
+    <value>TABLA DE PUNTUACIONES</value>
+  </data>
+  <data name="txtBlockUnirsePartida" xml:space="preserve">
+    <value>UNIRSE A PARTIDA</value>
   </data>
 </root>
