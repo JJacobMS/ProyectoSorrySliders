@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<SavedWcfConfigurationInformation xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Version="9.1" CheckSum="RaEzLS6fjLP3sPFs2wdIZhrxRW/PYpj74QwC8Isl1cI=">
+<SavedWcfConfigurationInformation xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Version="9.1" CheckSum="aELPaGhed0cGYFMvfIhDzvUnVQPI1AOXRxDg35upHaQ=">
   <bindingConfigurations>
     <bindingConfiguration bindingType="netTcpBinding" name="NetTcpBinding_IRegistroUsuario">
       <properties>
@@ -711,7 +711,7 @@
     </bindingConfiguration>
   </bindingConfigurations>
   <endpoints>
-    <endpoint name="NetTcpBinding_IInicioSesion" contract="ServicioSorrySliders.IInicioSesion" bindingType="netTcpBinding" address="net.tcp://localhost:5455/ServidorSorrySliders" bindingConfiguration="NetTcpBinding_IInicioSesion">
+    <endpoint name="NetTcpBinding_IInicioSesion" contract="ServicioSorrySlider.IInicioSesion" bindingType="netTcpBinding" address="net.tcp://localhost:5455/ServidorSorrySliders" bindingConfiguration="NetTcpBinding_IInicioSesion">
       <properties>
         <property path="/address" isComplexType="false" isExplicitlyDefined="true" clrType="System.Uri, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue>net.tcp://localhost:5455/ServidorSorrySliders</serializedValue>
@@ -726,7 +726,7 @@
           <serializedValue>NetTcpBinding_IInicioSesion</serializedValue>
         </property>
         <property path="/contract" isComplexType="false" isExplicitlyDefined="true" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>ServicioSorrySliders.IInicioSesion</serializedValue>
+          <serializedValue>ServicioSorrySlider.IInicioSesion</serializedValue>
         </property>
         <property path="/headers" isComplexType="true" isExplicitlyDefined="false" clrType="System.ServiceModel.Configuration.AddressHeaderCollectionElement, System.ServiceModel, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue>System.ServiceModel.Configuration.AddressHeaderCollectionElement</serializedValue>
@@ -796,7 +796,7 @@
         </property>
       </properties>
     </endpoint>
-    <endpoint name="NetTcpBinding_IMenuPrincipal" contract="ServicioSorrySliders.IMenuPrincipal" bindingType="netTcpBinding" address="net.tcp://localhost:5455/ServidorSorrySliders" bindingConfiguration="NetTcpBinding_IMenuPrincipal">
+    <endpoint name="NetTcpBinding_IMenuPrincipal" contract="ServicioSorrySlider.IMenuPrincipal" bindingType="netTcpBinding" address="net.tcp://localhost:5455/ServidorSorrySliders" bindingConfiguration="NetTcpBinding_IMenuPrincipal">
       <properties>
         <property path="/address" isComplexType="false" isExplicitlyDefined="true" clrType="System.Uri, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue>net.tcp://localhost:5455/ServidorSorrySliders</serializedValue>
@@ -811,7 +811,7 @@
           <serializedValue>NetTcpBinding_IMenuPrincipal</serializedValue>
         </property>
         <property path="/contract" isComplexType="false" isExplicitlyDefined="true" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>ServicioSorrySliders.IMenuPrincipal</serializedValue>
+          <serializedValue>ServicioSorrySlider.IMenuPrincipal</serializedValue>
         </property>
         <property path="/headers" isComplexType="true" isExplicitlyDefined="false" clrType="System.ServiceModel.Configuration.AddressHeaderCollectionElement, System.ServiceModel, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue>System.ServiceModel.Configuration.AddressHeaderCollectionElement</serializedValue>
@@ -881,7 +881,7 @@
         </property>
       </properties>
     </endpoint>
-    <endpoint name="NetTcpBinding_IRegistroUsuario" contract="ServicioSorrySliders.IRegistroUsuario" bindingType="netTcpBinding" address="net.tcp://localhost:5455/ServidorSorrySliders" bindingConfiguration="NetTcpBinding_IRegistroUsuario">
+    <endpoint name="NetTcpBinding_IRegistroUsuario" contract="ServicioSorrySlider.IRegistroUsuario" bindingType="netTcpBinding" address="net.tcp://localhost:5455/ServidorSorrySliders" bindingConfiguration="NetTcpBinding_IRegistroUsuario">
       <properties>
         <property path="/address" isComplexType="false" isExplicitlyDefined="true" clrType="System.Uri, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue>net.tcp://localhost:5455/ServidorSorrySliders</serializedValue>
@@ -896,7 +896,7 @@
           <serializedValue>NetTcpBinding_IRegistroUsuario</serializedValue>
         </property>
         <property path="/contract" isComplexType="false" isExplicitlyDefined="true" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>ServicioSorrySliders.IRegistroUsuario</serializedValue>
+          <serializedValue>ServicioSorrySlider.IRegistroUsuario</serializedValue>
         </property>
         <property path="/headers" isComplexType="true" isExplicitlyDefined="false" clrType="System.ServiceModel.Configuration.AddressHeaderCollectionElement, System.ServiceModel, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue>System.ServiceModel.Configuration.AddressHeaderCollectionElement</serializedValue>
@@ -966,7 +966,7 @@
         </property>
       </properties>
     </endpoint>
-    <endpoint name="NetTcpBinding_ILobby" contract="ServicioSorrySliders.ILobby" bindingType="netTcpBinding" address="net.tcp://localhost:5455/ServidorSorrySliders" bindingConfiguration="NetTcpBinding_ILobby">
+    <endpoint name="NetTcpBinding_ILobby" contract="ServicioSorrySlider.ILobby" bindingType="netTcpBinding" address="net.tcp://localhost:5455/ServidorSorrySliders" bindingConfiguration="NetTcpBinding_ILobby">
       <properties>
         <property path="/address" isComplexType="false" isExplicitlyDefined="true" clrType="System.Uri, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue>net.tcp://localhost:5455/ServidorSorrySliders</serializedValue>
@@ -981,7 +981,7 @@
           <serializedValue>NetTcpBinding_ILobby</serializedValue>
         </property>
         <property path="/contract" isComplexType="false" isExplicitlyDefined="true" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>ServicioSorrySliders.ILobby</serializedValue>
+          <serializedValue>ServicioSorrySlider.ILobby</serializedValue>
         </property>
         <property path="/headers" isComplexType="true" isExplicitlyDefined="false" clrType="System.ServiceModel.Configuration.AddressHeaderCollectionElement, System.ServiceModel, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue>System.ServiceModel.Configuration.AddressHeaderCollectionElement</serializedValue>
@@ -1051,7 +1051,7 @@
         </property>
       </properties>
     </endpoint>
-    <endpoint name="NetTcpBinding_IUnirsePartida" contract="ServicioSorrySliders.IUnirsePartida" bindingType="netTcpBinding" address="net.tcp://localhost:5455/ServidorSorrySliders" bindingConfiguration="NetTcpBinding_IUnirsePartida">
+    <endpoint name="NetTcpBinding_IUnirsePartida" contract="ServicioSorrySlider.IUnirsePartida" bindingType="netTcpBinding" address="net.tcp://localhost:5455/ServidorSorrySliders" bindingConfiguration="NetTcpBinding_IUnirsePartida">
       <properties>
         <property path="/address" isComplexType="false" isExplicitlyDefined="true" clrType="System.Uri, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue>net.tcp://localhost:5455/ServidorSorrySliders</serializedValue>
@@ -1066,7 +1066,7 @@
           <serializedValue>NetTcpBinding_IUnirsePartida</serializedValue>
         </property>
         <property path="/contract" isComplexType="false" isExplicitlyDefined="true" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>ServicioSorrySliders.IUnirsePartida</serializedValue>
+          <serializedValue>ServicioSorrySlider.IUnirsePartida</serializedValue>
         </property>
         <property path="/headers" isComplexType="true" isExplicitlyDefined="false" clrType="System.ServiceModel.Configuration.AddressHeaderCollectionElement, System.ServiceModel, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue>System.ServiceModel.Configuration.AddressHeaderCollectionElement</serializedValue>
@@ -1136,7 +1136,7 @@
         </property>
       </properties>
     </endpoint>
-    <endpoint name="NetTcpBinding_ICrearLobby" contract="ServicioSorrySliders.ICrearLobby" bindingType="netTcpBinding" address="net.tcp://localhost:5455/ServidorSorrySliders" bindingConfiguration="NetTcpBinding_ICrearLobby">
+    <endpoint name="NetTcpBinding_ICrearLobby" contract="ServicioSorrySlider.ICrearLobby" bindingType="netTcpBinding" address="net.tcp://localhost:5455/ServidorSorrySliders" bindingConfiguration="NetTcpBinding_ICrearLobby">
       <properties>
         <property path="/address" isComplexType="false" isExplicitlyDefined="true" clrType="System.Uri, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue>net.tcp://localhost:5455/ServidorSorrySliders</serializedValue>
@@ -1151,7 +1151,7 @@
           <serializedValue>NetTcpBinding_ICrearLobby</serializedValue>
         </property>
         <property path="/contract" isComplexType="false" isExplicitlyDefined="true" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>ServicioSorrySliders.ICrearLobby</serializedValue>
+          <serializedValue>ServicioSorrySlider.ICrearLobby</serializedValue>
         </property>
         <property path="/headers" isComplexType="true" isExplicitlyDefined="false" clrType="System.ServiceModel.Configuration.AddressHeaderCollectionElement, System.ServiceModel, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue>System.ServiceModel.Configuration.AddressHeaderCollectionElement</serializedValue>
