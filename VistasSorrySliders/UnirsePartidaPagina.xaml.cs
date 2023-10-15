@@ -128,10 +128,5 @@ namespace VistasSorrySliders
             string pattern = @"^[0-9A-Fa-f]{8}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{12}$";
             return Regex.IsMatch(uid, pattern);
         }
-
-        private void ClicSalir(object sender, RoutedEventArgs e)
-        {
-            this.NavigationService.GoBack();
-        }
     }
 }

@@ -18,8 +18,7 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <Image Source="/Recursos/peones.png" Margin="10"></Image>
-        <Button Style="{StaticResource estiloBtnSalir}" Click="ClicSalir" 
-                HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20">Salir</Button>
+        <Button Style="{StaticResource estiloBtnSalir}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20">Salir</Button>
         <Image Grid.Column="2" Source="/Recursos/dado.png" Margin="10"/>
         <Viewbox Grid.Column="1">
             <Border Grid.Column="1" BorderBrush="#042437" BorderThickness="4" CornerRadius="10" Margin="0,40,0,40"

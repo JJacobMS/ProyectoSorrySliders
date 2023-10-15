@@ -119,11 +119,5 @@ namespace VistasSorrySliders
             
             this.NavigationService.Navigate(configuracionLobby);
         }
-
-        private void ClickUnirsePartida(object sender, RoutedEventArgs e)
-        {
-            UnirsePartidaPagina unirsePartida = new UnirsePartidaPagina(_cuentaUsuario);
-            this.NavigationService.Navigate(unirsePartida);
-        }
     }
 }
