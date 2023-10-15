@@ -505,4 +505,51 @@ namespace VistasSorrySliders.ServicioSorrySliders {
             return base.Channel.RecuperarJugadoresLobbyAsync(uid);
         }
     }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServicioSorrySliders.ICrearLobby")]
+    public interface ICrearLobby {
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICrearLobby/CrearPartida", ReplyAction="http://tempuri.org/ICrearLobby/CrearPartidaResponse")]
+        System.ValueTuple<VistasSorrySliders.ServicioSorrySliders.Constantes, string> CrearPartida(string correoHost, int NumeroJugadores);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICrearLobby/CrearPartida", ReplyAction="http://tempuri.org/ICrearLobby/CrearPartidaResponse")]
+        System.Threading.Tasks.Task<System.ValueTuple<VistasSorrySliders.ServicioSorrySliders.Constantes, string>> CrearPartidaAsync(string correoHost, int NumeroJugadores);
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public interface ICrearLobbyChannel : VistasSorrySliders.ServicioSorrySliders.ICrearLobby, System.ServiceModel.IClientChannel {
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class CrearLobbyClient : System.ServiceModel.ClientBase<VistasSorrySliders.ServicioSorrySliders.ICrearLobby>, VistasSorrySliders.ServicioSorrySliders.ICrearLobby {
+        
+        public CrearLobbyClient() {
+        }
+        
+        public CrearLobbyClient(string endpointConfigurationName) : 
+                base(endpointConfigurationName) {
+        }
+        
+        public CrearLobbyClient(string endpointConfigurationName, string remoteAddress) : 
+                base(endpointConfigurationName, remoteAddress) {
+        }
+        
+        public CrearLobbyClient(string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(endpointConfigurationName, remoteAddress) {
+        }
+        
+        public CrearLobbyClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(binding, remoteAddress) {
+        }
+        
+        public System.ValueTuple<VistasSorrySliders.ServicioSorrySliders.Constantes, string> CrearPartida(string correoHost, int NumeroJugadores) {
+            return base.Channel.CrearPartida(correoHost, NumeroJugadores);
+        }
+        
+        public System.Threading.Tasks.Task<System.ValueTuple<VistasSorrySliders.ServicioSorrySliders.Constantes, string>> CrearPartidaAsync(string correoHost, int NumeroJugadores) {
+            return base.Channel.CrearPartidaAsync(correoHost, NumeroJugadores);
+        }
+    }
 }

@@ -33,21 +33,21 @@ namespace VistasSorrySliders
             InitializeComponent();
             EstablecerImagenPorDefecto();
         }
-        private String rutaImagen;
-        private byte[] avatarByte = null;
+        private String _rutaImagen;
+        private byte[] _avatarByte = null;
         private void EstablecerImagenPorDefecto() 
         {
-            rutaImagen = "pack://application:,,,/Recursos/avatarPredefinido.jpg";
+            _rutaImagen = "pack://application:,,,/Recursos/avatarPredefinido.jpg";
             try
             {
-                imgBrushAvatar.ImageSource = new BitmapImage(new Uri(rutaImagen));
-                BitmapImage bitmap = new BitmapImage(new Uri(rutaImagen));
+                imgBrushAvatar.ImageSource = new BitmapImage(new Uri(_rutaImagen));
+                BitmapImage bitmap = new BitmapImage(new Uri(_rutaImagen));
                 JpegBitmapEncoder encoder = new JpegBitmapEncoder();
                 encoder.Frames.Add(BitmapFrame.Create(bitmap));
                 using (MemoryStream ms = new MemoryStream())
                 {
                     encoder.Save(ms);
-                    avatarByte = ms.ToArray();
+                    _avatarByte = ms.ToArray();
                 }
             }
             catch (Exception ex)
@@ -177,7 +177,7 @@ namespace VistasSorrySliders
             var nuevaCuenta = new CuentaSet
             {
                 CorreoElectronico = correoElectronico,
-                Avatar = avatarByte, 
+                Avatar = _avatarByte, 
                 Nickname = nickname,
                 Contraseña = contraseña
             };
@@ -192,7 +192,19 @@ namespace VistasSorrySliders
                 RegistroUsuarioClient proxyRegistrarUsuario = new RegistroUsuarioClient();
                 resultado = proxyRegistrarUsuario.AgregarUsuario(usuarioNuevo,nuevaCuenta);
                 proxyRegistrarUsuario.Close();
-                switch (resultado)
+            }
+            catch (CommunicationException excepcion)
+            {
+                resultado = Constantes.ERROR_CONEXION_SERVIDOR;
+                System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorConexion);
+            }
+            catch (TimeoutException excepcion)
+            {
+                resultado = Constantes.ERROR_CONEXION_SERVIDOR;
+                System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorConexion);
+
+            }
+            switch (resultado)
                 {
                     case Constantes.OPERACION_EXITOSA:
                         System.Windows.Forms.MessageBox.Show(Properties.Resources.msgCuentaCreada, Properties.Resources.msgTituloCuentaCreada, MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -209,18 +221,7 @@ namespace VistasSorrySliders
                         System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorConexion);
                         break;
                 }
-            }
-            catch (CommunicationException excepcion)
-            {
-                resultado = Constantes.ERROR_CONEXION_SERVIDOR;
-                System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorConexion);
-            }
-            catch (TimeoutException excepcion)
-            {
-                resultado = Constantes.ERROR_CONEXION_SERVIDOR;
-                System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorConexion);
-
-            }
+            
 
         }
 
@@ -321,15 +322,15 @@ namespace VistasSorrySliders
                 abrirBiblioteca.Filter = "Archivos de imagen|*.jpg;*.jpeg";
                 if (abrirBiblioteca.ShowDialog() == DialogResult.OK)
                 {
-                    rutaImagen = abrirBiblioteca.FileName;
+                    _rutaImagen = abrirBiblioteca.FileName;
                     string[] formatosSoportados = { ".jpg", ".jpeg" };
-                    if (formatosSoportados.Any(ext => rutaImagen.EndsWith(ext, StringComparison.OrdinalIgnoreCase)))
+                    if (formatosSoportados.Any(ext => _rutaImagen.EndsWith(ext, StringComparison.OrdinalIgnoreCase)))
                     {
-                        BitmapImage mapaBits = new BitmapImage(new Uri(rutaImagen));
-                        if(ValidarTamañoImagen(rutaImagen)) 
+                        BitmapImage mapaBits = new BitmapImage(new Uri(_rutaImagen));
+                        if(ValidarTamañoImagen(_rutaImagen)) 
                         {
                             imgBrushAvatar.ImageSource = mapaBits;
-                            avatarByte = File.ReadAllBytes(rutaImagen);
+                            _avatarByte = File.ReadAllBytes(_rutaImagen);
                         }   
                     }
                     else
