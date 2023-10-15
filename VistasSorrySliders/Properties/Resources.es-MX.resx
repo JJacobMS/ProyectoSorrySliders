@@ -214,7 +214,7 @@
     <value>La imagen supera el limite de 3MB</value>
   </data>
   <data name="msgTituloContraseñaInvalida" xml:space="preserve">
-    <value>Contraseña invalida</value>
+    <value>Invalid password</value>
   </data>
   <data name="msgTituloCorreoEncontrado" xml:space="preserve">
     <value>Cuenta previamente registrada</value>

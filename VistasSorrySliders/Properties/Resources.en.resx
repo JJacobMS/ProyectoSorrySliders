@@ -118,141 +118,141 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="btnCancelar" xml:space="preserve">
-    <value>CANCELAR</value>
+    <value>CANCEL</value>
   </data>
   <data name="btnContinuar" xml:space="preserve">
-    <value>CONTINUAR</value>
+    <value>CONTINUE</value>
   </data>
   <data name="btnContinuarInvitado" xml:space="preserve">
-    <value>CONTINUAR COMO INVITADO</value>
+    <value>CONTINUE AS GUEST</value>
   </data>
   <data name="btnCrearCuenta" xml:space="preserve">
-    <value>CREAR CUENTA</value>
+    <value>CREATE ACCOUNT</value>
   </data>
   <data name="btnGuardarCambios" xml:space="preserve">
-    <value>GUARDAR CAMBIOS</value>
+    <value>SAVE CHANGES</value>
   </data>
   <data name="btnRegistrarCuenta" xml:space="preserve">
-    <value>REGISTRAR CUENTA</value>
+    <value>REGISTER ACCOUNT</value>
   </data>
   <data name="btnSalir" xml:space="preserve">
-    <value>SALIR</value>
+    <value>EXIT</value>
   </data>
   <data name="lblAjustes" xml:space="preserve">
-    <value>Ajustes</value>
+    <value>Settings</value>
   </data>
   <data name="lblApellidos" xml:space="preserve">
-    <value>Apellido/s</value>
+    <value>Last Name/s</value>
   </data>
   <data name="lblAvatar" xml:space="preserve">
     <value>Avatar</value>
   </data>
   <data name="lblBienvenido" xml:space="preserve">
-    <value>Bienvenido</value>
+    <value>Welcome</value>
   </data>
   <data name="lblBienvenidoNuevo" xml:space="preserve">
-    <value>Bienvenido de nuevo</value>
+    <value>Welcome again</value>
   </data>
   <data name="lblContrasena" xml:space="preserve">
-    <value>Contraseña:</value>
+    <value>Password:</value>
   </data>
   <data name="lblCorreo" xml:space="preserve">
-    <value>Correo:</value>
+    <value>Email:</value>
   </data>
   <data name="lblCorreoElectronico" xml:space="preserve">
-    <value>Correo electrónico</value>
+    <value>Email Address:</value>
   </data>
   <data name="lblDatosCuenta" xml:space="preserve">
-    <value>Datos de la cuenta</value>
+    <value>Account Details</value>
   </data>
   <data name="lblEspanol" xml:space="preserve">
-    <value>Español</value>
+    <value>Spanish</value>
   </data>
   <data name="lblIdioma" xml:space="preserve">
-    <value>IDIOMA:</value>
+    <value>LANGUAGE:</value>
   </data>
   <data name="lblIngles" xml:space="preserve">
-    <value>Inglés</value>
+    <value>English</value>
   </data>
   <data name="lblInicioSesion" xml:space="preserve">
-    <value>INICIAR SESIÓN</value>
+    <value>LOGIN</value>
   </data>
   <data name="lblNickname" xml:space="preserve">
-    <value>Nickname/apodo</value>
+    <value>Nickname</value>
   </data>
   <data name="lblNombres" xml:space="preserve">
-    <value>Nombre/s</value>
+    <value>Name/s</value>
   </data>
   <data name="msgCorreoEncontrado" xml:space="preserve">
-    <value>El correo ingresado se encuentra registrado en el sistema</value>
+    <value>The input email is registered in the system</value>
   </data>
   <data name="msgCorreoInvalido" xml:space="preserve">
-    <value>El correo electrónico es inválido, ingresa una dirección valida</value>
+    <value>The email is invalid, please enter a valid address</value>
   </data>
   <data name="msgCuentaCreada" xml:space="preserve">
-    <value>La cuenta se ha registrado exitosamente</value>
+    <value>The account has been successfully registered</value>
   </data>
   <data name="msgErrorAvatarDefault" xml:space="preserve">
-    <value>Error al cargar la imagen del avatar por defecto</value>
+    <value>Error loading default avatar image</value>
   </data>
   <data name="msgErrorBaseDatos" xml:space="preserve">
-    <value>Hubo un error de conexión con la base de datos</value>
+    <value>There has been a connection error with the database</value>
   </data>
   <data name="msgErrorConexion" xml:space="preserve">
-    <value>Hubo un error de conexión con el servidor</value>
+    <value>There has been a connection error with the server</value>
   </data>
   <data name="msgErrorContrasenaInvalida" xml:space="preserve">
-    <value>La contraseña debe contar con: Mínimo 8 caracteres, con un número o un carácter especial</value>
+    <value>Password must have: Minimum of 8 characters with one number or one special character</value>
   </data>
   <data name="msgErrorImagen" xml:space="preserve">
-    <value>La imagen no se puede cargar</value>
+    <value>The image cannot be loaded</value>
   </data>
   <data name="msgImagenInvalida" xml:space="preserve">
-    <value>Por favor, seleccione un archivo de imagen válida</value>
+    <value>Please select a valid image file</value>
   </data>
   <data name="msgTamañoImagenError" xml:space="preserve">
-    <value>La imagen supera el limite de 3MB</value>
+    <value>The image exceeds the 3MB limit</value>
   </data>
   <data name="msgTituloContraseñaInvalida" xml:space="preserve">
     <value>Contraseña invalida</value>
   </data>
   <data name="msgTituloCorreoEncontrado" xml:space="preserve">
-    <value>Cuenta previamente registrada</value>
+    <value>Previously registered account</value>
   </data>
   <data name="msgTituloCorreoInvalido" xml:space="preserve">
-    <value>Correo invalido</value>
+    <value>Invalid email</value>
   </data>
   <data name="msgTituloCuentaCreada" xml:space="preserve">
-    <value>Cuenta creada</value>
+    <value>Account created</value>
   </data>
   <data name="msgTituloErrorAvatarDefault" xml:space="preserve">
-    <value>Error al cargar la imagen</value>
+    <value>Error loading the image</value>
   </data>
   <data name="msgTituloErrorImagen" xml:space="preserve">
-    <value>Error de imagen</value>
+    <value>Image Error</value>
   </data>
   <data name="msgTituloTamañoImagenError" xml:space="preserve">
-    <value>Imagen demasiado grande</value>
+    <value>Image too big</value>
   </data>
   <data name="txtBlockAjustes" xml:space="preserve">
-    <value>AJUSTES</value>
+    <value>SETTINGS</value>
   </data>
   <data name="txtBlockContrasenaInvalida" xml:space="preserve">
-    <value>La contraseña no es correcta. Verifica tu contraseña e inténtalo de nuevo</value>
+    <value>The password is not valid. Verify your password and try again</value>
   </data>
   <data name="txtBlockCorreoInvalido" xml:space="preserve">
-    <value>El correo electrónico no se encuentra registrado en el sistema</value>
+    <value>The email address isn´t register in the sistem</value>
   </data>
   <data name="txtBlockCrearLobby" xml:space="preserve">
     <value>CREAR LOBBY</value>
   </data>
   <data name="txtBlockJugadoresAmigos" xml:space="preserve">
-    <value>JUGADORES Y AMIGOS</value>
+    <value>PLAYERS AND FRIEND</value>
   </data>
   <data name="txtBlockTablaPuntuaciones" xml:space="preserve">
-    <value>TABLA DE PUNTUACIONES</value>
+    <value>SCORE TABLE</value>
   </data>
   <data name="txtBlockUnirsePartida" xml:space="preserve">
-    <value>UNIRSE A PARTIDA</value>
+    <value>JOIN PARTY</value>
   </data>
 </root>

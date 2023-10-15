@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -12,24 +13,24 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using VistasSorrySliders.ServicioSorrySliders;
 
 namespace VistasSorrySliders
 {
     /// <summary>
-    /// Lógica de interacción para MainWindow.xaml
+    /// Lógica de interacción para InicioPagina.xaml
     /// </summary>
-    public partial class MainWindow : NavigationWindow
+    public partial class InicioPagina : Page
     {
-        public MainWindow()
+        public InicioPagina()
         {
             InitializeComponent();
         }
-        /*public void Ejemplo() 
-        {
-            using (var context = new SorrySlidersBDEntities())
-            {
 
-            }
-        }*/
+        private void ClickIniciarJuego(object sender, RoutedEventArgs e)
+        {
+            InicioSesionPagina inicioSesion = new InicioSesionPagina();
+            this.NavigationService.Navigate(inicioSesion);
+        }
     }
 }

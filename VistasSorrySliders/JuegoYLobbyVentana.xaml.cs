@@ -12,24 +12,26 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using VistasSorrySliders.ServicioSorrySliders;
 
 namespace VistasSorrySliders
 {
     /// <summary>
-    /// Lógica de interacción para MainWindow.xaml
+    /// Lógica de interacción para JuegoYLobbyVentana.xaml
     /// </summary>
-    public partial class MainWindow : NavigationWindow
+    public partial class JuegoYLobbyVentana : Window
     {
-        public MainWindow()
+        public JuegoYLobbyVentana()
+        {
+        }
+
+        public JuegoYLobbyVentana(LobbyPagina lobby)
         {
             InitializeComponent();
+            frameLobby.Content = lobby;
+            frameListaAmigos.Content = new ListaAmigosPagina();
         }
-        /*public void Ejemplo() 
-        {
-            using (var context = new SorrySlidersBDEntities())
-            {
 
-            }
-        }*/
+
     }
 }
