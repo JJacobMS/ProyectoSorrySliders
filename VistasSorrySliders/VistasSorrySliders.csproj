@@ -124,6 +124,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="DiccionarioEstilos\DiccionarioConfiguracionLobby.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="DiccionarioEstilos\DiccionarioFormularioCuenta.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -131,6 +135,10 @@
     <Page Include="DiccionarioEstilos\DiccionarioInicioSesion.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="DiccionarioEstilos\DiccionarioListaAmigos.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="DiccionarioEstilos\DiccionarioMenuPrincipal.xaml">
       <SubType>Designer</SubType>
@@ -230,6 +238,9 @@
     </None>
     <None Include="Connected Services\ServicioSorrySliders\ServicioComunicacionSorrySliders.wsdl" />
     <None Include="Connected Services\ServicioSorrySliders\VistasSorrySliders.ServicioSorrySliders.Constantes.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ServicioSorrySliders\VistasSorrySliders.ServicioSorrySliders.CuentaSet.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="packages.config" />

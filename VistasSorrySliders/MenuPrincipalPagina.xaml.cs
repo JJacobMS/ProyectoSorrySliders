@@ -33,14 +33,14 @@ namespace VistasSorrySliders
         public MenuPrincipalPagina(string correoUsuario)
         {
             InitializeComponent();
-            //Metodo BuscarUsuarioPorCorreo Puedo reutilizar la consulta de buscar correo, debe regresar Nickname y Avatar SERVIDOR
-            //Metodo settear datos usuario txtBlockCorreo, txtBlockNickname y imgBrushAvatar
+            
             //Metodo calcular partidas todos los jugadores SERVIDOR
             //
             RecuperarDatosUsuario(correoUsuario);
+
         }
 
-        private void RecuperarDatosUsuario(String correoUsuario) 
+        private void RecuperarDatosUsuario(string correoUsuario) 
         {
             Constantes resultado;
             string nickname = "";
@@ -116,6 +116,7 @@ namespace VistasSorrySliders
         private void ClickMostrarConfiguracionLobby(object sender, RoutedEventArgs e)
         {
             ConfiguracionLobby configuracionLobby = new ConfiguracionLobby(_cuentaUsuario);
+            
             this.NavigationService.Navigate(configuracionLobby);
         }
     }

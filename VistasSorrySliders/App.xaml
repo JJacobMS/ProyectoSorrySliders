@@ -11,6 +11,8 @@
                 <ResourceDictionary Source="/DiccionarioEstilos/DiccionarioFormularioCuenta.xaml"/>
                 <ResourceDictionary Source="/DiccionarioEstilos/DiccionarioAjustes.xaml"/>
                 <ResourceDictionary Source="/DiccionarioEstilos/DiccionarioMenuPrincipal.xaml"/>
+                <ResourceDictionary Source="/DiccionarioEstilos/DiccionarioConfiguracionLobby.xaml"/>
+                <ResourceDictionary Source="/DiccionarioEstilos/DiccionarioListaAmigos.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

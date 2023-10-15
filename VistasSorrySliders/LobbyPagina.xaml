@@ -7,15 +7,7 @@
       mc:Ignorable="d" 
       d:DesignHeight="576" d:DesignWidth="615"
       Title="LobbyPagina">
-    <Page.Resources>
-        <Style x:Key="estiloLblNumeroJugadores" TargetType="Label">
-            <Setter Property="FontSize" Value="14"/>
-            <Setter Property="FontFamily" Value="{StaticResource FuentesTitulo}"/>
-            <Setter Property="HorizontalAlignment" Value="Center"/>
-            <Setter Property="Height" Value="25"/>
-            <Setter Property="Foreground" Value="#ffffff"/>
-        </Style>
-    </Page.Resources>
+    
 
     <Grid>
         <Grid.Background>
@@ -32,13 +24,13 @@
                 </Grid.RowDefinitions>
                 <Grid>
                     <Button VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10" Height="35" Width="105"
-                        Style="{StaticResource estiloBtnSalir}">Salir</Button>
+                        Style="{StaticResource estiloBtnSalir}" Click="ClickSalirLobbyJugadores">Salir</Button>
                     <Label FontSize="38" VerticalAlignment="Center" Style="{StaticResource estiloLblTituloTextos}">LOBBY DE ESPERA</Label>
                 </Grid>
                 <Border BorderBrush="#604111" BorderThickness="3" CornerRadius="10" Margin="15" Grid.Row="1">
                     <Grid>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width=".35*"/>
+                            <ColumnDefinition Width=".33*"/>
                             <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
                         <Viewbox>
@@ -51,7 +43,7 @@
                         </Viewbox>
                         <StackPanel Grid.Column="1" Margin="5">
                             <Viewbox>
-                                <Grid Margin="5" Height="60" Width="380">
+                                <Grid Margin="5" Height="60" Width="385">
                                     <Image Source="/Recursos/Banner.png"/>
                                     <Label Style="{StaticResource estiloLblInicioSesion}" FontSize="25" Margin="0,10,0,0">Modo de Juego Normal</Label>
                                 </Grid>
@@ -59,32 +51,36 @@
                             <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition/>
-                                    <ColumnDefinition Width="1.5*"/>
+                                    <ColumnDefinition Width="2*"/>
                                 </Grid.ColumnDefinitions>
                                 <Label Style="{StaticResource estiloLblDatos}" 
-                                   Margin="0" FontSize="12" VerticalAlignment="Center">Número de Jugadores:</Label>
-                                <TextBox Grid.Column="1" Style="{StaticResource estiloTxtBoxDatosAzul}" 
+                                   Margin="0" FontSize="11" VerticalAlignment="Center">Número de Jugadores:</Label>
+                                <TextBox x:Name="txtBoxJugadores"  Grid.Column="1" Style="{StaticResource estiloTxtBoxDatosAzul}" 
                                      Margin="5" Height="28" IsEnabled="False">4 Jugadores</TextBox>
                             </Grid>
                             <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition/>
-                                    <ColumnDefinition Width="1.5*"/>
+                                    <ColumnDefinition Width="2*"/>
                                 </Grid.ColumnDefinitions>
                                 <Label Style="{StaticResource estiloLblDatos}" 
-                                   Margin="0" FontSize="12" VerticalAlignment="Center">Host de la partida:</Label>
-                                <TextBox Grid.Column="1" Style="{StaticResource estiloTxtBoxDatosAzul}" 
+                                   Margin="0" FontSize="11" VerticalAlignment="Center">Host de la partida:</Label>
+                                <TextBox x:Name="txtBoxHost" Grid.Column="1" Style="{StaticResource estiloTxtBoxDatosAzul}" 
                                      Margin="5" Height="28" IsEnabled="False">melus_1</TextBox>
                             </Grid>
                             <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition/>
-                                    <ColumnDefinition Width="1.5*"/>
+                                    <ColumnDefinition Width="2.42*"/>
                                 </Grid.ColumnDefinitions>
-                                <Label Style="{StaticResource estiloLblDatos}" 
-                                   Margin="0" FontSize="12" VerticalAlignment="Center">Código de la partida:</Label>
-                                <TextBox Grid.Column="1" Style="{StaticResource estiloTxtBoxDatosAzul}" 
-                                     Margin="5" Height="28" IsEnabled="False">1234567</TextBox>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+                                        <Label Style="{StaticResource estiloLblDatos}" 
+                                   Margin="0" FontSize="11" VerticalAlignment="Center">Código de partida:</Label>
+                                <TextBox x:Name="txtBoxCodigoPartida" Grid.Column="1" Style="{StaticResource estiloTxtBoxDatosAzul}" 
+                                     Margin="5" Height="28" IsReadOnly="True" Text="1BDEC8BD-A504-45FD-9D34-089835C6194E" ></TextBox>
                             </Grid>
                         </StackPanel>
                     </Grid>

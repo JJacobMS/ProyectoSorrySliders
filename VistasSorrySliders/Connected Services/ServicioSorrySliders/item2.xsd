@@ -20,4 +20,52 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="ValueTupleOfConstantesstringbase64BinarywTLIru0k" nillable="true" type="tns:ValueTupleOfConstantesstringbase64BinarywTLIru0k" />
+  <xs:complexType name="ValueTupleOfConstantesintW4mnvVr6">
+    <xs:annotation>
+      <xs:appinfo>
+        <GenericType Name="ValueTupleOf{0}{1}{#}" Namespace="http://schemas.datacontract.org/2004/07/System" xmlns="http://schemas.microsoft.com/2003/10/Serialization/">
+          <GenericParameter Name="Constantes" Namespace="http://schemas.datacontract.org/2004/07/DatosSorrySliders" />
+          <GenericParameter Name="int" Namespace="http://www.w3.org/2001/XMLSchema" />
+        </GenericType>
+        <IsValueType xmlns="http://schemas.microsoft.com/2003/10/Serialization/">true</IsValueType>
+      </xs:appinfo>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/DatosSorrySliders" name="Item1" type="q2:Constantes" />
+      <xs:element name="Item2" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ValueTupleOfConstantesintW4mnvVr6" nillable="true" type="tns:ValueTupleOfConstantesintW4mnvVr6" />
+  <xs:complexType name="ValueTupleOfConstantesArrayOfCuentaSetalmaccdW">
+    <xs:annotation>
+      <xs:appinfo>
+        <GenericType Name="ValueTupleOf{0}{1}{#}" Namespace="http://schemas.datacontract.org/2004/07/System" xmlns="http://schemas.microsoft.com/2003/10/Serialization/">
+          <GenericParameter Name="Constantes" Namespace="http://schemas.datacontract.org/2004/07/DatosSorrySliders" />
+          <GenericParameter Name="ArrayOfCuentaSet" Namespace="http://schemas.datacontract.org/2004/07/DatosSorrySliders" />
+        </GenericType>
+        <IsValueType xmlns="http://schemas.microsoft.com/2003/10/Serialization/">true</IsValueType>
+      </xs:appinfo>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/DatosSorrySliders" name="Item1" type="q3:Constantes" />
+      <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/DatosSorrySliders" name="Item2" nillable="true" type="q4:ArrayOfCuentaSet" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ValueTupleOfConstantesArrayOfCuentaSetalmaccdW" nillable="true" type="tns:ValueTupleOfConstantesArrayOfCuentaSetalmaccdW" />
+  <xs:complexType name="ValueTupleOfConstantesstringW4mnvVr6">
+    <xs:annotation>
+      <xs:appinfo>
+        <GenericType Name="ValueTupleOf{0}{1}{#}" Namespace="http://schemas.datacontract.org/2004/07/System" xmlns="http://schemas.microsoft.com/2003/10/Serialization/">
+          <GenericParameter Name="Constantes" Namespace="http://schemas.datacontract.org/2004/07/DatosSorrySliders" />
+          <GenericParameter Name="string" Namespace="http://www.w3.org/2001/XMLSchema" />
+        </GenericType>
+        <IsValueType xmlns="http://schemas.microsoft.com/2003/10/Serialization/">true</IsValueType>
+      </xs:appinfo>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/DatosSorrySliders" name="Item1" type="q5:Constantes" />
+      <xs:element name="Item2" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ValueTupleOfConstantesstringW4mnvVr6" nillable="true" type="tns:ValueTupleOfConstantesstringW4mnvVr6" />
 </xs:schema>
