@@ -102,10 +102,10 @@ namespace VistasSorrySliders
         {
             txtBlockAjustes.Text = Properties.Resources.txtBlockAjustes;
             txtBlockUnirsePartida.Text = Properties.Resources.txtBlockUnirsePartida;
-            txtBlockAjustes.Text = Properties.Resources.txtBlockAjustes;
-            txtBlockAjustes.Text = Properties.Resources.txtBlockAjustes;
-            txtBlockAjustes.Text = Properties.Resources.txtBlockAjustes;
-
+            txtBlockAjustes.Text = Properties.Resources.txtBlockCrearLobby;
+            txtBlockAjustes.Text = Properties.Resources.txtBlockJugadoresAmigos;
+            txtBlockAjustes.Text = Properties.Resources.txtBlockUnirsePartida;
+            txtBlockSalir.Text = Properties.Resources.btnSalir;
         }
 
         private void ClickSalirMenuPrincipal(object sender, RoutedEventArgs e)
@@ -118,6 +118,12 @@ namespace VistasSorrySliders
             ConfiguracionLobby configuracionLobby = new ConfiguracionLobby(_cuentaUsuario);
             
             this.NavigationService.Navigate(configuracionLobby);
+        }
+
+        private void ClickMostrarUnirsePartida(object sender, RoutedEventArgs e)
+        {
+            UnirsePartidaPagina unirsePartida = new UnirsePartidaPagina(_cuentaUsuario);
+            this.NavigationService.Navigate(unirsePartida);
         }
     }
 }

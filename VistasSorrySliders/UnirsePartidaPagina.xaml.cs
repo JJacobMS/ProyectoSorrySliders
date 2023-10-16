@@ -77,7 +77,7 @@ namespace VistasSorrySliders
             switch (resultado)
             {
                 case Constantes.OPERACION_EXITOSA:
-                    EntrarLobby(numeroMaximoJugadores);
+                    EntrarLobby(numeroMaximoJugadores, codigo);
                     break;
                 case Constantes.OPERACION_EXITOSA_VACIA:
                     MostrarErrorJugadores(numeroMaximoJugadores);
@@ -92,10 +92,13 @@ namespace VistasSorrySliders
             }
         }
 
-        private void EntrarLobby(int numeroMaximoJugadores)
+        private void EntrarLobby(int numeroMaximoJugadores, string codigo)
         {
-            //JuegoYLobbyVentana ventanaJuego = new JuegoYLobbyVentana(numeroMaximoJugadores, _cuentaActual);
-            //ventanaJuego.Show();
+            NavigationService navigationService = NavigationService.GetNavigationService(this);
+            LobbyPagina lobby = new LobbyPagina();
+            lobby.RecuperarDatosPartida(codigo);
+            JuegoYLobbyVentana lobbyUnirse = new JuegoYLobbyVentana(lobby);
+            lobbyUnirse.Show();
         }
 
         private void MostrarErrorJugadores(int numeroMaximoJugadores)
@@ -127,6 +130,12 @@ namespace VistasSorrySliders
         {
             string pattern = @"^[0-9A-Fa-f]{8}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{12}$";
             return Regex.IsMatch(uid, pattern);
+        }
+
+        private void ClickSalirMenuPrincipal(object sender, RoutedEventArgs e)
+        {
+            MenuPrincipalPagina menu = new MenuPrincipalPagina(_cuentaActual.CorreoElectronico);
+            this.NavigationService.Navigate(menu);
         }
     }
 }
