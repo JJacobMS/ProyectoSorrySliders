@@ -36,14 +36,13 @@
                     </Grid.RowDefinitions>
                     <Rectangle x:Name="rctJugador" Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="2" Height="45" Width="360" Fill="#D19028" RadiusX="10" RadiusY="10" VerticalAlignment="Center"/>
                     <Label x:Name="lblJugador" Grid.Column="2" Grid.Row="0" Content="Jacobobo"  Foreground="Black" Style="{StaticResource estiloLblDatos}"  VerticalAlignment="Top" Margin="0,5,0,0"/>
-                    <Ellipse Grid.Column="1" Grid.Row="0" Width="40" Height="40" Fill="White" VerticalAlignment="Center" HorizontalAlignment="Right"/>
-                    <StackPanel Grid.Column="1" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Right">
-                        <Ellipse Width="40" Height="40" Stroke="Black" StrokeThickness="5">
-                            <Ellipse.Fill>
-                                <ImageBrush x:Name="mgBrushAvatar" Stretch="Uniform"></ImageBrush>
-                            </Ellipse.Fill>
-                        </Ellipse>
-                    </StackPanel>
+                    <Ellipse x:Name="llpFondo" StrokeThickness="5" Grid.Column="1" Grid.Row="0" Width="40" Height="40" Fill="White" VerticalAlignment="Center" HorizontalAlignment="Right"/>
+                    <Ellipse x:Name="llpAvatar" Grid.Column="1" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Right"  Width="40" Height="40" Stroke="Black" StrokeThickness="5">
+                        <Ellipse.Fill>
+                            <ImageBrush x:Name="mgBrushAvatar" Stretch="Uniform"></ImageBrush>
+                        </Ellipse.Fill>
+                    </Ellipse>
+                    <Ellipse x:Name="llpColor" Grid.Column="0" Grid.Row="0" Width="40" Height="40" StrokeThickness="5" Stroke="Blue" Fill="AliceBlue"  VerticalAlignment="Center" HorizontalAlignment="Right"/>
                 </Grid>
                 <Grid>
                     <Button VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10" Height="35" Width="105"

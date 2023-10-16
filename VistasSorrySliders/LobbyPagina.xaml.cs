@@ -28,12 +28,14 @@ namespace VistasSorrySliders
         public LobbyPagina()
         {
             InitializeComponent();
+            InicializarDatosPartida();
+            /*  SELECT PartidaSet.CodigoPartida, PartidaSet.CorreoElectronico, PartidaSet.CantidadJugadores from PartidaSet
+                INNER JOIN RelacionPartidaCuentaSet ON RelacionPartidaCuentaSet.CodigoPartida = PartidaSet.CodigoPartida 
+                Where PartidaSet.CodigoPartida ='A27ADE58-AA17-4FA9-B82A-FE9228B2F892';*/
         }
 
         public void RecuperarDatosPartida(string codigoPartida) 
         {
-            //Recuperar PartidaSet
-            InicializarDatosPartida();
             CuentaSet[] cuentas = new CuentaSet[4];
             Constantes respuesta = Constantes.OPERACION_EXITOSA_VACIA;
             try
@@ -63,7 +65,6 @@ namespace VistasSorrySliders
                     break;
                 case Constantes.OPERACION_EXITOSA_VACIA:
                     Console.WriteLine("OPERACION_EXITOSA_VACIA");
-
                     break;
                 default:
                     break;
@@ -72,7 +73,6 @@ namespace VistasSorrySliders
 
         private void CrearBorders(CuentaSet[] cuentas) 
         {
-            //Cambiar numeroJugadores por la cantidad de registros en CuentaSet 
             int contador = 0;
             foreach(var cuenta in cuentas) 
             {
@@ -85,7 +85,22 @@ namespace VistasSorrySliders
         }
         private void CrearEllipses(CuentaSet[] cuentas)
         {
+            int contador = 0;
+            foreach (var cuenta in cuentas)
+            {
+                //Falta inicializar mgBrushAvatar con la imagen de CuentaSet
+                Ellipse nuevaEllipseAvatar = XamlReader.Parse(XamlWriter.Save(llpAvatar)) as Ellipse;
+                nuevaEllipseAvatar.Name = "llpAvatarJugador" + (contador + 1);
+                Grid.SetRow(nuevaEllipseAvatar, contador);
+                grdJugadores.Children.Add(nuevaEllipseAvatar);
 
+
+                Ellipse nuevaEllipseFondo = XamlReader.Parse(XamlWriter.Save(llpFondo)) as Ellipse;
+                nuevaEllipseFondo.Name = "llpFondoJugador" + (contador + 1);
+                Grid.SetRow(nuevaEllipseFondo, contador);
+                grdJugadores.Children.Add(nuevaEllipseFondo);
+                contador = contador + 1;
+            }
         }
         private void CrearLabels(CuentaSet[] cuentas) 
         {
@@ -103,6 +118,7 @@ namespace VistasSorrySliders
 
         private void InicializarDatosPartida() 
         {
+            //Recuperar PArtidaSet
             txtBoxCodigoPartida.Text = "codigoPartida";// partida.codigoPartida;
             txtBoxHost.Text = "nicknameHost";// partida.nicknameHost;
             txtBoxJugadores.Text = "numeroJugadores";//partida.numeroJugadores;
