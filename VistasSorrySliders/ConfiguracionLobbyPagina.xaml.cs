@@ -124,8 +124,7 @@ namespace VistasSorrySliders
         private void CrearVentanaLobby(string numeroJugadoresString, CuentaSet _cuentaUsuario, string codigoPartida) 
         {
             NavigationService navigationService = NavigationService.GetNavigationService(this);
-            LobbyPagina lobby = new LobbyPagina(_cuentaUsuario);
-            lobby.RecuperarDatosPartida(codigoPartida);
+            LobbyPagina lobby = new LobbyPagina(_cuentaUsuario, codigoPartida);
             JuegoYLobbyVentana lobbyUnirse = new JuegoYLobbyVentana(lobby);
             lobbyUnirse.Show();
 

@@ -21,21 +21,25 @@ namespace VistasSorrySliders
     /// <summary>
     /// Lógica de interacción para LobbyPagina.xaml
     /// </summary>
-    public partial class LobbyPagina : Page
+    public partial class LobbyPagina : Page, ILobbyCallback
     {
         private CuentaSet _cuentaUsuario;
+        private string _codigoPartida;
 
-        public LobbyPagina(CuentaSet cuentaUsuario)
+        public LobbyPagina(CuentaSet cuentaUsuario, string codigoPartida)
         {
             InitializeComponent();
             _cuentaUsuario = cuentaUsuario;
+            _codigoPartida = codigoPartida;
+            EntrarPartida();
+            InicializarDatosPartida(codigoPartida);
+            RecuperarDatosPartida(codigoPartida);
         }
 
         public void RecuperarDatosPartida(string codigoPartida) 
         {
-            InicializarDatosPartida(codigoPartida);
             CuentaSet[] cuentas = new CuentaSet[4];
-            Constantes respuesta = Constantes.OPERACION_EXITOSA_VACIA;
+            Constantes respuesta;
             try
             {
                 UnirsePartidaClient proxyRecuperarJugadores = new UnirsePartidaClient();
@@ -55,9 +59,10 @@ namespace VistasSorrySliders
                     Console.WriteLine("ERROR_CONSULTA");
                     break;
                 case Constantes.ERROR_CONEXION_SERVIDOR:
-                    Console.WriteLine("ERROR_CONEXION_SERVIDOR");
+                    Console.WriteLine("ERROR_CONEXION_SERVIDOR1");
                     break;
                 case Constantes.OPERACION_EXITOSA:
+                    grdJugadores.Children.Clear();
                     CrearBorders(cuentas);
                     CrearEllipses(cuentas);
                     CrearLabels(cuentas);
@@ -90,6 +95,7 @@ namespace VistasSorrySliders
                 //Falta inicializar mgBrushAvatar con la imagen de CuentaSet
                 Ellipse nuevaEllipseAvatar = XamlReader.Parse(XamlWriter.Save(llpAvatar)) as Ellipse;
                 nuevaEllipseAvatar.Name = "llpAvatarJugador" + (contador + 1);
+                nuevaEllipseAvatar.Fill = Utilidades.ConvertirBytesAImageBrush(cuenta.Avatar);
                 Grid.SetRow(nuevaEllipseAvatar, contador);
                 grdJugadores.Children.Add(nuevaEllipseAvatar);
 
@@ -118,7 +124,7 @@ namespace VistasSorrySliders
         private void InicializarDatosPartida(string codigoPartida) 
         {
             PartidaSet partidaActual = new PartidaSet();
-            Constantes respuesta = Constantes.OPERACION_EXITOSA_VACIA;
+            Constantes respuesta;
             try
             {
                 UnirsePartidaClient proxyUnirsePartida = new UnirsePartidaClient();
@@ -139,7 +145,7 @@ namespace VistasSorrySliders
 
                     break;
                 case Constantes.ERROR_CONEXION_SERVIDOR:
-                    Console.WriteLine("ERROR_CONEXION_SERVIDOR");
+                    Console.WriteLine("ERROR_CONEXION_SERVIDOR2");
 
                     break;
                 case Constantes.OPERACION_EXITOSA:
@@ -163,6 +169,26 @@ namespace VistasSorrySliders
             ventanaPrincipal.Content = menu;
             ventanaPrincipal.Show();
             Window.GetWindow(this).Close();
+        }
+
+        public void JugadorEntroPartida()
+        {
+            RecuperarDatosPartida(_codigoPartida);
+        }
+
+        public void EntrarPartida()
+        {
+            try
+            {
+                InstanceContext contextoCallback = new InstanceContext(this);
+                LobbyClient proxyLobby = new LobbyClient(contextoCallback);
+                proxyLobby.EntrarPartida(_codigoPartida);
+            }
+            catch (CommunicationException ex)
+            {
+                MessageBox.Show("Error servidor :c");
+                Console.WriteLine(ex);
+            }
         }
     }
 }

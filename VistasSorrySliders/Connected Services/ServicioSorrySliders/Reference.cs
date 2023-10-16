@@ -488,17 +488,17 @@ namespace VistasSorrySliders.ServicioSorrySliders {
     public interface ILobby {
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/ILobby/EntrarPartida")]
-        void EntrarPartida(string uid, string correoJugadorNuevo);
+        void EntrarPartida(string uid);
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/ILobby/EntrarPartida")]
-        System.Threading.Tasks.Task EntrarPartidaAsync(string uid, string correoJugadorNuevo);
+        System.Threading.Tasks.Task EntrarPartidaAsync(string uid);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public interface ILobbyCallback {
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/ILobby/JugadorEntroPartida")]
-        void JugadorEntroPartida(VistasSorrySliders.ServicioSorrySliders.CuentaSet[] listaJugadores);
+        void JugadorEntroPartida();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -529,12 +529,12 @@ namespace VistasSorrySliders.ServicioSorrySliders {
                 base(callbackInstance, binding, remoteAddress) {
         }
         
-        public void EntrarPartida(string uid, string correoJugadorNuevo) {
-            base.Channel.EntrarPartida(uid, correoJugadorNuevo);
+        public void EntrarPartida(string uid) {
+            base.Channel.EntrarPartida(uid);
         }
         
-        public System.Threading.Tasks.Task EntrarPartidaAsync(string uid, string correoJugadorNuevo) {
-            return base.Channel.EntrarPartidaAsync(uid, correoJugadorNuevo);
+        public System.Threading.Tasks.Task EntrarPartidaAsync(string uid) {
+            return base.Channel.EntrarPartidaAsync(uid);
         }
     }
     
