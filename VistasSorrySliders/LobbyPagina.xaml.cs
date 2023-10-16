@@ -43,6 +43,7 @@ namespace VistasSorrySliders
             }
             catch(CommunicationException ex)
             {
+                Console.WriteLine(ex);
                 respuesta = Constantes.ERROR_CONEXION_SERVIDOR;
             }
             switch (respuesta)
@@ -116,7 +117,6 @@ namespace VistasSorrySliders
 
         private void InicializarDatosPartida(string codigoPartida) 
         {
-            //Recuperar PArtidaSet
             PartidaSet partidaActual = new PartidaSet();
             Constantes respuesta = Constantes.OPERACION_EXITOSA_VACIA;
             try
@@ -126,6 +126,7 @@ namespace VistasSorrySliders
             }
             catch(CommunicationException ex)
             {
+                Console.WriteLine(ex);
                 respuesta = Constantes.ERROR_CONEXION_SERVIDOR;
             }
             switch (respuesta)
@@ -158,7 +159,6 @@ namespace VistasSorrySliders
         private void ClickSalirLobbyJugadores(object sender, RoutedEventArgs e)
         {
             var ventanaPrincipal = new MainWindow();
-            
             MenuPrincipalPagina menu = new MenuPrincipalPagina(_cuentaUsuario.CorreoElectronico);
             ventanaPrincipal.Content = menu;
             ventanaPrincipal.Show();

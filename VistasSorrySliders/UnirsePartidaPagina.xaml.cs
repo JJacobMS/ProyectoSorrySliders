@@ -99,6 +99,7 @@ namespace VistasSorrySliders
             lobby.RecuperarDatosPartida(codigo);
             JuegoYLobbyVentana lobbyUnirse = new JuegoYLobbyVentana(lobby);
             lobbyUnirse.Show();
+            Window.GetWindow(this).Close();
         }
 
         private void MostrarErrorJugadores(int numeroMaximoJugadores)

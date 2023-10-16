@@ -31,6 +31,7 @@ namespace VistasSorrySliders
             _cuentaUsuario = new CuentaSet();
             _cuentaUsuario = cuentaUsuario;
             Utilidades.IngresarImagen(_cuentaUsuario.Avatar, this.mgBrushAvatar);
+            txtBlockNickname.Text = _cuentaUsuario.Nickname; 
         }
 
         private Border selectedBorder;
@@ -81,15 +82,16 @@ namespace VistasSorrySliders
                 {
                     CrearLobbyClient proxyCrearLobby = new CrearLobbyClient();
                     (respuesta, codigoPartida) = proxyCrearLobby.CrearPartida(_cuentaUsuario.CorreoElectronico, numeroJugadoresInt);
-                    Console.WriteLine(codigoPartida);
                 }
-                catch (CommunicationException excepcion)
+                catch (CommunicationException ex)
                 {
+                    Console.WriteLine(ex);
                     respuesta = Constantes.ERROR_CONEXION_SERVIDOR;
                     System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorConexion);
                 }
-                catch (TimeoutException excepcion)
+                catch (TimeoutException ex)
                 {
+                    Console.WriteLine(ex);
                     respuesta = Constantes.ERROR_CONEXION_SERVIDOR;
                     System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorConexion);
 
