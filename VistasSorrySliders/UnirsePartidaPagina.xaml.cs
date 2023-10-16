@@ -95,7 +95,7 @@ namespace VistasSorrySliders
         private void EntrarLobby(int numeroMaximoJugadores, string codigo)
         {
             NavigationService navigationService = NavigationService.GetNavigationService(this);
-            LobbyPagina lobby = new LobbyPagina();
+            LobbyPagina lobby = new LobbyPagina(_cuentaActual);
             lobby.RecuperarDatosPartida(codigo);
             JuegoYLobbyVentana lobbyUnirse = new JuegoYLobbyVentana(lobby);
             lobbyUnirse.Show();

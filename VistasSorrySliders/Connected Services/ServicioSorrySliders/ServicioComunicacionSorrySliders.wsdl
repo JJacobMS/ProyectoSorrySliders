@@ -248,6 +248,12 @@
   <wsdl:message name="IUnirsePartida_RecuperarJugadoresLobby_OutputMessage">
     <wsdl:part name="parameters" element="tns:RecuperarJugadoresLobbyResponse" />
   </wsdl:message>
+  <wsdl:message name="IUnirsePartida_RecuperarPartida_InputMessage">
+    <wsdl:part name="parameters" element="tns:RecuperarPartida" />
+  </wsdl:message>
+  <wsdl:message name="IUnirsePartida_RecuperarPartida_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RecuperarPartidaResponse" />
+  </wsdl:message>
   <wsdl:message name="ICrearLobby_CrearPartida_InputMessage">
     <wsdl:part name="parameters" element="tns:CrearPartida" />
   </wsdl:message>
@@ -292,6 +298,10 @@
     <wsdl:operation name="RecuperarJugadoresLobby">
       <wsdl:input wsaw:Action="http://tempuri.org/IUnirsePartida/RecuperarJugadoresLobby" message="tns:IUnirsePartida_RecuperarJugadoresLobby_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IUnirsePartida/RecuperarJugadoresLobbyResponse" message="tns:IUnirsePartida_RecuperarJugadoresLobby_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="RecuperarPartida">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUnirsePartida/RecuperarPartida" message="tns:IUnirsePartida_RecuperarPartida_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUnirsePartida/RecuperarPartidaResponse" message="tns:IUnirsePartida_RecuperarPartida_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:portType name="ICrearLobby">
@@ -378,6 +388,15 @@
     </wsdl:operation>
     <wsdl:operation name="RecuperarJugadoresLobby">
       <soap12:operation soapAction="http://tempuri.org/IUnirsePartida/RecuperarJugadoresLobby" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RecuperarPartida">
+      <soap12:operation soapAction="http://tempuri.org/IUnirsePartida/RecuperarPartida" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

@@ -25,17 +25,15 @@ namespace VistasSorrySliders
     {
         private CuentaSet _cuentaUsuario;
 
-        public LobbyPagina()
+        public LobbyPagina(CuentaSet cuentaUsuario)
         {
             InitializeComponent();
-            InicializarDatosPartida();
-            /*  SELECT PartidaSet.CodigoPartida, PartidaSet.CorreoElectronico, PartidaSet.CantidadJugadores from PartidaSet
-                INNER JOIN RelacionPartidaCuentaSet ON RelacionPartidaCuentaSet.CodigoPartida = PartidaSet.CodigoPartida 
-                Where PartidaSet.CodigoPartida ='A27ADE58-AA17-4FA9-B82A-FE9228B2F892';*/
+            _cuentaUsuario = cuentaUsuario;
         }
 
         public void RecuperarDatosPartida(string codigoPartida) 
         {
+            InicializarDatosPartida(codigoPartida);
             CuentaSet[] cuentas = new CuentaSet[4];
             Constantes respuesta = Constantes.OPERACION_EXITOSA_VACIA;
             try
@@ -64,7 +62,7 @@ namespace VistasSorrySliders
                     CrearLabels(cuentas);
                     break;
                 case Constantes.OPERACION_EXITOSA_VACIA:
-                    Console.WriteLine("OPERACION_EXITOSA_VACIA");
+                    Console.WriteLine("OPERACION_EXITOSA_VACIA1");
                     break;
                 default:
                     break;
@@ -116,12 +114,45 @@ namespace VistasSorrySliders
             }
         }
 
-        private void InicializarDatosPartida() 
+        private void InicializarDatosPartida(string codigoPartida) 
         {
             //Recuperar PArtidaSet
-            txtBoxCodigoPartida.Text = "codigoPartida";// partida.codigoPartida;
-            txtBoxHost.Text = "nicknameHost";// partida.nicknameHost;
-            txtBoxJugadores.Text = "numeroJugadores";//partida.numeroJugadores;
+            PartidaSet partidaActual = new PartidaSet();
+            Constantes respuesta = Constantes.OPERACION_EXITOSA_VACIA;
+            try
+            {
+                UnirsePartidaClient proxyUnirsePartida = new UnirsePartidaClient();
+                (respuesta, partidaActual) = proxyUnirsePartida.RecuperarPartida(codigoPartida);
+            }
+            catch(CommunicationException ex)
+            {
+                respuesta = Constantes.ERROR_CONEXION_SERVIDOR;
+            }
+            switch (respuesta)
+            {
+                case Constantes.ERROR_CONEXION_BD:
+                    Console.WriteLine("ERROR_CONEXION_BD");
+                    break;
+                case Constantes.ERROR_CONSULTA:
+                    Console.WriteLine("ERROR_CONSULTA");
+
+                    break;
+                case Constantes.ERROR_CONEXION_SERVIDOR:
+                    Console.WriteLine("ERROR_CONEXION_SERVIDOR");
+
+                    break;
+                case Constantes.OPERACION_EXITOSA:
+                    txtBoxCodigoPartida.Text = partidaActual.CodigoPartida.ToString();
+                    txtBoxHost.Text = partidaActual.CorreoElectronico;
+                    txtBoxJugadores.Text = ""+partidaActual.CantidadJugadores;
+                    break;
+                case Constantes.OPERACION_EXITOSA_VACIA:
+                    Console.WriteLine("OPERACION_EXITOSA_VACIA2");
+                    break;
+                default:
+                    break;
+            }
+            
         }
 
         private void ClickSalirLobbyJugadores(object sender, RoutedEventArgs e)

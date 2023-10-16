@@ -78,7 +78,7 @@
                                 <Label Style="{StaticResource estiloLblDatos}" 
                                    Margin="0" FontSize="11" VerticalAlignment="Center">Número de Jugadores:</Label>
                                 <TextBox x:Name="txtBoxJugadores"  Grid.Column="1" Style="{StaticResource estiloTxtBoxDatosAzul}" 
-                                     Margin="5" Height="28" IsEnabled="False">4 Jugadores</TextBox>
+                                     Margin="5" Height="28" IsEnabled="False"></TextBox>
                             </Grid>
                             <Grid>
                                 <Grid.ColumnDefinitions>
@@ -88,7 +88,7 @@
                                 <Label Style="{StaticResource estiloLblDatos}" 
                                    Margin="0" FontSize="11" VerticalAlignment="Center">Host de la partida:</Label>
                                 <TextBox x:Name="txtBoxHost" Grid.Column="1" Style="{StaticResource estiloTxtBoxDatosAzul}" 
-                                     Margin="5" Height="28" IsEnabled="False">melus_1</TextBox>
+                                     Margin="5" Height="28" IsEnabled="False"></TextBox>
                             </Grid>
                             <Grid>
                                 <Grid.ColumnDefinitions>
@@ -102,7 +102,7 @@
                                         <Label Style="{StaticResource estiloLblDatos}" 
                                    Margin="0" FontSize="11" VerticalAlignment="Center">Código de partida:</Label>
                                 <TextBox x:Name="txtBoxCodigoPartida" Grid.Column="1" Style="{StaticResource estiloTxtBoxDatosAzul}" 
-                                     Margin="5" Height="28" IsReadOnly="True" Text="1BDEC8BD-A504-45FD-9D34-089835C6194E" ></TextBox>
+                                     Margin="5" Height="28" IsReadOnly="True" Text="" ></TextBox>
                             </Grid>
                         </StackPanel>
                     </Grid>

@@ -29,10 +29,7 @@ namespace VistasSorrySliders
         {
             InitializeComponent();
             _cuentaUsuario = new CuentaSet();
-            _cuentaUsuario.CorreoElectronico = cuentaUsuario.CorreoElectronico;
-            _cuentaUsuario.Nickname = cuentaUsuario.Nickname;
-            _cuentaUsuario.Avatar = cuentaUsuario.Avatar;
-            txtBlockNickname.Text = cuentaUsuario.Nickname;
+            _cuentaUsuario = cuentaUsuario;
             Utilidades.IngresarImagen(_cuentaUsuario.Avatar, this.mgBrushAvatar);
         }
 
@@ -84,6 +81,7 @@ namespace VistasSorrySliders
                 {
                     CrearLobbyClient proxyCrearLobby = new CrearLobbyClient();
                     (respuesta, codigoPartida) = proxyCrearLobby.CrearPartida(_cuentaUsuario.CorreoElectronico, numeroJugadoresInt);
+                    Console.WriteLine(codigoPartida);
                 }
                 catch (CommunicationException excepcion)
                 {
@@ -124,7 +122,7 @@ namespace VistasSorrySliders
         private void CrearVentanaLobby(string numeroJugadoresString, CuentaSet _cuentaUsuario, string codigoPartida) 
         {
             NavigationService navigationService = NavigationService.GetNavigationService(this);
-            LobbyPagina lobby = new LobbyPagina();
+            LobbyPagina lobby = new LobbyPagina(_cuentaUsuario);
             lobby.RecuperarDatosPartida(codigoPartida);
             JuegoYLobbyVentana lobbyUnirse = new JuegoYLobbyVentana(lobby);
             lobbyUnirse.Show();

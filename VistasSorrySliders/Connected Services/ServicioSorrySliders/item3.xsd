@@ -103,6 +103,20 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="RecuperarPartida">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="codigoPartida" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RecuperarPartidaResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/System" minOccurs="0" name="RecuperarPartidaResult" type="q11:ValueTupleOfConstantesPartidaSetalmaccdW" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="CrearPartida">
     <xs:complexType>
       <xs:sequence>
@@ -114,7 +128,7 @@
   <xs:element name="CrearPartidaResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/System" minOccurs="0" name="CrearPartidaResult" type="q11:ValueTupleOfConstantesstringW4mnvVr6" />
+        <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/System" minOccurs="0" name="CrearPartidaResult" type="q12:ValueTupleOfConstantesstringW4mnvVr6" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

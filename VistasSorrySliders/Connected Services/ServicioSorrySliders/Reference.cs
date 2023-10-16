@@ -235,6 +235,99 @@ namespace VistasSorrySliders.ServicioSorrySliders {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="PartidaSet", Namespace="http://schemas.datacontract.org/2004/07/DatosSorrySliders")]
+    [System.SerializableAttribute()]
+    public partial class PartidaSet : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int CantidadJugadoresField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Guid CodigoPartidaField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string CorreoElectronicoField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private VistasSorrySliders.ServicioSorrySliders.CuentaSet CuentaSetField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int CantidadJugadores {
+            get {
+                return this.CantidadJugadoresField;
+            }
+            set {
+                if ((this.CantidadJugadoresField.Equals(value) != true)) {
+                    this.CantidadJugadoresField = value;
+                    this.RaisePropertyChanged("CantidadJugadores");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid CodigoPartida {
+            get {
+                return this.CodigoPartidaField;
+            }
+            set {
+                if ((this.CodigoPartidaField.Equals(value) != true)) {
+                    this.CodigoPartidaField = value;
+                    this.RaisePropertyChanged("CodigoPartida");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string CorreoElectronico {
+            get {
+                return this.CorreoElectronicoField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.CorreoElectronicoField, value) != true)) {
+                    this.CorreoElectronicoField = value;
+                    this.RaisePropertyChanged("CorreoElectronico");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public VistasSorrySliders.ServicioSorrySliders.CuentaSet CuentaSet {
+            get {
+                return this.CuentaSetField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.CuentaSetField, value) != true)) {
+                    this.CuentaSetField = value;
+                    this.RaisePropertyChanged("CuentaSet");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServicioSorrySliders.IInicioSesion")]
     public interface IInicioSesion {
@@ -460,6 +553,12 @@ namespace VistasSorrySliders.ServicioSorrySliders {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUnirsePartida/RecuperarJugadoresLobby", ReplyAction="http://tempuri.org/IUnirsePartida/RecuperarJugadoresLobbyResponse")]
         System.Threading.Tasks.Task<System.ValueTuple<VistasSorrySliders.ServicioSorrySliders.Constantes, VistasSorrySliders.ServicioSorrySliders.CuentaSet[]>> RecuperarJugadoresLobbyAsync(string uid);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUnirsePartida/RecuperarPartida", ReplyAction="http://tempuri.org/IUnirsePartida/RecuperarPartidaResponse")]
+        System.ValueTuple<VistasSorrySliders.ServicioSorrySliders.Constantes, VistasSorrySliders.ServicioSorrySliders.PartidaSet> RecuperarPartida(string codigoPartida);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUnirsePartida/RecuperarPartida", ReplyAction="http://tempuri.org/IUnirsePartida/RecuperarPartidaResponse")]
+        System.Threading.Tasks.Task<System.ValueTuple<VistasSorrySliders.ServicioSorrySliders.Constantes, VistasSorrySliders.ServicioSorrySliders.PartidaSet>> RecuperarPartidaAsync(string codigoPartida);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -503,6 +602,14 @@ namespace VistasSorrySliders.ServicioSorrySliders {
         
         public System.Threading.Tasks.Task<System.ValueTuple<VistasSorrySliders.ServicioSorrySliders.Constantes, VistasSorrySliders.ServicioSorrySliders.CuentaSet[]>> RecuperarJugadoresLobbyAsync(string uid) {
             return base.Channel.RecuperarJugadoresLobbyAsync(uid);
+        }
+        
+        public System.ValueTuple<VistasSorrySliders.ServicioSorrySliders.Constantes, VistasSorrySliders.ServicioSorrySliders.PartidaSet> RecuperarPartida(string codigoPartida) {
+            return base.Channel.RecuperarPartida(codigoPartida);
+        }
+        
+        public System.Threading.Tasks.Task<System.ValueTuple<VistasSorrySliders.ServicioSorrySliders.Constantes, VistasSorrySliders.ServicioSorrySliders.PartidaSet>> RecuperarPartidaAsync(string codigoPartida) {
+            return base.Channel.RecuperarPartidaAsync(codigoPartida);
         }
     }
     
