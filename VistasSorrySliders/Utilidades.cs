@@ -65,8 +65,6 @@ namespace VistasSorrySliders
                     bitmapImage.DecodePixelWidth = 100;
                     bitmapImage.EndInit();
                     imagen.ImageSource = bitmapImage;
-                    string _rutaImagen = "pack://application:,,,/Recursos/avatarPredefinido.jpg";
-                    imagen.ImageSource = new BitmapImage(new Uri(_rutaImagen));
                     return imagen;
                 }
             }
