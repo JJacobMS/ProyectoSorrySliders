@@ -39,7 +39,7 @@
                     <Ellipse x:Name="llpFondo" StrokeThickness="5" Grid.Column="1" Grid.Row="0" Width="40" Height="40" Fill="White" VerticalAlignment="Center" HorizontalAlignment="Right"/>
                     <Ellipse x:Name="llpAvatar" Grid.Column="1" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Right"  Width="40" Height="40" Stroke="Black" StrokeThickness="5">
                         <Ellipse.Fill>
-                            <ImageBrush x:Name="mgBrushAvatar" Stretch="Uniform" ImageSource="/Recursos/avatarPredefinido.jpg"></ImageBrush>
+                            <ImageBrush x:Name="mgBrushAvatar" Stretch="Uniform"></ImageBrush>
                         </Ellipse.Fill>
                     </Ellipse>
                     <Ellipse x:Name="llpColor" Grid.Column="0" Grid.Row="0" Width="40" Height="40" StrokeThickness="5" Stroke="Blue" Fill="AliceBlue"  VerticalAlignment="Center" HorizontalAlignment="Right"/>

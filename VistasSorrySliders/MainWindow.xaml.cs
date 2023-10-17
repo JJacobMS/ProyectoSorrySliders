@@ -24,12 +24,5 @@ namespace VistasSorrySliders
         {
             InitializeComponent();
         }
-        /*public void Ejemplo() 
-        {
-            using (var context = new SorrySlidersBDEntities())
-            {
-
-            }
-        }*/
     }
 }

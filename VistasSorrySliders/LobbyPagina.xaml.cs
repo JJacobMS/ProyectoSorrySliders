@@ -84,7 +84,7 @@ namespace VistasSorrySliders
                 rectanguloNuevo.Name = "rctJugador" + (contador + 1);
                 Grid.SetRow(rectanguloNuevo, contador);
                 grdJugadores.Children.Add(rectanguloNuevo);
-                contador = contador + 1;
+                contador++;
             }
         }
         private void CrearEllipses(CuentaSet[] cuentas)
@@ -92,19 +92,19 @@ namespace VistasSorrySliders
             int contador = 0;
             foreach (var cuenta in cuentas)
             {
-                //Falta inicializar mgBrushAvatar con la imagen de CuentaSet
+                //Falta regresarlo y ponerle color
                 Ellipse nuevaEllipseAvatar = XamlReader.Parse(XamlWriter.Save(llpAvatar)) as Ellipse;
                 nuevaEllipseAvatar.Name = "llpAvatarJugador" + (contador + 1);
-                nuevaEllipseAvatar.Fill = Utilidades.ConvertirBytesAImageBrush(cuenta.Avatar);
                 Grid.SetRow(nuevaEllipseAvatar, contador);
                 grdJugadores.Children.Add(nuevaEllipseAvatar);
-
+                
 
                 Ellipse nuevaEllipseFondo = XamlReader.Parse(XamlWriter.Save(llpFondo)) as Ellipse;
                 nuevaEllipseFondo.Name = "llpFondoJugador" + (contador + 1);
+                nuevaEllipseFondo.Fill = Utilidades.ConvertirBytesAImageBrush(cuenta.Avatar);
                 Grid.SetRow(nuevaEllipseFondo, contador);
                 grdJugadores.Children.Add(nuevaEllipseFondo);
-                contador = contador + 1;
+                contador++;
             }
         }
         private void CrearLabels(CuentaSet[] cuentas) 
@@ -117,7 +117,7 @@ namespace VistasSorrySliders
                 nuevoLabel.Content = cuenta.Nickname;
                 Grid.SetRow(nuevoLabel, contador);
                 grdJugadores.Children.Add(nuevoLabel);
-                contador = contador + 1;
+                contador++;
             }
         }
 
