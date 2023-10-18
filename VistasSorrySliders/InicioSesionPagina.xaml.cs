@@ -117,7 +117,6 @@ namespace VistasSorrySliders
             {
                 case Constantes.OPERACION_EXITOSA:
                     CambiarPantallaMenuPrincipal(cuentaPorVerificar.CorreoElectronico);
-                    MessageBox.Show("ENTRAR AL SISTEMA");
                     break;
                 case Constantes.OPERACION_EXITOSA_VACIA:
                     txtBlockContrasenaInvalida.Visibility = Visibility.Visible;
