@@ -198,6 +198,39 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
+  <wsp:Policy wsu:Id="NetTcpBinding_IListaAmigos_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <wsrm:RMAssertion xmlns:wsrm="http://schemas.xmlsoap.org/ws/2005/02/rm/policy">
+          <wsrm:InactivityTimeout Milliseconds="600000" />
+          <wsrm:AcknowledgementInterval Milliseconds="200" />
+        </wsrm:RMAssertion>
+        <msb:BinaryEncoding xmlns:msb="http://schemas.microsoft.com/ws/06/2004/mspolicy/netbinary1" />
+        <sp:TransportBinding xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <wsp:Policy>
+            <sp:TransportToken>
+              <wsp:Policy>
+                <msf:WindowsTransportSecurity xmlns:msf="http://schemas.microsoft.com/ws/2006/05/framing/policy">
+                  <msf:ProtectionLevel>EncryptAndSign</msf:ProtectionLevel>
+                </msf:WindowsTransportSecurity>
+              </wsp:Policy>
+            </sp:TransportToken>
+            <sp:AlgorithmSuite>
+              <wsp:Policy>
+                <sp:Basic256 />
+              </wsp:Policy>
+            </sp:AlgorithmSuite>
+            <sp:Layout>
+              <wsp:Policy>
+                <sp:Strict />
+              </wsp:Policy>
+            </sp:Layout>
+          </wsp:Policy>
+        </sp:TransportBinding>
+        <wsaw:UsingAddressing />
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
   <wsdl:types>
     <xsd:schema targetNamespace="http://tempuri.org/Imports">
       <xsd:import schemaLocation="http://localhost:5454/?xsd=xsd0" namespace="http://tempuri.org/" />
@@ -233,8 +266,14 @@
   <wsdl:message name="ILobby_EntrarPartida_InputMessage">
     <wsdl:part name="parameters" element="tns:EntrarPartida" />
   </wsdl:message>
+  <wsdl:message name="ILobby_SalirPartida_InputMessage">
+    <wsdl:part name="parameters" element="tns:SalirPartida" />
+  </wsdl:message>
   <wsdl:message name="ILobby_JugadorEntroPartida_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:JugadorEntroPartida" />
+  </wsdl:message>
+  <wsdl:message name="ILobby_JugadorSalioPartida_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:JugadorSalioPartida" />
   </wsdl:message>
   <wsdl:message name="IUnirsePartida_UnirseAlLobby_InputMessage">
     <wsdl:part name="parameters" element="tns:UnirseAlLobby" />
@@ -259,6 +298,18 @@
   </wsdl:message>
   <wsdl:message name="ICrearLobby_CrearPartida_OutputMessage">
     <wsdl:part name="parameters" element="tns:CrearPartidaResponse" />
+  </wsdl:message>
+  <wsdl:message name="IListaAmigos_RecuperarAmigosCuenta_InputMessage">
+    <wsdl:part name="parameters" element="tns:RecuperarAmigosCuenta" />
+  </wsdl:message>
+  <wsdl:message name="IListaAmigos_RecuperarAmigosCuenta_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RecuperarAmigosCuentaResponse" />
+  </wsdl:message>
+  <wsdl:message name="IListaAmigos_RecuperarJugadoresCuenta_InputMessage">
+    <wsdl:part name="parameters" element="tns:RecuperarJugadoresCuenta" />
+  </wsdl:message>
+  <wsdl:message name="IListaAmigos_RecuperarJugadoresCuenta_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RecuperarJugadoresCuentaResponse" />
   </wsdl:message>
   <wsdl:portType name="IInicioSesion">
     <wsdl:operation name="VerificarExistenciaCorreoCuenta">
@@ -286,8 +337,14 @@
     <wsdl:operation name="EntrarPartida">
       <wsdl:input wsaw:Action="http://tempuri.org/ILobby/EntrarPartida" message="tns:ILobby_EntrarPartida_InputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="SalirPartida">
+      <wsdl:input wsaw:Action="http://tempuri.org/ILobby/SalirPartida" message="tns:ILobby_SalirPartida_InputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="JugadorEntroPartida">
       <wsdl:output wsaw:Action="http://tempuri.org/ILobby/JugadorEntroPartida" message="tns:ILobby_JugadorEntroPartida_OutputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="JugadorSalioPartida">
+      <wsdl:output wsaw:Action="http://tempuri.org/ILobby/JugadorSalioPartida" message="tns:ILobby_JugadorSalioPartida_OutputCallbackMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:portType name="IUnirsePartida">
@@ -308,6 +365,16 @@
     <wsdl:operation name="CrearPartida">
       <wsdl:input wsaw:Action="http://tempuri.org/ICrearLobby/CrearPartida" message="tns:ICrearLobby_CrearPartida_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ICrearLobby/CrearPartidaResponse" message="tns:ICrearLobby_CrearPartida_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="IListaAmigos">
+    <wsdl:operation name="RecuperarAmigosCuenta">
+      <wsdl:input wsaw:Action="http://tempuri.org/IListaAmigos/RecuperarAmigosCuenta" message="tns:IListaAmigos_RecuperarAmigosCuenta_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IListaAmigos/RecuperarAmigosCuentaResponse" message="tns:IListaAmigos_RecuperarAmigosCuenta_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="RecuperarJugadoresCuenta">
+      <wsdl:input wsaw:Action="http://tempuri.org/IListaAmigos/RecuperarJugadoresCuenta" message="tns:IListaAmigos_RecuperarJugadoresCuenta_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IListaAmigos/RecuperarJugadoresCuentaResponse" message="tns:IListaAmigos_RecuperarJugadoresCuenta_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="NetTcpBinding_IInicioSesion" type="tns:IInicioSesion">
@@ -367,8 +434,20 @@
         <soap12:body use="literal" />
       </wsdl:input>
     </wsdl:operation>
+    <wsdl:operation name="SalirPartida">
+      <soap12:operation soapAction="http://tempuri.org/ILobby/SalirPartida" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
     <wsdl:operation name="JugadorEntroPartida">
       <soap12:operation soapAction="http://tempuri.org/ILobby/JugadorEntroPartida" style="document" />
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="JugadorSalioPartida">
+      <soap12:operation soapAction="http://tempuri.org/ILobby/JugadorSalioPartida" style="document" />
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>
@@ -410,6 +489,28 @@
     <soap12:binding transport="http://schemas.microsoft.com/soap/tcp" />
     <wsdl:operation name="CrearPartida">
       <soap12:operation soapAction="http://tempuri.org/ICrearLobby/CrearPartida" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="NetTcpBinding_IListaAmigos" type="tns:IListaAmigos">
+    <wsp:PolicyReference URI="#NetTcpBinding_IListaAmigos_policy" />
+    <soap12:binding transport="http://schemas.microsoft.com/soap/tcp" />
+    <wsdl:operation name="RecuperarAmigosCuenta">
+      <soap12:operation soapAction="http://tempuri.org/IListaAmigos/RecuperarAmigosCuenta" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RecuperarJugadoresCuenta">
+      <soap12:operation soapAction="http://tempuri.org/IListaAmigos/RecuperarJugadoresCuenta" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -465,6 +566,15 @@
       </wsa10:EndpointReference>
     </wsdl:port>
     <wsdl:port name="NetTcpBinding_ICrearLobby" binding="tns:NetTcpBinding_ICrearLobby">
+      <soap12:address location="net.tcp://localhost:5455/ServidorSorrySliders" />
+      <wsa10:EndpointReference>
+        <wsa10:Address>net.tcp://localhost:5455/ServidorSorrySliders</wsa10:Address>
+        <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
+          <Upn>LAPTOP-SF103ATP\monti</Upn>
+        </Identity>
+      </wsa10:EndpointReference>
+    </wsdl:port>
+    <wsdl:port name="NetTcpBinding_IListaAmigos" binding="tns:NetTcpBinding_IListaAmigos">
       <soap12:address location="net.tcp://localhost:5455/ServidorSorrySliders" />
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:5455/ServidorSorrySliders</wsa10:Address>

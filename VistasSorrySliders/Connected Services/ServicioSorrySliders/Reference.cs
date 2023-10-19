@@ -488,17 +488,26 @@ namespace VistasSorrySliders.ServicioSorrySliders {
     public interface ILobby {
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/ILobby/EntrarPartida")]
-        void EntrarPartida(string uid, string correoJugadorNuevo);
+        void EntrarPartida(string uid);
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/ILobby/EntrarPartida")]
-        System.Threading.Tasks.Task EntrarPartidaAsync(string uid, string correoJugadorNuevo);
+        System.Threading.Tasks.Task EntrarPartidaAsync(string uid);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/ILobby/SalirPartida")]
+        void SalirPartida(string uid);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/ILobby/SalirPartida")]
+        System.Threading.Tasks.Task SalirPartidaAsync(string uid);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public interface ILobbyCallback {
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/ILobby/JugadorEntroPartida")]
-        void JugadorEntroPartida(VistasSorrySliders.ServicioSorrySliders.CuentaSet[] listaJugadores);
+        void JugadorEntroPartida();
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/ILobby/JugadorSalioPartida")]
+        void JugadorSalioPartida();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -529,12 +538,20 @@ namespace VistasSorrySliders.ServicioSorrySliders {
                 base(callbackInstance, binding, remoteAddress) {
         }
         
-        public void EntrarPartida(string uid, string correoJugadorNuevo) {
-            base.Channel.EntrarPartida(uid, correoJugadorNuevo);
+        public void EntrarPartida(string uid) {
+            base.Channel.EntrarPartida(uid);
         }
         
-        public System.Threading.Tasks.Task EntrarPartidaAsync(string uid, string correoJugadorNuevo) {
-            return base.Channel.EntrarPartidaAsync(uid, correoJugadorNuevo);
+        public System.Threading.Tasks.Task EntrarPartidaAsync(string uid) {
+            return base.Channel.EntrarPartidaAsync(uid);
+        }
+        
+        public void SalirPartida(string uid) {
+            base.Channel.SalirPartida(uid);
+        }
+        
+        public System.Threading.Tasks.Task SalirPartidaAsync(string uid) {
+            return base.Channel.SalirPartidaAsync(uid);
         }
     }
     
@@ -657,6 +674,67 @@ namespace VistasSorrySliders.ServicioSorrySliders {
         
         public System.Threading.Tasks.Task<System.ValueTuple<VistasSorrySliders.ServicioSorrySliders.Constantes, string>> CrearPartidaAsync(string correoHost, int NumeroJugadores) {
             return base.Channel.CrearPartidaAsync(correoHost, NumeroJugadores);
+        }
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServicioSorrySliders.IListaAmigos")]
+    public interface IListaAmigos {
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IListaAmigos/RecuperarAmigosCuenta", ReplyAction="http://tempuri.org/IListaAmigos/RecuperarAmigosCuentaResponse")]
+        System.ValueTuple<VistasSorrySliders.ServicioSorrySliders.Constantes, VistasSorrySliders.ServicioSorrySliders.CuentaSet[]> RecuperarAmigosCuenta(string correoElectronico);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IListaAmigos/RecuperarAmigosCuenta", ReplyAction="http://tempuri.org/IListaAmigos/RecuperarAmigosCuentaResponse")]
+        System.Threading.Tasks.Task<System.ValueTuple<VistasSorrySliders.ServicioSorrySliders.Constantes, VistasSorrySliders.ServicioSorrySliders.CuentaSet[]>> RecuperarAmigosCuentaAsync(string correoElectronico);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IListaAmigos/RecuperarJugadoresCuenta", ReplyAction="http://tempuri.org/IListaAmigos/RecuperarJugadoresCuentaResponse")]
+        System.ValueTuple<VistasSorrySliders.ServicioSorrySliders.Constantes, VistasSorrySliders.ServicioSorrySliders.CuentaSet[]> RecuperarJugadoresCuenta(string informacionJugador);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IListaAmigos/RecuperarJugadoresCuenta", ReplyAction="http://tempuri.org/IListaAmigos/RecuperarJugadoresCuentaResponse")]
+        System.Threading.Tasks.Task<System.ValueTuple<VistasSorrySliders.ServicioSorrySliders.Constantes, VistasSorrySliders.ServicioSorrySliders.CuentaSet[]>> RecuperarJugadoresCuentaAsync(string informacionJugador);
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public interface IListaAmigosChannel : VistasSorrySliders.ServicioSorrySliders.IListaAmigos, System.ServiceModel.IClientChannel {
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class ListaAmigosClient : System.ServiceModel.ClientBase<VistasSorrySliders.ServicioSorrySliders.IListaAmigos>, VistasSorrySliders.ServicioSorrySliders.IListaAmigos {
+        
+        public ListaAmigosClient() {
+        }
+        
+        public ListaAmigosClient(string endpointConfigurationName) : 
+                base(endpointConfigurationName) {
+        }
+        
+        public ListaAmigosClient(string endpointConfigurationName, string remoteAddress) : 
+                base(endpointConfigurationName, remoteAddress) {
+        }
+        
+        public ListaAmigosClient(string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(endpointConfigurationName, remoteAddress) {
+        }
+        
+        public ListaAmigosClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(binding, remoteAddress) {
+        }
+        
+        public System.ValueTuple<VistasSorrySliders.ServicioSorrySliders.Constantes, VistasSorrySliders.ServicioSorrySliders.CuentaSet[]> RecuperarAmigosCuenta(string correoElectronico) {
+            return base.Channel.RecuperarAmigosCuenta(correoElectronico);
+        }
+        
+        public System.Threading.Tasks.Task<System.ValueTuple<VistasSorrySliders.ServicioSorrySliders.Constantes, VistasSorrySliders.ServicioSorrySliders.CuentaSet[]>> RecuperarAmigosCuentaAsync(string correoElectronico) {
+            return base.Channel.RecuperarAmigosCuentaAsync(correoElectronico);
+        }
+        
+        public System.ValueTuple<VistasSorrySliders.ServicioSorrySliders.Constantes, VistasSorrySliders.ServicioSorrySliders.CuentaSet[]> RecuperarJugadoresCuenta(string informacionJugador) {
+            return base.Channel.RecuperarJugadoresCuenta(informacionJugador);
+        }
+        
+        public System.Threading.Tasks.Task<System.ValueTuple<VistasSorrySliders.ServicioSorrySliders.Constantes, VistasSorrySliders.ServicioSorrySliders.CuentaSet[]>> RecuperarJugadoresCuentaAsync(string informacionJugador) {
+            return base.Channel.RecuperarJugadoresCuentaAsync(informacionJugador);
         }
     }
 }
