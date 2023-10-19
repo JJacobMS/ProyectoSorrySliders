@@ -46,7 +46,7 @@ namespace VistasSorrySliders
         private void VerificarCuenta()
         {
             ReiniciarPantalla();
-            Boolean datosCompletos = true;
+            bool datosCompletos = true;
             string correoIngresado = txtBoxCorreo.Text;
             string contrasena = pssBoxContrasena.Password;
 
@@ -64,7 +64,7 @@ namespace VistasSorrySliders
 
             if (datosCompletos)
             {
-                Constantes resultado = Constantes.OPERACION_EXITOSA;
+                Constantes resultado;
                 try
                 {
                     InicioSesionClient proxyInicioSesion = new InicioSesionClient();
@@ -117,7 +117,6 @@ namespace VistasSorrySliders
             {
                 case Constantes.OPERACION_EXITOSA:
                     CambiarPantallaMenuPrincipal(cuentaPorVerificar.CorreoElectronico);
-                    MessageBox.Show("ENTRAR AL SISTEMA");
                     break;
                 case Constantes.OPERACION_EXITOSA_VACIA:
                     txtBlockContrasenaInvalida.Visibility = Visibility.Visible;

@@ -35,7 +35,7 @@
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
                     <Rectangle x:Name="rctJugador" Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="2" Height="45" Width="360" Fill="#D19028" RadiusX="10" RadiusY="10" VerticalAlignment="Center"/>
-                    <Label x:Name="lblJugador" Grid.Column="2" Grid.Row="0" Content="Jacobobo"  Foreground="Black" Style="{StaticResource estiloLblDatos}"  VerticalAlignment="Top" Margin="0,5,0,0"/>
+                    <Label x:Name="lblJugador" Grid.Column="2" Grid.Row="0" Content=""  Foreground="Black" Style="{StaticResource estiloLblDatos}"  VerticalAlignment="Top" Margin="0,5,0,0"/>
                     <Ellipse x:Name="llpFondo" StrokeThickness="5" Grid.Column="1" Grid.Row="0" Width="40" Height="40" Fill="White" VerticalAlignment="Center" HorizontalAlignment="Right"/>
                     <Ellipse x:Name="llpAvatar" Grid.Column="1" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Right"  Width="40" Height="40" Stroke="Black" StrokeThickness="5">
                         <Ellipse.Fill>
@@ -88,7 +88,7 @@
                                 <Label Style="{StaticResource estiloLblDatos}" 
                                    Margin="0" FontSize="11" VerticalAlignment="Center">Host de la partida:</Label>
                                 <TextBox x:Name="txtBoxHost" Grid.Column="1" Style="{StaticResource estiloTxtBoxDatosAzul}" 
-                                     Margin="5" Height="28" IsEnabled="False"></TextBox>
+                                     Margin="5" Height="28" IsEnabled="False" ></TextBox>
                             </Grid>
                             <Grid>
                                 <Grid.ColumnDefinitions>
@@ -102,7 +102,7 @@
                                         <Label Style="{StaticResource estiloLblDatos}" 
                                    Margin="0" FontSize="11" VerticalAlignment="Center">Código de partida:</Label>
                                 <TextBox x:Name="txtBoxCodigoPartida" Grid.Column="1" Style="{StaticResource estiloTxtBoxDatosAzul}" 
-                                     Margin="5" Height="28" IsReadOnly="True" Text="" ></TextBox>
+                                     Margin="5" Height="28" IsReadOnly="True" Text="" FontSize="12"></TextBox>
                             </Grid>
                         </StackPanel>
                     </Grid>

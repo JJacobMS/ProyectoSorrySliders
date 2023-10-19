@@ -35,7 +35,7 @@ namespace VistasSorrySliders
             InitializeComponent();
             
             //Metodo calcular partidas todos los jugadores SERVIDOR
-            //
+
             RecuperarDatosUsuario(correoUsuario);
 
         }
@@ -43,16 +43,17 @@ namespace VistasSorrySliders
         private void RecuperarDatosUsuario(string correoUsuario) 
         {
             Constantes resultado;
-            string nickname = "";
-            byte[] avatar = null;
-
             try
             {
                 MenuPrincipalClient proxyRegistrarUsuario = new MenuPrincipalClient();
+                string nickname;
+                byte[] avatar;
                 (resultado, nickname, avatar) = proxyRegistrarUsuario.RecuperarDatosUsuario(correoUsuario);
                 _cuentaUsuario = new CuentaSet
                 {
-                    Nickname = nickname, Avatar = avatar, CorreoElectronico = correoUsuario
+                    Nickname = nickname,
+                    Avatar = avatar,
+                    CorreoElectronico = correoUsuario
                 };
                 proxyRegistrarUsuario.Close();
             }
@@ -88,8 +89,6 @@ namespace VistasSorrySliders
             }
 
         }
-
-
 
         private void ClickMostrarAjustes(object sender, RoutedEventArgs e)
         {

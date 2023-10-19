@@ -77,7 +77,7 @@ namespace VistasSorrySliders
             switch (resultado)
             {
                 case Constantes.OPERACION_EXITOSA:
-                    EntrarLobby(numeroMaximoJugadores, codigo);
+                    EntrarLobby(codigo);
                     break;
                 case Constantes.OPERACION_EXITOSA_VACIA:
                     MostrarErrorJugadores(numeroMaximoJugadores);
@@ -92,12 +92,9 @@ namespace VistasSorrySliders
             }
         }
 
-        private void EntrarLobby(int numeroMaximoJugadores, string codigo)
+        private void EntrarLobby(string codigo)
         {
-            NavigationService navigationService = NavigationService.GetNavigationService(this);
-            LobbyPagina lobby = new LobbyPagina(_cuentaActual);
-            lobby.RecuperarDatosPartida(codigo);
-            JuegoYLobbyVentana lobbyUnirse = new JuegoYLobbyVentana(lobby);
+            JuegoYLobbyVentana lobbyUnirse = new JuegoYLobbyVentana(_cuentaActual, codigo);
             lobbyUnirse.Show();
             Window.GetWindow(this).Close();
         }
