@@ -576,6 +576,12 @@ namespace VistasSorrySliders.ServicioSorrySliders {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUnirsePartida/RecuperarPartida", ReplyAction="http://tempuri.org/IUnirsePartida/RecuperarPartidaResponse")]
         System.Threading.Tasks.Task<System.ValueTuple<VistasSorrySliders.ServicioSorrySliders.Constantes, VistasSorrySliders.ServicioSorrySliders.PartidaSet>> RecuperarPartidaAsync(string codigoPartida);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUnirsePartida/SalirDelLobby", ReplyAction="http://tempuri.org/IUnirsePartida/SalirDelLobbyResponse")]
+        VistasSorrySliders.ServicioSorrySliders.Constantes SalirDelLobby(string correoJugador, string codigoPartida);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUnirsePartida/SalirDelLobby", ReplyAction="http://tempuri.org/IUnirsePartida/SalirDelLobbyResponse")]
+        System.Threading.Tasks.Task<VistasSorrySliders.ServicioSorrySliders.Constantes> SalirDelLobbyAsync(string correoJugador, string codigoPartida);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -627,6 +633,14 @@ namespace VistasSorrySliders.ServicioSorrySliders {
         
         public System.Threading.Tasks.Task<System.ValueTuple<VistasSorrySliders.ServicioSorrySliders.Constantes, VistasSorrySliders.ServicioSorrySliders.PartidaSet>> RecuperarPartidaAsync(string codigoPartida) {
             return base.Channel.RecuperarPartidaAsync(codigoPartida);
+        }
+        
+        public VistasSorrySliders.ServicioSorrySliders.Constantes SalirDelLobby(string correoJugador, string codigoPartida) {
+            return base.Channel.SalirDelLobby(correoJugador, codigoPartida);
+        }
+        
+        public System.Threading.Tasks.Task<VistasSorrySliders.ServicioSorrySliders.Constantes> SalirDelLobbyAsync(string correoJugador, string codigoPartida) {
+            return base.Channel.SalirDelLobbyAsync(correoJugador, codigoPartida);
         }
     }
     

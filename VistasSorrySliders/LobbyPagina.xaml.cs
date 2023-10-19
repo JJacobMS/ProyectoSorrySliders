@@ -25,6 +25,7 @@ namespace VistasSorrySliders
     {
         private CuentaSet _cuentaUsuario;
         private string _codigoPartida;
+        private LobbyClient _proxyLobby;
 
         public LobbyPagina(CuentaSet cuentaUsuario, string codigoPartida)
         {
@@ -38,6 +39,7 @@ namespace VistasSorrySliders
 
         public void RecuperarDatosPartida(string codigoPartida) 
         {
+            Console.WriteLine("Se actualizo la partida");
             CuentaSet[] cuentas = new CuentaSet[4];
             Constantes respuesta;
             try
@@ -164,6 +166,7 @@ namespace VistasSorrySliders
 
         private void ClickSalirLobbyJugadores(object sender, RoutedEventArgs e)
         {
+            SalirPartida();
             var ventanaPrincipal = new MainWindow();
             MenuPrincipalPagina menu = new MenuPrincipalPagina(_cuentaUsuario.CorreoElectronico);
             ventanaPrincipal.Content = menu;
@@ -181,14 +184,65 @@ namespace VistasSorrySliders
             try
             {
                 InstanceContext contextoCallback = new InstanceContext(this);
-                LobbyClient proxyLobby = new LobbyClient(contextoCallback);
-                proxyLobby.EntrarPartida(_codigoPartida);
+                _proxyLobby = new LobbyClient(contextoCallback);
+                _proxyLobby.EntrarPartida(_codigoPartida);
             }
             catch (CommunicationException ex)
             {
                 MessageBox.Show("Error servidor :c");
                 Console.WriteLine(ex);
             }
+        }
+
+
+        public void SalirPartida() 
+        {
+            try
+            {
+                Constantes respuesta;
+                try
+                {
+                    UnirsePartidaClient proxyUnirse = new UnirsePartidaClient();
+                    respuesta = proxyUnirse.SalirDelLobby(_cuentaUsuario.CorreoElectronico, _codigoPartida);
+                }
+                catch (CommunicationException ex)
+                {
+                    Console.WriteLine(ex);
+                    respuesta = Constantes.ERROR_CONEXION_SERVIDOR;
+                }
+                switch (respuesta)
+                {
+                    case Constantes.ERROR_CONEXION_BD:
+                        Console.WriteLine("ERROR_CONEXION_BD");
+                        break;
+                    case Constantes.ERROR_CONSULTA:
+                        Console.WriteLine("ERROR_CONSULTA");
+
+                        break;
+                    case Constantes.ERROR_CONEXION_SERVIDOR:
+                        Console.WriteLine("ERROR_CONEXION_SERVIDOR2");
+
+                        break;
+                    case Constantes.OPERACION_EXITOSA:
+                        Console.WriteLine("EXITO");
+
+                        _proxyLobby.SalirPartida(_codigoPartida);
+                        break;
+                    case Constantes.OPERACION_EXITOSA_VACIA:
+                        Console.WriteLine("OPERACION_EXITOSA_VACIA2");
+                        break;
+                    default:
+                        break;
+                }
+            }
+            catch (CommunicationException ex) 
+            {
+                Console.WriteLine(ex);
+            }
+        }
+        public void JugadorSalioPartida()
+        {
+            RecuperarDatosPartida(_codigoPartida);
         }
     }
 }
