@@ -87,7 +87,7 @@ namespace VistasSorrySliders
             int contador = 0;
             foreach (var cuenta in cuentas)
             {
-                //Falta inicializar mgBrushAvatar con la imagen de CuentaSet
+                //Falta inicializar mgBrushAvatar con la imagen de CuentaSet 
                 Ellipse nuevaEllipseAvatar = XamlReader.Parse(XamlWriter.Save(llpAvatar)) as Ellipse;
                 nuevaEllipseAvatar.Name = "llpAvatarJugador" + (contador + 1);
                 Grid.SetRow(nuevaEllipseAvatar, contador);
