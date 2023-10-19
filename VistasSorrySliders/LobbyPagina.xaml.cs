@@ -168,7 +168,7 @@ namespace VistasSorrySliders
         {
             SalirPartida();
             var ventanaPrincipal = new MainWindow();
-            MenuPrincipalPagina menu = new MenuPrincipalPagina(_cuentaUsuario.CorreoElectronico);
+            MenuPrincipalPagina menu = new MenuPrincipalPagina(_cuentaUsuario);
             ventanaPrincipal.Content = menu;
             ventanaPrincipal.Show();
             Window.GetWindow(this).Close();
@@ -199,41 +199,10 @@ namespace VistasSorrySliders
         {
             try
             {
-                Constantes respuesta;
-                try
-                {
-                    UnirsePartidaClient proxyUnirse = new UnirsePartidaClient();
-                    respuesta = proxyUnirse.SalirDelLobby(_cuentaUsuario.CorreoElectronico, _codigoPartida);
-                }
-                catch (CommunicationException ex)
-                {
-                    Console.WriteLine(ex);
-                    respuesta = Constantes.ERROR_CONEXION_SERVIDOR;
-                }
-                switch (respuesta)
-                {
-                    case Constantes.ERROR_CONEXION_BD:
-                        Console.WriteLine("ERROR_CONEXION_BD");
-                        break;
-                    case Constantes.ERROR_CONSULTA:
-                        Console.WriteLine("ERROR_CONSULTA");
-
-                        break;
-                    case Constantes.ERROR_CONEXION_SERVIDOR:
-                        Console.WriteLine("ERROR_CONEXION_SERVIDOR2");
-
-                        break;
-                    case Constantes.OPERACION_EXITOSA:
-                        Console.WriteLine("EXITO");
-
-                        _proxyLobby.SalirPartida(_codigoPartida);
-                        break;
-                    case Constantes.OPERACION_EXITOSA_VACIA:
-                        Console.WriteLine("OPERACION_EXITOSA_VACIA2");
-                        break;
-                    default:
-                        break;
-                }
+                UnirsePartidaClient proxyUnirse = new UnirsePartidaClient();
+                proxyUnirse.SalirDelLobby(_cuentaUsuario.CorreoElectronico, _codigoPartida);
+                _proxyLobby.SalirPartida(_codigoPartida);
+                   
             }
             catch (CommunicationException ex) 
             {

@@ -134,13 +134,6 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="SalirDelLobbyResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/DatosSorrySliders" minOccurs="0" name="SalirDelLobbyResult" type="q11:Constantes" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
   <xs:element name="CrearPartida">
     <xs:complexType>
       <xs:sequence>
@@ -152,7 +145,7 @@
   <xs:element name="CrearPartidaResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/System" minOccurs="0" name="CrearPartidaResult" type="q12:ValueTupleOfConstantesstringW4mnvVr6" />
+        <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/System" minOccurs="0" name="CrearPartidaResult" type="q11:ValueTupleOfConstantesstringW4mnvVr6" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -166,7 +159,7 @@
   <xs:element name="RecuperarAmigosCuentaResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/System" minOccurs="0" name="RecuperarAmigosCuentaResult" type="q13:ValueTupleOfConstantesArrayOfCuentaSetalmaccdW" />
+        <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/System" minOccurs="0" name="RecuperarAmigosCuentaResult" type="q12:ValueTupleOfConstantesArrayOfCuentaSetalmaccdW" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -180,7 +173,7 @@
   <xs:element name="RecuperarJugadoresCuentaResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q14="http://schemas.datacontract.org/2004/07/System" minOccurs="0" name="RecuperarJugadoresCuentaResult" type="q14:ValueTupleOfConstantesArrayOfCuentaSetalmaccdW" />
+        <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/System" minOccurs="0" name="RecuperarJugadoresCuentaResult" type="q13:ValueTupleOfConstantesArrayOfCuentaSetalmaccdW" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

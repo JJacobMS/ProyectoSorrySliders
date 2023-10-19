@@ -296,9 +296,6 @@
   <wsdl:message name="IUnirsePartida_SalirDelLobby_InputMessage">
     <wsdl:part name="parameters" element="tns:SalirDelLobby" />
   </wsdl:message>
-  <wsdl:message name="IUnirsePartida_SalirDelLobby_OutputMessage">
-    <wsdl:part name="parameters" element="tns:SalirDelLobbyResponse" />
-  </wsdl:message>
   <wsdl:message name="ICrearLobby_CrearPartida_InputMessage">
     <wsdl:part name="parameters" element="tns:CrearPartida" />
   </wsdl:message>
@@ -368,7 +365,6 @@
     </wsdl:operation>
     <wsdl:operation name="SalirDelLobby">
       <wsdl:input wsaw:Action="http://tempuri.org/IUnirsePartida/SalirDelLobby" message="tns:IUnirsePartida_SalirDelLobby_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IUnirsePartida/SalirDelLobbyResponse" message="tns:IUnirsePartida_SalirDelLobby_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:portType name="ICrearLobby">
@@ -498,9 +494,6 @@
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
-      <wsdl:output>
-        <soap12:body use="literal" />
-      </wsdl:output>
     </wsdl:operation>
   </wsdl:binding>
   <wsdl:binding name="NetTcpBinding_ICrearLobby" type="tns:ICrearLobby">

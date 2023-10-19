@@ -39,6 +39,19 @@ namespace VistasSorrySliders
             RecuperarDatosUsuario(correoUsuario);
 
         }
+        public MenuPrincipalPagina(CuentaSet cuentaActual) 
+        {
+            InitializeComponent();
+            _cuentaUsuario = cuentaActual;
+            InicializarDatosMenu();
+        }
+
+        private void InicializarDatosMenu() 
+        {
+            txtBlockNickname.Text = _cuentaUsuario.Nickname;
+            txtBlockCorreoElectronico.Text = _cuentaUsuario.CorreoElectronico;
+            Utilidades.IngresarImagen(_cuentaUsuario.Avatar, this.mgBrushAvatar);
+        }
 
         private void RecuperarDatosUsuario(string correoUsuario) 
         {
@@ -71,9 +84,7 @@ namespace VistasSorrySliders
             switch (resultado)
             {
                 case Constantes.OPERACION_EXITOSA:
-                    txtBlockNickname.Text = _cuentaUsuario.Nickname;
-                    txtBlockCorreoElectronico.Text = _cuentaUsuario.CorreoElectronico;
-                    Utilidades.IngresarImagen(_cuentaUsuario.Avatar, this.mgBrushAvatar);
+                    InicializarDatosMenu();
                     break;
                 case Constantes.OPERACION_EXITOSA_VACIA:
                     break;

@@ -132,7 +132,7 @@ namespace VistasSorrySliders
 
         private void ClickSalirMenuPrincipal(object sender, RoutedEventArgs e)
         {
-            MenuPrincipalPagina menu = new MenuPrincipalPagina(_cuentaActual.CorreoElectronico);
+            MenuPrincipalPagina menu = new MenuPrincipalPagina(_cuentaActual);
             this.NavigationService.Navigate(menu);
         }
     }
