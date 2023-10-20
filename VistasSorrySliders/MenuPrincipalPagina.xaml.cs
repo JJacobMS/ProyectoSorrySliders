@@ -107,7 +107,7 @@ namespace VistasSorrySliders
         {
             AjustesVentana ajustes = new AjustesVentana();
             ajustes.IdiomaCambiado += ActualizarVentanaMenuPrincipal;
-            ajustes.Show();
+            ajustes.ShowDialog();
         }
 
         private void ActualizarVentanaMenuPrincipal()
@@ -136,6 +136,12 @@ namespace VistasSorrySliders
         {
             UnirsePartidaPagina unirsePartida = new UnirsePartidaPagina(_cuentaUsuario);
             this.NavigationService.Navigate(unirsePartida);
+        }
+
+        private void MouseLeftButtonDownMostrarDetallesCuenta(object sender, MouseButtonEventArgs e)
+        {
+            CuentaDetallesVentana detalles = new CuentaDetallesVentana(_cuentaUsuario);
+            detalles.ShowDialog();
         }
     }
 }

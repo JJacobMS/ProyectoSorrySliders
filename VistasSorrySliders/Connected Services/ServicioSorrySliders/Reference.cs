@@ -751,4 +751,51 @@ namespace VistasSorrySliders.ServicioSorrySliders {
             return base.Channel.RecuperarJugadoresCuentaAsync(informacionJugador);
         }
     }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServicioSorrySliders.IDetallesCuentaUsuario")]
+    public interface IDetallesCuentaUsuario {
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDetallesCuentaUsuario/RecuperarDatosUsuarioDeCuenta", ReplyAction="http://tempuri.org/IDetallesCuentaUsuario/RecuperarDatosUsuarioDeCuentaResponse")]
+        System.ValueTuple<VistasSorrySliders.ServicioSorrySliders.Constantes, VistasSorrySliders.ServicioSorrySliders.UsuarioSet> RecuperarDatosUsuarioDeCuenta(string correoElectronico);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDetallesCuentaUsuario/RecuperarDatosUsuarioDeCuenta", ReplyAction="http://tempuri.org/IDetallesCuentaUsuario/RecuperarDatosUsuarioDeCuentaResponse")]
+        System.Threading.Tasks.Task<System.ValueTuple<VistasSorrySliders.ServicioSorrySliders.Constantes, VistasSorrySliders.ServicioSorrySliders.UsuarioSet>> RecuperarDatosUsuarioDeCuentaAsync(string correoElectronico);
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public interface IDetallesCuentaUsuarioChannel : VistasSorrySliders.ServicioSorrySliders.IDetallesCuentaUsuario, System.ServiceModel.IClientChannel {
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class DetallesCuentaUsuarioClient : System.ServiceModel.ClientBase<VistasSorrySliders.ServicioSorrySliders.IDetallesCuentaUsuario>, VistasSorrySliders.ServicioSorrySliders.IDetallesCuentaUsuario {
+        
+        public DetallesCuentaUsuarioClient() {
+        }
+        
+        public DetallesCuentaUsuarioClient(string endpointConfigurationName) : 
+                base(endpointConfigurationName) {
+        }
+        
+        public DetallesCuentaUsuarioClient(string endpointConfigurationName, string remoteAddress) : 
+                base(endpointConfigurationName, remoteAddress) {
+        }
+        
+        public DetallesCuentaUsuarioClient(string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(endpointConfigurationName, remoteAddress) {
+        }
+        
+        public DetallesCuentaUsuarioClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(binding, remoteAddress) {
+        }
+        
+        public System.ValueTuple<VistasSorrySliders.ServicioSorrySliders.Constantes, VistasSorrySliders.ServicioSorrySliders.UsuarioSet> RecuperarDatosUsuarioDeCuenta(string correoElectronico) {
+            return base.Channel.RecuperarDatosUsuarioDeCuenta(correoElectronico);
+        }
+        
+        public System.Threading.Tasks.Task<System.ValueTuple<VistasSorrySliders.ServicioSorrySliders.Constantes, VistasSorrySliders.ServicioSorrySliders.UsuarioSet>> RecuperarDatosUsuarioDeCuentaAsync(string correoElectronico) {
+            return base.Channel.RecuperarDatosUsuarioDeCuentaAsync(correoElectronico);
+        }
+    }
 }
