@@ -8,7 +8,7 @@
       d:DesignHeight="576" d:DesignWidth="409">
 
     <Viewbox>
-        <Grid Height="576" Width="409">
+        <Grid Height="576" Width="409" >
             <Border BorderBrush="#17033B" BorderThickness="3" CornerRadius="10" Margin="15">
                 <Grid>
                     <Grid.RowDefinitions>
@@ -20,26 +20,27 @@
                     <Label Content="INVITAR JUGADOR" Style="{StaticResource estiloLblTituloTextos}"/>
                     <StackPanel Grid.Row="1" VerticalAlignment="Center">
                         <Label Content="Lista de Amigos" Style="{StaticResource estiloLblTextoListaAmigos}"/>
-                        <ListBox Style="{StaticResource estiloLstBoxAmigos}">
+                        <ListBox Style="{StaticResource estiloLstBoxAmigos}" Name="lstBoxAmigos">
                             <ListBox.ItemContainerStyle>
-                                <Style TargetType="ListBoxItem" BasedOn="{StaticResource estiloLstBoxItemListaAmigos}"></Style>
+                                <Style TargetType="ListBoxItem" BasedOn="{StaticResource estiloLstBoxItemListaAmigos}">
+                                    <EventSetter Event="Button.Click" Handler="ClickEnviarCodigo" />
+                                </Style>
                             </ListBox.ItemContainerStyle>
-                            <ListBoxItem></ListBoxItem>
                         </ListBox>
                     </StackPanel>
                     <StackPanel Grid.Row="2" VerticalAlignment="Center">
-                        <Label Content="Lista de Amigos" Style="{StaticResource estiloLblTextoListaAmigos}"/>
+                        <Label Content="Lista de Jugadores" Style="{StaticResource estiloLblTextoListaAmigos}"/>
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                            <TextBox Width="230" Margin="10,5,5,5" HorizontalAlignment="Left" Style="{StaticResource estiloTxtBoxDatosMorado}"></TextBox>
-                            <Button Content="BUSCAR" Margin="5" Height="25" Width="90" FontSize="14"
+                            <TextBox x:Name="txtBoxBuscadorJugadores" Width="230" Margin="10,5,5,5" HorizontalAlignment="Left" Style="{StaticResource estiloTxtBoxDatosMorado}"></TextBox>
+                            <Button Content="BUSCAR" Margin="5" Height="25" Width="90" FontSize="14" Click="ClicBuscarJugador"
                                     Style="{StaticResource estiloBtnMorado}" HorizontalAlignment="Right"/>
                         </StackPanel>
-                        <ListBox Style="{StaticResource estiloLstBoxAmigos}">
+                        <ListBox Name="lstBoxJugadores" Style="{StaticResource estiloLstBoxAmigos}">
                             <ListBox.ItemContainerStyle>
-                                <Style TargetType="ListBoxItem" BasedOn="{StaticResource estiloLstBoxItemListaAmigos}"></Style>
+                                <Style TargetType="ListBoxItem" BasedOn="{StaticResource estiloLstBoxItemListaAmigos}">
+                                    <EventSetter Event="Button.Click" Handler="ClickEnviarCodigo" />
+                                </Style>
                             </ListBox.ItemContainerStyle>
-                            <ListBoxItem></ListBoxItem>
-
                         </ListBox>
                     </StackPanel>
                     <StackPanel Grid.Row="3" VerticalAlignment="Center">
@@ -47,7 +48,7 @@
                         <StackPanel Orientation="Horizontal" Margin="0,0,0,10" HorizontalAlignment="Center">
                             <TextBox Width="230" Style="{StaticResource estiloTxtBoxDatosMorado}"></TextBox>
                             <Button Content="ENVIAR CÓDIGO" Margin="5"
-                                    Style="{StaticResource estiloBtnListaAmigos}" HorizontalAlignment="Right"/>
+                                    Style="{StaticResource estiloBtnListaAmigos}" HorizontalAlignment="Right" Click="ClickEnviarCodigoJugadorSinCuenta"/>
                         </StackPanel>
 
                     </StackPanel>

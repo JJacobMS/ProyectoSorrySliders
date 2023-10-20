@@ -29,11 +29,9 @@ namespace VistasSorrySliders
         {
             InitializeComponent();
             _cuentaUsuario = new CuentaSet();
-            _cuentaUsuario.CorreoElectronico = cuentaUsuario.CorreoElectronico;
-            _cuentaUsuario.Nickname = cuentaUsuario.Nickname;
-            _cuentaUsuario.Avatar = cuentaUsuario.Avatar;
-            txtBlockNickname.Text = cuentaUsuario.Nickname;
+            _cuentaUsuario = cuentaUsuario;
             Utilidades.IngresarImagen(_cuentaUsuario.Avatar, this.mgBrushAvatar);
+            txtBlockNickname.Text = _cuentaUsuario.Nickname; 
         }
 
         private Border selectedBorder;
@@ -85,16 +83,17 @@ namespace VistasSorrySliders
                     CrearLobbyClient proxyCrearLobby = new CrearLobbyClient();
                     (respuesta, codigoPartida) = proxyCrearLobby.CrearPartida(_cuentaUsuario.CorreoElectronico, numeroJugadoresInt);
                 }
-                catch (CommunicationException excepcion)
+                catch (CommunicationException ex)
                 {
+                    Console.WriteLine(ex);
                     respuesta = Constantes.ERROR_CONEXION_SERVIDOR;
                     System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorConexion);
                 }
-                catch (TimeoutException excepcion)
+                catch (TimeoutException ex)
                 {
+                    Console.WriteLine(ex);
                     respuesta = Constantes.ERROR_CONEXION_SERVIDOR;
                     System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorConexion);
-
                 }
                 switch (respuesta)
                     {
@@ -123,17 +122,14 @@ namespace VistasSorrySliders
 
         private void CrearVentanaLobby(string numeroJugadoresString, CuentaSet _cuentaUsuario, string codigoPartida) 
         {
-            NavigationService navigationService = NavigationService.GetNavigationService(this);
-            LobbyPagina lobby = new LobbyPagina();
-            JuegoYLobbyVentana lobbyUnirse = new JuegoYLobbyVentana(lobby);
-            lobby.InicializarDatos(numeroJugadoresString, _cuentaUsuario, codigoPartida);
+            JuegoYLobbyVentana lobbyUnirse = new JuegoYLobbyVentana(_cuentaUsuario, codigoPartida);
             lobbyUnirse.Show();
 
         }
 
         private void ClickSalirConfigurarLobby(object sender, RoutedEventArgs e)
         {
-            MenuPrincipalPagina menu = new MenuPrincipalPagina(_cuentaUsuario.CorreoElectronico);
+            MenuPrincipalPagina menu = new MenuPrincipalPagina(_cuentaUsuario);
             this.NavigationService.Navigate(menu);
         }
     }

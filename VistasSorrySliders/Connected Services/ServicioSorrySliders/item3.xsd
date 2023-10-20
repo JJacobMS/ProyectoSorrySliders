@@ -63,15 +63,24 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="uid" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="correoJugadorNuevo" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SalirPartida">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="uid" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="JugadorEntroPartida">
     <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/DatosSorrySliders" minOccurs="0" name="listaJugadores" nillable="true" type="q8:ArrayOfCuentaSet" />
-      </xs:sequence>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="JugadorSalioPartida">
+    <xs:complexType>
+      <xs:sequence />
     </xs:complexType>
   </xs:element>
   <xs:element name="UnirseAlLobby">
@@ -85,7 +94,7 @@
   <xs:element name="UnirseAlLobbyResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/System" minOccurs="0" name="UnirseAlLobbyResult" type="q9:ValueTupleOfConstantesintW4mnvVr6" />
+        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/System" minOccurs="0" name="UnirseAlLobbyResult" type="q8:ValueTupleOfConstantesintW4mnvVr6" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -99,7 +108,29 @@
   <xs:element name="RecuperarJugadoresLobbyResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/System" minOccurs="0" name="RecuperarJugadoresLobbyResult" type="q10:ValueTupleOfConstantesArrayOfCuentaSetalmaccdW" />
+        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/System" minOccurs="0" name="RecuperarJugadoresLobbyResult" type="q9:ValueTupleOfConstantesArrayOfCuentaSetalmaccdW" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RecuperarPartida">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="codigoPartida" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RecuperarPartidaResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/System" minOccurs="0" name="RecuperarPartidaResult" type="q10:ValueTupleOfConstantesPartidaSetalmaccdW" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SalirDelLobby">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="correoJugador" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="codigoPartida" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -115,6 +146,34 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/System" minOccurs="0" name="CrearPartidaResult" type="q11:ValueTupleOfConstantesstringW4mnvVr6" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RecuperarAmigosCuenta">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="correoElectronico" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RecuperarAmigosCuentaResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/System" minOccurs="0" name="RecuperarAmigosCuentaResult" type="q12:ValueTupleOfConstantesArrayOfCuentaSetalmaccdW" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RecuperarJugadoresCuenta">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="informacionJugador" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RecuperarJugadoresCuentaResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/System" minOccurs="0" name="RecuperarJugadoresCuentaResult" type="q13:ValueTupleOfConstantesArrayOfCuentaSetalmaccdW" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

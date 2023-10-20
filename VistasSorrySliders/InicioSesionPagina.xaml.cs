@@ -46,7 +46,7 @@ namespace VistasSorrySliders
         private void VerificarCuenta()
         {
             ReiniciarPantalla();
-            Boolean datosCompletos = true;
+            bool datosCompletos = true;
             string correoIngresado = txtBoxCorreo.Text;
             string contrasena = pssBoxContrasena.Password;
 
@@ -64,17 +64,24 @@ namespace VistasSorrySliders
 
             if (datosCompletos)
             {
-                Constantes resultado = Constantes.OPERACION_EXITOSA;
+                Constantes resultado;
                 try
                 {
                     InicioSesionClient proxyInicioSesion = new InicioSesionClient();
                     resultado = proxyInicioSesion.VerificarExistenciaCorreoCuenta(correoIngresado);
                     proxyInicioSesion.Close();
                 }
-                catch (CommunicationException excepcion) 
+                catch (CommunicationException ex)
                 {
+                    Console.WriteLine(ex);
                     resultado = Constantes.ERROR_CONEXION_SERVIDOR;
-                    Console.WriteLine(excepcion);
+                    System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorConexion);
+                }
+                catch (TimeoutException ex)
+                {
+                    Console.WriteLine(ex);
+                    resultado = Constantes.ERROR_CONEXION_SERVIDOR;
+                    System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorConexion);
                 }
 
                 switch (resultado)
@@ -107,17 +114,23 @@ namespace VistasSorrySliders
                 resultado = proxyInicioSesion.VerificarContrasenaDeCuenta(cuentaPorVerificar);
                 proxyInicioSesion.Close();
             }
-            catch (CommunicationException excepcion)    
+            catch (CommunicationException ex)
             {
+                Console.WriteLine(ex);
                 resultado = Constantes.ERROR_CONEXION_SERVIDOR;
-                Console.WriteLine(excepcion);
+                System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorConexion);
+            }
+            catch (TimeoutException ex)
+            {
+                Console.WriteLine(ex);
+                resultado = Constantes.ERROR_CONEXION_SERVIDOR;
+                System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorConexion);
             }
 
             switch (resultado)
             {
                 case Constantes.OPERACION_EXITOSA:
                     CambiarPantallaMenuPrincipal(cuentaPorVerificar.CorreoElectronico);
-                    MessageBox.Show("ENTRAR AL SISTEMA");
                     break;
                 case Constantes.OPERACION_EXITOSA_VACIA:
                     txtBlockContrasenaInvalida.Visibility = Visibility.Visible;

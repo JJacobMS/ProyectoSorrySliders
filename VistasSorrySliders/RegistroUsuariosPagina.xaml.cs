@@ -52,6 +52,7 @@ namespace VistasSorrySliders
             }
             catch (Exception ex)
             {
+                Console.WriteLine(ex);
                 System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorAvatarDefault,Properties.Resources.msgTituloErrorAvatarDefault, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
@@ -144,12 +145,14 @@ namespace VistasSorrySliders
                     return false;
                 }
             }
-            catch (RegexMatchTimeoutException e)
+            catch (RegexMatchTimeoutException ex)
             {
+                Console.WriteLine(ex);
                 return false;
             }
-            catch (ArgumentException e)
+            catch (ArgumentException ex)
             {
+                Console.WriteLine(ex);
                 return false;
             }
         }
@@ -193,13 +196,15 @@ namespace VistasSorrySliders
                 resultado = proxyRegistrarUsuario.AgregarUsuario(usuarioNuevo,nuevaCuenta);
                 proxyRegistrarUsuario.Close();
             }
-            catch (CommunicationException excepcion)
+            catch (CommunicationException ex)
             {
+                Console.WriteLine(ex);
                 resultado = Constantes.ERROR_CONEXION_SERVIDOR;
                 System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorConexion);
             }
-            catch (TimeoutException excepcion)
+            catch (TimeoutException ex)
             {
+                Console.WriteLine(ex);
                 resultado = Constantes.ERROR_CONEXION_SERVIDOR;
                 System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorConexion);
 
@@ -265,10 +270,10 @@ namespace VistasSorrySliders
                 resultado = proxyInicioSesion.VerificarExistenciaCorreoCuenta(correoIngresado);
                 proxyInicioSesion.Close();
             }
-            catch (CommunicationException excepcion)
+            catch (CommunicationException ex)
             {
                 resultado = Constantes.ERROR_CONEXION_SERVIDOR;
-                Console.WriteLine(excepcion);
+                Console.WriteLine(ex);
             }
 
             switch (resultado)
@@ -300,6 +305,7 @@ namespace VistasSorrySliders
                 }
                 catch (CommunicationException ex)
                 {
+                    Console.WriteLine(ex);
                     System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorConexion);
                 }
             }
@@ -341,10 +347,12 @@ namespace VistasSorrySliders
             }
             catch (UnauthorizedAccessException ex)
             {
+                Console.WriteLine(ex);
                 Console.WriteLine("No se tienen permisos para acceder al archivo", "Sin permisos para el archivo");
             }
             catch (Exception ex)
             {
+                Console.WriteLine(ex);
                 System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorImagen, Properties.Resources.msgTituloErrorImagen, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
@@ -398,22 +406,21 @@ namespace VistasSorrySliders
                 {
                     int tamañoenBytes = (int)flujoArchivo.Length;
                     int tamañoEnKB = tamañoenBytes / 1024;
-                    int tamañoEnMB = tamañoEnKB / 1024;
 
-                    if (tamañoEnMB <= 3)
+                    if (tamañoEnKB <= 400)
                     {
                         return true;
                     }
                     else
                     {
-                        System.Windows.Forms.MessageBox.Show("La imagen supera el limite de 3MB", "Imagen demasiado grande", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
+                        System.Windows.Forms.MessageBox.Show("La imagen supera el limite de 400KB", "Imagen demasiado grande", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return false;
                     }
                 }
             }
-            catch (IOException e)
+            catch (IOException ex)
             {
+                Console.WriteLine(ex);
                 System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorImagen, Properties.Resources.msgTituloErrorImagen, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }

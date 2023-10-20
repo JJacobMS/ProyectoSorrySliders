@@ -28,6 +28,17 @@
             <Trigger Property="IsMouseOver" Value="True">
                 <Setter Property="Cursor" Value="Hand"/>
             </Trigger>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="Button">
+                            <Border CornerRadius="5" Background="#66757F">
+                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Trigger>
         </Style.Triggers>
     </Style>
 
@@ -55,7 +66,7 @@
         <Setter Property="Height" Value="40"/>
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate>
+                <ControlTemplate TargetType="ListBoxItem">
                     <Border BorderBrush="#17033B" BorderThickness="0,0,0,3">
                         <Grid Height="40">
                             <Grid.ColumnDefinitions>
@@ -63,11 +74,11 @@
                                 <ColumnDefinition Width=".3*"/>
                             </Grid.ColumnDefinitions>
                             <Ellipse Height="10" Width="10" Fill="Black" Margin="5,5,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-                            <Label Content="Nickname" FontSize="14" Margin="15,-3,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"
+                            <Label Content="{Binding Path=Nickname}" FontSize="14" Margin="15,-3,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"
                                             Style="{StaticResource estiloLblTextoListaAmigos}"/>
-                            <Label Content="Correo@gmail.com" FontSize="12" Margin="0,0,0,3" HorizontalAlignment="Left" VerticalAlignment="Bottom"
+                            <Label Content="{Binding Path=CorreoElectronico}" FontSize="12" Margin="0,0,0,3" HorizontalAlignment="Left" VerticalAlignment="Bottom"
                                     Style="{StaticResource estiloLblTextoListaAmigos}"/>
-                            <Button Grid.Column="1" Content="ENVIAR CÓDIGO" Margin="0,-5,10,0"
+                            <Button x:Name="btnJugador" Grid.Column="1" Content="ENVIAR CÓDIGO" Margin="0,-5,10,0" CommandParameter="{Binding}"
                                     Style="{StaticResource estiloBtnListaAmigos}"/>
                         </Grid>
                     </Border>

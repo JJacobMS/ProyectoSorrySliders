@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -12,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using VistasSorrySliders.ServicioSorrySliders;
 
 namespace VistasSorrySliders
 {
@@ -27,8 +29,6 @@ namespace VistasSorrySliders
 
         private void ClickIniciarJuego(object sender, RoutedEventArgs e)
         {
-            /*MenuPrincipalPagina pagina = new MenuPrincipalPagina("trescuatro1234@gmail.com");
-            this.NavigationService.Navigate(pagina);*/
             InicioSesionPagina inicioSesion = new InicioSesionPagina();
             this.NavigationService.Navigate(inicioSesion);
         }

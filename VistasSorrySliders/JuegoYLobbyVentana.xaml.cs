@@ -25,11 +25,11 @@ namespace VistasSorrySliders
         {
         }
 
-        public JuegoYLobbyVentana(LobbyPagina lobby)
+        public JuegoYLobbyVentana(CuentaSet cuenta, string codigoPartida)
         {
             InitializeComponent();
-            frameLobby.Content = lobby;
-            frameListaAmigos.Content = new ListaAmigosPagina();
+            frameLobby.Content = new LobbyPagina(cuenta, codigoPartida);
+            frameListaAmigos.Content = new ListaAmigosPagina(cuenta, codigoPartida);
         }
 
 

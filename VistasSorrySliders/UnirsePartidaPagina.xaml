@@ -14,48 +14,57 @@
         </Grid.Background>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
-            <ColumnDefinition Width="1.5*"/>
+            <ColumnDefinition Width="1.8*"/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <Image Source="/Recursos/peones.png" Margin="10"></Image>
-        <Button Style="{StaticResource estiloBtnSalir}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20">Salir</Button>
+        <Button Style="{StaticResource estiloBtnSalir}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20" Click="ClickSalirMenuPrincipal" >Salir</Button>
         <Image Grid.Column="2" Source="/Recursos/dado.png" Margin="10"/>
-
-        <Border Grid.Column="1" BorderBrush="#042437" BorderThickness="4" CornerRadius="10" Margin="0,40,0,40">
-            <StackPanel VerticalAlignment="Center">
-                <Viewbox>
-                    <Grid Margin="5" Height="80" Width="380">
+        <Viewbox Grid.Column="1">
+            <Border Grid.Column="1" BorderBrush="#042437" BorderThickness="4" CornerRadius="10" Margin="0,40,0,40"
+                    Height="350" Width="390" HorizontalAlignment="Center">
+                <StackPanel VerticalAlignment="Center">
+                    <Grid Margin="5" Height="80">
                         <Image Source="/Recursos/Banner.png"/>
                         <Label Style="{StaticResource estiloLblInicioSesion}" Margin="0,12,0,0">UNIRSE A PARTIDA</Label>
                     </Grid>
-                </Viewbox>
-                <Grid Margin="0,10,0,0">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition/>
-                        <ColumnDefinition Width="1*"/>
-                    </Grid.ColumnDefinitions>
-                    <Label Style="{StaticResource estiloLblDatos}" Margin="5,0,0,0" FontSize="16" VerticalAlignment="Center">Código de Partida:</Label>
-                    <TextBox Grid.Column="1" Style="{StaticResource estiloTxtBoxDatosAzul}" Margin="10,0,10,0"></TextBox>
-                </Grid>
-                <Grid Height="40">
-                    <TextBlock Style="{StaticResource estiloTxtBlockErrorUnirsePartida}" Visibility="Hidden" Width="250" Margin="0"
-                           Name="lblMaximoJugadores">La partida ya no acepta más jugadores</TextBlock>
-                    <TextBlock Style="{StaticResource estiloTxtBlockErrorUnirsePartida}" Width="250" Margin="0"
-                           Name="lblCodigoNoValido">Código no válido</TextBlock>
-                </Grid>
-                <Grid x:Name="grdNickname" Visibility="Visible">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition/>
-                        <ColumnDefinition Width="1*"/>
-                    </Grid.ColumnDefinitions>
-                    <Label Style="{StaticResource estiloLblDatos}" FontSize="16" VerticalAlignment="Center">Nickname:</Label>
-                    <TextBox Grid.Column="1" Style="{StaticResource estiloTxtBoxDatosAzul}" Margin="10,0,10,0"></TextBox>
-                </Grid>
-                <TextBlock Style="{StaticResource estiloTxtBlockErrorUnirsePartida}" Width="250" Margin="0,10,0,10" 
-                           Name="lblNickNameNoValido">Nickname no es válido</TextBlock>
-                <Button Style="{StaticResource estiloBtnContinuar}" Width="200">UNIRSE A LA PARTIDA</Button>
+                    <Grid Margin="0,10,0,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Label Style="{StaticResource estiloLblDatos}" Margin="5,0,0,0" FontSize="12" VerticalAlignment="Center"
+                               Width="120">Código de Partida:</Label>
+                        <TextBox Name="txtBoxCodigo" Grid.Column="1" Style="{StaticResource estiloTxtBoxDatosAzul}" 
+                                 Margin="10,0,10,0" FontSize="12"></TextBox>
+                    </Grid>
+                    <Grid Height="40">
+                        <TextBlock Style="{StaticResource estiloTxtBlockErrorUnirsePartida}" Visibility="Hidden" Margin="0"
+                               Name="lblMaximoJugadores">La partida ya no acepta más jugadores</TextBlock>
+                        <TextBlock Style="{StaticResource estiloTxtBlockErrorUnirsePartida}" Margin="0" Visibility="Hidden"
+                               Name="lblCodigoNoValido">Código no válido</TextBlock>
+                        <TextBlock Style="{StaticResource estiloTxtBlockErrorUnirsePartida}" Margin="0" Visibility="Hidden"
+                                Name="lblCuentaYaEnJuego">Su cuenta ya está jugando dentro del lobby</TextBlock>
+                    </Grid>
+                    <Grid x:Name="grdNickname" Visibility="Collapsed" >
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition Width="1*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Label Style="{StaticResource estiloLblDatos}" FontSize="12" VerticalAlignment="Center">Nickname:</Label>
+                        <TextBox Grid.Column="1" Style="{StaticResource estiloTxtBoxDatosAzul}" Margin="10,0,10,0" FontSize="12"></TextBox>
+                        <TextBlock Grid.Row="1" Grid.ColumnSpan="2" Style="{StaticResource estiloTxtBlockErrorUnirsePartida}" Width="250" 
+                        Name="lblNickNameNoValido" HorizontalAlignment="Center">Nickname no es válido</TextBlock>
+                    </Grid>
+                    <Button Style="{StaticResource estiloBtnContinuar}" Width="200" Click="ClickUnirsePartida">UNIRSE A LA PARTIDA</Button>
 
-            </StackPanel>
-        </Border>
+                </StackPanel>
+            </Border>
+        </Viewbox>
+        
     </Grid>
 </Page>

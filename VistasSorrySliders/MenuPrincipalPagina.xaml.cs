@@ -35,44 +35,58 @@ namespace VistasSorrySliders
             InitializeComponent();
             
             //Metodo calcular partidas todos los jugadores SERVIDOR
-            //
+
             RecuperarDatosUsuario(correoUsuario);
 
+        }
+        public MenuPrincipalPagina(CuentaSet cuentaActual) 
+        {
+            InitializeComponent();
+            _cuentaUsuario = cuentaActual;
+            InicializarDatosMenu();
+        }
+
+        private void InicializarDatosMenu() 
+        {
+            txtBlockNickname.Text = _cuentaUsuario.Nickname;
+            txtBlockCorreoElectronico.Text = _cuentaUsuario.CorreoElectronico;
+            Utilidades.IngresarImagen(_cuentaUsuario.Avatar, this.mgBrushAvatar);
         }
 
         private void RecuperarDatosUsuario(string correoUsuario) 
         {
             Constantes resultado;
-            string nickname = "";
-            byte[] avatar = null;
-
             try
             {
                 MenuPrincipalClient proxyRegistrarUsuario = new MenuPrincipalClient();
+                string nickname;
+                byte[] avatar;
                 (resultado, nickname, avatar) = proxyRegistrarUsuario.RecuperarDatosUsuario(correoUsuario);
                 _cuentaUsuario = new CuentaSet
                 {
-                    Nickname = nickname, Avatar = avatar, CorreoElectronico = correoUsuario
+                    Nickname = nickname,
+                    Avatar = avatar,
+                    CorreoElectronico = correoUsuario
                 };
                 proxyRegistrarUsuario.Close();
             }
-            catch (CommunicationException excepcion)
+            catch (CommunicationException ex)
             {
+                Console.WriteLine(ex);
                 resultado = Constantes.ERROR_CONEXION_SERVIDOR;
-                Console.WriteLine(excepcion);
+                System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorConexion);
             }
-            catch (TimeoutException excepcion)
+            catch (TimeoutException ex)
             {
+                Console.WriteLine(ex);
                 resultado = Constantes.ERROR_CONEXION_SERVIDOR;
-                Console.WriteLine(excepcion);
+                System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorConexion);
             }
 
             switch (resultado)
             {
                 case Constantes.OPERACION_EXITOSA:
-                    txtBlockNickname.Text = _cuentaUsuario.Nickname;
-                    txtBlockCorreoElectronico.Text = _cuentaUsuario.CorreoElectronico;
-                    Utilidades.IngresarImagen(_cuentaUsuario.Avatar, this.mgBrushAvatar);
+                    InicializarDatosMenu();
                     break;
                 case Constantes.OPERACION_EXITOSA_VACIA:
                     break;
@@ -89,8 +103,6 @@ namespace VistasSorrySliders
 
         }
 
-
-
         private void ClickMostrarAjustes(object sender, RoutedEventArgs e)
         {
             AjustesVentana ajustes = new AjustesVentana();
@@ -102,10 +114,10 @@ namespace VistasSorrySliders
         {
             txtBlockAjustes.Text = Properties.Resources.txtBlockAjustes;
             txtBlockUnirsePartida.Text = Properties.Resources.txtBlockUnirsePartida;
-            txtBlockAjustes.Text = Properties.Resources.txtBlockAjustes;
-            txtBlockAjustes.Text = Properties.Resources.txtBlockAjustes;
-            txtBlockAjustes.Text = Properties.Resources.txtBlockAjustes;
-
+            txtBlockAjustes.Text = Properties.Resources.txtBlockCrearLobby;
+            txtBlockAjustes.Text = Properties.Resources.txtBlockJugadoresAmigos;
+            txtBlockAjustes.Text = Properties.Resources.txtBlockUnirsePartida;
+            txtBlockSalir.Text = Properties.Resources.btnSalir;
         }
 
         private void ClickSalirMenuPrincipal(object sender, RoutedEventArgs e)
@@ -118,6 +130,12 @@ namespace VistasSorrySliders
             ConfiguracionLobby configuracionLobby = new ConfiguracionLobby(_cuentaUsuario);
             
             this.NavigationService.Navigate(configuracionLobby);
+        }
+
+        private void ClickMostrarUnirsePartida(object sender, RoutedEventArgs e)
+        {
+            UnirsePartidaPagina unirsePartida = new UnirsePartidaPagina(_cuentaUsuario);
+            this.NavigationService.Navigate(unirsePartida);
         }
     }
 }
