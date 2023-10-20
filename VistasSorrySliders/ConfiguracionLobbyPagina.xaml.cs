@@ -94,7 +94,6 @@ namespace VistasSorrySliders
                     Console.WriteLine(ex);
                     respuesta = Constantes.ERROR_CONEXION_SERVIDOR;
                     System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorConexion);
-
                 }
                 switch (respuesta)
                     {

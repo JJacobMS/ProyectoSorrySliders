@@ -19,10 +19,11 @@
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="200"/>
+                    <RowDefinition Height="183"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-                <Grid x:Name="grdJugadores" Grid.Column="0" Grid.Row="2" Height="200" Width="500">
+                <Button x:Name="btnIniciarPartida" VerticalAlignment="Top" Grid.Column="0" Grid.Row="3" Width="225" Height="27" Content="I N I C I A R   P A R T I D A" Style="{StaticResource estiloBtnCrearCuenta}" Click="ClickIniciarPartida"/>
+                <Grid x:Name="grdJugadores" Grid.Column="0" Grid.Row="2" Height="190" Width="500">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="70"/>
                         <ColumnDefinition Width="80"/>
@@ -42,7 +43,7 @@
                             <ImageBrush x:Name="mgBrushAvatar" Stretch="Uniform"></ImageBrush>
                         </Ellipse.Fill>
                     </Ellipse>
-                    <Ellipse x:Name="llpColor" Grid.Column="0" Grid.Row="0" Width="40" Height="40" StrokeThickness="5" Stroke="Blue" Fill="AliceBlue"  VerticalAlignment="Center" HorizontalAlignment="Right"/>
+                    <Ellipse x:Name="llpDecoracion" Grid.Column="0" Grid.Row="0" Width="40" Height="40" StrokeThickness="5" Stroke="#B2880D" Fill="#B2880D"  VerticalAlignment="Center" HorizontalAlignment="Right"/>
                 </Grid>
                 <Grid>
                     <Button VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10" Height="35" Width="105"
@@ -76,7 +77,7 @@
                                     <ColumnDefinition Width="2*"/>
                                 </Grid.ColumnDefinitions>
                                 <Label Style="{StaticResource estiloLblDatos}" 
-                                   Margin="0" FontSize="11" VerticalAlignment="Center">Número de Jugadores:</Label>
+                                   Margin="0" FontSize="11" VerticalAlignment="Center">Total Jugadores:</Label>
                                 <TextBox x:Name="txtBoxJugadores"  Grid.Column="1" Style="{StaticResource estiloTxtBoxDatosAzul}" 
                                      Margin="5" Height="28" IsEnabled="False"></TextBox>
                             </Grid>
@@ -105,6 +106,7 @@
                                      Margin="5" Height="28" IsReadOnly="True" Text="" FontSize="12"></TextBox>
                             </Grid>
                         </StackPanel>
+                        
                     </Grid>
                 </Border>
             </Grid>

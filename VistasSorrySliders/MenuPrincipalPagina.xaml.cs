@@ -70,15 +70,17 @@ namespace VistasSorrySliders
                 };
                 proxyRegistrarUsuario.Close();
             }
-            catch (CommunicationException excepcion)
+            catch (CommunicationException ex)
             {
+                Console.WriteLine(ex);
                 resultado = Constantes.ERROR_CONEXION_SERVIDOR;
-                Console.WriteLine(excepcion);
+                System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorConexion);
             }
-            catch (TimeoutException excepcion)
+            catch (TimeoutException ex)
             {
+                Console.WriteLine(ex);
                 resultado = Constantes.ERROR_CONEXION_SERVIDOR;
-                Console.WriteLine(excepcion);
+                System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorConexion);
             }
 
             switch (resultado)

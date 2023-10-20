@@ -71,10 +71,17 @@ namespace VistasSorrySliders
                     resultado = proxyInicioSesion.VerificarExistenciaCorreoCuenta(correoIngresado);
                     proxyInicioSesion.Close();
                 }
-                catch (CommunicationException excepcion) 
+                catch (CommunicationException ex)
                 {
+                    Console.WriteLine(ex);
                     resultado = Constantes.ERROR_CONEXION_SERVIDOR;
-                    Console.WriteLine(excepcion);
+                    System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorConexion);
+                }
+                catch (TimeoutException ex)
+                {
+                    Console.WriteLine(ex);
+                    resultado = Constantes.ERROR_CONEXION_SERVIDOR;
+                    System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorConexion);
                 }
 
                 switch (resultado)
@@ -107,10 +114,17 @@ namespace VistasSorrySliders
                 resultado = proxyInicioSesion.VerificarContrasenaDeCuenta(cuentaPorVerificar);
                 proxyInicioSesion.Close();
             }
-            catch (CommunicationException excepcion)    
+            catch (CommunicationException ex)
             {
+                Console.WriteLine(ex);
                 resultado = Constantes.ERROR_CONEXION_SERVIDOR;
-                Console.WriteLine(excepcion);
+                System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorConexion);
+            }
+            catch (TimeoutException ex)
+            {
+                Console.WriteLine(ex);
+                resultado = Constantes.ERROR_CONEXION_SERVIDOR;
+                System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorConexion);
             }
 
             switch (resultado)

@@ -26,6 +26,8 @@ namespace VistasSorrySliders
         private CuentaSet _cuentaUsuario;
         private string _codigoPartida;
         private LobbyClient _proxyLobby;
+        private CuentaSet[] _cuentas;
+        private PartidaSet _partidaActual;
 
         public LobbyPagina(CuentaSet cuentaUsuario, string codigoPartida)
         {
@@ -40,17 +42,32 @@ namespace VistasSorrySliders
         public void RecuperarDatosPartida(string codigoPartida) 
         {
             Console.WriteLine("Se actualizo la partida");
-            CuentaSet[] cuentas = new CuentaSet[4];
+           
             Constantes respuesta;
             try
             {
                 UnirsePartidaClient proxyRecuperarJugadores = new UnirsePartidaClient();
-                (respuesta, cuentas) = proxyRecuperarJugadores.RecuperarJugadoresLobby(codigoPartida);
+                (respuesta, _cuentas) = proxyRecuperarJugadores.RecuperarJugadoresLobby(codigoPartida);
+                if (_cuentas.Count() == _partidaActual.CantidadJugadores)
+                {
+                    btnIniciarPartida.IsEnabled = true;
+                }
+                else
+                {
+                    btnIniciarPartida.IsEnabled = false;
+                }
             }
-            catch(CommunicationException ex)
+            catch (CommunicationException ex)
+            {
+                respuesta = Constantes.ERROR_CONEXION_SERVIDOR;
+                Console.WriteLine(ex);
+                System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorConexion);
+            }
+            catch (TimeoutException ex)
             {
                 Console.WriteLine(ex);
                 respuesta = Constantes.ERROR_CONEXION_SERVIDOR;
+                System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorConexion);
             }
             switch (respuesta)
             {
@@ -65,9 +82,10 @@ namespace VistasSorrySliders
                     break;
                 case Constantes.OPERACION_EXITOSA:
                     grdJugadores.Children.Clear();
-                    CrearBorders(cuentas);
-                    CrearEllipses(cuentas);
-                    CrearLabels(cuentas);
+                    CrearBorders(_cuentas);
+                    CrearEllipses(_cuentas);
+                    CrearLabels(_cuentas);
+                    txtBoxHost.Text = _cuentas[0].CorreoElectronico;
                     break;
                 case Constantes.OPERACION_EXITOSA_VACIA:
                     Console.WriteLine("OPERACION_EXITOSA_VACIA1");
@@ -94,7 +112,6 @@ namespace VistasSorrySliders
             int contador = 0;
             foreach (var cuenta in cuentas)
             {
-                //Falta regresarlo y ponerle color
                 Ellipse nuevaEllipseAvatar = XamlReader.Parse(XamlWriter.Save(llpAvatar)) as Ellipse;
                 nuevaEllipseAvatar.Name = "llpAvatarJugador" + (contador + 1);
                 Grid.SetRow(nuevaEllipseAvatar, contador);
@@ -106,6 +123,12 @@ namespace VistasSorrySliders
                 nuevaEllipseFondo.Fill = Utilidades.ConvertirBytesAImageBrush(cuenta.Avatar);
                 Grid.SetRow(nuevaEllipseFondo, contador);
                 grdJugadores.Children.Add(nuevaEllipseFondo);
+
+                Ellipse nuevaEllipseDecoracion = XamlReader.Parse(XamlWriter.Save(llpDecoracion)) as Ellipse;
+                nuevaEllipseDecoracion.Name = "llpDecoracion" + (contador + 1);
+                Grid.SetRow(nuevaEllipseDecoracion, contador);
+                grdJugadores.Children.Add(nuevaEllipseDecoracion);
+
                 contador++;
             }
         }
@@ -125,17 +148,24 @@ namespace VistasSorrySliders
 
         private void InicializarDatosPartida(string codigoPartida) 
         {
-            PartidaSet partidaActual = new PartidaSet();
             Constantes respuesta;
             try
             {
                 UnirsePartidaClient proxyUnirsePartida = new UnirsePartidaClient();
-                (respuesta, partidaActual) = proxyUnirsePartida.RecuperarPartida(codigoPartida);
+                (respuesta, _partidaActual) = proxyUnirsePartida.RecuperarPartida(codigoPartida);
+                
             }
-            catch(CommunicationException ex)
+            catch (CommunicationException ex)
             {
                 Console.WriteLine(ex);
                 respuesta = Constantes.ERROR_CONEXION_SERVIDOR;
+                System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorConexion);
+            }
+            catch (TimeoutException ex)
+            {
+                Console.WriteLine(ex);
+                respuesta = Constantes.ERROR_CONEXION_SERVIDOR;
+                System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorConexion);
             }
             switch (respuesta)
             {
@@ -151,9 +181,9 @@ namespace VistasSorrySliders
 
                     break;
                 case Constantes.OPERACION_EXITOSA:
-                    txtBoxCodigoPartida.Text = partidaActual.CodigoPartida.ToString();
-                    txtBoxHost.Text = partidaActual.CorreoElectronico;
-                    txtBoxJugadores.Text = ""+partidaActual.CantidadJugadores;
+                    txtBoxCodigoPartida.Text = _partidaActual.CodigoPartida.ToString();
+                    txtBoxHost.Text = _partidaActual.CorreoElectronico;
+                    txtBoxJugadores.Text = ""+ _partidaActual.CantidadJugadores;
                     break;
                 case Constantes.OPERACION_EXITOSA_VACIA:
                     Console.WriteLine("OPERACION_EXITOSA_VACIA2");
@@ -204,14 +234,28 @@ namespace VistasSorrySliders
                 _proxyLobby.SalirPartida(_codigoPartida);
                    
             }
-            catch (CommunicationException ex) 
+            catch (CommunicationException ex)
             {
                 Console.WriteLine(ex);
+                System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorConexion);
+            }
+            catch (TimeoutException ex)
+            {
+                Console.WriteLine(ex);
+                System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorConexion);
             }
         }
         public void JugadorSalioPartida()
         {
             RecuperarDatosPartida(_codigoPartida);
+        }
+
+        private void ClickIniciarPartida(object sender, RoutedEventArgs e)
+        {
+            if (_cuentas.Count() == _partidaActual.CantidadJugadores)
+            {
+
+            }
         }
     }
 }

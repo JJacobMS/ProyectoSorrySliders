@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Mail;
+using System.Net;
 using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,6 +17,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using VistasSorrySliders.ServicioSorrySliders;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.TextBox;
+using System.Drawing;
 
 namespace VistasSorrySliders
 {
@@ -24,10 +27,12 @@ namespace VistasSorrySliders
     public partial class ListaAmigosPagina : Page
     {
         private CuentaSet _cuenta;
-        public ListaAmigosPagina(CuentaSet cuenta)
+        private string _codigoPartida;
+        public ListaAmigosPagina(CuentaSet cuenta, string codigoPartida)
         {
             InitializeComponent();
             _cuenta = cuenta;
+            _codigoPartida = codigoPartida;
             RecuperarAmigos();
         }
 
@@ -85,9 +90,32 @@ namespace VistasSorrySliders
 
         }
 
-        private void EnviarInvitacion()
+        private void EnviarCorreo()
         {
+            try
+            {
+                MailMessage correo = new MailMessage();
+                string correoJuego = "TheSorrySliders@gmail.com";
+                string contraseñaAplicacion = "nsnd wsuu kqeb qayk";
+                correo.From = new MailAddress(correoJuego);
+                correo.To.Add("montielsalasjesus@gmail.com");
+                correo.Subject = "Invitación a Sorry Sliders";
 
+                correo.Body = $"<p>El jugador {_cuenta.CorreoElectronico} te ha invitado a jugar Sorry Sliders \n " +
+                    $"Únete como invitado con el siguiente código de partida: {_codigoPartida} \n " +
+                    $"</p><img src='VistasSorrySliders/Recursos/logoSliders.png' alt='Sorry Sliders'>";
+                correo.IsBodyHtml = true;
+
+                SmtpClient clienteSmtp = new SmtpClient("smtp.gmail.com");
+                clienteSmtp.Port = 587;
+                clienteSmtp.Credentials = new NetworkCredential(correoJuego, contraseñaAplicacion);
+                clienteSmtp.EnableSsl = true;
+                clienteSmtp.Send(correo);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error al enviar el correo: " + ex.StackTrace);
+            }
         }
 
         private void ClicBuscarJugador(object sender, RoutedEventArgs e)
@@ -117,10 +145,17 @@ namespace VistasSorrySliders
                     jugadoresLista = cuentas.ToList();
                 }
             }
-            catch (CommunicationException excepcion)
+            catch (CommunicationException ex)
             {
+                Console.WriteLine(ex);
                 resultado = Constantes.ERROR_CONEXION_SERVIDOR;
-                Console.WriteLine(excepcion);
+                System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorConexion);
+            }
+            catch (TimeoutException ex)
+            {
+                Console.WriteLine(ex);
+                resultado = Constantes.ERROR_CONEXION_SERVIDOR;
+                System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorConexion);
             }
 
             switch (resultado)
@@ -138,6 +173,11 @@ namespace VistasSorrySliders
                     MessageBox.Show(Properties.Resources.msgErrorConexion);
                     break;
             }
+        }
+
+        private void ClickEnviarCodigoJugadorSinCuenta(object sender, RoutedEventArgs e)
+        {
+            EnviarCorreo();
         }
     }
 }

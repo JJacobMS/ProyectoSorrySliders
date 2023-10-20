@@ -29,7 +29,7 @@ namespace VistasSorrySliders
         {
             InitializeComponent();
             frameLobby.Content = new LobbyPagina(cuenta, codigoPartida);
-            frameListaAmigos.Content = new ListaAmigosPagina(cuenta);
+            frameListaAmigos.Content = new ListaAmigosPagina(cuenta, codigoPartida);
         }
 
 

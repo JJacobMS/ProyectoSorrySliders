@@ -48,7 +48,7 @@
                         <StackPanel Orientation="Horizontal" Margin="0,0,0,10" HorizontalAlignment="Center">
                             <TextBox Width="230" Style="{StaticResource estiloTxtBoxDatosMorado}"></TextBox>
                             <Button Content="ENVIAR CÓDIGO" Margin="5"
-                                    Style="{StaticResource estiloBtnListaAmigos}" HorizontalAlignment="Right"/>
+                                    Style="{StaticResource estiloBtnListaAmigos}" HorizontalAlignment="Right" Click="ClickEnviarCodigoJugadorSinCuenta"/>
                         </StackPanel>
 
                     </StackPanel>
