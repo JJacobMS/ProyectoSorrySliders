@@ -13,6 +13,7 @@
                 <ResourceDictionary Source="/DiccionarioEstilos/DiccionarioMenuPrincipal.xaml"/>
                 <ResourceDictionary Source="/DiccionarioEstilos/DiccionarioConfiguracionLobby.xaml"/>
                 <ResourceDictionary Source="/DiccionarioEstilos/DiccionarioListaAmigos.xaml"/>
+                <ResourceDictionary Source="/DiccionarioEstilos/DiccionarioDetallesCuenta.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

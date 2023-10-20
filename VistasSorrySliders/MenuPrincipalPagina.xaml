@@ -85,7 +85,10 @@
                             <Image Grid.Column="1" Source="/Recursos/jugadoresAmigosIcono.png" VerticalAlignment="Center" Margin="-55,-5,-25,-5"/>
                         </Grid>
                     </Button>
-                    <Rectangle Grid.Column="1" Grid.Row="5" Height="85" Width="410" Fill="#D19028" RadiusX="10" RadiusY="10" VerticalAlignment="Top"/>
+                    <Border Grid.Column="1" Grid.Row="5" MouseLeftButtonDown="MouseLeftButtonDownMostrarDetallesCuenta">
+                        <Rectangle Height="85" Width="410" Fill="#D19028" RadiusX="10" RadiusY="10" VerticalAlignment="Top"/>
+                    </Border>
+                    
                     <Grid Grid.Column="1" Grid.Row="5" Height="85" Width="410" VerticalAlignment="Top">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="315"/>
