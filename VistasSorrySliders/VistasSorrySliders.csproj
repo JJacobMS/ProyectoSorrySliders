@@ -257,6 +257,9 @@
     <None Include="Connected Services\ServicioSorrySliders\VistasSorrySliders.ServicioSorrySliders.PartidaSet.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Connected Services\ServicioSorrySliders\VistasSorrySliders.ServicioSorrySliders.UsuarioSet.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

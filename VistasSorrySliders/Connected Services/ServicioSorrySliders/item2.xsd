@@ -84,4 +84,20 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="ValueTupleOfConstantesstringW4mnvVr6" nillable="true" type="tns:ValueTupleOfConstantesstringW4mnvVr6" />
+  <xs:complexType name="ValueTupleOfConstantesUsuarioSetalmaccdW">
+    <xs:annotation>
+      <xs:appinfo>
+        <GenericType Name="ValueTupleOf{0}{1}{#}" Namespace="http://schemas.datacontract.org/2004/07/System" xmlns="http://schemas.microsoft.com/2003/10/Serialization/">
+          <GenericParameter Name="Constantes" Namespace="http://schemas.datacontract.org/2004/07/DatosSorrySliders" />
+          <GenericParameter Name="UsuarioSet" Namespace="http://schemas.datacontract.org/2004/07/DatosSorrySliders" />
+        </GenericType>
+        <IsValueType xmlns="http://schemas.microsoft.com/2003/10/Serialization/">true</IsValueType>
+      </xs:appinfo>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/DatosSorrySliders" name="Item1" type="q8:Constantes" />
+      <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/DatosSorrySliders" name="Item2" nillable="true" type="q9:UsuarioSet" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ValueTupleOfConstantesUsuarioSetalmaccdW" nillable="true" type="tns:ValueTupleOfConstantesUsuarioSetalmaccdW" />
 </xs:schema>

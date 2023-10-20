@@ -12,48 +12,54 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
 
-        <Border Background="#D19028" BorderBrush="Black" BorderThickness="3" Height="70" Width="650">
-            <Grid>
-                <Button Style="{StaticResource estiloBtnSalir}" HorizontalAlignment="Left" Margin="5">SALIR</Button>
-                <Label Style="{StaticResource estiloLblInicioSesion}" Margin="0,5,0,0">Perfil de Jugador</Label>
-            </Grid>
+        <Border Background="#D19028" BorderBrush="Black" BorderThickness="3" >
+            <Viewbox>
+                <Grid Height="70" Width="650">
+                    <Button Style="{StaticResource estiloBtnSalir}" HorizontalAlignment="Left" Margin="5" Click="ClickSalir">SALIR</Button>
+                    <Label Style="{StaticResource estiloLblInicioSesion}" Margin="0,5,0,0">Perfil de Jugador</Label>
+                </Grid>
+            </Viewbox>
         </Border>
-        <Border Grid.Row="1" Background="#FFF7BE" BorderBrush="Black" BorderThickness="3" Height="365" Width="650">
-            <Grid Margin="5,5,5,15">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
-                    <ColumnDefinition Width=".8*"/>
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                </Grid.RowDefinitions>
-                <StackPanel VerticalAlignment="Center">
-                    <Label Content="Nombre:" Style="{StaticResource estiloLblDatosJugador}"/>
-                    <TextBox Style="{StaticResource estiloTxtBoxDatosPerfil}"/>
-                </StackPanel>
-                <StackPanel VerticalAlignment="Center" Grid.Row="1">
-                    <Label Content="Apellidos:" Style="{StaticResource estiloLblDatosJugador}"/>
-                    <TextBox Style="{StaticResource estiloTxtBoxDatosPerfil}"/>
-                </StackPanel>
-                <StackPanel VerticalAlignment="Center" Grid.Row="2">
-                    <Label Content="Nickname:" Style="{StaticResource estiloLblDatosJugador}"/>
-                    <TextBox x:Name="txtBoxNickname" Style="{StaticResource estiloTxtBoxDatosPerfil}"/>
-                </StackPanel>
-                <StackPanel VerticalAlignment="Center" Grid.Row="3">
-                    <Label Content="Correo Electrónico:" Style="{StaticResource estiloLblDatosJugador}"/>
-                    <TextBox x:Name="txtBoxCorreo" Style="{StaticResource estiloTxtBoxDatosPerfil}"/>
-                </StackPanel>
-                <Ellipse Grid.Column="1" Grid.RowSpan="2" Height="160" Width="160" Fill="Black"></Ellipse>
-                <Ellipse x:Name="llpAvatar" Grid.Column="1" Grid.RowSpan="2" Height="150" Width="150" Fill="White"></Ellipse>
-                <Button Grid.Row="2" Grid.Column="1" Style="{StaticResource estiloBtnMorado}"
-                        Height="50" Width="200" FontSize="20">Modificar Cuenta</Button>
-                <Button Grid.Row="3" Grid.Column="1" Style="{StaticResource estiloBtnListaAmigos}"
-                        Height="50" Width="200" FontSize="20">Cambiar Contraseña</Button>
-            </Grid>
+        <Border Grid.Row="1"  Background="#FFF7BE" BorderBrush="Black" BorderThickness="3" >
+            <Viewbox>
+                <Grid Margin="5,5,5,15" Height="365" Width="650">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width=".8*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <StackPanel VerticalAlignment="Center">
+                        <Label Content="Nombre:" Style="{StaticResource estiloLblDatosJugador}"/>
+                        <TextBox x:Name="txtBoxNombre" Style="{StaticResource estiloTxtBoxDatosPerfil}"/>
+                    </StackPanel>
+                    <StackPanel VerticalAlignment="Center" Grid.Row="1">
+                        <Label Content="Apellidos:" Style="{StaticResource estiloLblDatosJugador}"/>
+                        <TextBox x:Name="txtBoxApellidos" Style="{StaticResource estiloTxtBoxDatosPerfil}"/>
+                    </StackPanel>
+                    <StackPanel VerticalAlignment="Center" Grid.Row="2">
+                        <Label Content="Nickname:" Style="{StaticResource estiloLblDatosJugador}"/>
+                        <TextBox x:Name="txtBoxNickname" Style="{StaticResource estiloTxtBoxDatosPerfil}"/>
+                    </StackPanel>
+                    <StackPanel VerticalAlignment="Center" Grid.Row="3">
+                        <Label Content="Correo Electrónico:" Style="{StaticResource estiloLblDatosJugador}"/>
+                        <TextBox x:Name="txtBoxCorreo" Style="{StaticResource estiloTxtBoxDatosPerfil}"/>
+                    </StackPanel>
+                    <Ellipse Grid.Column="1" Grid.RowSpan="2" Height="160" Width="160" Fill="Black"></Ellipse>
+                    <Ellipse x:Name="llpAvatar" Grid.Column="1" Grid.RowSpan="2" Height="150" Width="150" Fill="White"></Ellipse>
+                    <Button Grid.Row="2" Grid.Column="1" Style="{StaticResource estiloBtnMorado}"
+                                Height="50" Width="200" FontSize="20">Modificar Cuenta</Button>
+                    <Button Grid.Row="3" Grid.Column="1" Style="{StaticResource estiloBtnListaAmigos}"
+                                Height="50" Width="200" FontSize="20">Cambiar Contraseña</Button>
+                </Grid>
+            </Viewbox>
+            
         </Border>
+
 
     </Grid>
 </Window>
