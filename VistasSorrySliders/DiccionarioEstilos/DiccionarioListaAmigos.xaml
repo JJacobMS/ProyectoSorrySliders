@@ -1,5 +1,6 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:p="clr-namespace:VistasSorrySliders.Properties">
 
     <Style x:Key="estiloLblTextoListaAmigos" TargetType="Label">
         <Setter Property="FontFamily" Value="{StaticResource FuentesTitulo}"/>
@@ -78,7 +79,7 @@
                                             Style="{StaticResource estiloLblTextoListaAmigos}"/>
                             <Label Content="{Binding Path=CorreoElectronico}" FontSize="12" Margin="0,0,0,3" HorizontalAlignment="Left" VerticalAlignment="Bottom"
                                     Style="{StaticResource estiloLblTextoListaAmigos}"/>
-                            <Button x:Name="btnJugador" Grid.Column="1" Content="ENVIAR CÓDIGO" Margin="0,-5,10,0" CommandParameter="{Binding}"
+                            <Button x:Name="btnJugador" Grid.Column="1" Content="{x:Static p:Resources.btnEnviarCodigo}" Margin="0,-5,10,0" CommandParameter="{Binding}"
                                     Style="{StaticResource estiloBtnListaAmigos}"/>
                         </Grid>
                     </Border>

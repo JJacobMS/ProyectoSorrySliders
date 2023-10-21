@@ -3,6 +3,7 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:p="clr-namespace:VistasSorrySliders.Properties"
       xmlns:local="clr-namespace:VistasSorrySliders"
       mc:Ignorable="d" 
       d:DesignHeight="576" d:DesignWidth="615"
@@ -22,7 +23,7 @@
                     <RowDefinition Height="183"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-                <Button x:Name="btnIniciarPartida" VerticalAlignment="Top" Grid.Column="0" Grid.Row="3" Width="225" Height="27" Content="I N I C I A R   P A R T I D A" Style="{StaticResource estiloBtnCrearCuenta}" Click="ClickIniciarPartida"/>
+                <Button x:Name="btnIniciarPartida" VerticalAlignment="Top" Grid.Column="0" Grid.Row="3" Width="225" Height="27" Content="{x:Static p:Resources.btnIniciarPartida}" Style="{StaticResource estiloBtnCrearCuenta}" Click="ClickIniciarPartida"/>
                 <Grid x:Name="grdJugadores" Grid.Column="0" Grid.Row="2" Height="190" Width="500">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="70"/>
@@ -48,7 +49,7 @@
                 <Grid>
                     <Button VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10" Height="35" Width="105"
                         Style="{StaticResource estiloBtnSalir}" Click="ClickSalirLobbyJugadores">Salir</Button>
-                    <Label FontSize="38" VerticalAlignment="Center" Style="{StaticResource estiloLblTituloTextos}">LOBBY DE ESPERA</Label>
+                    <Label FontSize="38" VerticalAlignment="Center" Style="{StaticResource estiloLblTituloTextos}" Content="{x:Static p:Resources.lblLobbyEspera}"></Label>
                 </Grid>
                 <Border BorderBrush="#604111" BorderThickness="3" CornerRadius="10" Margin="15" Grid.Row="1">
                     <Grid>
@@ -59,8 +60,8 @@
                         <Viewbox>
                             <Border Background="#052B42" CornerRadius="5" Margin="10" Width="120" Height="140">
                                 <StackPanel VerticalAlignment="Center">
-                                    <Image Source="/Recursos/TableroCuatroConFondo.png" Height="100" Margin="10,10,10,0"/>
-                                    <Label Style="{StaticResource estiloLblNumeroJugadores}">4 JUGADORES</Label>
+                                    <Image x:Name="mgTablero" Source="/Recursos/TableroCuatroConFondo.png" Height="100" Margin="10,10,10,0"/>
+                                    <Label x:Name="lblCantidadJugadoresPartida" Style="{StaticResource estiloLblNumeroJugadores}" Content=""></Label>
                                 </StackPanel>
                             </Border>
                         </Viewbox>
@@ -68,7 +69,7 @@
                             <Viewbox>
                                 <Grid Margin="5" Height="60" Width="385">
                                     <Image Source="/Recursos/Banner.png"/>
-                                    <Label Style="{StaticResource estiloLblInicioSesion}" FontSize="25" Margin="0,10,0,0">Modo de Juego Normal</Label>
+                                    <Label Style="{StaticResource estiloLblInicioSesion}" FontSize="25" Margin="0,10,0,0" Content="{x:Static p:Resources.lblModoJuego}"></Label>
                                 </Grid>
                             </Viewbox>
                             <Grid>
@@ -77,7 +78,7 @@
                                     <ColumnDefinition Width="2*"/>
                                 </Grid.ColumnDefinitions>
                                 <Label Style="{StaticResource estiloLblDatos}" 
-                                   Margin="0" FontSize="11" VerticalAlignment="Center">Total Jugadores:</Label>
+                                   Margin="0" FontSize="11" VerticalAlignment="Center" Content="{x:Static p:Resources.lblTotalJugadores}"></Label>
                                 <TextBox x:Name="txtBoxJugadores"  Grid.Column="1" Style="{StaticResource estiloTxtBoxDatosAzul}" 
                                      Margin="5" Height="28" IsEnabled="False"></TextBox>
                             </Grid>
@@ -87,7 +88,7 @@
                                     <ColumnDefinition Width="2*"/>
                                 </Grid.ColumnDefinitions>
                                 <Label Style="{StaticResource estiloLblDatos}" 
-                                   Margin="0" FontSize="11" VerticalAlignment="Center">Host de la partida:</Label>
+                                   Margin="0" FontSize="11" VerticalAlignment="Center" Content="{x:Static p:Resources.lblHostPartida}"></Label>
                                 <TextBox x:Name="txtBoxHost" Grid.Column="1" Style="{StaticResource estiloTxtBoxDatosAzul}" 
                                      Margin="5" Height="28" IsEnabled="False" ></TextBox>
                             </Grid>
@@ -100,8 +101,8 @@
                                     <RowDefinition Height="*"/>
                                     <RowDefinition Height="*"/>
                                 </Grid.RowDefinitions>
-                                        <Label Style="{StaticResource estiloLblDatos}" 
-                                   Margin="0" FontSize="11" VerticalAlignment="Center">Código de partida:</Label>
+                                <Label Style="{StaticResource estiloLblDatos}" 
+                                   Margin="0" FontSize="11" VerticalAlignment="Center" Content="{x:Static p:Resources.lblCodigoPartida}"></Label>
                                 <TextBox x:Name="txtBoxCodigoPartida" Grid.Column="1" Style="{StaticResource estiloTxtBoxDatosAzul}" 
                                      Margin="5" Height="28" IsReadOnly="True" Text="" FontSize="12"></TextBox>
                             </Grid>

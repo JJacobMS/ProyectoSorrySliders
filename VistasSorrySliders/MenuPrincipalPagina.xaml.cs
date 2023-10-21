@@ -114,10 +114,11 @@ namespace VistasSorrySliders
         {
             txtBlockAjustes.Text = Properties.Resources.txtBlockAjustes;
             txtBlockUnirsePartida.Text = Properties.Resources.txtBlockUnirsePartida;
-            txtBlockAjustes.Text = Properties.Resources.txtBlockCrearLobby;
-            txtBlockAjustes.Text = Properties.Resources.txtBlockJugadoresAmigos;
-            txtBlockAjustes.Text = Properties.Resources.txtBlockUnirsePartida;
+            txtBlockCrearLobby.Text = Properties.Resources.txtBlockCrearLobby;
+            txtBlockJugadoresAmigos.Text = Properties.Resources.txtBlockJugadoresAmigos;
+            txtBlockUnirsePartida.Text = Properties.Resources.txtBlockUnirsePartida;
             txtBlockSalir.Text = Properties.Resources.btnSalir;
+            txtBlockTablaPuntuaciones.Text = Properties.Resources.txtBlockTablaPuntuaciones;
         }
 
         private void ClickSalirMenuPrincipal(object sender, RoutedEventArgs e)

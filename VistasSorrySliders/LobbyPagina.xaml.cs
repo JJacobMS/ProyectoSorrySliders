@@ -41,8 +41,6 @@ namespace VistasSorrySliders
 
         public void RecuperarDatosPartida(string codigoPartida) 
         {
-            Console.WriteLine("Se actualizo la partida");
-           
             Constantes respuesta;
             try
             {
@@ -184,6 +182,24 @@ namespace VistasSorrySliders
                     txtBoxCodigoPartida.Text = _partidaActual.CodigoPartida.ToString();
                     txtBoxHost.Text = _partidaActual.CorreoElectronico;
                     txtBoxJugadores.Text = ""+ _partidaActual.CantidadJugadores;
+                    switch (_partidaActual.CantidadJugadores)
+                    {
+                        case 2:
+                            lblCantidadJugadoresPartida.Content = Properties.Resources.lblDosJugadores;
+                            //mgTablero.Source = "/Recursos/TableroCuatroConFondo.png";
+                            break;
+                        case 3:
+                            lblCantidadJugadoresPartida.Content = Properties.Resources.lblTresJugadores;
+                            //
+                            break;
+                        case 4:
+                            lblCantidadJugadoresPartida.Content = Properties.Resources.lblCuatroJugadores;
+                            //
+                            break;
+                        default:
+                            break;
+                    }
+                    
                     break;
                 case Constantes.OPERACION_EXITOSA_VACIA:
                     Console.WriteLine("OPERACION_EXITOSA_VACIA2");
@@ -254,7 +270,7 @@ namespace VistasSorrySliders
         {
             if (_cuentas.Count() == _partidaActual.CantidadJugadores)
             {
-
+                
             }
         }
     }

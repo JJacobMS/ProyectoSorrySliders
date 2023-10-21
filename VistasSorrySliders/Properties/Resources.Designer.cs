@@ -61,6 +61,15 @@ namespace VistasSorrySliders.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a BUSCAR.
+        /// </summary>
+        public static string btnBuscar {
+            get {
+                return ResourceManager.GetString("btnBuscar", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a CANCELAR.
         /// </summary>
         public static string btnCancelar {
@@ -97,11 +106,38 @@ namespace VistasSorrySliders.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a C R E A R   L O B B Y.
+        /// </summary>
+        public static string btnCrearLobby {
+            get {
+                return ResourceManager.GetString("btnCrearLobby", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a ENVIAR CÓDIGO.
+        /// </summary>
+        public static string btnEnviarCodigo {
+            get {
+                return ResourceManager.GetString("btnEnviarCodigo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a GUARDAR CAMBIOS.
         /// </summary>
         public static string btnGuardarCambios {
             get {
                 return ResourceManager.GetString("btnGuardarCambios", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a I N I C I A R   P A R T I D A.
+        /// </summary>
+        public static string btnIniciarPartida {
+            get {
+                return ResourceManager.GetString("btnIniciarPartida", resourceCulture);
             }
         }
         
@@ -120,6 +156,15 @@ namespace VistasSorrySliders.Properties {
         public static string btnSalir {
             get {
                 return ResourceManager.GetString("btnSalir", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a UNIRSE A LA PARTIDA.
+        /// </summary>
+        public static string btnUnirsePartida {
+            get {
+                return ResourceManager.GetString("btnUnirsePartida", resourceCulture);
             }
         }
         
@@ -169,6 +214,15 @@ namespace VistasSorrySliders.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Código de partida:.
+        /// </summary>
+        public static string lblCodigoPartida {
+            get {
+                return ResourceManager.GetString("lblCodigoPartida", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Contraseña:.
         /// </summary>
         public static string lblContrasena {
@@ -196,6 +250,24 @@ namespace VistasSorrySliders.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Correo de Jugador sin Cuenta:.
+        /// </summary>
+        public static string lblCorreoJugadorSinCuenta {
+            get {
+                return ResourceManager.GetString("lblCorreoJugadorSinCuenta", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a 4 Jugadores.
+        /// </summary>
+        public static string lblCuatroJugadores {
+            get {
+                return ResourceManager.GetString("lblCuatroJugadores", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Datos de la cuenta.
         /// </summary>
         public static string lblDatosCuenta {
@@ -205,11 +277,29 @@ namespace VistasSorrySliders.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a 2 Jugadores.
+        /// </summary>
+        public static string lblDosJugadores {
+            get {
+                return ResourceManager.GetString("lblDosJugadores", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Español.
         /// </summary>
         public static string lblEspanol {
             get {
                 return ResourceManager.GetString("lblEspanol", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Host de la Partida:.
+        /// </summary>
+        public static string lblHostPartida {
+            get {
+                return ResourceManager.GetString("lblHostPartida", resourceCulture);
             }
         }
         
@@ -241,6 +331,51 @@ namespace VistasSorrySliders.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a INVITAR JUGADOR.
+        /// </summary>
+        public static string lblInvitarJugador {
+            get {
+                return ResourceManager.GetString("lblInvitarJugador", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Lista de amigos.
+        /// </summary>
+        public static string lblListaAmigos {
+            get {
+                return ResourceManager.GetString("lblListaAmigos", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Lista de jugadores.
+        /// </summary>
+        public static string lblListaDeJugadores {
+            get {
+                return ResourceManager.GetString("lblListaDeJugadores", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a LOBBY DE ESPERA.
+        /// </summary>
+        public static string lblLobbyEspera {
+            get {
+                return ResourceManager.GetString("lblLobbyEspera", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Modo de Juego Normal.
+        /// </summary>
+        public static string lblModoJuego {
+            get {
+                return ResourceManager.GetString("lblModoJuego", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Nickname/apodo.
         /// </summary>
         public static string lblNickname {
@@ -255,6 +390,33 @@ namespace VistasSorrySliders.Properties {
         public static string lblNombres {
             get {
                 return ResourceManager.GetString("lblNombres", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Total de Jugadores:.
+        /// </summary>
+        public static string lblTotalJugadores {
+            get {
+                return ResourceManager.GetString("lblTotalJugadores", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a 3 Jugadores.
+        /// </summary>
+        public static string lblTresJugadores {
+            get {
+                return ResourceManager.GetString("lblTresJugadores", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a UNIRSE A PARTIDA.
+        /// </summary>
+        public static string lblUnirsePartida {
+            get {
+                return ResourceManager.GetString("lblUnirsePartida", resourceCulture);
             }
         }
         
@@ -417,6 +579,15 @@ namespace VistasSorrySliders.Properties {
         public static string txtBlockAjustes {
             get {
                 return ResourceManager.GetString("txtBlockAjustes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a CONFIGURAR PARTIDA.
+        /// </summary>
+        public static string txtBlockConfigurarPartida {
+            get {
+                return ResourceManager.GetString("txtBlockConfigurarPartida", resourceCulture);
             }
         }
         

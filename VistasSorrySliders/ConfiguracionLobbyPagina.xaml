@@ -26,8 +26,8 @@
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
-                    <Button x:Name="btnCrearLobby" Grid.Column="1" Grid.Row="4" Content="C R E A R   L O B B Y" Click="ClickCrearLobby" Width="220" Height="40" Style="{StaticResource estiloBtnCrearCuenta}" IsEnabled="False"/>
-                    <TextBlock Grid.Column="1" Grid.Row="0" Width="400" Height="50" Text="CONFIGURAR PARTIDA" FontSize="35" TextAlignment="Center" VerticalAlignment="Center" FontFamily="{StaticResource FuentesTexto}"/>
+                    <Button x:Name="btnCrearLobby" Grid.Column="1" Grid.Row="4" Content="{x:Static p:Resources.btnCrearLobby}" Click="ClickCrearLobby" Width="220" Height="40" Style="{StaticResource estiloBtnCrearCuenta}" IsEnabled="False"/>
+                    <TextBlock Grid.Column="1" Grid.Row="0" Width="400" Height="50" Text="{x:Static p:Resources.txtBlockConfigurarPartida}" FontSize="35" TextAlignment="Center" VerticalAlignment="Center" FontFamily="{StaticResource FuentesTexto}"/>
                     <Button Grid.Column="0" Grid.Row="0" Height="45" Width="200" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="25,0,0,0"  Style="{StaticResource estiloBtnSalir}" Click="ClickSalirConfigurarLobby">
                         <TextBlock Text="{x:Static p:Resources.btnSalir}" Style="{StaticResource estiloTxtBoxBotonesMenuPrincipal}" Margin="-10,10,10,10"/>
                     </Button>
@@ -42,7 +42,7 @@
                                 <RowDefinition Height="*"/>
                             </Grid.RowDefinitions>
                             <Image Grid.Column="0" Grid.Row="0" Source="/Recursos/tableroCuatroConFondo.png" Margin="0,20,0,0"/>
-                            <Label Grid.Column="0" Grid.Row="1" FontSize="18" Content="4 Jugadores"  Style="{StaticResource estiloLblNumeroJugadores}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            <Label Grid.Column="0" Grid.Row="1" FontSize="18" Content="{x:Static p:Resources.lblCuatroJugadores}"  Style="{StaticResource estiloLblNumeroJugadores}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Grid>
                     </Border>
                     <Border x:Name="brdTablero3Jugadores" Grid.Column="1" Grid.Row="1" Height="270" Width="250" Background="#C71C25" VerticalAlignment="Center" HorizontalAlignment="Center" CornerRadius="10" IsHitTestVisible="True" MouseLeftButtonDown="MouseLeftButtonDownSeleccionarTablero">
@@ -54,8 +54,8 @@
                                 <RowDefinition Height="230"/>
                                 <RowDefinition Height="*"/>
                             </Grid.RowDefinitions>
-                            <Image Grid.Column="0" Grid.Row="0" Source="/Recursos/tableroTresConFondo.png" Margin="-170,-150,-210,-200" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                            <Label Grid.Column="0" Grid.Row="1" FontSize="18" Content="3 Jugadores"  Style="{StaticResource estiloLblNumeroJugadores}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            <Image Grid.Column="0" Grid.Row="0" Source="/Recursos/tableroTresConFondo.png" Margin="-10,19,-10,0" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                            <Label Grid.Column="0" Grid.Row="1" FontSize="18" Content="{x:Static p:Resources.lblTresJugadores}"  Style="{StaticResource estiloLblNumeroJugadores}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Grid>
                     </Border>
                     <Border x:Name="brdTablero2Jugadores" Grid.Column="2" Grid.Row="1" Height="270" Width="250" Background="#D19028" VerticalAlignment="Center" HorizontalAlignment="Left" CornerRadius="10" IsHitTestVisible="True" MouseLeftButtonDown="MouseLeftButtonDownSeleccionarTablero">
@@ -67,8 +67,8 @@
                                 <RowDefinition Height="220"/>
                                 <RowDefinition Height="*"/>
                             </Grid.RowDefinitions>
-                            <Image Grid.Column="0" Grid.Row="0" Source="/Recursos/tableroDosConFondo.png" Margin="-125,-100,-125,-110"/>
-                            <Label Grid.Column="0" Grid.Row="1" Content="2 Jugadores" FontSize="18"  Style="{StaticResource estiloLblNumeroJugadores}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            <Image Grid.Column="0" Grid.Row="0" Source="Recursos/TableroDosConFondo.png" Margin="0,17,0,-10"/>
+                            <Label Grid.Column="0" Grid.Row="1" Content="{x:Static p:Resources.lblDosJugadores}" FontSize="18"  Style="{StaticResource estiloLblNumeroJugadores}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Grid>
                     </Border>
                     <Border Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="3" BorderThickness="2" BorderBrush="Black"  Margin="40,5,40,5" CornerRadius="10"/>

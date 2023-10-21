@@ -18,6 +18,7 @@ using System.Windows.Shapes;
 using VistasSorrySliders.ServicioSorrySliders;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.TextBox;
 using System.Drawing;
+using System.Net.NetworkInformation;
 
 namespace VistasSorrySliders
 {
@@ -94,23 +95,32 @@ namespace VistasSorrySliders
         {
             try
             {
-                MailMessage correo = new MailMessage();
-                string correoJuego = "TheSorrySliders@gmail.com";
-                string contraseñaAplicacion = "nsnd wsuu kqeb qayk";
-                correo.From = new MailAddress(correoJuego);
-                correo.To.Add("montielsalasjesus@gmail.com");
-                correo.Subject = "Invitación a Sorry Sliders";
+                if (NetworkInterface.GetIsNetworkAvailable())
+                {
+                    Console.WriteLine("Estás conectado a Internet");
 
-                correo.Body = $"<p>El jugador {_cuenta.CorreoElectronico} te ha invitado a jugar Sorry Sliders \n " +
-                    $"Únete como invitado con el siguiente código de partida: {_codigoPartida} \n " +
-                    $"</p><img src='VistasSorrySliders/Recursos/logoSliders.png' alt='Sorry Sliders'>";
-                correo.IsBodyHtml = true;
+                    MailMessage correo = new MailMessage();
+                    string correoJuego = "TheSorrySliders@gmail.com";
+                    string contraseñaAplicacion = "nsnd wsuu kqeb qayk";
+                    correo.From = new MailAddress(correoJuego);
+                    correo.To.Add("montielsalasjesus@gmail.com");
+                    correo.Subject = "Invitación a Sorry Sliders";
 
-                SmtpClient clienteSmtp = new SmtpClient("smtp.gmail.com");
-                clienteSmtp.Port = 587;
-                clienteSmtp.Credentials = new NetworkCredential(correoJuego, contraseñaAplicacion);
-                clienteSmtp.EnableSsl = true;
-                clienteSmtp.Send(correo);
+                    correo.Body = $"<p>El jugador {_cuenta.CorreoElectronico} te ha invitado a jugar Sorry Sliders \n " +
+                        $"Únete como invitado con el siguiente código de partida: {_codigoPartida} \n " +
+                        $"</p><img src='VistasSorrySliders/Recursos/logoSliders.png' alt='Sorry Sliders'>";
+                    correo.IsBodyHtml = true;
+
+                    SmtpClient clienteSmtp = new SmtpClient("smtp.gmail.com");
+                    clienteSmtp.Port = 587;
+                    clienteSmtp.Credentials = new NetworkCredential(correoJuego, contraseñaAplicacion);
+                    clienteSmtp.EnableSsl = true;
+                    clienteSmtp.Send(correo);
+                }
+                else
+                {
+                    Console.WriteLine("No hay conexión a Internet");
+                }
             }
             catch (Exception ex)
             {
