@@ -122,7 +122,7 @@ namespace VistasSorrySliders
         }
 
         private void ClickSalirMenuPrincipal(object sender, RoutedEventArgs e)
-        {
+        {+¿
             InicioSesionPagina inicio = new InicioSesionPagina();
             this.NavigationService.Navigate(inicio);
         }
