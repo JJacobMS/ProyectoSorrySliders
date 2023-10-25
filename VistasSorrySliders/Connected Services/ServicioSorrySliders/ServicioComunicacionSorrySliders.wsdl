@@ -270,6 +270,7 @@
       <xsd:import schemaLocation="http://localhost:5454/?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
       <xsd:import schemaLocation="http://localhost:5454/?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/DatosSorrySliders" />
       <xsd:import schemaLocation="http://localhost:5454/?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/System" />
+      <xsd:import schemaLocation="http://localhost:5454/?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/ServidorSorrySliders" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="IInicioSesion_VerificarExistenciaCorreoCuenta_InputMessage">
@@ -290,11 +291,23 @@
   <wsdl:message name="IMenuPrincipal_RecuperarDatosUsuario_OutputMessage">
     <wsdl:part name="parameters" element="tns:RecuperarDatosUsuarioResponse" />
   </wsdl:message>
+  <wsdl:message name="IMenuPrincipal_RecuperarPuntuaciones_InputMessage">
+    <wsdl:part name="parameters" element="tns:RecuperarPuntuaciones" />
+  </wsdl:message>
+  <wsdl:message name="IMenuPrincipal_RecuperarPuntuaciones_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RecuperarPuntuacionesResponse" />
+  </wsdl:message>
   <wsdl:message name="IRegistroUsuario_AgregarUsuario_InputMessage">
     <wsdl:part name="parameters" element="tns:AgregarUsuario" />
   </wsdl:message>
   <wsdl:message name="IRegistroUsuario_AgregarUsuario_OutputMessage">
     <wsdl:part name="parameters" element="tns:AgregarUsuarioResponse" />
+  </wsdl:message>
+  <wsdl:message name="IRegistroUsuario_ActualizarUsuario_InputMessage">
+    <wsdl:part name="parameters" element="tns:ActualizarUsuario" />
+  </wsdl:message>
+  <wsdl:message name="IRegistroUsuario_ActualizarUsuario_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ActualizarUsuarioResponse" />
   </wsdl:message>
   <wsdl:message name="ILobby_EntrarPartida_InputMessage">
     <wsdl:part name="parameters" element="tns:EntrarPartida" />
@@ -374,11 +387,19 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IMenuPrincipal/RecuperarDatosUsuario" message="tns:IMenuPrincipal_RecuperarDatosUsuario_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IMenuPrincipal/RecuperarDatosUsuarioResponse" message="tns:IMenuPrincipal_RecuperarDatosUsuario_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="RecuperarPuntuaciones">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMenuPrincipal/RecuperarPuntuaciones" message="tns:IMenuPrincipal_RecuperarPuntuaciones_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMenuPrincipal/RecuperarPuntuacionesResponse" message="tns:IMenuPrincipal_RecuperarPuntuaciones_OutputMessage" />
+    </wsdl:operation>
   </wsdl:portType>
   <wsdl:portType name="IRegistroUsuario">
     <wsdl:operation name="AgregarUsuario">
       <wsdl:input wsaw:Action="http://tempuri.org/IRegistroUsuario/AgregarUsuario" message="tns:IRegistroUsuario_AgregarUsuario_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IRegistroUsuario/AgregarUsuarioResponse" message="tns:IRegistroUsuario_AgregarUsuario_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ActualizarUsuario">
+      <wsdl:input wsaw:Action="http://tempuri.org/IRegistroUsuario/ActualizarUsuario" message="tns:IRegistroUsuario_ActualizarUsuario_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IRegistroUsuario/ActualizarUsuarioResponse" message="tns:IRegistroUsuario_ActualizarUsuario_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:portType name="ILobby">
@@ -472,12 +493,30 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="RecuperarPuntuaciones">
+      <soap12:operation soapAction="http://tempuri.org/IMenuPrincipal/RecuperarPuntuaciones" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
   </wsdl:binding>
   <wsdl:binding name="NetTcpBinding_IRegistroUsuario" type="tns:IRegistroUsuario">
     <wsp:PolicyReference URI="#NetTcpBinding_IRegistroUsuario_policy" />
     <soap12:binding transport="http://schemas.microsoft.com/soap/tcp" />
     <wsdl:operation name="AgregarUsuario">
       <soap12:operation soapAction="http://tempuri.org/IRegistroUsuario/AgregarUsuario" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ActualizarUsuario">
+      <soap12:operation soapAction="http://tempuri.org/IRegistroUsuario/ActualizarUsuario" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -614,7 +653,7 @@
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:5455/ServidorSorrySliders</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>LAPTOP-H4AE1QJ9\sulem</Upn>
+          <Upn>LAPTOP-SF103ATP\monti</Upn>
         </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>
@@ -623,7 +662,7 @@
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:5455/ServidorSorrySliders</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>LAPTOP-H4AE1QJ9\sulem</Upn>
+          <Upn>LAPTOP-SF103ATP\monti</Upn>
         </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>
@@ -632,7 +671,7 @@
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:5455/ServidorSorrySliders</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>LAPTOP-H4AE1QJ9\sulem</Upn>
+          <Upn>LAPTOP-SF103ATP\monti</Upn>
         </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>
@@ -641,7 +680,7 @@
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:5455/ServidorSorrySliders</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>LAPTOP-H4AE1QJ9\sulem</Upn>
+          <Upn>LAPTOP-SF103ATP\monti</Upn>
         </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>
@@ -650,7 +689,7 @@
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:5455/ServidorSorrySliders</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>LAPTOP-H4AE1QJ9\sulem</Upn>
+          <Upn>LAPTOP-SF103ATP\monti</Upn>
         </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>
@@ -659,7 +698,7 @@
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:5455/ServidorSorrySliders</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>LAPTOP-H4AE1QJ9\sulem</Upn>
+          <Upn>LAPTOP-SF103ATP\monti</Upn>
         </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>
@@ -668,7 +707,7 @@
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:5455/ServidorSorrySliders</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>LAPTOP-H4AE1QJ9\sulem</Upn>
+          <Upn>LAPTOP-SF103ATP\monti</Upn>
         </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>
@@ -677,7 +716,7 @@
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:5455/ServidorSorrySliders</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>LAPTOP-H4AE1QJ9\sulem</Upn>
+          <Upn>LAPTOP-SF103ATP\monti</Upn>
         </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>

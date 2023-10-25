@@ -28,10 +28,24 @@ namespace VistasSorrySliders
     /// </summary>
     public partial class RegistroUsuariosPagina : Page
     {
+        private CuentaSet _cuenta;
+        private UsuarioSet _usuario;
+        private bool _esModificacion;
         public RegistroUsuariosPagina()
         {
             InitializeComponent();
+            InicializarDatosCrearUsuario();
             EstablecerImagenPorDefecto();
+            
+            _esModificacion = false;
+        }
+        public RegistroUsuariosPagina(CuentaSet cuentaUsuario,  UsuarioSet usuario)
+        {
+            InitializeComponent();
+            _esModificacion = true;
+            _cuenta = cuentaUsuario;
+            _usuario = usuario;
+            InicializarDatosModificarUsuario();
         }
         private String _rutaImagen;
         private byte[] _avatarByte = null;
@@ -57,7 +71,27 @@ namespace VistasSorrySliders
             }
         }
 
+        private void InicializarDatosCrearUsuario() 
+        {
+            lblTitulo.Content = Properties.Resources.lblBienvenido;
+            lblContraseña.Visibility = Visibility.Visible;
+        }
 
+        private void InicializarDatosModificarUsuario() 
+        {
+            txtBoxCorreoElectronico.Text = _cuenta.CorreoElectronico;
+            pssBoxContrasena.Password = _cuenta.Contraseña;
+            txtBoxNickname.Text = _cuenta.Nickname;
+            txtBoxApellidos.Text = _usuario.Apellido;
+            txtBoxNombre.Text = _usuario.Nombre;
+
+            txtBoxCorreoElectronico.IsReadOnly = true;
+            pssBoxContrasena.Visibility = Visibility.Hidden;
+            lblContraseña.Visibility = Visibility.Hidden;
+
+            lblTitulo.Content = Properties.Resources.lblBienvenidoNuevo;
+
+        }
 
         private bool ValidarCampos()
         {
@@ -87,25 +121,29 @@ namespace VistasSorrySliders
                 validacionCampos = false;
             }
 
-            if (!string.IsNullOrWhiteSpace(txtBoxCorreoElectronico.Text) && ValidarCorreo(txtBoxCorreoElectronico.Text) && ValidarExistenciaCorreo())
+            if (_esModificacion == false)
             {
-                txtBoxCorreoElectronico.Style = estiloTxtBoxAzul;
-            }
-            else
-            {
-                txtBoxCorreoElectronico.Style = estiloTxtBoxRojo;
-                validacionCampos = false;
+                if (!string.IsNullOrWhiteSpace(txtBoxCorreoElectronico.Text) && ValidarCorreo(txtBoxCorreoElectronico.Text) && ValidarExistenciaCorreo())
+                {
+                    txtBoxCorreoElectronico.Style = estiloTxtBoxAzul;
+                }
+                else
+                {
+                    txtBoxCorreoElectronico.Style = estiloTxtBoxRojo;
+                    validacionCampos = false;
+                }
+
+                if (!string.IsNullOrWhiteSpace(pssBoxContrasena.Password) && ValidarContraseña(pssBoxContrasena.Password))
+                {
+                    pssBoxContrasena.Style = estiloPssBoxAzul;
+                }
+                else
+                {
+                    pssBoxContrasena.Style = estiloPssBoxRojo;
+                    validacionCampos = false;
+                }
             }
 
-            if (!string.IsNullOrWhiteSpace(pssBoxContrasena.Password) && ValidarContraseña(pssBoxContrasena.Password))
-            {
-                pssBoxContrasena.Style = estiloPssBoxAzul;
-            }
-            else
-            {
-                pssBoxContrasena.Style = estiloPssBoxRojo;
-                validacionCampos = false;
-            }
 
             if(!string.IsNullOrWhiteSpace(txtBoxNickname.Text))
             {
@@ -296,18 +334,25 @@ namespace VistasSorrySliders
         }
         private void ClickCrearCuenta(object sender, RoutedEventArgs e)
         {
-            if (ValidarCampos() && ValidarExistenciaImagen())
+            try
             {
-                try
+                if (_esModificacion)
                 {
-                    AñadirCuenta();
-                    IrInicioSesion();
+                    ValidarCampos();   
                 }
-                catch (CommunicationException ex)
+                else
                 {
-                    Console.WriteLine(ex);
-                    System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorConexion);
+                    if (ValidarCampos() && ValidarExistenciaImagen())
+                    {
+                        AñadirCuenta();
+                        IrInicioSesion();
+                    }
                 }
+            }
+            catch (CommunicationException ex)
+            {
+                Console.WriteLine(ex);
+                System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorConexion);
             }
 
         }

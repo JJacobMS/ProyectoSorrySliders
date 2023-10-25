@@ -11,6 +11,7 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 using VistasSorrySliders.ServicioSorrySliders;
 
@@ -21,6 +22,8 @@ namespace VistasSorrySliders
     /// </summary>
     public partial class CuentaDetallesVentana : Window
     {
+        public delegate void ManegarEventoConUsuario(UsuarioSet usuario);
+        public event ManegarEventoConUsuario ModificarCuenta;
         private CuentaSet _cuenta;
         private UsuarioSet _usuario;
         public CuentaDetallesVentana(CuentaSet cuenta)
@@ -83,6 +86,12 @@ namespace VistasSorrySliders
 
         private void ClickSalir(object sender, RoutedEventArgs e)
         {
+            this.Close();
+        }
+
+        private void ClickIrRegistroUsuarios(object sender, RoutedEventArgs e)
+        {
+            ModificarCuenta?.Invoke(_usuario);
             this.Close();
         }
     }

@@ -45,7 +45,7 @@
                             <TextBlock x:Name="txtBlockSalir"  Text="{x:Static p:Resources.btnSalir}" Style="{StaticResource estiloTxtBoxBotonesMenuPrincipal}" Margin="-10,10,10,10"/>
                         </Button>
                     </WrapPanel>
-                    <Button Grid.Column="3" Grid.Row="1" Style="{StaticResource estiloBtnTablaPuntuaciones}">
+                    <Button Grid.Column="3" Grid.Row="1" Style="{StaticResource estiloBtnTablaPuntuaciones}" Click="ClickMostrarPuntuaciones">
                         <Grid Height="60" Width="380">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="330"/>

@@ -27,6 +27,7 @@
     <MetadataFile FileName="item2.xsd" MetadataType="Schema" ID="18918ea9-9b84-4f6d-9679-b4cc8c66c837" SourceId="1" SourceUrl="http://localhost:5454/?xsd=xsd3" />
     <MetadataFile FileName="item3.xsd" MetadataType="Schema" ID="b9d8154d-2df2-4eff-afd0-86b267c1c7af" SourceId="1" SourceUrl="http://localhost:5454/?xsd=xsd0" />
     <MetadataFile FileName="item.xsd" MetadataType="Schema" ID="b6a107d3-1a2b-4c2d-9f3f-bbf11db511c9" SourceId="1" SourceUrl="http://localhost:5454/?xsd=xsd1" />
+    <MetadataFile FileName="item4.xsd" MetadataType="Schema" ID="66d4d86e-4745-4469-83b5-387e00a887f3" SourceId="1" SourceUrl="http://localhost:5454/?xsd=xsd4" />
     <MetadataFile FileName="ServicioComunicacionSorrySliders.wsdl" MetadataType="Wsdl" ID="754f6b2a-d05e-4fe5-880f-54c3bbefe11e" SourceId="1" SourceUrl="http://localhost:5454/?wsdl" />
   </Metadata>
   <Extensions>

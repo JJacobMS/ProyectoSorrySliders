@@ -33,41 +33,46 @@ namespace VistasSorrySliders
         public MenuPrincipalPagina(string correoUsuario)
         {
             InitializeComponent();
-            
+
             //Metodo calcular partidas todos los jugadores SERVIDOR
 
             RecuperarDatosUsuario(correoUsuario);
 
         }
-        public MenuPrincipalPagina(CuentaSet cuentaActual) 
+        public MenuPrincipalPagina(CuentaSet cuentaActual)
         {
             InitializeComponent();
             _cuentaUsuario = cuentaActual;
             InicializarDatosMenu();
         }
 
-        private void InicializarDatosMenu() 
+        private void InicializarDatosMenu()
         {
             txtBlockNickname.Text = _cuentaUsuario.Nickname;
             txtBlockCorreoElectronico.Text = _cuentaUsuario.CorreoElectronico;
             Utilidades.IngresarImagen(_cuentaUsuario.Avatar, this.mgBrushAvatar);
         }
 
-        private void RecuperarDatosUsuario(string correoUsuario) 
+        private void RecuperarDatosUsuario(string correoUsuario)
         {
             Constantes resultado;
             try
             {
                 MenuPrincipalClient proxyRegistrarUsuario = new MenuPrincipalClient();
                 string nickname;
+                string contraseña;
                 byte[] avatar;
-                (resultado, nickname, avatar) = proxyRegistrarUsuario.RecuperarDatosUsuario(correoUsuario);
-                _cuentaUsuario = new CuentaSet
+                (resultado, nickname, avatar, contraseña) = proxyRegistrarUsuario.RecuperarDatosUsuario(correoUsuario);
+                if (resultado == Constantes.OPERACION_EXITOSA)
                 {
-                    Nickname = nickname,
-                    Avatar = avatar,
-                    CorreoElectronico = correoUsuario
-                };
+                    _cuentaUsuario = new CuentaSet
+                    {
+                        Nickname = nickname,
+                        Avatar = avatar,
+                        CorreoElectronico = correoUsuario,
+                        Contraseña = contraseña
+                    };
+                }
                 proxyRegistrarUsuario.Close();
             }
             catch (CommunicationException ex)
@@ -91,12 +96,15 @@ namespace VistasSorrySliders
                 case Constantes.OPERACION_EXITOSA_VACIA:
                     break;
                 case Constantes.ERROR_CONEXION_BD:
+                    IrInicioSesion();
                     System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorBaseDatos);
                     break;
                 case Constantes.ERROR_CONSULTA:
+                    IrInicioSesion();
                     System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorBaseDatos);
                     break;
                 case Constantes.ERROR_CONEXION_SERVIDOR:
+                    IrInicioSesion();
                     System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorConexion);
                     break;
             }
@@ -106,11 +114,11 @@ namespace VistasSorrySliders
         private void ClickMostrarAjustes(object sender, RoutedEventArgs e)
         {
             AjustesVentana ajustes = new AjustesVentana();
-            ajustes.IdiomaCambiado += ActualizarVentanaMenuPrincipal;
+            ajustes.IdiomaCambiado += ActualizarIdiomaMenuPrincipal;
             ajustes.ShowDialog();
         }
 
-        private void ActualizarVentanaMenuPrincipal()
+        private void ActualizarIdiomaMenuPrincipal()
         {
             txtBlockAjustes.Text = Properties.Resources.txtBlockAjustes;
             txtBlockUnirsePartida.Text = Properties.Resources.txtBlockUnirsePartida;
@@ -123,13 +131,17 @@ namespace VistasSorrySliders
 
         private void ClickSalirMenuPrincipal(object sender, RoutedEventArgs e)
         {
+            IrInicioSesion();
+        }
+        private void IrInicioSesion()
+        {
             InicioSesionPagina inicio = new InicioSesionPagina();
             this.NavigationService.Navigate(inicio);
         }
         private void ClickMostrarConfiguracionLobby(object sender, RoutedEventArgs e)
         {
             ConfiguracionLobby configuracionLobby = new ConfiguracionLobby(_cuentaUsuario);
-            
+
             this.NavigationService.Navigate(configuracionLobby);
         }
 
@@ -142,7 +154,61 @@ namespace VistasSorrySliders
         private void MouseLeftButtonDownMostrarDetallesCuenta(object sender, MouseButtonEventArgs e)
         {
             CuentaDetallesVentana detalles = new CuentaDetallesVentana(_cuentaUsuario);
+            detalles.ModificarCuenta += ActualizarPaginaMenuPrincipal;
             detalles.ShowDialog();
+        }
+
+        private void ActualizarPaginaMenuPrincipal(UsuarioSet usuario) 
+        {
+            RegistroUsuariosPagina registro = new RegistroUsuariosPagina(_cuentaUsuario, usuario);
+            this.NavigationService.Navigate(registro);
+        } 
+
+        private void ClickMostrarPuntuaciones(object sender, RoutedEventArgs e)
+        {
+            Constantes resultado = new Constantes();
+            Puntuacion[] puntuaciones = new Puntuacion[] { };
+            try
+            {
+                MenuPrincipalClient proxyRecuperarPuntuaciones = new MenuPrincipalClient();
+                (resultado, puntuaciones) = proxyRecuperarPuntuaciones.RecuperarPuntuaciones();
+                proxyRecuperarPuntuaciones.Close();
+                switch (resultado)
+                {
+                    case Constantes.OPERACION_EXITOSA:
+                        foreach (var puntuacion in puntuaciones)
+                        {
+                            Console.WriteLine(puntuacion.Nickname + " " + puntuacion.NumeroPartidasGanadas);
+                        }
+                        break;
+                    case Constantes.OPERACION_EXITOSA_VACIA:
+                        Console.WriteLine("VACIO");
+                        break;
+                    case Constantes.ERROR_CONEXION_BD:
+                        System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorBaseDatos);
+                        break;
+                    case Constantes.ERROR_CONSULTA:
+                        System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorBaseDatos);
+                        break;
+                    case Constantes.ERROR_CONEXION_SERVIDOR:
+                        System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorConexion);
+                        break;
+                    default:
+                        break;
+                }
+            }
+            catch (CommunicationException ex)
+            {
+                Console.WriteLine(ex);
+                resultado = Constantes.ERROR_CONEXION_SERVIDOR;
+                System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorConexion);
+            }
+            catch (TimeoutException ex)
+            {
+                Console.WriteLine(ex);
+                resultado = Constantes.ERROR_CONEXION_SERVIDOR;
+                System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorConexion);
+            }
         }
     }
 }

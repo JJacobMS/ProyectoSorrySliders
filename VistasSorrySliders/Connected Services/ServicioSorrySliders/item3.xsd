@@ -40,22 +40,49 @@
   <xs:element name="RecuperarDatosUsuarioResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/System" minOccurs="0" name="RecuperarDatosUsuarioResult" type="q4:ValueTupleOfConstantesstringbase64BinarywTLIru0k" />
+        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/System" minOccurs="0" name="RecuperarDatosUsuarioResult" type="q4:ValueTupleOfConstantesstringbase64Binarystring_PIB9N_S6v" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RecuperarPuntuaciones">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RecuperarPuntuacionesResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/System" minOccurs="0" name="RecuperarPuntuacionesResult" type="q5:ValueTupleOfConstantesArrayOfPuntuacionK_Pmi0k2_P" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="AgregarUsuario">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/DatosSorrySliders" minOccurs="0" name="usuarioPorGuardar" nillable="true" type="q5:UsuarioSet" />
-        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/DatosSorrySliders" minOccurs="0" name="cuentaPorGuardar" nillable="true" type="q6:CuentaSet" />
+        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/DatosSorrySliders" minOccurs="0" name="usuarioPorGuardar" nillable="true" type="q6:UsuarioSet" />
+        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/DatosSorrySliders" minOccurs="0" name="cuentaPorGuardar" nillable="true" type="q7:CuentaSet" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="AgregarUsuarioResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/DatosSorrySliders" minOccurs="0" name="AgregarUsuarioResult" type="q7:Constantes" />
+        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/DatosSorrySliders" minOccurs="0" name="AgregarUsuarioResult" type="q8:Constantes" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ActualizarUsuario">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/DatosSorrySliders" minOccurs="0" name="usuarioPorActualizar" nillable="true" type="q9:UsuarioSet" />
+        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/DatosSorrySliders" minOccurs="0" name="cuentaPorGuardar" nillable="true" type="q10:CuentaSet" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ActualizarUsuarioResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/DatosSorrySliders" minOccurs="0" name="ActualizarUsuarioResult" type="q11:Constantes" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -94,7 +121,7 @@
   <xs:element name="UnirseAlLobbyResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/System" minOccurs="0" name="UnirseAlLobbyResult" type="q8:ValueTupleOfConstantesintW4mnvVr6" />
+        <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/System" minOccurs="0" name="UnirseAlLobbyResult" type="q12:ValueTupleOfConstantesintW4mnvVr6" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -108,7 +135,7 @@
   <xs:element name="RecuperarJugadoresLobbyResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/System" minOccurs="0" name="RecuperarJugadoresLobbyResult" type="q9:ValueTupleOfConstantesArrayOfCuentaSetalmaccdW" />
+        <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/System" minOccurs="0" name="RecuperarJugadoresLobbyResult" type="q13:ValueTupleOfConstantesArrayOfCuentaSetalmaccdW" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -122,7 +149,7 @@
   <xs:element name="RecuperarPartidaResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/System" minOccurs="0" name="RecuperarPartidaResult" type="q10:ValueTupleOfConstantesPartidaSetalmaccdW" />
+        <xs:element xmlns:q14="http://schemas.datacontract.org/2004/07/System" minOccurs="0" name="RecuperarPartidaResult" type="q14:ValueTupleOfConstantesPartidaSetalmaccdW" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -137,14 +164,14 @@
   <xs:element name="CrearCuentaProvisionalInvitado">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/DatosSorrySliders" minOccurs="0" name="cuentaProvisionalInvitado" nillable="true" type="q11:CuentaSet" />
+        <xs:element xmlns:q15="http://schemas.datacontract.org/2004/07/DatosSorrySliders" minOccurs="0" name="cuentaProvisionalInvitado" nillable="true" type="q15:CuentaSet" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="CrearCuentaProvisionalInvitadoResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/DatosSorrySliders" minOccurs="0" name="CrearCuentaProvisionalInvitadoResult" type="q12:Constantes" />
+        <xs:element xmlns:q16="http://schemas.datacontract.org/2004/07/DatosSorrySliders" minOccurs="0" name="CrearCuentaProvisionalInvitadoResult" type="q16:Constantes" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -159,7 +186,7 @@
   <xs:element name="CrearPartidaResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/System" minOccurs="0" name="CrearPartidaResult" type="q13:ValueTupleOfConstantesstringW4mnvVr6" />
+        <xs:element xmlns:q17="http://schemas.datacontract.org/2004/07/System" minOccurs="0" name="CrearPartidaResult" type="q17:ValueTupleOfConstantesstringW4mnvVr6" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -173,7 +200,7 @@
   <xs:element name="RecuperarAmigosCuentaResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q14="http://schemas.datacontract.org/2004/07/System" minOccurs="0" name="RecuperarAmigosCuentaResult" type="q14:ValueTupleOfConstantesArrayOfCuentaSetalmaccdW" />
+        <xs:element xmlns:q18="http://schemas.datacontract.org/2004/07/System" minOccurs="0" name="RecuperarAmigosCuentaResult" type="q18:ValueTupleOfConstantesArrayOfCuentaSetalmaccdW" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -187,7 +214,7 @@
   <xs:element name="RecuperarJugadoresCuentaResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q15="http://schemas.datacontract.org/2004/07/System" minOccurs="0" name="RecuperarJugadoresCuentaResult" type="q15:ValueTupleOfConstantesArrayOfCuentaSetalmaccdW" />
+        <xs:element xmlns:q19="http://schemas.datacontract.org/2004/07/System" minOccurs="0" name="RecuperarJugadoresCuentaResult" type="q19:ValueTupleOfConstantesArrayOfCuentaSetalmaccdW" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -201,7 +228,7 @@
   <xs:element name="RecuperarDatosUsuarioDeCuentaResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q16="http://schemas.datacontract.org/2004/07/System" minOccurs="0" name="RecuperarDatosUsuarioDeCuentaResult" type="q16:ValueTupleOfConstantesUsuarioSetalmaccdW" />
+        <xs:element xmlns:q20="http://schemas.datacontract.org/2004/07/System" minOccurs="0" name="RecuperarDatosUsuarioDeCuentaResult" type="q20:ValueTupleOfConstantesUsuarioSetalmaccdW" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
