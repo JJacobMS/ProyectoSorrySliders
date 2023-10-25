@@ -83,7 +83,7 @@ namespace VistasSorrySliders
                     CrearBorders(_cuentas);
                     CrearEllipses(_cuentas);
                     CrearLabels(_cuentas);
-                    txtBoxHost.Text = _cuentas[0].CorreoElectronico;
+                    txtBoxHost.Text = _cuentas[0].Nickname;
                     break;
                 case Constantes.OPERACION_EXITOSA_VACIA:
                     Console.WriteLine("OPERACION_EXITOSA_VACIA1");
