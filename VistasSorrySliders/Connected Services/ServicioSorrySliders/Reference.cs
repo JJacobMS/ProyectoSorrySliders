@@ -582,6 +582,12 @@ namespace VistasSorrySliders.ServicioSorrySliders {
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IUnirsePartida/SalirDelLobby")]
         System.Threading.Tasks.Task SalirDelLobbyAsync(string correoJugador, string codigoPartida);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUnirsePartida/CrearCuentaProvisionalInvitado", ReplyAction="http://tempuri.org/IUnirsePartida/CrearCuentaProvisionalInvitadoResponse")]
+        VistasSorrySliders.ServicioSorrySliders.Constantes CrearCuentaProvisionalInvitado(VistasSorrySliders.ServicioSorrySliders.CuentaSet cuentaProvisionalInvitado);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUnirsePartida/CrearCuentaProvisionalInvitado", ReplyAction="http://tempuri.org/IUnirsePartida/CrearCuentaProvisionalInvitadoResponse")]
+        System.Threading.Tasks.Task<VistasSorrySliders.ServicioSorrySliders.Constantes> CrearCuentaProvisionalInvitadoAsync(VistasSorrySliders.ServicioSorrySliders.CuentaSet cuentaProvisionalInvitado);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -641,6 +647,14 @@ namespace VistasSorrySliders.ServicioSorrySliders {
         
         public System.Threading.Tasks.Task SalirDelLobbyAsync(string correoJugador, string codigoPartida) {
             return base.Channel.SalirDelLobbyAsync(correoJugador, codigoPartida);
+        }
+        
+        public VistasSorrySliders.ServicioSorrySliders.Constantes CrearCuentaProvisionalInvitado(VistasSorrySliders.ServicioSorrySliders.CuentaSet cuentaProvisionalInvitado) {
+            return base.Channel.CrearCuentaProvisionalInvitado(cuentaProvisionalInvitado);
+        }
+        
+        public System.Threading.Tasks.Task<VistasSorrySliders.ServicioSorrySliders.Constantes> CrearCuentaProvisionalInvitadoAsync(VistasSorrySliders.ServicioSorrySliders.CuentaSet cuentaProvisionalInvitado) {
+            return base.Channel.CrearCuentaProvisionalInvitadoAsync(cuentaProvisionalInvitado);
         }
     }
     

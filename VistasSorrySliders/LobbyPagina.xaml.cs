@@ -28,10 +28,12 @@ namespace VistasSorrySliders
         private LobbyClient _proxyLobby;
         private CuentaSet[] _cuentas;
         private PartidaSet _partidaActual;
+        private bool _esInvitado;
 
-        public LobbyPagina(CuentaSet cuentaUsuario, string codigoPartida)
+        public LobbyPagina(CuentaSet cuentaUsuario, string codigoPartida, bool esInvitado)
         {
             InitializeComponent();
+            _esInvitado = esInvitado;
             _cuentaUsuario = cuentaUsuario;
             _codigoPartida = codigoPartida;
             EntrarPartida();
@@ -214,8 +216,17 @@ namespace VistasSorrySliders
         {
             SalirPartida();
             var ventanaPrincipal = new MainWindow();
-            MenuPrincipalPagina menu = new MenuPrincipalPagina(_cuentaUsuario);
-            ventanaPrincipal.Content = menu;
+
+            if (_esInvitado)
+            {
+                InicioSesionPagina inicio = new InicioSesionPagina();
+                ventanaPrincipal.Content = inicio;
+            }
+            else
+            {
+                MenuPrincipalPagina menu = new MenuPrincipalPagina(_cuentaUsuario);
+                ventanaPrincipal.Content = menu;
+            }
             ventanaPrincipal.Show();
             Window.GetWindow(this).Close();
         }

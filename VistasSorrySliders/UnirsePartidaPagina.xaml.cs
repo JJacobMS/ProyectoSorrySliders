@@ -24,10 +24,19 @@ namespace VistasSorrySliders
     public partial class UnirsePartidaPagina : Page
     {
         private CuentaSet _cuentaActual;
+        private bool _esInvitado;
         public UnirsePartidaPagina(CuentaSet cuentaActual)
         {
             InitializeComponent();
             _cuentaActual = cuentaActual;
+            _esInvitado = false;
+        }
+
+        public UnirsePartidaPagina()
+        {
+            InitializeComponent();
+            _esInvitado = true;
+            grdNickname.Visibility = Visibility.Visible;
         }
 
         private void ClickUnirsePartida(object sender, RoutedEventArgs e)
@@ -55,7 +64,28 @@ namespace VistasSorrySliders
 
             if (esValido)
             {
+                if (_esInvitado)
+                {
+                    ValidarInvitado(codigoPartida);
+                    return;
+                }
                 UnirsePartida(codigoPartida);
+            }
+        }
+        private void ValidarInvitado(string codigo)
+        {
+            bool esValido = true;
+            string nickname = txtBoxNickname.Text;
+            if (string.IsNullOrWhiteSpace(nickname))
+            {
+                txtBoxNickname.Style = (Style)FindResource("estiloTxtBoxDatosRojo");
+                txtBlockNicknameNoValido.Visibility = Visibility.Visible;
+                esValido = false;
+            }
+
+            if (esValido)
+            {
+                CrearCuentaProvisionalInvitado(codigo);
             }
         }
 
@@ -92,9 +122,64 @@ namespace VistasSorrySliders
             }
         }
 
+        private void CrearCuentaProvisionalInvitado(string codigo)
+        {
+            _cuentaActual = new CuentaSet
+            {
+                CorreoElectronico = Guid.NewGuid().ToString(),
+                Avatar = Utilidades.GenerarImagenDefectoBytes(),
+                Nickname = txtBoxNickname.Text
+            };
+
+            Constantes resultado;
+            try
+            {
+                UnirsePartidaClient proxyUnirsePartida = new UnirsePartidaClient();
+                resultado = proxyUnirsePartida.CrearCuentaProvisionalInvitado(_cuentaActual);
+                proxyUnirsePartida.Close();
+            }
+            catch (CommunicationException ex)
+            {
+                Console.WriteLine(ex);
+                resultado = Constantes.ERROR_CONEXION_SERVIDOR;
+            }
+            catch (TimeoutException ex)
+            {
+                Console.WriteLine(ex);
+                resultado = Constantes.ERROR_CONEXION_SERVIDOR;
+
+            }
+            switch (resultado)
+            {
+                case Constantes.OPERACION_EXITOSA:
+                    UnirsePartida(codigo);
+                    break;
+                case Constantes.OPERACION_EXITOSA_VACIA:
+                    break;
+                case Constantes.ERROR_CONEXION_BD:
+                    MessageBox.Show(Properties.Resources.msgErrorBaseDatos);
+                    break;
+                case Constantes.ERROR_CONSULTA:
+                    MessageBox.Show(Properties.Resources.msgErrorBaseDatos);
+                    break;
+                case Constantes.ERROR_CONEXION_SERVIDOR:
+                    MessageBox.Show(Properties.Resources.msgErrorConexion);
+                    break;
+            }
+        }
+
         private void EntrarLobby(string codigo)
         {
-            JuegoYLobbyVentana lobbyUnirse = new JuegoYLobbyVentana(_cuentaActual, codigo);
+            JuegoYLobbyVentana lobbyUnirse;
+            if (_esInvitado)
+            {
+                lobbyUnirse = new JuegoYLobbyVentana(_cuentaActual, codigo, true);
+            }
+            else
+            {
+                lobbyUnirse = new JuegoYLobbyVentana(_cuentaActual, codigo, false);
+            }
+            
             lobbyUnirse.Show();
             Window.GetWindow(this).Close();
         }
@@ -121,6 +206,8 @@ namespace VistasSorrySliders
         {
             lblCodigoNoValido.Visibility = Visibility.Hidden;
             lblMaximoJugadores.Visibility = Visibility.Hidden;
+            txtBlockNicknameNoValido.Visibility = Visibility.Hidden;
+            txtBoxNickname.Style = (Style)FindResource("estiloTxtBoxDatosAzul");
             txtBoxCodigo.Style = (Style)FindResource("estiloTxtBoxDatosAzul");
         }
 
@@ -130,8 +217,14 @@ namespace VistasSorrySliders
             return Regex.IsMatch(uid, pattern);
         }
 
-        private void ClickSalirMenuPrincipal(object sender, RoutedEventArgs e)
+        private void ClickSalir(object sender, RoutedEventArgs e)
         {
+            if (_esInvitado)
+            {
+                InicioSesionPagina inicioPagina = new InicioSesionPagina();
+                this.NavigationService.Navigate(inicioPagina);
+                return;
+            }
             MenuPrincipalPagina menu = new MenuPrincipalPagina(_cuentaActual);
             this.NavigationService.Navigate(menu);
         }
