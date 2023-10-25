@@ -168,5 +168,10 @@ namespace VistasSorrySliders
             }
         }
 
+        private void ClickEntrarComoInvitado(object sender, RoutedEventArgs e)
+        {
+            UnirsePartidaPagina unirsePaginaInvitado = new UnirsePartidaPagina();
+            this.NavigationService.Navigate(unirsePaginaInvitado);
+        }
     }
 }

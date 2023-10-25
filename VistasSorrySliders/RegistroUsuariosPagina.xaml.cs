@@ -210,22 +210,22 @@ namespace VistasSorrySliders
 
             }
             switch (resultado)
-                {
-                    case Constantes.OPERACION_EXITOSA:
-                        System.Windows.Forms.MessageBox.Show(Properties.Resources.msgCuentaCreada, Properties.Resources.msgTituloCuentaCreada, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        break;
-                    case Constantes.OPERACION_EXITOSA_VACIA:
-                        break;
-                    case Constantes.ERROR_CONEXION_BD:
-                        System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorBaseDatos);
-                        break;
-                    case Constantes.ERROR_CONSULTA:
-                        System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorBaseDatos);
-                        break;
-                    case Constantes.ERROR_CONEXION_SERVIDOR:
-                        System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorConexion);
-                        break;
-                }
+            {
+                case Constantes.OPERACION_EXITOSA:
+                    System.Windows.Forms.MessageBox.Show(Properties.Resources.msgCuentaCreada, Properties.Resources.msgTituloCuentaCreada, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    break;
+                case Constantes.OPERACION_EXITOSA_VACIA:
+                    break;
+                case Constantes.ERROR_CONEXION_BD:
+                    System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorBaseDatos);
+                    break;
+                case Constantes.ERROR_CONSULTA:
+                    System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorBaseDatos);
+                    break;
+                case Constantes.ERROR_CONEXION_SERVIDOR:
+                    System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorConexion);
+                    break;
+            }
             
 
         }

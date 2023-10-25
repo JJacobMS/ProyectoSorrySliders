@@ -583,6 +583,15 @@ namespace VistasSorrySliders.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Código no válido.
+        /// </summary>
+        public static string txtBlockCodigoNoValido {
+            get {
+                return ResourceManager.GetString("txtBlockCodigoNoValido", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a CONFIGURAR PARTIDA.
         /// </summary>
         public static string txtBlockConfigurarPartida {
@@ -619,11 +628,38 @@ namespace VistasSorrySliders.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Su cuenta ya está jugando dentro del lobby.
+        /// </summary>
+        public static string txtBlockCuentaYaEnLobby {
+            get {
+                return ResourceManager.GetString("txtBlockCuentaYaEnLobby", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a JUGADORES Y AMIGOS.
         /// </summary>
         public static string txtBlockJugadoresAmigos {
             get {
                 return ResourceManager.GetString("txtBlockJugadoresAmigos", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a La partida no acepta más jugadores.
+        /// </summary>
+        public static string txtBlockJugadoresMaximosExcedidos {
+            get {
+                return ResourceManager.GetString("txtBlockJugadoresMaximosExcedidos", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Nickname no es válido.
+        /// </summary>
+        public static string txtBlockNicknameNoValido {
+            get {
+                return ResourceManager.GetString("txtBlockNicknameNoValido", resourceCulture);
             }
         }
         

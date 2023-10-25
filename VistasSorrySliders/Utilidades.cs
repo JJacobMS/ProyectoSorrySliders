@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
@@ -90,6 +91,32 @@ namespace VistasSorrySliders
             }
 
             return null;
+        }
+
+        public static byte[] GenerarImagenDefectoBytes()
+        {
+            string rutaImagen = "pack://application:,,,/Recursos/avatarPredefinido.jpg";
+            try
+            {
+                BitmapImage bitmap = new BitmapImage(new Uri(rutaImagen));
+                JpegBitmapEncoder encoder = new JpegBitmapEncoder();
+                encoder.Frames.Add(BitmapFrame.Create(bitmap));
+                using (MemoryStream ms = new MemoryStream())
+                {
+                    encoder.Save(ms);
+                    return ms.ToArray();
+                }
+            }
+            catch (IOException ex)
+            {
+                Console.WriteLine(ex);
+                return null;
+            }
+            catch (OutOfMemoryException ex)
+            {
+                Console.WriteLine(ex);
+                return null;
+            }
         }
 
     }

@@ -122,7 +122,7 @@ namespace VistasSorrySliders
 
         private void CrearVentanaLobby(string numeroJugadoresString, CuentaSet _cuentaUsuario, string codigoPartida) 
         {
-            JuegoYLobbyVentana lobbyUnirse = new JuegoYLobbyVentana(_cuentaUsuario, codigoPartida);
+            JuegoYLobbyVentana lobbyUnirse = new JuegoYLobbyVentana(_cuentaUsuario, codigoPartida, false);
             lobbyUnirse.Show();
 
         }

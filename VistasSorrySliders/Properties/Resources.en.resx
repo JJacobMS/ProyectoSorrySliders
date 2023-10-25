@@ -291,6 +291,9 @@
   <data name="txtBlockAjustes" xml:space="preserve">
     <value>SETTINGS</value>
   </data>
+  <data name="txtBlockCodigoNoValido" xml:space="preserve">
+    <value>Invalid code</value>
+  </data>
   <data name="txtBlockConfigurarPartida" xml:space="preserve">
     <value>SETUP GAME</value>
   </data>
@@ -303,8 +306,17 @@
   <data name="txtBlockCrearLobby" xml:space="preserve">
     <value>CREATE LOBBY</value>
   </data>
+  <data name="txtBlockCuentaYaEnLobby" xml:space="preserve">
+    <value>Your account is already in the lobby</value>
+  </data>
   <data name="txtBlockJugadoresAmigos" xml:space="preserve">
     <value>PLAYERS AND FRIENDS</value>
+  </data>
+  <data name="txtBlockJugadoresMaximosExcedidos" xml:space="preserve">
+    <value>The lobby doesn't accept more players</value>
+  </data>
+  <data name="txtBlockNicknameNoValido" xml:space="preserve">
+    <value>Invalid Nickname</value>
   </data>
   <data name="txtBlockTablaPuntuaciones" xml:space="preserve">
     <value>SCORE TABLE</value>

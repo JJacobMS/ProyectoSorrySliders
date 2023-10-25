@@ -25,11 +25,14 @@ namespace VistasSorrySliders
         {
         }
 
-        public JuegoYLobbyVentana(CuentaSet cuenta, string codigoPartida)
+        public JuegoYLobbyVentana(CuentaSet cuenta, string codigoPartida, bool esInvitado)
         {
             InitializeComponent();
-            frameLobby.Content = new LobbyPagina(cuenta, codigoPartida);
-            frameListaAmigos.Content = new ListaAmigosPagina(cuenta, codigoPartida);
+            frameLobby.Content = new LobbyPagina(cuenta, codigoPartida, esInvitado);
+            if (!esInvitado)
+            {
+                frameListaAmigos.Content = new ListaAmigosPagina(cuenta, codigoPartida);
+            }
         }
 
 
