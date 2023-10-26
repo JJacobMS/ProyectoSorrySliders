@@ -554,10 +554,10 @@ namespace VistasSorrySliders.ServicioSorrySliders {
         System.Threading.Tasks.Task<VistasSorrySliders.ServicioSorrySliders.Constantes> AgregarUsuarioAsync(VistasSorrySliders.ServicioSorrySliders.UsuarioSet usuarioPorGuardar, VistasSorrySliders.ServicioSorrySliders.CuentaSet cuentaPorGuardar);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRegistroUsuario/ActualizarUsuario", ReplyAction="http://tempuri.org/IRegistroUsuario/ActualizarUsuarioResponse")]
-        VistasSorrySliders.ServicioSorrySliders.Constantes ActualizarUsuario(VistasSorrySliders.ServicioSorrySliders.UsuarioSet usuarioPorActualizar, VistasSorrySliders.ServicioSorrySliders.CuentaSet cuentaPorGuardar);
+        VistasSorrySliders.ServicioSorrySliders.Constantes ActualizarUsuario(VistasSorrySliders.ServicioSorrySliders.UsuarioSet usuarioPorActualizar, VistasSorrySliders.ServicioSorrySliders.CuentaSet cuentaPorActualizar);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRegistroUsuario/ActualizarUsuario", ReplyAction="http://tempuri.org/IRegistroUsuario/ActualizarUsuarioResponse")]
-        System.Threading.Tasks.Task<VistasSorrySliders.ServicioSorrySliders.Constantes> ActualizarUsuarioAsync(VistasSorrySliders.ServicioSorrySliders.UsuarioSet usuarioPorActualizar, VistasSorrySliders.ServicioSorrySliders.CuentaSet cuentaPorGuardar);
+        System.Threading.Tasks.Task<VistasSorrySliders.ServicioSorrySliders.Constantes> ActualizarUsuarioAsync(VistasSorrySliders.ServicioSorrySliders.UsuarioSet usuarioPorActualizar, VistasSorrySliders.ServicioSorrySliders.CuentaSet cuentaPorActualizar);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -595,12 +595,12 @@ namespace VistasSorrySliders.ServicioSorrySliders {
             return base.Channel.AgregarUsuarioAsync(usuarioPorGuardar, cuentaPorGuardar);
         }
         
-        public VistasSorrySliders.ServicioSorrySliders.Constantes ActualizarUsuario(VistasSorrySliders.ServicioSorrySliders.UsuarioSet usuarioPorActualizar, VistasSorrySliders.ServicioSorrySliders.CuentaSet cuentaPorGuardar) {
-            return base.Channel.ActualizarUsuario(usuarioPorActualizar, cuentaPorGuardar);
+        public VistasSorrySliders.ServicioSorrySliders.Constantes ActualizarUsuario(VistasSorrySliders.ServicioSorrySliders.UsuarioSet usuarioPorActualizar, VistasSorrySliders.ServicioSorrySliders.CuentaSet cuentaPorActualizar) {
+            return base.Channel.ActualizarUsuario(usuarioPorActualizar, cuentaPorActualizar);
         }
         
-        public System.Threading.Tasks.Task<VistasSorrySliders.ServicioSorrySliders.Constantes> ActualizarUsuarioAsync(VistasSorrySliders.ServicioSorrySliders.UsuarioSet usuarioPorActualizar, VistasSorrySliders.ServicioSorrySliders.CuentaSet cuentaPorGuardar) {
-            return base.Channel.ActualizarUsuarioAsync(usuarioPorActualizar, cuentaPorGuardar);
+        public System.Threading.Tasks.Task<VistasSorrySliders.ServicioSorrySliders.Constantes> ActualizarUsuarioAsync(VistasSorrySliders.ServicioSorrySliders.UsuarioSet usuarioPorActualizar, VistasSorrySliders.ServicioSorrySliders.CuentaSet cuentaPorActualizar) {
+            return base.Channel.ActualizarUsuarioAsync(usuarioPorActualizar, cuentaPorActualizar);
         }
     }
     

@@ -80,7 +80,7 @@
                             <PasswordBox  x:Name="pssBoxContrasena"  Width="290"  Style="{StaticResource estiloPssBoxAzul}"></PasswordBox>
                         </StackPanel>
                         <StackPanel Grid.Column="1" Grid.Row="4" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Right">
-                            <Button Content="{x:Static p:Resources.btnCrearCuenta}" Click="ClickCrearCuenta" Width="160" Height="45" Style="{StaticResource estiloBtnCrearCuenta}"></Button>
+                            <Button x:Name="btnContinuar" Click="ClickCrearCuenta" Width="160" Height="45" Style="{StaticResource estiloBtnCrearCuenta}"></Button>
                             <Button  Content="{x:Static p:Resources.btnCancelar}" Margin="50,20,50,20" Width="160" Height="45" Style="{StaticResource estiloBtnCancelar}" Click="ClickCancelar"></Button>
                         </StackPanel>
                         

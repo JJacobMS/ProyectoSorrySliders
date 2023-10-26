@@ -75,7 +75,7 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/DatosSorrySliders" minOccurs="0" name="usuarioPorActualizar" nillable="true" type="q9:UsuarioSet" />
-        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/DatosSorrySliders" minOccurs="0" name="cuentaPorGuardar" nillable="true" type="q10:CuentaSet" />
+        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/DatosSorrySliders" minOccurs="0" name="cuentaPorActualizar" nillable="true" type="q10:CuentaSet" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

@@ -74,10 +74,11 @@ namespace VistasSorrySliders
         private void InicializarDatosCrearUsuario() 
         {
             lblTitulo.Content = Properties.Resources.lblBienvenido;
+            btnContinuar.Content = Properties.Resources.btnCrearCuenta;
             lblContraseña.Visibility = Visibility.Visible;
         }
 
-        private void InicializarDatosModificarUsuario() 
+        private void InicializarDatosModificarUsuario()
         {
             txtBoxCorreoElectronico.Text = _cuenta.CorreoElectronico;
             pssBoxContrasena.Password = _cuenta.Contraseña;
@@ -90,7 +91,9 @@ namespace VistasSorrySliders
             lblContraseña.Visibility = Visibility.Hidden;
 
             lblTitulo.Content = Properties.Resources.lblBienvenidoNuevo;
-
+            btnContinuar.Content = Properties.Resources.btnGuardarCambios;
+            _avatarByte = _cuenta.Avatar;
+            Utilidades.IngresarImagen(_cuenta.Avatar, imgBrushAvatar);
         }
 
         private bool ValidarCampos()
@@ -268,6 +271,66 @@ namespace VistasSorrySliders
 
         }
 
+        private void ActualizarCuenta()
+        {
+            String nombre = txtBoxNombre.Text;
+            String apellidos = txtBoxApellidos.Text;
+            String nickname = txtBoxNickname.Text;
+            _cuenta.Nickname = nickname;
+            _cuenta.Avatar = _avatarByte;
+            var cuentaActualizada = new CuentaSet
+            {
+                CorreoElectronico=_cuenta.CorreoElectronico,
+                Nickname = _cuenta.Nickname,
+                Avatar = _cuenta.Avatar
+            };
+
+            var usuarioActualizado = new UsuarioSet
+            {
+                Nombre = nombre,
+                Apellido = apellidos
+            };
+            Constantes resultado = Constantes.OPERACION_EXITOSA;
+            try
+            {
+                RegistroUsuarioClient proxyRegistrarUsuario = new RegistroUsuarioClient();
+                resultado = proxyRegistrarUsuario.ActualizarUsuario(usuarioActualizado, cuentaActualizada);
+                proxyRegistrarUsuario.Close();
+            }
+            catch (CommunicationException ex)
+            {
+                Console.WriteLine(ex);
+                resultado = Constantes.ERROR_CONEXION_SERVIDOR;
+                System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorConexion);
+            }
+            catch (TimeoutException ex)
+            {
+                Console.WriteLine(ex);
+                resultado = Constantes.ERROR_CONEXION_SERVIDOR;
+                System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorConexion);
+
+            }
+            switch (resultado)
+            {
+                case Constantes.OPERACION_EXITOSA:
+                    break;
+                case Constantes.OPERACION_EXITOSA_VACIA:
+                    break;
+                case Constantes.ERROR_CONEXION_BD:
+                    System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorBaseDatos);
+                    break;
+                case Constantes.ERROR_CONSULTA:
+                    System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorBaseDatos);
+                    break;
+                case Constantes.ERROR_CONEXION_SERVIDOR:
+                    System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorConexion);
+                    break;
+            }
+
+
+        }
+
+
         private bool ValidarExistenciaImagen() 
         {
             bool archivoExiste = false;
@@ -338,7 +401,12 @@ namespace VistasSorrySliders
             {
                 if (_esModificacion)
                 {
-                    ValidarCampos();   
+                    if (ValidarCampos()) 
+                    {
+                        ActualizarCuenta();
+                        MenuPrincipalPagina menu = new MenuPrincipalPagina(_cuenta);
+                        this.NavigationService.Navigate(menu);
+                    }
                 }
                 else
                 {
