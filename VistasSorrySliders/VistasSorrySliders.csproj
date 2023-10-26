@@ -348,5 +348,8 @@
   <ItemGroup>
     <Resource Include="Recursos\imagenTablaPuntuaciones.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Recursos\bannerColorMorado.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
