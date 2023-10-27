@@ -90,5 +90,11 @@ namespace VistasSorrySliders
                 System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorConexion);
             }
         }
+
+        private void ClickSalirMenuPrincipal(object sender, RoutedEventArgs e)
+        {
+            MenuPrincipalPagina menu = new MenuPrincipalPagina(_cuenta);
+            this.NavigationService.Navigate(menu);
+        }
     }
 }

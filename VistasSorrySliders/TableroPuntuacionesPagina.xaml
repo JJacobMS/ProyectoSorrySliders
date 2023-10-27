@@ -45,22 +45,25 @@
                     <ImageBrush ImageSource="/Recursos/imagenTablaPuntuaciones.png"/>
                 </Rectangle.Fill>
             </Rectangle>
-            <Border BorderBrush="Black" BorderThickness="2" Margin="40,40,40,40" CornerRadius="10" Grid.Column="0" Grid.Row="0" Grid.RowSpan="3" Grid.ColumnSpan="3" />
-            <ListView x:Name="lstViewPuntuaciones" Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" Width="600" Height="320" VerticalAlignment="Bottom" Margin="0,0,0,70" ItemsSource="{Binding ListaPuntuaciones}">
+            <Button Style="{StaticResource estiloBtnSalir}" Content="{x:Static p:Resources.btnSalir}" Grid.Column="0" Grid.Row="0" Margin="10,10,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Click="ClickSalirMenuPrincipal" />
+            <Border BorderBrush="Black" BorderThickness="2" Margin="45,60,45,45" CornerRadius="10" Grid.Column="0" Grid.Row="0" Grid.RowSpan="3" Grid.ColumnSpan="3" />
+            <ListView x:Name="lstViewPuntuaciones"  ScrollViewer.HorizontalScrollBarVisibility="Hidden" Background="#EAD4F4" Opacity="1.0" IsEnabled="True" 
+                      Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" Width="600" Height="320" VerticalAlignment="Bottom" Margin="0,0,0,70" ItemsSource="{Binding ListaPuntuaciones}" 
+                      BorderBrush="Black" BorderThickness="2" Padding="-3,0,0,0" >
                 <ListView.View>
-                    <GridView>
-                        <GridViewColumn x:Name="GrdViewColumnUno" Header="Nickname" Width="300"  DisplayMemberBinding="{Binding Path=Nickname}" />
+                    <GridView AllowsColumnReorder="False" >
+                        <GridViewColumn x:Name="GrdViewColumnUno" Header="Nickname" Width="300" >
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Border BorderBrush="Black" BorderThickness="1" CornerRadius="5" Padding="300,80,50,50" HorizontalAlignment="Center" VerticalAlignment="Center" >
+                                        <TextBlock Text="{Binding Path=Nickname}" VerticalAlignment="Center"  HorizontalAlignment="Center" />
+                                    </Border>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
                         <GridViewColumn x:Name="GrdViewColumnDos" Header="Rondas Ganadas" Width="300" DisplayMemberBinding="{Binding Path=NumeroPartidasGanadas}" />
                     </GridView>
                 </ListView.View>
-                <ListBox.ItemTemplate>
-                    <DataTemplate>
-                        <StackPanel Orientation="Horizontal">
-                            <Label x:Name="txtBlockColumnaUno" Content="Columna1" Style="{StaticResource estiloLblFormularioCuenta}" Height="100" Width="100" />
-                            <Label x:Name="txtBlockColumnaDos" Content="Columna2" Style="{StaticResource estiloLblFormularioCuenta}" Height="100" Width="100" />
-                        </StackPanel>
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
             </ListView>
         </Grid>
 
