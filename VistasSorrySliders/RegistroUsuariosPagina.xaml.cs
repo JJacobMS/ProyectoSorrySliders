@@ -303,6 +303,7 @@ namespace VistasSorrySliders
                 case Constantes.OPERACION_EXITOSA:
                     break;
                 case Constantes.OPERACION_EXITOSA_VACIA:
+                    System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorBaseDatos);
                     break;
                 case Constantes.ERROR_CONEXION_BD:
                     System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorBaseDatos);
@@ -371,6 +372,7 @@ namespace VistasSorrySliders
                     System.Windows.Forms.MessageBox.Show(Properties.Resources.msgCorreoEncontrado, Properties.Resources.msgTituloCorreoEncontrado, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return false;
                 case Constantes.OPERACION_EXITOSA_VACIA:
+                    System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorBaseDatos);
                     return true;
                 case Constantes.ERROR_CONEXION_BD:
                     return false;
@@ -426,7 +428,7 @@ namespace VistasSorrySliders
             try
             {
                 OpenFileDialog abrirBiblioteca = new OpenFileDialog();
-                abrirBiblioteca.Filter = "Archivos de imagen|*.jpg;*.jpeg";
+                abrirBiblioteca.Filter = $"{Properties.Resources.strArchivosImagen}|*.jpg;*.jpeg";
                 if (abrirBiblioteca.ShowDialog() == DialogResult.OK)
                 {
                     _rutaImagen = abrirBiblioteca.FileName;
@@ -449,7 +451,7 @@ namespace VistasSorrySliders
             catch (UnauthorizedAccessException ex)
             {
                 Console.WriteLine(ex);
-                Console.WriteLine("No se tienen permisos para acceder al archivo", "Sin permisos para el archivo");
+                Console.WriteLine(Properties.Resources.msgErrorImagenPermisos, Properties.Resources.msgErrorTituloImagenPermisos);
             }
             catch (Exception ex)
             {
@@ -514,7 +516,7 @@ namespace VistasSorrySliders
                     }
                     else
                     {
-                        System.Windows.Forms.MessageBox.Show("La imagen supera el limite de 400KB", "Imagen demasiado grande", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorTamañoImagen, Properties.Resources.msgErrorTituloImagenPermisos, MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return false;
                     }
                 }

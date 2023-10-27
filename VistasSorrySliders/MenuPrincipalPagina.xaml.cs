@@ -33,9 +33,6 @@ namespace VistasSorrySliders
         public MenuPrincipalPagina(string correoUsuario)
         {
             InitializeComponent();
-
-            //Metodo calcular partidas todos los jugadores SERVIDOR
-
             RecuperarDatosUsuario(correoUsuario);
 
         }

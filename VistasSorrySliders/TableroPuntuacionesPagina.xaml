@@ -55,7 +55,7 @@
                             <GridViewColumn.HeaderTemplate  >
                                 <DataTemplate>
                                     <Border Background="#EAD4F4" Width="296" CornerRadius="6" BorderBrush="Black" BorderThickness="1">
-                                        <TextBlock Text="Nickname" FontFamily="{StaticResource FuentesTitulo}" FontSize="30" Background="#EAD4F4" HorizontalAlignment="Center"/>
+                                        <TextBlock Text="{x:Static p:Resources.txtBlockNickname}" FontFamily="{StaticResource FuentesTitulo}" FontSize="30" Background="#EAD4F4" HorizontalAlignment="Center"/>
                                     </Border>
                                 </DataTemplate>
                             </GridViewColumn.HeaderTemplate>
@@ -71,7 +71,7 @@
                             <GridViewColumn.HeaderTemplate>
                                 <DataTemplate>
                                     <Border Background="#EAD4F4" Width="294" CornerRadius="6" BorderBrush="Black" BorderThickness="1">
-                                        <TextBlock Text="Rondas Ganadas" FontFamily="{StaticResource FuentesTitulo}" FontSize="30" Background="#EAD4F4" HorizontalAlignment="Center"/>
+                                        <TextBlock Text="{x:Static p:Resources.txtBlockRondasGanadas}" FontFamily="{StaticResource FuentesTitulo}" FontSize="30" Background="#EAD4F4" HorizontalAlignment="Center"/>
                                     </Border>
                                 </DataTemplate>
                             </GridViewColumn.HeaderTemplate>
@@ -94,7 +94,7 @@
                 <ImageBrush ImageSource="/Recursos/bannerColorMorado.png" />
             </Rectangle.Fill>
         </Rectangle>
-        <Label Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" Content="TABLERO DE PUNTUACIONES" Style="{StaticResource estiloLblInicioSesion}" />
+        <Label Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" Content="{x:Static p:Resources.lblTablaPuntuaciones}" Style="{StaticResource estiloLblInicioSesion}" />
         <Image Source="/Recursos/puntuacionIcono.png" Width="200" Height="150" Grid.Column="0" Margin="0,0,-65,0" HorizontalAlignment="Right"/>
         <Image Source="/Recursos/puntuacionIcono.png" Width="200" Height="150" Grid.Column="2" Margin="-65,0,0,0" HorizontalAlignment="Left"/>
         

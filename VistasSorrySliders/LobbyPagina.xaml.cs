@@ -72,13 +72,13 @@ namespace VistasSorrySliders
             switch (respuesta)
             {
                 case Constantes.ERROR_CONEXION_BD:
-                    Console.WriteLine("ERROR_CONEXION_BD");
+                    IrMenuUsuario();
                     break;
                 case Constantes.ERROR_CONSULTA:
-                    Console.WriteLine("ERROR_CONSULTA");
+                    IrMenuUsuario();
                     break;
                 case Constantes.ERROR_CONEXION_SERVIDOR:
-                    Console.WriteLine("ERROR_CONEXION_SERVIDOR1");
+                    IrMenuUsuario();
                     break;
                 case Constantes.OPERACION_EXITOSA:
                     grdJugadores.Children.Clear();
@@ -88,7 +88,7 @@ namespace VistasSorrySliders
                     txtBoxHost.Text = _cuentas[0].Nickname;
                     break;
                 case Constantes.OPERACION_EXITOSA_VACIA:
-                    Console.WriteLine("OPERACION_EXITOSA_VACIA1");
+                    IrMenuUsuario();
                     break;
                 default:
                     break;
@@ -170,15 +170,13 @@ namespace VistasSorrySliders
             switch (respuesta)
             {
                 case Constantes.ERROR_CONEXION_BD:
-                    Console.WriteLine("ERROR_CONEXION_BD");
+                    IrMenuUsuario();
                     break;
                 case Constantes.ERROR_CONSULTA:
-                    Console.WriteLine("ERROR_CONSULTA");
-
+                    IrMenuUsuario();
                     break;
                 case Constantes.ERROR_CONEXION_SERVIDOR:
-                    Console.WriteLine("ERROR_CONEXION_SERVIDOR2");
-
+                    IrMenuUsuario();
                     break;
                 case Constantes.OPERACION_EXITOSA:
                     txtBoxCodigoPartida.Text = _partidaActual.CodigoPartida.ToString();
@@ -188,15 +186,18 @@ namespace VistasSorrySliders
                     {
                         case 2:
                             lblCantidadJugadoresPartida.Content = Properties.Resources.lblDosJugadores;
-                            //mgTablero.Source = "/Recursos/TableroCuatroConFondo.png";
+                            Uri urlRelativa1 = new Uri("/Recursos/TableroDosConFondo.png", UriKind.Relative);
+                            mgTablero.Source = new BitmapImage(urlRelativa1);
                             break;
                         case 3:
                             lblCantidadJugadoresPartida.Content = Properties.Resources.lblTresJugadores;
-                            //
+                            Uri urlRelativa2 = new Uri("/Recursos/TableroTresConFondo.png", UriKind.Relative);
+                            mgTablero.Source = new BitmapImage(urlRelativa2);
                             break;
                         case 4:
                             lblCantidadJugadoresPartida.Content = Properties.Resources.lblCuatroJugadores;
-                            //
+                            Uri urlRelativa3 = new Uri("/Recursos/TableroCuatroConFondo.png", UriKind.Relative);
+                            mgTablero.Source = new BitmapImage(urlRelativa3);
                             break;
                         default:
                             break;
@@ -204,7 +205,7 @@ namespace VistasSorrySliders
                     
                     break;
                 case Constantes.OPERACION_EXITOSA_VACIA:
-                    Console.WriteLine("OPERACION_EXITOSA_VACIA2");
+                    IrMenuUsuario();
                     break;
                 default:
                     break;
@@ -213,6 +214,10 @@ namespace VistasSorrySliders
         }
 
         private void ClickSalirLobbyJugadores(object sender, RoutedEventArgs e)
+        {
+            IrMenuUsuario();
+        }
+        public void IrMenuUsuario() 
         {
             SalirPartida();
             var ventanaPrincipal = new MainWindow();
@@ -224,6 +229,7 @@ namespace VistasSorrySliders
             }
             else
             {
+                IrMenuUsuario();
                 MenuPrincipalPagina menu = new MenuPrincipalPagina(_cuentaUsuario);
                 ventanaPrincipal.Content = menu;
             }
@@ -246,7 +252,6 @@ namespace VistasSorrySliders
             }
             catch (CommunicationException ex)
             {
-                MessageBox.Show("Error servidor :c");
                 Console.WriteLine(ex);
             }
         }

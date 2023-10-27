@@ -97,7 +97,6 @@ namespace VistasSorrySliders
             {
                 if (NetworkInterface.GetIsNetworkAvailable())
                 {
-                    Console.WriteLine("Estás conectado a Internet");
 
                     MailMessage correo = new MailMessage();
                     string correoJuego = "TheSorrySliders@gmail.com";

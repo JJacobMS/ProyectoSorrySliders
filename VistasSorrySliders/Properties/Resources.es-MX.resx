@@ -228,6 +228,9 @@
   <data name="lblNombres" xml:space="preserve">
     <value>Nombre/s</value>
   </data>
+  <data name="lblTablaPuntuaciones" xml:space="preserve">
+    <value>TABLERO DE PUNTUACIONES</value>
+  </data>
   <data name="lblTotalJugadores" xml:space="preserve">
     <value>Total de Jugadores:</value>
   </data>
@@ -261,8 +264,20 @@
   <data name="msgErrorImagen" xml:space="preserve">
     <value>La imagen no se puede cargar</value>
   </data>
+  <data name="msgErrorImagenPermisos" xml:space="preserve">
+    <value>No se tienen permisos para acceder al archivo</value>
+  </data>
+  <data name="msgErrorTamañoImagen" xml:space="preserve">
+    <value>La imagen supera el límite de 400 KB</value>
+  </data>
+  <data name="msgErrorTituloImagenPermisos" xml:space="preserve">
+    <value>Sin permisos para el archivo</value>
+  </data>
   <data name="msgImagenInvalida" xml:space="preserve">
     <value>Por favor, seleccione un archivo de imagen válida</value>
+  </data>
+  <data name="msgTablaVacia" xml:space="preserve">
+    <value>Aun no hay ganadores, sé el primero en ganar</value>
   </data>
   <data name="msgTamañoImagenError" xml:space="preserve">
     <value>La imagen supera el limite de 3MB</value>
@@ -285,8 +300,14 @@
   <data name="msgTituloErrorImagen" xml:space="preserve">
     <value>Error de imagen</value>
   </data>
+  <data name="msgTituloErrorTamañoImagen" xml:space="preserve">
+    <value>Imagen demasiado grande</value>
+  </data>
   <data name="msgTituloTamañoImagenError" xml:space="preserve">
     <value>Imagen demasiado grande</value>
+  </data>
+  <data name="strArchivosImagen" xml:space="preserve">
+    <value>Archivos de imagen</value>
   </data>
   <data name="txtBlockAjustes" xml:space="preserve">
     <value>AJUSTES</value>
@@ -315,8 +336,14 @@
   <data name="txtBlockJugadoresMaximosExcedidos" xml:space="preserve">
     <value>La partida no acepta más jugadores</value>
   </data>
+  <data name="txtBlockNickname" xml:space="preserve">
+    <value>NICKNAME/APODO</value>
+  </data>
   <data name="txtBlockNicknameNoValido" xml:space="preserve">
     <value>Nickname no es válido</value>
+  </data>
+  <data name="txtBlockRondasGanadas" xml:space="preserve">
+    <value>RONDAS GANADAS</value>
   </data>
   <data name="txtBlockTablaPuntuaciones" xml:space="preserve">
     <value>TABLA DE PUNTUACIONES</value>

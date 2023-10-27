@@ -49,17 +49,12 @@ namespace VistasSorrySliders
                         ListaPuntuaciones = new ObservableCollection<Puntuacion>();
                         foreach (var puntuacion in puntuaciones)
                         {
-                            Console.WriteLine(puntuacion.Nickname + " " + puntuacion.NumeroPartidasGanadas);
                             ListaPuntuaciones.Add(puntuacion);
-
                         }
                         this.DataContext = this;
-
-
                         break;
                     case Constantes.OPERACION_EXITOSA_VACIA:
-                        Console.WriteLine("VACIO");
-
+                        System.Windows.Forms.MessageBox.Show(Properties.Resources.msgTablaVacia);
                         break;
                     case Constantes.ERROR_CONEXION_BD:
                         System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorBaseDatos);

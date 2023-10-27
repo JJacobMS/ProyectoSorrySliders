@@ -228,6 +228,9 @@
   <data name="lblNombres" xml:space="preserve">
     <value>Name/s</value>
   </data>
+  <data name="lblTablaPuntuaciones" xml:space="preserve">
+    <value>SCOREBOARD</value>
+  </data>
   <data name="lblTotalJugadores" xml:space="preserve">
     <value>Total Players:</value>
   </data>
@@ -261,8 +264,20 @@
   <data name="msgErrorImagen" xml:space="preserve">
     <value>The image cannot be loaded</value>
   </data>
+  <data name="msgErrorImagenPermisos" xml:space="preserve">
+    <value>You don't have permissions to access the file</value>
+  </data>
+  <data name="msgErrorTamañoImagen" xml:space="preserve">
+    <value>The image exceeds the limit of 400KB</value>
+  </data>
+  <data name="msgErrorTituloImagenPermisos" xml:space="preserve">
+    <value>No permissions for the file</value>
+  </data>
   <data name="msgImagenInvalida" xml:space="preserve">
     <value>Please select a valid image file</value>
+  </data>
+  <data name="msgTablaVacia" xml:space="preserve">
+    <value>No winners yet, be the first winner</value>
   </data>
   <data name="msgTamañoImagenError" xml:space="preserve">
     <value>The image exceeds the 3MB limit</value>
@@ -285,8 +300,14 @@
   <data name="msgTituloErrorImagen" xml:space="preserve">
     <value>Image Error</value>
   </data>
+  <data name="msgTituloErrorTamañoImagen" xml:space="preserve">
+    <value>Image too large</value>
+  </data>
   <data name="msgTituloTamañoImagenError" xml:space="preserve">
     <value>Image too big</value>
+  </data>
+  <data name="strArchivosImagen" xml:space="preserve">
+    <value>Image files</value>
   </data>
   <data name="txtBlockAjustes" xml:space="preserve">
     <value>SETTINGS</value>
@@ -315,8 +336,14 @@
   <data name="txtBlockJugadoresMaximosExcedidos" xml:space="preserve">
     <value>The lobby doesn't accept more players</value>
   </data>
+  <data name="txtBlockNickname" xml:space="preserve">
+    <value>NICKNAME</value>
+  </data>
   <data name="txtBlockNicknameNoValido" xml:space="preserve">
     <value>Invalid Nickname</value>
+  </data>
+  <data name="txtBlockRondasGanadas" xml:space="preserve">
+    <value>ROUNDS WON</value>
   </data>
   <data name="txtBlockTablaPuntuaciones" xml:space="preserve">
     <value>SCORE TABLE</value>
