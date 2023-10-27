@@ -47,21 +47,42 @@
             </Rectangle>
             <Button Style="{StaticResource estiloBtnSalir}" Content="{x:Static p:Resources.btnSalir}" Grid.Column="0" Grid.Row="0" Margin="10,10,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Click="ClickSalirMenuPrincipal" />
             <Border BorderBrush="Black" BorderThickness="2" Margin="45,60,45,45" CornerRadius="10" Grid.Column="0" Grid.Row="0" Grid.RowSpan="3" Grid.ColumnSpan="3" />
-            <ListView x:Name="lstViewPuntuaciones"  ScrollViewer.HorizontalScrollBarVisibility="Hidden" Background="#EAD4F4" Opacity="1.0" IsEnabled="True" 
-                      Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" Width="600" Height="320" VerticalAlignment="Bottom" Margin="0,0,0,70" ItemsSource="{Binding ListaPuntuaciones}" 
-                      BorderBrush="Black" BorderThickness="2" Padding="-3,0,0,0" >
+            <ListView x:Name="lstViewPuntuaciones"  ScrollViewer.HorizontalScrollBarVisibility="Hidden" Background="Transparent" IsHitTestVisible="False"
+                     BorderBrush="Transparent" Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" Width="600" Height="320" VerticalAlignment="Bottom" Margin="0,0,0,70" ItemsSource="{Binding ListaPuntuaciones}" Padding="-3,0,0,0" >
                 <ListView.View>
-                    <GridView AllowsColumnReorder="False" >
-                        <GridViewColumn x:Name="GrdViewColumnUno" Header="Nickname" Width="300" >
+                    <GridView AllowsColumnReorder="False"  >
+                        <GridViewColumn x:Name="GrdViewColumnUno" Width="300" >
+                            <GridViewColumn.HeaderTemplate  >
+                                <DataTemplate>
+                                    <Border Background="#EAD4F4" Width="296" CornerRadius="6" BorderBrush="Black" BorderThickness="1">
+                                        <TextBlock Text="Nickname" FontFamily="{StaticResource FuentesTitulo}" FontSize="30" Background="#EAD4F4" HorizontalAlignment="Center"/>
+                                    </Border>
+                                </DataTemplate>
+                            </GridViewColumn.HeaderTemplate>
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
-                                    <Border BorderBrush="Black" BorderThickness="1" CornerRadius="5" Padding="300,80,50,50" HorizontalAlignment="Center" VerticalAlignment="Center" >
-                                        <TextBlock Text="{Binding Path=Nickname}" VerticalAlignment="Center"  HorizontalAlignment="Center" />
+                                    <Border Background="#EAD4F4" Width="285" CornerRadius="6" BorderBrush="Black" BorderThickness="1">
+                                        <TextBlock Text="{Binding Path=Nickname}" FontSize="20" HorizontalAlignment="Center" FontFamily="{StaticResource FuentesTexto}" Background="#EAD4F4" />
                                     </Border>
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
-                        <GridViewColumn x:Name="GrdViewColumnDos" Header="Rondas Ganadas" Width="300" DisplayMemberBinding="{Binding Path=NumeroPartidasGanadas}" />
+                        <GridViewColumn x:Name="GrdViewColumnDos" Width="300">
+                            <GridViewColumn.HeaderTemplate>
+                                <DataTemplate>
+                                    <Border Background="#EAD4F4" Width="294" CornerRadius="6" BorderBrush="Black" BorderThickness="1">
+                                        <TextBlock Text="Rondas Ganadas" FontFamily="{StaticResource FuentesTitulo}" FontSize="30" Background="#EAD4F4" HorizontalAlignment="Center"/>
+                                    </Border>
+                                </DataTemplate>
+                            </GridViewColumn.HeaderTemplate>
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Border Background="#EAD4F4" Width="285" CornerRadius="6" BorderBrush="Black" BorderThickness="1">
+                                        <TextBlock Text="{Binding Path=NumeroPartidasGanadas}" FontSize="20" HorizontalAlignment="Center" FontFamily="{StaticResource FuentesTexto}" Background="#EAD4F4" />
+                                    </Border>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
                     </GridView>
                 </ListView.View>
             </ListView>
