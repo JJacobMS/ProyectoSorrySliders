@@ -166,49 +166,9 @@ namespace VistasSorrySliders
 
         private void ClickMostrarPuntuaciones(object sender, RoutedEventArgs e)
         {
-            Constantes resultado = new Constantes();
-            Puntuacion[] puntuaciones = new Puntuacion[] { };
-            try
-            {
-                MenuPrincipalClient proxyRecuperarPuntuaciones = new MenuPrincipalClient();
-                (resultado, puntuaciones) = proxyRecuperarPuntuaciones.RecuperarPuntuaciones();
-                proxyRecuperarPuntuaciones.Close();
-                switch (resultado)
-                {
-                    case Constantes.OPERACION_EXITOSA:
-                        foreach (var puntuacion in puntuaciones)
-                        {
-                            Console.WriteLine(puntuacion.Nickname + " " + puntuacion.NumeroPartidasGanadas);
-                        }
-                        break;
-                    case Constantes.OPERACION_EXITOSA_VACIA:
-                        Console.WriteLine("VACIO");
-                        break;
-                    case Constantes.ERROR_CONEXION_BD:
-                        System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorBaseDatos);
-                        break;
-                    case Constantes.ERROR_CONSULTA:
-                        System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorBaseDatos);
-                        break;
-                    case Constantes.ERROR_CONEXION_SERVIDOR:
-                        System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorConexion);
-                        break;
-                    default:
-                        break;
-                }
-            }
-            catch (CommunicationException ex)
-            {
-                Console.WriteLine(ex);
-                resultado = Constantes.ERROR_CONEXION_SERVIDOR;
-                System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorConexion);
-            }
-            catch (TimeoutException ex)
-            {
-                Console.WriteLine(ex);
-                resultado = Constantes.ERROR_CONEXION_SERVIDOR;
-                System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorConexion);
-            }
+            TableroPuntuacionesPagina tablero = new TableroPuntuacionesPagina(_cuentaUsuario);
+            this.NavigationService.Navigate(tablero);
+            
         }
     }
 }
