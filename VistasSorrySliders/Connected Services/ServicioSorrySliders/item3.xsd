@@ -232,4 +232,32 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="VerificarContrasenaActual">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q21="http://schemas.datacontract.org/2004/07/DatosSorrySliders" minOccurs="0" name="cuenta" nillable="true" type="q21:CuentaSet" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="VerificarContrasenaActualResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q22="http://schemas.datacontract.org/2004/07/DatosSorrySliders" minOccurs="0" name="VerificarContrasenaActualResult" type="q22:Constantes" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CambiarContrasena">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q23="http://schemas.datacontract.org/2004/07/DatosSorrySliders" minOccurs="0" name="cuenta" nillable="true" type="q23:CuentaSet" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CambiarContrasenaResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q24="http://schemas.datacontract.org/2004/07/DatosSorrySliders" minOccurs="0" name="CambiarContrasenaResult" type="q24:Constantes" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
 </xs:schema>

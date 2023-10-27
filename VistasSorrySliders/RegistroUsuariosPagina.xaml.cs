@@ -136,7 +136,7 @@ namespace VistasSorrySliders
                     validacionCampos = false;
                 }
 
-                if (!string.IsNullOrWhiteSpace(pssBoxContrasena.Password) && ValidarContraseña(pssBoxContrasena.Password))
+                if (!string.IsNullOrWhiteSpace(pssBoxContrasena.Password) && Utilidades.ValidarContraseña(pssBoxContrasena.Password))
                 {
                     pssBoxContrasena.Style = estiloPssBoxAzul;
                 }
@@ -196,18 +196,6 @@ namespace VistasSorrySliders
                 Console.WriteLine(ex);
                 return false;
             }
-        }
-        private bool ValidarContraseña(string contraseña)
-        {
-            string patron = @"^(?=.*[0-9!@#$%^&*()\-=_+.,:;])[A-Za-z0-9!@#$%^&*()\-=_+.,:;]{8,}$";
-            Regex regex = new Regex(patron);
-            bool correoValidado = regex.IsMatch(contraseña);
-            if (correoValidado)
-            {
-                return correoValidado;
-            }
-            System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorContrasenaInvalida, Properties.Resources.msgTituloContraseñaInvalida, MessageBoxButtons.OK, MessageBoxIcon.Error);
-            return correoValidado;  
         }
         
         private void AñadirCuenta() 

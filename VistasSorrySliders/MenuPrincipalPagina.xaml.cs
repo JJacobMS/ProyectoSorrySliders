@@ -151,24 +151,32 @@ namespace VistasSorrySliders
             this.NavigationService.Navigate(unirsePartida);
         }
 
-        private void MouseLeftButtonDownMostrarDetallesCuenta(object sender, MouseButtonEventArgs e)
-        {
-            CuentaDetallesVentana detalles = new CuentaDetallesVentana(_cuentaUsuario);
-            detalles.ModificarCuenta += ActualizarPaginaMenuPrincipal;
-            detalles.ShowDialog();
-        }
-
-        private void ActualizarPaginaMenuPrincipal(UsuarioSet usuario) 
-        {
-            RegistroUsuariosPagina registro = new RegistroUsuariosPagina(_cuentaUsuario, usuario);
-            this.NavigationService.Navigate(registro);
-        } 
 
         private void ClickMostrarPuntuaciones(object sender, RoutedEventArgs e)
         {
             TableroPuntuacionesPagina tablero = new TableroPuntuacionesPagina(_cuentaUsuario);
             this.NavigationService.Navigate(tablero);
             
+        }
+
+        private void MouseLeftButtonDownMostrarDetallesCuenta(object sender, MouseButtonEventArgs e)
+        {
+            CuentaDetallesVentana detalles = new CuentaDetallesVentana(_cuentaUsuario);
+            detalles.ModificarCuenta += ActualizarPaginaMenuPrincipal;
+            detalles.ModificarContrasena += CambiarPaginaModificarContrasena;
+            detalles.ShowDialog();
+        }
+
+        private void ActualizarPaginaMenuPrincipal(UsuarioSet usuario)
+        {
+            RegistroUsuariosPagina registro = new RegistroUsuariosPagina(_cuentaUsuario, usuario);
+            this.NavigationService.Navigate(registro);
+        }
+
+        private void CambiarPaginaModificarContrasena()
+        {
+            CambiarContrasenaPagina modificar = new CambiarContrasenaPagina(_cuentaUsuario);
+            this.NavigationService.Navigate(modificar);
         }
     }
 }

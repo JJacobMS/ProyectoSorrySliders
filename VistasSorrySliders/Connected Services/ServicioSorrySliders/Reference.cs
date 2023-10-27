@@ -896,6 +896,18 @@ namespace VistasSorrySliders.ServicioSorrySliders {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDetallesCuentaUsuario/RecuperarDatosUsuarioDeCuenta", ReplyAction="http://tempuri.org/IDetallesCuentaUsuario/RecuperarDatosUsuarioDeCuentaResponse")]
         System.Threading.Tasks.Task<System.ValueTuple<VistasSorrySliders.ServicioSorrySliders.Constantes, VistasSorrySliders.ServicioSorrySliders.UsuarioSet>> RecuperarDatosUsuarioDeCuentaAsync(string correoElectronico);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDetallesCuentaUsuario/VerificarContrasenaActual", ReplyAction="http://tempuri.org/IDetallesCuentaUsuario/VerificarContrasenaActualResponse")]
+        VistasSorrySliders.ServicioSorrySliders.Constantes VerificarContrasenaActual(VistasSorrySliders.ServicioSorrySliders.CuentaSet cuenta);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDetallesCuentaUsuario/VerificarContrasenaActual", ReplyAction="http://tempuri.org/IDetallesCuentaUsuario/VerificarContrasenaActualResponse")]
+        System.Threading.Tasks.Task<VistasSorrySliders.ServicioSorrySliders.Constantes> VerificarContrasenaActualAsync(VistasSorrySliders.ServicioSorrySliders.CuentaSet cuenta);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDetallesCuentaUsuario/CambiarContrasena", ReplyAction="http://tempuri.org/IDetallesCuentaUsuario/CambiarContrasenaResponse")]
+        VistasSorrySliders.ServicioSorrySliders.Constantes CambiarContrasena(VistasSorrySliders.ServicioSorrySliders.CuentaSet cuenta);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDetallesCuentaUsuario/CambiarContrasena", ReplyAction="http://tempuri.org/IDetallesCuentaUsuario/CambiarContrasenaResponse")]
+        System.Threading.Tasks.Task<VistasSorrySliders.ServicioSorrySliders.Constantes> CambiarContrasenaAsync(VistasSorrySliders.ServicioSorrySliders.CuentaSet cuenta);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -931,6 +943,22 @@ namespace VistasSorrySliders.ServicioSorrySliders {
         
         public System.Threading.Tasks.Task<System.ValueTuple<VistasSorrySliders.ServicioSorrySliders.Constantes, VistasSorrySliders.ServicioSorrySliders.UsuarioSet>> RecuperarDatosUsuarioDeCuentaAsync(string correoElectronico) {
             return base.Channel.RecuperarDatosUsuarioDeCuentaAsync(correoElectronico);
+        }
+        
+        public VistasSorrySliders.ServicioSorrySliders.Constantes VerificarContrasenaActual(VistasSorrySliders.ServicioSorrySliders.CuentaSet cuenta) {
+            return base.Channel.VerificarContrasenaActual(cuenta);
+        }
+        
+        public System.Threading.Tasks.Task<VistasSorrySliders.ServicioSorrySliders.Constantes> VerificarContrasenaActualAsync(VistasSorrySliders.ServicioSorrySliders.CuentaSet cuenta) {
+            return base.Channel.VerificarContrasenaActualAsync(cuenta);
+        }
+        
+        public VistasSorrySliders.ServicioSorrySliders.Constantes CambiarContrasena(VistasSorrySliders.ServicioSorrySliders.CuentaSet cuenta) {
+            return base.Channel.CambiarContrasena(cuenta);
+        }
+        
+        public System.Threading.Tasks.Task<VistasSorrySliders.ServicioSorrySliders.Constantes> CambiarContrasenaAsync(VistasSorrySliders.ServicioSorrySliders.CuentaSet cuenta) {
+            return base.Channel.CambiarContrasenaAsync(cuenta);
         }
     }
 }

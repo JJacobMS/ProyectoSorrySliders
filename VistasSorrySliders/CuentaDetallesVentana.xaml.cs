@@ -24,6 +24,7 @@ namespace VistasSorrySliders
     {
         public delegate void ManegarEventoConUsuario(UsuarioSet usuario);
         public event ManegarEventoConUsuario ModificarCuenta;
+        public event Action ModificarContrasena;
         private CuentaSet _cuenta;
         private UsuarioSet _usuario;
         public CuentaDetallesVentana(CuentaSet cuenta)
@@ -31,8 +32,6 @@ namespace VistasSorrySliders
             InitializeComponent();
             _cuenta = cuenta;
             RecuperarDatos();
-            ColocarDatos();
-
         }
 
         private void ColocarDatos()
@@ -56,13 +55,11 @@ namespace VistasSorrySliders
             {
                 Console.WriteLine(ex);
                 resultado = Constantes.ERROR_CONEXION_SERVIDOR;
-                System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorConexion);
             }
             catch (TimeoutException ex)
             {
                 Console.WriteLine(ex);
                 resultado = Constantes.ERROR_CONEXION_SERVIDOR;
-                System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorConexion);
             }
 
             switch (resultado)
@@ -73,13 +70,13 @@ namespace VistasSorrySliders
                 case Constantes.OPERACION_EXITOSA_VACIA:
                     break;
                 case Constantes.ERROR_CONEXION_BD:
-                    System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorBaseDatos);
+                    MessageBox.Show(Properties.Resources.msgErrorBaseDatos);
                     break;
                 case Constantes.ERROR_CONSULTA:
-                    System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorBaseDatos);
+                    MessageBox.Show(Properties.Resources.msgErrorBaseDatos);
                     break;
                 case Constantes.ERROR_CONEXION_SERVIDOR:
-                    System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorConexion);
+                    MessageBox.Show(Properties.Resources.msgErrorConexion);
                     break;
             }
         }
@@ -92,6 +89,12 @@ namespace VistasSorrySliders
         private void ClickIrRegistroUsuarios(object sender, RoutedEventArgs e)
         {
             ModificarCuenta?.Invoke(_usuario);
+            this.Close();
+        }
+
+        private void ClickModificarContrasena(object sender, RoutedEventArgs e)
+        {
+            ModificarContrasena?.Invoke();
             this.Close();
         }
     }
