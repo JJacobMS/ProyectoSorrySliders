@@ -24,6 +24,7 @@ namespace VistasSorrySliders
     {
         public delegate void ManegarEventoConUsuario(UsuarioSet usuario);
         public event ManegarEventoConUsuario ModificarCuenta;
+        public event Action ModificarContrasena;
         private CuentaSet _cuenta;
         private UsuarioSet _usuario;
         public CuentaDetallesVentana(CuentaSet cuenta)
@@ -88,6 +89,12 @@ namespace VistasSorrySliders
         private void ClickIrRegistroUsuarios(object sender, RoutedEventArgs e)
         {
             ModificarCuenta?.Invoke(_usuario);
+            this.Close();
+        }
+
+        private void ClickModificarContrasena(object sender, RoutedEventArgs e)
+        {
+            ModificarContrasena?.Invoke();
             this.Close();
         }
     }
