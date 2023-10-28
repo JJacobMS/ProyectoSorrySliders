@@ -124,10 +124,18 @@ namespace VistasSorrySliders
 
         private void CrearCuentaProvisionalInvitado(string codigo)
         {
+            Byte[] avatar = Utilidades.GenerarImagenDefectoBytes();
+
+            if (avatar == null)
+            {
+                MessageBox.Show("Ocurrió un error, inténtelo de nuevo o más tarde");
+                return;
+            }
+
             _cuentaActual = new CuentaSet
             {
                 CorreoElectronico = Guid.NewGuid().ToString(),
-                Avatar = Utilidades.GenerarImagenDefectoBytes(),
+                Avatar = avatar,
                 Nickname = txtBoxNickname.Text
             };
 

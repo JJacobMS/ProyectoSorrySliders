@@ -61,13 +61,13 @@ namespace VistasSorrySliders
             {
                 respuesta = Constantes.ERROR_CONEXION_SERVIDOR;
                 Console.WriteLine(ex);
-                System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorConexion);
+                MessageBox.Show(Properties.Resources.msgErrorConexion);
             }
             catch (TimeoutException ex)
             {
                 Console.WriteLine(ex);
                 respuesta = Constantes.ERROR_CONEXION_SERVIDOR;
-                System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorConexion);
+                MessageBox.Show(Properties.Resources.msgErrorConexion);
             }
             switch (respuesta)
             {
@@ -92,6 +92,7 @@ namespace VistasSorrySliders
                     break;
                 default:
                     break;
+
             }
         }
 
@@ -159,13 +160,13 @@ namespace VistasSorrySliders
             {
                 Console.WriteLine(ex);
                 respuesta = Constantes.ERROR_CONEXION_SERVIDOR;
-                System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorConexion);
+                MessageBox.Show(Properties.Resources.msgErrorConexion);
             }
             catch (TimeoutException ex)
             {
                 Console.WriteLine(ex);
                 respuesta = Constantes.ERROR_CONEXION_SERVIDOR;
-                System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorConexion);
+                MessageBox.Show(Properties.Resources.msgErrorConexion);
             }
             switch (respuesta)
             {
@@ -215,11 +216,11 @@ namespace VistasSorrySliders
 
         private void ClickSalirLobbyJugadores(object sender, RoutedEventArgs e)
         {
+            SalirPartida();
             IrMenuUsuario();
         }
         public void IrMenuUsuario() 
         {
-            SalirPartida();
             var ventanaPrincipal = new MainWindow();
 
             if (_esInvitado)
@@ -229,7 +230,6 @@ namespace VistasSorrySliders
             }
             else
             {
-                IrMenuUsuario();
                 MenuPrincipalPagina menu = new MenuPrincipalPagina(_cuentaUsuario);
                 ventanaPrincipal.Content = menu;
             }
@@ -277,6 +277,7 @@ namespace VistasSorrySliders
                 System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorConexion);
             }
         }
+
         public void JugadorSalioPartida()
         {
             RecuperarDatosPartida(_codigoPartida);
