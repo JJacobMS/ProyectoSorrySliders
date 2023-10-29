@@ -22,9 +22,9 @@ namespace VistasSorrySliders
     /// </summary>
     public partial class CuentaDetallesVentana : Window
     {
-        public delegate void ManegarEventoConUsuario(UsuarioSet usuario);
-        public event ManegarEventoConUsuario ModificarCuenta;
+        public event Action<UsuarioSet> ModificarUsuarioCuenta; 
         public event Action ModificarContrasena;
+        public event Action<Window> AbrirVentana;
         private CuentaSet _cuenta;
         private UsuarioSet _usuario;
         public CuentaDetallesVentana(CuentaSet cuenta)
@@ -65,11 +65,13 @@ namespace VistasSorrySliders
             switch (resultado)
             {
                 case Constantes.OPERACION_EXITOSA:
+                    AbrirVentana?.Invoke(this);
                     ColocarDatos();
                     break;
                 case Constantes.OPERACION_EXITOSA_VACIA:
                     break;
                 case Constantes.ERROR_CONEXION_BD:
+
                     MessageBox.Show(Properties.Resources.msgErrorBaseDatos);
                     break;
                 case Constantes.ERROR_CONSULTA:
@@ -88,7 +90,7 @@ namespace VistasSorrySliders
 
         private void ClickIrRegistroUsuarios(object sender, RoutedEventArgs e)
         {
-            ModificarCuenta?.Invoke(_usuario);
+            ModificarUsuarioCuenta?.Invoke(_usuario);
             this.Close();
         }
 

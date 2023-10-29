@@ -159,9 +159,15 @@ namespace VistasSorrySliders
         private void MouseLeftButtonDownMostrarDetallesCuenta(object sender, MouseButtonEventArgs e)
         {
             CuentaDetallesVentana detalles = new CuentaDetallesVentana(_cuentaUsuario);
-            detalles.ModificarCuenta += ActualizarPaginaMenuPrincipal;
+            detalles.ModificarUsuarioCuenta += ActualizarPaginaMenuPrincipal;
             detalles.ModificarContrasena += CambiarPaginaModificarContrasena;
-            detalles.ShowDialog();
+            detalles.AbrirVentana += AbrirVentanaDetalles;
+            
+        }
+
+        private void AbrirVentanaDetalles(Window ventanaAbrir)
+        {
+            ventanaAbrir.ShowDialog();
         }
 
         private void ActualizarPaginaMenuPrincipal(UsuarioSet usuario)
