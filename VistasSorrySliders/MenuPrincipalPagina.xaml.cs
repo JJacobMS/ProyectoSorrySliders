@@ -53,6 +53,7 @@ namespace VistasSorrySliders
         private void RecuperarDatosUsuario(string correoUsuario)
         {
             Constantes resultado;
+            Logger log = new Logger(this.GetType());
             try
             {
                 MenuPrincipalClient proxyRegistrarUsuario = new MenuPrincipalClient();
@@ -76,15 +77,20 @@ namespace VistasSorrySliders
             {
                 Console.WriteLine(ex);
                 resultado = Constantes.ERROR_CONEXION_SERVIDOR;
-                System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorConexion);
+                log.LogWarn("Error de Comunicación con el Servidor", ex);
             }
             catch (TimeoutException ex)
             {
                 Console.WriteLine(ex);
                 resultado = Constantes.ERROR_CONEXION_SERVIDOR;
-                System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorConexion);
+                log.LogWarn("Se agoto el tiempo de espera del servidor", ex);
             }
-
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+                resultado = Constantes.ERROR_CONEXION_SERVIDOR;
+                log.LogFatal("Ha ocurrido un error inesperado", ex);
+            }
             switch (resultado)
             {
                 case Constantes.OPERACION_EXITOSA:

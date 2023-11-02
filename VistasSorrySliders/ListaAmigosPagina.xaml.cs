@@ -41,6 +41,7 @@ namespace VistasSorrySliders
         private void RecuperarAmigos()
         {
             Constantes resultado;
+            Logger log = new Logger(this.GetType());
             List<CuentaSet> amigosLista = new List<CuentaSet>();
             try
             {
@@ -52,10 +53,23 @@ namespace VistasSorrySliders
                     amigosLista = cuentas.ToList();
                 }
             }
-            catch (CommunicationException excepcion)
+            catch (CommunicationException ex)
             {
                 resultado = Constantes.ERROR_CONEXION_SERVIDOR;
-                Console.WriteLine(excepcion);
+                Console.WriteLine(ex);
+                log.LogWarn("Error de Comunicación con el Servidor", ex);
+            }
+            catch (TimeoutException ex)
+            {
+                Console.WriteLine(ex);
+                resultado = Constantes.ERROR_CONEXION_SERVIDOR;
+                log.LogWarn("Se agoto el tiempo de espera del servidor", ex);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+                resultado = Constantes.ERROR_CONEXION_SERVIDOR;
+                log.LogFatal("Ha ocurrido un error inesperado", ex);
             }
 
             switch (resultado)
@@ -93,6 +107,7 @@ namespace VistasSorrySliders
 
         private void EnviarCorreo()
         {
+            Logger log = new Logger(this.GetType());
             try
             {
                 if (NetworkInterface.GetIsNetworkAvailable())
@@ -124,6 +139,7 @@ namespace VistasSorrySliders
             catch (Exception ex)
             {
                 Console.WriteLine("Error al enviar el correo: " + ex.StackTrace);
+                log.LogFatal("Ha ocurrido un error inesperado", ex);
             }
         }
 
@@ -144,6 +160,7 @@ namespace VistasSorrySliders
             Console.WriteLine(informacionJugador);
             Constantes resultado;
             List<CuentaSet> jugadoresLista = new List<CuentaSet>();
+            Logger log = new Logger(this.GetType());
             try
             {
                 CuentaSet[] cuentas;
@@ -158,13 +175,19 @@ namespace VistasSorrySliders
             {
                 Console.WriteLine(ex);
                 resultado = Constantes.ERROR_CONEXION_SERVIDOR;
-                System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorConexion);
+                log.LogWarn("Error de Comunicación con el Servidor", ex);
             }
             catch (TimeoutException ex)
             {
                 Console.WriteLine(ex);
                 resultado = Constantes.ERROR_CONEXION_SERVIDOR;
-                System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorConexion);
+                log.LogWarn("Se agoto el tiempo de espera del servidor", ex);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+                resultado = Constantes.ERROR_CONEXION_SERVIDOR;
+                log.LogFatal("Ha ocurrido un error inesperado", ex);
             }
 
             switch (resultado)

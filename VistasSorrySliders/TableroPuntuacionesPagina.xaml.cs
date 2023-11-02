@@ -38,51 +38,58 @@ namespace VistasSorrySliders
         {
             Constantes resultado = new Constantes();
             Puntuacion[] puntuaciones = new Puntuacion[] { };
+            Logger log = new Logger(this.GetType());
             try
             {
                 MenuPrincipalClient proxyRecuperarPuntuaciones = new MenuPrincipalClient();
                 (resultado, puntuaciones) = proxyRecuperarPuntuaciones.RecuperarPuntuaciones();
                 proxyRecuperarPuntuaciones.Close();
-                switch (resultado)
-                {
-                    case Constantes.OPERACION_EXITOSA:
-                        ListaPuntuaciones = new ObservableCollection<Puntuacion>();
-                        foreach (var puntuacion in puntuaciones)
-                        {
-                            ListaPuntuaciones.Add(puntuacion);
-                        }
-                        this.DataContext = this;
-                        break;
-                    case Constantes.OPERACION_EXITOSA_VACIA:
-                        System.Windows.Forms.MessageBox.Show(Properties.Resources.msgTablaVacia);
-                        break;
-                    case Constantes.ERROR_CONEXION_BD:
-                        System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorBaseDatos);
-                        this.NavigationService.GoBack();
-                        break;
-                    case Constantes.ERROR_CONSULTA:
-                        System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorBaseDatos);
-                        this.NavigationService.GoBack();
-                        break;
-                    case Constantes.ERROR_CONEXION_SERVIDOR:
-                        System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorConexion);
-                        this.NavigationService.GoBack();
-                        break;
-                    default:
-                        break;
-                }
             }
             catch (CommunicationException ex)
             {
                 Console.WriteLine(ex);
                 resultado = Constantes.ERROR_CONEXION_SERVIDOR;
-                System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorConexion);
+                log.LogWarn("Error de Comunicación con el Servidor", ex);
             }
             catch (TimeoutException ex)
             {
                 Console.WriteLine(ex);
                 resultado = Constantes.ERROR_CONEXION_SERVIDOR;
-                System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorConexion);
+                log.LogWarn("Se agoto el tiempo de espera del servidor", ex);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+                resultado = Constantes.ERROR_CONEXION_SERVIDOR;
+                log.LogFatal("Ha ocurrido un error inesperado", ex);
+            }
+            switch (resultado)
+            {
+                case Constantes.OPERACION_EXITOSA:
+                    ListaPuntuaciones = new ObservableCollection<Puntuacion>();
+                    foreach (var puntuacion in puntuaciones)
+                    {
+                        ListaPuntuaciones.Add(puntuacion);
+                    }
+                    this.DataContext = this;
+                    break;
+                case Constantes.OPERACION_EXITOSA_VACIA:
+                    System.Windows.Forms.MessageBox.Show(Properties.Resources.msgTablaVacia);
+                    break;
+                case Constantes.ERROR_CONEXION_BD:
+                    System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorBaseDatos);
+                    this.NavigationService.GoBack();
+                    break;
+                case Constantes.ERROR_CONSULTA:
+                    System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorBaseDatos);
+                    this.NavigationService.GoBack();
+                    break;
+                case Constantes.ERROR_CONEXION_SERVIDOR:
+                    System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorConexion);
+                    this.NavigationService.GoBack();
+                    break;
+                default:
+                    break;
             }
         }
 

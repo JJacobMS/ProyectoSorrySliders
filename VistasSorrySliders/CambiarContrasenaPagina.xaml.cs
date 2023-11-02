@@ -62,6 +62,7 @@ namespace VistasSorrySliders
         private void VerificarContrasenaAnterior(CuentaSet cuentaPorVerificar)
         {
             Constantes resultado;
+            Logger log = new Logger(this.GetType());
             try
             {
                 DetallesCuentaUsuarioClient proxyUsuario = new DetallesCuentaUsuarioClient();
@@ -71,13 +72,20 @@ namespace VistasSorrySliders
             {
                 Console.WriteLine(ex);
                 resultado = Constantes.ERROR_CONEXION_SERVIDOR;
+                log.LogWarn("Error de Comunicación con el Servidor",ex);
             }
             catch (TimeoutException ex)
             {
                 Console.WriteLine(ex);
                 resultado = Constantes.ERROR_CONEXION_SERVIDOR;
+                log.LogWarn("Se agoto el tiempo de espera del servidor", ex);
             }
-
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+                resultado = Constantes.ERROR_CONEXION_SERVIDOR;
+                log.LogFatal("Ha ocurrido un error inesperado", ex);
+            }
             switch (resultado)
             {
                 case Constantes.OPERACION_EXITOSA:
@@ -152,6 +160,7 @@ namespace VistasSorrySliders
         private void CambiarContrasena(CuentaSet cuentaCambiarContrasena)
         {
             Constantes resultado;
+            Logger log = new Logger(this.GetType());
             try
             {
                 DetallesCuentaUsuarioClient proxyUsuario = new DetallesCuentaUsuarioClient();
@@ -161,13 +170,20 @@ namespace VistasSorrySliders
             {
                 Console.WriteLine(ex);
                 resultado = Constantes.ERROR_CONEXION_SERVIDOR;
+                log.LogWarn("Error de Comunicación con el Servidor", ex);
             }
             catch (TimeoutException ex)
             {
                 Console.WriteLine(ex);
                 resultado = Constantes.ERROR_CONEXION_SERVIDOR;
+                log.LogWarn("Se agoto el tiempo de espera del servidor", ex);
             }
-
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+                resultado = Constantes.ERROR_CONEXION_SERVIDOR;
+                log.LogFatal("Ha ocurrido un error inesperado", ex);
+            }
             switch (resultado)
             {
                 case Constantes.OPERACION_EXITOSA:

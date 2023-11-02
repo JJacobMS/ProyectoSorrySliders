@@ -91,6 +91,7 @@ namespace VistasSorrySliders
 
         private void UnirsePartida(string codigo)
         {
+            Logger log = new Logger(this.GetType());
             Constantes resultado;
             int numeroMaximoJugadores = 0;
             try
@@ -98,10 +99,23 @@ namespace VistasSorrySliders
                 UnirsePartidaClient proxyUnirsePartida = new UnirsePartidaClient();
                 (resultado, numeroMaximoJugadores) = proxyUnirsePartida.UnirseAlLobby(codigo, _cuentaActual.CorreoElectronico);
             }
-            catch (CommunicationException excepcion)
+            catch (CommunicationException ex)
             {
                 resultado = Constantes.ERROR_CONEXION_SERVIDOR;
-                Console.WriteLine(excepcion);
+                Console.WriteLine(ex);
+                log.LogWarn("Error de Comunicación con el Servidor", ex);
+            }
+            catch (TimeoutException ex)
+            {
+                Console.WriteLine(ex);
+                resultado = Constantes.ERROR_CONEXION_SERVIDOR;
+                log.LogWarn("Se agoto el tiempo de espera del servidor", ex);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+                resultado = Constantes.ERROR_CONEXION_SERVIDOR;
+                log.LogFatal("Ha ocurrido un error inesperado", ex);
             }
 
             switch (resultado)
@@ -140,6 +154,7 @@ namespace VistasSorrySliders
             };
 
             Constantes resultado;
+            Logger log = new Logger(this.GetType());
             try
             {
                 UnirsePartidaClient proxyUnirsePartida = new UnirsePartidaClient();
@@ -150,12 +165,19 @@ namespace VistasSorrySliders
             {
                 Console.WriteLine(ex);
                 resultado = Constantes.ERROR_CONEXION_SERVIDOR;
+                log.LogWarn("Error de Comunicación con el Servidor", ex);
             }
             catch (TimeoutException ex)
             {
                 Console.WriteLine(ex);
                 resultado = Constantes.ERROR_CONEXION_SERVIDOR;
-
+                log.LogWarn("Se agoto el tiempo de espera del servidor", ex);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+                resultado = Constantes.ERROR_CONEXION_SERVIDOR;
+                log.LogFatal("Ha ocurrido un error inesperado", ex);
             }
             switch (resultado)
             {
@@ -221,8 +243,24 @@ namespace VistasSorrySliders
 
         private bool EsUniqueIdentifierValido(string uid)
         {
-            string pattern = @"^[0-9A-Fa-f]{8}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{12}$";
-            return Regex.IsMatch(uid, pattern);
+            Logger log = new Logger(this.GetType());
+            try
+            {
+                string pattern = @"^[0-9A-Fa-f]{8}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{12}$";
+                return Regex.IsMatch(uid, pattern);
+            }
+            catch (RegexMatchTimeoutException ex)
+            {
+                Console.WriteLine(ex);
+                log.LogWarn("El tiempo de espera para la expresión se ha agotado", ex);
+                return false;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+                log.LogFatal("Ha ocurrido un error inesperado", ex);
+                return false;
+            }
         }
 
         private void ClickSalir(object sender, RoutedEventArgs e)

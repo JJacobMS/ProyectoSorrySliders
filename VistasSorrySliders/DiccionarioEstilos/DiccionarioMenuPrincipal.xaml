@@ -45,6 +45,7 @@
         <Setter Property="FontFamily" Value="{StaticResource FuentesTexto}"/>
         <Setter Property="Height" Value="60"/>
         <Setter Property="Width" Value="380"/>
+        <Setter Property="Foreground" Value="White"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Button}">
@@ -57,7 +58,7 @@
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
                 <Setter Property="Cursor" Value="Hand"/>
-                <Setter Property="Foreground" Value="#E0B7F1"/>
+                <Setter Property="Foreground" Value="White"/>
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="{x:Type Button}">
@@ -77,7 +78,7 @@
         <Setter Property="Width" Value="380"/>
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="{x:Type Button}">
+                <ControlTemplate TargetType="Button">
                     <Border CornerRadius="5" BorderThickness="0" Background="#0A527D">
                         <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
                     </Border>
@@ -161,4 +162,6 @@
         </Style.Triggers>
     </Style>
 
+    
+    
 </ResourceDictionary>

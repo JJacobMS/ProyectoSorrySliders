@@ -65,6 +65,7 @@ namespace VistasSorrySliders
             if (datosCompletos)
             {
                 Constantes resultado;
+                Logger log = new Logger(this.GetType());
                 try
                 {
                     InicioSesionClient proxyInicioSesion = new InicioSesionClient();
@@ -75,15 +76,20 @@ namespace VistasSorrySliders
                 {
                     Console.WriteLine(ex);
                     resultado = Constantes.ERROR_CONEXION_SERVIDOR;
-                    System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorConexion);
+                    log.LogWarn("Error de Comunicación con el Servidor", ex);
                 }
                 catch (TimeoutException ex)
                 {
                     Console.WriteLine(ex);
                     resultado = Constantes.ERROR_CONEXION_SERVIDOR;
-                    System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorConexion);
+                    log.LogWarn("Se agoto el tiempo de espera del servidor", ex);
                 }
-
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex);
+                    resultado = Constantes.ERROR_CONEXION_SERVIDOR;
+                    log.LogFatal("Ha ocurrido un error inesperado", ex);
+                }
                 switch (resultado)
                 {
                     case Constantes.OPERACION_EXITOSA:
@@ -108,6 +114,7 @@ namespace VistasSorrySliders
         private void VerificarContrasena(CuentaSet cuentaPorVerificar)
         {
             Constantes resultado;
+            Logger log = new Logger(this.GetType());
             try
             {
                 InicioSesionClient proxyInicioSesion = new InicioSesionClient();
@@ -118,13 +125,19 @@ namespace VistasSorrySliders
             {
                 Console.WriteLine(ex);
                 resultado = Constantes.ERROR_CONEXION_SERVIDOR;
-                System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorConexion);
+                log.LogWarn("Error de Comunicación con el Servidor", ex);
             }
             catch (TimeoutException ex)
             {
                 Console.WriteLine(ex);
                 resultado = Constantes.ERROR_CONEXION_SERVIDOR;
-                System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorConexion);
+                log.LogWarn("Se agoto el tiempo de espera del servidor", ex);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+                resultado = Constantes.ERROR_CONEXION_SERVIDOR;
+                log.LogFatal("Ha ocurrido un error inesperado", ex);
             }
 
             switch (resultado)

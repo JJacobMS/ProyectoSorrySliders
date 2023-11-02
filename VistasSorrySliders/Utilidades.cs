@@ -16,6 +16,7 @@ namespace VistasSorrySliders
     {
         public static void IngresarImagen(byte[] avatar, ImageBrush mgBrush)
         {
+            Logger log = new Logger(typeof(Utilidades));
             try
             {
                 BitmapImage bitmapImage = new BitmapImage();
@@ -32,29 +33,34 @@ namespace VistasSorrySliders
             }
             catch (ArgumentException ex)
             {
+                System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorImagen, Properties.Resources.msgTituloErrorImagen, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                log.LogWarn("Se ha proporcionado un argumento invalido", ex);
                 Console.WriteLine(ex);
-                Console.WriteLine("Argumento no válido al cargar la imagen");
             }
             catch (OutOfMemoryException ex)
             {
+                System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorImagen, Properties.Resources.msgTituloErrorImagen, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                log.LogWarn("Se ha agotado la memoria", ex);
                 Console.WriteLine(ex);
-                Console.WriteLine("Error de memoria al cargar la imagen");
             }
             catch (System.IO.IOException ex)
             {
+                System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorImagen, Properties.Resources.msgTituloErrorImagen, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                log.LogWarn("Error al acceder a la imagen", ex);
                 Console.WriteLine(ex);
-                Console.WriteLine("Error de lectura en el MemoryStream");
             }
             catch (Exception ex)
             {
+                System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorImagen, Properties.Resources.msgTituloErrorImagen, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 Console.WriteLine(ex);
-                Console.WriteLine("Error de lectura al cargar la imagen");
+                log.LogFatal("Ha ocurrido un error inesperado", ex);
             }
         }
 
         public static ImageBrush ConvertirBytesAImageBrush(byte[] imagenBytes)
         {
             ImageBrush imagen = new ImageBrush();
+            Logger log = new Logger(typeof(Utilidades));
             try
             {
                 BitmapImage bitmapImage = new BitmapImage();
@@ -72,23 +78,27 @@ namespace VistasSorrySliders
             }
             catch (ArgumentException ex)
             {
+                System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorImagen, Properties.Resources.msgTituloErrorImagen, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                log.LogWarn("Se ha proporcionado un argumento invalido", ex);
                 Console.WriteLine(ex);
-                Console.WriteLine("Argumento no válido al cargar la imagen");
             }
             catch (OutOfMemoryException ex)
             {
+                System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorImagen, Properties.Resources.msgTituloErrorImagen, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                log.LogWarn("Se ha agotado la memoria", ex);
                 Console.WriteLine(ex);
-                Console.WriteLine("Error de memoria al cargar la imagen");
             }
             catch (System.IO.IOException ex)
             {
+                System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorImagen, Properties.Resources.msgTituloErrorImagen, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                log.LogWarn("Error al acceder a la imagen", ex);
                 Console.WriteLine(ex);
-                Console.WriteLine("Error de lectura en el MemoryStream");
             }
             catch (Exception ex)
             {
+                System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorImagen, Properties.Resources.msgTituloErrorImagen, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                log.LogFatal("Ha ocurrido un error inesperado", ex);
                 Console.WriteLine(ex);
-                Console.WriteLine("Error de lectura al cargar la imagen");
             }
 
             return null;
@@ -97,6 +107,7 @@ namespace VistasSorrySliders
         public static byte[] GenerarImagenDefectoBytes()
         {
             string rutaImagen = "pack://application:,,,/Recursos/avatarPredefinido.jpg";
+            Logger log = new Logger(typeof(Utilidades));
             try
             {
                 BitmapImage bitmap = new BitmapImage(new Uri(rutaImagen));
@@ -111,26 +122,63 @@ namespace VistasSorrySliders
             catch (IOException ex)
             {
                 Console.WriteLine(ex);
+                System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorImagen, Properties.Resources.msgTituloErrorImagen, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                log.LogWarn("Error al acceder a la imagen", ex);
+                return null;
+            }
+            catch (ArgumentException ex)
+            {
+                System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorImagen, Properties.Resources.msgTituloErrorImagen, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                log.LogWarn("Se ha proporcionado un argumento invalido", ex);
+                Console.WriteLine(ex);
                 return null;
             }
             catch (OutOfMemoryException ex)
             {
                 Console.WriteLine(ex);
+                System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorImagen, Properties.Resources.msgTituloErrorImagen, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                log.LogWarn("Se ha agotado la memoria", ex);
                 return null;
             }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+                System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorImagen, Properties.Resources.msgTituloErrorImagen, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                log.LogFatal("Ha ocurrido un error inesperado", ex);
+                return null;
+            }
+
         }
 
         public static bool ValidarContraseña(string contraseña)
         {
-            string patron = @"^(?=.*[0-9!@#$%^&*()\-=_+.,:;])[A-Za-z0-9!@#$%^&*()\-=_+.,:;]{8,}$";
-            Regex regex = new Regex(patron);
-            bool correoValidado = regex.IsMatch(contraseña);
-            if (correoValidado)
+            Logger log = new Logger(typeof(Utilidades));
+            try
             {
+                string patron = @"^(?=.*[0-9!@#$%^&*()\-=_+.,:;])[A-Za-z0-9!@#$%^&*()\-=_+.,:;]{8,}$";
+                Regex regex = new Regex(patron);
+                bool correoValidado = regex.IsMatch(contraseña);
+                if (correoValidado)
+                {
+                    return correoValidado;
+                }
+                MessageBox.Show(Properties.Resources.msgErrorContrasenaInvalida, Properties.Resources.msgTituloContraseñaInvalida, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return correoValidado;
             }
-            MessageBox.Show(Properties.Resources.msgErrorContrasenaInvalida, Properties.Resources.msgTituloContraseñaInvalida, MessageBoxButtons.OK, MessageBoxIcon.Error);
-            return correoValidado;
+            catch (RegexMatchTimeoutException ex)
+            {
+                Console.WriteLine(ex);
+                log.LogWarn("El tiempo de espera para la expresión se ha agotado", ex);
+                //MessageBox.Show();
+                return false;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+                log.LogFatal("Ha ocurrido un error inesperado", ex);
+                //MessageBox.Show();
+                return false;
+            }
         }
 
     }

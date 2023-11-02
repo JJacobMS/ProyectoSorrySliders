@@ -348,6 +348,9 @@
   <wsdl:message name="IUnirsePartida_CrearCuentaProvisionalInvitado_OutputMessage">
     <wsdl:part name="parameters" element="tns:CrearCuentaProvisionalInvitadoResponse" />
   </wsdl:message>
+  <wsdl:message name="IUnirsePartida_EliminarCuentaProvisional_InputMessage">
+    <wsdl:part name="parameters" element="tns:EliminarCuentaProvisional" />
+  </wsdl:message>
   <wsdl:message name="ICrearLobby_CrearPartida_InputMessage">
     <wsdl:part name="parameters" element="tns:CrearPartida" />
   </wsdl:message>
@@ -447,6 +450,9 @@
     <wsdl:operation name="CrearCuentaProvisionalInvitado">
       <wsdl:input wsaw:Action="http://tempuri.org/IUnirsePartida/CrearCuentaProvisionalInvitado" message="tns:IUnirsePartida_CrearCuentaProvisionalInvitado_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IUnirsePartida/CrearCuentaProvisionalInvitadoResponse" message="tns:IUnirsePartida_CrearCuentaProvisionalInvitado_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="EliminarCuentaProvisional">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUnirsePartida/EliminarCuentaProvisional" message="tns:IUnirsePartida_EliminarCuentaProvisional_InputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:portType name="ICrearLobby">
@@ -617,6 +623,12 @@
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EliminarCuentaProvisional">
+      <soap12:operation soapAction="http://tempuri.org/IUnirsePartida/EliminarCuentaProvisional" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
     </wsdl:operation>
   </wsdl:binding>
   <wsdl:binding name="NetTcpBinding_ICrearLobby" type="tns:ICrearLobby">

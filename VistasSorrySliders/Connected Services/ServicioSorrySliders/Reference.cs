@@ -709,6 +709,12 @@ namespace VistasSorrySliders.ServicioSorrySliders {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUnirsePartida/CrearCuentaProvisionalInvitado", ReplyAction="http://tempuri.org/IUnirsePartida/CrearCuentaProvisionalInvitadoResponse")]
         System.Threading.Tasks.Task<VistasSorrySliders.ServicioSorrySliders.Constantes> CrearCuentaProvisionalInvitadoAsync(VistasSorrySliders.ServicioSorrySliders.CuentaSet cuentaProvisionalInvitado);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IUnirsePartida/EliminarCuentaProvisional")]
+        void EliminarCuentaProvisional(string correoElectronico);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IUnirsePartida/EliminarCuentaProvisional")]
+        System.Threading.Tasks.Task EliminarCuentaProvisionalAsync(string correoElectronico);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -776,6 +782,14 @@ namespace VistasSorrySliders.ServicioSorrySliders {
         
         public System.Threading.Tasks.Task<VistasSorrySliders.ServicioSorrySliders.Constantes> CrearCuentaProvisionalInvitadoAsync(VistasSorrySliders.ServicioSorrySliders.CuentaSet cuentaProvisionalInvitado) {
             return base.Channel.CrearCuentaProvisionalInvitadoAsync(cuentaProvisionalInvitado);
+        }
+        
+        public void EliminarCuentaProvisional(string correoElectronico) {
+            base.Channel.EliminarCuentaProvisional(correoElectronico);
+        }
+        
+        public System.Threading.Tasks.Task EliminarCuentaProvisionalAsync(string correoElectronico) {
+            return base.Channel.EliminarCuentaProvisionalAsync(correoElectronico);
         }
     }
     

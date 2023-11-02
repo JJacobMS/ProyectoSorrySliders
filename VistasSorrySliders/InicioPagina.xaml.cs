@@ -31,6 +31,7 @@ namespace VistasSorrySliders
         {
             InicioSesionPagina inicioSesion = new InicioSesionPagina();
             this.NavigationService.Navigate(inicioSesion);
+            
         }
     }
 }
