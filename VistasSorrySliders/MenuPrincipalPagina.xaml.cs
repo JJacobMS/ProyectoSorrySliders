@@ -77,7 +77,7 @@ namespace VistasSorrySliders
             {
                 Console.WriteLine(ex);
                 resultado = Constantes.ERROR_CONEXION_SERVIDOR;
-                log.LogWarn("Error de Comunicación con el Servidor", ex);
+                log.LogError("Error de Comunicación con el Servidor", ex);
             }
             catch (TimeoutException ex)
             {

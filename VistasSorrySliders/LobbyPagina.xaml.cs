@@ -62,7 +62,7 @@ namespace VistasSorrySliders
             {
                 respuesta = Constantes.ERROR_CONEXION_SERVIDOR;
                 Console.WriteLine(ex);
-                log.LogWarn("Error de Comunicación con el Servidor", ex);
+                log.LogError("Error de Comunicación con el Servidor", ex);
             }
             catch (TimeoutException ex)
             {
@@ -171,7 +171,7 @@ namespace VistasSorrySliders
             {
                 Console.WriteLine(ex);
                 respuesta = Constantes.ERROR_CONEXION_SERVIDOR;
-                log.LogWarn("Error de Comunicación con el Servidor", ex);
+                log.LogError("Error de Comunicación con el Servidor", ex);
             }
             catch (TimeoutException ex)
             {
@@ -275,7 +275,7 @@ namespace VistasSorrySliders
             catch (CommunicationException ex)
             {
                 Console.WriteLine(ex);
-                log.LogWarn("Error de Comunicación con el Servidor", ex);
+                log.LogError("Error de Comunicación con el Servidor", ex);
             }
             catch (TimeoutException ex)
             {
@@ -303,7 +303,7 @@ namespace VistasSorrySliders
             {
                 Console.WriteLine(ex);
                 System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorConexion);
-                log.LogWarn("Error de Comunicación con el Servidor", ex);
+                log.LogError("Error de Comunicación con el Servidor", ex);
             }
             catch (TimeoutException ex)
             {

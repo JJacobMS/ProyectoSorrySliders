@@ -25,6 +25,7 @@ namespace VistasSorrySliders
         public InicioPagina()
         {
             InitializeComponent();
+            Logger log = new Logger(this.GetType());
         }
 
         private void ClickIniciarJuego(object sender, RoutedEventArgs e)
