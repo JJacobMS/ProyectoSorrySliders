@@ -34,6 +34,11 @@ namespace VistasSorrySliders
             RecuperarDatos();
         }
 
+        public void MostrarVentana()
+        {
+            RecuperarDatos();
+        }
+
         private void ColocarDatos()
         {
             txtBoxNombre.Text = _usuario.Nombre;
@@ -73,8 +78,8 @@ namespace VistasSorrySliders
             switch (resultado)
             {
                 case Constantes.OPERACION_EXITOSA:
-                    AbrirVentana?.Invoke(this);
                     ColocarDatos();
+                    AbrirVentana?.Invoke(this);
                     break;
                 case Constantes.OPERACION_EXITOSA_VACIA:
                     break;
