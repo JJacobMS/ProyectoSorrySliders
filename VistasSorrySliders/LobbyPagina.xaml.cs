@@ -246,6 +246,7 @@ namespace VistasSorrySliders
 
             if (_esInvitado)
             {
+                EliminarCuentaProvisionalInvitado(_cuentaUsuario.CorreoElectronico);
                 InicioSesionPagina inicio = new InicioSesionPagina();
                 ventanaPrincipal.Content = inicio;
             }
@@ -331,5 +332,23 @@ namespace VistasSorrySliders
                 
             }
         }
+
+        private void EliminarCuentaProvisionalInvitado(string correoProvisional)
+        {
+            try
+            {
+                UnirsePartidaClient proxyRecuperarJugadores = new UnirsePartidaClient();
+                proxyRecuperarJugadores.EliminarCuentaProvisional(correoProvisional);
+            }
+            catch (CommunicationException ex)
+            {
+                Console.WriteLine(ex);
+            }
+            catch (TimeoutException ex)
+            {
+                Console.WriteLine(ex);
+            }
+        }
+
     }
 }

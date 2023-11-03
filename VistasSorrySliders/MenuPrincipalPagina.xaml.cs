@@ -168,7 +168,7 @@ namespace VistasSorrySliders
             detalles.ModificarUsuarioCuenta += ActualizarPaginaMenuPrincipal;
             detalles.ModificarContrasena += CambiarPaginaModificarContrasena;
             detalles.AbrirVentana += AbrirVentanaDetalles;
-            
+            detalles.MostrarVentana();
         }
 
         private void AbrirVentanaDetalles(Window ventanaAbrir)

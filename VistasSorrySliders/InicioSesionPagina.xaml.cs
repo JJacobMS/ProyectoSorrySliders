@@ -34,7 +34,8 @@ namespace VistasSorrySliders
 
         private void ClickCancelar(object sender, RoutedEventArgs e)
         {
-            this.NavigationService.GoBack();
+            InicioPagina inicio = new InicioPagina();
+            this.NavigationService.Navigate(inicio);
         }
 
         private void ClickRegistrarCuenta(object sender, RoutedEventArgs e)
