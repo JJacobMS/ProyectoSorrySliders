@@ -29,10 +29,12 @@ namespace VistasSorrySliders
         private CuentaSet[] _cuentas;
         private PartidaSet _partidaActual;
         private bool _esInvitado;
+        private JuegoYLobbyVentana _juegoYLobbyVentana;
 
-        public LobbyPagina(CuentaSet cuentaUsuario, string codigoPartida, bool esInvitado)
+        public LobbyPagina(CuentaSet cuentaUsuario, string codigoPartida, bool esInvitado, JuegoYLobbyVentana ventana)
         {
             InitializeComponent();
+            _juegoYLobbyVentana = ventana;
             _esInvitado = esInvitado;
             _cuentaUsuario = cuentaUsuario;
             _codigoPartida = codigoPartida;
@@ -49,7 +51,7 @@ namespace VistasSorrySliders
             {
                 UnirsePartidaClient proxyRecuperarJugadores = new UnirsePartidaClient();
                 (respuesta, _cuentas) = proxyRecuperarJugadores.RecuperarJugadoresLobby(codigoPartida);
-                if (_cuentas.Count() == _partidaActual.CantidadJugadores)
+                if (_cuentas.Count() == _partidaActual.CantidadJugadores && _cuentaUsuario.CorreoElectronico == _cuentas[0].CorreoElectronico)
                 {
                     btnIniciarPartida.IsEnabled = true;
                 }
@@ -329,6 +331,19 @@ namespace VistasSorrySliders
         {
             if (_cuentas.Count() == _partidaActual.CantidadJugadores)
             {
+                //Corregir para las demás
+                Page paginaNueva;
+                switch (_cuentas.Count())
+                {
+                    case 2:
+                        break;
+                    case 3:
+                        break;
+                    case 4:
+                        paginaNueva = new JuegoLanzamientoPagina(_cuentas.ToList());
+                        _juegoYLobbyVentana.CambiarFrameLobby(paginaNueva);
+                        break;
+                }
                 
             }
         }
