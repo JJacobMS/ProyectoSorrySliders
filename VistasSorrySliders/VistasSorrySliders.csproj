@@ -94,6 +94,9 @@
     <Compile Include="InicioSesionPagina.xaml.cs">
       <DependentUpon>InicioSesionPagina.xaml</DependentUpon>
     </Compile>
+    <Compile Include="JuegoLanzamientoPagina.xaml.cs">
+      <DependentUpon>JuegoLanzamientoPagina.xaml</DependentUpon>
+    </Compile>
     <Compile Include="JuegoYLobbyVentana.xaml.cs">
       <DependentUpon>JuegoYLobbyVentana.xaml</DependentUpon>
     </Compile>
@@ -104,6 +107,13 @@
       <DependentUpon>LobbyPagina.xaml</DependentUpon>
     </Compile>
     <Compile Include="Logger.cs" />
+    <Compile Include="LogicaJuego\DadoPotencia.cs" />
+    <Compile Include="LogicaJuego\Direccion.cs" />
+    <Compile Include="LogicaJuego\JugadorLanzamiento.cs" />
+    <Compile Include="LogicaJuego\LineaMovimiento.cs" />
+    <Compile Include="LogicaJuego\PeonLanzamiento.cs" />
+    <Compile Include="LogicaJuego\Tablero.cs" />
+    <Compile Include="LogicaJuego\TableroCuatroJugadores.cs" />
     <Compile Include="MenuPrincipalPagina.xaml.cs">
       <DependentUpon>MenuPrincipalPagina.xaml</DependentUpon>
     </Compile>
@@ -180,6 +190,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="InicioSesionPagina.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="JuegoLanzamientoPagina.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -363,6 +377,12 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Recursos\bannerColorMorado.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Recursos\peonGris.png" />
+    <Resource Include="Recursos\peonMorado.png" />
+    <Resource Include="Recursos\peonNegro.png" />
+    <Resource Include="Recursos\peonRosa.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
