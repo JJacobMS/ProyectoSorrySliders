@@ -7,31 +7,14 @@
       mc:Ignorable="d" 
       d:DesignHeight="576" d:DesignWidth="614">
 
-    <Page.Resources>
-        <Style x:Key="estiloLblTextoLanzamiento" TargetType="Label">
-            <Setter Property="FontFamily" Value="{StaticResource FuentesTitulo}"/>
-            <Setter Property="FontSize" Value="14"/>
-            <Setter Property="Foreground" Value="#FFFFFF"/>
-            <Setter Property="HorizontalAlignment" Value="Center"/>
-        </Style>
-        <Style x:Key="estiloTxtBlockTextoLanzamiento" TargetType="TextBlock">
-            <Setter Property="FontFamily" Value="{StaticResource FuentesTitulo}"/>
-            <Setter Property="FontSize" Value="12"/>
-            <Setter Property="Foreground" Value="#FFFFFF"/>
-            <Setter Property="HorizontalAlignment" Value="Center"/>
-            <Setter Property="TextWrapping" Value="Wrap"/>
-            <Setter Property="TextAlignment" Value="Center"/>
-        </Style>
-    </Page.Resources>
-
     <Grid>
         <Grid.Background>
             <ImageBrush ImageSource="/Recursos/TableroLanzamientoFondo.png"></ImageBrush>
         </Grid.Background>
         <Viewbox>
-            <Border Width="619" Height="576" BorderBrush="#604111" BorderThickness="3" CornerRadius="10">
+            <Border Name="brdFondoTablero" Width="619" Height="576" BorderBrush="#604111" BorderThickness="3" CornerRadius="10">
                 <Border.Background>
-                    <ImageBrush ImageSource="/Recursos/TableroCuatro.png"/>
+                    <ImageBrush ImageSource="/Recursos/tableroCuatro.png"/>
                 </Border.Background>
                 <Canvas x:Name="cnvEspacioJuego">
                     <Button Name="btnLanzarPeonAmarillo" Canvas.Left="139" Canvas.Top="129" Style="{StaticResource estiloBtnTableroAmarillo}" IsEnabled="False" Click="ClickLanzarPeon">LANZAR PEÓN</Button>

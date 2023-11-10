@@ -187,5 +187,11 @@ namespace VistasSorrySliders
             CambiarContrasenaPagina modificar = new CambiarContrasenaPagina(_cuentaUsuario);
             this.NavigationService.Navigate(modificar);
         }
+
+        private void ClickIrJugadoresAmigos(object sender, RoutedEventArgs e)
+        {
+            ListaJugadoresPagina jugadores = new ListaJugadoresPagina();
+            this.NavigationService.Navigate(jugadores);
+        }
     }
 }

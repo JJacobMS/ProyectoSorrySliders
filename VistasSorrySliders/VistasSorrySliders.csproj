@@ -103,6 +103,9 @@
     <Compile Include="ListaAmigosPagina.xaml.cs">
       <DependentUpon>ListaAmigosPagina.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ListaJugadoresPagina.xaml.cs">
+      <DependentUpon>ListaJugadoresPagina.xaml</DependentUpon>
+    </Compile>
     <Compile Include="LobbyPagina.xaml.cs">
       <DependentUpon>LobbyPagina.xaml</DependentUpon>
     </Compile>
@@ -202,6 +205,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ListaAmigosPagina.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ListaJugadoresPagina.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -383,6 +390,12 @@
     <Resource Include="Recursos\peonMorado.png" />
     <Resource Include="Recursos\peonNegro.png" />
     <Resource Include="Recursos\peonRosa.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Recursos\tableroDos.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Recursos\tableroTres.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

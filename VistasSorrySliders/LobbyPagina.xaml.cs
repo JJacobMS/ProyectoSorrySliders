@@ -340,7 +340,7 @@ namespace VistasSorrySliders
                     case 3:
                         break;
                     case 4:
-                        paginaNueva = new JuegoLanzamientoPagina(_cuentas.ToList());
+                        paginaNueva = new JuegoLanzamientoPagina(_cuentas.ToList(), 4);
                         _juegoYLobbyVentana.CambiarFrameLobby(paginaNueva);
                         break;
                 }

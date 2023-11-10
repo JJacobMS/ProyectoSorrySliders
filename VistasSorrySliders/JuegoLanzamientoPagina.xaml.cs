@@ -26,10 +26,13 @@ namespace VistasSorrySliders
         private Dictionary<Direccion, Button> _botonesLanzarPeonJugador;
         private Dictionary<Direccion, Button> _botonesTirarDadoJugador;
         private TableroCuatroJugadores _tablero;
-        public JuegoLanzamientoPagina(List<CuentaSet> listaCuentas)
+        private int _numeroJugadores;
+        public JuegoLanzamientoPagina(List<CuentaSet> listaCuentas, int numeroJugadores)
         {
+            _numeroJugadores = numeroJugadores;
             InitializeComponent();
             ColocarNombres(listaCuentas);
+            MostrarTablero();
             
             _etiquetasJugadoresLanzamientoPotencia = new Dictionary<Direccion, TextBlock>
             {
@@ -60,6 +63,25 @@ namespace VistasSorrySliders
 
             ColocarPiezasJugadores();
             _tablero.IniciarTurno();
+        }
+        private void MostrarTablero()
+        {
+            ImageBrush fondo = new ImageBrush();
+            switch(_numeroJugadores)
+            {
+                case 2:
+                    fondo.ImageSource = new BitmapImage(new Uri("pack://application:,,,/Recursos/tableroDos.png"));
+                    brdFondoTablero.Background = fondo;
+                    break;
+                case 3:
+                    fondo.ImageSource = new BitmapImage(new Uri("pack://application:,,,/Recursos/tableroTres.png"));
+                    brdFondoTablero.Background = fondo;
+                    break;
+                case 4:
+                    fondo.ImageSource = new BitmapImage(new Uri("pack://application:,,,/Recursos/tableroCuatro.png"));
+                    brdFondoTablero.Background = fondo;
+                    break;
+            }
         }
         private void ColocarNombres(List<CuentaSet> jugadores)
         {

@@ -23,6 +23,12 @@ namespace VistasSorrySliders
     {
         public JuegoYLobbyVentana()
         {
+            InitializeComponent();
+            //Revisar
+            /*List<CuentaSet> lista = new List<CuentaSet> { new CuentaSet { Nickname = "1"}, new CuentaSet { Nickname = "2"},
+                new CuentaSet {Nickname = "3"}, new CuentaSet {Nickname= "4"}
+            };
+            frameLobby.Content = new JuegoLanzamientoPagina(lista, 2);*/
         }
 
         public JuegoYLobbyVentana(CuentaSet cuenta, string codigoPartida, bool esInvitado)
