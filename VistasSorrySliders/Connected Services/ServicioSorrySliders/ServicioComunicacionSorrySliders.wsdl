@@ -264,6 +264,39 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
+  <wsp:Policy wsu:Id="NetTcpBinding_IPuntuacion_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <wsrm:RMAssertion xmlns:wsrm="http://schemas.xmlsoap.org/ws/2005/02/rm/policy">
+          <wsrm:InactivityTimeout Milliseconds="600000" />
+          <wsrm:AcknowledgementInterval Milliseconds="200" />
+        </wsrm:RMAssertion>
+        <msb:BinaryEncoding xmlns:msb="http://schemas.microsoft.com/ws/06/2004/mspolicy/netbinary1" />
+        <sp:TransportBinding xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <wsp:Policy>
+            <sp:TransportToken>
+              <wsp:Policy>
+                <msf:WindowsTransportSecurity xmlns:msf="http://schemas.microsoft.com/ws/2006/05/framing/policy">
+                  <msf:ProtectionLevel>EncryptAndSign</msf:ProtectionLevel>
+                </msf:WindowsTransportSecurity>
+              </wsp:Policy>
+            </sp:TransportToken>
+            <sp:AlgorithmSuite>
+              <wsp:Policy>
+                <sp:Basic256 />
+              </wsp:Policy>
+            </sp:AlgorithmSuite>
+            <sp:Layout>
+              <wsp:Policy>
+                <sp:Strict />
+              </wsp:Policy>
+            </sp:Layout>
+          </wsp:Policy>
+        </sp:TransportBinding>
+        <wsaw:UsingAddressing />
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
   <wsdl:types>
     <xsd:schema targetNamespace="http://tempuri.org/Imports">
       <xsd:import schemaLocation="http://localhost:5454/?xsd=xsd0" namespace="http://tempuri.org/" />
@@ -291,12 +324,6 @@
   <wsdl:message name="IMenuPrincipal_RecuperarDatosUsuario_OutputMessage">
     <wsdl:part name="parameters" element="tns:RecuperarDatosUsuarioResponse" />
   </wsdl:message>
-  <wsdl:message name="IMenuPrincipal_RecuperarPuntuaciones_InputMessage">
-    <wsdl:part name="parameters" element="tns:RecuperarPuntuaciones" />
-  </wsdl:message>
-  <wsdl:message name="IMenuPrincipal_RecuperarPuntuaciones_OutputMessage">
-    <wsdl:part name="parameters" element="tns:RecuperarPuntuacionesResponse" />
-  </wsdl:message>
   <wsdl:message name="IRegistroUsuario_AgregarUsuario_InputMessage">
     <wsdl:part name="parameters" element="tns:AgregarUsuario" />
   </wsdl:message>
@@ -315,11 +342,20 @@
   <wsdl:message name="ILobby_SalirPartida_InputMessage">
     <wsdl:part name="parameters" element="tns:SalirPartida" />
   </wsdl:message>
+  <wsdl:message name="ILobby_ChatJuego_InputMessage">
+    <wsdl:part name="parameters" element="tns:ChatJuego" />
+  </wsdl:message>
   <wsdl:message name="ILobby_JugadorEntroPartida_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:JugadorEntroPartida" />
   </wsdl:message>
   <wsdl:message name="ILobby_JugadorSalioPartida_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:JugadorSalioPartida" />
+  </wsdl:message>
+  <wsdl:message name="ILobby_DevolverMensaje_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:DevolverMensaje" />
+  </wsdl:message>
+  <wsdl:message name="ILobby_DevolverMensaje_InputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:DevolverMensajeResponse" />
   </wsdl:message>
   <wsdl:message name="IUnirsePartida_UnirseAlLobby_InputMessage">
     <wsdl:part name="parameters" element="tns:UnirseAlLobby" />
@@ -387,6 +423,12 @@
   <wsdl:message name="IDetallesCuentaUsuario_CambiarContrasena_OutputMessage">
     <wsdl:part name="parameters" element="tns:CambiarContrasenaResponse" />
   </wsdl:message>
+  <wsdl:message name="IPuntuacion_RecuperarPuntuaciones_InputMessage">
+    <wsdl:part name="parameters" element="tns:RecuperarPuntuaciones" />
+  </wsdl:message>
+  <wsdl:message name="IPuntuacion_RecuperarPuntuaciones_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RecuperarPuntuacionesResponse" />
+  </wsdl:message>
   <wsdl:portType name="IInicioSesion">
     <wsdl:operation name="VerificarExistenciaCorreoCuenta">
       <wsdl:input wsaw:Action="http://tempuri.org/IInicioSesion/VerificarExistenciaCorreoCuenta" message="tns:IInicioSesion_VerificarExistenciaCorreoCuenta_InputMessage" />
@@ -401,10 +443,6 @@
     <wsdl:operation name="RecuperarDatosUsuario">
       <wsdl:input wsaw:Action="http://tempuri.org/IMenuPrincipal/RecuperarDatosUsuario" message="tns:IMenuPrincipal_RecuperarDatosUsuario_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IMenuPrincipal/RecuperarDatosUsuarioResponse" message="tns:IMenuPrincipal_RecuperarDatosUsuario_OutputMessage" />
-    </wsdl:operation>
-    <wsdl:operation name="RecuperarPuntuaciones">
-      <wsdl:input wsaw:Action="http://tempuri.org/IMenuPrincipal/RecuperarPuntuaciones" message="tns:IMenuPrincipal_RecuperarPuntuaciones_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IMenuPrincipal/RecuperarPuntuacionesResponse" message="tns:IMenuPrincipal_RecuperarPuntuaciones_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:portType name="IRegistroUsuario">
@@ -424,11 +462,18 @@
     <wsdl:operation name="SalirPartida">
       <wsdl:input wsaw:Action="http://tempuri.org/ILobby/SalirPartida" message="tns:ILobby_SalirPartida_InputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="ChatJuego">
+      <wsdl:input wsaw:Action="http://tempuri.org/ILobby/ChatJuego" message="tns:ILobby_ChatJuego_InputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="JugadorEntroPartida">
       <wsdl:output wsaw:Action="http://tempuri.org/ILobby/JugadorEntroPartida" message="tns:ILobby_JugadorEntroPartida_OutputCallbackMessage" />
     </wsdl:operation>
     <wsdl:operation name="JugadorSalioPartida">
       <wsdl:output wsaw:Action="http://tempuri.org/ILobby/JugadorSalioPartida" message="tns:ILobby_JugadorSalioPartida_OutputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DevolverMensaje">
+      <wsdl:output wsaw:Action="http://tempuri.org/ILobby/DevolverMensaje" message="tns:ILobby_DevolverMensaje_OutputCallbackMessage" />
+      <wsdl:input wsaw:Action="http://tempuri.org/ILobby/DevolverMensajeResponse" message="tns:ILobby_DevolverMensaje_InputCallbackMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:portType name="IUnirsePartida">
@@ -485,6 +530,12 @@
       <wsdl:output wsaw:Action="http://tempuri.org/IDetallesCuentaUsuario/CambiarContrasenaResponse" message="tns:IDetallesCuentaUsuario_CambiarContrasena_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
+  <wsdl:portType name="IPuntuacion">
+    <wsdl:operation name="RecuperarPuntuaciones">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPuntuacion/RecuperarPuntuaciones" message="tns:IPuntuacion_RecuperarPuntuaciones_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPuntuacion/RecuperarPuntuacionesResponse" message="tns:IPuntuacion_RecuperarPuntuaciones_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
   <wsdl:binding name="NetTcpBinding_IInicioSesion" type="tns:IInicioSesion">
     <wsp:PolicyReference URI="#NetTcpBinding_IInicioSesion_policy" />
     <soap12:binding transport="http://schemas.microsoft.com/soap/tcp" />
@@ -512,15 +563,6 @@
     <soap12:binding transport="http://schemas.microsoft.com/soap/tcp" />
     <wsdl:operation name="RecuperarDatosUsuario">
       <soap12:operation soapAction="http://tempuri.org/IMenuPrincipal/RecuperarDatosUsuario" style="document" />
-      <wsdl:input>
-        <soap12:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap12:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="RecuperarPuntuaciones">
-      <soap12:operation soapAction="http://tempuri.org/IMenuPrincipal/RecuperarPuntuaciones" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -566,6 +608,12 @@
         <soap12:body use="literal" />
       </wsdl:input>
     </wsdl:operation>
+    <wsdl:operation name="ChatJuego">
+      <soap12:operation soapAction="http://tempuri.org/ILobby/ChatJuego" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
     <wsdl:operation name="JugadorEntroPartida">
       <soap12:operation soapAction="http://tempuri.org/ILobby/JugadorEntroPartida" style="document" />
       <wsdl:output>
@@ -574,6 +622,15 @@
     </wsdl:operation>
     <wsdl:operation name="JugadorSalioPartida">
       <soap12:operation soapAction="http://tempuri.org/ILobby/JugadorSalioPartida" style="document" />
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DevolverMensaje">
+      <soap12:operation soapAction="http://tempuri.org/ILobby/DevolverMensaje" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>
@@ -697,6 +754,19 @@
       </wsdl:output>
     </wsdl:operation>
   </wsdl:binding>
+  <wsdl:binding name="NetTcpBinding_IPuntuacion" type="tns:IPuntuacion">
+    <wsp:PolicyReference URI="#NetTcpBinding_IPuntuacion_policy" />
+    <soap12:binding transport="http://schemas.microsoft.com/soap/tcp" />
+    <wsdl:operation name="RecuperarPuntuaciones">
+      <soap12:operation soapAction="http://tempuri.org/IPuntuacion/RecuperarPuntuaciones" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
   <wsdl:service name="ServicioComunicacionSorrySliders">
     <wsdl:port name="NetTcpBinding_IInicioSesion" binding="tns:NetTcpBinding_IInicioSesion">
       <soap12:address location="net.tcp://localhost:5455/ServidorSorrySliders" />
@@ -762,6 +832,15 @@
       </wsa10:EndpointReference>
     </wsdl:port>
     <wsdl:port name="NetTcpBinding_IDetallesCuentaUsuario" binding="tns:NetTcpBinding_IDetallesCuentaUsuario">
+      <soap12:address location="net.tcp://localhost:5455/ServidorSorrySliders" />
+      <wsa10:EndpointReference>
+        <wsa10:Address>net.tcp://localhost:5455/ServidorSorrySliders</wsa10:Address>
+        <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
+          <Upn>LAPTOP-SF103ATP\monti</Upn>
+        </Identity>
+      </wsa10:EndpointReference>
+    </wsdl:port>
+    <wsdl:port name="NetTcpBinding_IPuntuacion" binding="tns:NetTcpBinding_IPuntuacion">
       <soap12:address location="net.tcp://localhost:5455/ServidorSorrySliders" />
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:5455/ServidorSorrySliders</wsa10:Address>

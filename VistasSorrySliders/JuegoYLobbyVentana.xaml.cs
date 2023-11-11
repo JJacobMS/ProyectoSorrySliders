@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,6 +22,7 @@ namespace VistasSorrySliders
     /// </summary>
     public partial class JuegoYLobbyVentana : Window
     {
+        private LobbyPagina _frame;
         public JuegoYLobbyVentana()
         {
         }
@@ -28,13 +30,18 @@ namespace VistasSorrySliders
         public JuegoYLobbyVentana(CuentaSet cuenta, string codigoPartida, bool esInvitado)
         {
             InitializeComponent();
-            frameLobby.Content = new LobbyPagina(cuenta, codigoPartida, esInvitado);
+            _frame =  new LobbyPagina(cuenta, codigoPartida, esInvitado);
+            frameLobby.Content = _frame;
             if (!esInvitado)
             {
                 frameListaAmigos.Content = new ListaAmigosPagina(cuenta, codigoPartida);
             }
         }
 
+        private void CerrarVentana(object sender, CancelEventArgs e) 
+        {
+            _frame.SalirPartida();
+        }
 
     }
 }

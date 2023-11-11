@@ -329,7 +329,7 @@ namespace VistasSorrySliders
         {
             if (_cuentas.Count() == _partidaActual.CantidadJugadores)
             {
-                
+                EnviarMensaje();
             }
         }
 
@@ -350,5 +350,38 @@ namespace VistasSorrySliders
             }
         }
 
+        int contador = 0;
+
+        private void EnviarMensaje()
+        {
+            Logger log = new Logger(this.GetType());
+            try
+            {
+                contador = contador + 1;
+                Console.WriteLine("Mensaje enviado en cliente" + _cuentaUsuario.Nickname + ": " + "Mensajeeeeeeeee");
+                _proxyLobby.ChatJuego(_codigoPartida, _cuentaUsuario.Nickname, "Mensajeeeeeeeee");
+
+            }
+            catch (CommunicationException ex)
+            {
+                Console.WriteLine(ex);
+                log.LogError("Error de Comunicación con el Servidor", ex);
+            }
+            catch (TimeoutException ex)
+            {
+                Console.WriteLine(ex);
+                log.LogWarn("Se agoto el tiempo de espera del servidor", ex);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+                log.LogFatal("Ha ocurrido un error inesperado", ex);
+            }
+        }
+
+        public void DevolverMensaje(string nickname, string mensaje)
+        {
+            Console.WriteLine("Mensaje callback en cliente" + nickname + ": " + mensaje);
+        }
     }
 }
