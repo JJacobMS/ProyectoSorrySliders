@@ -29,6 +29,8 @@ namespace VistasSorrySliders
     {
         private CuentaSet _cuenta;
         private string _codigoPartida;
+        private LobbyClient _proxyJuego;
+
         public ListaAmigosPagina(CuentaSet cuenta, string codigoPartida)
         {
             InitializeComponent();
@@ -209,7 +211,31 @@ namespace VistasSorrySliders
 
         private void ClickEnviarCodigoJugadorSinCuenta(object sender, RoutedEventArgs e)
         {
-            EnviarCorreo();
+            //EnviarCorreo();
+            EnviarMensaje();
+        }
+        private void EnviarMensaje() 
+        {
+            Logger log = new Logger(this.GetType());
+            try
+            {
+
+            }
+            catch (CommunicationException ex)
+            {
+                Console.WriteLine(ex);
+                log.LogError("Error de Comunicación con el Servidor", ex);
+            }
+            catch (TimeoutException ex)
+            {
+                Console.WriteLine(ex);
+                log.LogWarn("Se agoto el tiempo de espera del servidor", ex);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+                log.LogFatal("Ha ocurrido un error inesperado", ex);
+            }
         }
     }
 }

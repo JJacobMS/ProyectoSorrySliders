@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,6 +22,7 @@ namespace VistasSorrySliders
     /// </summary>
     public partial class JuegoYLobbyVentana : Window
     {
+        private LobbyPagina _frame;
         public JuegoYLobbyVentana()
         {
             InitializeComponent();
@@ -41,6 +43,10 @@ namespace VistasSorrySliders
             }
         }
 
+        private void CerrarVentana(object sender, CancelEventArgs e) 
+        {
+            _frame.SalirPartida();
+        }
         public void CambiarFrameLobby(Page paginaNueva)
         {
             frameLobby.Content = paginaNueva;

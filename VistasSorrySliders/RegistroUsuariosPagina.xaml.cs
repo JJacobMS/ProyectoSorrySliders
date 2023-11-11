@@ -111,6 +111,7 @@ namespace VistasSorrySliders
             txtBoxNombre.Text = _usuario.Nombre;
 
             txtBoxCorreoElectronico.IsReadOnly = true;
+            txtBoxCorreoElectronico.BorderBrush = Brushes.LightGray;
             pssBoxContrasena.Visibility = Visibility.Hidden;
             lblContraseña.Visibility = Visibility.Hidden;
 

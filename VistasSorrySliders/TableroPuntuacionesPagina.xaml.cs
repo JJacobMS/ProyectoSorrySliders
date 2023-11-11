@@ -41,7 +41,7 @@ namespace VistasSorrySliders
             Logger log = new Logger(this.GetType());
             try
             {
-                MenuPrincipalClient proxyRecuperarPuntuaciones = new MenuPrincipalClient();
+                PuntuacionClient proxyRecuperarPuntuaciones = new PuntuacionClient();
                 (resultado, puntuaciones) = proxyRecuperarPuntuaciones.RecuperarPuntuaciones();
                 proxyRecuperarPuntuaciones.Close();
             }

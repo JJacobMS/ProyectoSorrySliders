@@ -280,7 +280,7 @@
     <value>No winners yet, be the first winner</value>
   </data>
   <data name="msgTamañoImagenError" xml:space="preserve">
-    <value>The image exceeds the 3MB limit</value>
+    <value>The image exceeds the 400KB limit</value>
   </data>
   <data name="msgTituloContraseñaInvalida" xml:space="preserve">
     <value>Contraseña invalida</value>

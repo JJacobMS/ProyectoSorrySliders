@@ -547,7 +547,7 @@ namespace VistasSorrySliders.Properties {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a La imagen supera el limite de 3MB.
+        ///   Busca una cadena traducida similar a La imagen supera el limite de 400KB.
         /// </summary>
         public static string msgTamañoImagenError {
             get {
