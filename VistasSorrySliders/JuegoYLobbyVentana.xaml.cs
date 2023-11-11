@@ -36,7 +36,9 @@ namespace VistasSorrySliders
         public JuegoYLobbyVentana(CuentaSet cuenta, string codigoPartida, bool esInvitado)
         {
             InitializeComponent();
-            frameLobby.Content = new LobbyPagina(cuenta, codigoPartida, esInvitado, this);
+            _frame = new LobbyPagina(cuenta, codigoPartida, esInvitado, this);
+            frameLobby.Content = _frame;
+            
             if (!esInvitado)
             {
                 frameListaAmigos.Content = new ListaAmigosPagina(cuenta, codigoPartida);
