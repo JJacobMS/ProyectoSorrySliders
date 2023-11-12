@@ -25,13 +25,20 @@ namespace VistasSorrySliders
         private LobbyPagina _frame;
         public JuegoYLobbyVentana()
         {
+            InitializeComponent();
+            //Revisar
+            /*List<CuentaSet> lista = new List<CuentaSet> { new CuentaSet { Nickname = "1"}, new CuentaSet { Nickname = "2"},
+                new CuentaSet {Nickname = "3"}, new CuentaSet {Nickname= "4"}
+            };
+            frameLobby.Content = new JuegoLanzamientoPagina(lista, 2);*/
         }
 
         public JuegoYLobbyVentana(CuentaSet cuenta, string codigoPartida, bool esInvitado)
         {
             InitializeComponent();
-            _frame =  new LobbyPagina(cuenta, codigoPartida, esInvitado);
+            _frame = new LobbyPagina(cuenta, codigoPartida, esInvitado, this);
             frameLobby.Content = _frame;
+            
             if (!esInvitado)
             {
                 frameListaAmigos.Content = new ListaAmigosPagina(cuenta, codigoPartida);
@@ -41,6 +48,10 @@ namespace VistasSorrySliders
         private void CerrarVentana(object sender, CancelEventArgs e) 
         {
             _frame.SalirPartida();
+        }
+        public void CambiarFrameLobby(Page paginaNueva)
+        {
+            frameLobby.Content = paginaNueva;
         }
 
     }
