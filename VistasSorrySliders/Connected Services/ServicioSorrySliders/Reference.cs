@@ -1332,10 +1332,10 @@ namespace VistasSorrySliders.ServicioSorrySliders {
     public interface ILobby {
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/ILobby/EntrarPartida")]
-        void EntrarPartida(string uid);
+        void EntrarPartida(string uid, string jugadorCorreo);
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/ILobby/EntrarPartida")]
-        System.Threading.Tasks.Task EntrarPartidaAsync(string uid);
+        System.Threading.Tasks.Task EntrarPartidaAsync(string uid, string jugadorCorreo);
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/ILobby/SalirPartida")]
         void SalirPartida(string uid);
@@ -1391,12 +1391,12 @@ namespace VistasSorrySliders.ServicioSorrySliders {
                 base(callbackInstance, binding, remoteAddress) {
         }
         
-        public void EntrarPartida(string uid) {
-            base.Channel.EntrarPartida(uid);
+        public void EntrarPartida(string uid, string jugadorCorreo) {
+            base.Channel.EntrarPartida(uid, jugadorCorreo);
         }
         
-        public System.Threading.Tasks.Task EntrarPartidaAsync(string uid) {
-            return base.Channel.EntrarPartidaAsync(uid);
+        public System.Threading.Tasks.Task EntrarPartidaAsync(string uid, string jugadorCorreo) {
+            return base.Channel.EntrarPartidaAsync(uid, jugadorCorreo);
         }
         
         public void SalirPartida(string uid) {
@@ -1774,10 +1774,10 @@ namespace VistasSorrySliders.ServicioSorrySliders {
         System.Threading.Tasks.Task ChatJuegoAsync(string uid, string nickname, string mensaje);
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IChat/IngresarAlChat")]
-        void IngresarAlChat(string uid);
+        void IngresarAlChat(string uid, string correo);
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IChat/IngresarAlChat")]
-        System.Threading.Tasks.Task IngresarAlChatAsync(string uid);
+        System.Threading.Tasks.Task IngresarAlChatAsync(string uid, string correo);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -1823,12 +1823,12 @@ namespace VistasSorrySliders.ServicioSorrySliders {
             return base.Channel.ChatJuegoAsync(uid, nickname, mensaje);
         }
         
-        public void IngresarAlChat(string uid) {
-            base.Channel.IngresarAlChat(uid);
+        public void IngresarAlChat(string uid, string correo) {
+            base.Channel.IngresarAlChat(uid, correo);
         }
         
-        public System.Threading.Tasks.Task IngresarAlChatAsync(string uid) {
-            return base.Channel.IngresarAlChatAsync(uid);
+        public System.Threading.Tasks.Task IngresarAlChatAsync(string uid, string correo) {
+            return base.Channel.IngresarAlChatAsync(uid, correo);
         }
     }
 }

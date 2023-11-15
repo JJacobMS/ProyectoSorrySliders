@@ -25,8 +25,8 @@ namespace VistasSorrySliders
         private Dictionary<Direccion, TextBlock> _etiquetasJugadoresLanzamientoPotencia;
         private Dictionary<Direccion, Button> _botonesLanzarPeonJugador;
         private Dictionary<Direccion, Button> _botonesTirarDadoJugador;
+        private Tablero _tablero;
         private ILobby _proxyLobby;
-        private TableroCuatroJugadores _tablero;
         private int _numeroJugadores;
         public JuegoLanzamientoPagina(List<CuentaSet> listaCuentas, int numeroJugadores, ILobby _proxyLobby)
         {
@@ -34,8 +34,8 @@ namespace VistasSorrySliders
             this._proxyLobby = _proxyLobby;
             InitializeComponent();
             ColocarNombres(listaCuentas);
-            MostrarTablero();
-            
+            MostrarTableroElementosCorrespondientes();
+
             _etiquetasJugadoresLanzamientoPotencia = new Dictionary<Direccion, TextBlock>
             {
                 {Direccion.Arriba, txtBlockPotenciaRojo },
@@ -43,6 +43,7 @@ namespace VistasSorrySliders
                 {Direccion.Izquierda, txtBlockPotenciaAmarillo } ,
                 {Direccion.Derecha, txtBlockPotenciaVerde }
             };
+
             _botonesLanzarPeonJugador = new Dictionary<Direccion, Button>
             {
                 { Direccion.Abajo, btnLanzarPeonAzul },
@@ -58,15 +59,17 @@ namespace VistasSorrySliders
                 { Direccion.Derecha, btnTirarDadoVerde }
             };
 
-            _tablero = new TableroCuatroJugadores(listaCuentas, RegresarObstaculos());
+            InicializarTablero(listaCuentas);
+
             _tablero.IniciarJuego += IniciarTurno;
             _tablero.MostrarPotenciaLanzamiento += MostrarPotenciaLanzamiento;
             _tablero.TerminarTurno += TerminarTurno;
+            _tablero.EliminarPeonTablero += EliminarPeonCanvas;
 
             ColocarPiezasJugadores();
             _tablero.IniciarTurno();
         }
-        private void MostrarTablero()
+        private void MostrarTableroElementosCorrespondientes()
         {
             ImageBrush fondo = new ImageBrush();
             switch(_numeroJugadores)
@@ -74,10 +77,13 @@ namespace VistasSorrySliders
                 case 2:
                     fondo.ImageSource = new BitmapImage(new Uri("pack://application:,,,/Recursos/tableroDos.png"));
                     brdFondoTablero.Background = fondo;
+                    cnvEspacioAmarillo.Visibility = Visibility.Hidden;
+                    cnvEspacioVerde.Visibility = Visibility.Hidden;
                     break;
                 case 3:
                     fondo.ImageSource = new BitmapImage(new Uri("pack://application:,,,/Recursos/tableroTres.png"));
                     brdFondoTablero.Background = fondo;
+                    cnvEspacioRojo.Visibility = Visibility.Hidden;
                     break;
                 case 4:
                     fondo.ImageSource = new BitmapImage(new Uri("pack://application:,,,/Recursos/tableroCuatro.png"));
@@ -85,21 +91,94 @@ namespace VistasSorrySliders
                     break;
             }
         }
+
         private void ColocarNombres(List<CuentaSet> jugadores)
         {
-            lblJugadorAzul.Content = jugadores[0].Nickname;
-            lblJugadorVerde.Content = jugadores[1].Nickname;
-            lblJugadorRojo.Content = jugadores[2].Nickname;
-            lblJugadorAmarillo.Content = jugadores[3].Nickname;
+            switch (_numeroJugadores)
+            {
+                case 2:
+                    lblJugadorAzul.Content = jugadores[0].Nickname;
+                    lblJugadorRojo.Content = jugadores[1].Nickname;
+                    break;
+                case 3:
+                    lblJugadorAzul.Content = jugadores[0].Nickname;
+                    lblJugadorVerde.Content = jugadores[2].Nickname;
+                    lblJugadorAmarillo.Content = jugadores[1].Nickname;
+                    break;
+                case 4:
+                    lblJugadorAzul.Content = jugadores[0].Nickname;
+                    lblJugadorVerde.Content = jugadores[1].Nickname;
+                    lblJugadorRojo.Content = jugadores[2].Nickname;
+                    lblJugadorAmarillo.Content = jugadores[3].Nickname;
+                    break;
+                default:
+                    break;
+            }
+            
         }
         private List<Rectangle> RegresarObstaculos()
         {
-            return new List<Rectangle>
+            List<Rectangle> listaObstaculos;
+            switch (_numeroJugadores)
             {
-                rctParedAmarillaAbajo, rctParedAmarilloArriba, rctParedAzulDerecha, rctParedAzulIzquierda,
-                rctParedRojaDerecha, rctParedRojaIzquierda, rctParedVerdeAbajo, rctParedVerdeArriba
-            };
+                case 2:
+                    listaObstaculos = new List<Rectangle>
+                    {
+                        rctParedAzulIzquierdaDos, rctParedAzulDerecha, rctParedAzulIzquierda,
+                        rctParedRojaDerecha, rctParedRojaIzquierda, rctParedRojaDerechaDos
+                    };
+                    break;
+                case 3:
+                    listaObstaculos = new List<Rectangle>
+                    {
+                        rctParedAzulArribaTres, rctParedAmarilloArriba, rctParedAmarillaAbajo, rctParedAzulDerecha, rctParedAzulIzquierda,
+                        rctParedVerdeAbajo, rctParedVerdeArriba
+                    };
+                    break;
+                case 4:
+                    listaObstaculos = new List<Rectangle>
+                    {
+                        rctParedAmarillaAbajo, rctParedAmarilloArriba, rctParedAzulDerecha, rctParedAzulIzquierda,
+                        rctParedRojaDerecha, rctParedRojaIzquierda, rctParedVerdeAbajo, rctParedVerdeArriba
+                    };
+                    break;
+                default:
+                    listaObstaculos = null;
+                    break;
+            }
+            return listaObstaculos;
         }
+        private List<Rectangle> RegresarLugaresNoValidos()
+        {
+            List<Rectangle> listaNoValidos;
+            switch (_numeroJugadores)
+            {
+                case 2:
+                    listaNoValidos = new List<Rectangle>
+                    {
+                        rctPistaAzul, rctPistaRojo
+                    };
+                    break;
+                case 3:
+                    listaNoValidos = new List<Rectangle>
+                    {
+                       rctPistaAmarillo, rctPistaAzul, rctPistaVerde
+                    };
+                    break;
+                case 4:
+                    listaNoValidos = new List<Rectangle>
+                    {
+                        rctPistaAmarillo, rctPistaAzul, rctPistaRojo, rctPistaVerde
+                    };
+                    break;
+                default:
+                    listaNoValidos = null;
+                    break;
+            }
+            return listaNoValidos;
+        }
+
+
         private void ClickDetenerDado(object sender, RoutedEventArgs e)
         {
             _tablero.DetenerDado();
@@ -162,5 +241,32 @@ namespace VistasSorrySliders
                 }
             }
         }
+
+        private void EliminarPeonCanvas(PeonLanzamiento peon)
+        {
+            cnvEspacioJuego.Children.Remove(peon.Figura);
+        }
+
+        private void InicializarTablero(List<CuentaSet> listaCuentas)
+        {
+            List<Rectangle> obstaculos = RegresarObstaculos();
+            List<Rectangle> noValidos = RegresarLugaresNoValidos();
+            switch (_numeroJugadores)
+            {
+                case 2:
+                    _tablero = new TableroDosJugadores(listaCuentas, obstaculos, noValidos);
+                    break;
+                case 3:
+                    _tablero = new TableroTresJugadores(listaCuentas, obstaculos, noValidos);
+                    break;
+                case 4:
+                    _tablero = new TableroCuatroJugadores(listaCuentas, obstaculos, noValidos);
+                    break;
+                default:
+                    _tablero = null;
+                    break;
+            }
+        }
+
     }
 }

@@ -274,7 +274,7 @@ namespace VistasSorrySliders
                 InstanceContext contextoCallback = new InstanceContext(this);
                 _contextoCallback = contextoCallback;
                 _proxyLobby = new LobbyClient(contextoCallback);
-                _proxyLobby.EntrarPartida(_codigoPartida);
+                _proxyLobby.EntrarPartida(_codigoPartida, _cuentaUsuario.CorreoElectronico);
             }
             catch (CommunicationException ex)
             {
@@ -330,7 +330,7 @@ namespace VistasSorrySliders
 
         private void ClickIniciarPartida(object sender, RoutedEventArgs e)
         {
-            if (_cuentas.Count() == _partidaActual.CantidadJugadores)// && txtBoxHost.Text == _cuentaUsuario.Nickname)
+            if (_cuentas.Count() == _partidaActual.CantidadJugadores && txtBoxHost.Text == _cuentaUsuario.Nickname)
             {
                 CambiarPaginas();
             }
@@ -376,26 +376,11 @@ namespace VistasSorrySliders
 
         public void HostInicioPartida()
         {
-            Page paginaNueva = new InicioPagina();
+            List<CuentaSet> cuentasJugadores = _cuentas.ToList();
+            Page paginaJuego = new JuegoLanzamientoPagina(cuentasJugadores, _partidaActual.CantidadJugadores, _proxyLobby);
             Page paginaChat = new JugadoresChatPagina(_cuentas, _cuentaUsuario, _partidaActual);
-            switch (_cuentas.Count())
-            {
-                case 2:
-                    //paginaNueva = new JuegoLanzamientoPagina(_cuentas.ToList(), 2, _proxyLobby);
-                    _juegoYLobbyVentana.CambiarFrameLobby(paginaNueva);
-                    _juegoYLobbyVentana.CambiarFrameListaAmigos(paginaChat);
-                    break;
-                case 3:
-
-                    _juegoYLobbyVentana.CambiarFrameListaAmigos(paginaChat);
-                    break;
-                case 4:
-                    paginaNueva = new JuegoLanzamientoPagina(_cuentas.ToList(), 4, _proxyLobby);
-                    //paginaChat = new JugadoresChatPagina (_cuentas, _cuentaUsuario, _proxyLobby, _partidaActual);
-                    _juegoYLobbyVentana.CambiarFrameLobby(paginaNueva);
-                    _juegoYLobbyVentana.CambiarFrameListaAmigos(paginaChat);
-                    break;
-            }
+            _juegoYLobbyVentana.CambiarFrameLobby(paginaJuego);
+            _juegoYLobbyVentana.CambiarFrameListaAmigos(paginaChat);
         }
     }
 }

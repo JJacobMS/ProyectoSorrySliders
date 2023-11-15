@@ -7,6 +7,7 @@ using System.Windows.Threading;
 using System.Windows.Shapes;
 using System.Windows.Media;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace VistasSorrySliders.LogicaJuego
 {
@@ -26,6 +27,7 @@ namespace VistasSorrySliders.LogicaJuego
         public List<JugadorLanzamiento> ListaJugadores;
         public List<PeonLanzamiento> ListaPeonesTablero;
         public List<Rectangle> ListaObstaculos;
+        public List<Rectangle> ListaLugaresNoValidos;
         public Dictionary<Direccion, ImageBrush> ColorPorJugador;
         public Dictionary<Direccion, Point> PosicionInicioJugadores;
         public Dictionary<Direccion, Point> PosicionLanzamientoInicial;
@@ -38,6 +40,7 @@ namespace VistasSorrySliders.LogicaJuego
         public event Action IniciarJuego;
         public event Action<int, int> MostrarPotenciaLanzamiento;
         public event Action TerminarTurno;
+        public event Action<PeonLanzamiento> EliminarPeonTablero;
 
 
         public Tablero()
@@ -81,9 +84,28 @@ namespace VistasSorrySliders.LogicaJuego
                 SiguienteTurno();
             }
         }
+        private void ComprobarLugarValidoFinal()
+        {
+            List<PeonLanzamiento> listaPeonesAEliminar = new List<PeonLanzamiento>();
+            foreach (PeonLanzamiento peon in ListaPeonesTablero)
+            {
+                if (!peon.EstaLugarValido(ListaLugaresNoValidos))
+                {
+                    listaPeonesAEliminar.Add(peon);
+                }
+            }
+            foreach (PeonLanzamiento peonAEliminar in listaPeonesAEliminar)
+            {
+                ListaPeonesTablero.Remove(peonAEliminar);
+                EliminarPeonTablero?.Invoke(peonAEliminar);
+
+            }
+        }
         private void SiguienteTurno()
         {
             _temporizadorPeonesMovimiento.Stop();
+            Task.Delay(1000).Wait();
+            ComprobarLugarValidoFinal();
 
             TerminarTurno?.Invoke();
             ListaJugadores[TurnoActual].TerminarTurno();

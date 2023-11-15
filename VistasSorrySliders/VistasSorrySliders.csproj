@@ -120,6 +120,8 @@
     <Compile Include="LogicaJuego\PeonLanzamiento.cs" />
     <Compile Include="LogicaJuego\Tablero.cs" />
     <Compile Include="LogicaJuego\TableroCuatroJugadores.cs" />
+    <Compile Include="LogicaJuego\TableroDosJugadores.cs" />
+    <Compile Include="LogicaJuego\TableroTresJugadores.cs" />
     <Compile Include="MenuPrincipalPagina.xaml.cs">
       <DependentUpon>MenuPrincipalPagina.xaml</DependentUpon>
     </Compile>
