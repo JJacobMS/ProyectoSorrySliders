@@ -105,6 +105,18 @@ namespace VistasSorrySliders.LogicaJuego
             }
         }
 
+        public bool EstaLugarValido(List<Rectangle> LugaresNoValidos)
+        {
+            foreach (Rectangle lugarNoValido in LugaresNoValidos)
+            {
+                if (IntersectaConRectangulo(lugarNoValido))
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+
         public void RealizarMovimiento(List<Rectangle> paredes, List<PeonLanzamiento> peonesTablero)
         {
             if (VelocidadHorizontal <= 0 && VelocidadVertical <= 0)

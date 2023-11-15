@@ -3,20 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Threading;
-using System.Windows.Shapes;
-using VistasSorrySliders.ServicioSorrySliders;
 using System.Windows.Media.Imaging;
 using System.Windows.Media;
+using System.Windows.Shapes;
+using VistasSorrySliders.ServicioSorrySliders;
 using System.Windows;
 
 namespace VistasSorrySliders.LogicaJuego
 {
-    public class TableroCuatroJugadores : Tablero
+    public class TableroTresJugadores : Tablero
     {
-        public TableroCuatroJugadores(List<CuentaSet> listaJugadores, List<Rectangle> obstaculos, List<Rectangle> noValidos) : base ()
+        public TableroTresJugadores(List<CuentaSet> listaJugadores, List<Rectangle> obstaculos, List<Rectangle> noValidos) : base()
         {
-            NumeroJugadores = 4;
+            NumeroJugadores = 3;
             TurnoActual = 0;
             ListaObstaculos = obstaculos;
             ListaLugaresNoValidos = noValidos;
@@ -28,16 +27,11 @@ namespace VistasSorrySliders.LogicaJuego
             AsignarLugaresJugadores(listaJugadores);
 
         }
-
         private void IniciarColoresJugadores()
         {
             ImageBrush pintarImagenAzul = new ImageBrush
             {
                 ImageSource = new BitmapImage(new Uri("pack://application:,,,/Recursos/peonMorado.png"))
-            };
-            ImageBrush pintarImagenRojo = new ImageBrush
-            {
-                ImageSource = new BitmapImage(new Uri("pack://application:,,,/Recursos/peonRosa.png"))
             };
             ImageBrush pintarImagenVerde = new ImageBrush
             {
@@ -51,7 +45,6 @@ namespace VistasSorrySliders.LogicaJuego
             ColorPorJugador = new Dictionary<Direccion, ImageBrush>
             {
                 { Direccion.Abajo, pintarImagenAzul }, //Morado
-                { Direccion.Arriba, pintarImagenRojo }, //Rosa
                 { Direccion.Derecha, pintarImagenVerde }, //Negro
                 { Direccion.Izquierda, pintarImagenAmarillo }, //Gris
             };
@@ -61,7 +54,6 @@ namespace VistasSorrySliders.LogicaJuego
             PosicionInicioJugadores = new Dictionary<Direccion, Point>
             {
                 { Direccion.Abajo,  new Point(36, 384)},
-                { Direccion.Arriba,  new Point(511, 128)},
                 { Direccion.Derecha,  new Point(511, 384)},
                 { Direccion.Izquierda,  new Point(36, 128)}
             };
@@ -71,7 +63,6 @@ namespace VistasSorrySliders.LogicaJuego
             PosicionLanzamientoInicial = new Dictionary<Direccion, Point>
             {
                 { Direccion.Abajo,  new Point(300, 535)},
-                { Direccion.Arriba,  new Point(300, 25)},
                 { Direccion.Derecha,  new Point(576, 279)},
                 { Direccion.Izquierda,  new Point(28, 279)}
             };
@@ -81,9 +72,8 @@ namespace VistasSorrySliders.LogicaJuego
             PosicionDados = new Dictionary<Direccion, (Point, Point)>
             {
                 { Direccion.Abajo, (new Point(33,465), new Point(144,465)) },
-                { Direccion.Arriba, (new Point(398,32), new Point(506,32)) },
                 { Direccion.Derecha, (new Point(402,465), new Point(506,465)) },
-                { Direccion.Izquierda, (new Point(33,32), new Point(144,32)) }
+                { Direccion.Izquierda, (new Point(34,32), new Point(144,32)) }
             };
         }
 
@@ -93,10 +83,8 @@ namespace VistasSorrySliders.LogicaJuego
             {
                 new JugadorLanzamiento(Direccion.Abajo, this, listaJugadores[0]),
                 new JugadorLanzamiento(Direccion.Derecha, this, listaJugadores[1]),
-                new JugadorLanzamiento(Direccion.Arriba, this, listaJugadores[2]),
-                new JugadorLanzamiento(Direccion.Izquierda, this, listaJugadores[3])
+                new JugadorLanzamiento(Direccion.Izquierda, this, listaJugadores[2])
             };
         }
-        
     }
 }
