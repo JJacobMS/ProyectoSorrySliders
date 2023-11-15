@@ -53,23 +53,36 @@ namespace VistasSorrySliders
 
         private void IngresarCallbacks() 
         {
-            Console.WriteLine("Ingresando al callback");
-            InstanceContext contextoCallback = new InstanceContext(this);
-            ChatClient proxyChat = new ChatClient(contextoCallback);
-            _proxyChat = proxyChat;
+            Logger log = new Logger(this.GetType());
             string codigoPartida = _partida.CodigoPartida + "";
-            _proxyChat.IngresarAlChat(codigoPartida);
+            try
+            {
+                InstanceContext contextoCallback = new InstanceContext(this);
+                ChatClient proxyChat = new ChatClient(contextoCallback);
+                _proxyChat = proxyChat;
+                _proxyChat.IngresarAlChat(codigoPartida, _cuentaUsuario.CorreoElectronico);
+            }
+            catch (CommunicationException ex)
+            {
+                Console.WriteLine(ex);
+                log.LogError("Error de Comunicación con el Servidor", ex);
+            }
+            catch (TimeoutException ex)
+            {
+                Console.WriteLine(ex);
+                log.LogWarn("Se agoto el tiempo de espera del servidor", ex);
+            }
+
         }
 
         private void ClickEnviarMensaje(object sender, RoutedEventArgs e)
         {
-            Console.WriteLine("Click enviar mensaje");
             if(txtBoxMensajeChat.Text.Length > 0) 
             {
+                txtBoxMensajeChat.Text = "";
                 Logger log = new Logger(this.GetType());
                 try
                 {
-                    Console.WriteLine("Click enviando mensaje a servidor");
                     string codigoPartida = _partida.CodigoPartida + "";
                     _proxyChat.ChatJuego(codigoPartida, _cuentaUsuario.Nickname, txtBoxMensajeChat.Text);
 
