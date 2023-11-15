@@ -100,6 +100,9 @@
     <Compile Include="JuegoYLobbyVentana.xaml.cs">
       <DependentUpon>JuegoYLobbyVentana.xaml</DependentUpon>
     </Compile>
+    <Compile Include="JugadoresChatPagina.xaml.cs">
+      <DependentUpon>JugadoresChatPagina.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ListaAmigosPagina.xaml.cs">
       <DependentUpon>ListaAmigosPagina.xaml</DependentUpon>
     </Compile>
@@ -203,6 +206,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="JuegoYLobbyVentana.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="JugadoresChatPagina.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

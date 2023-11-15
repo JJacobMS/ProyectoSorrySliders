@@ -88,12 +88,10 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="ChatJuego">
+  <xs:element name="IniciarPartida">
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="uid" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="nickname" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="mensaje" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -107,15 +105,7 @@
       <xs:sequence />
     </xs:complexType>
   </xs:element>
-  <xs:element name="DevolverMensaje">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="nickname" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="mensaje" nillable="true" type="xs:string" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="DevolverMensajeResponse">
+  <xs:element name="HostInicioPartida">
     <xs:complexType>
       <xs:sequence />
     </xs:complexType>
@@ -287,6 +277,35 @@
       <xs:sequence>
         <xs:element xmlns:q24="http://schemas.datacontract.org/2004/07/System" minOccurs="0" name="RecuperarPuntuacionesResult" type="q24:ValueTupleOfConstantesArrayOfPuntuacionK_Pmi0k2_P" />
       </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ChatJuego">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="uid" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="nickname" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="mensaje" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="IngresarAlChat">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="uid" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DevolverMensaje">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="nickname" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="mensaje" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DevolverMensajeResponse">
+    <xs:complexType>
+      <xs:sequence />
     </xs:complexType>
   </xs:element>
 </xs:schema>

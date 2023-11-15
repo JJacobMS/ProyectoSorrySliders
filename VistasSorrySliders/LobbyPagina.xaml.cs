@@ -30,6 +30,7 @@ namespace VistasSorrySliders
         private PartidaSet _partidaActual;
         private bool _esInvitado;
         private JuegoYLobbyVentana _juegoYLobbyVentana;
+        private InstanceContext _contextoCallback;
 
         public LobbyPagina(CuentaSet cuentaUsuario, string codigoPartida, bool esInvitado, JuegoYLobbyVentana ventana)
         {
@@ -57,7 +58,7 @@ namespace VistasSorrySliders
                 }
                 else
                 {
-                    btnIniciarPartida.IsEnabled = false;
+                    btnIniciarPartida.IsEnabled = true;
                 }
             }
             catch (CommunicationException ex)
@@ -203,7 +204,6 @@ namespace VistasSorrySliders
                     break;
                 case Constantes.OPERACION_EXITOSA:
                     txtBoxCodigoPartida.Text = _partidaActual.CodigoPartida.ToString();
-                    txtBoxHost.Text = _partidaActual.CorreoElectronico;
                     txtBoxJugadores.Text = ""+ _partidaActual.CantidadJugadores;
                     switch (_partidaActual.CantidadJugadores)
                     {
@@ -272,6 +272,7 @@ namespace VistasSorrySliders
             try
             {
                 InstanceContext contextoCallback = new InstanceContext(this);
+                _contextoCallback = contextoCallback;
                 _proxyLobby = new LobbyClient(contextoCallback);
                 _proxyLobby.EntrarPartida(_codigoPartida);
             }
@@ -329,23 +330,30 @@ namespace VistasSorrySliders
 
         private void ClickIniciarPartida(object sender, RoutedEventArgs e)
         {
-            if (_cuentas.Count() == _partidaActual.CantidadJugadores)
+            if (_cuentas.Count() == _partidaActual.CantidadJugadores)// && txtBoxHost.Text == _cuentaUsuario.Nickname)
             {
-                //Corregir para las demás
-                Page paginaNueva;
-                switch (_cuentas.Count())
-                {
-                    case 2:
-                        break;
-                    case 3:
-                        break;
-                    case 4:
-                        paginaNueva = new JuegoLanzamientoPagina(_cuentas.ToList(), 4);
-                        _juegoYLobbyVentana.CambiarFrameLobby(paginaNueva);
-                        break;
-                }
-                
-                EnviarMensaje();
+                CambiarPaginas();
+            }
+        }
+
+        private void CambiarPaginas() 
+        {
+            Logger log = new Logger(this.GetType());
+            try
+            {
+                _proxyLobby.IniciarPartida(_codigoPartida);
+            }
+            catch (CommunicationException ex)
+            {
+                Console.WriteLine(ex);
+                System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorConexion);
+                log.LogError("Error de Comunicación con el Servidor", ex);
+            }
+            catch (TimeoutException ex)
+            {
+                Console.WriteLine(ex);
+                System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorConexion);
+                log.LogWarn("Se agoto el tiempo de espera del servidor", ex);
             }
         }
 
@@ -366,38 +374,28 @@ namespace VistasSorrySliders
             }
         }
 
-        int contador = 0;
-
-        private void EnviarMensaje()
+        public void HostInicioPartida()
         {
-            Logger log = new Logger(this.GetType());
-            try
+            Page paginaNueva = new InicioPagina();
+            Page paginaChat = new JugadoresChatPagina(_cuentas, _cuentaUsuario, _partidaActual);
+            switch (_cuentas.Count())
             {
-                contador = contador + 1;
-                Console.WriteLine("Mensaje enviado en cliente" + _cuentaUsuario.Nickname + ": " + "Mensajeeeeeeeee");
-                _proxyLobby.ChatJuego(_codigoPartida, _cuentaUsuario.Nickname, "Mensajeeeeeeeee");
+                case 2:
+                    //paginaNueva = new JuegoLanzamientoPagina(_cuentas.ToList(), 2, _proxyLobby);
+                    _juegoYLobbyVentana.CambiarFrameLobby(paginaNueva);
+                    _juegoYLobbyVentana.CambiarFrameListaAmigos(paginaChat);
+                    break;
+                case 3:
 
+                    _juegoYLobbyVentana.CambiarFrameListaAmigos(paginaChat);
+                    break;
+                case 4:
+                    paginaNueva = new JuegoLanzamientoPagina(_cuentas.ToList(), 4, _proxyLobby);
+                    //paginaChat = new JugadoresChatPagina (_cuentas, _cuentaUsuario, _proxyLobby, _partidaActual);
+                    _juegoYLobbyVentana.CambiarFrameLobby(paginaNueva);
+                    _juegoYLobbyVentana.CambiarFrameListaAmigos(paginaChat);
+                    break;
             }
-            catch (CommunicationException ex)
-            {
-                Console.WriteLine(ex);
-                log.LogError("Error de Comunicación con el Servidor", ex);
-            }
-            catch (TimeoutException ex)
-            {
-                Console.WriteLine(ex);
-                log.LogWarn("Se agoto el tiempo de espera del servidor", ex);
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex);
-                log.LogFatal("Ha ocurrido un error inesperado", ex);
-            }
-        }
-
-        public void DevolverMensaje(string nickname, string mensaje)
-        {
-            Console.WriteLine("Mensaje callback en cliente" + nickname + ": " + mensaje);
         }
     }
 }
