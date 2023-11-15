@@ -25,11 +25,13 @@ namespace VistasSorrySliders
         private Dictionary<Direccion, TextBlock> _etiquetasJugadoresLanzamientoPotencia;
         private Dictionary<Direccion, Button> _botonesLanzarPeonJugador;
         private Dictionary<Direccion, Button> _botonesTirarDadoJugador;
+        private ILobby _proxyLobby;
         private TableroCuatroJugadores _tablero;
         private int _numeroJugadores;
-        public JuegoLanzamientoPagina(List<CuentaSet> listaCuentas, int numeroJugadores)
+        public JuegoLanzamientoPagina(List<CuentaSet> listaCuentas, int numeroJugadores, ILobby _proxyLobby)
         {
             _numeroJugadores = numeroJugadores;
+            this._proxyLobby = _proxyLobby;
             InitializeComponent();
             ColocarNombres(listaCuentas);
             MostrarTablero();

@@ -51,7 +51,14 @@ namespace VistasSorrySliders
         }
         public void CambiarFrameLobby(Page paginaNueva)
         {
+
             frameLobby.Content = paginaNueva;
+
+        }
+        public void CambiarFrameListaAmigos(Page paginaNueva)
+        {
+            //_frame = pagina nueva;, ponerle a pagina nueva salirPartida();, y en ese metodo poner el RecargarListaJugadores
+            frameListaAmigos.Content = paginaNueva;
         }
 
     }
