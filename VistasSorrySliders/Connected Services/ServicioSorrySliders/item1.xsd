@@ -18,8 +18,8 @@
       <xs:element minOccurs="0" name="CorreoElectronico" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="IdUsuario" type="xs:int" />
       <xs:element minOccurs="0" name="Nickname" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="NotificaciónSet" nillable="true" type="tns:ArrayOfNotificaciónSet" />
-      <xs:element minOccurs="0" name="NotificaciónSet1" nillable="true" type="tns:ArrayOfNotificaciónSet" />
+      <xs:element minOccurs="0" name="NotificacionSet" nillable="true" type="tns:ArrayOfNotificacionSet" />
+      <xs:element minOccurs="0" name="NotificacionSet1" nillable="true" type="tns:ArrayOfNotificacionSet" />
       <xs:element minOccurs="0" name="PartidaSet" nillable="true" type="tns:ArrayOfPartidaSet" />
       <xs:element minOccurs="0" name="RelacionBaneadosSet" nillable="true" type="tns:ArrayOfRelacionBaneadosSet" />
       <xs:element minOccurs="0" name="RelacionBaneadosSet1" nillable="true" type="tns:ArrayOfRelacionBaneadosSet" />
@@ -30,13 +30,13 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="CuentaSet" nillable="true" type="tns:CuentaSet" />
-  <xs:complexType name="ArrayOfNotificaciónSet">
+  <xs:complexType name="ArrayOfNotificacionSet">
     <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="NotificaciónSet" nillable="true" type="tns:NotificaciónSet" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="NotificacionSet" nillable="true" type="tns:NotificacionSet" />
     </xs:sequence>
   </xs:complexType>
-  <xs:element name="ArrayOfNotificaciónSet" nillable="true" type="tns:ArrayOfNotificaciónSet" />
-  <xs:complexType name="NotificaciónSet">
+  <xs:element name="ArrayOfNotificacionSet" nillable="true" type="tns:ArrayOfNotificacionSet" />
+  <xs:complexType name="NotificacionSet">
     <xs:sequence>
       <xs:element minOccurs="0" name="CorreoElectronicoDestinatario" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="CorreoElectronicoRemitente" nillable="true" type="xs:string" />
@@ -48,12 +48,12 @@
       <xs:element minOccurs="0" name="TipoNotificacion" nillable="true" type="tns:TipoNotificacion" />
     </xs:sequence>
   </xs:complexType>
-  <xs:element name="NotificaciónSet" nillable="true" type="tns:NotificaciónSet" />
+  <xs:element name="NotificacionSet" nillable="true" type="tns:NotificacionSet" />
   <xs:complexType name="TipoNotificacion">
     <xs:sequence>
       <xs:element minOccurs="0" name="IdTipoNotificacion" type="xs:int" />
       <xs:element minOccurs="0" name="NombreNotificacion" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="NotificaciónSet" nillable="true" type="tns:ArrayOfNotificaciónSet" />
+      <xs:element minOccurs="0" name="NotificacionSet" nillable="true" type="tns:ArrayOfNotificacionSet" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="TipoNotificacion" nillable="true" type="tns:TipoNotificacion" />
@@ -137,4 +137,10 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="ArrayOfCuentaSet" nillable="true" type="tns:ArrayOfCuentaSet" />
+  <xs:complexType name="ArrayOfTipoNotificacion">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="TipoNotificacion" nillable="true" type="tns:TipoNotificacion" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfTipoNotificacion" nillable="true" type="tns:ArrayOfTipoNotificacion" />
 </xs:schema>

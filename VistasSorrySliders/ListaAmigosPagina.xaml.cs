@@ -29,7 +29,8 @@ namespace VistasSorrySliders
     {
         private CuentaSet _cuenta;
         private string _codigoPartida;
-        private LobbyClient _proxyJuego;
+        private ListaAmigosClient _proxyAmigos;
+        private TipoNotificacion[] _tiposNotificacion;
 
         public ListaAmigosPagina(CuentaSet cuenta, string codigoPartida)
         {
@@ -37,6 +38,7 @@ namespace VistasSorrySliders
             _cuenta = cuenta;
             _codigoPartida = codigoPartida;
             RecuperarAmigos();
+            RecuperarTiposNotificacion();
         }
 
 
@@ -48,8 +50,9 @@ namespace VistasSorrySliders
             try
             {
                 CuentaSet[] cuentas;
-                ListaAmigosClient proxyAmigos = new ListaAmigosClient();
-                (resultado, cuentas) = proxyAmigos.RecuperarAmigosCuenta(_cuenta.CorreoElectronico);
+                InstanceContext contexto = new InstanceContext(this);
+                _proxyAmigos = new ListaAmigosClient();
+                (resultado, cuentas) = _proxyAmigos.RecuperarAmigosCuenta(_cuenta.CorreoElectronico);
                 if (cuentas != null)
                 {
                     amigosLista = cuentas.ToList();
@@ -92,7 +95,11 @@ namespace VistasSorrySliders
         }
         private void ClickEnviarCodigo(object sender, RoutedEventArgs e)
         {
-            RecuperarCuentaListItem((ListBoxItem)sender);
+            CuentaSet cuentaJugadorClickeado = RecuperarCuentaListItem((ListBoxItem)sender);
+            if (_tiposNotificacion != null)
+            {
+                EnviarInvitacionJugador(cuentaJugadorClickeado);                
+            }
         }
 
         private CuentaSet RecuperarCuentaListItem(ListBoxItem itemJugador)
@@ -166,8 +173,7 @@ namespace VistasSorrySliders
             try
             {
                 CuentaSet[] cuentas;
-                ListaAmigosClient proxyAmigos = new ListaAmigosClient();
-                (resultado, cuentas) = proxyAmigos.RecuperarJugadoresCuenta(informacionJugador);
+                (resultado, cuentas) = _proxyAmigos.RecuperarJugadoresCuenta(informacionJugador);
                 if (cuentas != null)
                 {
                     jugadoresLista = cuentas.ToList();
@@ -212,30 +218,111 @@ namespace VistasSorrySliders
         private void ClickEnviarCodigoJugadorSinCuenta(object sender, RoutedEventArgs e)
         {
             //EnviarCorreo();
-            EnviarMensaje();
         }
-        private void EnviarMensaje() 
+
+        private void EnviarInvitacionJugador(CuentaSet cuentaJugadorClickeado) 
         {
             Logger log = new Logger(this.GetType());
+            Constantes resultado;
             try
             {
-
+                NotificacionSet notificacionNueva = new NotificacionSet
+                {
+                    CorreoElectronicoRemitente = _cuenta.CorreoElectronico,
+                    CorreoElectronicoDestinatario = cuentaJugadorClickeado.CorreoElectronico,
+                    IdTipoNotificacion = _tiposNotificacion[0].IdTipoNotificacion,
+                    Mensaje = _codigoPartida
+                };
+                _proxyAmigos.GuardarNotificacion(notificacionNueva);
+                resultado = Constantes.OPERACION_EXITOSA;
             }
             catch (CommunicationException ex)
             {
                 Console.WriteLine(ex);
+                resultado = Constantes.ERROR_CONEXION_SERVIDOR;
                 log.LogError("Error de Comunicación con el Servidor", ex);
             }
             catch (TimeoutException ex)
             {
                 Console.WriteLine(ex);
+                resultado = Constantes.ERROR_CONEXION_SERVIDOR;
                 log.LogWarn("Se agoto el tiempo de espera del servidor", ex);
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex);
+                resultado = Constantes.ERROR_CONEXION_SERVIDOR;
                 log.LogFatal("Ha ocurrido un error inesperado", ex);
             }
+            switch (resultado)
+            {
+                case Constantes.ERROR_CONEXION_BD:
+                    MessageBox.Show(Properties.Resources.msgErrorBaseDatos);
+                    break;
+                case Constantes.ERROR_CONSULTA:
+                    MessageBox.Show(Properties.Resources.msgErrorBaseDatos);
+                    break;
+                case Constantes.ERROR_CONEXION_SERVIDOR:
+                    MessageBox.Show(Properties.Resources.msgErrorConexion);
+                    break;
+                case Constantes.OPERACION_EXITOSA:
+                    break;
+                case Constantes.OPERACION_EXITOSA_VACIA:
+                    MessageBox.Show(Properties.Resources.msgErrorBaseDatos);
+                    break;
+                default:
+                    break;
+            }
         }
+
+        private void RecuperarTiposNotificacion() 
+        {
+            Logger log = new Logger(this.GetType());
+            Constantes resultado = new Constantes();
+            try
+            {
+                InstanceContext contexto = new InstanceContext(this);
+                (resultado, _tiposNotificacion) = _proxyAmigos.RecuperarTipoNotificacion();
+                
+            }
+            catch (CommunicationException ex)
+            {
+                Console.WriteLine(ex);
+                resultado = Constantes.ERROR_CONEXION_SERVIDOR;
+                log.LogError("Error de Comunicación con el Servidor", ex);
+            }
+            catch (TimeoutException ex)
+            {
+                Console.WriteLine(ex);
+                resultado = Constantes.ERROR_CONEXION_SERVIDOR;
+                log.LogWarn("Se agoto el tiempo de espera del servidor", ex);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+                resultado = Constantes.ERROR_CONEXION_SERVIDOR;
+                log.LogFatal("Ha ocurrido un error inesperado", ex);
+            }
+            switch (resultado)
+            {
+                case Constantes.ERROR_CONEXION_BD:
+                    MessageBox.Show(Properties.Resources.msgErrorBaseDatos);
+                    break;
+                case Constantes.ERROR_CONSULTA:
+                    MessageBox.Show(Properties.Resources.msgErrorBaseDatos);
+                    break;
+                case Constantes.ERROR_CONEXION_SERVIDOR:
+                    MessageBox.Show(Properties.Resources.msgErrorConexion);
+                    break;
+                case Constantes.OPERACION_EXITOSA:
+                    break;
+                case Constantes.OPERACION_EXITOSA_VACIA:
+                    MessageBox.Show(Properties.Resources.msgErrorBaseDatos);
+                    break;
+                default:
+                    break;
+            }
+        }
+
     }
 }

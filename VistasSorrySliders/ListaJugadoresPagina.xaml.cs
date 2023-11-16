@@ -71,7 +71,33 @@ namespace VistasSorrySliders
 
         private void CargarNotificaciones()
         {
+            foreach (CuentaSet cuenta in _lista)
+            {
+                ListBoxItem lstBoxItemCuenta = new ListBoxItem
+                {
+                    DataContext = cuenta
+                };
+                if (EsNotificacionPartida())
+                {
+                    //lstBoxItemCuenta.Style = (Style)FindResource("");
+                }
+                if (EsNotificacionAmistad())
+                {
+                    //lstBoxItemCuenta.Style = (Style)FindResource("");
+                }
+                //lstBoxNotificaciones.Items.Add(lstBoxItemCuenta);
+            }
 
+            Console.WriteLine("Cargando jugadores");
+        }
+        private bool EsNotificacionPartida()
+        {
+            return true;
+        }
+
+        private bool EsNotificacionAmistad() 
+        {
+            return true;
         }
 
         private void CargarAmigos()
@@ -164,6 +190,11 @@ namespace VistasSorrySliders
         private void PreviewMouseDownEliminarNotificacionPartida(object sender, MouseButtonEventArgs e)
         {
             Console.WriteLine("Notificacion");
+        }
+
+        public void RecuperarNotificacion()
+        {
+            CargarNotificaciones();
         }
     }
 }

@@ -58,10 +58,10 @@ namespace VistasSorrySliders.ServicioSorrySliders {
         private string NicknameField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private VistasSorrySliders.ServicioSorrySliders.NotificaciónSet[] NotificaciónSetField;
+        private VistasSorrySliders.ServicioSorrySliders.NotificacionSet[] NotificacionSetField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private VistasSorrySliders.ServicioSorrySliders.NotificaciónSet[] NotificaciónSet1Field;
+        private VistasSorrySliders.ServicioSorrySliders.NotificacionSet[] NotificacionSet1Field;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private VistasSorrySliders.ServicioSorrySliders.PartidaSet[] PartidaSetField;
@@ -160,27 +160,27 @@ namespace VistasSorrySliders.ServicioSorrySliders {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public VistasSorrySliders.ServicioSorrySliders.NotificaciónSet[] NotificaciónSet {
+        public VistasSorrySliders.ServicioSorrySliders.NotificacionSet[] NotificacionSet {
             get {
-                return this.NotificaciónSetField;
+                return this.NotificacionSetField;
             }
             set {
-                if ((object.ReferenceEquals(this.NotificaciónSetField, value) != true)) {
-                    this.NotificaciónSetField = value;
-                    this.RaisePropertyChanged("NotificaciónSet");
+                if ((object.ReferenceEquals(this.NotificacionSetField, value) != true)) {
+                    this.NotificacionSetField = value;
+                    this.RaisePropertyChanged("NotificacionSet");
                 }
             }
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public VistasSorrySliders.ServicioSorrySliders.NotificaciónSet[] NotificaciónSet1 {
+        public VistasSorrySliders.ServicioSorrySliders.NotificacionSet[] NotificacionSet1 {
             get {
-                return this.NotificaciónSet1Field;
+                return this.NotificacionSet1Field;
             }
             set {
-                if ((object.ReferenceEquals(this.NotificaciónSet1Field, value) != true)) {
-                    this.NotificaciónSet1Field = value;
-                    this.RaisePropertyChanged("NotificaciónSet1");
+                if ((object.ReferenceEquals(this.NotificacionSet1Field, value) != true)) {
+                    this.NotificacionSet1Field = value;
+                    this.RaisePropertyChanged("NotificacionSet1");
                 }
             }
         }
@@ -381,9 +381,9 @@ namespace VistasSorrySliders.ServicioSorrySliders {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="NotificaciónSet", Namespace="http://schemas.datacontract.org/2004/07/DatosSorrySliders")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="NotificacionSet", Namespace="http://schemas.datacontract.org/2004/07/DatosSorrySliders")]
     [System.SerializableAttribute()]
-    public partial class NotificaciónSet : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+    public partial class NotificacionSet : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
         [System.NonSerializedAttribute()]
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
@@ -1004,7 +1004,7 @@ namespace VistasSorrySliders.ServicioSorrySliders {
         private string NombreNotificacionField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private VistasSorrySliders.ServicioSorrySliders.NotificaciónSet[] NotificaciónSetField;
+        private VistasSorrySliders.ServicioSorrySliders.NotificacionSet[] NotificacionSetField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -1043,14 +1043,14 @@ namespace VistasSorrySliders.ServicioSorrySliders {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public VistasSorrySliders.ServicioSorrySliders.NotificaciónSet[] NotificaciónSet {
+        public VistasSorrySliders.ServicioSorrySliders.NotificacionSet[] NotificacionSet {
             get {
-                return this.NotificaciónSetField;
+                return this.NotificacionSetField;
             }
             set {
-                if ((object.ReferenceEquals(this.NotificaciónSetField, value) != true)) {
-                    this.NotificaciónSetField = value;
-                    this.RaisePropertyChanged("NotificaciónSet");
+                if ((object.ReferenceEquals(this.NotificacionSetField, value) != true)) {
+                    this.NotificacionSetField = value;
+                    this.RaisePropertyChanged("NotificacionSet");
                 }
             }
         }
@@ -1595,6 +1595,18 @@ namespace VistasSorrySliders.ServicioSorrySliders {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IListaAmigos/RecuperarJugadoresCuenta", ReplyAction="http://tempuri.org/IListaAmigos/RecuperarJugadoresCuentaResponse")]
         System.Threading.Tasks.Task<System.ValueTuple<VistasSorrySliders.ServicioSorrySliders.Constantes, VistasSorrySliders.ServicioSorrySliders.CuentaSet[]>> RecuperarJugadoresCuentaAsync(string informacionJugador);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IListaAmigos/RecuperarTipoNotificacion", ReplyAction="http://tempuri.org/IListaAmigos/RecuperarTipoNotificacionResponse")]
+        System.ValueTuple<VistasSorrySliders.ServicioSorrySliders.Constantes, VistasSorrySliders.ServicioSorrySliders.TipoNotificacion[]> RecuperarTipoNotificacion();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IListaAmigos/RecuperarTipoNotificacion", ReplyAction="http://tempuri.org/IListaAmigos/RecuperarTipoNotificacionResponse")]
+        System.Threading.Tasks.Task<System.ValueTuple<VistasSorrySliders.ServicioSorrySliders.Constantes, VistasSorrySliders.ServicioSorrySliders.TipoNotificacion[]>> RecuperarTipoNotificacionAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IListaAmigos/GuardarNotificacion", ReplyAction="http://tempuri.org/IListaAmigos/GuardarNotificacionResponse")]
+        VistasSorrySliders.ServicioSorrySliders.Constantes GuardarNotificacion(VistasSorrySliders.ServicioSorrySliders.NotificacionSet notificacion);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IListaAmigos/GuardarNotificacion", ReplyAction="http://tempuri.org/IListaAmigos/GuardarNotificacionResponse")]
+        System.Threading.Tasks.Task<VistasSorrySliders.ServicioSorrySliders.Constantes> GuardarNotificacionAsync(VistasSorrySliders.ServicioSorrySliders.NotificacionSet notificacion);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -1638,6 +1650,22 @@ namespace VistasSorrySliders.ServicioSorrySliders {
         
         public System.Threading.Tasks.Task<System.ValueTuple<VistasSorrySliders.ServicioSorrySliders.Constantes, VistasSorrySliders.ServicioSorrySliders.CuentaSet[]>> RecuperarJugadoresCuentaAsync(string informacionJugador) {
             return base.Channel.RecuperarJugadoresCuentaAsync(informacionJugador);
+        }
+        
+        public System.ValueTuple<VistasSorrySliders.ServicioSorrySliders.Constantes, VistasSorrySliders.ServicioSorrySliders.TipoNotificacion[]> RecuperarTipoNotificacion() {
+            return base.Channel.RecuperarTipoNotificacion();
+        }
+        
+        public System.Threading.Tasks.Task<System.ValueTuple<VistasSorrySliders.ServicioSorrySliders.Constantes, VistasSorrySliders.ServicioSorrySliders.TipoNotificacion[]>> RecuperarTipoNotificacionAsync() {
+            return base.Channel.RecuperarTipoNotificacionAsync();
+        }
+        
+        public VistasSorrySliders.ServicioSorrySliders.Constantes GuardarNotificacion(VistasSorrySliders.ServicioSorrySliders.NotificacionSet notificacion) {
+            return base.Channel.GuardarNotificacion(notificacion);
+        }
+        
+        public System.Threading.Tasks.Task<VistasSorrySliders.ServicioSorrySliders.Constantes> GuardarNotificacionAsync(VistasSorrySliders.ServicioSorrySliders.NotificacionSet notificacion) {
+            return base.Channel.GuardarNotificacionAsync(notificacion);
         }
     }
     

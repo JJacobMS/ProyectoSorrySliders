@@ -145,7 +145,7 @@
             </Setter>
         </Style>
 
-        <Style x:Key="estiloLstBoxItemNotificacioPartida" TargetType="ListBoxItem">
+        <Style x:Key="estiloLstBoxItemNotificacionPartida" TargetType="ListBoxItem">
             <Setter Property="Height" Value="50"/>
             <Setter Property="Template">
                 <Setter.Value>
@@ -249,7 +249,7 @@
                                                 <Style TargetType="ListBoxItem" BasedOn="{StaticResource estiloLstBoxItemNotificacionAmigo}"/>
                                             </ListBox.ItemContainerStyle>
                                             <ListBoxItem/>
-                                            <ListBoxItem Style="{StaticResource estiloLstBoxItemNotificacioPartida}"></ListBoxItem>
+                                            <ListBoxItem Style="{StaticResource estiloLstBoxItemNotificacionPartida}"></ListBoxItem>
                                         </ListBox>
                                     </Grid>
                                 </TabItem>
