@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -26,12 +27,10 @@ namespace VistasSorrySliders
         private Dictionary<Direccion, Button> _botonesLanzarPeonJugador;
         private Dictionary<Direccion, Button> _botonesTirarDadoJugador;
         private Tablero _tablero;
-        private ILobby _proxyLobby;
         private int _numeroJugadores;
-        public JuegoLanzamientoPagina(List<CuentaSet> listaCuentas, int numeroJugadores, ILobby _proxyLobby)
+        public JuegoLanzamientoPagina(List<CuentaSet> listaCuentas, int numeroJugadores)
         {
             _numeroJugadores = numeroJugadores;
-            this._proxyLobby = _proxyLobby;
             InitializeComponent();
             ColocarNombres(listaCuentas);
             MostrarTableroElementosCorrespondientes();
@@ -246,7 +245,6 @@ namespace VistasSorrySliders
         {
             cnvEspacioJuego.Children.Remove(peon.Figura);
         }
-
         private void InicializarTablero(List<CuentaSet> listaCuentas)
         {
             List<Rectangle> obstaculos = RegresarObstaculos();
@@ -265,6 +263,24 @@ namespace VistasSorrySliders
                 default:
                     _tablero = null;
                     break;
+            }
+        }
+
+        private void RevivirProxy()
+        {
+            Logger log = new Logger(this.GetType());
+            try
+            {
+                InstanceContext contexto = new InstanceContext(this);
+                //_proxyLobby = new LobbyClient(contexto);
+            }
+            catch (CommunicationException ex)
+            {
+                Console.WriteLine(ex);
+            }
+            catch (TimeoutException ex)
+            {
+                Console.WriteLine(ex);
             }
         }
 
