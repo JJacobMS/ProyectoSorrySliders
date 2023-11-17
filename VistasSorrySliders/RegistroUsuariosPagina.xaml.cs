@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity.Infrastructure.Interception;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -28,35 +29,97 @@ namespace VistasSorrySliders
     /// </summary>
     public partial class RegistroUsuariosPagina : Page
     {
+        private CuentaSet _cuenta;
+        private UsuarioSet _usuario;
+        private bool _esModificacion;
+
         public RegistroUsuariosPagina()
         {
             InitializeComponent();
+            InicializarDatosCrearUsuario();
             EstablecerImagenPorDefecto();
+            _esModificacion = false;
+        }
+        public RegistroUsuariosPagina(CuentaSet cuentaUsuario, UsuarioSet usuario)
+        {
+            InitializeComponent();
+            _esModificacion = true;
+            _cuenta = cuentaUsuario;
+            _usuario = usuario;
+            InicializarDatosModificarUsuario();
         }
         private String _rutaImagen;
         private byte[] _avatarByte = null;
-        private void EstablecerImagenPorDefecto() 
+        private void EstablecerImagenPorDefecto()
         {
+            Logger log = new Logger(this.GetType());
             _rutaImagen = "pack://application:,,,/Recursos/avatarPredefinido.jpg";
             try
             {
                 imgBrushAvatar.ImageSource = new BitmapImage(new Uri(_rutaImagen));
-                BitmapImage bitmap = new BitmapImage(new Uri(_rutaImagen));
-                JpegBitmapEncoder encoder = new JpegBitmapEncoder();
-                encoder.Frames.Add(BitmapFrame.Create(bitmap));
-                using (MemoryStream ms = new MemoryStream())
+                BitmapImage mapaBits = new BitmapImage(new Uri(_rutaImagen));
+                JpegBitmapEncoder codificador = new JpegBitmapEncoder();
+                codificador.Frames.Add(BitmapFrame.Create(mapaBits));
+                using (MemoryStream flujoMemoria = new MemoryStream())
                 {
-                    encoder.Save(ms);
-                    _avatarByte = ms.ToArray();
+                    codificador.Save(flujoMemoria);
+                    _avatarByte = flujoMemoria.ToArray();
+                    if (_avatarByte == null) 
+                    {
+                        IrInicioSesion();
+                    }
                 }
+            }
+            catch (ArgumentException ex)
+            {
+                System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorImagen, Properties.Resources.msgTituloErrorImagen, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                log.LogWarn("Se ha proporcionado un argumento invalido", ex);
+                Console.WriteLine(ex);
+            }
+            catch (OutOfMemoryException ex)
+            {
+                System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorImagen, Properties.Resources.msgTituloErrorImagen, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                log.LogWarn("Se ha agotado la memoria", ex);
+                Console.WriteLine(ex);
+            }
+            catch (System.IO.IOException ex)
+            {
+                System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorImagen, Properties.Resources.msgTituloErrorImagen, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                log.LogWarn("Error al acceder a la imagen", ex);
             }
             catch (Exception ex)
             {
-                System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorAvatarDefault,Properties.Resources.msgTituloErrorAvatarDefault, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Console.WriteLine(ex);
+                System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorAvatarDefault, Properties.Resources.msgTituloErrorAvatarDefault, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                log.LogFatal("Ha ocurrido un error inesperado", ex);
             }
         }
 
+        private void InicializarDatosCrearUsuario()
+        {
+            lblTitulo.Content = Properties.Resources.lblBienvenido;
+            btnContinuar.Content = Properties.Resources.btnCrearCuenta;
+            lblContraseña.Visibility = Visibility.Visible;
+        }
 
+        private void InicializarDatosModificarUsuario()
+        {
+            txtBoxCorreoElectronico.Text = _cuenta.CorreoElectronico;
+            pssBoxContrasena.Password = _cuenta.Contraseña;
+            txtBoxNickname.Text = _cuenta.Nickname;
+            txtBoxApellidos.Text = _usuario.Apellido;
+            txtBoxNombre.Text = _usuario.Nombre;
+
+            txtBoxCorreoElectronico.IsReadOnly = true;
+            txtBoxCorreoElectronico.BorderBrush = Brushes.LightGray;
+            pssBoxContrasena.Visibility = Visibility.Hidden;
+            lblContraseña.Visibility = Visibility.Hidden;
+
+            lblTitulo.Content = Properties.Resources.lblBienvenidoNuevo;
+            btnContinuar.Content = Properties.Resources.btnGuardarCambios;
+            _avatarByte = _cuenta.Avatar;
+            Utilidades.IngresarImagen(_cuenta.Avatar, imgBrushAvatar);
+        }
 
         private bool ValidarCampos()
         {
@@ -86,27 +149,31 @@ namespace VistasSorrySliders
                 validacionCampos = false;
             }
 
-            if (!string.IsNullOrWhiteSpace(txtBoxCorreoElectronico.Text) && ValidarCorreo(txtBoxCorreoElectronico.Text) && ValidarExistenciaCorreo())
+            if (_esModificacion == false)
             {
-                txtBoxCorreoElectronico.Style = estiloTxtBoxAzul;
-            }
-            else
-            {
-                txtBoxCorreoElectronico.Style = estiloTxtBoxRojo;
-                validacionCampos = false;
+                if (!string.IsNullOrWhiteSpace(txtBoxCorreoElectronico.Text) && ValidarCorreo(txtBoxCorreoElectronico.Text) && ValidarExistenciaCorreo())
+                {
+                    txtBoxCorreoElectronico.Style = estiloTxtBoxAzul;
+                }
+                else
+                {
+                    txtBoxCorreoElectronico.Style = estiloTxtBoxRojo;
+                    validacionCampos = false;
+                }
+
+                if (!string.IsNullOrWhiteSpace(pssBoxContrasena.Password) && Utilidades.ValidarContraseña(pssBoxContrasena.Password))
+                {
+                    pssBoxContrasena.Style = estiloPssBoxAzul;
+                }
+                else
+                {
+                    pssBoxContrasena.Style = estiloPssBoxRojo;
+                    validacionCampos = false;
+                }
             }
 
-            if (!string.IsNullOrWhiteSpace(pssBoxContrasena.Password) && ValidarContraseña(pssBoxContrasena.Password))
-            {
-                pssBoxContrasena.Style = estiloPssBoxAzul;
-            }
-            else
-            {
-                pssBoxContrasena.Style = estiloPssBoxRojo;
-                validacionCampos = false;
-            }
 
-            if(!string.IsNullOrWhiteSpace(txtBoxNickname.Text))
+            if (!string.IsNullOrWhiteSpace(txtBoxNickname.Text))
             {
                 txtBoxNickname.Style = estiloTxtBoxAzul;
             }
@@ -120,13 +187,14 @@ namespace VistasSorrySliders
 
         private bool ValidarCorreo(string correo)
         {
+            Logger log = new Logger(this.GetType());
             if (string.IsNullOrWhiteSpace(correo))
             {
-                return  false;
+                return false;
             }
             try
             {
-                correo = Regex.Replace(correo, @"(@)(.+)$", DomainMapper,RegexOptions.None, TimeSpan.FromMilliseconds(200));
+                correo = Regex.Replace(correo, @"(@)(.+)$", DomainMapper, RegexOptions.None, TimeSpan.FromMilliseconds(200));
                 string DomainMapper(Match match)
                 {
                     var idn = new IdnMapping();
@@ -144,29 +212,27 @@ namespace VistasSorrySliders
                     return false;
                 }
             }
-            catch (RegexMatchTimeoutException e)
+            catch (RegexMatchTimeoutException ex)
             {
+                Console.WriteLine(ex);
+                log.LogWarn("El tiempo de espera para la expresión se ha agotado", ex);
                 return false;
             }
-            catch (ArgumentException e)
+            catch (ArgumentException ex)
             {
+                Console.WriteLine(ex);
+                log.LogWarn("Se ha proporcionado un argumento invalido", ex);
+                return false;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+                log.LogFatal("Ha ocurrido un error inesperado", ex);
                 return false;
             }
         }
-        private bool ValidarContraseña(string contraseña)
-        {
-            string patron = @"^(?=.*[0-9!@#$%^&*()\-=_+.,:;])[A-Za-z0-9!@#$%^&*()\-=_+.,:;]{8,}$";
-            Regex regex = new Regex(patron);
-            bool correoValidado = regex.IsMatch(contraseña);
-            if (correoValidado)
-            {
-                return correoValidado;
-            }
-            System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorContrasenaInvalida, Properties.Resources.msgTituloContraseñaInvalida, MessageBoxButtons.OK, MessageBoxIcon.Error);
-            return correoValidado;  
-        }
-        
-        private void AñadirCuenta() 
+
+        private void AñadirCuenta()
         {
             String nombre = txtBoxNombre.Text;
             String apellidos = txtBoxApellidos.Text;
@@ -187,90 +253,147 @@ namespace VistasSorrySliders
                 Apellido = apellidos
             };
             Constantes resultado = Constantes.OPERACION_EXITOSA;
+            Logger log = new Logger(this.GetType());
             try
             {
                 RegistroUsuarioClient proxyRegistrarUsuario = new RegistroUsuarioClient();
                 resultado = proxyRegistrarUsuario.AgregarUsuario(usuarioNuevo,nuevaCuenta);
                 proxyRegistrarUsuario.Close();
             }
-            catch (CommunicationException excepcion)
+            catch (CommunicationException ex)
             {
+                Console.WriteLine(ex);
                 resultado = Constantes.ERROR_CONEXION_SERVIDOR;
-                System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorConexion);
+                log.LogError("Error de Comunicación con el Servidor", ex);
             }
-            catch (TimeoutException excepcion)
+            catch (TimeoutException ex)
             {
+                Console.WriteLine(ex);
                 resultado = Constantes.ERROR_CONEXION_SERVIDOR;
-                System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorConexion);
-
+                log.LogWarn("Se agoto el tiempo de espera del servidor", ex);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+                resultado = Constantes.ERROR_CONEXION_SERVIDOR;
+                log.LogFatal("Ha ocurrido un error inesperado", ex);
             }
             switch (resultado)
-                {
-                    case Constantes.OPERACION_EXITOSA:
-                        System.Windows.Forms.MessageBox.Show(Properties.Resources.msgCuentaCreada, Properties.Resources.msgTituloCuentaCreada, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        break;
-                    case Constantes.OPERACION_EXITOSA_VACIA:
-                        break;
-                    case Constantes.ERROR_CONEXION_BD:
-                        System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorBaseDatos);
-                        break;
-                    case Constantes.ERROR_CONSULTA:
-                        System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorBaseDatos);
-                        break;
-                    case Constantes.ERROR_CONEXION_SERVIDOR:
-                        System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorConexion);
-                        break;
-                }
+            {
+                case Constantes.OPERACION_EXITOSA:
+                    System.Windows.Forms.MessageBox.Show(Properties.Resources.msgCuentaCreada, Properties.Resources.msgTituloCuentaCreada, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    break;
+                case Constantes.OPERACION_EXITOSA_VACIA:
+                    break;
+                case Constantes.ERROR_CONEXION_BD:
+                    System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorBaseDatos);
+                    break;
+                case Constantes.ERROR_CONSULTA:
+                    System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorBaseDatos);
+                    break;
+                case Constantes.ERROR_CONEXION_SERVIDOR:
+                    System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorConexion);
+                    break;
+            }
             
 
         }
 
-        private bool ValidarExistenciaImagen() 
+        private void ActualizarCuenta()
         {
-            bool archivoExiste = false;
-            if (imgBrushAvatar.ImageSource is BitmapImage bitmapImage)
+            String nombre = txtBoxNombre.Text;
+            String apellidos = txtBoxApellidos.Text;
+            String nickname = txtBoxNickname.Text;
+            _cuenta.Nickname = nickname;
+            _cuenta.Avatar = _avatarByte;
+            var cuentaActualizada = new CuentaSet
             {
-                Uri uri = bitmapImage.UriSource;
-                if (uri.IsAbsoluteUri)
-                {
-                    if (uri.IsFile)
-                    {
-                        string rutaArchivo = uri.LocalPath;
-                        archivoExiste = File.Exists(rutaArchivo);
-                    }
-                    else
-                    {
-                        archivoExiste = true;
-                    }
-                }
-            }
-            if (archivoExiste)
+                CorreoElectronico=_cuenta.CorreoElectronico,
+                Nickname = _cuenta.Nickname,
+                Avatar = _cuenta.Avatar
+            };
+
+            var usuarioActualizado = new UsuarioSet
             {
-                return archivoExiste;
-            }
-            else 
+                Nombre = nombre,
+                Apellido = apellidos
+            };
+            Constantes resultado = Constantes.OPERACION_EXITOSA;
+            Logger log = new Logger(this.GetType());
+            try
             {
-                System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorImagen, Properties.Resources.msgTituloErrorImagen, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                return archivoExiste;
+                RegistroUsuarioClient proxyRegistrarUsuario = new RegistroUsuarioClient();
+                resultado = proxyRegistrarUsuario.ActualizarUsuario(usuarioActualizado, cuentaActualizada);
+                proxyRegistrarUsuario.Close();
             }
+            catch (CommunicationException ex)
+            {
+                Console.WriteLine(ex);
+                resultado = Constantes.ERROR_CONEXION_SERVIDOR;
+                log.LogError("Error de Comunicación con el Servidor", ex);
+            }
+            catch (TimeoutException ex)
+            {
+                Console.WriteLine(ex);
+                resultado = Constantes.ERROR_CONEXION_SERVIDOR;
+                log.LogWarn("Se agoto el tiempo de espera del servidor", ex);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+                resultado = Constantes.ERROR_CONEXION_SERVIDOR;
+                log.LogFatal("Ha ocurrido un error inesperado", ex);
+            }
+            switch (resultado)
+            {
+                case Constantes.OPERACION_EXITOSA:
+                    break;
+                case Constantes.OPERACION_EXITOSA_VACIA:
+                    System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorBaseDatos);
+                    break;
+                case Constantes.ERROR_CONEXION_BD:
+                    System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorBaseDatos);
+                    break;
+                case Constantes.ERROR_CONSULTA:
+                    System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorBaseDatos);
+                    break;
+                case Constantes.ERROR_CONEXION_SERVIDOR:
+                    System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorConexion);
+                    break;
+            }
+
+
         }
 
         private bool ValidarExistenciaCorreo() 
         {
             string correoIngresado = txtBoxCorreoElectronico.Text;
             Constantes resultado = Constantes.OPERACION_EXITOSA_VACIA;
+            Logger log = new Logger(this.GetType());
             try
             {
                 InicioSesionClient proxyInicioSesion = new InicioSesionClient();
                 resultado = proxyInicioSesion.VerificarExistenciaCorreoCuenta(correoIngresado);
                 proxyInicioSesion.Close();
             }
-            catch (CommunicationException excepcion)
+            catch (CommunicationException ex)
             {
                 resultado = Constantes.ERROR_CONEXION_SERVIDOR;
-                Console.WriteLine(excepcion);
+                Console.WriteLine(ex);
+                log.LogError("Error de Comunicación con el Servidor", ex);
             }
-
+            catch (TimeoutException ex)
+            {
+                Console.WriteLine(ex);
+                resultado = Constantes.ERROR_CONEXION_SERVIDOR;
+                log.LogWarn("Se agoto el tiempo de espera del servidor", ex);
+            }
+            catch (Exception ex)
+            {
+                resultado = Constantes.ERROR_CONEXION_SERVIDOR;
+                Console.WriteLine(ex);
+                log.LogFatal("Ha ocurrido un error inesperado", ex);
+            }
             switch (resultado)
             {
                 case Constantes.OPERACION_EXITOSA:
@@ -291,17 +414,44 @@ namespace VistasSorrySliders
         }
         private void ClickCrearCuenta(object sender, RoutedEventArgs e)
         {
-            if (ValidarCampos() && ValidarExistenciaImagen())
+            Logger log = new Logger(this.GetType());
+            try
             {
-                try
+                if (_esModificacion)
                 {
-                    AñadirCuenta();
-                    IrInicioSesion();
+                    if (ValidarCampos()) 
+                    {
+                        ActualizarCuenta();
+                        MenuPrincipalPagina menu = new MenuPrincipalPagina(_cuenta);
+                        this.NavigationService.Navigate(menu);
+                    }
                 }
-                catch (CommunicationException ex)
+                else
                 {
-                    System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorConexion);
+                    if (ValidarCampos())
+                    {
+                        AñadirCuenta();
+                        IrInicioSesion();
+                    }
                 }
+            }
+            catch (CommunicationException ex)
+            {
+                Console.WriteLine(ex);
+                System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorConexion);
+                log.LogError("Error de Comunicación con el Servidor", ex);
+            }
+            catch (TimeoutException ex)
+            {
+                Console.WriteLine(ex);
+                System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorConexion);
+                log.LogWarn("Se agoto el tiempo de espera del servidor", ex);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+                System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorConexion);
+                log.LogFatal("Ha ocurrido un error inesperado", ex);
             }
 
         }
@@ -316,10 +466,11 @@ namespace VistasSorrySliders
 
         private void SeleccionarImagen(object sender, MouseButtonEventArgs e)
         {
+            Logger log = new Logger(this.GetType());
             try
             {
                 OpenFileDialog abrirBiblioteca = new OpenFileDialog();
-                abrirBiblioteca.Filter = "Archivos de imagen|*.jpg;*.jpeg";
+                abrirBiblioteca.Filter = $"{Properties.Resources.strArchivosImagen}|*.jpg;*.jpeg";
                 if (abrirBiblioteca.ShowDialog() == DialogResult.OK)
                 {
                     _rutaImagen = abrirBiblioteca.FileName;
@@ -339,13 +490,35 @@ namespace VistasSorrySliders
                     }
                 }
             }
+            catch (ArgumentException ex)
+            {
+                System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorImagen, Properties.Resources.msgTituloErrorImagen, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                log.LogWarn("Se ha proporcionado un argumento invalido", ex);
+                Console.WriteLine(ex);
+            }
+            catch (OutOfMemoryException ex)
+            {
+                System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorImagen, Properties.Resources.msgTituloErrorImagen, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                log.LogWarn("Se ha agotado la memoria", ex);
+                Console.WriteLine(ex);
+            }
             catch (UnauthorizedAccessException ex)
             {
-                Console.WriteLine("No se tienen permisos para acceder al archivo", "Sin permisos para el archivo");
+                Console.WriteLine(ex);
+                log.LogWarn("Error al acceder a la imagen", ex);
+                System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorImagenPermisos, Properties.Resources.msgErrorTituloImagenPermisos);
+            }
+            catch (System.IO.IOException ex)
+            {
+                System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorImagen, Properties.Resources.msgTituloErrorImagen, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                log.LogWarn("Error al acceder a la imagen", ex);
+                Console.WriteLine(ex);
             }
             catch (Exception ex)
             {
+                Console.WriteLine(ex);
                 System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorImagen, Properties.Resources.msgTituloErrorImagen, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                log.LogFatal("Ha ocurrido un error inesperado", ex);
             }
         }
 
@@ -356,63 +529,90 @@ namespace VistasSorrySliders
 
         private void TextChangedTamañoNombre(object sender, TextChangedEventArgs e)
         {
-            if (txtBoxNombre.Text.Length > 60)
+            int tamañoMaximoNombre = 60;
+            if (txtBoxNombre.Text.Length > tamañoMaximoNombre)
             {
-                txtBoxNombre.Text = txtBoxNombre.Text.Substring(0, 60);
+                txtBoxNombre.Text = txtBoxNombre.Text.Substring(0, tamañoMaximoNombre);
                 txtBoxNombre.SelectionStart = txtBoxNombre.Text.Length;
             }
         }
 
         private void TextChangedTamañoNickname(object sender, TextChangedEventArgs e)
         {
-            if (txtBoxNickname.Text.Length > 30)
+            int tamañoMaximoNickname = 30;
+            if (txtBoxNickname.Text.Length > tamañoMaximoNickname)
             {
-                txtBoxNickname.Text = txtBoxNickname.Text.Substring(0, 30);
+                txtBoxNickname.Text = txtBoxNickname.Text.Substring(0, tamañoMaximoNickname);
                 txtBoxNickname.SelectionStart = txtBoxNickname.Text.Length;
             }
         }
 
         private void TextChangedTamañoApellidos(object sender, TextChangedEventArgs e)
         {
-            if (txtBoxApellidos.Text.Length > 30)
+            int tamañoMaximoApellidos = 30;
+            if (txtBoxApellidos.Text.Length > tamañoMaximoApellidos)
             {
-                txtBoxApellidos.Text = txtBoxApellidos.Text.Substring(0, 30);
+                txtBoxApellidos.Text = txtBoxApellidos.Text.Substring(0, tamañoMaximoApellidos);
                 txtBoxApellidos.SelectionStart = txtBoxApellidos.Text.Length;
             }
         }
 
         private void TextChangedTamañoCorreoElectronico(object sender, TextChangedEventArgs e)
         {
-            if (txtBoxCorreoElectronico.Text.Length > 100)
+            int tamañoMaximoCorreoElectronico = 100;
+            if (txtBoxCorreoElectronico.Text.Length > tamañoMaximoCorreoElectronico)
             {
-                txtBoxCorreoElectronico.Text = txtBoxCorreoElectronico.Text.Substring(0, 100);
+                txtBoxCorreoElectronico.Text = txtBoxCorreoElectronico.Text.Substring(0, tamañoMaximoCorreoElectronico);
                 txtBoxCorreoElectronico.SelectionStart = txtBoxCorreoElectronico.Text.Length;
             }
         }
 
         static bool ValidarTamañoImagen(string ruta)
         {
+            Logger log = new Logger(typeof(Utilidades));
             try
             {
-                using (FileStream flujoArchivo = new FileStream(ruta, FileMode.Open, FileAccess.Read))
+                if (ruta == null)
                 {
-                    int tamañoenBytes = (int)flujoArchivo.Length;
-                    int tamañoEnKB = tamañoenBytes / 1024;
-
-                    if (tamañoEnKB <= 700)
+                    System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorImagen, Properties.Resources.msgTituloErrorImagen, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return false;
+                }
+                {
+                    using (FileStream flujoArchivo = new FileStream(ruta, FileMode.Open, FileAccess.Read))
                     {
-                        return true;
-                    }
-                    else
-                    {
-                        System.Windows.Forms.MessageBox.Show("La imagen supera el limite de 700KB", "Imagen demasiado grande", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        int tamañoenBytes = (int)flujoArchivo.Length;
+                        int tamañoEnKB = tamañoenBytes / 1024;
 
-                        return false;
+                        if (tamañoEnKB <= 400)
+                        {
+                            return true;
+                        }
+                        else
+                        {
+                            System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorTamañoImagen, Properties.Resources.msgErrorTituloImagenPermisos, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return false;
+                        }
                     }
                 }
             }
-            catch (IOException e)
+            catch (IOException ex)
             {
+                Console.WriteLine(ex);
+                log.LogWarn("Error al acceder a la imagen", ex);
+                System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorImagen, Properties.Resources.msgTituloErrorImagen, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+            catch (UnauthorizedAccessException ex)
+            {
+                Console.WriteLine(ex);
+                log.LogWarn("Error al acceder a la imagen", ex);
+                System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorImagen, Properties.Resources.msgTituloErrorImagen, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+                log.LogFatal("Ha ocurrido un error inesperado", ex);
                 System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorImagen, Properties.Resources.msgTituloErrorImagen, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }

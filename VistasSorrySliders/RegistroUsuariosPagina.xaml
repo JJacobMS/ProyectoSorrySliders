@@ -19,12 +19,12 @@
                     <RowDefinition Height="Auto"/>
                     <RowDefinition/>
                 </Grid.RowDefinitions>
-                <Rectangle Grid.Column="0" Grid.Row="0" Width="400" Height="100">
+                <Rectangle Grid.Column="0" Grid.Row="0" Width="450" Height="100">
                     <Rectangle.Fill>
                         <ImageBrush ImageSource="/Recursos/bannerColorRojo.png"/>
                     </Rectangle.Fill>
                 </Rectangle>
-                <Label Grid.Column="0" Grid.Row="0" Content="{x:Static p:Resources.lblBienvenido}" FontSize="50" Style="{StaticResource estiloLblInicioSesion}"></Label>
+                <Label x:Name="lblTitulo" Grid.Column="0" Grid.Row="0" Content="{x:Static p:Resources.lblBienvenido}" FontSize="50" Style="{StaticResource estiloLblInicioSesion}"></Label>
                 <Border Grid.Column="0" Grid.Row="1" BorderBrush="Black" BorderThickness="2" Margin="4,10,4,5" CornerRadius="10">
                     <Grid Margin="5">
                         <Grid.RowDefinitions>
@@ -76,11 +76,11 @@
                             <TextBox x:Name="txtBoxCorreoElectronico" Width="325" Style="{StaticResource estiloTxtBoxAzul}" TextChanged="TextChangedTamañoCorreoElectronico"></TextBox>
                         </StackPanel>
                         <StackPanel Grid.Column="0" Grid.Row="4" Grid.ColumnSpan="2" Margin="40,0,20,0" VerticalAlignment="Center" HorizontalAlignment="Left">
-                            <Label Content="{x:Static p:Resources.lblContrasena}" Style="{StaticResource estiloLblFormularioCuenta}" HorizontalAlignment="Left"></Label>
+                            <Label x:Name="lblContraseña" Content="{x:Static p:Resources.lblContrasena}" Style="{StaticResource estiloLblFormularioCuenta}" HorizontalAlignment="Left"></Label>
                             <PasswordBox  x:Name="pssBoxContrasena"  Width="290"  Style="{StaticResource estiloPssBoxAzul}"></PasswordBox>
                         </StackPanel>
                         <StackPanel Grid.Column="1" Grid.Row="4" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Right">
-                            <Button Content="{x:Static p:Resources.btnCrearCuenta}" Click="ClickCrearCuenta" Width="160" Height="45" Style="{StaticResource estiloBtnCrearCuenta}"></Button>
+                            <Button x:Name="btnContinuar" Click="ClickCrearCuenta" Width="160" Height="45" Style="{StaticResource estiloBtnCrearCuenta}" Content="{x:Static p:Resources.btnContinuar}"></Button>
                             <Button  Content="{x:Static p:Resources.btnCancelar}" Margin="50,20,50,20" Width="160" Height="45" Style="{StaticResource estiloBtnCancelar}" Click="ClickCancelar"></Button>
                         </StackPanel>
                         

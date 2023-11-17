@@ -267,4 +267,20 @@
             </DataTrigger>
         </Style.Triggers>
     </Style>
+
+    <Style x:Key="estiloLblTextoLanzamiento" TargetType="Label">
+        <Setter Property="FontFamily" Value="{StaticResource FuentesTitulo}"/>
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="Foreground" Value="#FFFFFF"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+    </Style>
+    
+    <Style x:Key="estiloTxtBlockTextoLanzamiento" TargetType="TextBlock">
+        <Setter Property="FontFamily" Value="{StaticResource FuentesTitulo}"/>
+        <Setter Property="FontSize" Value="12"/>
+        <Setter Property="Foreground" Value="#FFFFFF"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="TextWrapping" Value="Wrap"/>
+        <Setter Property="TextAlignment" Value="Center"/>
+    </Style>
 </ResourceDictionary>

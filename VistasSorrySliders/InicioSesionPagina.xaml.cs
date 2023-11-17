@@ -34,7 +34,8 @@ namespace VistasSorrySliders
 
         private void ClickCancelar(object sender, RoutedEventArgs e)
         {
-            this.NavigationService.GoBack();
+            InicioPagina inicio = new InicioPagina();
+            this.NavigationService.Navigate(inicio);
         }
 
         private void ClickRegistrarCuenta(object sender, RoutedEventArgs e)
@@ -46,7 +47,7 @@ namespace VistasSorrySliders
         private void VerificarCuenta()
         {
             ReiniciarPantalla();
-            Boolean datosCompletos = true;
+            bool datosCompletos = true;
             string correoIngresado = txtBoxCorreo.Text;
             string contrasena = pssBoxContrasena.Password;
 
@@ -64,19 +65,32 @@ namespace VistasSorrySliders
 
             if (datosCompletos)
             {
-                Constantes resultado = Constantes.OPERACION_EXITOSA;
+                Constantes resultado;
+                Logger log = new Logger(this.GetType());
                 try
                 {
                     InicioSesionClient proxyInicioSesion = new InicioSesionClient();
                     resultado = proxyInicioSesion.VerificarExistenciaCorreoCuenta(correoIngresado);
                     proxyInicioSesion.Close();
                 }
-                catch (CommunicationException excepcion) 
+                catch (CommunicationException ex)
                 {
+                    Console.WriteLine(ex);
                     resultado = Constantes.ERROR_CONEXION_SERVIDOR;
-                    Console.WriteLine(excepcion);
+                    log.LogError("Error de Comunicación con el Servidor", ex);
                 }
-
+                catch (TimeoutException ex)
+                {
+                    Console.WriteLine(ex);
+                    resultado = Constantes.ERROR_CONEXION_SERVIDOR;
+                    log.LogWarn("Se agoto el tiempo de espera del servidor", ex);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex);
+                    resultado = Constantes.ERROR_CONEXION_SERVIDOR;
+                    log.LogFatal("Ha ocurrido un error inesperado", ex);
+                }
                 switch (resultado)
                 {
                     case Constantes.OPERACION_EXITOSA:
@@ -101,23 +115,36 @@ namespace VistasSorrySliders
         private void VerificarContrasena(CuentaSet cuentaPorVerificar)
         {
             Constantes resultado;
+            Logger log = new Logger(this.GetType());
             try
             {
                 InicioSesionClient proxyInicioSesion = new InicioSesionClient();
                 resultado = proxyInicioSesion.VerificarContrasenaDeCuenta(cuentaPorVerificar);
                 proxyInicioSesion.Close();
             }
-            catch (CommunicationException excepcion)    
+            catch (CommunicationException ex)
             {
+                Console.WriteLine(ex);
                 resultado = Constantes.ERROR_CONEXION_SERVIDOR;
-                Console.WriteLine(excepcion);
+                log.LogError("Error de Comunicación con el Servidor", ex);
+            }
+            catch (TimeoutException ex)
+            {
+                Console.WriteLine(ex);
+                resultado = Constantes.ERROR_CONEXION_SERVIDOR;
+                log.LogWarn("Se agoto el tiempo de espera del servidor", ex);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+                resultado = Constantes.ERROR_CONEXION_SERVIDOR;
+                log.LogFatal("Ha ocurrido un error inesperado", ex);
             }
 
             switch (resultado)
             {
                 case Constantes.OPERACION_EXITOSA:
                     CambiarPantallaMenuPrincipal(cuentaPorVerificar.CorreoElectronico);
-                    MessageBox.Show("ENTRAR AL SISTEMA");
                     break;
                 case Constantes.OPERACION_EXITOSA_VACIA:
                     txtBlockContrasenaInvalida.Visibility = Visibility.Visible;
@@ -155,5 +182,10 @@ namespace VistasSorrySliders
             }
         }
 
+        private void ClickEntrarComoInvitado(object sender, RoutedEventArgs e)
+        {
+            UnirsePartidaPagina unirsePaginaInvitado = new UnirsePartidaPagina();
+            this.NavigationService.Navigate(unirsePaginaInvitado);
+        }
     }
 }

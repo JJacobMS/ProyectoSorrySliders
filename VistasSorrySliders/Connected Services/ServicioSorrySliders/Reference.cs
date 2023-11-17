@@ -57,6 +57,33 @@ namespace VistasSorrySliders.ServicioSorrySliders {
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string NicknameField;
         
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private VistasSorrySliders.ServicioSorrySliders.NotificacionSet[] NotificacionSetField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private VistasSorrySliders.ServicioSorrySliders.NotificacionSet[] NotificacionSet1Field;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private VistasSorrySliders.ServicioSorrySliders.PartidaSet[] PartidaSetField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private VistasSorrySliders.ServicioSorrySliders.RelacionBaneadosSet[] RelacionBaneadosSetField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private VistasSorrySliders.ServicioSorrySliders.RelacionBaneadosSet[] RelacionBaneadosSet1Field;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private VistasSorrySliders.ServicioSorrySliders.RelacionPartidaCuentaSet[] RelacionPartidaCuentaSetField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private VistasSorrySliders.ServicioSorrySliders.RelaciónAmigosSet[] RelaciónAmigosSetField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private VistasSorrySliders.ServicioSorrySliders.RelaciónAmigosSet[] RelaciónAmigosSet1Field;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private VistasSorrySliders.ServicioSorrySliders.UsuarioSet UsuarioSetField;
+        
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
             get {
@@ -128,6 +155,123 @@ namespace VistasSorrySliders.ServicioSorrySliders {
                 if ((object.ReferenceEquals(this.NicknameField, value) != true)) {
                     this.NicknameField = value;
                     this.RaisePropertyChanged("Nickname");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public VistasSorrySliders.ServicioSorrySliders.NotificacionSet[] NotificacionSet {
+            get {
+                return this.NotificacionSetField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.NotificacionSetField, value) != true)) {
+                    this.NotificacionSetField = value;
+                    this.RaisePropertyChanged("NotificacionSet");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public VistasSorrySliders.ServicioSorrySliders.NotificacionSet[] NotificacionSet1 {
+            get {
+                return this.NotificacionSet1Field;
+            }
+            set {
+                if ((object.ReferenceEquals(this.NotificacionSet1Field, value) != true)) {
+                    this.NotificacionSet1Field = value;
+                    this.RaisePropertyChanged("NotificacionSet1");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public VistasSorrySliders.ServicioSorrySliders.PartidaSet[] PartidaSet {
+            get {
+                return this.PartidaSetField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.PartidaSetField, value) != true)) {
+                    this.PartidaSetField = value;
+                    this.RaisePropertyChanged("PartidaSet");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public VistasSorrySliders.ServicioSorrySliders.RelacionBaneadosSet[] RelacionBaneadosSet {
+            get {
+                return this.RelacionBaneadosSetField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.RelacionBaneadosSetField, value) != true)) {
+                    this.RelacionBaneadosSetField = value;
+                    this.RaisePropertyChanged("RelacionBaneadosSet");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public VistasSorrySliders.ServicioSorrySliders.RelacionBaneadosSet[] RelacionBaneadosSet1 {
+            get {
+                return this.RelacionBaneadosSet1Field;
+            }
+            set {
+                if ((object.ReferenceEquals(this.RelacionBaneadosSet1Field, value) != true)) {
+                    this.RelacionBaneadosSet1Field = value;
+                    this.RaisePropertyChanged("RelacionBaneadosSet1");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public VistasSorrySliders.ServicioSorrySliders.RelacionPartidaCuentaSet[] RelacionPartidaCuentaSet {
+            get {
+                return this.RelacionPartidaCuentaSetField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.RelacionPartidaCuentaSetField, value) != true)) {
+                    this.RelacionPartidaCuentaSetField = value;
+                    this.RaisePropertyChanged("RelacionPartidaCuentaSet");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public VistasSorrySliders.ServicioSorrySliders.RelaciónAmigosSet[] RelaciónAmigosSet {
+            get {
+                return this.RelaciónAmigosSetField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.RelaciónAmigosSetField, value) != true)) {
+                    this.RelaciónAmigosSetField = value;
+                    this.RaisePropertyChanged("RelaciónAmigosSet");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public VistasSorrySliders.ServicioSorrySliders.RelaciónAmigosSet[] RelaciónAmigosSet1 {
+            get {
+                return this.RelaciónAmigosSet1Field;
+            }
+            set {
+                if ((object.ReferenceEquals(this.RelaciónAmigosSet1Field, value) != true)) {
+                    this.RelaciónAmigosSet1Field = value;
+                    this.RaisePropertyChanged("RelaciónAmigosSet1");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public VistasSorrySliders.ServicioSorrySliders.UsuarioSet UsuarioSet {
+            get {
+                return this.UsuarioSetField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.UsuarioSetField, value) != true)) {
+                    this.UsuarioSetField = value;
+                    this.RaisePropertyChanged("UsuarioSet");
                 }
             }
         }
@@ -235,6 +379,785 @@ namespace VistasSorrySliders.ServicioSorrySliders {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="NotificacionSet", Namespace="http://schemas.datacontract.org/2004/07/DatosSorrySliders")]
+    [System.SerializableAttribute()]
+    public partial class NotificacionSet : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string CorreoElectronicoDestinatarioField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string CorreoElectronicoRemitenteField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private VistasSorrySliders.ServicioSorrySliders.CuentaSet CuentaSetField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private VistasSorrySliders.ServicioSorrySliders.CuentaSet CuentaSet1Field;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int IdNotificacionField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<int> IdTipoNotificacionField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string MensajeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private VistasSorrySliders.ServicioSorrySliders.TipoNotificacion TipoNotificacionField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string CorreoElectronicoDestinatario {
+            get {
+                return this.CorreoElectronicoDestinatarioField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.CorreoElectronicoDestinatarioField, value) != true)) {
+                    this.CorreoElectronicoDestinatarioField = value;
+                    this.RaisePropertyChanged("CorreoElectronicoDestinatario");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string CorreoElectronicoRemitente {
+            get {
+                return this.CorreoElectronicoRemitenteField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.CorreoElectronicoRemitenteField, value) != true)) {
+                    this.CorreoElectronicoRemitenteField = value;
+                    this.RaisePropertyChanged("CorreoElectronicoRemitente");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public VistasSorrySliders.ServicioSorrySliders.CuentaSet CuentaSet {
+            get {
+                return this.CuentaSetField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.CuentaSetField, value) != true)) {
+                    this.CuentaSetField = value;
+                    this.RaisePropertyChanged("CuentaSet");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public VistasSorrySliders.ServicioSorrySliders.CuentaSet CuentaSet1 {
+            get {
+                return this.CuentaSet1Field;
+            }
+            set {
+                if ((object.ReferenceEquals(this.CuentaSet1Field, value) != true)) {
+                    this.CuentaSet1Field = value;
+                    this.RaisePropertyChanged("CuentaSet1");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int IdNotificacion {
+            get {
+                return this.IdNotificacionField;
+            }
+            set {
+                if ((this.IdNotificacionField.Equals(value) != true)) {
+                    this.IdNotificacionField = value;
+                    this.RaisePropertyChanged("IdNotificacion");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<int> IdTipoNotificacion {
+            get {
+                return this.IdTipoNotificacionField;
+            }
+            set {
+                if ((this.IdTipoNotificacionField.Equals(value) != true)) {
+                    this.IdTipoNotificacionField = value;
+                    this.RaisePropertyChanged("IdTipoNotificacion");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Mensaje {
+            get {
+                return this.MensajeField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.MensajeField, value) != true)) {
+                    this.MensajeField = value;
+                    this.RaisePropertyChanged("Mensaje");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public VistasSorrySliders.ServicioSorrySliders.TipoNotificacion TipoNotificacion {
+            get {
+                return this.TipoNotificacionField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.TipoNotificacionField, value) != true)) {
+                    this.TipoNotificacionField = value;
+                    this.RaisePropertyChanged("TipoNotificacion");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="PartidaSet", Namespace="http://schemas.datacontract.org/2004/07/DatosSorrySliders")]
+    [System.SerializableAttribute()]
+    public partial class PartidaSet : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int CantidadJugadoresField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Guid CodigoPartidaField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string CorreoElectronicoField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private VistasSorrySliders.ServicioSorrySliders.CuentaSet CuentaSetField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private VistasSorrySliders.ServicioSorrySliders.RelacionPartidaCuentaSet[] RelacionPartidaCuentaSetField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int CantidadJugadores {
+            get {
+                return this.CantidadJugadoresField;
+            }
+            set {
+                if ((this.CantidadJugadoresField.Equals(value) != true)) {
+                    this.CantidadJugadoresField = value;
+                    this.RaisePropertyChanged("CantidadJugadores");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid CodigoPartida {
+            get {
+                return this.CodigoPartidaField;
+            }
+            set {
+                if ((this.CodigoPartidaField.Equals(value) != true)) {
+                    this.CodigoPartidaField = value;
+                    this.RaisePropertyChanged("CodigoPartida");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string CorreoElectronico {
+            get {
+                return this.CorreoElectronicoField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.CorreoElectronicoField, value) != true)) {
+                    this.CorreoElectronicoField = value;
+                    this.RaisePropertyChanged("CorreoElectronico");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public VistasSorrySliders.ServicioSorrySliders.CuentaSet CuentaSet {
+            get {
+                return this.CuentaSetField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.CuentaSetField, value) != true)) {
+                    this.CuentaSetField = value;
+                    this.RaisePropertyChanged("CuentaSet");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public VistasSorrySliders.ServicioSorrySliders.RelacionPartidaCuentaSet[] RelacionPartidaCuentaSet {
+            get {
+                return this.RelacionPartidaCuentaSetField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.RelacionPartidaCuentaSetField, value) != true)) {
+                    this.RelacionPartidaCuentaSetField = value;
+                    this.RaisePropertyChanged("RelacionPartidaCuentaSet");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="RelacionBaneadosSet", Namespace="http://schemas.datacontract.org/2004/07/DatosSorrySliders")]
+    [System.SerializableAttribute()]
+    public partial class RelacionBaneadosSet : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string CorreoElectronicoJugadorBaneadoField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string CorreoElectronicoJugadorPrincipalField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private VistasSorrySliders.ServicioSorrySliders.CuentaSet CuentaSetField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private VistasSorrySliders.ServicioSorrySliders.CuentaSet CuentaSet1Field;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int IdRelacionBaneadosField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string CorreoElectronicoJugadorBaneado {
+            get {
+                return this.CorreoElectronicoJugadorBaneadoField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.CorreoElectronicoJugadorBaneadoField, value) != true)) {
+                    this.CorreoElectronicoJugadorBaneadoField = value;
+                    this.RaisePropertyChanged("CorreoElectronicoJugadorBaneado");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string CorreoElectronicoJugadorPrincipal {
+            get {
+                return this.CorreoElectronicoJugadorPrincipalField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.CorreoElectronicoJugadorPrincipalField, value) != true)) {
+                    this.CorreoElectronicoJugadorPrincipalField = value;
+                    this.RaisePropertyChanged("CorreoElectronicoJugadorPrincipal");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public VistasSorrySliders.ServicioSorrySliders.CuentaSet CuentaSet {
+            get {
+                return this.CuentaSetField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.CuentaSetField, value) != true)) {
+                    this.CuentaSetField = value;
+                    this.RaisePropertyChanged("CuentaSet");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public VistasSorrySliders.ServicioSorrySliders.CuentaSet CuentaSet1 {
+            get {
+                return this.CuentaSet1Field;
+            }
+            set {
+                if ((object.ReferenceEquals(this.CuentaSet1Field, value) != true)) {
+                    this.CuentaSet1Field = value;
+                    this.RaisePropertyChanged("CuentaSet1");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int IdRelacionBaneados {
+            get {
+                return this.IdRelacionBaneadosField;
+            }
+            set {
+                if ((this.IdRelacionBaneadosField.Equals(value) != true)) {
+                    this.IdRelacionBaneadosField = value;
+                    this.RaisePropertyChanged("IdRelacionBaneados");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="RelacionPartidaCuentaSet", Namespace="http://schemas.datacontract.org/2004/07/DatosSorrySliders")]
+    [System.SerializableAttribute()]
+    public partial class RelacionPartidaCuentaSet : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Guid CodigoPartidaField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string CorreoElectronicoField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private VistasSorrySliders.ServicioSorrySliders.CuentaSet CuentaSetField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int IdPartidaCuentaField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private VistasSorrySliders.ServicioSorrySliders.PartidaSet PartidaSetField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int PosicionField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid CodigoPartida {
+            get {
+                return this.CodigoPartidaField;
+            }
+            set {
+                if ((this.CodigoPartidaField.Equals(value) != true)) {
+                    this.CodigoPartidaField = value;
+                    this.RaisePropertyChanged("CodigoPartida");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string CorreoElectronico {
+            get {
+                return this.CorreoElectronicoField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.CorreoElectronicoField, value) != true)) {
+                    this.CorreoElectronicoField = value;
+                    this.RaisePropertyChanged("CorreoElectronico");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public VistasSorrySliders.ServicioSorrySliders.CuentaSet CuentaSet {
+            get {
+                return this.CuentaSetField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.CuentaSetField, value) != true)) {
+                    this.CuentaSetField = value;
+                    this.RaisePropertyChanged("CuentaSet");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int IdPartidaCuenta {
+            get {
+                return this.IdPartidaCuentaField;
+            }
+            set {
+                if ((this.IdPartidaCuentaField.Equals(value) != true)) {
+                    this.IdPartidaCuentaField = value;
+                    this.RaisePropertyChanged("IdPartidaCuenta");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public VistasSorrySliders.ServicioSorrySliders.PartidaSet PartidaSet {
+            get {
+                return this.PartidaSetField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.PartidaSetField, value) != true)) {
+                    this.PartidaSetField = value;
+                    this.RaisePropertyChanged("PartidaSet");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Posicion {
+            get {
+                return this.PosicionField;
+            }
+            set {
+                if ((this.PosicionField.Equals(value) != true)) {
+                    this.PosicionField = value;
+                    this.RaisePropertyChanged("Posicion");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="RelaciónAmigosSet", Namespace="http://schemas.datacontract.org/2004/07/DatosSorrySliders")]
+    [System.SerializableAttribute()]
+    public partial class RelaciónAmigosSet : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string CorreoElectronicoJugadorAmigoField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string CorreoElectronicoJugadorPrincipalField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private VistasSorrySliders.ServicioSorrySliders.CuentaSet CuentaSetField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private VistasSorrySliders.ServicioSorrySliders.CuentaSet CuentaSet1Field;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int IdRelaciónAmigosField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string CorreoElectronicoJugadorAmigo {
+            get {
+                return this.CorreoElectronicoJugadorAmigoField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.CorreoElectronicoJugadorAmigoField, value) != true)) {
+                    this.CorreoElectronicoJugadorAmigoField = value;
+                    this.RaisePropertyChanged("CorreoElectronicoJugadorAmigo");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string CorreoElectronicoJugadorPrincipal {
+            get {
+                return this.CorreoElectronicoJugadorPrincipalField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.CorreoElectronicoJugadorPrincipalField, value) != true)) {
+                    this.CorreoElectronicoJugadorPrincipalField = value;
+                    this.RaisePropertyChanged("CorreoElectronicoJugadorPrincipal");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public VistasSorrySliders.ServicioSorrySliders.CuentaSet CuentaSet {
+            get {
+                return this.CuentaSetField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.CuentaSetField, value) != true)) {
+                    this.CuentaSetField = value;
+                    this.RaisePropertyChanged("CuentaSet");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public VistasSorrySliders.ServicioSorrySliders.CuentaSet CuentaSet1 {
+            get {
+                return this.CuentaSet1Field;
+            }
+            set {
+                if ((object.ReferenceEquals(this.CuentaSet1Field, value) != true)) {
+                    this.CuentaSet1Field = value;
+                    this.RaisePropertyChanged("CuentaSet1");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int IdRelaciónAmigos {
+            get {
+                return this.IdRelaciónAmigosField;
+            }
+            set {
+                if ((this.IdRelaciónAmigosField.Equals(value) != true)) {
+                    this.IdRelaciónAmigosField = value;
+                    this.RaisePropertyChanged("IdRelaciónAmigos");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="TipoNotificacion", Namespace="http://schemas.datacontract.org/2004/07/DatosSorrySliders")]
+    [System.SerializableAttribute()]
+    public partial class TipoNotificacion : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int IdTipoNotificacionField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string NombreNotificacionField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private VistasSorrySliders.ServicioSorrySliders.NotificacionSet[] NotificacionSetField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int IdTipoNotificacion {
+            get {
+                return this.IdTipoNotificacionField;
+            }
+            set {
+                if ((this.IdTipoNotificacionField.Equals(value) != true)) {
+                    this.IdTipoNotificacionField = value;
+                    this.RaisePropertyChanged("IdTipoNotificacion");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string NombreNotificacion {
+            get {
+                return this.NombreNotificacionField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.NombreNotificacionField, value) != true)) {
+                    this.NombreNotificacionField = value;
+                    this.RaisePropertyChanged("NombreNotificacion");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public VistasSorrySliders.ServicioSorrySliders.NotificacionSet[] NotificacionSet {
+            get {
+                return this.NotificacionSetField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.NotificacionSetField, value) != true)) {
+                    this.NotificacionSetField = value;
+                    this.RaisePropertyChanged("NotificacionSet");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Puntuacion", Namespace="http://schemas.datacontract.org/2004/07/ServidorSorrySliders")]
+    [System.SerializableAttribute()]
+    public partial class Puntuacion : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string NicknameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int NumeroPartidasGanadasField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string _nicknameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int _numeroPartidasGanadasField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Nickname {
+            get {
+                return this.NicknameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.NicknameField, value) != true)) {
+                    this.NicknameField = value;
+                    this.RaisePropertyChanged("Nickname");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int NumeroPartidasGanadas {
+            get {
+                return this.NumeroPartidasGanadasField;
+            }
+            set {
+                if ((this.NumeroPartidasGanadasField.Equals(value) != true)) {
+                    this.NumeroPartidasGanadasField = value;
+                    this.RaisePropertyChanged("NumeroPartidasGanadas");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string _nickname {
+            get {
+                return this._nicknameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this._nicknameField, value) != true)) {
+                    this._nicknameField = value;
+                    this.RaisePropertyChanged("_nickname");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int _numeroPartidasGanadas {
+            get {
+                return this._numeroPartidasGanadasField;
+            }
+            set {
+                if ((this._numeroPartidasGanadasField.Equals(value) != true)) {
+                    this._numeroPartidasGanadasField = value;
+                    this.RaisePropertyChanged("_numeroPartidasGanadas");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServicioSorrySliders.IInicioSesion")]
     public interface IInicioSesion {
@@ -301,10 +1224,10 @@ namespace VistasSorrySliders.ServicioSorrySliders {
     public interface IMenuPrincipal {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMenuPrincipal/RecuperarDatosUsuario", ReplyAction="http://tempuri.org/IMenuPrincipal/RecuperarDatosUsuarioResponse")]
-        System.ValueTuple<VistasSorrySliders.ServicioSorrySliders.Constantes, string, byte[]> RecuperarDatosUsuario(string correoElectronico);
+        System.ValueTuple<VistasSorrySliders.ServicioSorrySliders.Constantes, string, byte[], string> RecuperarDatosUsuario(string correoElectronico);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMenuPrincipal/RecuperarDatosUsuario", ReplyAction="http://tempuri.org/IMenuPrincipal/RecuperarDatosUsuarioResponse")]
-        System.Threading.Tasks.Task<System.ValueTuple<VistasSorrySliders.ServicioSorrySliders.Constantes, string, byte[]>> RecuperarDatosUsuarioAsync(string correoElectronico);
+        System.Threading.Tasks.Task<System.ValueTuple<VistasSorrySliders.ServicioSorrySliders.Constantes, string, byte[], string>> RecuperarDatosUsuarioAsync(string correoElectronico);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -334,11 +1257,11 @@ namespace VistasSorrySliders.ServicioSorrySliders {
                 base(binding, remoteAddress) {
         }
         
-        public System.ValueTuple<VistasSorrySliders.ServicioSorrySliders.Constantes, string, byte[]> RecuperarDatosUsuario(string correoElectronico) {
+        public System.ValueTuple<VistasSorrySliders.ServicioSorrySliders.Constantes, string, byte[], string> RecuperarDatosUsuario(string correoElectronico) {
             return base.Channel.RecuperarDatosUsuario(correoElectronico);
         }
         
-        public System.Threading.Tasks.Task<System.ValueTuple<VistasSorrySliders.ServicioSorrySliders.Constantes, string, byte[]>> RecuperarDatosUsuarioAsync(string correoElectronico) {
+        public System.Threading.Tasks.Task<System.ValueTuple<VistasSorrySliders.ServicioSorrySliders.Constantes, string, byte[], string>> RecuperarDatosUsuarioAsync(string correoElectronico) {
             return base.Channel.RecuperarDatosUsuarioAsync(correoElectronico);
         }
     }
@@ -352,6 +1275,12 @@ namespace VistasSorrySliders.ServicioSorrySliders {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRegistroUsuario/AgregarUsuario", ReplyAction="http://tempuri.org/IRegistroUsuario/AgregarUsuarioResponse")]
         System.Threading.Tasks.Task<VistasSorrySliders.ServicioSorrySliders.Constantes> AgregarUsuarioAsync(VistasSorrySliders.ServicioSorrySliders.UsuarioSet usuarioPorGuardar, VistasSorrySliders.ServicioSorrySliders.CuentaSet cuentaPorGuardar);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRegistroUsuario/ActualizarUsuario", ReplyAction="http://tempuri.org/IRegistroUsuario/ActualizarUsuarioResponse")]
+        VistasSorrySliders.ServicioSorrySliders.Constantes ActualizarUsuario(VistasSorrySliders.ServicioSorrySliders.UsuarioSet usuarioPorActualizar, VistasSorrySliders.ServicioSorrySliders.CuentaSet cuentaPorActualizar);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRegistroUsuario/ActualizarUsuario", ReplyAction="http://tempuri.org/IRegistroUsuario/ActualizarUsuarioResponse")]
+        System.Threading.Tasks.Task<VistasSorrySliders.ServicioSorrySliders.Constantes> ActualizarUsuarioAsync(VistasSorrySliders.ServicioSorrySliders.UsuarioSet usuarioPorActualizar, VistasSorrySliders.ServicioSorrySliders.CuentaSet cuentaPorActualizar);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -388,6 +1317,14 @@ namespace VistasSorrySliders.ServicioSorrySliders {
         public System.Threading.Tasks.Task<VistasSorrySliders.ServicioSorrySliders.Constantes> AgregarUsuarioAsync(VistasSorrySliders.ServicioSorrySliders.UsuarioSet usuarioPorGuardar, VistasSorrySliders.ServicioSorrySliders.CuentaSet cuentaPorGuardar) {
             return base.Channel.AgregarUsuarioAsync(usuarioPorGuardar, cuentaPorGuardar);
         }
+        
+        public VistasSorrySliders.ServicioSorrySliders.Constantes ActualizarUsuario(VistasSorrySliders.ServicioSorrySliders.UsuarioSet usuarioPorActualizar, VistasSorrySliders.ServicioSorrySliders.CuentaSet cuentaPorActualizar) {
+            return base.Channel.ActualizarUsuario(usuarioPorActualizar, cuentaPorActualizar);
+        }
+        
+        public System.Threading.Tasks.Task<VistasSorrySliders.ServicioSorrySliders.Constantes> ActualizarUsuarioAsync(VistasSorrySliders.ServicioSorrySliders.UsuarioSet usuarioPorActualizar, VistasSorrySliders.ServicioSorrySliders.CuentaSet cuentaPorActualizar) {
+            return base.Channel.ActualizarUsuarioAsync(usuarioPorActualizar, cuentaPorActualizar);
+        }
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -395,17 +1332,35 @@ namespace VistasSorrySliders.ServicioSorrySliders {
     public interface ILobby {
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/ILobby/EntrarPartida")]
-        void EntrarPartida(string uid, string correoJugadorNuevo);
+        void EntrarPartida(string uid, string jugadorCorreo);
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/ILobby/EntrarPartida")]
-        System.Threading.Tasks.Task EntrarPartidaAsync(string uid, string correoJugadorNuevo);
+        System.Threading.Tasks.Task EntrarPartidaAsync(string uid, string jugadorCorreo);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/ILobby/SalirPartida")]
+        void SalirPartida(string uid);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/ILobby/SalirPartida")]
+        System.Threading.Tasks.Task SalirPartidaAsync(string uid);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/ILobby/IniciarPartida")]
+        void IniciarPartida(string uid);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/ILobby/IniciarPartida")]
+        System.Threading.Tasks.Task IniciarPartidaAsync(string uid);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public interface ILobbyCallback {
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/ILobby/JugadorEntroPartida")]
-        void JugadorEntroPartida(VistasSorrySliders.ServicioSorrySliders.CuentaSet[] listaJugadores);
+        void JugadorEntroPartida();
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/ILobby/JugadorSalioPartida")]
+        void JugadorSalioPartida();
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/ILobby/HostInicioPartida")]
+        void HostInicioPartida();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -436,12 +1391,28 @@ namespace VistasSorrySliders.ServicioSorrySliders {
                 base(callbackInstance, binding, remoteAddress) {
         }
         
-        public void EntrarPartida(string uid, string correoJugadorNuevo) {
-            base.Channel.EntrarPartida(uid, correoJugadorNuevo);
+        public void EntrarPartida(string uid, string jugadorCorreo) {
+            base.Channel.EntrarPartida(uid, jugadorCorreo);
         }
         
-        public System.Threading.Tasks.Task EntrarPartidaAsync(string uid, string correoJugadorNuevo) {
-            return base.Channel.EntrarPartidaAsync(uid, correoJugadorNuevo);
+        public System.Threading.Tasks.Task EntrarPartidaAsync(string uid, string jugadorCorreo) {
+            return base.Channel.EntrarPartidaAsync(uid, jugadorCorreo);
+        }
+        
+        public void SalirPartida(string uid) {
+            base.Channel.SalirPartida(uid);
+        }
+        
+        public System.Threading.Tasks.Task SalirPartidaAsync(string uid) {
+            return base.Channel.SalirPartidaAsync(uid);
+        }
+        
+        public void IniciarPartida(string uid) {
+            base.Channel.IniciarPartida(uid);
+        }
+        
+        public System.Threading.Tasks.Task IniciarPartidaAsync(string uid) {
+            return base.Channel.IniciarPartidaAsync(uid);
         }
     }
     
@@ -460,6 +1431,30 @@ namespace VistasSorrySliders.ServicioSorrySliders {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUnirsePartida/RecuperarJugadoresLobby", ReplyAction="http://tempuri.org/IUnirsePartida/RecuperarJugadoresLobbyResponse")]
         System.Threading.Tasks.Task<System.ValueTuple<VistasSorrySliders.ServicioSorrySliders.Constantes, VistasSorrySliders.ServicioSorrySliders.CuentaSet[]>> RecuperarJugadoresLobbyAsync(string uid);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUnirsePartida/RecuperarPartida", ReplyAction="http://tempuri.org/IUnirsePartida/RecuperarPartidaResponse")]
+        System.ValueTuple<VistasSorrySliders.ServicioSorrySliders.Constantes, VistasSorrySliders.ServicioSorrySliders.PartidaSet> RecuperarPartida(string codigoPartida);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUnirsePartida/RecuperarPartida", ReplyAction="http://tempuri.org/IUnirsePartida/RecuperarPartidaResponse")]
+        System.Threading.Tasks.Task<System.ValueTuple<VistasSorrySliders.ServicioSorrySliders.Constantes, VistasSorrySliders.ServicioSorrySliders.PartidaSet>> RecuperarPartidaAsync(string codigoPartida);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IUnirsePartida/SalirDelLobby")]
+        void SalirDelLobby(string correoJugador, string codigoPartida);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IUnirsePartida/SalirDelLobby")]
+        System.Threading.Tasks.Task SalirDelLobbyAsync(string correoJugador, string codigoPartida);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUnirsePartida/CrearCuentaProvisionalInvitado", ReplyAction="http://tempuri.org/IUnirsePartida/CrearCuentaProvisionalInvitadoResponse")]
+        VistasSorrySliders.ServicioSorrySliders.Constantes CrearCuentaProvisionalInvitado(VistasSorrySliders.ServicioSorrySliders.CuentaSet cuentaProvisionalInvitado);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUnirsePartida/CrearCuentaProvisionalInvitado", ReplyAction="http://tempuri.org/IUnirsePartida/CrearCuentaProvisionalInvitadoResponse")]
+        System.Threading.Tasks.Task<VistasSorrySliders.ServicioSorrySliders.Constantes> CrearCuentaProvisionalInvitadoAsync(VistasSorrySliders.ServicioSorrySliders.CuentaSet cuentaProvisionalInvitado);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IUnirsePartida/EliminarCuentaProvisional")]
+        void EliminarCuentaProvisional(string correoElectronico);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IUnirsePartida/EliminarCuentaProvisional")]
+        System.Threading.Tasks.Task EliminarCuentaProvisionalAsync(string correoElectronico);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -503,6 +1498,38 @@ namespace VistasSorrySliders.ServicioSorrySliders {
         
         public System.Threading.Tasks.Task<System.ValueTuple<VistasSorrySliders.ServicioSorrySliders.Constantes, VistasSorrySliders.ServicioSorrySliders.CuentaSet[]>> RecuperarJugadoresLobbyAsync(string uid) {
             return base.Channel.RecuperarJugadoresLobbyAsync(uid);
+        }
+        
+        public System.ValueTuple<VistasSorrySliders.ServicioSorrySliders.Constantes, VistasSorrySliders.ServicioSorrySliders.PartidaSet> RecuperarPartida(string codigoPartida) {
+            return base.Channel.RecuperarPartida(codigoPartida);
+        }
+        
+        public System.Threading.Tasks.Task<System.ValueTuple<VistasSorrySliders.ServicioSorrySliders.Constantes, VistasSorrySliders.ServicioSorrySliders.PartidaSet>> RecuperarPartidaAsync(string codigoPartida) {
+            return base.Channel.RecuperarPartidaAsync(codigoPartida);
+        }
+        
+        public void SalirDelLobby(string correoJugador, string codigoPartida) {
+            base.Channel.SalirDelLobby(correoJugador, codigoPartida);
+        }
+        
+        public System.Threading.Tasks.Task SalirDelLobbyAsync(string correoJugador, string codigoPartida) {
+            return base.Channel.SalirDelLobbyAsync(correoJugador, codigoPartida);
+        }
+        
+        public VistasSorrySliders.ServicioSorrySliders.Constantes CrearCuentaProvisionalInvitado(VistasSorrySliders.ServicioSorrySliders.CuentaSet cuentaProvisionalInvitado) {
+            return base.Channel.CrearCuentaProvisionalInvitado(cuentaProvisionalInvitado);
+        }
+        
+        public System.Threading.Tasks.Task<VistasSorrySliders.ServicioSorrySliders.Constantes> CrearCuentaProvisionalInvitadoAsync(VistasSorrySliders.ServicioSorrySliders.CuentaSet cuentaProvisionalInvitado) {
+            return base.Channel.CrearCuentaProvisionalInvitadoAsync(cuentaProvisionalInvitado);
+        }
+        
+        public void EliminarCuentaProvisional(string correoElectronico) {
+            base.Channel.EliminarCuentaProvisional(correoElectronico);
+        }
+        
+        public System.Threading.Tasks.Task EliminarCuentaProvisionalAsync(string correoElectronico) {
+            return base.Channel.EliminarCuentaProvisionalAsync(correoElectronico);
         }
     }
     
@@ -550,6 +1577,406 @@ namespace VistasSorrySliders.ServicioSorrySliders {
         
         public System.Threading.Tasks.Task<System.ValueTuple<VistasSorrySliders.ServicioSorrySliders.Constantes, string>> CrearPartidaAsync(string correoHost, int NumeroJugadores) {
             return base.Channel.CrearPartidaAsync(correoHost, NumeroJugadores);
+        }
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServicioSorrySliders.IListaAmigos")]
+    public interface IListaAmigos {
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IListaAmigos/RecuperarAmigosCuenta", ReplyAction="http://tempuri.org/IListaAmigos/RecuperarAmigosCuentaResponse")]
+        System.ValueTuple<VistasSorrySliders.ServicioSorrySliders.Constantes, VistasSorrySliders.ServicioSorrySliders.CuentaSet[]> RecuperarAmigosCuenta(string correoElectronico);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IListaAmigos/RecuperarAmigosCuenta", ReplyAction="http://tempuri.org/IListaAmigos/RecuperarAmigosCuentaResponse")]
+        System.Threading.Tasks.Task<System.ValueTuple<VistasSorrySliders.ServicioSorrySliders.Constantes, VistasSorrySliders.ServicioSorrySliders.CuentaSet[]>> RecuperarAmigosCuentaAsync(string correoElectronico);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IListaAmigos/RecuperarJugadoresCuenta", ReplyAction="http://tempuri.org/IListaAmigos/RecuperarJugadoresCuentaResponse")]
+        System.ValueTuple<VistasSorrySliders.ServicioSorrySliders.Constantes, VistasSorrySliders.ServicioSorrySliders.CuentaSet[]> RecuperarJugadoresCuenta(string informacionJugador);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IListaAmigos/RecuperarJugadoresCuenta", ReplyAction="http://tempuri.org/IListaAmigos/RecuperarJugadoresCuentaResponse")]
+        System.Threading.Tasks.Task<System.ValueTuple<VistasSorrySliders.ServicioSorrySliders.Constantes, VistasSorrySliders.ServicioSorrySliders.CuentaSet[]>> RecuperarJugadoresCuentaAsync(string informacionJugador);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IListaAmigos/RecuperarTipoNotificacion", ReplyAction="http://tempuri.org/IListaAmigos/RecuperarTipoNotificacionResponse")]
+        System.ValueTuple<VistasSorrySliders.ServicioSorrySliders.Constantes, VistasSorrySliders.ServicioSorrySliders.TipoNotificacion[]> RecuperarTipoNotificacion();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IListaAmigos/RecuperarTipoNotificacion", ReplyAction="http://tempuri.org/IListaAmigos/RecuperarTipoNotificacionResponse")]
+        System.Threading.Tasks.Task<System.ValueTuple<VistasSorrySliders.ServicioSorrySliders.Constantes, VistasSorrySliders.ServicioSorrySliders.TipoNotificacion[]>> RecuperarTipoNotificacionAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IListaAmigos/GuardarNotificacion", ReplyAction="http://tempuri.org/IListaAmigos/GuardarNotificacionResponse")]
+        VistasSorrySliders.ServicioSorrySliders.Constantes GuardarNotificacion(VistasSorrySliders.ServicioSorrySliders.NotificacionSet notificacion);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IListaAmigos/GuardarNotificacion", ReplyAction="http://tempuri.org/IListaAmigos/GuardarNotificacionResponse")]
+        System.Threading.Tasks.Task<VistasSorrySliders.ServicioSorrySliders.Constantes> GuardarNotificacionAsync(VistasSorrySliders.ServicioSorrySliders.NotificacionSet notificacion);
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public interface IListaAmigosChannel : VistasSorrySliders.ServicioSorrySliders.IListaAmigos, System.ServiceModel.IClientChannel {
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class ListaAmigosClient : System.ServiceModel.ClientBase<VistasSorrySliders.ServicioSorrySliders.IListaAmigos>, VistasSorrySliders.ServicioSorrySliders.IListaAmigos {
+        
+        public ListaAmigosClient() {
+        }
+        
+        public ListaAmigosClient(string endpointConfigurationName) : 
+                base(endpointConfigurationName) {
+        }
+        
+        public ListaAmigosClient(string endpointConfigurationName, string remoteAddress) : 
+                base(endpointConfigurationName, remoteAddress) {
+        }
+        
+        public ListaAmigosClient(string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(endpointConfigurationName, remoteAddress) {
+        }
+        
+        public ListaAmigosClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(binding, remoteAddress) {
+        }
+        
+        public System.ValueTuple<VistasSorrySliders.ServicioSorrySliders.Constantes, VistasSorrySliders.ServicioSorrySliders.CuentaSet[]> RecuperarAmigosCuenta(string correoElectronico) {
+            return base.Channel.RecuperarAmigosCuenta(correoElectronico);
+        }
+        
+        public System.Threading.Tasks.Task<System.ValueTuple<VistasSorrySliders.ServicioSorrySliders.Constantes, VistasSorrySliders.ServicioSorrySliders.CuentaSet[]>> RecuperarAmigosCuentaAsync(string correoElectronico) {
+            return base.Channel.RecuperarAmigosCuentaAsync(correoElectronico);
+        }
+        
+        public System.ValueTuple<VistasSorrySliders.ServicioSorrySliders.Constantes, VistasSorrySliders.ServicioSorrySliders.CuentaSet[]> RecuperarJugadoresCuenta(string informacionJugador) {
+            return base.Channel.RecuperarJugadoresCuenta(informacionJugador);
+        }
+        
+        public System.Threading.Tasks.Task<System.ValueTuple<VistasSorrySliders.ServicioSorrySliders.Constantes, VistasSorrySliders.ServicioSorrySliders.CuentaSet[]>> RecuperarJugadoresCuentaAsync(string informacionJugador) {
+            return base.Channel.RecuperarJugadoresCuentaAsync(informacionJugador);
+        }
+        
+        public System.ValueTuple<VistasSorrySliders.ServicioSorrySliders.Constantes, VistasSorrySliders.ServicioSorrySliders.TipoNotificacion[]> RecuperarTipoNotificacion() {
+            return base.Channel.RecuperarTipoNotificacion();
+        }
+        
+        public System.Threading.Tasks.Task<System.ValueTuple<VistasSorrySliders.ServicioSorrySliders.Constantes, VistasSorrySliders.ServicioSorrySliders.TipoNotificacion[]>> RecuperarTipoNotificacionAsync() {
+            return base.Channel.RecuperarTipoNotificacionAsync();
+        }
+        
+        public VistasSorrySliders.ServicioSorrySliders.Constantes GuardarNotificacion(VistasSorrySliders.ServicioSorrySliders.NotificacionSet notificacion) {
+            return base.Channel.GuardarNotificacion(notificacion);
+        }
+        
+        public System.Threading.Tasks.Task<VistasSorrySliders.ServicioSorrySliders.Constantes> GuardarNotificacionAsync(VistasSorrySliders.ServicioSorrySliders.NotificacionSet notificacion) {
+            return base.Channel.GuardarNotificacionAsync(notificacion);
+        }
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServicioSorrySliders.IDetallesCuentaUsuario")]
+    public interface IDetallesCuentaUsuario {
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDetallesCuentaUsuario/RecuperarDatosUsuarioDeCuenta", ReplyAction="http://tempuri.org/IDetallesCuentaUsuario/RecuperarDatosUsuarioDeCuentaResponse")]
+        System.ValueTuple<VistasSorrySliders.ServicioSorrySliders.Constantes, VistasSorrySliders.ServicioSorrySliders.UsuarioSet> RecuperarDatosUsuarioDeCuenta(string correoElectronico);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDetallesCuentaUsuario/RecuperarDatosUsuarioDeCuenta", ReplyAction="http://tempuri.org/IDetallesCuentaUsuario/RecuperarDatosUsuarioDeCuentaResponse")]
+        System.Threading.Tasks.Task<System.ValueTuple<VistasSorrySliders.ServicioSorrySliders.Constantes, VistasSorrySliders.ServicioSorrySliders.UsuarioSet>> RecuperarDatosUsuarioDeCuentaAsync(string correoElectronico);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDetallesCuentaUsuario/VerificarContrasenaActual", ReplyAction="http://tempuri.org/IDetallesCuentaUsuario/VerificarContrasenaActualResponse")]
+        VistasSorrySliders.ServicioSorrySliders.Constantes VerificarContrasenaActual(VistasSorrySliders.ServicioSorrySliders.CuentaSet cuenta);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDetallesCuentaUsuario/VerificarContrasenaActual", ReplyAction="http://tempuri.org/IDetallesCuentaUsuario/VerificarContrasenaActualResponse")]
+        System.Threading.Tasks.Task<VistasSorrySliders.ServicioSorrySliders.Constantes> VerificarContrasenaActualAsync(VistasSorrySliders.ServicioSorrySliders.CuentaSet cuenta);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDetallesCuentaUsuario/CambiarContrasena", ReplyAction="http://tempuri.org/IDetallesCuentaUsuario/CambiarContrasenaResponse")]
+        VistasSorrySliders.ServicioSorrySliders.Constantes CambiarContrasena(VistasSorrySliders.ServicioSorrySliders.CuentaSet cuenta);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDetallesCuentaUsuario/CambiarContrasena", ReplyAction="http://tempuri.org/IDetallesCuentaUsuario/CambiarContrasenaResponse")]
+        System.Threading.Tasks.Task<VistasSorrySliders.ServicioSorrySliders.Constantes> CambiarContrasenaAsync(VistasSorrySliders.ServicioSorrySliders.CuentaSet cuenta);
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public interface IDetallesCuentaUsuarioChannel : VistasSorrySliders.ServicioSorrySliders.IDetallesCuentaUsuario, System.ServiceModel.IClientChannel {
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class DetallesCuentaUsuarioClient : System.ServiceModel.ClientBase<VistasSorrySliders.ServicioSorrySliders.IDetallesCuentaUsuario>, VistasSorrySliders.ServicioSorrySliders.IDetallesCuentaUsuario {
+        
+        public DetallesCuentaUsuarioClient() {
+        }
+        
+        public DetallesCuentaUsuarioClient(string endpointConfigurationName) : 
+                base(endpointConfigurationName) {
+        }
+        
+        public DetallesCuentaUsuarioClient(string endpointConfigurationName, string remoteAddress) : 
+                base(endpointConfigurationName, remoteAddress) {
+        }
+        
+        public DetallesCuentaUsuarioClient(string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(endpointConfigurationName, remoteAddress) {
+        }
+        
+        public DetallesCuentaUsuarioClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(binding, remoteAddress) {
+        }
+        
+        public System.ValueTuple<VistasSorrySliders.ServicioSorrySliders.Constantes, VistasSorrySliders.ServicioSorrySliders.UsuarioSet> RecuperarDatosUsuarioDeCuenta(string correoElectronico) {
+            return base.Channel.RecuperarDatosUsuarioDeCuenta(correoElectronico);
+        }
+        
+        public System.Threading.Tasks.Task<System.ValueTuple<VistasSorrySliders.ServicioSorrySliders.Constantes, VistasSorrySliders.ServicioSorrySliders.UsuarioSet>> RecuperarDatosUsuarioDeCuentaAsync(string correoElectronico) {
+            return base.Channel.RecuperarDatosUsuarioDeCuentaAsync(correoElectronico);
+        }
+        
+        public VistasSorrySliders.ServicioSorrySliders.Constantes VerificarContrasenaActual(VistasSorrySliders.ServicioSorrySliders.CuentaSet cuenta) {
+            return base.Channel.VerificarContrasenaActual(cuenta);
+        }
+        
+        public System.Threading.Tasks.Task<VistasSorrySliders.ServicioSorrySliders.Constantes> VerificarContrasenaActualAsync(VistasSorrySliders.ServicioSorrySliders.CuentaSet cuenta) {
+            return base.Channel.VerificarContrasenaActualAsync(cuenta);
+        }
+        
+        public VistasSorrySliders.ServicioSorrySliders.Constantes CambiarContrasena(VistasSorrySliders.ServicioSorrySliders.CuentaSet cuenta) {
+            return base.Channel.CambiarContrasena(cuenta);
+        }
+        
+        public System.Threading.Tasks.Task<VistasSorrySliders.ServicioSorrySliders.Constantes> CambiarContrasenaAsync(VistasSorrySliders.ServicioSorrySliders.CuentaSet cuenta) {
+            return base.Channel.CambiarContrasenaAsync(cuenta);
+        }
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServicioSorrySliders.IPuntuacion")]
+    public interface IPuntuacion {
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPuntuacion/RecuperarPuntuaciones", ReplyAction="http://tempuri.org/IPuntuacion/RecuperarPuntuacionesResponse")]
+        System.ValueTuple<VistasSorrySliders.ServicioSorrySliders.Constantes, VistasSorrySliders.ServicioSorrySliders.Puntuacion[]> RecuperarPuntuaciones();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPuntuacion/RecuperarPuntuaciones", ReplyAction="http://tempuri.org/IPuntuacion/RecuperarPuntuacionesResponse")]
+        System.Threading.Tasks.Task<System.ValueTuple<VistasSorrySliders.ServicioSorrySliders.Constantes, VistasSorrySliders.ServicioSorrySliders.Puntuacion[]>> RecuperarPuntuacionesAsync();
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public interface IPuntuacionChannel : VistasSorrySliders.ServicioSorrySliders.IPuntuacion, System.ServiceModel.IClientChannel {
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class PuntuacionClient : System.ServiceModel.ClientBase<VistasSorrySliders.ServicioSorrySliders.IPuntuacion>, VistasSorrySliders.ServicioSorrySliders.IPuntuacion {
+        
+        public PuntuacionClient() {
+        }
+        
+        public PuntuacionClient(string endpointConfigurationName) : 
+                base(endpointConfigurationName) {
+        }
+        
+        public PuntuacionClient(string endpointConfigurationName, string remoteAddress) : 
+                base(endpointConfigurationName, remoteAddress) {
+        }
+        
+        public PuntuacionClient(string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(endpointConfigurationName, remoteAddress) {
+        }
+        
+        public PuntuacionClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(binding, remoteAddress) {
+        }
+        
+        public System.ValueTuple<VistasSorrySliders.ServicioSorrySliders.Constantes, VistasSorrySliders.ServicioSorrySliders.Puntuacion[]> RecuperarPuntuaciones() {
+            return base.Channel.RecuperarPuntuaciones();
+        }
+        
+        public System.Threading.Tasks.Task<System.ValueTuple<VistasSorrySliders.ServicioSorrySliders.Constantes, VistasSorrySliders.ServicioSorrySliders.Puntuacion[]>> RecuperarPuntuacionesAsync() {
+            return base.Channel.RecuperarPuntuacionesAsync();
+        }
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServicioSorrySliders.IChat", CallbackContract=typeof(VistasSorrySliders.ServicioSorrySliders.IChatCallback))]
+    public interface IChat {
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IChat/ChatJuego")]
+        void ChatJuego(string uid, string nickname, string mensaje);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IChat/ChatJuego")]
+        System.Threading.Tasks.Task ChatJuegoAsync(string uid, string nickname, string mensaje);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IChat/IngresarAlChat")]
+        void IngresarAlChat(string uid, string correo);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IChat/IngresarAlChat")]
+        System.Threading.Tasks.Task IngresarAlChatAsync(string uid, string correo);
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public interface IChatCallback {
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IChat/DevolverMensaje", ReplyAction="http://tempuri.org/IChat/DevolverMensajeResponse")]
+        void DevolverMensaje(string nickname, string mensaje);
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public interface IChatChannel : VistasSorrySliders.ServicioSorrySliders.IChat, System.ServiceModel.IClientChannel {
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class ChatClient : System.ServiceModel.DuplexClientBase<VistasSorrySliders.ServicioSorrySliders.IChat>, VistasSorrySliders.ServicioSorrySliders.IChat {
+        
+        public ChatClient(System.ServiceModel.InstanceContext callbackInstance) : 
+                base(callbackInstance) {
+        }
+        
+        public ChatClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName) : 
+                base(callbackInstance, endpointConfigurationName) {
+        }
+        
+        public ChatClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName, string remoteAddress) : 
+                base(callbackInstance, endpointConfigurationName, remoteAddress) {
+        }
+        
+        public ChatClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(callbackInstance, endpointConfigurationName, remoteAddress) {
+        }
+        
+        public ChatClient(System.ServiceModel.InstanceContext callbackInstance, System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(callbackInstance, binding, remoteAddress) {
+        }
+        
+        public void ChatJuego(string uid, string nickname, string mensaje) {
+            base.Channel.ChatJuego(uid, nickname, mensaje);
+        }
+        
+        public System.Threading.Tasks.Task ChatJuegoAsync(string uid, string nickname, string mensaje) {
+            return base.Channel.ChatJuegoAsync(uid, nickname, mensaje);
+        }
+        
+        public void IngresarAlChat(string uid, string correo) {
+            base.Channel.IngresarAlChat(uid, correo);
+        }
+        
+        public System.Threading.Tasks.Task IngresarAlChatAsync(string uid, string correo) {
+            return base.Channel.IngresarAlChatAsync(uid, correo);
+        }
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServicioSorrySliders.IJuegoLanzamiento", CallbackContract=typeof(VistasSorrySliders.ServicioSorrySliders.IJuegoLanzamientoCallback))]
+    public interface IJuegoLanzamiento {
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IJuegoLanzamiento/AgregarJugadorJuegoLanzamiento")]
+        void AgregarJugadorJuegoLanzamiento(string codigoPartida, string correoElectronico);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IJuegoLanzamiento/AgregarJugadorJuegoLanzamiento")]
+        System.Threading.Tasks.Task AgregarJugadorJuegoLanzamientoAsync(string codigoPartida, string correoElectronico);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IJuegoLanzamiento/EliminarJugadorJuegoLanzamiento")]
+        void EliminarJugadorJuegoLanzamiento(string codigoPartida);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IJuegoLanzamiento/EliminarJugadorJuegoLanzamiento")]
+        System.Threading.Tasks.Task EliminarJugadorJuegoLanzamientoAsync(string codigoPartida);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IJuegoLanzamiento/NotificarLanzamientoDado")]
+        void NotificarLanzamientoDado(string codigoPartida, string correo, int numeroDado);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IJuegoLanzamiento/NotificarLanzamientoDado")]
+        System.Threading.Tasks.Task NotificarLanzamientoDadoAsync(string codigoPartida, string correo, int numeroDado);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IJuegoLanzamiento/NotificarLanzamientoLinea")]
+        void NotificarLanzamientoLinea(string codigoPartida, string correo, double posicionX, double posicionY);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IJuegoLanzamiento/NotificarLanzamientoLinea")]
+        System.Threading.Tasks.Task NotificarLanzamientoLineaAsync(string codigoPartida, string correo, double posicionX, double posicionY);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IJuegoLanzamiento/NotificarFinalizarLanzamiento")]
+        void NotificarFinalizarLanzamiento(string codigoPartida, string correo);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IJuegoLanzamiento/NotificarFinalizarLanzamiento")]
+        System.Threading.Tasks.Task NotificarFinalizarLanzamientoAsync(string codigoPartida, string correo);
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public interface IJuegoLanzamientoCallback {
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IJuegoLanzamiento/JugadorTiroDado")]
+        void JugadorTiroDado(int numeroDado);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IJuegoLanzamiento/JugadorDetuvoLinea")]
+        void JugadorDetuvoLinea(double posicionX, double posicionY);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IJuegoLanzamiento/JugadorSalioJuegoLanzamiento")]
+        void JugadorSalioJuegoLanzamiento(string correoElectronicoSalido);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IJuegoLanzamiento/JugadoresListosParaSiguienteTurno")]
+        void JugadoresListosParaSiguienteTurno();
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public interface IJuegoLanzamientoChannel : VistasSorrySliders.ServicioSorrySliders.IJuegoLanzamiento, System.ServiceModel.IClientChannel {
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class JuegoLanzamientoClient : System.ServiceModel.DuplexClientBase<VistasSorrySliders.ServicioSorrySliders.IJuegoLanzamiento>, VistasSorrySliders.ServicioSorrySliders.IJuegoLanzamiento {
+        
+        public JuegoLanzamientoClient(System.ServiceModel.InstanceContext callbackInstance) : 
+                base(callbackInstance) {
+        }
+        
+        public JuegoLanzamientoClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName) : 
+                base(callbackInstance, endpointConfigurationName) {
+        }
+        
+        public JuegoLanzamientoClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName, string remoteAddress) : 
+                base(callbackInstance, endpointConfigurationName, remoteAddress) {
+        }
+        
+        public JuegoLanzamientoClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(callbackInstance, endpointConfigurationName, remoteAddress) {
+        }
+        
+        public JuegoLanzamientoClient(System.ServiceModel.InstanceContext callbackInstance, System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(callbackInstance, binding, remoteAddress) {
+        }
+        
+        public void AgregarJugadorJuegoLanzamiento(string codigoPartida, string correoElectronico) {
+            base.Channel.AgregarJugadorJuegoLanzamiento(codigoPartida, correoElectronico);
+        }
+        
+        public System.Threading.Tasks.Task AgregarJugadorJuegoLanzamientoAsync(string codigoPartida, string correoElectronico) {
+            return base.Channel.AgregarJugadorJuegoLanzamientoAsync(codigoPartida, correoElectronico);
+        }
+        
+        public void EliminarJugadorJuegoLanzamiento(string codigoPartida) {
+            base.Channel.EliminarJugadorJuegoLanzamiento(codigoPartida);
+        }
+        
+        public System.Threading.Tasks.Task EliminarJugadorJuegoLanzamientoAsync(string codigoPartida) {
+            return base.Channel.EliminarJugadorJuegoLanzamientoAsync(codigoPartida);
+        }
+        
+        public void NotificarLanzamientoDado(string codigoPartida, string correo, int numeroDado) {
+            base.Channel.NotificarLanzamientoDado(codigoPartida, correo, numeroDado);
+        }
+        
+        public System.Threading.Tasks.Task NotificarLanzamientoDadoAsync(string codigoPartida, string correo, int numeroDado) {
+            return base.Channel.NotificarLanzamientoDadoAsync(codigoPartida, correo, numeroDado);
+        }
+        
+        public void NotificarLanzamientoLinea(string codigoPartida, string correo, double posicionX, double posicionY) {
+            base.Channel.NotificarLanzamientoLinea(codigoPartida, correo, posicionX, posicionY);
+        }
+        
+        public System.Threading.Tasks.Task NotificarLanzamientoLineaAsync(string codigoPartida, string correo, double posicionX, double posicionY) {
+            return base.Channel.NotificarLanzamientoLineaAsync(codigoPartida, correo, posicionX, posicionY);
+        }
+        
+        public void NotificarFinalizarLanzamiento(string codigoPartida, string correo) {
+            base.Channel.NotificarFinalizarLanzamiento(codigoPartida, correo);
+        }
+        
+        public System.Threading.Tasks.Task NotificarFinalizarLanzamientoAsync(string codigoPartida, string correo) {
+            return base.Channel.NotificarFinalizarLanzamientoAsync(codigoPartida, correo);
         }
     }
 }

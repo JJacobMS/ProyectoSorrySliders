@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="btnBuscar" xml:space="preserve">
+    <value>SEARCH</value>
+  </data>
   <data name="btnCancelar" xml:space="preserve">
     <value>CANCEL</value>
   </data>
@@ -129,14 +132,26 @@
   <data name="btnCrearCuenta" xml:space="preserve">
     <value>CREATE ACCOUNT</value>
   </data>
+  <data name="btnCrearLobby" xml:space="preserve">
+    <value>C R E A T E  L O B B Y</value>
+  </data>
+  <data name="btnEnviarCodigo" xml:space="preserve">
+    <value>SEND CODE</value>
+  </data>
   <data name="btnGuardarCambios" xml:space="preserve">
     <value>SAVE CHANGES</value>
+  </data>
+  <data name="btnIniciarPartida" xml:space="preserve">
+    <value>S T A R T  G A M E</value>
   </data>
   <data name="btnRegistrarCuenta" xml:space="preserve">
     <value>REGISTER ACCOUNT</value>
   </data>
   <data name="btnSalir" xml:space="preserve">
     <value>EXIT</value>
+  </data>
+  <data name="btnUnirsePartida" xml:space="preserve">
+    <value>JOIN THE PARTY</value>
   </data>
   <data name="lblAjustes" xml:space="preserve">
     <value>Settings</value>
@@ -153,6 +168,9 @@
   <data name="lblBienvenidoNuevo" xml:space="preserve">
     <value>Welcome again</value>
   </data>
+  <data name="lblCodigoPartida" xml:space="preserve">
+    <value>Game code:</value>
+  </data>
   <data name="lblContrasena" xml:space="preserve">
     <value>Password:</value>
   </data>
@@ -162,11 +180,23 @@
   <data name="lblCorreoElectronico" xml:space="preserve">
     <value>Email Address:</value>
   </data>
+  <data name="lblCorreoJugadorSinCuenta" xml:space="preserve">
+    <value>Email of player without account:</value>
+  </data>
+  <data name="lblCuatroJugadores" xml:space="preserve">
+    <value>4 Players</value>
+  </data>
   <data name="lblDatosCuenta" xml:space="preserve">
     <value>Account Details</value>
   </data>
+  <data name="lblDosJugadores" xml:space="preserve">
+    <value>2 Players</value>
+  </data>
   <data name="lblEspanol" xml:space="preserve">
     <value>Spanish</value>
+  </data>
+  <data name="lblHostPartida" xml:space="preserve">
+    <value>Game host:</value>
   </data>
   <data name="lblIdioma" xml:space="preserve">
     <value>LANGUAGE:</value>
@@ -177,11 +207,38 @@
   <data name="lblInicioSesion" xml:space="preserve">
     <value>LOGIN</value>
   </data>
+  <data name="lblInvitarJugador" xml:space="preserve">
+    <value>INVITE PLAYER</value>
+  </data>
+  <data name="lblListaAmigos" xml:space="preserve">
+    <value>Friends List</value>
+  </data>
+  <data name="lblListaDeJugadores" xml:space="preserve">
+    <value>Players List</value>
+  </data>
+  <data name="lblLobbyEspera" xml:space="preserve">
+    <value>WAITING LOBBY</value>
+  </data>
+  <data name="lblModoJuego" xml:space="preserve">
+    <value>Normal Game Mode</value>
+  </data>
   <data name="lblNickname" xml:space="preserve">
     <value>Nickname</value>
   </data>
   <data name="lblNombres" xml:space="preserve">
     <value>Name/s</value>
+  </data>
+  <data name="lblTablaPuntuaciones" xml:space="preserve">
+    <value>SCOREBOARD</value>
+  </data>
+  <data name="lblTotalJugadores" xml:space="preserve">
+    <value>Total Players:</value>
+  </data>
+  <data name="lblTresJugadores" xml:space="preserve">
+    <value>3 Players</value>
+  </data>
+  <data name="lblUnirsePartida" xml:space="preserve">
+    <value>JOIN GAME</value>
   </data>
   <data name="msgCorreoEncontrado" xml:space="preserve">
     <value>The input email is registered in the system</value>
@@ -207,11 +264,23 @@
   <data name="msgErrorImagen" xml:space="preserve">
     <value>The image cannot be loaded</value>
   </data>
+  <data name="msgErrorImagenPermisos" xml:space="preserve">
+    <value>You don't have permissions to access the file</value>
+  </data>
+  <data name="msgErrorTamañoImagen" xml:space="preserve">
+    <value>The image exceeds the limit of 400KB</value>
+  </data>
+  <data name="msgErrorTituloImagenPermisos" xml:space="preserve">
+    <value>No permissions for the file</value>
+  </data>
   <data name="msgImagenInvalida" xml:space="preserve">
     <value>Please select a valid image file</value>
   </data>
+  <data name="msgTablaVacia" xml:space="preserve">
+    <value>No winners yet, be the first winner</value>
+  </data>
   <data name="msgTamañoImagenError" xml:space="preserve">
-    <value>The image exceeds the 3MB limit</value>
+    <value>The image exceeds the 400KB limit</value>
   </data>
   <data name="msgTituloContraseñaInvalida" xml:space="preserve">
     <value>Contraseña invalida</value>
@@ -231,11 +300,23 @@
   <data name="msgTituloErrorImagen" xml:space="preserve">
     <value>Image Error</value>
   </data>
+  <data name="msgTituloErrorTamañoImagen" xml:space="preserve">
+    <value>Image too large</value>
+  </data>
   <data name="msgTituloTamañoImagenError" xml:space="preserve">
     <value>Image too big</value>
   </data>
+  <data name="strArchivosImagen" xml:space="preserve">
+    <value>Image files</value>
+  </data>
   <data name="txtBlockAjustes" xml:space="preserve">
     <value>SETTINGS</value>
+  </data>
+  <data name="txtBlockCodigoNoValido" xml:space="preserve">
+    <value>Invalid code</value>
+  </data>
+  <data name="txtBlockConfigurarPartida" xml:space="preserve">
+    <value>SETUP GAME</value>
   </data>
   <data name="txtBlockContrasenaInvalida" xml:space="preserve">
     <value>The password is not valid. Verify your password and try again</value>
@@ -244,15 +325,30 @@
     <value>The email address isn´t register in the sistem</value>
   </data>
   <data name="txtBlockCrearLobby" xml:space="preserve">
-    <value>CREAR LOBBY</value>
+    <value>CREATE LOBBY</value>
+  </data>
+  <data name="txtBlockCuentaYaEnLobby" xml:space="preserve">
+    <value>Your account is already in the lobby</value>
   </data>
   <data name="txtBlockJugadoresAmigos" xml:space="preserve">
-    <value>PLAYERS AND FRIEND</value>
+    <value>PLAYERS AND FRIENDS</value>
+  </data>
+  <data name="txtBlockJugadoresMaximosExcedidos" xml:space="preserve">
+    <value>The lobby doesn't accept more players</value>
+  </data>
+  <data name="txtBlockNickname" xml:space="preserve">
+    <value>NICKNAME</value>
+  </data>
+  <data name="txtBlockNicknameNoValido" xml:space="preserve">
+    <value>Invalid Nickname</value>
+  </data>
+  <data name="txtBlockRondasGanadas" xml:space="preserve">
+    <value>ROUNDS WON</value>
   </data>
   <data name="txtBlockTablaPuntuaciones" xml:space="preserve">
     <value>SCORE TABLE</value>
   </data>
   <data name="txtBlockUnirsePartida" xml:space="preserve">
-    <value>JOIN PARTY</value>
+    <value>JOIN GAME</value>
   </data>
 </root>
