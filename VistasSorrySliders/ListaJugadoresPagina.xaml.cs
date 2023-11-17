@@ -171,13 +171,18 @@ namespace VistasSorrySliders
         private void CargarNotificaciones() 
         {
             Constantes resultado;
-            NotificacionSet[] listaNotificaciones = new NotificacionSet[] { };
+            List<NotificacionSet> listaNotificaciones = new List<NotificacionSet>();
+            
             Logger log = new Logger(this.GetType());
             try
             {
                 Console.WriteLine("CARGAR NOTIFICACIONES");
-                (resultado, listaNotificaciones) = _proxyAmigos.RecuperarNotificaciones(_cuentaUsuario.CorreoElectronico);
-                resultado = Constantes.OPERACION_EXITOSA;
+                NotificacionSet[] listaNotificacionesResultado;
+                (resultado, listaNotificacionesResultado) = _proxyAmigos.RecuperarNotificaciones(_cuentaUsuario.CorreoElectronico);
+                if (resultado == Constantes.OPERACION_EXITOSA)
+                {
+                    listaNotificaciones = listaNotificacionesResultado.ToList();
+                }
             }
             catch (CommunicationException ex)
             {
@@ -216,7 +221,7 @@ namespace VistasSorrySliders
             }
         }
 
-        private void ObtenerNotificaciones(NotificacionSet[] listaNotificaciones)
+        private void ObtenerNotificaciones(List<NotificacionSet> listaNotificaciones)
         {
             Debug.WriteLine("Cargando notificaciones");
 
