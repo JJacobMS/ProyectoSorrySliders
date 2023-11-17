@@ -313,7 +313,8 @@ namespace VistasSorrySliders.LogicaJuego
 
         private void HacerMovimientoDerecha()
         {
-            if ((Canvas.GetLeft(Figura) + Figura.Width * 2) < (Application.Current.MainWindow.Width))
+            
+            if ((Canvas.GetLeft(Figura) + Figura.Width * 2) < Tablero.ANCHO_TABLERO)
             {
                 Canvas.SetLeft(Figura, Canvas.GetLeft(Figura) + VelocidadHorizontal);
             }
@@ -329,11 +330,12 @@ namespace VistasSorrySliders.LogicaJuego
                     EnMovimientoDerecha = false;
                 }
             }
+            
         }
 
         private void HacerMovimientoAbajo()
         {
-            if ((Canvas.GetTop(Figura) + Figura.Height * 2) < Application.Current.MainWindow.Height)
+            if ((Canvas.GetTop(Figura) + Figura.Height * 2) < Tablero.ALTO_TABLERO)
             {
                 Canvas.SetTop(Figura, Canvas.GetTop(Figura) + VelocidadVertical);
             }

@@ -33,8 +33,8 @@ namespace VistasSorrySliders
             _cuentas = cuentas;
             _cuentaUsuario = cuentaUsuario;
             _partida = partida;
-            IngresarCallbacks();
-            RemoverCallbacks();
+            //IngresarCallbacks();
+            //RemoverCallbacks();
         }
 
         private void TextChangedTamañoChat(object sender, TextChangedEventArgs e)

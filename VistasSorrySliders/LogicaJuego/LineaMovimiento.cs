@@ -38,6 +38,11 @@ namespace VistasSorrySliders.LogicaJuego
             NumeroPosicion += SentidoRecorrido;
         }
 
+        public (double, double) RegresarCoordenadasLinea()
+        {
+            return (FiguraLinea.X2, FiguraLinea.Y2);
+        }
+
         public double RegresarAnguloFormado()
         {
             double valorAbsolutoCatetoOpuesto = Math.Abs(FiguraLinea.Y2);

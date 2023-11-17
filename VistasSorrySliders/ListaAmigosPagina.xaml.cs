@@ -86,6 +86,7 @@ namespace VistasSorrySliders
                     break;
                 case Constantes.ERROR_CONEXION_BD:
                 case Constantes.ERROR_CONSULTA:
+                    Console.WriteLine("WAOS 1");
                     MessageBox.Show(Properties.Resources.msgErrorBaseDatos);
                     break;
                 case Constantes.ERROR_CONEXION_SERVIDOR:
@@ -257,7 +258,7 @@ namespace VistasSorrySliders
             switch (resultado)
             {
                 case Constantes.ERROR_CONEXION_BD:
-                    MessageBox.Show(Properties.Resources.msgErrorBaseDatos);
+                    MessageBox.Show(Properties.Resources.msgErrorBaseDatos + "3");
                     break;
                 case Constantes.ERROR_CONSULTA:
                     MessageBox.Show(Properties.Resources.msgErrorBaseDatos);
@@ -306,7 +307,8 @@ namespace VistasSorrySliders
             switch (resultado)
             {
                 case Constantes.ERROR_CONEXION_BD:
-                    MessageBox.Show(Properties.Resources.msgErrorBaseDatos);
+                    Console.WriteLine("WAOS 2");
+                    MessageBox.Show(Properties.Resources.msgErrorBaseDatos + " 2");
                     break;
                 case Constantes.ERROR_CONSULTA:
                     MessageBox.Show(Properties.Resources.msgErrorBaseDatos);

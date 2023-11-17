@@ -58,7 +58,7 @@ namespace VistasSorrySliders
                 }
                 else
                 {
-                    btnIniciarPartida.IsEnabled = true;
+                    btnIniciarPartida.IsEnabled = false;
                 }
             }
             catch (CommunicationException ex)
@@ -83,15 +83,15 @@ namespace VistasSorrySliders
             {
                 case Constantes.ERROR_CONEXION_BD:
                     MessageBox.Show(Properties.Resources.msgErrorBaseDatos);
-                    IrMenuUsuario();
+                    IrMenuPrincipal();
                     break;
                 case Constantes.ERROR_CONSULTA:
                     MessageBox.Show(Properties.Resources.msgErrorBaseDatos);
-                    IrMenuUsuario();
+                    IrMenuPrincipal();
                     break;
                 case Constantes.ERROR_CONEXION_SERVIDOR:
                     MessageBox.Show(Properties.Resources.msgErrorConexion);
-                    IrMenuUsuario();
+                    IrMenuPrincipal();
                     break;
                 case Constantes.OPERACION_EXITOSA:
                     grdJugadores.Children.Clear();
@@ -102,7 +102,7 @@ namespace VistasSorrySliders
                     break;
                 case Constantes.OPERACION_EXITOSA_VACIA:
                     MessageBox.Show(Properties.Resources.msgErrorConexion);
-                    IrMenuUsuario();
+                    IrMenuPrincipal();
                     break;
                 default:
                     break;
@@ -191,16 +191,16 @@ namespace VistasSorrySliders
             switch (respuesta)
             {
                 case Constantes.ERROR_CONEXION_BD:
-                    MessageBox.Show(Properties.Resources.msgErrorBaseDatos);
-                    IrMenuUsuario();
+                    MessageBox.Show(Properties.Resources.msgErrorBaseDatos );
+                    IrMenuPrincipal();
                     break;
                 case Constantes.ERROR_CONSULTA:
-                    MessageBox.Show(Properties.Resources.msgErrorBaseDatos);
-                    IrMenuUsuario();
+                    MessageBox.Show(Properties.Resources.msgErrorBaseDatos + "8");
+                    IrMenuPrincipal();
                     break;
                 case Constantes.ERROR_CONEXION_SERVIDOR:
                     MessageBox.Show(Properties.Resources.msgErrorConexion);
-                    IrMenuUsuario();
+                    IrMenuPrincipal();
                     break;
                 case Constantes.OPERACION_EXITOSA:
                     txtBoxCodigoPartida.Text = _partidaActual.CodigoPartida.ToString();
@@ -229,7 +229,7 @@ namespace VistasSorrySliders
                     break;
                 case Constantes.OPERACION_EXITOSA_VACIA:
                     MessageBox.Show(Properties.Resources.msgErrorBaseDatos);
-                    IrMenuUsuario();
+                    _juegoYLobbyVentana.CerrarVentanaActual();
                     break;
                 default:
                     break;
@@ -239,25 +239,12 @@ namespace VistasSorrySliders
 
         private void ClickSalirLobbyJugadores(object sender, RoutedEventArgs e)
         {
-            SalirPartida();
-            IrMenuUsuario();
+            IrMenuPrincipal();
         }
-        public void IrMenuUsuario() 
+        
+        private void IrMenuPrincipal()
         {
-            var ventanaPrincipal = new MainWindow();
-
-            if (_esInvitado)
-            {
-                EliminarCuentaProvisionalInvitado(_cuentaUsuario.CorreoElectronico);
-                InicioSesionPagina inicio = new InicioSesionPagina();
-                ventanaPrincipal.Content = inicio;
-            }
-            else
-            {
-                MenuPrincipalPagina menu = new MenuPrincipalPagina(_cuentaUsuario);
-                ventanaPrincipal.Content = menu;
-            }
-            ventanaPrincipal.Show();
+            SalirLobbyServidor();
             Window.GetWindow(this).Close();
         }
 
@@ -293,36 +280,6 @@ namespace VistasSorrySliders
             }
         }
 
-
-        public void SalirPartida() 
-        {
-            Logger log = new Logger(this.GetType());
-            try
-            {
-                UnirsePartidaClient proxyUnirse = new UnirsePartidaClient();
-                proxyUnirse.SalirDelLobby(_cuentaUsuario.CorreoElectronico, _codigoPartida);
-                _proxyLobby.SalirPartida(_codigoPartida);  
-            }
-            catch (CommunicationException ex)
-            {
-                Console.WriteLine(ex);
-                System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorConexion);
-                log.LogError("Error de Comunicación con el Servidor", ex);
-            }
-            catch (TimeoutException ex)
-            {
-                Console.WriteLine(ex);
-                System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorConexion);
-                log.LogWarn("Se agoto el tiempo de espera del servidor", ex);
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex);
-                System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorConexion);
-                log.LogFatal("Ha ocurrido un error inesperado", ex);
-            }
-        }
-
         public void JugadorSalioPartida()
         {
             RecuperarDatosPartida(_codigoPartida);
@@ -330,6 +287,7 @@ namespace VistasSorrySliders
 
         private void ClickIniciarPartida(object sender, RoutedEventArgs e)
         {
+            //SWITCH -JACOB
             if (_cuentas.Count() == _partidaActual.CantidadJugadores && txtBoxHost.Text == _cuentaUsuario.Nickname)
             {
                 CambiarPaginas();
@@ -357,30 +315,42 @@ namespace VistasSorrySliders
             }
         }
 
-        private void EliminarCuentaProvisionalInvitado(string correoProvisional)
+        public void HostInicioPartida()
         {
+            List<CuentaSet> cuentasJugadores = _cuentas.ToList();
+            Page paginaJuego = new JuegoLanzamientoPagina(cuentasJugadores, _partidaActual.CantidadJugadores, _partidaActual.CodigoPartida.ToString(), _cuentaUsuario.CorreoElectronico);
+            Page paginaChat = new JugadoresChatPagina(_cuentas, _cuentaUsuario, _partidaActual);
+            _juegoYLobbyVentana.CambiarFrameLobby(paginaJuego);
+            _juegoYLobbyVentana.CambiarFrameListaAmigos(paginaChat);
+
+            SalirLobbyServidor();
+        }
+
+        private void SalirLobbyServidor()
+        {
+            Logger log = new Logger(this.GetType());
             try
             {
-                UnirsePartidaClient proxyRecuperarJugadores = new UnirsePartidaClient();
-                proxyRecuperarJugadores.EliminarCuentaProvisional(correoProvisional);
+                _proxyLobby.SalirPartida(_codigoPartida);
             }
             catch (CommunicationException ex)
             {
                 Console.WriteLine(ex);
+                System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorConexion);
+                log.LogError("Error de Comunicación con el Servidor", ex);
             }
             catch (TimeoutException ex)
             {
                 Console.WriteLine(ex);
+                System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorConexion);
+                log.LogWarn("Se agoto el tiempo de espera del servidor", ex);
             }
-        }
-
-        public void HostInicioPartida()
-        {
-            List<CuentaSet> cuentasJugadores = _cuentas.ToList();
-            Page paginaJuego = new JuegoLanzamientoPagina(cuentasJugadores, _partidaActual.CantidadJugadores);
-            Page paginaChat = new JugadoresChatPagina(_cuentas, _cuentaUsuario, _partidaActual);
-            _juegoYLobbyVentana.CambiarFrameLobby(paginaJuego);
-            _juegoYLobbyVentana.CambiarFrameListaAmigos(paginaChat);
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+                System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorConexion);
+                log.LogFatal("Ha ocurrido un error inesperado", ex);
+            }
         }
     }
 }
