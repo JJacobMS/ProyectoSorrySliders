@@ -231,6 +231,39 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
+  <wsp:Policy wsu:Id="NetTcpBinding_INotificarJugadores_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <wsrm:RMAssertion xmlns:wsrm="http://schemas.xmlsoap.org/ws/2005/02/rm/policy">
+          <wsrm:InactivityTimeout Milliseconds="600000" />
+          <wsrm:AcknowledgementInterval Milliseconds="200" />
+        </wsrm:RMAssertion>
+        <msb:BinaryEncoding xmlns:msb="http://schemas.microsoft.com/ws/06/2004/mspolicy/netbinary1" />
+        <sp:TransportBinding xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <wsp:Policy>
+            <sp:TransportToken>
+              <wsp:Policy>
+                <msf:WindowsTransportSecurity xmlns:msf="http://schemas.microsoft.com/ws/2006/05/framing/policy">
+                  <msf:ProtectionLevel>EncryptAndSign</msf:ProtectionLevel>
+                </msf:WindowsTransportSecurity>
+              </wsp:Policy>
+            </sp:TransportToken>
+            <sp:AlgorithmSuite>
+              <wsp:Policy>
+                <sp:Basic256 />
+              </wsp:Policy>
+            </sp:AlgorithmSuite>
+            <sp:Layout>
+              <wsp:Policy>
+                <sp:Strict />
+              </wsp:Policy>
+            </sp:Layout>
+          </wsp:Policy>
+        </sp:TransportBinding>
+        <wsaw:UsingAddressing />
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
   <wsp:Policy wsu:Id="NetTcpBinding_IDetallesCuentaUsuario_policy">
     <wsp:ExactlyOne>
       <wsp:All>
@@ -447,6 +480,30 @@
   <wsdl:message name="IListaAmigos_GuardarNotificacion_OutputMessage">
     <wsdl:part name="parameters" element="tns:GuardarNotificacionResponse" />
   </wsdl:message>
+  <wsdl:message name="IListaAmigos_RecuperarNotificaciones_InputMessage">
+    <wsdl:part name="parameters" element="tns:RecuperarNotificaciones" />
+  </wsdl:message>
+  <wsdl:message name="IListaAmigos_RecuperarNotificaciones_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RecuperarNotificacionesResponse" />
+  </wsdl:message>
+  <wsdl:message name="INotificarJugadores_AgregarProxy_InputMessage">
+    <wsdl:part name="parameters" element="tns:AgregarProxy" />
+  </wsdl:message>
+  <wsdl:message name="INotificarJugadores_AgregarProxy_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AgregarProxyResponse" />
+  </wsdl:message>
+  <wsdl:message name="INotificarJugadores_EliminarProxy_InputMessage">
+    <wsdl:part name="parameters" element="tns:EliminarProxy" />
+  </wsdl:message>
+  <wsdl:message name="INotificarJugadores_EliminarProxy_OutputMessage">
+    <wsdl:part name="parameters" element="tns:EliminarProxyResponse" />
+  </wsdl:message>
+  <wsdl:message name="INotificarJugadores_NotificarJugadorInvitado_InputMessage">
+    <wsdl:part name="parameters" element="tns:NotificarJugadorInvitado" />
+  </wsdl:message>
+  <wsdl:message name="INotificarJugadores_RecuperarNotificacion_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:RecuperarNotificacion" />
+  </wsdl:message>
   <wsdl:message name="IDetallesCuentaUsuario_RecuperarDatosUsuarioDeCuenta_InputMessage">
     <wsdl:part name="parameters" element="tns:RecuperarDatosUsuarioDeCuenta" />
   </wsdl:message>
@@ -575,6 +632,26 @@
     <wsdl:operation name="GuardarNotificacion">
       <wsdl:input wsaw:Action="http://tempuri.org/IListaAmigos/GuardarNotificacion" message="tns:IListaAmigos_GuardarNotificacion_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IListaAmigos/GuardarNotificacionResponse" message="tns:IListaAmigos_GuardarNotificacion_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="RecuperarNotificaciones">
+      <wsdl:input wsaw:Action="http://tempuri.org/IListaAmigos/RecuperarNotificaciones" message="tns:IListaAmigos_RecuperarNotificaciones_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IListaAmigos/RecuperarNotificacionesResponse" message="tns:IListaAmigos_RecuperarNotificaciones_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="INotificarJugadores">
+    <wsdl:operation name="AgregarProxy">
+      <wsdl:input wsaw:Action="http://tempuri.org/INotificarJugadores/AgregarProxy" message="tns:INotificarJugadores_AgregarProxy_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/INotificarJugadores/AgregarProxyResponse" message="tns:INotificarJugadores_AgregarProxy_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="EliminarProxy">
+      <wsdl:input wsaw:Action="http://tempuri.org/INotificarJugadores/EliminarProxy" message="tns:INotificarJugadores_EliminarProxy_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/INotificarJugadores/EliminarProxyResponse" message="tns:INotificarJugadores_EliminarProxy_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="NotificarJugadorInvitado">
+      <wsdl:input wsaw:Action="http://tempuri.org/INotificarJugadores/NotificarJugadorInvitado" message="tns:INotificarJugadores_NotificarJugadorInvitado_InputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="RecuperarNotificacion">
+      <wsdl:output wsaw:Action="http://tempuri.org/INotificarJugadores/RecuperarNotificacion" message="tns:INotificarJugadores_RecuperarNotificacion_OutputCallbackMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:portType name="IDetallesCuentaUsuario">
@@ -810,6 +887,49 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="RecuperarNotificaciones">
+      <soap12:operation soapAction="http://tempuri.org/IListaAmigos/RecuperarNotificaciones" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="NetTcpBinding_INotificarJugadores" type="tns:INotificarJugadores">
+    <wsp:PolicyReference URI="#NetTcpBinding_INotificarJugadores_policy" />
+    <soap12:binding transport="http://schemas.microsoft.com/soap/tcp" />
+    <wsdl:operation name="AgregarProxy">
+      <soap12:operation soapAction="http://tempuri.org/INotificarJugadores/AgregarProxy" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EliminarProxy">
+      <soap12:operation soapAction="http://tempuri.org/INotificarJugadores/EliminarProxy" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="NotificarJugadorInvitado">
+      <soap12:operation soapAction="http://tempuri.org/INotificarJugadores/NotificarJugadorInvitado" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="RecuperarNotificacion">
+      <soap12:operation soapAction="http://tempuri.org/INotificarJugadores/RecuperarNotificacion" style="document" />
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
   </wsdl:binding>
   <wsdl:binding name="NetTcpBinding_IDetallesCuentaUsuario" type="tns:IDetallesCuentaUsuario">
     <wsp:PolicyReference URI="#NetTcpBinding_IDetallesCuentaUsuario_policy" />
@@ -936,6 +1056,15 @@
       </wsa10:EndpointReference>
     </wsdl:port>
     <wsdl:port name="NetTcpBinding_IListaAmigos" binding="tns:NetTcpBinding_IListaAmigos">
+      <soap12:address location="net.tcp://localhost:5455/ServidorSorrySliders" />
+      <wsa10:EndpointReference>
+        <wsa10:Address>net.tcp://localhost:5455/ServidorSorrySliders</wsa10:Address>
+        <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
+          <Upn>LAPTOP-SF103ATP\monti</Upn>
+        </Identity>
+      </wsa10:EndpointReference>
+    </wsdl:port>
+    <wsdl:port name="NetTcpBinding_INotificarJugadores" binding="tns:NetTcpBinding_INotificarJugadores">
       <soap12:address location="net.tcp://localhost:5455/ServidorSorrySliders" />
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:5455/ServidorSorrySliders</wsa10:Address>

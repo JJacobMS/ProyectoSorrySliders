@@ -103,6 +103,22 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="ValueTupleOfConstantesArrayOfTipoNotificacionalmaccdW" nillable="true" type="tns:ValueTupleOfConstantesArrayOfTipoNotificacionalmaccdW" />
+  <xs:complexType name="ValueTupleOfConstantesArrayOfNotificacionSetalmaccdW">
+    <xs:annotation>
+      <xs:appinfo>
+        <GenericType Name="ValueTupleOf{0}{1}{#}" Namespace="http://schemas.datacontract.org/2004/07/System" xmlns="http://schemas.microsoft.com/2003/10/Serialization/">
+          <GenericParameter Name="Constantes" Namespace="http://schemas.datacontract.org/2004/07/DatosSorrySliders" />
+          <GenericParameter Name="ArrayOfNotificacionSet" Namespace="http://schemas.datacontract.org/2004/07/DatosSorrySliders" />
+        </GenericType>
+        <IsValueType xmlns="http://schemas.microsoft.com/2003/10/Serialization/">true</IsValueType>
+      </xs:appinfo>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/DatosSorrySliders" name="Item1" type="q10:Constantes" />
+      <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/DatosSorrySliders" name="Item2" nillable="true" type="q11:ArrayOfNotificacionSet" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ValueTupleOfConstantesArrayOfNotificacionSetalmaccdW" nillable="true" type="tns:ValueTupleOfConstantesArrayOfNotificacionSetalmaccdW" />
   <xs:complexType name="ValueTupleOfConstantesUsuarioSetalmaccdW">
     <xs:annotation>
       <xs:appinfo>
@@ -114,8 +130,8 @@
       </xs:appinfo>
     </xs:annotation>
     <xs:sequence>
-      <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/DatosSorrySliders" name="Item1" type="q10:Constantes" />
-      <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/DatosSorrySliders" name="Item2" nillable="true" type="q11:UsuarioSet" />
+      <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/DatosSorrySliders" name="Item1" type="q12:Constantes" />
+      <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/DatosSorrySliders" name="Item2" nillable="true" type="q13:UsuarioSet" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="ValueTupleOfConstantesUsuarioSetalmaccdW" nillable="true" type="tns:ValueTupleOfConstantesUsuarioSetalmaccdW" />
@@ -130,8 +146,8 @@
       </xs:appinfo>
     </xs:annotation>
     <xs:sequence>
-      <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/DatosSorrySliders" name="Item1" type="q12:Constantes" />
-      <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/ServidorSorrySliders" name="Item2" nillable="true" type="q13:ArrayOfPuntuacion" />
+      <xs:element xmlns:q14="http://schemas.datacontract.org/2004/07/DatosSorrySliders" name="Item1" type="q14:Constantes" />
+      <xs:element xmlns:q15="http://schemas.datacontract.org/2004/07/ServidorSorrySliders" name="Item2" nillable="true" type="q15:ArrayOfPuntuacion" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="ValueTupleOfConstantesArrayOfPuntuacionK_Pmi0k2_P" nillable="true" type="tns:ValueTupleOfConstantesArrayOfPuntuacionK_Pmi0k2_P" />
