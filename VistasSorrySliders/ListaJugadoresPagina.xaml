@@ -27,9 +27,9 @@
                                         Style="{StaticResource estiloLblTextoListaAmigos}"/>
                                 <Button Grid.Column="1" Margin="0,-5,10,0" CommandParameter="{Binding}" PreviewMouseDown="PreviewMouseDownSolicitudAmistad"
                                         Style="{StaticResource estiloBtnAmistad}">
-                                    <TextBlock Text="ENVIAR SOLICITUD DE AMISTAD" TextWrapping="Wrap" TextAlignment="Center"/>
+                                    <TextBlock Text="{x:Static p:Resources.btnEnviarSolicitudAmistad}" TextWrapping="Wrap" TextAlignment="Center"/>
                                 </Button>
-                                <Button Grid.Column="2" Content="BANEAR" Margin="0,-5,10,0" CommandParameter="{Binding}" PreviewMouseDown="PreviewMouseDownBanearJugador"
+                                <Button Grid.Column="2" Content="{x:Static p:Resources.btnBanear}" Margin="0,-5,10,0" CommandParameter="{Binding}" PreviewMouseDown="PreviewMouseDownBanearJugador"
                                         Style="{StaticResource estiloBtnBanear}"/>
                             </Grid>
                         </Border>
@@ -54,33 +54,8 @@
                                     Style="{StaticResource estiloLblTextoListaAmigos}"/>
                                 <Label Content="{Binding Path=CorreoElectronico}" FontSize="12" Margin="0,0,0,3" HorizontalAlignment="Left" VerticalAlignment="Bottom"
                                     Style="{StaticResource estiloLblTextoListaAmigos}"/>
-                                <Button Grid.Column="1" Content="ELIMINAR BANEO" Margin="0,-5,10,0" CommandParameter="{Binding}" PreviewMouseDown="PreviewMouseDownEliminarBaneo"
+                                <Button Grid.Column="1" Content="{x:Static p:Resources.btnEliminarBaneo}" Margin="0,-5,10,0" CommandParameter="{Binding}" PreviewMouseDown="PreviewMouseDownEliminarBaneo"
                                     Style="{StaticResource estiloBtnListaAmigos}" FontSize="15"/>
-                            </Grid>
-                        </Border>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-
-        <Style x:Key="estiloLstBoxItemJugadorAmigo" TargetType="ListBoxItem">
-            <Setter Property="Height" Value="40"/>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="ListBoxItem">
-                        <Border BorderBrush="#17033B" BorderThickness="0,0,0,3">
-                            <Grid Height="40">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition/>
-                                    <ColumnDefinition Width=".7*"/>
-                                </Grid.ColumnDefinitions>
-                                <Ellipse Height="10" Width="10" Fill="Black" Margin="5,5,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-                                <Label Content="{Binding Path=Nickname}" FontSize="14" Margin="15,-3,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"
-                                    Style="{StaticResource estiloLblTextoListaAmigos}"/>
-                                <Label Content="{Binding Path=CorreoElectronico}" FontSize="12" Margin="0,0,0,3" HorizontalAlignment="Left" VerticalAlignment="Bottom"
-                                    Style="{StaticResource estiloLblTextoListaAmigos}"/>
-                                <Button Grid.Column="2" Content="BANEAR" Margin="0,-5,10,0" CommandParameter="{Binding}" PreviewMouseDown="PreviewMouseDownBanearAmigo"
-                                    Style="{StaticResource estiloBtnBanear}"/>
                             </Grid>
                         </Border>
                     </ControlTemplate>
@@ -97,19 +72,16 @@
                             <Grid Height="40">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition/>
-                                    <ColumnDefinition Width=".3*"/>
-                                    <ColumnDefinition Width=".3*"/>
+                                    <ColumnDefinition Width=".6*"/>
                                 </Grid.ColumnDefinitions>
                                 <Ellipse Height="10" Width="10" Fill="Black" Margin="5,5,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
                                 <Label Content="{Binding Path=Nickname}" FontSize="14" Margin="15,-3,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"
                                     Style="{StaticResource estiloLblTextoListaAmigos}"/>
                                 <Label Content="{Binding Path=CorreoElectronico}" FontSize="12" Margin="0,0,0,3" HorizontalAlignment="Left" VerticalAlignment="Bottom"
                                     Style="{StaticResource estiloLblTextoListaAmigos}"/>
-                                <Button Grid.Column="1" Content="BANEAR" Margin="0,-5,10,0" CommandParameter="{Binding}" PreviewMouseDown="PreviewMouseDownBanearAmigo"
-                                        Style="{StaticResource estiloBtnBanear}"/>
                                 <Button Grid.Column="2" Margin="0,-5,10,0" CommandParameter="{Binding}" PreviewMouseDown="PreviewMouseDownEliminarAmigo"
-                                    Style="{StaticResource estiloBtnEliminarAmigo}">
-                                    <TextBlock Text="ELIMINAR AMIGO" TextWrapping="Wrap" TextAlignment="Center"></TextBlock>
+                                    Style="{StaticResource estiloBtnEliminarAmigo}" Width="120">
+                                    <TextBlock Text="{x:Static p:Resources.btnEliminarAmigo}" TextWrapping="Wrap" TextAlignment="Center" FontSize="16"></TextBlock>
                                 </Button>
                             </Grid>
                         </Border>
@@ -131,13 +103,13 @@
                                     <ColumnDefinition Width=".3*"/>
                                 </Grid.ColumnDefinitions>
                                 <TextBlock Style="{StaticResource estiloTxtBlockNotificacion}">
-                                    <Run Foreground="#E0B7F1" Background="#17033B">sulem477g8946038560925@gmail.com</Run>
-                                    <Run>envío una solicitud de amistad</Run>
+                                    <Run Foreground="#E0B7F1" Background="#17033B" Text="{Binding Path=CorreoElectronicoRemitente}"></Run>
+                                    <Run Text="{x:Static p:Resources.rnMensajeSolicitudAmistad}"></Run>
                                 </TextBlock>
-                                <Button Grid.Column="1" Content="ACEPTAR" Margin="0,0,10,0" CommandParameter="{Binding}" PreviewMouseDown="PreviewMouseDownAceptarNotificacion"
+                                <Button Grid.Column="1" Content="{x:Static p:Resources.btnAceptar}" Margin="0,0,10,0" CommandParameter="{Binding}" PreviewMouseDown="PreviewMouseDownAceptarNotificacion"
                                     Style="{StaticResource estiloBtnAceptarNotificacion}"/>
                                 <Button Grid.Column="2" Margin="0,0,10,0" CommandParameter="{Binding}" PreviewMouseDown="PreviewMouseDownRechazarNotificacion"
-                                    Style="{StaticResource estiloBtnBanear}" Content="RECHAZAR"/>
+                                    Style="{StaticResource estiloBtnBanear}" Content="{x:Static p:Resources.btnRechazar}"/>
                             </Grid>
                         </Border>
                     </ControlTemplate>
@@ -159,14 +131,14 @@
                                 <RichTextBox Style="{StaticResource estiloRchTextBoxNotificacionPartida}">
                                     <FlowDocument>
                                         <Paragraph>
-                                            <Run Foreground="#E0B7F1" Background="#17033B">sulem47752748628568587@gmail.com</Run>
-                                            <Run>te invitó a su partida con el código</Run>
-                                            <Run Foreground="#C4E2F4" Background="#052B42">6B29FC40-CA47-1067-B31D-00DD010662DA</Run>
+                                            <Run Foreground="#E0B7F1" Background="#17033B" Text="{Binding Path=CorreoElectronicoRemitente}"></Run>
+                                            <Run Text="{x:Static p:Resources.rnMensajeSolicitudPartida}"></Run>
+                                            <Run Foreground="#C4E2F4" Background="#052B42" Text="{Binding Path=Mensaje}"></Run>
                                         </Paragraph>
                                     </FlowDocument>
                                 </RichTextBox>
-                                <Button Grid.Column="1" Content="ELIMINAR" Margin="0,0,10,0" CommandParameter="{Binding}" PreviewMouseDown="PreviewMouseDownEliminarNotificacionPartida"
-                            Style="{StaticResource estiloBtnBanear}"/>
+                                <Button Grid.Column="1" Content="{x:Static p:Resources.btnEliminarNotificacion}" Margin="0,0,10,0" CommandParameter="{Binding}" PreviewMouseDown="PreviewMouseDownEliminarNotificacionPartida"
+                                    Style="{StaticResource estiloBtnBanear}"/>
                             </Grid>
                         </Border>
                     </ControlTemplate>
@@ -204,17 +176,17 @@
                                 <TabControl.ItemContainerStyle>
                                     <Style TargetType="TabItem" BasedOn="{StaticResource estiloTbItemListaJugadores}"/>
                                 </TabControl.ItemContainerStyle>
-                                <TabItem Header="JUGADORES">
+                                <TabItem Header="{x:Static p:Resources.tbItemJugadores}">
                                     <Grid>
                                         <Grid.RowDefinitions>
                                             <RowDefinition Height="Auto"/>
                                             <RowDefinition Height="Auto"/>
                                             <RowDefinition/>
                                         </Grid.RowDefinitions>
-                                        <Label Style="{StaticResource estiloLblTituloJugadores}">LISTA JUGADORES</Label>
+                                        <Label Style="{StaticResource estiloLblTituloJugadores}" Content="{x:Static p:Resources.lblListaJugadores}"></Label>
                                         <StackPanel Grid.Row="1" Orientation="Horizontal">
                                             <TextBox Width="270" Style="{StaticResource estiloTxtBoxDatosMorado}"/>
-                                            <Button Content="BUSCAR" Margin="5" Height="25" Width="90" FontSize="14" Style="{StaticResource estiloBtnMorado}"/>
+                                            <Button Content="{x:Static p:Resources.btnBuscar}" Margin="5" Height="25" Width="90" FontSize="14" Style="{StaticResource estiloBtnMorado}"/>
                                         </StackPanel>
                                         <ListBox Grid.Row="2" Name="lstBoxJugadores" Style="{StaticResource estiloLstBoxAmigos}" Height="360">
                                             <ListBox.ItemContainerStyle>
@@ -223,13 +195,13 @@
                                         </ListBox>
                                     </Grid>
                                 </TabItem>
-                                <TabItem Header="AMIGOS">
+                                <TabItem Header="{x:Static p:Resources.tbItemAmigos}">
                                     <Grid>
                                         <Grid.RowDefinitions>
                                             <RowDefinition Height="Auto"/>
                                             <RowDefinition/>
                                         </Grid.RowDefinitions>
-                                        <Label Style="{StaticResource estiloLblTituloJugadores}">LISTA AMIGOS</Label>
+                                        <Label Style="{StaticResource estiloLblTituloJugadores}" Content="{x:Static p:Resources.lblListaAmigosMayuscula}"></Label>
                                         <ListBox Grid.Row="2" Name="lstBoxAmigos" Style="{StaticResource estiloLstBoxAmigos}" Height="380">
                                             <ListBox.ItemContainerStyle>
                                                 <Style TargetType="ListBoxItem" BasedOn="{StaticResource estiloLstBoxItemAmigo}"/>
@@ -237,26 +209,24 @@
                                         </ListBox>
                                     </Grid>
                                 </TabItem>
-                                <TabItem Header="NOTIFICACIONES">
+                                <TabItem Header="{x:Static p:Resources.tbItemNotificaciones}">
                                     <Grid>
                                         <Grid.RowDefinitions>
                                             <RowDefinition Height="Auto"/>
                                             <RowDefinition/>
                                         </Grid.RowDefinitions>
-                                        <Label Style="{StaticResource estiloLblTituloJugadores}">NOTIFICACIONES</Label>
+                                        <Label Style="{StaticResource estiloLblTituloJugadores}" Content="{x:Static p:Resources.tbItemNotificaciones}"></Label>
                                         <ListBox Grid.Row="2" Name="lstBoxNotificaciones" Style="{StaticResource estiloLstBoxAmigos}" Height="380">
                                             <ListBox.ItemContainerStyle>
                                                 <Style TargetType="ListBoxItem" BasedOn="{StaticResource estiloLstBoxItemNotificacionAmigo}"/>
                                             </ListBox.ItemContainerStyle>
-                                            <ListBoxItem/>
-                                            <ListBoxItem Style="{StaticResource estiloLstBoxItemNotificacionPartida}"></ListBoxItem>
                                         </ListBox>
                                     </Grid>
                                 </TabItem>
                             </TabControl>
                             <Border Grid.Row="1" BorderThickness="0,5,0,0" BorderBrush="#042437">
-                                <Button Click="ClickRegresarMenu"
-                                    Style="{StaticResource estiloBtnCancelar}" Width="300" Margin="10">REGRESAR A MENÚ PRINCIPAL</Button>
+                                <Button Click="ClickRegresarMenu" Content="{x:Static p:Resources.btnRegresarMenuPrincipal}"
+                                    Style="{StaticResource estiloBtnCancelar}" Width="300" Margin="10"></Button>
                             </Border>
                         </Grid>
                         

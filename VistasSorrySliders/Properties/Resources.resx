@@ -117,6 +117,12 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="btnAceptar" xml:space="preserve">
+    <value>ACEPTAR</value>
+  </data>
+  <data name="btnBanear" xml:space="preserve">
+    <value>BANEAR</value>
+  </data>
   <data name="btnBuscar" xml:space="preserve">
     <value>BUSCAR</value>
   </data>
@@ -135,8 +141,20 @@
   <data name="btnCrearLobby" xml:space="preserve">
     <value>C R E A R   L O B B Y</value>
   </data>
+  <data name="btnEliminarAmigo" xml:space="preserve">
+    <value>ELIMINAR AMIGO</value>
+  </data>
+  <data name="btnEliminarBaneo" xml:space="preserve">
+    <value>ELIMINAR BANEO</value>
+  </data>
+  <data name="btnEliminarNotificacion" xml:space="preserve">
+    <value>ELIMINAR</value>
+  </data>
   <data name="btnEnviarCodigo" xml:space="preserve">
     <value>ENVIAR CÓDIGO</value>
+  </data>
+  <data name="btnEnviarSolicitudAmistad" xml:space="preserve">
+    <value>ENVIAR SOLICITUD DE AMISTAD</value>
   </data>
   <data name="btnGuardarCambios" xml:space="preserve">
     <value>GUARDAR CAMBIOS</value>
@@ -144,8 +162,14 @@
   <data name="btnIniciarPartida" xml:space="preserve">
     <value>I N I C I A R   P A R T I D A</value>
   </data>
+  <data name="btnRechazar" xml:space="preserve">
+    <value>RECHAZAR</value>
+  </data>
   <data name="btnRegistrarCuenta" xml:space="preserve">
     <value>REGISTRAR CUENTA</value>
+  </data>
+  <data name="btnRegresarMenuPrincipal" xml:space="preserve">
+    <value>REGRESAR A MENÚ PRINCIPAL</value>
   </data>
   <data name="btnSalir" xml:space="preserve">
     <value>SALIR</value>
@@ -213,8 +237,14 @@
   <data name="lblListaAmigos" xml:space="preserve">
     <value>Lista de amigos</value>
   </data>
+  <data name="lblListaAmigosMayuscula" xml:space="preserve">
+    <value>LISTA AMIGOS</value>
+  </data>
   <data name="lblListaDeJugadores" xml:space="preserve">
     <value>Lista de jugadores</value>
+  </data>
+  <data name="lblListaJugadores" xml:space="preserve">
+    <value>LISTA JUGADORES</value>
   </data>
   <data name="lblLobbyEspera" xml:space="preserve">
     <value>LOBBY DE ESPERA</value>
@@ -306,8 +336,23 @@
   <data name="msgTituloTamañoImagenError" xml:space="preserve">
     <value>Imagen demasiado grande</value>
   </data>
+  <data name="rnMensajeSolicitudAmistad" xml:space="preserve">
+    <value>envío una solicitud de amistad</value>
+  </data>
+  <data name="rnMensajeSolicitudPartida" xml:space="preserve">
+    <value>te invitó a su partida con el código</value>
+  </data>
   <data name="strArchivosImagen" xml:space="preserve">
     <value>Archivos de imagen</value>
+  </data>
+  <data name="tbItemAmigos" xml:space="preserve">
+    <value>AMIGOS</value>
+  </data>
+  <data name="tbItemJugadores" xml:space="preserve">
+    <value>JUGADORES</value>
+  </data>
+  <data name="tbItemNotificaciones" xml:space="preserve">
+    <value>NOTIFICACIONES</value>
   </data>
   <data name="txtBlockAjustes" xml:space="preserve">
     <value>AJUSTES</value>

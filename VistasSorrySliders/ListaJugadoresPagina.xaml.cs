@@ -162,7 +162,7 @@ namespace VistasSorrySliders
                 }
                 if (EsCuentaAmigo(cuenta))
                 {
-                    lstBoxItemCuenta.Style = (Style)FindResource("estiloLstBoxItemJugadorAmigo");
+                    lstBoxItemCuenta.Style = (Style)FindResource("estiloLstBoxItemAmigo");
                 }
                 lstBoxJugadores.Items.Add(lstBoxItemCuenta);
             }
