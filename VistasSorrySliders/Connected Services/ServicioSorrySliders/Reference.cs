@@ -1607,6 +1607,12 @@ namespace VistasSorrySliders.ServicioSorrySliders {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IListaAmigos/GuardarNotificacion", ReplyAction="http://tempuri.org/IListaAmigos/GuardarNotificacionResponse")]
         System.Threading.Tasks.Task<VistasSorrySliders.ServicioSorrySliders.Constantes> GuardarNotificacionAsync(VistasSorrySliders.ServicioSorrySliders.NotificacionSet notificacion);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IListaAmigos/RecuperarNotificaciones", ReplyAction="http://tempuri.org/IListaAmigos/RecuperarNotificacionesResponse")]
+        System.ValueTuple<VistasSorrySliders.ServicioSorrySliders.Constantes, VistasSorrySliders.ServicioSorrySliders.NotificacionSet[]> RecuperarNotificaciones(string correoElectronico);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IListaAmigos/RecuperarNotificaciones", ReplyAction="http://tempuri.org/IListaAmigos/RecuperarNotificacionesResponse")]
+        System.Threading.Tasks.Task<System.ValueTuple<VistasSorrySliders.ServicioSorrySliders.Constantes, VistasSorrySliders.ServicioSorrySliders.NotificacionSet[]>> RecuperarNotificacionesAsync(string correoElectronico);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -1666,6 +1672,97 @@ namespace VistasSorrySliders.ServicioSorrySliders {
         
         public System.Threading.Tasks.Task<VistasSorrySliders.ServicioSorrySliders.Constantes> GuardarNotificacionAsync(VistasSorrySliders.ServicioSorrySliders.NotificacionSet notificacion) {
             return base.Channel.GuardarNotificacionAsync(notificacion);
+        }
+        
+        public System.ValueTuple<VistasSorrySliders.ServicioSorrySliders.Constantes, VistasSorrySliders.ServicioSorrySliders.NotificacionSet[]> RecuperarNotificaciones(string correoElectronico) {
+            return base.Channel.RecuperarNotificaciones(correoElectronico);
+        }
+        
+        public System.Threading.Tasks.Task<System.ValueTuple<VistasSorrySliders.ServicioSorrySliders.Constantes, VistasSorrySliders.ServicioSorrySliders.NotificacionSet[]>> RecuperarNotificacionesAsync(string correoElectronico) {
+            return base.Channel.RecuperarNotificacionesAsync(correoElectronico);
+        }
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServicioSorrySliders.INotificarJugadores", CallbackContract=typeof(VistasSorrySliders.ServicioSorrySliders.INotificarJugadoresCallback))]
+    public interface INotificarJugadores {
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/INotificarJugadores/AgregarProxy", ReplyAction="http://tempuri.org/INotificarJugadores/AgregarProxyResponse")]
+        VistasSorrySliders.ServicioSorrySliders.Constantes AgregarProxy(string correoElectronico);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/INotificarJugadores/AgregarProxy", ReplyAction="http://tempuri.org/INotificarJugadores/AgregarProxyResponse")]
+        System.Threading.Tasks.Task<VistasSorrySliders.ServicioSorrySliders.Constantes> AgregarProxyAsync(string correoElectronico);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/INotificarJugadores/EliminarProxy", ReplyAction="http://tempuri.org/INotificarJugadores/EliminarProxyResponse")]
+        void EliminarProxy(string correoElectronico);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/INotificarJugadores/EliminarProxy", ReplyAction="http://tempuri.org/INotificarJugadores/EliminarProxyResponse")]
+        System.Threading.Tasks.Task EliminarProxyAsync(string correoElectronico);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/INotificarJugadores/NotificarJugadorInvitado")]
+        void NotificarJugadorInvitado(string correoElectronico);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/INotificarJugadores/NotificarJugadorInvitado")]
+        System.Threading.Tasks.Task NotificarJugadorInvitadoAsync(string correoElectronico);
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public interface INotificarJugadoresCallback {
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/INotificarJugadores/RecuperarNotificacion")]
+        void RecuperarNotificacion();
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public interface INotificarJugadoresChannel : VistasSorrySliders.ServicioSorrySliders.INotificarJugadores, System.ServiceModel.IClientChannel {
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class NotificarJugadoresClient : System.ServiceModel.DuplexClientBase<VistasSorrySliders.ServicioSorrySliders.INotificarJugadores>, VistasSorrySliders.ServicioSorrySliders.INotificarJugadores {
+        
+        public NotificarJugadoresClient(System.ServiceModel.InstanceContext callbackInstance) : 
+                base(callbackInstance) {
+        }
+        
+        public NotificarJugadoresClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName) : 
+                base(callbackInstance, endpointConfigurationName) {
+        }
+        
+        public NotificarJugadoresClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName, string remoteAddress) : 
+                base(callbackInstance, endpointConfigurationName, remoteAddress) {
+        }
+        
+        public NotificarJugadoresClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(callbackInstance, endpointConfigurationName, remoteAddress) {
+        }
+        
+        public NotificarJugadoresClient(System.ServiceModel.InstanceContext callbackInstance, System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(callbackInstance, binding, remoteAddress) {
+        }
+        
+        public VistasSorrySliders.ServicioSorrySliders.Constantes AgregarProxy(string correoElectronico) {
+            return base.Channel.AgregarProxy(correoElectronico);
+        }
+        
+        public System.Threading.Tasks.Task<VistasSorrySliders.ServicioSorrySliders.Constantes> AgregarProxyAsync(string correoElectronico) {
+            return base.Channel.AgregarProxyAsync(correoElectronico);
+        }
+        
+        public void EliminarProxy(string correoElectronico) {
+            base.Channel.EliminarProxy(correoElectronico);
+        }
+        
+        public System.Threading.Tasks.Task EliminarProxyAsync(string correoElectronico) {
+            return base.Channel.EliminarProxyAsync(correoElectronico);
+        }
+        
+        public void NotificarJugadorInvitado(string correoElectronico) {
+            base.Channel.NotificarJugadorInvitado(correoElectronico);
+        }
+        
+        public System.Threading.Tasks.Task NotificarJugadorInvitadoAsync(string correoElectronico) {
+            return base.Channel.NotificarJugadorInvitadoAsync(correoElectronico);
         }
     }
     

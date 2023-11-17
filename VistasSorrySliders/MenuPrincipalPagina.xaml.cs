@@ -190,7 +190,7 @@ namespace VistasSorrySliders
 
         private void ClickIrJugadoresAmigos(object sender, RoutedEventArgs e)
         {
-            ListaJugadoresPagina jugadores = new ListaJugadoresPagina();
+            ListaJugadoresPagina jugadores = new ListaJugadoresPagina(_cuentaUsuario);
             this.NavigationService.Navigate(jugadores);
         }
     }

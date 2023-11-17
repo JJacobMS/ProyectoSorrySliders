@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
+using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -20,19 +22,26 @@ namespace VistasSorrySliders
     /// <summary>
     /// Lógica de interacción para ListaJugadoresPagina.xaml
     /// </summary>
-    public partial class ListaJugadoresPagina : Page
+    public partial class ListaJugadoresPagina : Page, INotificarJugadoresCallback
     {
         private List<CuentaSet> _baneados;
         private List<CuentaSet> _amigos;
         private List<CuentaSet> _lista;
-        public ListaJugadoresPagina()
+        private NotificarJugadoresClient _proxyNotificar;
+        private CuentaSet _cuentaUsuario;
+        private ListaAmigosClient _proxyAmigos;
+        public ListaJugadoresPagina(CuentaSet cuenta)
         {
             InitializeComponent();
+            _cuentaUsuario = cuenta;
+            CrearProxyAmigos();
+            GuardarContexto();
             _lista = new List<CuentaSet> {new CuentaSet { Nickname = "jazmin", CorreoElectronico= "jazmin123@gmail.com"}, 
                 new CuentaSet {Nickname= "sulem", CorreoElectronico = "sulem477@gmail.com"},
                 new CuentaSet { Nickname = "Jacobo", CorreoElectronico= "jacob123@gmail.com"}, 
                 new CuentaSet { Nickname = "melus", CorreoElectronico = "waos@gmail.com"}
             };
+            
 
             _baneados = new List<CuentaSet> { 
                 new CuentaSet { Nickname = "sulem", CorreoElectronico= "sulem477@gmail.com"},
@@ -42,11 +51,101 @@ namespace VistasSorrySliders
             _amigos = new List<CuentaSet> {
                 new CuentaSet { Nickname = "melus", CorreoElectronico = "waos@gmail.com"}
             };
-
+            
             CargarJugadores();
             CargarAmigos();
             CargarNotificaciones();
-            
+        }
+
+        private void CrearProxyAmigos()
+        {
+            Logger log = new Logger(this.GetType());
+            Constantes resultado;
+            try
+            {
+                _proxyAmigos = new ListaAmigosClient();
+                resultado = Constantes.OPERACION_EXITOSA;
+            }
+            catch (CommunicationException ex)
+            {
+                Console.WriteLine(ex);
+                resultado = Constantes.ERROR_CONEXION_SERVIDOR;
+                log.LogError("Error de Comunicación con el Servidor", ex);
+            }
+            catch (TimeoutException ex)
+            {
+                Console.WriteLine(ex);
+                resultado = Constantes.ERROR_CONEXION_SERVIDOR;
+                log.LogWarn("Se agoto el tiempo de espera del servidor", ex);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+                resultado = Constantes.ERROR_CONEXION_SERVIDOR;
+                log.LogFatal("Ha ocurrido un error inesperado", ex);
+            }
+            switch (resultado)
+            {
+                case Constantes.OPERACION_EXITOSA:
+                    break;
+                case Constantes.OPERACION_EXITOSA_VACIA:
+                    break;
+                case Constantes.ERROR_CONEXION_BD:
+                    MessageBox.Show(Properties.Resources.msgErrorBaseDatos);
+                    break;
+                case Constantes.ERROR_CONSULTA:
+                    MessageBox.Show(Properties.Resources.msgErrorBaseDatos);
+                    break;
+                case Constantes.ERROR_CONEXION_SERVIDOR:
+                    MessageBox.Show(Properties.Resources.msgErrorConexion);
+                    break;
+            }
+        }
+
+        private void GuardarContexto() 
+        {
+            Logger log = new Logger(this.GetType());
+            Constantes resultado;
+            try
+            {
+                InstanceContext contexto = new InstanceContext(this);
+                _proxyNotificar = new NotificarJugadoresClient(contexto);
+                resultado = _proxyNotificar.AgregarProxy(_cuentaUsuario.CorreoElectronico);
+            }
+            catch (CommunicationException ex)
+            {
+                Console.WriteLine(ex);
+                resultado = Constantes.ERROR_CONEXION_SERVIDOR;
+                log.LogError("Error de Comunicación con el Servidor", ex);
+            }
+            catch (TimeoutException ex)
+            {
+                Console.WriteLine(ex);
+                resultado = Constantes.ERROR_CONEXION_SERVIDOR;
+                log.LogWarn("Se agoto el tiempo de espera del servidor", ex);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+                resultado = Constantes.ERROR_CONEXION_SERVIDOR;
+                log.LogFatal("Ha ocurrido un error inesperado", ex);
+            }
+            switch (resultado)
+            {
+                case Constantes.OPERACION_EXITOSA:
+                    break;
+                case Constantes.OPERACION_EXITOSA_VACIA:
+                    break;
+                case Constantes.ERROR_CONEXION_BD:
+                    MessageBox.Show(Properties.Resources.msgErrorBaseDatos);
+                    break;
+                case Constantes.ERROR_CONSULTA:
+                    MessageBox.Show(Properties.Resources.msgErrorBaseDatos);
+                    break;
+                case Constantes.ERROR_CONEXION_SERVIDOR:
+                    MessageBox.Show(Properties.Resources.msgErrorConexion);
+                    break;
+            }
         }
 
         private void CargarJugadores()
@@ -69,36 +168,84 @@ namespace VistasSorrySliders
             }
         }
 
-        private void CargarNotificaciones()
+        private void CargarNotificaciones() 
         {
-            foreach (CuentaSet cuenta in _lista)
+            Constantes resultado;
+            NotificacionSet[] listaNotificaciones = new NotificacionSet[] { };
+            Logger log = new Logger(this.GetType());
+            try
+            {
+                Console.WriteLine("CARGAR NOTIFICACIONES");
+                (resultado, listaNotificaciones) = _proxyAmigos.RecuperarNotificaciones(_cuentaUsuario.CorreoElectronico);
+                resultado = Constantes.OPERACION_EXITOSA;
+            }
+            catch (CommunicationException ex)
+            {
+                Console.WriteLine(ex);
+                resultado = Constantes.ERROR_CONEXION_SERVIDOR;
+                log.LogError("Error de Comunicación con el Servidor", ex);
+            }
+            catch (TimeoutException ex)
+            {
+                Console.WriteLine(ex);
+                resultado = Constantes.ERROR_CONEXION_SERVIDOR;
+                log.LogWarn("Se agoto el tiempo de espera del servidor", ex);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+                resultado = Constantes.ERROR_CONEXION_SERVIDOR;
+                log.LogFatal("Ha ocurrido un error inesperado", ex);
+            }
+            switch (resultado)
+            {
+                case Constantes.OPERACION_EXITOSA:
+                    ObtenerNotificaciones(listaNotificaciones);
+                    break;
+                case Constantes.OPERACION_EXITOSA_VACIA:
+                    break;
+                case Constantes.ERROR_CONEXION_BD:
+                    MessageBox.Show(Properties.Resources.msgErrorBaseDatos);
+                    break;
+                case Constantes.ERROR_CONSULTA:
+                    MessageBox.Show(Properties.Resources.msgErrorBaseDatos);
+                    break;
+                case Constantes.ERROR_CONEXION_SERVIDOR:
+                    MessageBox.Show(Properties.Resources.msgErrorConexion);
+                    break;
+            }
+        }
+
+        private void ObtenerNotificaciones(NotificacionSet[] listaNotificaciones)
+        {
+            Debug.WriteLine("Cargando notificaciones");
+
+            foreach (NotificacionSet cuenta in listaNotificaciones)
             {
                 ListBoxItem lstBoxItemCuenta = new ListBoxItem
                 {
                     DataContext = cuenta
                 };
-                if (EsNotificacionPartida())
+                //QUITAR CODIGO HARDCODEADO Y RECUPËRAR LOS TIPOS NOTIFICACIONES
+                if (cuenta.IdTipoNotificacion==1)
                 {
-                    //lstBoxItemCuenta.Style = (Style)FindResource("");
+                    Console.WriteLine(cuenta.IdTipoNotificacion+ " 1");
+                    //lstBoxItemCuenta.Style = (Style)FindResource("estiloLstBoxItemNotificacionAmigo");
+
+
+
                 }
-                if (EsNotificacionAmistad())
+                if (cuenta.IdTipoNotificacion == 2)
                 {
-                    //lstBoxItemCuenta.Style = (Style)FindResource("");
+                    Console.WriteLine(cuenta.IdTipoNotificacion+ " 2");
+                    //lstBoxItemCuenta.Style = (Style)FindResource("estiloLstBoxItemNotificacionPartida");
                 }
                 //lstBoxNotificaciones.Items.Add(lstBoxItemCuenta);
             }
 
             Console.WriteLine("Cargando jugadores");
         }
-        private bool EsNotificacionPartida()
-        {
-            return true;
-        }
 
-        private bool EsNotificacionAmistad() 
-        {
-            return true;
-        }
 
         private void CargarAmigos()
         {
@@ -133,6 +280,26 @@ namespace VistasSorrySliders
 
         private void ClickRegresarMenu(object sender, RoutedEventArgs e)
         {
+            Logger log = new Logger(this.GetType());
+            try
+            {
+                _proxyNotificar.EliminarProxy(_cuentaUsuario.CorreoElectronico);
+            }
+            catch(CommunicationException ex)
+            {
+                Console.WriteLine(ex);
+                log.LogError("Error de Comunicación con el Servidor", ex);
+            }
+            catch (TimeoutException ex)
+            {
+                Console.WriteLine(ex);
+                log.LogWarn("Se agoto el tiempo de espera del servidor", ex);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+                log.LogFatal("Ha ocurrido un error inesperado", ex);
+            }
             this.NavigationService.GoBack();
         }
 

@@ -25,7 +25,7 @@ namespace VistasSorrySliders
     /// <summary>
     /// Lógica de interacción para ListaAmigosPagina.xaml
     /// </summary>
-    public partial class ListaAmigosPagina : Page
+    public partial class ListaAmigosPagina : Page, INotificarJugadoresCallback
     {
         private CuentaSet _cuenta;
         private string _codigoPartida;
@@ -41,7 +41,6 @@ namespace VistasSorrySliders
             RecuperarTiposNotificacion();
         }
 
-
         private void RecuperarAmigos()
         {
             Constantes resultado;
@@ -50,7 +49,6 @@ namespace VistasSorrySliders
             try
             {
                 CuentaSet[] cuentas;
-                InstanceContext contexto = new InstanceContext(this);
                 _proxyAmigos = new ListaAmigosClient();
                 (resultado, cuentas) = _proxyAmigos.RecuperarAmigosCuenta(_cuenta.CorreoElectronico);
                 if (cuentas != null)
@@ -234,8 +232,7 @@ namespace VistasSorrySliders
                     IdTipoNotificacion = _tiposNotificacion[0].IdTipoNotificacion,
                     Mensaje = _codigoPartida
                 };
-                _proxyAmigos.GuardarNotificacion(notificacionNueva);
-                resultado = Constantes.OPERACION_EXITOSA;
+                resultado = _proxyAmigos.GuardarNotificacion(notificacionNueva);
             }
             catch (CommunicationException ex)
             {
@@ -255,6 +252,7 @@ namespace VistasSorrySliders
                 resultado = Constantes.ERROR_CONEXION_SERVIDOR;
                 log.LogFatal("Ha ocurrido un error inesperado", ex);
             }
+            Console.WriteLine(resultado);
             switch (resultado)
             {
                 case Constantes.ERROR_CONEXION_BD:
@@ -267,6 +265,7 @@ namespace VistasSorrySliders
                     MessageBox.Show(Properties.Resources.msgErrorConexion);
                     break;
                 case Constantes.OPERACION_EXITOSA:
+                    NotificarUsuarioInvitado(cuentaJugadorClickeado);
                     break;
                 case Constantes.OPERACION_EXITOSA_VACIA:
                     MessageBox.Show(Properties.Resources.msgErrorBaseDatos);
@@ -276,13 +275,39 @@ namespace VistasSorrySliders
             }
         }
 
+        private void NotificarUsuarioInvitado(CuentaSet cuentaJugadorClickeado)
+        {
+            Logger log = new Logger(this.GetType());
+            try
+            {
+                InstanceContext contexto = new InstanceContext(this);
+                NotificarJugadoresClient proxyNotificarJugador = new NotificarJugadoresClient(contexto);
+                proxyNotificarJugador.NotificarJugadorInvitado(cuentaJugadorClickeado.CorreoElectronico);
+            }
+            catch (CommunicationException ex)
+            {
+                Console.WriteLine(ex);
+                log.LogError("Error de Comunicación con el Servidor", ex);
+            }
+            catch (TimeoutException ex)
+            {
+                Console.WriteLine(ex);
+                log.LogWarn("Se agoto el tiempo de espera del servidor", ex);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+                log.LogFatal("Ha ocurrido un error inesperado", ex);
+            }
+        }
+
+
         private void RecuperarTiposNotificacion() 
         {
             Logger log = new Logger(this.GetType());
             Constantes resultado = new Constantes();
             try
             {
-                InstanceContext contexto = new InstanceContext(this);
                 (resultado, _tiposNotificacion) = _proxyAmigos.RecuperarTipoNotificacion();
                 
             }
@@ -326,5 +351,9 @@ namespace VistasSorrySliders
             }
         }
 
+        public void RecuperarNotificacion()
+        {
+            Console.WriteLine("RecuperarNotificacion lista amigos");
+        }
     }
 }
