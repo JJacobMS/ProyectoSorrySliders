@@ -205,7 +205,7 @@ namespace VistasSorrySliders
             switch (resultado)
             {
                 case Constantes.OPERACION_EXITOSA:
-                    ObtenerNotificaciones(listaNotificaciones);
+                    MostrarNotificaciones(listaNotificaciones);
                     break;
                 case Constantes.OPERACION_EXITOSA_VACIA:
                     break;
@@ -221,34 +221,26 @@ namespace VistasSorrySliders
             }
         }
 
-        private void ObtenerNotificaciones(List<NotificacionSet> listaNotificaciones)
+        private void MostrarNotificaciones(List<NotificacionSet> listaNotificaciones)
         {
-            Debug.WriteLine("Cargando notificaciones");
-
-            foreach (NotificacionSet cuenta in listaNotificaciones)
+            lstBoxNotificaciones.Items.Clear();
+            foreach (NotificacionSet notificacion in listaNotificaciones)
             {
                 ListBoxItem lstBoxItemCuenta = new ListBoxItem
                 {
-                    DataContext = cuenta
+                    DataContext = notificacion
                 };
-                //QUITAR CODIGO HARDCODEADO Y RECUPËRAR LOS TIPOS NOTIFICACIONES
-                if (cuenta.IdTipoNotificacion==1)
+                //QUITAR CODIGO HARDCODEADO Y RECUPERAR LOS TIPOS NOTIFICACIONES
+                if (notificacion.IdTipoNotificacion==2)
                 {
-                    Console.WriteLine(cuenta.IdTipoNotificacion+ " 1");
-                    //lstBoxItemCuenta.Style = (Style)FindResource("estiloLstBoxItemNotificacionAmigo");
-
-
-
+                    lstBoxItemCuenta.Style = (Style)FindResource("estiloLstBoxItemNotificacionAmigo");
                 }
-                if (cuenta.IdTipoNotificacion == 2)
+                if (notificacion.IdTipoNotificacion == 1)
                 {
-                    Console.WriteLine(cuenta.IdTipoNotificacion+ " 2");
-                    //lstBoxItemCuenta.Style = (Style)FindResource("estiloLstBoxItemNotificacionPartida");
+                    lstBoxItemCuenta.Style = (Style)FindResource("estiloLstBoxItemNotificacionPartida");
                 }
-                //lstBoxNotificaciones.Items.Add(lstBoxItemCuenta);
+                lstBoxNotificaciones.Items.Add(lstBoxItemCuenta);
             }
-
-            Console.WriteLine("Cargando jugadores");
         }
 
 

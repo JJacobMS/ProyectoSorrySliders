@@ -332,8 +332,7 @@ namespace VistasSorrySliders
             switch (resultado)
             {
                 case Constantes.ERROR_CONEXION_BD:
-                    Console.WriteLine("WAOS 2");
-                    MessageBox.Show(Properties.Resources.msgErrorBaseDatos + " 2");
+                    MessageBox.Show(Properties.Resources.msgErrorBaseDatos);
                     break;
                 case Constantes.ERROR_CONSULTA:
                     MessageBox.Show(Properties.Resources.msgErrorBaseDatos);
