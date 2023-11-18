@@ -23,6 +23,8 @@ namespace VistasSorrySliders.LogicaJuego
         public const int NO_INTERVALOS = 5;
         public const int TAMANO_DADO = 73;
         public const int DADOS_POR_JUGADOR = 2;
+        public const int ANCHO_TABLERO = 615;
+        public const int ALTO_TABLERO = 615;
 
         public List<JugadorLanzamiento> ListaJugadores;
         public List<PeonLanzamiento> ListaPeonesTablero;
@@ -41,7 +43,7 @@ namespace VistasSorrySliders.LogicaJuego
         public event Action<int, int> MostrarPotenciaLanzamiento;
         public event Action TerminarTurno;
         public event Action<PeonLanzamiento> EliminarPeonTablero;
-
+        public event Action FinalizarMovimientoPeones;
 
         public Tablero()
         {
@@ -57,7 +59,7 @@ namespace VistasSorrySliders.LogicaJuego
 
             _temporizadorPeonesMovimiento = new DispatcherTimer();
             _temporizadorPeonesMovimiento.Tick += IniciarMovimientoPeones;
-            _temporizadorPeonesMovimiento.Interval = TimeSpan.FromMilliseconds(20);
+            _temporizadorPeonesMovimiento.Interval = TimeSpan.FromMilliseconds(50);
         }
 
         private void IniciarMovimientoDados(object sender, EventArgs e)
@@ -81,7 +83,7 @@ namespace VistasSorrySliders.LogicaJuego
             }
             if (piezasEnMovimiento == 0)
             {
-                SiguienteTurno();
+                FinalizarTurno();
             }
         }
         private void ComprobarLugarValidoFinal()
@@ -98,15 +100,18 @@ namespace VistasSorrySliders.LogicaJuego
             {
                 ListaPeonesTablero.Remove(peonAEliminar);
                 EliminarPeonTablero?.Invoke(peonAEliminar);
-
             }
         }
-        private void SiguienteTurno()
+        private void FinalizarTurno()
         {
             _temporizadorPeonesMovimiento.Stop();
-            Task.Delay(1000).Wait();
-            ComprobarLugarValidoFinal();
+            Task.Delay(500).Wait();
+            FinalizarMovimientoPeones?.Invoke();            
+        }
 
+        public void CambiarTurnoSiguiente()
+        {
+            ComprobarLugarValidoFinal();
             TerminarTurno?.Invoke();
             ListaJugadores[TurnoActual].TerminarTurno();
 
@@ -136,29 +141,59 @@ namespace VistasSorrySliders.LogicaJuego
             _temporizadorDado.Start();
 
         }
-        public void DetenerDado()
+        public int RetornarDado()
         {
             JugadorLanzamiento jugadorTurno = ListaJugadores[TurnoActual];
             if (jugadorTurno.NumeroDadosLanzados < DADOS_POR_JUGADOR)
             {
-                jugadorTurno.AumentarDadosLanzados();
+                return jugadorTurno.DadosJugador[jugadorTurno.NumeroDadosLanzados].NumeroDado;
             }
-
-            if (jugadorTurno.NumeroDadosLanzados >= DADOS_POR_JUGADOR)
+            return -1;
+        }
+        public void DetenerDadoPosicion(int numeroDado)
+        {
+            JugadorLanzamiento jugadorTurno = ListaJugadores[TurnoActual];
+            switch (jugadorTurno.NumeroDadosLanzados)
             {
-                (int potencia, int potenciaAgregada) = jugadorTurno.RegresarPotenciaDados();
-                MostrarPotenciaLanzamiento?.Invoke(potencia, potenciaAgregada);
-                _temporizadorDado.Stop();
-                _temporizadorLinea.Start();
+                case 0:
+                    jugadorTurno.AumentarDadosLanzados();
+                    jugadorTurno.DadosJugador[0].AsignarPosicionDado(numeroDado);
+                    break;
+                case 1:
+                    jugadorTurno.AumentarDadosLanzados();
+                    jugadorTurno.DadosJugador[1].AsignarPosicionDado(numeroDado);
+
+                    (int potencia, int potenciaAgregada) = jugadorTurno.RegresarPotenciaDados();
+                    MostrarPotenciaLanzamiento?.Invoke(potencia, potenciaAgregada);
+                    _temporizadorDado.Stop();
+                    _temporizadorLinea.Start();
+                    break;
             }
         }
+
         public void LanzarPeonActual()
         {
             _temporizadorLinea.Stop();
-
             ListaJugadores[TurnoActual].IniciarMovimientoPeon();
-
             _temporizadorPeonesMovimiento.Start();
+        }
+
+        public (double, double) RecuperarPosicionLineaJugadorActual()
+        {
+            JugadorLanzamiento jugadorTurno = ListaJugadores[TurnoActual];
+            if (jugadorTurno.LineaMovimiento != null)
+            {
+                LineaMovimiento linea = jugadorTurno.LineaMovimiento;
+                return (linea.FiguraLinea.X2, linea.FiguraLinea.Y2);
+            }
+            return (-1, -1);
+        }
+        public void DetenerLineaMovimiento(double posicionX, double posicionY)
+        {
+            JugadorLanzamiento jugadorTurno = ListaJugadores[TurnoActual];
+            jugadorTurno.LineaMovimiento.FiguraLinea.X2 = posicionX;
+            jugadorTurno.LineaMovimiento.FiguraLinea.Y2 = posicionY;
+            LanzarPeonActual();
         }
 
     }

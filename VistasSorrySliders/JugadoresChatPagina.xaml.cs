@@ -79,7 +79,6 @@ namespace VistasSorrySliders
         {
             if(txtBoxMensajeChat.Text.Length > 0) 
             {
-                txtBoxMensajeChat.Text = "";
                 Logger log = new Logger(this.GetType());
                 try
                 {
@@ -102,6 +101,7 @@ namespace VistasSorrySliders
                     Console.WriteLine(ex);
                     log.LogFatal("Ha ocurrido un error inesperado", ex);
                 }
+                txtBoxMensajeChat.Text = "";
             }
             
         }

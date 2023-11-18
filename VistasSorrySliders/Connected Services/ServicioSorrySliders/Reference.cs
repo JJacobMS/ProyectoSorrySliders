@@ -1956,4 +1956,124 @@ namespace VistasSorrySliders.ServicioSorrySliders {
             return base.Channel.IngresarAlChatAsync(uid, correo);
         }
     }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServicioSorrySliders.IJuegoLanzamiento", CallbackContract=typeof(VistasSorrySliders.ServicioSorrySliders.IJuegoLanzamientoCallback))]
+    public interface IJuegoLanzamiento {
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IJuegoLanzamiento/AgregarJugadorJuegoLanzamiento")]
+        void AgregarJugadorJuegoLanzamiento(string codigoPartida, string correoElectronico);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IJuegoLanzamiento/AgregarJugadorJuegoLanzamiento")]
+        System.Threading.Tasks.Task AgregarJugadorJuegoLanzamientoAsync(string codigoPartida, string correoElectronico);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IJuegoLanzamiento/EliminarJugadorJuegoLanzamiento")]
+        void EliminarJugadorJuegoLanzamiento(string codigoPartida);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IJuegoLanzamiento/EliminarJugadorJuegoLanzamiento")]
+        System.Threading.Tasks.Task EliminarJugadorJuegoLanzamientoAsync(string codigoPartida);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IJuegoLanzamiento/NotificarLanzamientoDado")]
+        void NotificarLanzamientoDado(string codigoPartida, string correo, int numeroDado);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IJuegoLanzamiento/NotificarLanzamientoDado")]
+        System.Threading.Tasks.Task NotificarLanzamientoDadoAsync(string codigoPartida, string correo, int numeroDado);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IJuegoLanzamiento/NotificarLanzamientoLinea")]
+        void NotificarLanzamientoLinea(string codigoPartida, string correo, double posicionX, double posicionY);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IJuegoLanzamiento/NotificarLanzamientoLinea")]
+        System.Threading.Tasks.Task NotificarLanzamientoLineaAsync(string codigoPartida, string correo, double posicionX, double posicionY);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IJuegoLanzamiento/NotificarFinalizarLanzamiento")]
+        void NotificarFinalizarLanzamiento(string codigoPartida, string correo);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IJuegoLanzamiento/NotificarFinalizarLanzamiento")]
+        System.Threading.Tasks.Task NotificarFinalizarLanzamientoAsync(string codigoPartida, string correo);
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public interface IJuegoLanzamientoCallback {
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IJuegoLanzamiento/JugadorTiroDado")]
+        void JugadorTiroDado(int numeroDado);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IJuegoLanzamiento/JugadorDetuvoLinea")]
+        void JugadorDetuvoLinea(double posicionX, double posicionY);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IJuegoLanzamiento/JugadorSalioJuegoLanzamiento")]
+        void JugadorSalioJuegoLanzamiento(string correoElectronicoSalido);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IJuegoLanzamiento/JugadoresListosParaSiguienteTurno")]
+        void JugadoresListosParaSiguienteTurno();
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public interface IJuegoLanzamientoChannel : VistasSorrySliders.ServicioSorrySliders.IJuegoLanzamiento, System.ServiceModel.IClientChannel {
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class JuegoLanzamientoClient : System.ServiceModel.DuplexClientBase<VistasSorrySliders.ServicioSorrySliders.IJuegoLanzamiento>, VistasSorrySliders.ServicioSorrySliders.IJuegoLanzamiento {
+        
+        public JuegoLanzamientoClient(System.ServiceModel.InstanceContext callbackInstance) : 
+                base(callbackInstance) {
+        }
+        
+        public JuegoLanzamientoClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName) : 
+                base(callbackInstance, endpointConfigurationName) {
+        }
+        
+        public JuegoLanzamientoClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName, string remoteAddress) : 
+                base(callbackInstance, endpointConfigurationName, remoteAddress) {
+        }
+        
+        public JuegoLanzamientoClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(callbackInstance, endpointConfigurationName, remoteAddress) {
+        }
+        
+        public JuegoLanzamientoClient(System.ServiceModel.InstanceContext callbackInstance, System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(callbackInstance, binding, remoteAddress) {
+        }
+        
+        public void AgregarJugadorJuegoLanzamiento(string codigoPartida, string correoElectronico) {
+            base.Channel.AgregarJugadorJuegoLanzamiento(codigoPartida, correoElectronico);
+        }
+        
+        public System.Threading.Tasks.Task AgregarJugadorJuegoLanzamientoAsync(string codigoPartida, string correoElectronico) {
+            return base.Channel.AgregarJugadorJuegoLanzamientoAsync(codigoPartida, correoElectronico);
+        }
+        
+        public void EliminarJugadorJuegoLanzamiento(string codigoPartida) {
+            base.Channel.EliminarJugadorJuegoLanzamiento(codigoPartida);
+        }
+        
+        public System.Threading.Tasks.Task EliminarJugadorJuegoLanzamientoAsync(string codigoPartida) {
+            return base.Channel.EliminarJugadorJuegoLanzamientoAsync(codigoPartida);
+        }
+        
+        public void NotificarLanzamientoDado(string codigoPartida, string correo, int numeroDado) {
+            base.Channel.NotificarLanzamientoDado(codigoPartida, correo, numeroDado);
+        }
+        
+        public System.Threading.Tasks.Task NotificarLanzamientoDadoAsync(string codigoPartida, string correo, int numeroDado) {
+            return base.Channel.NotificarLanzamientoDadoAsync(codigoPartida, correo, numeroDado);
+        }
+        
+        public void NotificarLanzamientoLinea(string codigoPartida, string correo, double posicionX, double posicionY) {
+            base.Channel.NotificarLanzamientoLinea(codigoPartida, correo, posicionX, posicionY);
+        }
+        
+        public System.Threading.Tasks.Task NotificarLanzamientoLineaAsync(string codigoPartida, string correo, double posicionX, double posicionY) {
+            return base.Channel.NotificarLanzamientoLineaAsync(codigoPartida, correo, posicionX, posicionY);
+        }
+        
+        public void NotificarFinalizarLanzamiento(string codigoPartida, string correo) {
+            base.Channel.NotificarFinalizarLanzamiento(codigoPartida, correo);
+        }
+        
+        public System.Threading.Tasks.Task NotificarFinalizarLanzamientoAsync(string codigoPartida, string correo) {
+            return base.Channel.NotificarFinalizarLanzamientoAsync(codigoPartida, correo);
+        }
+    }
 }

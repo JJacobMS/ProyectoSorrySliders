@@ -363,6 +363,39 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
+  <wsp:Policy wsu:Id="NetTcpBinding_IJuegoLanzamiento_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <wsrm:RMAssertion xmlns:wsrm="http://schemas.xmlsoap.org/ws/2005/02/rm/policy">
+          <wsrm:InactivityTimeout Milliseconds="600000" />
+          <wsrm:AcknowledgementInterval Milliseconds="200" />
+        </wsrm:RMAssertion>
+        <msb:BinaryEncoding xmlns:msb="http://schemas.microsoft.com/ws/06/2004/mspolicy/netbinary1" />
+        <sp:TransportBinding xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <wsp:Policy>
+            <sp:TransportToken>
+              <wsp:Policy>
+                <msf:WindowsTransportSecurity xmlns:msf="http://schemas.microsoft.com/ws/2006/05/framing/policy">
+                  <msf:ProtectionLevel>EncryptAndSign</msf:ProtectionLevel>
+                </msf:WindowsTransportSecurity>
+              </wsp:Policy>
+            </sp:TransportToken>
+            <sp:AlgorithmSuite>
+              <wsp:Policy>
+                <sp:Basic256 />
+              </wsp:Policy>
+            </sp:AlgorithmSuite>
+            <sp:Layout>
+              <wsp:Policy>
+                <sp:Strict />
+              </wsp:Policy>
+            </sp:Layout>
+          </wsp:Policy>
+        </sp:TransportBinding>
+        <wsaw:UsingAddressing />
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
   <wsdl:types>
     <xsd:schema targetNamespace="http://tempuri.org/Imports">
       <xsd:import schemaLocation="http://localhost:5454/?xsd=xsd0" namespace="http://tempuri.org/" />
@@ -540,6 +573,33 @@
   <wsdl:message name="IChat_DevolverMensaje_InputCallbackMessage">
     <wsdl:part name="parameters" element="tns:DevolverMensajeResponse" />
   </wsdl:message>
+  <wsdl:message name="IJuegoLanzamiento_AgregarJugadorJuegoLanzamiento_InputMessage">
+    <wsdl:part name="parameters" element="tns:AgregarJugadorJuegoLanzamiento" />
+  </wsdl:message>
+  <wsdl:message name="IJuegoLanzamiento_EliminarJugadorJuegoLanzamiento_InputMessage">
+    <wsdl:part name="parameters" element="tns:EliminarJugadorJuegoLanzamiento" />
+  </wsdl:message>
+  <wsdl:message name="IJuegoLanzamiento_NotificarLanzamientoDado_InputMessage">
+    <wsdl:part name="parameters" element="tns:NotificarLanzamientoDado" />
+  </wsdl:message>
+  <wsdl:message name="IJuegoLanzamiento_NotificarLanzamientoLinea_InputMessage">
+    <wsdl:part name="parameters" element="tns:NotificarLanzamientoLinea" />
+  </wsdl:message>
+  <wsdl:message name="IJuegoLanzamiento_NotificarFinalizarLanzamiento_InputMessage">
+    <wsdl:part name="parameters" element="tns:NotificarFinalizarLanzamiento" />
+  </wsdl:message>
+  <wsdl:message name="IJuegoLanzamiento_JugadorTiroDado_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:JugadorTiroDado" />
+  </wsdl:message>
+  <wsdl:message name="IJuegoLanzamiento_JugadorDetuvoLinea_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:JugadorDetuvoLinea" />
+  </wsdl:message>
+  <wsdl:message name="IJuegoLanzamiento_JugadorSalioJuegoLanzamiento_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:JugadorSalioJuegoLanzamiento" />
+  </wsdl:message>
+  <wsdl:message name="IJuegoLanzamiento_JugadoresListosParaSiguienteTurno_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:JugadoresListosParaSiguienteTurno" />
+  </wsdl:message>
   <wsdl:portType name="IInicioSesion">
     <wsdl:operation name="VerificarExistenciaCorreoCuenta">
       <wsdl:input wsaw:Action="http://tempuri.org/IInicioSesion/VerificarExistenciaCorreoCuenta" message="tns:IInicioSesion_VerificarExistenciaCorreoCuenta_InputMessage" />
@@ -684,6 +744,35 @@
     <wsdl:operation name="DevolverMensaje">
       <wsdl:output wsaw:Action="http://tempuri.org/IChat/DevolverMensaje" message="tns:IChat_DevolverMensaje_OutputCallbackMessage" />
       <wsdl:input wsaw:Action="http://tempuri.org/IChat/DevolverMensajeResponse" message="tns:IChat_DevolverMensaje_InputCallbackMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="IJuegoLanzamiento">
+    <wsdl:operation name="AgregarJugadorJuegoLanzamiento">
+      <wsdl:input wsaw:Action="http://tempuri.org/IJuegoLanzamiento/AgregarJugadorJuegoLanzamiento" message="tns:IJuegoLanzamiento_AgregarJugadorJuegoLanzamiento_InputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="EliminarJugadorJuegoLanzamiento">
+      <wsdl:input wsaw:Action="http://tempuri.org/IJuegoLanzamiento/EliminarJugadorJuegoLanzamiento" message="tns:IJuegoLanzamiento_EliminarJugadorJuegoLanzamiento_InputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="NotificarLanzamientoDado">
+      <wsdl:input wsaw:Action="http://tempuri.org/IJuegoLanzamiento/NotificarLanzamientoDado" message="tns:IJuegoLanzamiento_NotificarLanzamientoDado_InputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="NotificarLanzamientoLinea">
+      <wsdl:input wsaw:Action="http://tempuri.org/IJuegoLanzamiento/NotificarLanzamientoLinea" message="tns:IJuegoLanzamiento_NotificarLanzamientoLinea_InputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="NotificarFinalizarLanzamiento">
+      <wsdl:input wsaw:Action="http://tempuri.org/IJuegoLanzamiento/NotificarFinalizarLanzamiento" message="tns:IJuegoLanzamiento_NotificarFinalizarLanzamiento_InputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="JugadorTiroDado">
+      <wsdl:output wsaw:Action="http://tempuri.org/IJuegoLanzamiento/JugadorTiroDado" message="tns:IJuegoLanzamiento_JugadorTiroDado_OutputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="JugadorDetuvoLinea">
+      <wsdl:output wsaw:Action="http://tempuri.org/IJuegoLanzamiento/JugadorDetuvoLinea" message="tns:IJuegoLanzamiento_JugadorDetuvoLinea_OutputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="JugadorSalioJuegoLanzamiento">
+      <wsdl:output wsaw:Action="http://tempuri.org/IJuegoLanzamiento/JugadorSalioJuegoLanzamiento" message="tns:IJuegoLanzamiento_JugadorSalioJuegoLanzamiento_OutputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="JugadoresListosParaSiguienteTurno">
+      <wsdl:output wsaw:Action="http://tempuri.org/IJuegoLanzamiento/JugadoresListosParaSiguienteTurno" message="tns:IJuegoLanzamiento_JugadoresListosParaSiguienteTurno_OutputCallbackMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="NetTcpBinding_IInicioSesion" type="tns:IInicioSesion">
@@ -1000,13 +1089,71 @@
       </wsdl:output>
     </wsdl:operation>
   </wsdl:binding>
+  <wsdl:binding name="NetTcpBinding_IJuegoLanzamiento" type="tns:IJuegoLanzamiento">
+    <wsp:PolicyReference URI="#NetTcpBinding_IJuegoLanzamiento_policy" />
+    <soap12:binding transport="http://schemas.microsoft.com/soap/tcp" />
+    <wsdl:operation name="AgregarJugadorJuegoLanzamiento">
+      <soap12:operation soapAction="http://tempuri.org/IJuegoLanzamiento/AgregarJugadorJuegoLanzamiento" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="EliminarJugadorJuegoLanzamiento">
+      <soap12:operation soapAction="http://tempuri.org/IJuegoLanzamiento/EliminarJugadorJuegoLanzamiento" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="NotificarLanzamientoDado">
+      <soap12:operation soapAction="http://tempuri.org/IJuegoLanzamiento/NotificarLanzamientoDado" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="NotificarLanzamientoLinea">
+      <soap12:operation soapAction="http://tempuri.org/IJuegoLanzamiento/NotificarLanzamientoLinea" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="NotificarFinalizarLanzamiento">
+      <soap12:operation soapAction="http://tempuri.org/IJuegoLanzamiento/NotificarFinalizarLanzamiento" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="JugadorTiroDado">
+      <soap12:operation soapAction="http://tempuri.org/IJuegoLanzamiento/JugadorTiroDado" style="document" />
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="JugadorDetuvoLinea">
+      <soap12:operation soapAction="http://tempuri.org/IJuegoLanzamiento/JugadorDetuvoLinea" style="document" />
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="JugadorSalioJuegoLanzamiento">
+      <soap12:operation soapAction="http://tempuri.org/IJuegoLanzamiento/JugadorSalioJuegoLanzamiento" style="document" />
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="JugadoresListosParaSiguienteTurno">
+      <soap12:operation soapAction="http://tempuri.org/IJuegoLanzamiento/JugadoresListosParaSiguienteTurno" style="document" />
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
   <wsdl:service name="ServicioComunicacionSorrySliders">
     <wsdl:port name="NetTcpBinding_IInicioSesion" binding="tns:NetTcpBinding_IInicioSesion">
       <soap12:address location="net.tcp://localhost:5455/ServidorSorrySliders" />
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:5455/ServidorSorrySliders</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>LAPTOP-SF103ATP\monti</Upn>
+          <Upn>LAPTOP-H4AE1QJ9\sulem</Upn>
         </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>
@@ -1015,7 +1162,7 @@
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:5455/ServidorSorrySliders</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>LAPTOP-SF103ATP\monti</Upn>
+          <Upn>LAPTOP-H4AE1QJ9\sulem</Upn>
         </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>
@@ -1024,7 +1171,7 @@
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:5455/ServidorSorrySliders</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>LAPTOP-SF103ATP\monti</Upn>
+          <Upn>LAPTOP-H4AE1QJ9\sulem</Upn>
         </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>
@@ -1033,7 +1180,7 @@
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:5455/ServidorSorrySliders</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>LAPTOP-SF103ATP\monti</Upn>
+          <Upn>LAPTOP-H4AE1QJ9\sulem</Upn>
         </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>
@@ -1042,7 +1189,7 @@
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:5455/ServidorSorrySliders</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>LAPTOP-SF103ATP\monti</Upn>
+          <Upn>LAPTOP-H4AE1QJ9\sulem</Upn>
         </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>
@@ -1051,7 +1198,7 @@
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:5455/ServidorSorrySliders</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>LAPTOP-SF103ATP\monti</Upn>
+          <Upn>LAPTOP-H4AE1QJ9\sulem</Upn>
         </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>
@@ -1060,7 +1207,7 @@
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:5455/ServidorSorrySliders</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>LAPTOP-SF103ATP\monti</Upn>
+          <Upn>LAPTOP-H4AE1QJ9\sulem</Upn>
         </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>
@@ -1069,7 +1216,7 @@
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:5455/ServidorSorrySliders</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>LAPTOP-SF103ATP\monti</Upn>
+          <Upn>LAPTOP-H4AE1QJ9\sulem</Upn>
         </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>
@@ -1078,7 +1225,7 @@
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:5455/ServidorSorrySliders</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>LAPTOP-SF103ATP\monti</Upn>
+          <Upn>LAPTOP-H4AE1QJ9\sulem</Upn>
         </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>
@@ -1087,7 +1234,7 @@
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:5455/ServidorSorrySliders</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>LAPTOP-SF103ATP\monti</Upn>
+          <Upn>LAPTOP-H4AE1QJ9\sulem</Upn>
         </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>
@@ -1096,7 +1243,16 @@
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:5455/ServidorSorrySliders</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>LAPTOP-SF103ATP\monti</Upn>
+          <Upn>LAPTOP-H4AE1QJ9\sulem</Upn>
+        </Identity>
+      </wsa10:EndpointReference>
+    </wsdl:port>
+    <wsdl:port name="NetTcpBinding_IJuegoLanzamiento" binding="tns:NetTcpBinding_IJuegoLanzamiento">
+      <soap12:address location="net.tcp://localhost:5455/ServidorSorrySliders" />
+      <wsa10:EndpointReference>
+        <wsa10:Address>net.tcp://localhost:5455/ServidorSorrySliders</wsa10:Address>
+        <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
+          <Upn>LAPTOP-H4AE1QJ9\sulem</Upn>
         </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>

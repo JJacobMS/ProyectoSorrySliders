@@ -70,7 +70,7 @@ namespace VistasSorrySliders
                 {
                     numeroJugadoresInt = 2;
                 }
-                Constantes respuesta = Constantes.OPERACION_EXITOSA_VACIA;
+                Constantes respuesta;
                 string codigoPartida = "";
                 Logger log = new Logger(this.GetType());
                 try
@@ -97,25 +97,25 @@ namespace VistasSorrySliders
                     log.LogFatal("Ha ocurrido un error inesperado", ex);
                 }
                 switch (respuesta)
-                    {
-                        case Constantes.ERROR_CONEXION_BD:
-                            MessageBox.Show(Properties.Resources.msgErrorBaseDatos);
-                            break;
-                        case Constantes.ERROR_CONSULTA:
-                            MessageBox.Show(Properties.Resources.msgErrorBaseDatos);
-                            break;
-                        case Constantes.ERROR_CONEXION_SERVIDOR:
-                            MessageBox.Show(Properties.Resources.msgErrorConexion);
-                            break;
-                        case Constantes.OPERACION_EXITOSA:
-                            CrearVentanaLobby(numeroJugadoresInt.ToString(), _cuentaUsuario, codigoPartida);
-                            Window.GetWindow(this).Close();
+                {
+                    case Constantes.ERROR_CONEXION_BD:
+                        MessageBox.Show(Properties.Resources.msgErrorBaseDatos);
                         break;
-                        case Constantes.OPERACION_EXITOSA_VACIA:
-                            break;
-                        default:
-                            break;
-                    }
+                    case Constantes.ERROR_CONSULTA:
+                        MessageBox.Show(Properties.Resources.msgErrorBaseDatos);
+                        break;
+                    case Constantes.ERROR_CONEXION_SERVIDOR:
+                        MessageBox.Show(Properties.Resources.msgErrorConexion);
+                        break;
+                    case Constantes.OPERACION_EXITOSA:
+                        CrearVentanaLobby(numeroJugadoresInt.ToString(), _cuentaUsuario, codigoPartida);
+                        Window.GetWindow(this).Close();
+                        break;
+                    case Constantes.OPERACION_EXITOSA_VACIA:
+                        break;
+                    default:
+                        break;
+                }
                     
                 
             }

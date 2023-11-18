@@ -34,7 +34,10 @@ namespace VistasSorrySliders.LogicaJuego
             GenerarLineaMovimiento();
             GenerarDados();
         }
-
+        public int RegresarValorDado(int dado)
+        {
+            return DadosJugador[dado].NumeroDado;
+        }
         private void GenerarPeonesLanzamiento()
         {
             Random rnd = new Random(Guid.NewGuid().GetHashCode());

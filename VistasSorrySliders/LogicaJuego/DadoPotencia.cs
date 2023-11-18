@@ -37,5 +37,11 @@ namespace VistasSorrySliders.LogicaJuego
             NumeroDado = (NumeroDado + 1 > 6) ? 1 : NumeroDado + 1;
             ImagenDado.Source = ImagenDadoCorrespondiente[NumeroDado];
         }
+
+        public void AsignarPosicionDado(int numeroDado)
+        {
+            NumeroDado = numeroDado;
+            ImagenDado.Source = ImagenDadoCorrespondiente[NumeroDado];
+        }
     }
 }
