@@ -3,6 +3,7 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:p="clr-namespace:VistasSorrySliders.Properties"
       xmlns:local="clr-namespace:VistasSorrySliders"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
@@ -18,7 +19,7 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <Image Source="/Recursos/peones.png" Margin="10"></Image>
-        <Button Style="{StaticResource estiloBtnSalir}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20" Click="ClickSalirMenuPrincipal" >Salir</Button>
+        <Button Style="{StaticResource estiloBtnSalir}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20" Click="ClickSalir" Content="{x:Static p:Resources.btnSalir}"></Button>
         <Image Grid.Column="2" Source="/Recursos/dado.png" Margin="10"/>
         <Viewbox Grid.Column="1">
             <Border Grid.Column="1" BorderBrush="#042437" BorderThickness="4" CornerRadius="10" Margin="0,40,0,40"
@@ -26,7 +27,7 @@
                 <StackPanel VerticalAlignment="Center">
                     <Grid Margin="5" Height="80">
                         <Image Source="/Recursos/Banner.png"/>
-                        <Label Style="{StaticResource estiloLblInicioSesion}" Margin="0,12,0,0">UNIRSE A PARTIDA</Label>
+                        <Label Style="{StaticResource estiloLblInicioSesion}" Margin="0,12,0,0" Content="{x:Static p:Resources.lblUnirsePartida}"></Label>
                     </Grid>
                     <Grid Margin="0,10,0,0">
                         <Grid.ColumnDefinitions>
@@ -34,33 +35,35 @@
                             <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
                         <Label Style="{StaticResource estiloLblDatos}" Margin="5,0,0,0" FontSize="12" VerticalAlignment="Center"
-                               Width="120">Código de Partida:</Label>
+                               Width="120" Content="{x:Static p:Resources.lblCodigoPartida}"></Label>
                         <TextBox Name="txtBoxCodigo" Grid.Column="1" Style="{StaticResource estiloTxtBoxDatosAzul}" 
                                  Margin="10,0,10,0" FontSize="12"></TextBox>
                     </Grid>
                     <Grid Height="40">
                         <TextBlock Style="{StaticResource estiloTxtBlockErrorUnirsePartida}" Visibility="Hidden" Margin="0"
-                               Name="lblMaximoJugadores">La partida ya no acepta más jugadores</TextBlock>
+                               Name="lblMaximoJugadores" Text="{x:Static p:Resources.txtBlockJugadoresMaximosExcedidos}"></TextBlock>
                         <TextBlock Style="{StaticResource estiloTxtBlockErrorUnirsePartida}" Margin="0" Visibility="Hidden"
-                               Name="lblCodigoNoValido">Código no válido</TextBlock>
+                               Name="lblCodigoNoValido" Text="{x:Static p:Resources.txtBlockCodigoNoValido}"></TextBlock>
                         <TextBlock Style="{StaticResource estiloTxtBlockErrorUnirsePartida}" Margin="0" Visibility="Hidden"
-                                Name="lblCuentaYaEnJuego">Su cuenta ya está jugando dentro del lobby</TextBlock>
+                                Name="lblCuentaYaEnJuego" Text="{x:Static p:Resources.txtBlockCuentaYaEnLobby}"></TextBlock>
                     </Grid>
                     <Grid x:Name="grdNickname" Visibility="Collapsed" >
                         <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition/>
-                            <ColumnDefinition Width="1*"/>
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
                             <RowDefinition/>
-                            <RowDefinition Height="Auto"/>
+                            <RowDefinition/>
                         </Grid.RowDefinitions>
-                        <Label Style="{StaticResource estiloLblDatos}" FontSize="12" VerticalAlignment="Center">Nickname:</Label>
-                        <TextBox Grid.Column="1" Style="{StaticResource estiloTxtBoxDatosAzul}" Margin="10,0,10,0" FontSize="12"></TextBox>
-                        <TextBlock Grid.Row="1" Grid.ColumnSpan="2" Style="{StaticResource estiloTxtBlockErrorUnirsePartida}" Width="250" 
-                        Name="lblNickNameNoValido" HorizontalAlignment="Center">Nickname no es válido</TextBlock>
+                        <Label Style="{StaticResource estiloLblDatos}" Margin="5,0,0,0" FontSize="12" VerticalAlignment="Center"
+                               Width="120" Content="{x:Static p:Resources.lblNickname}"></Label>
+                        <TextBox Grid.Column="1" Style="{StaticResource estiloTxtBoxDatosAzul}" Name="txtBoxNickname"
+                                 Margin="10,0,10,0" FontSize="12"></TextBox>
+                        <TextBlock Grid.Row="1" Grid.ColumnSpan="2" Style="{StaticResource estiloTxtBlockErrorUnirsePartida}" Width="250" Visibility="Hidden"
+                                   HorizontalAlignment="Center" Name="txtBlockNicknameNoValido" Text="{x:Static p:Resources.txtBlockNicknameNoValido}"></TextBlock>
                     </Grid>
-                    <Button Style="{StaticResource estiloBtnContinuar}" Width="200" Click="ClickUnirsePartida">UNIRSE A LA PARTIDA</Button>
+                    <Button Style="{StaticResource estiloBtnContinuar}" Width="200" Click="ClickUnirsePartida" Content="{x:Static p:Resources.btnUnirsePartida}"></Button>
 
                 </StackPanel>
             </Border>

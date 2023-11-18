@@ -41,12 +41,17 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="log4net, Version=2.0.15.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\packages\log4net.2.0.15\lib\net45\log4net.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
@@ -69,6 +74,9 @@
     <Compile Include="AjustesVentana.xaml.cs">
       <DependentUpon>AjustesVentana.xaml</DependentUpon>
     </Compile>
+    <Compile Include="CambiarContrasenaPagina.xaml.cs">
+      <DependentUpon>CambiarContrasenaPagina.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ConfiguracionLobbyPagina.xaml.cs">
       <DependentUpon>ConfiguracionLobbyPagina.xaml</DependentUpon>
     </Compile>
@@ -77,21 +85,43 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="CuentaDetallesVentana.xaml.cs">
+      <DependentUpon>CuentaDetallesVentana.xaml</DependentUpon>
+    </Compile>
     <Compile Include="InicioPagina.xaml.cs">
       <DependentUpon>InicioPagina.xaml</DependentUpon>
     </Compile>
     <Compile Include="InicioSesionPagina.xaml.cs">
       <DependentUpon>InicioSesionPagina.xaml</DependentUpon>
     </Compile>
+    <Compile Include="JuegoLanzamientoPagina.xaml.cs">
+      <DependentUpon>JuegoLanzamientoPagina.xaml</DependentUpon>
+    </Compile>
     <Compile Include="JuegoYLobbyVentana.xaml.cs">
       <DependentUpon>JuegoYLobbyVentana.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="JugadoresChatPagina.xaml.cs">
+      <DependentUpon>JugadoresChatPagina.xaml</DependentUpon>
     </Compile>
     <Compile Include="ListaAmigosPagina.xaml.cs">
       <DependentUpon>ListaAmigosPagina.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ListaJugadoresPagina.xaml.cs">
+      <DependentUpon>ListaJugadoresPagina.xaml</DependentUpon>
+    </Compile>
     <Compile Include="LobbyPagina.xaml.cs">
       <DependentUpon>LobbyPagina.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Logger.cs" />
+    <Compile Include="LogicaJuego\DadoPotencia.cs" />
+    <Compile Include="LogicaJuego\Direccion.cs" />
+    <Compile Include="LogicaJuego\JugadorLanzamiento.cs" />
+    <Compile Include="LogicaJuego\LineaMovimiento.cs" />
+    <Compile Include="LogicaJuego\PeonLanzamiento.cs" />
+    <Compile Include="LogicaJuego\Tablero.cs" />
+    <Compile Include="LogicaJuego\TableroCuatroJugadores.cs" />
+    <Compile Include="LogicaJuego\TableroDosJugadores.cs" />
+    <Compile Include="LogicaJuego\TableroTresJugadores.cs" />
     <Compile Include="MenuPrincipalPagina.xaml.cs">
       <DependentUpon>MenuPrincipalPagina.xaml</DependentUpon>
     </Compile>
@@ -108,6 +138,9 @@
     <Compile Include="RegistroUsuariosPagina.xaml.cs">
       <DependentUpon>RegistroUsuariosPagina.xaml</DependentUpon>
     </Compile>
+    <Compile Include="TableroPuntuacionesPagina.xaml.cs">
+      <DependentUpon>TableroPuntuacionesPagina.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UnirsePartidaPagina.xaml.cs">
       <DependentUpon>UnirsePartidaPagina.xaml</DependentUpon>
     </Compile>
@@ -116,7 +149,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="CambiarContrasenaPagina.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="ConfiguracionLobbyPagina.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CuentaDetallesVentana.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -125,6 +166,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="DiccionarioEstilos\DiccionarioConfiguracionLobby.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="DiccionarioEstilos\DiccionarioDetallesCuenta.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -156,11 +201,23 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="JuegoLanzamientoPagina.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="JuegoYLobbyVentana.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="JugadoresChatPagina.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="ListaAmigosPagina.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ListaJugadoresPagina.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -185,6 +242,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="RegistroUsuariosPagina.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="TableroPuntuacionesPagina.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -236,6 +297,9 @@
     <None Include="Connected Services\ServicioSorrySliders\item3.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Connected Services\ServicioSorrySliders\item4.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Connected Services\ServicioSorrySliders\ServicioComunicacionSorrySliders.wsdl" />
     <None Include="Connected Services\ServicioSorrySliders\VistasSorrySliders.ServicioSorrySliders.Constantes.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
@@ -243,7 +307,19 @@
     <None Include="Connected Services\ServicioSorrySliders\VistasSorrySliders.ServicioSorrySliders.CuentaSet.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Connected Services\ServicioSorrySliders\VistasSorrySliders.ServicioSorrySliders.NotificacionSet.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Connected Services\ServicioSorrySliders\VistasSorrySliders.ServicioSorrySliders.PartidaSet.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ServicioSorrySliders\VistasSorrySliders.ServicioSorrySliders.Puntuacion.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ServicioSorrySliders\VistasSorrySliders.ServicioSorrySliders.TipoNotificacion.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ServicioSorrySliders\VistasSorrySliders.ServicioSorrySliders.UsuarioSet.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="packages.config" />
@@ -303,8 +379,6 @@
     <Resource Include="Recursos\jugadoresAmigosIcono.png" />
     <Resource Include="Recursos\puntuacionIcono.png" />
     <Resource Include="Recursos\salirIcono.png" />
-    <Resource Include="Recursos\tableroDosConFondo.png" />
-    <Resource Include="Recursos\tableroTresConFondo.png" />
     <Resource Include="Recursos\unirsePartidaIcono.png" />
   </ItemGroup>
   <ItemGroup>
@@ -315,6 +389,28 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Recursos\avatarPredefinido.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Recursos\tableroDosConFondo.png" />
+    <Resource Include="Recursos\tableroTresConFondo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Recursos\imagenTablaPuntuaciones.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Recursos\bannerColorMorado.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Recursos\peonGris.png" />
+    <Resource Include="Recursos\peonMorado.png" />
+    <Resource Include="Recursos\peonNegro.png" />
+    <Resource Include="Recursos\peonRosa.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Recursos\tableroDos.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Recursos\tableroTres.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -117,6 +117,15 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="btnAceptar" xml:space="preserve">
+    <value>ACEPTAR</value>
+  </data>
+  <data name="btnBanear" xml:space="preserve">
+    <value>BANEAR</value>
+  </data>
+  <data name="btnBuscar" xml:space="preserve">
+    <value>BUSCAR</value>
+  </data>
   <data name="btnCancelar" xml:space="preserve">
     <value>CANCELAR</value>
   </data>
@@ -129,14 +138,41 @@
   <data name="btnCrearCuenta" xml:space="preserve">
     <value>CREAR CUENTA</value>
   </data>
+  <data name="btnCrearLobby" xml:space="preserve">
+    <value>C R E A R   L O B B Y</value>
+  </data>
+  <data name="btnEliminarAmigo" xml:space="preserve">
+    <value>ELIMINAR AMIGO</value>
+  </data>
+  <data name="btnEliminarBaneo" xml:space="preserve">
+    <value>ELIMINAR BANEO</value>
+  </data>
+  <data name="btnEnviarCodigo" xml:space="preserve">
+    <value>ENVIAR CÓDIGO</value>
+  </data>
+  <data name="btnEnviarSolicitudAmistad" xml:space="preserve">
+    <value>ENVIAR SOLICITUD DE AMISTAD</value>
+  </data>
   <data name="btnGuardarCambios" xml:space="preserve">
     <value>GUARDAR CAMBIOS</value>
+  </data>
+  <data name="btnIniciarPartida" xml:space="preserve">
+    <value>I N I C I A R   P A R T I D A</value>
+  </data>
+  <data name="btnRechazar" xml:space="preserve">
+    <value>RECHAZAR</value>
   </data>
   <data name="btnRegistrarCuenta" xml:space="preserve">
     <value>REGISTRAR CUENTA</value>
   </data>
+  <data name="btnRegresarMenuPrincipal" xml:space="preserve">
+    <value>REGRESAR A MENÚ PRINCIPAL</value>
+  </data>
   <data name="btnSalir" xml:space="preserve">
     <value>SALIR</value>
+  </data>
+  <data name="btnUnirsePartida" xml:space="preserve">
+    <value>UNIRSE A LA PARTIDA</value>
   </data>
   <data name="lblAjustes" xml:space="preserve">
     <value>Ajustes</value>
@@ -153,6 +189,9 @@
   <data name="lblBienvenidoNuevo" xml:space="preserve">
     <value>Bienvenido de nuevo</value>
   </data>
+  <data name="lblCodigoPartida" xml:space="preserve">
+    <value>Código de partida:</value>
+  </data>
   <data name="lblContrasena" xml:space="preserve">
     <value>Contraseña:</value>
   </data>
@@ -162,11 +201,23 @@
   <data name="lblCorreoElectronico" xml:space="preserve">
     <value>Correo electrónico</value>
   </data>
+  <data name="lblCorreoJugadorSinCuenta" xml:space="preserve">
+    <value>Correo de Jugador sin Cuenta:</value>
+  </data>
+  <data name="lblCuatroJugadores" xml:space="preserve">
+    <value>4 Jugadores</value>
+  </data>
   <data name="lblDatosCuenta" xml:space="preserve">
     <value>Datos de la cuenta</value>
   </data>
+  <data name="lblDosJugadores" xml:space="preserve">
+    <value>2 Jugadores</value>
+  </data>
   <data name="lblEspanol" xml:space="preserve">
     <value>Español</value>
+  </data>
+  <data name="lblHostPartida" xml:space="preserve">
+    <value>Host de la Partida:</value>
   </data>
   <data name="lblIdioma" xml:space="preserve">
     <value>IDIOMA:</value>
@@ -177,11 +228,44 @@
   <data name="lblInicioSesion" xml:space="preserve">
     <value>INICIAR SESIÓN</value>
   </data>
+  <data name="lblInvitarJugador" xml:space="preserve">
+    <value>INVITAR JUGADOR</value>
+  </data>
+  <data name="lblListaAmigos" xml:space="preserve">
+    <value>Lista de amigos</value>
+  </data>
+  <data name="lblListaAmigosMayuscula" xml:space="preserve">
+    <value>LISTA AMIGOS</value>
+  </data>
+  <data name="lblListaDeJugadores" xml:space="preserve">
+    <value>Lista de jugadores</value>
+  </data>
+  <data name="lblListaJugadores" xml:space="preserve">
+    <value>LISTA JUGADORES</value>
+  </data>
+  <data name="lblLobbyEspera" xml:space="preserve">
+    <value>LOBBY DE ESPERA</value>
+  </data>
+  <data name="lblModoJuego" xml:space="preserve">
+    <value>Modo de Juego Normal</value>
+  </data>
   <data name="lblNickname" xml:space="preserve">
     <value>Nickname/apodo</value>
   </data>
   <data name="lblNombres" xml:space="preserve">
     <value>Nombre/s</value>
+  </data>
+  <data name="lblTablaPuntuaciones" xml:space="preserve">
+    <value>TABLERO DE PUNTUACIONES</value>
+  </data>
+  <data name="lblTotalJugadores" xml:space="preserve">
+    <value>Total de Jugadores:</value>
+  </data>
+  <data name="lblTresJugadores" xml:space="preserve">
+    <value>3 Jugadores</value>
+  </data>
+  <data name="lblUnirsePartida" xml:space="preserve">
+    <value>UNIRSE A PARTIDA</value>
   </data>
   <data name="msgCorreoEncontrado" xml:space="preserve">
     <value>El correo ingresado se encuentra registrado en el sistema</value>
@@ -207,11 +291,23 @@
   <data name="msgErrorImagen" xml:space="preserve">
     <value>La imagen no se puede cargar</value>
   </data>
+  <data name="msgErrorImagenPermisos" xml:space="preserve">
+    <value>No se tienen permisos para acceder al archivo</value>
+  </data>
+  <data name="msgErrorTamañoImagen" xml:space="preserve">
+    <value>La imagen supera el límite de 400 KB</value>
+  </data>
+  <data name="msgErrorTituloImagenPermisos" xml:space="preserve">
+    <value>Sin permisos para el archivo</value>
+  </data>
   <data name="msgImagenInvalida" xml:space="preserve">
     <value>Por favor, seleccione un archivo de imagen válida</value>
   </data>
+  <data name="msgTablaVacia" xml:space="preserve">
+    <value>Aun no hay ganadores, sé el primero en ganar</value>
+  </data>
   <data name="msgTamañoImagenError" xml:space="preserve">
-    <value>La imagen supera el limite de 3MB</value>
+    <value>La imagen supera el limite de 400KB</value>
   </data>
   <data name="msgTituloContraseñaInvalida" xml:space="preserve">
     <value>Invalid password</value>
@@ -231,11 +327,38 @@
   <data name="msgTituloErrorImagen" xml:space="preserve">
     <value>Error de imagen</value>
   </data>
+  <data name="msgTituloErrorTamañoImagen" xml:space="preserve">
+    <value>Imagen demasiado grande</value>
+  </data>
   <data name="msgTituloTamañoImagenError" xml:space="preserve">
     <value>Imagen demasiado grande</value>
   </data>
+  <data name="rnMensajeSolicitudAmistad" xml:space="preserve">
+    <value>envío una solicitud de amistad</value>
+  </data>
+  <data name="rnMensajeSolicitudPartida" xml:space="preserve">
+    <value>te invitó a su partida con el código</value>
+  </data>
+  <data name="strArchivosImagen" xml:space="preserve">
+    <value>Archivos de imagen</value>
+  </data>
+  <data name="tbItemAmigos" xml:space="preserve">
+    <value>AMIGOS</value>
+  </data>
+  <data name="tbItemJugadores" xml:space="preserve">
+    <value>JUGADORES</value>
+  </data>
+  <data name="tbItemNotificaciones" xml:space="preserve">
+    <value>NOTIFICACIONES</value>
+  </data>
   <data name="txtBlockAjustes" xml:space="preserve">
     <value>AJUSTES</value>
+  </data>
+  <data name="txtBlockCodigoNoValido" xml:space="preserve">
+    <value>Código no válido</value>
+  </data>
+  <data name="txtBlockConfigurarPartida" xml:space="preserve">
+    <value>CONFIGURAR PARTIDA</value>
   </data>
   <data name="txtBlockContrasenaInvalida" xml:space="preserve">
     <value>La contraseña no es correcta. Verifica tu contraseña e inténtalo de nuevo</value>
@@ -246,8 +369,23 @@
   <data name="txtBlockCrearLobby" xml:space="preserve">
     <value>CREAR LOBBY</value>
   </data>
+  <data name="txtBlockCuentaYaEnLobby" xml:space="preserve">
+    <value>Su cuenta ya está jugando dentro del lobby</value>
+  </data>
   <data name="txtBlockJugadoresAmigos" xml:space="preserve">
     <value>JUGADORES Y AMIGOS</value>
+  </data>
+  <data name="txtBlockJugadoresMaximosExcedidos" xml:space="preserve">
+    <value>La partida no acepta más jugadores</value>
+  </data>
+  <data name="txtBlockNickname" xml:space="preserve">
+    <value>NICKNAME/APODO</value>
+  </data>
+  <data name="txtBlockNicknameNoValido" xml:space="preserve">
+    <value>Nickname no es válido</value>
+  </data>
+  <data name="txtBlockRondasGanadas" xml:space="preserve">
+    <value>RONDAS GANADAS</value>
   </data>
   <data name="txtBlockTablaPuntuaciones" xml:space="preserve">
     <value>TABLA DE PUNTUACIONES</value>

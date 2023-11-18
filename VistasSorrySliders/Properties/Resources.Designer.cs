@@ -61,6 +61,33 @@ namespace VistasSorrySliders.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a ACEPTAR.
+        /// </summary>
+        public static string btnAceptar {
+            get {
+                return ResourceManager.GetString("btnAceptar", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a BANEAR.
+        /// </summary>
+        public static string btnBanear {
+            get {
+                return ResourceManager.GetString("btnBanear", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a BUSCAR.
+        /// </summary>
+        public static string btnBuscar {
+            get {
+                return ResourceManager.GetString("btnBuscar", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a CANCELAR.
         /// </summary>
         public static string btnCancelar {
@@ -97,11 +124,83 @@ namespace VistasSorrySliders.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a C R E A R   L O B B Y.
+        /// </summary>
+        public static string btnCrearLobby {
+            get {
+                return ResourceManager.GetString("btnCrearLobby", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a ELIMINAR AMIGO.
+        /// </summary>
+        public static string btnEliminarAmigo {
+            get {
+                return ResourceManager.GetString("btnEliminarAmigo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a ELIMINAR BANEO.
+        /// </summary>
+        public static string btnEliminarBaneo {
+            get {
+                return ResourceManager.GetString("btnEliminarBaneo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a ELIMINAR.
+        /// </summary>
+        public static string btnEliminarNotificacion {
+            get {
+                return ResourceManager.GetString("btnEliminarNotificacion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a ENVIAR CÓDIGO.
+        /// </summary>
+        public static string btnEnviarCodigo {
+            get {
+                return ResourceManager.GetString("btnEnviarCodigo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a ENVIAR SOLICITUD DE AMISTAD.
+        /// </summary>
+        public static string btnEnviarSolicitudAmistad {
+            get {
+                return ResourceManager.GetString("btnEnviarSolicitudAmistad", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a GUARDAR CAMBIOS.
         /// </summary>
         public static string btnGuardarCambios {
             get {
                 return ResourceManager.GetString("btnGuardarCambios", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a I N I C I A R   P A R T I D A.
+        /// </summary>
+        public static string btnIniciarPartida {
+            get {
+                return ResourceManager.GetString("btnIniciarPartida", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a RECHAZAR.
+        /// </summary>
+        public static string btnRechazar {
+            get {
+                return ResourceManager.GetString("btnRechazar", resourceCulture);
             }
         }
         
@@ -115,11 +214,29 @@ namespace VistasSorrySliders.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a REGRESAR A MENÚ PRINCIPAL.
+        /// </summary>
+        public static string btnRegresarMenuPrincipal {
+            get {
+                return ResourceManager.GetString("btnRegresarMenuPrincipal", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a SALIR.
         /// </summary>
         public static string btnSalir {
             get {
                 return ResourceManager.GetString("btnSalir", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a UNIRSE A LA PARTIDA.
+        /// </summary>
+        public static string btnUnirsePartida {
+            get {
+                return ResourceManager.GetString("btnUnirsePartida", resourceCulture);
             }
         }
         
@@ -169,6 +286,15 @@ namespace VistasSorrySliders.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Código de partida:.
+        /// </summary>
+        public static string lblCodigoPartida {
+            get {
+                return ResourceManager.GetString("lblCodigoPartida", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Contraseña:.
         /// </summary>
         public static string lblContrasena {
@@ -196,6 +322,24 @@ namespace VistasSorrySliders.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Correo de Jugador sin Cuenta:.
+        /// </summary>
+        public static string lblCorreoJugadorSinCuenta {
+            get {
+                return ResourceManager.GetString("lblCorreoJugadorSinCuenta", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a 4 Jugadores.
+        /// </summary>
+        public static string lblCuatroJugadores {
+            get {
+                return ResourceManager.GetString("lblCuatroJugadores", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Datos de la cuenta.
         /// </summary>
         public static string lblDatosCuenta {
@@ -205,11 +349,29 @@ namespace VistasSorrySliders.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a 2 Jugadores.
+        /// </summary>
+        public static string lblDosJugadores {
+            get {
+                return ResourceManager.GetString("lblDosJugadores", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Español.
         /// </summary>
         public static string lblEspanol {
             get {
                 return ResourceManager.GetString("lblEspanol", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Host de la Partida:.
+        /// </summary>
+        public static string lblHostPartida {
+            get {
+                return ResourceManager.GetString("lblHostPartida", resourceCulture);
             }
         }
         
@@ -241,6 +403,69 @@ namespace VistasSorrySliders.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a INVITAR JUGADOR.
+        /// </summary>
+        public static string lblInvitarJugador {
+            get {
+                return ResourceManager.GetString("lblInvitarJugador", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Lista de amigos.
+        /// </summary>
+        public static string lblListaAmigos {
+            get {
+                return ResourceManager.GetString("lblListaAmigos", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a LISTA AMIGOS.
+        /// </summary>
+        public static string lblListaAmigosMayuscula {
+            get {
+                return ResourceManager.GetString("lblListaAmigosMayuscula", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Lista de jugadores.
+        /// </summary>
+        public static string lblListaDeJugadores {
+            get {
+                return ResourceManager.GetString("lblListaDeJugadores", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a LISTA JUGADORES.
+        /// </summary>
+        public static string lblListaJugadores {
+            get {
+                return ResourceManager.GetString("lblListaJugadores", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a LOBBY DE ESPERA.
+        /// </summary>
+        public static string lblLobbyEspera {
+            get {
+                return ResourceManager.GetString("lblLobbyEspera", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Modo de Juego Normal.
+        /// </summary>
+        public static string lblModoJuego {
+            get {
+                return ResourceManager.GetString("lblModoJuego", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Nickname/apodo.
         /// </summary>
         public static string lblNickname {
@@ -255,6 +480,42 @@ namespace VistasSorrySliders.Properties {
         public static string lblNombres {
             get {
                 return ResourceManager.GetString("lblNombres", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a TABLERO DE PUNTUACIONES.
+        /// </summary>
+        public static string lblTablaPuntuaciones {
+            get {
+                return ResourceManager.GetString("lblTablaPuntuaciones", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Total de Jugadores:.
+        /// </summary>
+        public static string lblTotalJugadores {
+            get {
+                return ResourceManager.GetString("lblTotalJugadores", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a 3 Jugadores.
+        /// </summary>
+        public static string lblTresJugadores {
+            get {
+                return ResourceManager.GetString("lblTresJugadores", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a UNIRSE A PARTIDA.
+        /// </summary>
+        public static string lblUnirsePartida {
+            get {
+                return ResourceManager.GetString("lblUnirsePartida", resourceCulture);
             }
         }
         
@@ -331,6 +592,33 @@ namespace VistasSorrySliders.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a No se tienen permisos para acceder al archivo.
+        /// </summary>
+        public static string msgErrorImagenPermisos {
+            get {
+                return ResourceManager.GetString("msgErrorImagenPermisos", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a La imagen supera el límite de 400 KB.
+        /// </summary>
+        public static string msgErrorTamañoImagen {
+            get {
+                return ResourceManager.GetString("msgErrorTamañoImagen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Sin permisos para el archivo.
+        /// </summary>
+        public static string msgErrorTituloImagenPermisos {
+            get {
+                return ResourceManager.GetString("msgErrorTituloImagenPermisos", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Por favor, seleccione un archivo de imagen válida.
         /// </summary>
         public static string msgImagenInvalida {
@@ -340,7 +628,16 @@ namespace VistasSorrySliders.Properties {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a La imagen supera el limite de 3MB.
+        ///   Busca una cadena traducida similar a Aun no hay ganadores, Sé el primero en ganar.
+        /// </summary>
+        public static string msgTablaVacia {
+            get {
+                return ResourceManager.GetString("msgTablaVacia", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a La imagen supera el limite de 400KB.
         /// </summary>
         public static string msgTamañoImagenError {
             get {
@@ -405,9 +702,72 @@ namespace VistasSorrySliders.Properties {
         /// <summary>
         ///   Busca una cadena traducida similar a Imagen demasiado grande.
         /// </summary>
+        public static string msgTituloErrorTamañoImagen {
+            get {
+                return ResourceManager.GetString("msgTituloErrorTamañoImagen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Imagen demasiado grande.
+        /// </summary>
         public static string msgTituloTamañoImagenError {
             get {
                 return ResourceManager.GetString("msgTituloTamañoImagenError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a envío una solicitud de amistad.
+        /// </summary>
+        public static string rnMensajeSolicitudAmistad {
+            get {
+                return ResourceManager.GetString("rnMensajeSolicitudAmistad", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a te invitó a su partida con el código.
+        /// </summary>
+        public static string rnMensajeSolicitudPartida {
+            get {
+                return ResourceManager.GetString("rnMensajeSolicitudPartida", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Archivos de imagen.
+        /// </summary>
+        public static string strArchivosImagen {
+            get {
+                return ResourceManager.GetString("strArchivosImagen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a AMIGOS.
+        /// </summary>
+        public static string tbItemAmigos {
+            get {
+                return ResourceManager.GetString("tbItemAmigos", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a JUGADORES.
+        /// </summary>
+        public static string tbItemJugadores {
+            get {
+                return ResourceManager.GetString("tbItemJugadores", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a NOTIFICACIONES.
+        /// </summary>
+        public static string tbItemNotificaciones {
+            get {
+                return ResourceManager.GetString("tbItemNotificaciones", resourceCulture);
             }
         }
         
@@ -417,6 +777,24 @@ namespace VistasSorrySliders.Properties {
         public static string txtBlockAjustes {
             get {
                 return ResourceManager.GetString("txtBlockAjustes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Código no válido.
+        /// </summary>
+        public static string txtBlockCodigoNoValido {
+            get {
+                return ResourceManager.GetString("txtBlockCodigoNoValido", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a CONFIGURAR PARTIDA.
+        /// </summary>
+        public static string txtBlockConfigurarPartida {
+            get {
+                return ResourceManager.GetString("txtBlockConfigurarPartida", resourceCulture);
             }
         }
         
@@ -448,11 +826,56 @@ namespace VistasSorrySliders.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Su cuenta ya está jugando dentro del lobby.
+        /// </summary>
+        public static string txtBlockCuentaYaEnLobby {
+            get {
+                return ResourceManager.GetString("txtBlockCuentaYaEnLobby", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a JUGADORES Y AMIGOS.
         /// </summary>
         public static string txtBlockJugadoresAmigos {
             get {
                 return ResourceManager.GetString("txtBlockJugadoresAmigos", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a La partida no acepta más jugadores.
+        /// </summary>
+        public static string txtBlockJugadoresMaximosExcedidos {
+            get {
+                return ResourceManager.GetString("txtBlockJugadoresMaximosExcedidos", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a NICKNAME/APODO.
+        /// </summary>
+        public static string txtBlockNickname {
+            get {
+                return ResourceManager.GetString("txtBlockNickname", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Nickname no es válido.
+        /// </summary>
+        public static string txtBlockNicknameNoValido {
+            get {
+                return ResourceManager.GetString("txtBlockNicknameNoValido", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a RONDAS GANADAS.
+        /// </summary>
+        public static string txtBlockRondasGanadas {
+            get {
+                return ResourceManager.GetString("txtBlockRondasGanadas", resourceCulture);
             }
         }
         

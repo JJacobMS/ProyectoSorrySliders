@@ -34,50 +34,45 @@ namespace VistasSorrySliders
             txtBlockNickname.Text = _cuentaUsuario.Nickname; 
         }
 
-        private Border selectedBorder;
+        private Border bordeAnterior;
 
         private void MouseLeftButtonDownSeleccionarTablero(object sender, MouseButtonEventArgs e)
         {
-            Border clickedBorder = sender as Border;
+            Border bordeSeleccionado = sender as Border;
 
-            if (selectedBorder != null)
+            if (bordeAnterior != null)
             {
-                selectedBorder.BorderBrush = Brushes.Black;
-                selectedBorder.BorderThickness = new Thickness(0);
+                bordeAnterior.BorderBrush = Brushes.Black;
+                bordeAnterior.BorderThickness = new Thickness(0);
             }
-            clickedBorder.BorderThickness = new Thickness(4);
-            clickedBorder.BorderBrush = Brushes.Red; 
-            selectedBorder = clickedBorder;
+            bordeSeleccionado.BorderThickness = new Thickness(4);
+            bordeSeleccionado.BorderBrush = Brushes.Red;
+            bordeAnterior = bordeSeleccionado;
 
             
-            btnCrearLobby.IsEnabled = (selectedBorder != null);
-            e.Handled = false;
+            btnCrearLobby.IsEnabled = (bordeAnterior != null);
         }
 
         private void ClickCrearLobby(object sender, RoutedEventArgs e)
         {
-            if (selectedBorder != null)
+            if (bordeAnterior != null)
             {
                 int numeroJugadoresInt = 0;
-                string numeroJugadoresString = "";
-                if (selectedBorder.Name == "brdTablero4Jugadores")
+                if (bordeAnterior.Name == "brdTablero4Jugadores")
                 {
                     numeroJugadoresInt = 4;
-                    numeroJugadoresString = "4";
                 }
-                else if (selectedBorder.Name == "brdTablero3Jugadores")
+                else if (bordeAnterior.Name == "brdTablero3Jugadores")
                 {
                     numeroJugadoresInt = 3;
-                    numeroJugadoresString = "3";
-
                 }
-                else if (selectedBorder.Name == "brdTablero2Jugadores")
+                else if (bordeAnterior.Name == "brdTablero2Jugadores")
                 {
                     numeroJugadoresInt = 2;
-                    numeroJugadoresString = "2";
                 }
-                Constantes respuesta = Constantes.OPERACION_EXITOSA_VACIA;
+                Constantes respuesta;
                 string codigoPartida = "";
+                Logger log = new Logger(this.GetType());
                 try
                 {
                     CrearLobbyClient proxyCrearLobby = new CrearLobbyClient();
@@ -87,34 +82,40 @@ namespace VistasSorrySliders
                 {
                     Console.WriteLine(ex);
                     respuesta = Constantes.ERROR_CONEXION_SERVIDOR;
-                    System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorConexion);
+                    log.LogError("Error de Comunicación con el Servidor", ex);
                 }
                 catch (TimeoutException ex)
                 {
                     Console.WriteLine(ex);
                     respuesta = Constantes.ERROR_CONEXION_SERVIDOR;
-                    System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorConexion);
+                    log.LogWarn("Se agoto el tiempo de espera del servidor", ex);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex);
+                    respuesta = Constantes.ERROR_CONEXION_SERVIDOR;
+                    log.LogFatal("Ha ocurrido un error inesperado", ex);
                 }
                 switch (respuesta)
-                    {
-                        case Constantes.ERROR_CONEXION_BD:
-                            MessageBox.Show(Properties.Resources.msgErrorBaseDatos);
-                            break;
-                        case Constantes.ERROR_CONSULTA:
-                            MessageBox.Show(Properties.Resources.msgErrorBaseDatos);
-                            break;
-                        case Constantes.ERROR_CONEXION_SERVIDOR:
-                            MessageBox.Show(Properties.Resources.msgErrorConexion);
-                            break;
-                        case Constantes.OPERACION_EXITOSA:
-                            CrearVentanaLobby(numeroJugadoresString, _cuentaUsuario, codigoPartida);
-                            Window.GetWindow(this).Close();
+                {
+                    case Constantes.ERROR_CONEXION_BD:
+                        MessageBox.Show(Properties.Resources.msgErrorBaseDatos);
                         break;
-                        case Constantes.OPERACION_EXITOSA_VACIA:
-                            break;
-                        default:
-                            break;
-                    }
+                    case Constantes.ERROR_CONSULTA:
+                        MessageBox.Show(Properties.Resources.msgErrorBaseDatos);
+                        break;
+                    case Constantes.ERROR_CONEXION_SERVIDOR:
+                        MessageBox.Show(Properties.Resources.msgErrorConexion);
+                        break;
+                    case Constantes.OPERACION_EXITOSA:
+                        CrearVentanaLobby(numeroJugadoresInt.ToString(), _cuentaUsuario, codigoPartida);
+                        Window.GetWindow(this).Close();
+                        break;
+                    case Constantes.OPERACION_EXITOSA_VACIA:
+                        break;
+                    default:
+                        break;
+                }
                     
                 
             }
@@ -122,7 +123,7 @@ namespace VistasSorrySliders
 
         private void CrearVentanaLobby(string numeroJugadoresString, CuentaSet _cuentaUsuario, string codigoPartida) 
         {
-            JuegoYLobbyVentana lobbyUnirse = new JuegoYLobbyVentana(_cuentaUsuario, codigoPartida);
+            JuegoYLobbyVentana lobbyUnirse = new JuegoYLobbyVentana(_cuentaUsuario, codigoPartida, false);
             lobbyUnirse.Show();
 
         }

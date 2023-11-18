@@ -28,10 +28,15 @@ namespace VistasSorrySliders
         private LobbyClient _proxyLobby;
         private CuentaSet[] _cuentas;
         private PartidaSet _partidaActual;
+        private bool _esInvitado;
+        private JuegoYLobbyVentana _juegoYLobbyVentana;
+        private InstanceContext _contextoCallback;
 
-        public LobbyPagina(CuentaSet cuentaUsuario, string codigoPartida)
+        public LobbyPagina(CuentaSet cuentaUsuario, string codigoPartida, bool esInvitado, JuegoYLobbyVentana ventana)
         {
             InitializeComponent();
+            _juegoYLobbyVentana = ventana;
+            _esInvitado = esInvitado;
             _cuentaUsuario = cuentaUsuario;
             _codigoPartida = codigoPartida;
             EntrarPartida();
@@ -41,14 +46,13 @@ namespace VistasSorrySliders
 
         public void RecuperarDatosPartida(string codigoPartida) 
         {
-            Console.WriteLine("Se actualizo la partida");
-           
             Constantes respuesta;
+            Logger log = new Logger(this.GetType());
             try
             {
                 UnirsePartidaClient proxyRecuperarJugadores = new UnirsePartidaClient();
                 (respuesta, _cuentas) = proxyRecuperarJugadores.RecuperarJugadoresLobby(codigoPartida);
-                if (_cuentas.Count() == _partidaActual.CantidadJugadores)
+                if (_cuentas.Count() == _partidaActual.CantidadJugadores && _cuentaUsuario.CorreoElectronico == _cuentas[0].CorreoElectronico)
                 {
                     btnIniciarPartida.IsEnabled = true;
                 }
@@ -61,37 +65,48 @@ namespace VistasSorrySliders
             {
                 respuesta = Constantes.ERROR_CONEXION_SERVIDOR;
                 Console.WriteLine(ex);
-                System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorConexion);
+                log.LogError("Error de Comunicación con el Servidor", ex);
             }
             catch (TimeoutException ex)
             {
                 Console.WriteLine(ex);
                 respuesta = Constantes.ERROR_CONEXION_SERVIDOR;
-                System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorConexion);
+                log.LogWarn("Se agoto el tiempo de espera del servidor", ex);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+                respuesta = Constantes.ERROR_CONEXION_SERVIDOR;
+                log.LogFatal("Ha ocurrido un error inesperado", ex);
             }
             switch (respuesta)
             {
                 case Constantes.ERROR_CONEXION_BD:
-                    Console.WriteLine("ERROR_CONEXION_BD");
+                    MessageBox.Show(Properties.Resources.msgErrorBaseDatos);
+                    IrMenuPrincipal();
                     break;
                 case Constantes.ERROR_CONSULTA:
-                    Console.WriteLine("ERROR_CONSULTA");
+                    MessageBox.Show(Properties.Resources.msgErrorBaseDatos);
+                    IrMenuPrincipal();
                     break;
                 case Constantes.ERROR_CONEXION_SERVIDOR:
-                    Console.WriteLine("ERROR_CONEXION_SERVIDOR1");
+                    MessageBox.Show(Properties.Resources.msgErrorConexion);
+                    IrMenuPrincipal();
                     break;
                 case Constantes.OPERACION_EXITOSA:
                     grdJugadores.Children.Clear();
                     CrearBorders(_cuentas);
                     CrearEllipses(_cuentas);
                     CrearLabels(_cuentas);
-                    txtBoxHost.Text = _cuentas[0].CorreoElectronico;
+                    txtBoxHost.Text = _cuentas[0].Nickname;
                     break;
                 case Constantes.OPERACION_EXITOSA_VACIA:
-                    Console.WriteLine("OPERACION_EXITOSA_VACIA1");
+                    MessageBox.Show(Properties.Resources.msgErrorConexion);
+                    IrMenuPrincipal();
                     break;
                 default:
                     break;
+
             }
         }
 
@@ -100,10 +115,10 @@ namespace VistasSorrySliders
             int contador = 0;
             foreach(var cuenta in cuentas) 
             {
-                Rectangle rectanguloNuevo = XamlReader.Parse(XamlWriter.Save(rctJugador)) as Rectangle;
-                rectanguloNuevo.Name = "rctJugador" + (contador + 1);
-                Grid.SetRow(rectanguloNuevo, contador);
-                grdJugadores.Children.Add(rectanguloNuevo);
+                Rectangle rctNuevo = XamlReader.Parse(XamlWriter.Save(rctJugador)) as Rectangle;
+                rctNuevo.Name = "rctJugador" + (contador + 1);
+                Grid.SetRow(rctNuevo, contador);
+                grdJugadores.Children.Add(rctNuevo);
                 contador++;
             }
         }
@@ -112,22 +127,22 @@ namespace VistasSorrySliders
             int contador = 0;
             foreach (var cuenta in cuentas)
             {
-                Ellipse nuevaEllipseAvatar = XamlReader.Parse(XamlWriter.Save(llpAvatar)) as Ellipse;
-                nuevaEllipseAvatar.Name = "llpAvatarJugador" + (contador + 1);
-                Grid.SetRow(nuevaEllipseAvatar, contador);
-                grdJugadores.Children.Add(nuevaEllipseAvatar);
+                Ellipse llpNuevaAvatar = XamlReader.Parse(XamlWriter.Save(llpAvatar)) as Ellipse;
+                llpNuevaAvatar.Name = "llpAvatarJugador" + (contador + 1);
+                Grid.SetRow(llpNuevaAvatar, contador);
+                grdJugadores.Children.Add(llpNuevaAvatar);
                 
 
-                Ellipse nuevaEllipseFondo = XamlReader.Parse(XamlWriter.Save(llpFondo)) as Ellipse;
-                nuevaEllipseFondo.Name = "llpFondoJugador" + (contador + 1);
-                nuevaEllipseFondo.Fill = Utilidades.ConvertirBytesAImageBrush(cuenta.Avatar);
-                Grid.SetRow(nuevaEllipseFondo, contador);
-                grdJugadores.Children.Add(nuevaEllipseFondo);
+                Ellipse llpNuevaFondo = XamlReader.Parse(XamlWriter.Save(llpFondo)) as Ellipse;
+                llpNuevaFondo.Name = "llpFondoJugador" + (contador + 1);
+                llpNuevaFondo.Fill = Utilidades.ConvertirBytesAImageBrush(cuenta.Avatar);
+                Grid.SetRow(llpNuevaFondo, contador);
+                grdJugadores.Children.Add(llpNuevaFondo);
 
-                Ellipse nuevaEllipseDecoracion = XamlReader.Parse(XamlWriter.Save(llpDecoracion)) as Ellipse;
-                nuevaEllipseDecoracion.Name = "llpDecoracion" + (contador + 1);
-                Grid.SetRow(nuevaEllipseDecoracion, contador);
-                grdJugadores.Children.Add(nuevaEllipseDecoracion);
+                Ellipse llpNuevaDecoracion = XamlReader.Parse(XamlWriter.Save(llpDecoracion)) as Ellipse;
+                llpNuevaDecoracion.Name = "llpDecoracion" + (contador + 1);
+                Grid.SetRow(llpNuevaDecoracion, contador);
+                grdJugadores.Children.Add(llpNuevaDecoracion);
 
                 contador++;
             }
@@ -137,11 +152,11 @@ namespace VistasSorrySliders
             int contador = 0;
             foreach (var cuenta in cuentas)
             {
-                Label nuevoLabel = XamlReader.Parse(XamlWriter.Save(lblJugador)) as Label;
-                nuevoLabel.Name = "lblJugador" + (contador + 1);
-                nuevoLabel.Content = cuenta.Nickname;
-                Grid.SetRow(nuevoLabel, contador);
-                grdJugadores.Children.Add(nuevoLabel);
+                Label lblNuevo = XamlReader.Parse(XamlWriter.Save(lblJugador)) as Label;
+                lblNuevo.Name = "lblJugador" + (contador + 1);
+                lblNuevo.Content = cuenta.Nickname;
+                Grid.SetRow(lblNuevo, contador);
+                grdJugadores.Children.Add(lblNuevo);
                 contador++;
             }
         }
@@ -149,44 +164,72 @@ namespace VistasSorrySliders
         private void InicializarDatosPartida(string codigoPartida) 
         {
             Constantes respuesta;
+            Logger log = new Logger(this.GetType());
             try
             {
                 UnirsePartidaClient proxyUnirsePartida = new UnirsePartidaClient();
                 (respuesta, _partidaActual) = proxyUnirsePartida.RecuperarPartida(codigoPartida);
-                
             }
             catch (CommunicationException ex)
             {
                 Console.WriteLine(ex);
                 respuesta = Constantes.ERROR_CONEXION_SERVIDOR;
-                System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorConexion);
+                log.LogError("Error de Comunicación con el Servidor", ex);
             }
             catch (TimeoutException ex)
             {
                 Console.WriteLine(ex);
                 respuesta = Constantes.ERROR_CONEXION_SERVIDOR;
-                System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorConexion);
+                log.LogWarn("Se agoto el tiempo de espera del servidor", ex);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+                respuesta = Constantes.ERROR_CONEXION_SERVIDOR;
+                log.LogFatal("Ha ocurrido un error inesperado", ex);
             }
             switch (respuesta)
             {
                 case Constantes.ERROR_CONEXION_BD:
-                    Console.WriteLine("ERROR_CONEXION_BD");
+                    MessageBox.Show(Properties.Resources.msgErrorBaseDatos );
+                    IrMenuPrincipal();
                     break;
                 case Constantes.ERROR_CONSULTA:
-                    Console.WriteLine("ERROR_CONSULTA");
-
+                    MessageBox.Show(Properties.Resources.msgErrorBaseDatos + "8");
+                    IrMenuPrincipal();
                     break;
                 case Constantes.ERROR_CONEXION_SERVIDOR:
-                    Console.WriteLine("ERROR_CONEXION_SERVIDOR2");
-
+                    MessageBox.Show(Properties.Resources.msgErrorConexion);
+                    IrMenuPrincipal();
                     break;
                 case Constantes.OPERACION_EXITOSA:
                     txtBoxCodigoPartida.Text = _partidaActual.CodigoPartida.ToString();
-                    txtBoxHost.Text = _partidaActual.CorreoElectronico;
                     txtBoxJugadores.Text = ""+ _partidaActual.CantidadJugadores;
+                    switch (_partidaActual.CantidadJugadores)
+                    {
+                        case 2:
+                            lblCantidadJugadoresPartida.Content = Properties.Resources.lblDosJugadores;
+                            Uri urlRelativa1 = new Uri("/Recursos/TableroDosConFondo.png", UriKind.Relative);
+                            mgTablero.Source = new BitmapImage(urlRelativa1);
+                            break;
+                        case 3:
+                            lblCantidadJugadoresPartida.Content = Properties.Resources.lblTresJugadores;
+                            Uri urlRelativa2 = new Uri("/Recursos/TableroTresConFondo.png", UriKind.Relative);
+                            mgTablero.Source = new BitmapImage(urlRelativa2);
+                            break;
+                        case 4:
+                            lblCantidadJugadoresPartida.Content = Properties.Resources.lblCuatroJugadores;
+                            Uri urlRelativa3 = new Uri("/Recursos/TableroCuatroConFondo.png", UriKind.Relative);
+                            mgTablero.Source = new BitmapImage(urlRelativa3);
+                            break;
+                        default:
+                            break;
+                    }
+                    
                     break;
                 case Constantes.OPERACION_EXITOSA_VACIA:
-                    Console.WriteLine("OPERACION_EXITOSA_VACIA2");
+                    MessageBox.Show(Properties.Resources.msgErrorBaseDatos);
+                    _juegoYLobbyVentana.CerrarVentanaActual();
                     break;
                 default:
                     break;
@@ -196,11 +239,12 @@ namespace VistasSorrySliders
 
         private void ClickSalirLobbyJugadores(object sender, RoutedEventArgs e)
         {
-            SalirPartida();
-            var ventanaPrincipal = new MainWindow();
-            MenuPrincipalPagina menu = new MenuPrincipalPagina(_cuentaUsuario);
-            ventanaPrincipal.Content = menu;
-            ventanaPrincipal.Show();
+            IrMenuPrincipal();
+        }
+        
+        private void IrMenuPrincipal()
+        {
+            SalirLobbyServidor();
             Window.GetWindow(this).Close();
         }
 
@@ -211,40 +255,31 @@ namespace VistasSorrySliders
 
         public void EntrarPartida()
         {
+            Logger log = new Logger(this.GetType());
             try
             {
                 InstanceContext contextoCallback = new InstanceContext(this);
+                _contextoCallback = contextoCallback;
                 _proxyLobby = new LobbyClient(contextoCallback);
-                _proxyLobby.EntrarPartida(_codigoPartida);
-            }
-            catch (CommunicationException ex)
-            {
-                MessageBox.Show("Error servidor :c");
-                Console.WriteLine(ex);
-            }
-        }
-
-
-        public void SalirPartida() 
-        {
-            try
-            {
-                UnirsePartidaClient proxyUnirse = new UnirsePartidaClient();
-                proxyUnirse.SalirDelLobby(_cuentaUsuario.CorreoElectronico, _codigoPartida);
-                _proxyLobby.SalirPartida(_codigoPartida);
-                   
+                _proxyLobby.EntrarPartida(_codigoPartida, _cuentaUsuario.CorreoElectronico);
             }
             catch (CommunicationException ex)
             {
                 Console.WriteLine(ex);
-                System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorConexion);
+                log.LogError("Error de Comunicación con el Servidor", ex);
             }
             catch (TimeoutException ex)
             {
                 Console.WriteLine(ex);
-                System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorConexion);
+                log.LogWarn("Se agoto el tiempo de espera del servidor", ex);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+                log.LogFatal("Ha ocurrido un error inesperado", ex);
             }
         }
+
         public void JugadorSalioPartida()
         {
             RecuperarDatosPartida(_codigoPartida);
@@ -252,9 +287,69 @@ namespace VistasSorrySliders
 
         private void ClickIniciarPartida(object sender, RoutedEventArgs e)
         {
-            if (_cuentas.Count() == _partidaActual.CantidadJugadores)
+            //SWITCH -JACOB
+            if (_cuentas.Count() == _partidaActual.CantidadJugadores && txtBoxHost.Text == _cuentaUsuario.Nickname)
             {
+                CambiarPaginas();
+            }
+        }
 
+        private void CambiarPaginas() 
+        {
+            Logger log = new Logger(this.GetType());
+            try
+            {
+                _proxyLobby.IniciarPartida(_codigoPartida);
+            }
+            catch (CommunicationException ex)
+            {
+                Console.WriteLine(ex);
+                System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorConexion);
+                log.LogError("Error de Comunicación con el Servidor", ex);
+            }
+            catch (TimeoutException ex)
+            {
+                Console.WriteLine(ex);
+                System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorConexion);
+                log.LogWarn("Se agoto el tiempo de espera del servidor", ex);
+            }
+        }
+
+        public void HostInicioPartida()
+        {
+            List<CuentaSet> cuentasJugadores = _cuentas.ToList();
+            Page paginaJuego = new JuegoLanzamientoPagina(cuentasJugadores, _partidaActual.CantidadJugadores, _partidaActual.CodigoPartida.ToString(), _cuentaUsuario.CorreoElectronico);
+            Page paginaChat = new JugadoresChatPagina(_cuentas, _cuentaUsuario, _partidaActual);
+            _juegoYLobbyVentana.CambiarFrameLobby(paginaJuego);
+            _juegoYLobbyVentana.CambiarFrameListaAmigos(paginaChat);
+
+            SalirLobbyServidor();
+        }
+
+        private void SalirLobbyServidor()
+        {
+            Logger log = new Logger(this.GetType());
+            try
+            {
+                _proxyLobby.SalirPartida(_codigoPartida);
+            }
+            catch (CommunicationException ex)
+            {
+                Console.WriteLine(ex);
+                System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorConexion);
+                log.LogError("Error de Comunicación con el Servidor", ex);
+            }
+            catch (TimeoutException ex)
+            {
+                Console.WriteLine(ex);
+                System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorConexion);
+                log.LogWarn("Se agoto el tiempo de espera del servidor", ex);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+                System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorConexion);
+                log.LogFatal("Ha ocurrido un error inesperado", ex);
             }
         }
     }

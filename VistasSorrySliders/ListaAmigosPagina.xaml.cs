@@ -18,43 +18,61 @@ using System.Windows.Shapes;
 using VistasSorrySliders.ServicioSorrySliders;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.TextBox;
 using System.Drawing;
+using System.Net.NetworkInformation;
 
 namespace VistasSorrySliders
 {
     /// <summary>
     /// Lógica de interacción para ListaAmigosPagina.xaml
     /// </summary>
-    public partial class ListaAmigosPagina : Page
+    public partial class ListaAmigosPagina : Page, INotificarJugadoresCallback
     {
         private CuentaSet _cuenta;
         private string _codigoPartida;
+        private ListaAmigosClient _proxyAmigos;
+        private TipoNotificacion[] _tiposNotificacion;
+
         public ListaAmigosPagina(CuentaSet cuenta, string codigoPartida)
         {
             InitializeComponent();
             _cuenta = cuenta;
             _codigoPartida = codigoPartida;
             RecuperarAmigos();
+            RecuperarTiposNotificacion();
         }
-
 
         private void RecuperarAmigos()
         {
             Constantes resultado;
+            Logger log = new Logger(this.GetType());
             List<CuentaSet> amigosLista = new List<CuentaSet>();
             try
             {
                 CuentaSet[] cuentas;
-                ListaAmigosClient proxyAmigos = new ListaAmigosClient();
-                (resultado, cuentas) = proxyAmigos.RecuperarAmigosCuenta(_cuenta.CorreoElectronico);
+                _proxyAmigos = new ListaAmigosClient();
+                (resultado, cuentas) = _proxyAmigos.RecuperarAmigosCuenta(_cuenta.CorreoElectronico);
                 if (cuentas != null)
                 {
                     amigosLista = cuentas.ToList();
                 }
             }
-            catch (CommunicationException excepcion)
+            catch (CommunicationException ex)
             {
                 resultado = Constantes.ERROR_CONEXION_SERVIDOR;
-                Console.WriteLine(excepcion);
+                Console.WriteLine(ex);
+                log.LogError("Error de Comunicación con el Servidor", ex);
+            }
+            catch (TimeoutException ex)
+            {
+                Console.WriteLine(ex);
+                resultado = Constantes.ERROR_CONEXION_SERVIDOR;
+                log.LogWarn("Se agoto el tiempo de espera del servidor", ex);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+                resultado = Constantes.ERROR_CONEXION_SERVIDOR;
+                log.LogFatal("Ha ocurrido un error inesperado", ex);
             }
 
             switch (resultado)
@@ -66,6 +84,7 @@ namespace VistasSorrySliders
                     break;
                 case Constantes.ERROR_CONEXION_BD:
                 case Constantes.ERROR_CONSULTA:
+                    Console.WriteLine("WAOS 1");
                     MessageBox.Show(Properties.Resources.msgErrorBaseDatos);
                     break;
                 case Constantes.ERROR_CONEXION_SERVIDOR:
@@ -75,7 +94,11 @@ namespace VistasSorrySliders
         }
         private void ClickEnviarCodigo(object sender, RoutedEventArgs e)
         {
-            RecuperarCuentaListItem((ListBoxItem)sender);
+            CuentaSet cuentaJugadorClickeado = RecuperarCuentaListItem((ListBoxItem)sender);
+            if (_tiposNotificacion != null)
+            {
+                EnviarInvitacionJugador(cuentaJugadorClickeado);                
+            }
         }
 
         private CuentaSet RecuperarCuentaListItem(ListBoxItem itemJugador)
@@ -92,29 +115,39 @@ namespace VistasSorrySliders
 
         private void EnviarCorreo()
         {
+            Logger log = new Logger(this.GetType());
             try
             {
-                MailMessage correo = new MailMessage();
-                string correoJuego = "TheSorrySliders@gmail.com";
-                string contraseñaAplicacion = "nsnd wsuu kqeb qayk";
-                correo.From = new MailAddress(correoJuego);
-                correo.To.Add("montielsalasjesus@gmail.com");
-                correo.Subject = "Invitación a Sorry Sliders";
+                if (NetworkInterface.GetIsNetworkAvailable())
+                {
 
-                correo.Body = $"<p>El jugador {_cuenta.CorreoElectronico} te ha invitado a jugar Sorry Sliders \n " +
-                    $"Únete como invitado con el siguiente código de partida: {_codigoPartida} \n " +
-                    $"</p><img src='VistasSorrySliders/Recursos/logoSliders.png' alt='Sorry Sliders'>";
-                correo.IsBodyHtml = true;
+                    MailMessage correo = new MailMessage();
+                    string correoJuego = "TheSorrySliders@gmail.com";
+                    string contraseñaAplicacion = "nsnd wsuu kqeb qayk";
+                    correo.From = new MailAddress(correoJuego);
+                    correo.To.Add("montielsalasjesus@gmail.com");
+                    correo.Subject = "Invitación a Sorry Sliders";
 
-                SmtpClient clienteSmtp = new SmtpClient("smtp.gmail.com");
-                clienteSmtp.Port = 587;
-                clienteSmtp.Credentials = new NetworkCredential(correoJuego, contraseñaAplicacion);
-                clienteSmtp.EnableSsl = true;
-                clienteSmtp.Send(correo);
+                    correo.Body = $"<p>El jugador {_cuenta.CorreoElectronico} te ha invitado a jugar Sorry Sliders \n " +
+                        $"Únete como invitado con el siguiente código de partida: {_codigoPartida} \n " +
+                        $"</p><img src='VistasSorrySliders/Recursos/logoSliders.png' alt='Sorry Sliders'>";
+                    correo.IsBodyHtml = true;
+
+                    SmtpClient clienteSmtp = new SmtpClient("smtp.gmail.com");
+                    clienteSmtp.Port = 587;
+                    clienteSmtp.Credentials = new NetworkCredential(correoJuego, contraseñaAplicacion);
+                    clienteSmtp.EnableSsl = true;
+                    clienteSmtp.Send(correo);
+                }
+                else
+                {
+                    Console.WriteLine("No hay conexión a Internet");
+                }
             }
             catch (Exception ex)
             {
                 Console.WriteLine("Error al enviar el correo: " + ex.StackTrace);
+                log.LogFatal("Ha ocurrido un error inesperado", ex);
             }
         }
 
@@ -135,11 +168,11 @@ namespace VistasSorrySliders
             Console.WriteLine(informacionJugador);
             Constantes resultado;
             List<CuentaSet> jugadoresLista = new List<CuentaSet>();
+            Logger log = new Logger(this.GetType());
             try
             {
                 CuentaSet[] cuentas;
-                ListaAmigosClient proxyAmigos = new ListaAmigosClient();
-                (resultado, cuentas) = proxyAmigos.RecuperarJugadoresCuenta(informacionJugador);
+                (resultado, cuentas) = _proxyAmigos.RecuperarJugadoresCuenta(informacionJugador);
                 if (cuentas != null)
                 {
                     jugadoresLista = cuentas.ToList();
@@ -149,13 +182,19 @@ namespace VistasSorrySliders
             {
                 Console.WriteLine(ex);
                 resultado = Constantes.ERROR_CONEXION_SERVIDOR;
-                System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorConexion);
+                log.LogError("Error de Comunicación con el Servidor", ex);
             }
             catch (TimeoutException ex)
             {
                 Console.WriteLine(ex);
                 resultado = Constantes.ERROR_CONEXION_SERVIDOR;
-                System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorConexion);
+                log.LogWarn("Se agoto el tiempo de espera del servidor", ex);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+                resultado = Constantes.ERROR_CONEXION_SERVIDOR;
+                log.LogFatal("Ha ocurrido un error inesperado", ex);
             }
 
             switch (resultado)
@@ -177,7 +216,143 @@ namespace VistasSorrySliders
 
         private void ClickEnviarCodigoJugadorSinCuenta(object sender, RoutedEventArgs e)
         {
-            EnviarCorreo();
+            //EnviarCorreo();
+        }
+
+        private void EnviarInvitacionJugador(CuentaSet cuentaJugadorClickeado) 
+        {
+            Logger log = new Logger(this.GetType());
+            Constantes resultado;
+            try
+            {
+                NotificacionSet notificacionNueva = new NotificacionSet
+                {
+                    CorreoElectronicoRemitente = _cuenta.CorreoElectronico,
+                    CorreoElectronicoDestinatario = cuentaJugadorClickeado.CorreoElectronico,
+                    IdTipoNotificacion = _tiposNotificacion[0].IdTipoNotificacion,
+                    Mensaje = _codigoPartida
+                };
+                resultado = _proxyAmigos.GuardarNotificacion(notificacionNueva);
+            }
+            catch (CommunicationException ex)
+            {
+                Console.WriteLine(ex);
+                resultado = Constantes.ERROR_CONEXION_SERVIDOR;
+                log.LogError("Error de Comunicación con el Servidor", ex);
+            }
+            catch (TimeoutException ex)
+            {
+                Console.WriteLine(ex);
+                resultado = Constantes.ERROR_CONEXION_SERVIDOR;
+                log.LogWarn("Se agoto el tiempo de espera del servidor", ex);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+                resultado = Constantes.ERROR_CONEXION_SERVIDOR;
+                log.LogFatal("Ha ocurrido un error inesperado", ex);
+            }
+            Console.WriteLine(resultado);
+            switch (resultado)
+            {
+                case Constantes.ERROR_CONEXION_BD:
+                    MessageBox.Show(Properties.Resources.msgErrorBaseDatos + "3");
+                    break;
+                case Constantes.ERROR_CONSULTA:
+                    MessageBox.Show(Properties.Resources.msgErrorBaseDatos);
+                    break;
+                case Constantes.ERROR_CONEXION_SERVIDOR:
+                    MessageBox.Show(Properties.Resources.msgErrorConexion);
+                    break;
+                case Constantes.OPERACION_EXITOSA:
+                    NotificarUsuarioInvitado(cuentaJugadorClickeado);
+                    break;
+                case Constantes.OPERACION_EXITOSA_VACIA:
+                    MessageBox.Show(Properties.Resources.msgErrorBaseDatos);
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        private void NotificarUsuarioInvitado(CuentaSet cuentaJugadorClickeado)
+        {
+            Logger log = new Logger(this.GetType());
+            try
+            {
+                InstanceContext contexto = new InstanceContext(this);
+                NotificarJugadoresClient proxyNotificarJugador = new NotificarJugadoresClient(contexto);
+                proxyNotificarJugador.NotificarJugadorInvitado(cuentaJugadorClickeado.CorreoElectronico);
+            }
+            catch (CommunicationException ex)
+            {
+                Console.WriteLine(ex);
+                log.LogError("Error de Comunicación con el Servidor", ex);
+            }
+            catch (TimeoutException ex)
+            {
+                Console.WriteLine(ex);
+                log.LogWarn("Se agoto el tiempo de espera del servidor", ex);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+                log.LogFatal("Ha ocurrido un error inesperado", ex);
+            }
+        }
+
+
+        private void RecuperarTiposNotificacion() 
+        {
+            Logger log = new Logger(this.GetType());
+            Constantes resultado = new Constantes();
+            try
+            {
+                (resultado, _tiposNotificacion) = _proxyAmigos.RecuperarTipoNotificacion();
+                
+            }
+            catch (CommunicationException ex)
+            {
+                Console.WriteLine(ex);
+                resultado = Constantes.ERROR_CONEXION_SERVIDOR;
+                log.LogError("Error de Comunicación con el Servidor", ex);
+            }
+            catch (TimeoutException ex)
+            {
+                Console.WriteLine(ex);
+                resultado = Constantes.ERROR_CONEXION_SERVIDOR;
+                log.LogWarn("Se agoto el tiempo de espera del servidor", ex);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+                resultado = Constantes.ERROR_CONEXION_SERVIDOR;
+                log.LogFatal("Ha ocurrido un error inesperado", ex);
+            }
+            switch (resultado)
+            {
+                case Constantes.ERROR_CONEXION_BD:
+                    MessageBox.Show(Properties.Resources.msgErrorBaseDatos);
+                    break;
+                case Constantes.ERROR_CONSULTA:
+                    MessageBox.Show(Properties.Resources.msgErrorBaseDatos);
+                    break;
+                case Constantes.ERROR_CONEXION_SERVIDOR:
+                    MessageBox.Show(Properties.Resources.msgErrorConexion);
+                    break;
+                case Constantes.OPERACION_EXITOSA:
+                    break;
+                case Constantes.OPERACION_EXITOSA_VACIA:
+                    MessageBox.Show(Properties.Resources.msgErrorBaseDatos);
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        public void RecuperarNotificacion()
+        {
+            Console.WriteLine("RecuperarNotificacion lista amigos");
         }
     }
 }
