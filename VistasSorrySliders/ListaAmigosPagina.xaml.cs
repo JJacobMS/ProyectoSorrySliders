@@ -25,12 +25,12 @@ namespace VistasSorrySliders
     /// <summary>
     /// Lógica de interacción para ListaAmigosPagina.xaml
     /// </summary>
-    public partial class ListaAmigosPagina : Page, INotificarJugadoresCallback
+    public partial class ListaAmigosPagina : Page
     {
         private CuentaSet _cuenta;
         private string _codigoPartida;
         private ListaAmigosClient _proxyAmigos;
-        private TipoNotificacion[] _tiposNotificacion;
+        private List<TipoNotificacion> _tiposNotificacion;
 
         public ListaAmigosPagina(CuentaSet cuenta, string codigoPartida)
         {
@@ -280,9 +280,7 @@ namespace VistasSorrySliders
             Logger log = new Logger(this.GetType());
             try
             {
-                InstanceContext contexto = new InstanceContext(this);
-                NotificarJugadoresClient proxyNotificarJugador = new NotificarJugadoresClient(contexto);
-                proxyNotificarJugador.NotificarJugadorInvitado(cuentaJugadorClickeado.CorreoElectronico);
+                _proxyAmigos.NotificarInvitado(cuentaJugadorClickeado.CorreoElectronico);
             }
             catch (CommunicationException ex)
             {
@@ -305,11 +303,15 @@ namespace VistasSorrySliders
         private void RecuperarTiposNotificacion() 
         {
             Logger log = new Logger(this.GetType());
-            Constantes resultado = new Constantes();
+            Constantes resultado;
+            TipoNotificacion[] listaTiposNotificaciones;
             try
             {
-                (resultado, _tiposNotificacion) = _proxyAmigos.RecuperarTipoNotificacion();
-                
+                (resultado, listaTiposNotificaciones) = _proxyAmigos.RecuperarTipoNotificacion();
+                if (resultado == Constantes.OPERACION_EXITOSA)
+                {
+                    _tiposNotificacion = listaTiposNotificaciones.ToList();
+                }
             }
             catch (CommunicationException ex)
             {
@@ -348,11 +350,6 @@ namespace VistasSorrySliders
                 default:
                     break;
             }
-        }
-
-        public void RecuperarNotificacion()
-        {
-            Console.WriteLine("RecuperarNotificacion lista amigos");
         }
     }
 }
