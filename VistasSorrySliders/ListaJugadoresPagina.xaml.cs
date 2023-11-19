@@ -55,7 +55,7 @@ namespace VistasSorrySliders
             RecuperarTiposNotificacion();
             CargarAmigos();
             CargarNotificaciones();
-            CargarJugadores();
+            MostrarJugadores();
         }
 
         private void CrearProxyAmigos()
@@ -201,34 +201,31 @@ namespace VistasSorrySliders
             }
         }
 
-        private void CargarJugadores()
+        private void MostrarJugadores()
         {
             lstBoxJugadores.Items.Clear();
-            
-            foreach (CuentaSet cuenta in _lista)
+            if (_lista != null)
             {
-                ListBoxItem lstBoxItemCuenta = new ListBoxItem
+                foreach (CuentaSet cuenta in _lista)
                 {
-                    DataContext = cuenta
-                };
-                if (EsCuentaBaneada(cuenta))
-                {
-                    lstBoxItemCuenta.Style = (Style)FindResource("estiloLstBoxItemJugadorBaneado");
+                    ListBoxItem lstBoxItemCuenta = new ListBoxItem
+                    {
+                        DataContext = cuenta
+                    };
+                    if (EsCuentaBaneada(cuenta))
+                    {
+                        lstBoxItemCuenta.Style = (Style)FindResource("estiloLstBoxItemJugadorBaneado");
+                    }
+                    if (EsCuentaAmigo(cuenta))
+                    {
+                        lstBoxItemCuenta.Style = (Style)FindResource("estiloLstBoxItemAmigo");
+                    }
+                    lstBoxJugadores.Items.Add(lstBoxItemCuenta);
                 }
-                if (EsCuentaAmigo(cuenta))
-                {
-                    lstBoxItemCuenta.Style = (Style)FindResource("estiloLstBoxItemAmigo");
-                }
-                lstBoxJugadores.Items.Add(lstBoxItemCuenta);
             }
         }
-        private void CargarAmigos()
-        {
-            lstBoxAmigos.Items.Clear();
-            ObtenerAmigos();
-        }
 
-        private void ObtenerAmigos()
+        private void CargarAmigos()
         {
             Constantes resultado;
             Logger log = new Logger(this.GetType());
@@ -262,9 +259,19 @@ namespace VistasSorrySliders
             switch (resultado)
             {
                 case Constantes.OPERACION_EXITOSA:
+                    Console.WriteLine("OPERACION_EXITOSA");
+                    lstBoxAmigos.ItemsSource = null;
+                    lstBoxAmigos.Items.Clear();
                     lstBoxAmigos.ItemsSource = _amigos;
+                    //NOTIFICAR AL OTRO USUARIO QUE RECARGUE LA PANTALLA
+                    
                     break;
                 case Constantes.OPERACION_EXITOSA_VACIA:
+                    Console.WriteLine("OPERACION_EXITOSA_VACIA");
+                    lstBoxAmigos.ItemsSource = null;
+                    lstBoxAmigos.Items.Clear();
+                    //lstBoxAmigos.ItemsSource = _amigos;
+
                     break;
                 case Constantes.ERROR_CONEXION_BD:
                     MessageBox.Show(Properties.Resources.msgErrorBaseDatos);
@@ -278,19 +285,14 @@ namespace VistasSorrySliders
             }
         }
 
+
         private void CargarNotificaciones() 
         {
             lstBoxNotificaciones.Items.Clear();
-            ObtenerNotificaciones();
-        }
-
-        private void ObtenerNotificaciones() 
-        {
             Constantes resultado;
             Logger log = new Logger(this.GetType());
             try
             {
-                Console.WriteLine("CARGAR NOTIFICACIONES");
                 NotificacionSet[] listaNotificacionesResultado;
                 (resultado, listaNotificacionesResultado) = _proxyAmigos.RecuperarNotificaciones(_cuentaUsuario.CorreoElectronico);
                 if (resultado == Constantes.OPERACION_EXITOSA)
@@ -337,22 +339,23 @@ namespace VistasSorrySliders
 
         private void MostrarNotificaciones()
         {
-            lstBoxNotificaciones.Items.Clear();
-            foreach (NotificacionSet notificacion in _notificaciones)
-            {
-                ListBoxItem lstBoxItemCuenta = new ListBoxItem
+            if(_notificaciones != null) {
+                foreach (NotificacionSet notificacion in _notificaciones)
                 {
-                    DataContext = notificacion
-                };
-                if (notificacion.IdTipoNotificacion== _tiposNotificacion[1].IdTipoNotificacion)
-                {
-                    lstBoxItemCuenta.Style = (Style)FindResource("estiloLstBoxItemNotificacionAmigo");
+                    ListBoxItem lstBoxItemCuenta = new ListBoxItem
+                    {
+                        DataContext = notificacion
+                    };
+                    if (notificacion.IdTipoNotificacion == _tiposNotificacion[1].IdTipoNotificacion)
+                    {
+                        lstBoxItemCuenta.Style = (Style)FindResource("estiloLstBoxItemNotificacionAmigo");
+                    }
+                    if (notificacion.IdTipoNotificacion == _tiposNotificacion[0].IdTipoNotificacion)
+                    {
+                        lstBoxItemCuenta.Style = (Style)FindResource("estiloLstBoxItemNotificacionPartida");
+                    }
+                    lstBoxNotificaciones.Items.Add(lstBoxItemCuenta);
                 }
-                if (notificacion.IdTipoNotificacion == _tiposNotificacion[0].IdTipoNotificacion)
-                {
-                    lstBoxItemCuenta.Style = (Style)FindResource("estiloLstBoxItemNotificacionPartida");
-                }
-                lstBoxNotificaciones.Items.Add(lstBoxItemCuenta);
             }
         }
 
@@ -361,23 +364,30 @@ namespace VistasSorrySliders
 
         private bool EsCuentaBaneada(CuentaSet cuentaComparar)
         {
-            foreach (CuentaSet cuenta in _baneados)
+            if (_baneados != null)
             {
-                if (cuenta.CorreoElectronico.Equals(cuentaComparar.CorreoElectronico))
+                foreach (CuentaSet cuenta in _baneados)
                 {
-                    return true;
+                    if (cuenta.CorreoElectronico.Equals(cuentaComparar.CorreoElectronico))
+                    {
+                        return true;
+                    }
                 }
             }
             return false;
+                
         }
 
         private bool EsCuentaAmigo(CuentaSet cuentaComparar)
         {
-            foreach (CuentaSet cuenta in _amigos)
+            if (_amigos != null)
             {
-                if (cuenta.CorreoElectronico.Equals(cuentaComparar.CorreoElectronico))
+                foreach (CuentaSet cuenta in _amigos)
                 {
-                    return true;
+                    if (cuenta.CorreoElectronico.Equals(cuentaComparar.CorreoElectronico))
+                    {
+                        return true;
+                    }
                 }
             }
             return false;
@@ -434,20 +444,12 @@ namespace VistasSorrySliders
             Console.WriteLine("Eliminar Banear");
         }
 
-        private void PreviewMouseDownBanearAmigo(object sender, MouseButtonEventArgs e)
-        {
-            Button boton = sender as Button;
-            CuentaSet cuenta = boton.CommandParameter as CuentaSet;
-            Console.WriteLine(cuenta.Nickname);
-            Console.WriteLine("Banear Amigo");
-        }
 
         private void PreviewMouseDownEliminarAmigo(object sender, MouseButtonEventArgs e)
         {
             Button boton = sender as Button;
-            CuentaSet cuenta = boton.CommandParameter as CuentaSet;
-            Console.WriteLine(cuenta.Nickname);
-            Console.WriteLine("Eliminar Amigo");
+            CuentaSet cuentaAmigo = boton.CommandParameter as CuentaSet;
+            EliminarAmistad(cuentaAmigo);
         }
 
         private void PreviewMouseDownAceptarNotificacion(object sender, MouseButtonEventArgs e)
@@ -570,9 +572,81 @@ namespace VistasSorrySliders
             }
         }
 
+        private void EliminarAmistad(CuentaSet cuentaAmigo) 
+        {
+            Logger log = new Logger(this.GetType());
+            Constantes resultado;
+            try
+            {
+                resultado = _proxyAmigos.EliminarAmistad(_cuentaUsuario.CorreoElectronico, cuentaAmigo.CorreoElectronico);
+            }
+            catch (CommunicationException ex)
+            {
+                Console.WriteLine(ex);
+                resultado = Constantes.ERROR_CONEXION_SERVIDOR;
+                log.LogError("Error de Comunicación con el Servidor", ex);
+            }
+            catch (TimeoutException ex)
+            {
+                Console.WriteLine(ex);
+                resultado = Constantes.ERROR_CONEXION_SERVIDOR;
+                log.LogWarn("Se agoto el tiempo de espera del servidor", ex);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+                resultado = Constantes.ERROR_CONEXION_SERVIDOR;
+                log.LogFatal("Ha ocurrido un error inesperado", ex);
+            }
+            switch (resultado)
+            {
+                case Constantes.OPERACION_EXITOSA:
+                    NotificarUsuario(cuentaAmigo);
+                    CargarAmigos();
+                    break;
+                case Constantes.OPERACION_EXITOSA_VACIA:
+                    break;
+                case Constantes.ERROR_CONEXION_BD:
+                    MessageBox.Show(Properties.Resources.msgErrorBaseDatos);
+                    break;
+                case Constantes.ERROR_CONSULTA:
+                    MessageBox.Show(Properties.Resources.msgErrorBaseDatos);
+                    break;
+                case Constantes.ERROR_CONEXION_SERVIDOR:
+                    MessageBox.Show(Properties.Resources.msgErrorConexion);
+                    break;
+            }
+        }
+
+        private void NotificarUsuario(CuentaSet cuentaJugador)
+        {
+            Logger log = new Logger(this.GetType());
+            try
+            {
+                _proxyAmigos.NotificarUsuario(cuentaJugador.CorreoElectronico);
+            }
+            catch (CommunicationException ex)
+            {
+                Console.WriteLine(ex);
+                log.LogError("Error de Comunicación con el Servidor", ex);
+            }
+            catch (TimeoutException ex)
+            {
+                Console.WriteLine(ex);
+                log.LogWarn("Se agoto el tiempo de espera del servidor", ex);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+                log.LogFatal("Ha ocurrido un error inesperado", ex);
+            }
+        }
+
         public void RecuperarNotificacion()
         {
+            CargarAmigos();
             CargarNotificaciones();
+            MostrarJugadores();
         }
     }
 }

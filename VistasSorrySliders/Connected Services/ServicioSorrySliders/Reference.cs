@@ -1626,17 +1626,23 @@ namespace VistasSorrySliders.ServicioSorrySliders {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IListaAmigos/EliminarNotificacionJugador", ReplyAction="http://tempuri.org/IListaAmigos/EliminarNotificacionJugadorResponse")]
         System.Threading.Tasks.Task<VistasSorrySliders.ServicioSorrySliders.Constantes> EliminarNotificacionJugadorAsync(string correoElectronico, int idNotificacion);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IListaAmigos/NotificarInvitado", ReplyAction="http://tempuri.org/IListaAmigos/NotificarInvitadoResponse")]
-        void NotificarInvitado(string correoElectronico);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IListaAmigos/NotificarUsuario", ReplyAction="http://tempuri.org/IListaAmigos/NotificarUsuarioResponse")]
+        void NotificarUsuario(string correoElectronico);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IListaAmigos/NotificarInvitado", ReplyAction="http://tempuri.org/IListaAmigos/NotificarInvitadoResponse")]
-        System.Threading.Tasks.Task NotificarInvitadoAsync(string correoElectronico);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IListaAmigos/NotificarUsuario", ReplyAction="http://tempuri.org/IListaAmigos/NotificarUsuarioResponse")]
+        System.Threading.Tasks.Task NotificarUsuarioAsync(string correoElectronico);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IListaAmigos/GuardarAmistad", ReplyAction="http://tempuri.org/IListaAmigos/GuardarAmistadResponse")]
         VistasSorrySliders.ServicioSorrySliders.Constantes GuardarAmistad(string correoElectronicoDestinatario, string correoElectronicoRemitente);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IListaAmigos/GuardarAmistad", ReplyAction="http://tempuri.org/IListaAmigos/GuardarAmistadResponse")]
         System.Threading.Tasks.Task<VistasSorrySliders.ServicioSorrySliders.Constantes> GuardarAmistadAsync(string correoElectronicoDestinatario, string correoElectronicoRemitente);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IListaAmigos/EliminarAmistad", ReplyAction="http://tempuri.org/IListaAmigos/EliminarAmistadResponse")]
+        VistasSorrySliders.ServicioSorrySliders.Constantes EliminarAmistad(string correoElectronicoPrincipal, string correoElectronicoAmigo);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IListaAmigos/EliminarAmistad", ReplyAction="http://tempuri.org/IListaAmigos/EliminarAmistadResponse")]
+        System.Threading.Tasks.Task<VistasSorrySliders.ServicioSorrySliders.Constantes> EliminarAmistadAsync(string correoElectronicoPrincipal, string correoElectronicoAmigo);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -1722,12 +1728,12 @@ namespace VistasSorrySliders.ServicioSorrySliders {
             return base.Channel.EliminarNotificacionJugadorAsync(correoElectronico, idNotificacion);
         }
         
-        public void NotificarInvitado(string correoElectronico) {
-            base.Channel.NotificarInvitado(correoElectronico);
+        public void NotificarUsuario(string correoElectronico) {
+            base.Channel.NotificarUsuario(correoElectronico);
         }
         
-        public System.Threading.Tasks.Task NotificarInvitadoAsync(string correoElectronico) {
-            return base.Channel.NotificarInvitadoAsync(correoElectronico);
+        public System.Threading.Tasks.Task NotificarUsuarioAsync(string correoElectronico) {
+            return base.Channel.NotificarUsuarioAsync(correoElectronico);
         }
         
         public VistasSorrySliders.ServicioSorrySliders.Constantes GuardarAmistad(string correoElectronicoDestinatario, string correoElectronicoRemitente) {
@@ -1736,6 +1742,14 @@ namespace VistasSorrySliders.ServicioSorrySliders {
         
         public System.Threading.Tasks.Task<VistasSorrySliders.ServicioSorrySliders.Constantes> GuardarAmistadAsync(string correoElectronicoDestinatario, string correoElectronicoRemitente) {
             return base.Channel.GuardarAmistadAsync(correoElectronicoDestinatario, correoElectronicoRemitente);
+        }
+        
+        public VistasSorrySliders.ServicioSorrySliders.Constantes EliminarAmistad(string correoElectronicoPrincipal, string correoElectronicoAmigo) {
+            return base.Channel.EliminarAmistad(correoElectronicoPrincipal, correoElectronicoAmigo);
+        }
+        
+        public System.Threading.Tasks.Task<VistasSorrySliders.ServicioSorrySliders.Constantes> EliminarAmistadAsync(string correoElectronicoPrincipal, string correoElectronicoAmigo) {
+            return base.Channel.EliminarAmistadAsync(correoElectronicoPrincipal, correoElectronicoAmigo);
         }
     }
     

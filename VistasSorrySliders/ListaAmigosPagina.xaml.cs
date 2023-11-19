@@ -280,7 +280,7 @@ namespace VistasSorrySliders
             Logger log = new Logger(this.GetType());
             try
             {
-                _proxyAmigos.NotificarInvitado(cuentaJugadorClickeado.CorreoElectronico);
+                _proxyAmigos.NotificarUsuario(cuentaJugadorClickeado.CorreoElectronico);
             }
             catch (CommunicationException ex)
             {
