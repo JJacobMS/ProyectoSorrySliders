@@ -33,25 +33,25 @@ namespace VistasSorrySliders
             }
             catch (ArgumentException ex)
             {
-                System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorImagen, Properties.Resources.msgTituloErrorImagen, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show(Properties.Resources.msgErrorImagen, Properties.Resources.msgTituloErrorImagen, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 log.LogWarn("Se ha proporcionado un argumento invalido", ex);
                 Console.WriteLine(ex);
             }
             catch (OutOfMemoryException ex)
             {
-                System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorImagen, Properties.Resources.msgTituloErrorImagen, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show(Properties.Resources.msgErrorImagen, Properties.Resources.msgTituloErrorImagen, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 log.LogWarn("Se ha agotado la memoria", ex);
                 Console.WriteLine(ex);
             }
-            catch (System.IO.IOException ex)
+            catch (IOException ex)
             {
-                System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorImagen, Properties.Resources.msgTituloErrorImagen, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show(Properties.Resources.msgErrorImagen, Properties.Resources.msgTituloErrorImagen, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 log.LogWarn("Error al acceder a la imagen", ex);
                 Console.WriteLine(ex);
             }
             catch (Exception ex)
             {
-                System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorImagen, Properties.Resources.msgTituloErrorImagen, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show(Properties.Resources.msgErrorImagen, Properties.Resources.msgTituloErrorImagen, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 Console.WriteLine(ex);
                 log.LogFatal("Ha ocurrido un error inesperado", ex);
             }
@@ -78,27 +78,23 @@ namespace VistasSorrySliders
             }
             catch (ArgumentException ex)
             {
-                System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorImagen, Properties.Resources.msgTituloErrorImagen, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show(Properties.Resources.msgErrorImagen, Properties.Resources.msgTituloErrorImagen, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 log.LogWarn("Se ha proporcionado un argumento invalido", ex);
-                Console.WriteLine(ex);
             }
             catch (OutOfMemoryException ex)
             {
-                System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorImagen, Properties.Resources.msgTituloErrorImagen, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show(Properties.Resources.msgErrorImagen, Properties.Resources.msgTituloErrorImagen, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 log.LogWarn("Se ha agotado la memoria", ex);
-                Console.WriteLine(ex);
             }
-            catch (System.IO.IOException ex)
+            catch (IOException ex)
             {
-                System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorImagen, Properties.Resources.msgTituloErrorImagen, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show(Properties.Resources.msgErrorImagen, Properties.Resources.msgTituloErrorImagen, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 log.LogWarn("Error al acceder a la imagen", ex);
-                Console.WriteLine(ex);
             }
             catch (Exception ex)
             {
-                System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorImagen, Properties.Resources.msgTituloErrorImagen, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show(Properties.Resources.msgErrorImagen, Properties.Resources.msgTituloErrorImagen, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 log.LogFatal("Ha ocurrido un error inesperado", ex);
-                Console.WriteLine(ex);
             }
 
             return null;
@@ -121,29 +117,25 @@ namespace VistasSorrySliders
             }
             catch (IOException ex)
             {
-                Console.WriteLine(ex);
-                System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorImagen, Properties.Resources.msgTituloErrorImagen, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show(Properties.Resources.msgErrorImagen, Properties.Resources.msgTituloErrorImagen, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 log.LogWarn("Error al acceder a la imagen", ex);
                 return null;
             }
             catch (ArgumentException ex)
             {
-                System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorImagen, Properties.Resources.msgTituloErrorImagen, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show(Properties.Resources.msgErrorImagen, Properties.Resources.msgTituloErrorImagen, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 log.LogWarn("Se ha proporcionado un argumento invalido", ex);
-                Console.WriteLine(ex);
                 return null;
             }
             catch (OutOfMemoryException ex)
             {
-                Console.WriteLine(ex);
-                System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorImagen, Properties.Resources.msgTituloErrorImagen, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show(Properties.Resources.msgErrorImagen, Properties.Resources.msgTituloErrorImagen, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 log.LogWarn("Se ha agotado la memoria", ex);
                 return null;
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex);
-                System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorImagen, Properties.Resources.msgTituloErrorImagen, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show(Properties.Resources.msgErrorImagen, Properties.Resources.msgTituloErrorImagen, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 log.LogFatal("Ha ocurrido un error inesperado", ex);
                 return null;
             }

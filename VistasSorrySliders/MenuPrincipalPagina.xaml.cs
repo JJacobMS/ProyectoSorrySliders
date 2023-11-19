@@ -12,7 +12,6 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
-using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Markup;
 using System.Windows.Media;
@@ -70,6 +69,7 @@ namespace VistasSorrySliders
                         CorreoElectronico = correoUsuario,
                         Contraseña = contraseña
                     };
+                    InicializarDatosMenu();
                 }
                 proxyRegistrarUsuario.Close();
             }
@@ -82,7 +82,7 @@ namespace VistasSorrySliders
             catch (TimeoutException ex)
             {
                 Console.WriteLine(ex);
-                resultado = Constantes.ERROR_CONEXION_SERVIDOR;
+                resultado = Constantes.ERROR_TIEMPO_ESPERA_SERVIDOR;
                 log.LogWarn("Se agoto el tiempo de espera del servidor", ex);
             }
             catch (Exception ex)
@@ -94,24 +94,24 @@ namespace VistasSorrySliders
             switch (resultado)
             {
                 case Constantes.OPERACION_EXITOSA:
-                    InicializarDatosMenu();
-                    break;
+                    return;
                 case Constantes.OPERACION_EXITOSA_VACIA:
+                    MessageBox.Show(Properties.Resources.msgDatosCuentaVacia);
                     break;
                 case Constantes.ERROR_CONEXION_BD:
-                    IrInicioSesion();
-                    System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorBaseDatos);
+                    MessageBox.Show(Properties.Resources.msgErrorBaseDatos);
                     break;
                 case Constantes.ERROR_CONSULTA:
-                    IrInicioSesion();
-                    System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorBaseDatos);
+                    MessageBox.Show(Properties.Resources.msgErrorConsulta);
                     break;
                 case Constantes.ERROR_CONEXION_SERVIDOR:
-                    IrInicioSesion();
-                    System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorConexion);
+                    MessageBox.Show(Properties.Resources.msgErrorConexion);
+                    break;
+                case Constantes.ERROR_TIEMPO_ESPERA_SERVIDOR:
+                    MessageBox.Show(Properties.Resources.msgErrorTiempoEsperaServidor);
                     break;
             }
-
+            IrInicioSesion();
         }
 
         private void ClickMostrarAjustes(object sender, RoutedEventArgs e)

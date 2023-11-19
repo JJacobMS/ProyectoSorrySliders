@@ -116,6 +116,7 @@
     <Compile Include="LogicaJuego\DadoPotencia.cs" />
     <Compile Include="LogicaJuego\Direccion.cs" />
     <Compile Include="LogicaJuego\JugadorLanzamiento.cs" />
+    <Compile Include="LogicaJuego\JugadorLista.cs" />
     <Compile Include="LogicaJuego\LineaMovimiento.cs" />
     <Compile Include="LogicaJuego\PeonLanzamiento.cs" />
     <Compile Include="LogicaJuego\Tablero.cs" />
@@ -162,6 +163,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="DiccionarioEstilos\DiccionarioAjustes.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="DiccionarioEstilos\DiccionarioChatJugadores.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -48,7 +48,7 @@
                 </Grid>
                 <Grid>
                     <Button VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10" Height="35" Width="105"
-                        Style="{StaticResource estiloBtnSalir}" Click="ClickSalirLobbyJugadores">Salir</Button>
+                        Style="{StaticResource estiloBtnSalir}" Click="ClickSalirLobbyJugadores" Content="{x:Static p:Resources.btnSalir}"></Button>
                     <Label FontSize="38" VerticalAlignment="Center" Style="{StaticResource estiloLblTituloTextos}" Content="{x:Static p:Resources.lblLobbyEspera}"></Label>
                 </Grid>
                 <Border BorderBrush="#604111" BorderThickness="3" CornerRadius="10" Margin="15" Grid.Row="1">

@@ -75,19 +75,16 @@ namespace VistasSorrySliders
                 }
                 catch (CommunicationException ex)
                 {
-                    Console.WriteLine(ex);
                     resultado = Constantes.ERROR_CONEXION_SERVIDOR;
                     log.LogError("Error de Comunicación con el Servidor", ex);
                 }
                 catch (TimeoutException ex)
                 {
-                    Console.WriteLine(ex);
-                    resultado = Constantes.ERROR_CONEXION_SERVIDOR;
+                    resultado = Constantes.ERROR_TIEMPO_ESPERA_SERVIDOR;
                     log.LogWarn("Se agoto el tiempo de espera del servidor", ex);
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine(ex);
                     resultado = Constantes.ERROR_CONEXION_SERVIDOR;
                     log.LogFatal("Ha ocurrido un error inesperado", ex);
                 }
@@ -101,11 +98,16 @@ namespace VistasSorrySliders
                         txtBlockCorreoInvalido.Visibility = Visibility.Visible;
                         break;
                     case Constantes.ERROR_CONEXION_BD:
-                    case Constantes.ERROR_CONSULTA:
                         MessageBox.Show(Properties.Resources.msgErrorBaseDatos);
+                        break;
+                    case Constantes.ERROR_CONSULTA:
+                        MessageBox.Show(Properties.Resources.msgErrorConsulta);
                         break;
                     case Constantes.ERROR_CONEXION_SERVIDOR:
                         MessageBox.Show(Properties.Resources.msgErrorConexion);
+                        break;
+                    case Constantes.ERROR_TIEMPO_ESPERA_SERVIDOR:
+                        MessageBox.Show(Properties.Resources.msgErrorTiempoEsperaServidor);
                         break;
                 }
             }
@@ -124,19 +126,16 @@ namespace VistasSorrySliders
             }
             catch (CommunicationException ex)
             {
-                Console.WriteLine(ex);
                 resultado = Constantes.ERROR_CONEXION_SERVIDOR;
                 log.LogError("Error de Comunicación con el Servidor", ex);
             }
             catch (TimeoutException ex)
             {
-                Console.WriteLine(ex);
-                resultado = Constantes.ERROR_CONEXION_SERVIDOR;
+                resultado = Constantes.ERROR_TIEMPO_ESPERA_SERVIDOR;
                 log.LogWarn("Se agoto el tiempo de espera del servidor", ex);
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex);
                 resultado = Constantes.ERROR_CONEXION_SERVIDOR;
                 log.LogFatal("Ha ocurrido un error inesperado", ex);
             }
@@ -150,11 +149,16 @@ namespace VistasSorrySliders
                     txtBlockContrasenaInvalida.Visibility = Visibility.Visible;
                     break;
                 case Constantes.ERROR_CONEXION_BD:
+                    MessageBox.Show(Properties.Resources.msgErrorBaseDatos);
+                    break;
                 case Constantes.ERROR_CONSULTA:
                     MessageBox.Show(Properties.Resources.msgErrorBaseDatos);
                     break;
                 case Constantes.ERROR_CONEXION_SERVIDOR:
                     MessageBox.Show(Properties.Resources.msgErrorConexion);
+                    break;
+                case Constantes.ERROR_TIEMPO_ESPERA_SERVIDOR:
+                    MessageBox.Show(Properties.Resources.msgErrorTiempoEsperaServidor);
                     break;
             }
         }

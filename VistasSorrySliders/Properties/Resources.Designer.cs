@@ -88,6 +88,15 @@ namespace VistasSorrySliders.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Cambiar Contraseña.
+        /// </summary>
+        public static string btnCambiarContrasena {
+            get {
+                return ResourceManager.GetString("btnCambiarContrasena", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a CANCELAR.
         /// </summary>
         public static string btnCancelar {
@@ -160,6 +169,15 @@ namespace VistasSorrySliders.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Enviar.
+        /// </summary>
+        public static string btnEnviar {
+            get {
+                return ResourceManager.GetString("btnEnviar", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a ENVIAR CÓDIGO.
         /// </summary>
         public static string btnEnviarCodigo {
@@ -178,6 +196,15 @@ namespace VistasSorrySliders.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a EXPULSAR.
+        /// </summary>
+        public static string btnExpulsar {
+            get {
+                return ResourceManager.GetString("btnExpulsar", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a GUARDAR CAMBIOS.
         /// </summary>
         public static string btnGuardarCambios {
@@ -187,11 +214,47 @@ namespace VistasSorrySliders.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a GUARDAR NUEVA CONTRASEÑA.
+        /// </summary>
+        public static string btnGuardarNuevaContrasena {
+            get {
+                return ResourceManager.GetString("btnGuardarNuevaContrasena", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a HOST.
+        /// </summary>
+        public static string btnHost {
+            get {
+                return ResourceManager.GetString("btnHost", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a I N I C I A R   P A R T I D A.
         /// </summary>
         public static string btnIniciarPartida {
             get {
                 return ResourceManager.GetString("btnIniciarPartida", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a LANZAR PEÓN.
+        /// </summary>
+        public static string btnLanzarPeon {
+            get {
+                return ResourceManager.GetString("btnLanzarPeon", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Modificar Cuenta.
+        /// </summary>
+        public static string btnModificarCuenta {
+            get {
+                return ResourceManager.GetString("btnModificarCuenta", resourceCulture);
             }
         }
         
@@ -232,11 +295,38 @@ namespace VistasSorrySliders.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a TIRAR DADO.
+        /// </summary>
+        public static string btnTirarDado {
+            get {
+                return ResourceManager.GetString("btnTirarDado", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a UNIRSE A LA PARTIDA.
         /// </summary>
         public static string btnUnirsePartida {
             get {
                 return ResourceManager.GetString("btnUnirsePartida", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Estado.
+        /// </summary>
+        public static string dtGridTemplateColumnEstado {
+            get {
+                return ResourceManager.GetString("dtGridTemplateColumnEstado", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Jugador.
+        /// </summary>
+        public static string dtGridTemplateColumnJugador {
+            get {
+                return ResourceManager.GetString("dtGridTemplateColumnJugador", resourceCulture);
             }
         }
         
@@ -282,6 +372,15 @@ namespace VistasSorrySliders.Properties {
         public static string lblBienvenidoNuevo {
             get {
                 return ResourceManager.GetString("lblBienvenidoNuevo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a CAMBIAR CONTRASEÑA.
+        /// </summary>
+        public static string lblCambiarContrasena {
+            get {
+                return ResourceManager.GetString("lblCambiarContrasena", resourceCulture);
             }
         }
         
@@ -430,7 +529,7 @@ namespace VistasSorrySliders.Properties {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Lista de jugadores.
+        ///   Busca una cadena traducida similar a Lista de Jugadores.
         /// </summary>
         public static string lblListaDeJugadores {
             get {
@@ -484,6 +583,15 @@ namespace VistasSorrySliders.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Perfil de Jugador.
+        /// </summary>
+        public static string lblPerfilJugador {
+            get {
+                return ResourceManager.GetString("lblPerfilJugador", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a TABLERO DE PUNTUACIONES.
         /// </summary>
         public static string lblTablaPuntuaciones {
@@ -511,11 +619,92 @@ namespace VistasSorrySliders.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a TURNO DEL JUGADOR:.
+        /// </summary>
+        public static string lblTurnoJugador {
+            get {
+                return ResourceManager.GetString("lblTurnoJugador", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a UNIRSE A PARTIDA.
         /// </summary>
         public static string lblUnirsePartida {
             get {
                 return ResourceManager.GetString("lblUnirsePartida", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a No se han podido recuperar los datos de la cuenta de usuario.
+        /// </summary>
+        public static string mgsCuentaDetalleErrorRecuperar {
+            get {
+                return ResourceManager.GetString("mgsCuentaDetalleErrorRecuperar", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Hubo un error al actualizar la cuenta, por favor inténtelo más tarde.
+        /// </summary>
+        public static string msgActualizarCuentaError {
+            get {
+                return ResourceManager.GetString("msgActualizarCuentaError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Cuenta correctamente actualizada.
+        /// </summary>
+        public static string msgActualizarCuentaExito {
+            get {
+                return ResourceManager.GetString("msgActualizarCuentaExito", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a No hay amigos.
+        /// </summary>
+        public static string msgAmigosErrorRecuperacion {
+            get {
+                return ResourceManager.GetString("msgAmigosErrorRecuperacion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Hubo un error al eliminar la solicitud de amistad, por favor inténtelo más tarde.
+        /// </summary>
+        public static string msgAmistadEliminarError {
+            get {
+                return ResourceManager.GetString("msgAmistadEliminarError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Hubo un error al enviar la solicitud de amistad, por favor inténtelo más tarde.
+        /// </summary>
+        public static string msgAmistadGuardarError {
+            get {
+                return ResourceManager.GetString("msgAmistadGuardarError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a La contraseña nueva se ha cambiado exitosamente.
+        /// </summary>
+        public static string msgContrasenaNuevaCambiada {
+            get {
+                return ResourceManager.GetString("msgContrasenaNuevaCambiada", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a La contraseña no puede ser la misma que la anterior.
+        /// </summary>
+        public static string msgContrasenaRepetida {
+            get {
+                return ResourceManager.GetString("msgContrasenaRepetida", resourceCulture);
             }
         }
         
@@ -538,11 +727,29 @@ namespace VistasSorrySliders.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a No se pudo crear el lobby, por favor inténtelo más tarde.
+        /// </summary>
+        public static string msgCrearLobbySinExito {
+            get {
+                return ResourceManager.GetString("msgCrearLobbySinExito", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a La cuenta se ha registrado exitosamente.
         /// </summary>
         public static string msgCuentaCreada {
             get {
                 return ResourceManager.GetString("msgCuentaCreada", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Hubo un error al recuperar los datos de su cuenta, por favor inténtelo más tarde.
+        /// </summary>
+        public static string msgDatosCuentaVacia {
+            get {
+                return ResourceManager.GetString("msgDatosCuentaVacia", resourceCulture);
             }
         }
         
@@ -570,6 +777,15 @@ namespace VistasSorrySliders.Properties {
         public static string msgErrorConexion {
             get {
                 return ResourceManager.GetString("msgErrorConexion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Hubo un error con la consulta, por favor inténtelo más tarde.
+        /// </summary>
+        public static string msgErrorConsulta {
+            get {
+                return ResourceManager.GetString("msgErrorConsulta", resourceCulture);
             }
         }
         
@@ -610,6 +826,15 @@ namespace VistasSorrySliders.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Se ha agotado el tiempo de espera del servidor.
+        /// </summary>
+        public static string msgErrorTiempoEsperaServidor {
+            get {
+                return ResourceManager.GetString("msgErrorTiempoEsperaServidor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Sin permisos para el archivo.
         /// </summary>
         public static string msgErrorTituloImagenPermisos {
@@ -619,11 +844,65 @@ namespace VistasSorrySliders.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Hubo un error al registrarse, por favor inténtelo más tarde.
+        /// </summary>
+        public static string msgGuardarCuentaError {
+            get {
+                return ResourceManager.GetString("msgGuardarCuentaError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Por favor, seleccione un archivo de imagen válida.
         /// </summary>
         public static string msgImagenInvalida {
             get {
                 return ResourceManager.GetString("msgImagenInvalida", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Hubo un error al recuperar los jugadores del lobby, por favor inténtelo más tarde.
+        /// </summary>
+        public static string msgJugadoresLobbyRecuperar {
+            get {
+                return ResourceManager.GetString("msgJugadoresLobbyRecuperar", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a No hay jugadores que coincidan con la búsqueda.
+        /// </summary>
+        public static string msgJugadoresRecuperacion {
+            get {
+                return ResourceManager.GetString("msgJugadoresRecuperacion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Hubo un error al guardar la notificación, por favor inténtelo más tarde.
+        /// </summary>
+        public static string msgNotificacionGuardarError {
+            get {
+                return ResourceManager.GetString("msgNotificacionGuardarError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a No hay notificaciones pendientes.
+        /// </summary>
+        public static string msgNotificacionRecuperar {
+            get {
+                return ResourceManager.GetString("msgNotificacionRecuperar", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Hubo un error al recuperar la partida, por favor inténtelo más tarde.
+        /// </summary>
+        public static string msgPartidaRecuperarVacia {
+            get {
+                return ResourceManager.GetString("msgPartidaRecuperarVacia", resourceCulture);
             }
         }
         
@@ -642,6 +921,15 @@ namespace VistasSorrySliders.Properties {
         public static string msgTamañoImagenError {
             get {
                 return ResourceManager.GetString("msgTamañoImagenError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Hubo un error con las notificaciones, por favor inténtelo más tarde.
+        /// </summary>
+        public static string msgTiposNotificacionVacios {
+            get {
+                return ResourceManager.GetString("msgTiposNotificacionVacios", resourceCulture);
             }
         }
         
@@ -799,11 +1087,56 @@ namespace VistasSorrySliders.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a CONTRASEÑA ANTERIOR.
+        /// </summary>
+        public static string txtBlockContrasenaAnterior {
+            get {
+                return ResourceManager.GetString("txtBlockContrasenaAnterior", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Contraseña es diferente a la actual.
+        /// </summary>
+        public static string txtBlockContrasenaDiferenteActual {
+            get {
+                return ResourceManager.GetString("txtBlockContrasenaDiferenteActual", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a La contraseña no es correcta. Verifica tu contraseña e inténtalo de nuevo.
         /// </summary>
         public static string txtBlockContrasenaInvalida {
             get {
                 return ResourceManager.GetString("txtBlockContrasenaInvalida", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a La contraseña no coincide.
+        /// </summary>
+        public static string txtBlockContrasenaNoCoincide {
+            get {
+                return ResourceManager.GetString("txtBlockContrasenaNoCoincide", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a La contraseña no cumple las normas requeridas.
+        /// </summary>
+        public static string txtBlockContrasenaNoNormasRequeridas {
+            get {
+                return ResourceManager.GetString("txtBlockContrasenaNoNormasRequeridas", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a CONTRASEÑA NUEVA.
+        /// </summary>
+        public static string txtBlockContrasenaNueva {
+            get {
+                return ResourceManager.GetString("txtBlockContrasenaNueva", resourceCulture);
             }
         }
         
@@ -867,6 +1200,24 @@ namespace VistasSorrySliders.Properties {
         public static string txtBlockNicknameNoValido {
             get {
                 return ResourceManager.GetString("txtBlockNicknameNoValido", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Potencia de Lanzamiento:.
+        /// </summary>
+        public static string txtBlockPotenciaLanzamiento {
+            get {
+                return ResourceManager.GetString("txtBlockPotenciaLanzamiento", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a REPETIR CONTRASEÑA NUEVA.
+        /// </summary>
+        public static string txtBlockRepetirContrasena {
+            get {
+                return ResourceManager.GetString("txtBlockRepetirContrasena", resourceCulture);
             }
         }
         

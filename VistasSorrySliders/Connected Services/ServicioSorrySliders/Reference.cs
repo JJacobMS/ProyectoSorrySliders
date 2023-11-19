@@ -31,6 +31,9 @@ namespace VistasSorrySliders.ServicioSorrySliders {
         
         [System.Runtime.Serialization.EnumMemberAttribute()]
         OPERACION_EXITOSA_VACIA = 4,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        ERROR_TIEMPO_ESPERA_SERVIDOR = 5,
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]

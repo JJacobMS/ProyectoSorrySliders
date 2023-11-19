@@ -126,6 +126,9 @@
   <data name="btnBuscar" xml:space="preserve">
     <value>BUSCAR</value>
   </data>
+  <data name="btnCambiarContrasena" xml:space="preserve">
+    <value>Cambiar Contraseña</value>
+  </data>
   <data name="btnCancelar" xml:space="preserve">
     <value>CANCELAR</value>
   </data>
@@ -150,17 +153,35 @@
   <data name="btnEliminarNotificacion" xml:space="preserve">
     <value>ELIMINAR</value>
   </data>
+  <data name="btnEnviar" xml:space="preserve">
+    <value>Enviar</value>
+  </data>
   <data name="btnEnviarCodigo" xml:space="preserve">
     <value>ENVIAR CÓDIGO</value>
   </data>
   <data name="btnEnviarSolicitudAmistad" xml:space="preserve">
     <value>ENVIAR SOLICITUD DE AMISTAD</value>
   </data>
+  <data name="btnExpulsar" xml:space="preserve">
+    <value>EXPULSAR</value>
+  </data>
   <data name="btnGuardarCambios" xml:space="preserve">
     <value>GUARDAR CAMBIOS</value>
   </data>
+  <data name="btnGuardarNuevaContrasena" xml:space="preserve">
+    <value>GUARDAR NUEVA CONTRASEÑA</value>
+  </data>
+  <data name="btnHost" xml:space="preserve">
+    <value>HOST</value>
+  </data>
   <data name="btnIniciarPartida" xml:space="preserve">
     <value>I N I C I A R   P A R T I D A</value>
+  </data>
+  <data name="btnLanzarPeon" xml:space="preserve">
+    <value>LANZAR PEÓN</value>
+  </data>
+  <data name="btnModificarCuenta" xml:space="preserve">
+    <value>Modificar Cuenta</value>
   </data>
   <data name="btnRechazar" xml:space="preserve">
     <value>RECHAZAR</value>
@@ -174,8 +195,17 @@
   <data name="btnSalir" xml:space="preserve">
     <value>SALIR</value>
   </data>
+  <data name="btnTirarDado" xml:space="preserve">
+    <value>TIRAR DADO</value>
+  </data>
   <data name="btnUnirsePartida" xml:space="preserve">
     <value>UNIRSE A LA PARTIDA</value>
+  </data>
+  <data name="dtGridTemplateColumnEstado" xml:space="preserve">
+    <value>Estado</value>
+  </data>
+  <data name="dtGridTemplateColumnJugador" xml:space="preserve">
+    <value>Jugador</value>
   </data>
   <data name="lblAjustes" xml:space="preserve">
     <value>Ajustes</value>
@@ -191,6 +221,9 @@
   </data>
   <data name="lblBienvenidoNuevo" xml:space="preserve">
     <value>Bienvenido de nuevo</value>
+  </data>
+  <data name="lblCambiarContrasena" xml:space="preserve">
+    <value>CAMBIAR CONTRASEÑA</value>
   </data>
   <data name="lblCodigoPartida" xml:space="preserve">
     <value>Código de partida:</value>
@@ -241,7 +274,7 @@
     <value>LISTA AMIGOS</value>
   </data>
   <data name="lblListaDeJugadores" xml:space="preserve">
-    <value>Lista de jugadores</value>
+    <value>Lista de Jugadores</value>
   </data>
   <data name="lblListaJugadores" xml:space="preserve">
     <value>LISTA JUGADORES</value>
@@ -258,6 +291,9 @@
   <data name="lblNombres" xml:space="preserve">
     <value>Nombre/s</value>
   </data>
+  <data name="lblPerfilJugador" xml:space="preserve">
+    <value>Perfil de Jugador</value>
+  </data>
   <data name="lblTablaPuntuaciones" xml:space="preserve">
     <value>TABLERO DE PUNTUACIONES</value>
   </data>
@@ -267,8 +303,35 @@
   <data name="lblTresJugadores" xml:space="preserve">
     <value>3 Jugadores</value>
   </data>
+  <data name="lblTurnoJugador" xml:space="preserve">
+    <value>TURNO DEL JUGADOR:</value>
+  </data>
   <data name="lblUnirsePartida" xml:space="preserve">
     <value>UNIRSE A PARTIDA</value>
+  </data>
+  <data name="mgsCuentaDetalleErrorRecuperar" xml:space="preserve">
+    <value>No se han podido recuperar los datos de la cuenta de usuario</value>
+  </data>
+  <data name="msgActualizarCuentaError" xml:space="preserve">
+    <value>Hubo un error al actualizar la cuenta, por favor inténtelo más tarde</value>
+  </data>
+  <data name="msgActualizarCuentaExito" xml:space="preserve">
+    <value>Cuenta correctamente actualizada</value>
+  </data>
+  <data name="msgAmigosErrorRecuperacion" xml:space="preserve">
+    <value>No hay amigos</value>
+  </data>
+  <data name="msgAmistadEliminarError" xml:space="preserve">
+    <value>Hubo un error al eliminar la solicitud de amistad, por favor inténtelo más tarde</value>
+  </data>
+  <data name="msgAmistadGuardarError" xml:space="preserve">
+    <value>Hubo un error al enviar la solicitud de amistad, por favor inténtelo más tarde</value>
+  </data>
+  <data name="msgContrasenaNuevaCambiada" xml:space="preserve">
+    <value>La contraseña nueva se ha cambiado exitosamente</value>
+  </data>
+  <data name="msgContrasenaRepetida" xml:space="preserve">
+    <value>La contraseña no puede ser la misma que la anterior</value>
   </data>
   <data name="msgCorreoEncontrado" xml:space="preserve">
     <value>El correo ingresado se encuentra registrado en el sistema</value>
@@ -276,8 +339,14 @@
   <data name="msgCorreoInvalido" xml:space="preserve">
     <value>El correo electrónico es inválido, ingresa una dirección valida</value>
   </data>
+  <data name="msgCrearLobbySinExito" xml:space="preserve">
+    <value>No se pudo crear el lobby, por favor inténtelo más tarde</value>
+  </data>
   <data name="msgCuentaCreada" xml:space="preserve">
     <value>La cuenta se ha registrado exitosamente</value>
+  </data>
+  <data name="msgDatosCuentaVacia" xml:space="preserve">
+    <value>Hubo un error al recuperar los datos de su cuenta, por favor inténtelo más tarde</value>
   </data>
   <data name="msgErrorAvatarDefault" xml:space="preserve">
     <value>Error al cargar la imagen del avatar por defecto</value>
@@ -287,6 +356,9 @@
   </data>
   <data name="msgErrorConexion" xml:space="preserve">
     <value>Hubo un error de conexión con el servidor</value>
+  </data>
+  <data name="msgErrorConsulta" xml:space="preserve">
+    <value>Hubo un error con la consulta, por favor inténtelo más tarde</value>
   </data>
   <data name="msgErrorContrasenaInvalida" xml:space="preserve">
     <value>La contraseña debe contar con: Mínimo 8 caracteres, con un número o un carácter especial</value>
@@ -300,17 +372,41 @@
   <data name="msgErrorTamañoImagen" xml:space="preserve">
     <value>La imagen supera el límite de 400 KB</value>
   </data>
+  <data name="msgErrorTiempoEsperaServidor" xml:space="preserve">
+    <value>Se ha agotado el tiempo de espera del servidor</value>
+  </data>
   <data name="msgErrorTituloImagenPermisos" xml:space="preserve">
     <value>Sin permisos para el archivo</value>
   </data>
+  <data name="msgGuardarCuentaError" xml:space="preserve">
+    <value>Hubo un error al registrarse, por favor inténtelo más tarde</value>
+  </data>
   <data name="msgImagenInvalida" xml:space="preserve">
     <value>Por favor, seleccione un archivo de imagen válida</value>
+  </data>
+  <data name="msgJugadoresLobbyRecuperar" xml:space="preserve">
+    <value>Hubo un error al recuperar los jugadores del lobby, por favor inténtelo más tarde</value>
+  </data>
+  <data name="msgJugadoresRecuperacion" xml:space="preserve">
+    <value>No hay jugadores que coincidan con la búsqueda</value>
+  </data>
+  <data name="msgNotificacionGuardarError" xml:space="preserve">
+    <value>Hubo un error al guardar la notificación, por favor inténtelo más tarde</value>
+  </data>
+  <data name="msgNotificacionRecuperar" xml:space="preserve">
+    <value>No hay notificaciones pendientes</value>
+  </data>
+  <data name="msgPartidaRecuperarVacia" xml:space="preserve">
+    <value>Hubo un error al recuperar la partida, por favor inténtelo más tarde</value>
   </data>
   <data name="msgTablaVacia" xml:space="preserve">
     <value>Aun no hay ganadores, Sé el primero en ganar</value>
   </data>
   <data name="msgTamañoImagenError" xml:space="preserve">
     <value>La imagen supera el limite de 400KB</value>
+  </data>
+  <data name="msgTiposNotificacionVacios" xml:space="preserve">
+    <value>Hubo un error con las notificaciones, por favor inténtelo más tarde</value>
   </data>
   <data name="msgTituloContraseñaInvalida" xml:space="preserve">
     <value>Contraseña invalida</value>
@@ -363,8 +459,23 @@
   <data name="txtBlockConfigurarPartida" xml:space="preserve">
     <value>CONFIGURAR PARTIDA</value>
   </data>
+  <data name="txtBlockContrasenaAnterior" xml:space="preserve">
+    <value>CONTRASEÑA ANTERIOR</value>
+  </data>
+  <data name="txtBlockContrasenaDiferenteActual" xml:space="preserve">
+    <value>Contraseña es diferente a la actual</value>
+  </data>
   <data name="txtBlockContrasenaInvalida" xml:space="preserve">
     <value>La contraseña no es correcta. Verifica tu contraseña e inténtalo de nuevo</value>
+  </data>
+  <data name="txtBlockContrasenaNoCoincide" xml:space="preserve">
+    <value>La contraseña no coincide</value>
+  </data>
+  <data name="txtBlockContrasenaNoNormasRequeridas" xml:space="preserve">
+    <value>La contraseña no cumple las normas requeridas</value>
+  </data>
+  <data name="txtBlockContrasenaNueva" xml:space="preserve">
+    <value>CONTRASEÑA NUEVA</value>
   </data>
   <data name="txtBlockCorreoInvalido" xml:space="preserve">
     <value>El correo electrónico no se encuentra registrado en el sistema</value>
@@ -386,6 +497,12 @@
   </data>
   <data name="txtBlockNicknameNoValido" xml:space="preserve">
     <value>Nickname no es válido</value>
+  </data>
+  <data name="txtBlockPotenciaLanzamiento" xml:space="preserve">
+    <value>Potencia de Lanzamiento:</value>
+  </data>
+  <data name="txtBlockRepetirContrasena" xml:space="preserve">
+    <value>REPETIR CONTRASEÑA NUEVA</value>
   </data>
   <data name="txtBlockRondasGanadas" xml:space="preserve">
     <value>RONDAS GANADAS</value>
