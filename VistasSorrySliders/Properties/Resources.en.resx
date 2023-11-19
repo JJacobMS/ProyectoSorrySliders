@@ -126,6 +126,9 @@
   <data name="btnBuscar" xml:space="preserve">
     <value>SEARCH</value>
   </data>
+  <data name="btnCambiarContrasena" xml:space="preserve">
+    <value>Change Password</value>
+  </data>
   <data name="btnCancelar" xml:space="preserve">
     <value>CANCEL</value>
   </data>
@@ -147,17 +150,35 @@
   <data name="btnEliminarBaneo" xml:space="preserve">
     <value>REMOVE BAN</value>
   </data>
+  <data name="btnEnviar" xml:space="preserve">
+    <value>Send</value>
+  </data>
   <data name="btnEnviarCodigo" xml:space="preserve">
     <value>SEND CODE</value>
   </data>
   <data name="btnEnviarSolicitudAmistad" xml:space="preserve">
     <value>SEND FRIEND REQUEST</value>
   </data>
+  <data name="btnExpulsar" xml:space="preserve">
+    <value>KICK OUT</value>
+  </data>
   <data name="btnGuardarCambios" xml:space="preserve">
     <value>SAVE CHANGES</value>
   </data>
+  <data name="btnGuardarNuevaContrasena" xml:space="preserve">
+    <value>SAVE NEW PASSWORD</value>
+  </data>
+  <data name="btnHost" xml:space="preserve">
+    <value>HOST</value>
+  </data>
   <data name="btnIniciarPartida" xml:space="preserve">
     <value>S T A R T  G A M E</value>
+  </data>
+  <data name="btnLanzarPeon" xml:space="preserve">
+    <value>LAUNCH PAWN</value>
+  </data>
+  <data name="btnModificarCuenta" xml:space="preserve">
+    <value>Modify Account</value>
   </data>
   <data name="btnRechazar" xml:space="preserve">
     <value>REJECT</value>
@@ -171,8 +192,17 @@
   <data name="btnSalir" xml:space="preserve">
     <value>EXIT</value>
   </data>
+  <data name="btnTirarDado" xml:space="preserve">
+    <value>ROLL DICE</value>
+  </data>
   <data name="btnUnirsePartida" xml:space="preserve">
     <value>JOIN THE PARTY</value>
+  </data>
+  <data name="dtGridTemplateColumnEstado" xml:space="preserve">
+    <value>State</value>
+  </data>
+  <data name="dtGridTemplateColumnJugador" xml:space="preserve">
+    <value>Player</value>
   </data>
   <data name="lblAjustes" xml:space="preserve">
     <value>Settings</value>
@@ -188,6 +218,9 @@
   </data>
   <data name="lblBienvenidoNuevo" xml:space="preserve">
     <value>Welcome again</value>
+  </data>
+  <data name="lblCambiarContrasena" xml:space="preserve">
+    <value>CHANGE PASSWORD</value>
   </data>
   <data name="lblCodigoPartida" xml:space="preserve">
     <value>Game code:</value>
@@ -255,6 +288,9 @@
   <data name="lblNombres" xml:space="preserve">
     <value>Name/s</value>
   </data>
+  <data name="lblPerfilJugador" xml:space="preserve">
+    <value>Player's Profile</value>
+  </data>
   <data name="lblTablaPuntuaciones" xml:space="preserve">
     <value>SCOREBOARD</value>
   </data>
@@ -264,8 +300,35 @@
   <data name="lblTresJugadores" xml:space="preserve">
     <value>3 Players</value>
   </data>
+  <data name="lblTurnoJugador" xml:space="preserve">
+    <value>PLAYER'S TURN:</value>
+  </data>
   <data name="lblUnirsePartida" xml:space="preserve">
     <value>JOIN GAME</value>
+  </data>
+  <data name="mgsCuentaDetalleErrorRecuperar" xml:space="preserve">
+    <value>User account data could not be recovered</value>
+  </data>
+  <data name="msgActualizarCuentaError" xml:space="preserve">
+    <value>There was an error updating your account, please try again later</value>
+  </data>
+  <data name="msgActualizarCuentaExito" xml:space="preserve">
+    <value>Account successfully updated</value>
+  </data>
+  <data name="msgAmigosErrorRecuperacion" xml:space="preserve">
+    <value>There are no friends</value>
+  </data>
+  <data name="msgAmistadEliminarError" xml:space="preserve">
+    <value>There was an error deleting the friend request, please try again later</value>
+  </data>
+  <data name="msgAmistadGuardarError" xml:space="preserve">
+    <value>There was an error sending the friend request, please try again later</value>
+  </data>
+  <data name="msgContrasenaNuevaCambiada" xml:space="preserve">
+    <value>The new password has been changed successfully</value>
+  </data>
+  <data name="msgContrasenaRepetida" xml:space="preserve">
+    <value>The password cannot be the same as the previous one</value>
   </data>
   <data name="msgCorreoEncontrado" xml:space="preserve">
     <value>The input email is registered in the system</value>
@@ -273,8 +336,14 @@
   <data name="msgCorreoInvalido" xml:space="preserve">
     <value>The email is invalid, please enter a valid address</value>
   </data>
+  <data name="msgCrearLobbySinExito" xml:space="preserve">
+    <value>Failed to create lobby, please try again later</value>
+  </data>
   <data name="msgCuentaCreada" xml:space="preserve">
     <value>The account has been successfully registered</value>
+  </data>
+  <data name="msgDatosCuentaVacia" xml:space="preserve">
+    <value>There was an error retrieving your account data, please try again later</value>
   </data>
   <data name="msgErrorAvatarDefault" xml:space="preserve">
     <value>Error loading default avatar image</value>
@@ -284,6 +353,9 @@
   </data>
   <data name="msgErrorConexion" xml:space="preserve">
     <value>There has been a connection error with the server</value>
+  </data>
+  <data name="msgErrorConsulta" xml:space="preserve">
+    <value>There's been an error with the query, please try later</value>
   </data>
   <data name="msgErrorContrasenaInvalida" xml:space="preserve">
     <value>Password must have: Minimum of 8 characters with one number or one special character</value>
@@ -297,11 +369,32 @@
   <data name="msgErrorTamañoImagen" xml:space="preserve">
     <value>The image exceeds the limit of 400KB</value>
   </data>
+  <data name="msgErrorTiempoEsperaServidor" xml:space="preserve">
+    <value>Server timed out</value>
+  </data>
   <data name="msgErrorTituloImagenPermisos" xml:space="preserve">
     <value>No permissions for the file</value>
   </data>
+  <data name="msgGuardarCuentaError" xml:space="preserve">
+    <value>There was an error registering, please try again later</value>
+  </data>
   <data name="msgImagenInvalida" xml:space="preserve">
     <value>Please select a valid image file</value>
+  </data>
+  <data name="msgJugadoresLobbyRecuperar" xml:space="preserve">
+    <value>There was an error retrieving players from the lobby, please try again later</value>
+  </data>
+  <data name="msgJugadoresRecuperacion" xml:space="preserve">
+    <value>There are no players matching the search</value>
+  </data>
+  <data name="msgNotificacionGuardarError" xml:space="preserve">
+    <value>There was an error saving the notification, please try again later</value>
+  </data>
+  <data name="msgNotificacionRecuperar" xml:space="preserve">
+    <value>There are no pending notifications</value>
+  </data>
+  <data name="msgPartidaRecuperarVacia" xml:space="preserve">
+    <value>There was an error recovering the game, please try again later</value>
   </data>
   <data name="msgTablaVacia" xml:space="preserve">
     <value>No winners yet, be the first winner</value>
@@ -309,8 +402,11 @@
   <data name="msgTamañoImagenError" xml:space="preserve">
     <value>The image exceeds the 400KB limit</value>
   </data>
+  <data name="msgTiposNotificacionVacios" xml:space="preserve">
+    <value>There was an error with notifications, please try again later</value>
+  </data>
   <data name="msgTituloContraseñaInvalida" xml:space="preserve">
-    <value>Contraseña invalida</value>
+    <value>Invalid password</value>
   </data>
   <data name="msgTituloCorreoEncontrado" xml:space="preserve">
     <value>Previously registered account</value>
@@ -358,10 +454,25 @@
     <value>Invalid code</value>
   </data>
   <data name="txtBlockConfigurarPartida" xml:space="preserve">
-    <value>SETUP GAME</value>
+    <value>SET UP GAME</value>
+  </data>
+  <data name="txtBlockContrasenaAnterior" xml:space="preserve">
+    <value>OLD PASSWORD</value>
+  </data>
+  <data name="txtBlockContrasenaDiferenteActual" xml:space="preserve">
+    <value>Password different from current one</value>
   </data>
   <data name="txtBlockContrasenaInvalida" xml:space="preserve">
     <value>The password is not valid. Verify your password and try again</value>
+  </data>
+  <data name="txtBlockContrasenaNoCoincide" xml:space="preserve">
+    <value>The password doesn't match</value>
+  </data>
+  <data name="txtBlockContrasenaNoNormasRequeridas" xml:space="preserve">
+    <value>The password doesn't meet the required standards</value>
+  </data>
+  <data name="txtBlockContrasenaNueva" xml:space="preserve">
+    <value>NEW PASSWORD</value>
   </data>
   <data name="txtBlockCorreoInvalido" xml:space="preserve">
     <value>The email address isn´t register in the sistem</value>
@@ -373,7 +484,7 @@
     <value>Your account is already in the lobby</value>
   </data>
   <data name="txtBlockJugadoresAmigos" xml:space="preserve">
-    <value>PLAYERS AND FRIENDS</value>
+    <value>PLAYER'S AND FRIENDS</value>
   </data>
   <data name="txtBlockJugadoresMaximosExcedidos" xml:space="preserve">
     <value>The lobby doesn't accept more players</value>
@@ -383,6 +494,12 @@
   </data>
   <data name="txtBlockNicknameNoValido" xml:space="preserve">
     <value>Invalid Nickname</value>
+  </data>
+  <data name="txtBlockPotenciaLanzamiento" xml:space="preserve">
+    <value>Launch Power:</value>
+  </data>
+  <data name="txtBlockRepetirContrasena" xml:space="preserve">
+    <value>REPEAT NEW PASSWORD</value>
   </data>
   <data name="txtBlockRondasGanadas" xml:space="preserve">
     <value>ROUNDS WON</value>

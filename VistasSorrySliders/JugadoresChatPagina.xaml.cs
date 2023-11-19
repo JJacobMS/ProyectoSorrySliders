@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using VistasSorrySliders.LogicaJuego;
 using VistasSorrySliders.ServicioSorrySliders;
 
 namespace VistasSorrySliders
@@ -26,6 +27,7 @@ namespace VistasSorrySliders
         private CuentaSet[] _cuentas;
         private PartidaSet _partida;
         private ChatClient _proxyChat;
+        private List<JugadorLista> _jugadoresListas;
 
         public JugadoresChatPagina(CuentaSet[] cuentas, CuentaSet cuentaUsuario, PartidaSet partida )
         {
@@ -35,6 +37,7 @@ namespace VistasSorrySliders
             _partida = partida;
             IngresarCallbacks();
             RemoverCallbacks();
+            CargarJugadores();
         }
 
         private void TextChangedTamañoChat(object sender, TextChangedEventArgs e)
@@ -64,12 +67,10 @@ namespace VistasSorrySliders
             }
             catch (CommunicationException ex)
             {
-                Console.WriteLine(ex);
                 log.LogError("Error de Comunicación con el Servidor", ex);
             }
             catch (TimeoutException ex)
             {
-                Console.WriteLine(ex);
                 log.LogWarn("Se agoto el tiempo de espera del servidor", ex);
             }
 
@@ -88,17 +89,14 @@ namespace VistasSorrySliders
                 }
                 catch (CommunicationException ex)
                 {
-                    Console.WriteLine(ex);
                     log.LogError("Error de Comunicación con el Servidor", ex);
                 }
                 catch (TimeoutException ex)
                 {
-                    Console.WriteLine(ex);
                     log.LogWarn("Se agoto el tiempo de espera del servidor", ex);
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine(ex);
                     log.LogFatal("Ha ocurrido un error inesperado", ex);
                 }
                 txtBoxMensajeChat.Text = "";
@@ -113,9 +111,27 @@ namespace VistasSorrySliders
 
         public void DevolverMensaje(string nickname, string mensaje)
         {
-            Console.WriteLine(nickname + ": " + mensaje);
             txtBlockMensajeChat.Text = nickname + ": " + mensaje;
+        }
 
+        private void CargarJugadores()
+        {
+            _jugadoresListas = new List<JugadorLista>();
+            for (int i = 0; i < _cuentas.Count(); i++)
+            {
+                JugadorLista jugador = new JugadorLista
+                {
+                    Nickname = _cuentas[i].Nickname,
+                    CorreoElectronico = _cuentas[i].CorreoElectronico,
+                    EstaExpulsado = false
+                };
+                if (i == 0)
+                {
+                    jugador.EsHost = true;
+                }
+                _jugadoresListas.Add(jugador);
+            }
+            dtGridJugadores.ItemsSource = _jugadoresListas;
         }
     }
 }

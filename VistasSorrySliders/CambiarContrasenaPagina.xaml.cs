@@ -77,7 +77,7 @@ namespace VistasSorrySliders
             catch (TimeoutException ex)
             {
                 Console.WriteLine(ex);
-                resultado = Constantes.ERROR_CONEXION_SERVIDOR;
+                resultado = Constantes.ERROR_TIEMPO_ESPERA_SERVIDOR;
                 log.LogWarn("Se agoto el tiempo de espera del servidor", ex);
             }
             catch (Exception ex)
@@ -98,10 +98,13 @@ namespace VistasSorrySliders
                     MessageBox.Show(Properties.Resources.msgErrorBaseDatos);
                     break;
                 case Constantes.ERROR_CONSULTA:
-                    MessageBox.Show(Properties.Resources.msgErrorBaseDatos);
+                    MessageBox.Show(Properties.Resources.msgErrorConsulta);
                     break;
                 case Constantes.ERROR_CONEXION_SERVIDOR:
                     MessageBox.Show(Properties.Resources.msgErrorConexion);
+                    break;
+                case Constantes.ERROR_TIEMPO_ESPERA_SERVIDOR:
+                    MessageBox.Show(Properties.Resources.msgErrorTiempoEsperaServidor);
                     break;
             }
         }
@@ -129,7 +132,7 @@ namespace VistasSorrySliders
                 if (contrasenaNueva.Equals(pssBoxContrasenaAnterior.Password))
                 {
                     pssBoxContrasenaNueva.Style = (Style)FindResource("estiloPssBoxContrasenaRojo");
-                    MessageBox.Show("La contraseña no puede ser la misma que la anterior");
+                    MessageBox.Show(Properties.Resources.msgContrasenaRepetida);
                     return;
                 }
 
@@ -175,7 +178,7 @@ namespace VistasSorrySliders
             catch (TimeoutException ex)
             {
                 Console.WriteLine(ex);
-                resultado = Constantes.ERROR_CONEXION_SERVIDOR;
+                resultado = Constantes.ERROR_TIEMPO_ESPERA_SERVIDOR;
                 log.LogWarn("Se agoto el tiempo de espera del servidor", ex);
             }
             catch (Exception ex)
@@ -187,7 +190,7 @@ namespace VistasSorrySliders
             switch (resultado)
             {
                 case Constantes.OPERACION_EXITOSA:
-                    MessageBox.Show("Cambio Contraseña Exitoso");
+                    MessageBox.Show(Properties.Resources.msgContrasenaNuevaCambiada);
                     this.NavigationService.GoBack();
                     break;
                 case Constantes.OPERACION_EXITOSA_VACIA:
@@ -197,10 +200,13 @@ namespace VistasSorrySliders
                     MessageBox.Show(Properties.Resources.msgErrorBaseDatos);
                     break;
                 case Constantes.ERROR_CONSULTA:
-                    MessageBox.Show(Properties.Resources.msgErrorBaseDatos);
+                    MessageBox.Show(Properties.Resources.msgErrorConsulta);
                     break;
                 case Constantes.ERROR_CONEXION_SERVIDOR:
                     MessageBox.Show(Properties.Resources.msgErrorConexion);
+                    break;
+                case Constantes.ERROR_TIEMPO_ESPERA_SERVIDOR:
+                    MessageBox.Show(Properties.Resources.msgErrorTiempoEsperaServidor);
                     break;
             }
         }

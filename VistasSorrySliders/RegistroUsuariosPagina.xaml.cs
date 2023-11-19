@@ -252,7 +252,7 @@ namespace VistasSorrySliders
                 Nombre = nombre,
                 Apellido = apellidos
             };
-            Constantes resultado = Constantes.OPERACION_EXITOSA;
+            Constantes resultado;
             Logger log = new Logger(this.GetType());
             try
             {
@@ -262,19 +262,16 @@ namespace VistasSorrySliders
             }
             catch (CommunicationException ex)
             {
-                Console.WriteLine(ex);
                 resultado = Constantes.ERROR_CONEXION_SERVIDOR;
                 log.LogError("Error de Comunicación con el Servidor", ex);
             }
             catch (TimeoutException ex)
             {
-                Console.WriteLine(ex);
-                resultado = Constantes.ERROR_CONEXION_SERVIDOR;
+                resultado = Constantes.ERROR_TIEMPO_ESPERA_SERVIDOR;
                 log.LogWarn("Se agoto el tiempo de espera del servidor", ex);
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex);
                 resultado = Constantes.ERROR_CONEXION_SERVIDOR;
                 log.LogFatal("Ha ocurrido un error inesperado", ex);
             }
@@ -284,15 +281,19 @@ namespace VistasSorrySliders
                     System.Windows.Forms.MessageBox.Show(Properties.Resources.msgCuentaCreada, Properties.Resources.msgTituloCuentaCreada, MessageBoxButtons.OK, MessageBoxIcon.Information);
                     break;
                 case Constantes.OPERACION_EXITOSA_VACIA:
+                    System.Windows.Forms.MessageBox.Show(Properties.Resources.msgGuardarCuentaError);
                     break;
                 case Constantes.ERROR_CONEXION_BD:
                     System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorBaseDatos);
                     break;
                 case Constantes.ERROR_CONSULTA:
-                    System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorBaseDatos);
+                    System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorConsulta);
                     break;
                 case Constantes.ERROR_CONEXION_SERVIDOR:
                     System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorConexion);
+                    break;
+                case Constantes.ERROR_TIEMPO_ESPERA_SERVIDOR:
+                    System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorTiempoEsperaServidor);
                     break;
             }
             
@@ -318,7 +319,7 @@ namespace VistasSorrySliders
                 Nombre = nombre,
                 Apellido = apellidos
             };
-            Constantes resultado = Constantes.OPERACION_EXITOSA;
+            Constantes resultado;
             Logger log = new Logger(this.GetType());
             try
             {
@@ -328,47 +329,46 @@ namespace VistasSorrySliders
             }
             catch (CommunicationException ex)
             {
-                Console.WriteLine(ex);
                 resultado = Constantes.ERROR_CONEXION_SERVIDOR;
                 log.LogError("Error de Comunicación con el Servidor", ex);
             }
             catch (TimeoutException ex)
             {
-                Console.WriteLine(ex);
-                resultado = Constantes.ERROR_CONEXION_SERVIDOR;
+                resultado = Constantes.ERROR_TIEMPO_ESPERA_SERVIDOR;
                 log.LogWarn("Se agoto el tiempo de espera del servidor", ex);
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex);
                 resultado = Constantes.ERROR_CONEXION_SERVIDOR;
                 log.LogFatal("Ha ocurrido un error inesperado", ex);
             }
             switch (resultado)
             {
                 case Constantes.OPERACION_EXITOSA:
+                    System.Windows.Forms.MessageBox.Show(Properties.Resources.msgActualizarCuentaExito);
                     break;
                 case Constantes.OPERACION_EXITOSA_VACIA:
-                    System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorBaseDatos);
+                    System.Windows.Forms.MessageBox.Show(Properties.Resources.msgActualizarCuentaError);
                     break;
                 case Constantes.ERROR_CONEXION_BD:
                     System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorBaseDatos);
                     break;
                 case Constantes.ERROR_CONSULTA:
-                    System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorBaseDatos);
+                    System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorConsulta);
                     break;
                 case Constantes.ERROR_CONEXION_SERVIDOR:
                     System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorConexion);
                     break;
+                case Constantes.ERROR_TIEMPO_ESPERA_SERVIDOR:
+                    System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorTiempoEsperaServidor);
+                    break;
             }
-
-
         }
 
         private bool ValidarExistenciaCorreo() 
         {
             string correoIngresado = txtBoxCorreoElectronico.Text;
-            Constantes resultado = Constantes.OPERACION_EXITOSA_VACIA;
+            Constantes resultado;
             Logger log = new Logger(this.GetType());
             try
             {
@@ -379,19 +379,16 @@ namespace VistasSorrySliders
             catch (CommunicationException ex)
             {
                 resultado = Constantes.ERROR_CONEXION_SERVIDOR;
-                Console.WriteLine(ex);
                 log.LogError("Error de Comunicación con el Servidor", ex);
             }
             catch (TimeoutException ex)
             {
-                Console.WriteLine(ex);
-                resultado = Constantes.ERROR_CONEXION_SERVIDOR;
+                resultado = Constantes.ERROR_TIEMPO_ESPERA_SERVIDOR;
                 log.LogWarn("Se agoto el tiempo de espera del servidor", ex);
             }
             catch (Exception ex)
             {
                 resultado = Constantes.ERROR_CONEXION_SERVIDOR;
-                Console.WriteLine(ex);
                 log.LogFatal("Ha ocurrido un error inesperado", ex);
             }
             switch (resultado)
@@ -402,9 +399,10 @@ namespace VistasSorrySliders
                 case Constantes.OPERACION_EXITOSA_VACIA:
                     return true;
                 case Constantes.ERROR_CONEXION_BD:
+                    System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorBaseDatos);
                     return false;
                 case Constantes.ERROR_CONSULTA:
-                    System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorBaseDatos);
+                    System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorConsulta);
                     return false;
                 case Constantes.ERROR_CONEXION_SERVIDOR:
                     System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorConexion);
@@ -437,19 +435,16 @@ namespace VistasSorrySliders
             }
             catch (CommunicationException ex)
             {
-                Console.WriteLine(ex);
                 System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorConexion);
                 log.LogError("Error de Comunicación con el Servidor", ex);
             }
             catch (TimeoutException ex)
             {
-                Console.WriteLine(ex);
                 System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorConexion);
                 log.LogWarn("Se agoto el tiempo de espera del servidor", ex);
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex);
                 System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorConexion);
                 log.LogFatal("Ha ocurrido un error inesperado", ex);
             }

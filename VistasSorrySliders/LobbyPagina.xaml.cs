@@ -70,7 +70,7 @@ namespace VistasSorrySliders
             catch (TimeoutException ex)
             {
                 Console.WriteLine(ex);
-                respuesta = Constantes.ERROR_CONEXION_SERVIDOR;
+                respuesta = Constantes.ERROR_TIEMPO_ESPERA_SERVIDOR;
                 log.LogWarn("Se agoto el tiempo de espera del servidor", ex);
             }
             catch (Exception ex)
@@ -81,33 +81,31 @@ namespace VistasSorrySliders
             }
             switch (respuesta)
             {
-                case Constantes.ERROR_CONEXION_BD:
-                    MessageBox.Show(Properties.Resources.msgErrorBaseDatos);
-                    IrMenuPrincipal();
-                    break;
-                case Constantes.ERROR_CONSULTA:
-                    MessageBox.Show(Properties.Resources.msgErrorBaseDatos);
-                    IrMenuPrincipal();
-                    break;
-                case Constantes.ERROR_CONEXION_SERVIDOR:
-                    MessageBox.Show(Properties.Resources.msgErrorConexion);
-                    IrMenuPrincipal();
-                    break;
                 case Constantes.OPERACION_EXITOSA:
                     grdJugadores.Children.Clear();
                     CrearBorders(_cuentas);
                     CrearEllipses(_cuentas);
                     CrearLabels(_cuentas);
                     txtBoxHost.Text = _cuentas[0].Nickname;
+                    return;
+                case Constantes.ERROR_CONEXION_BD:
+                    MessageBox.Show(Properties.Resources.msgErrorBaseDatos);
+                    break;
+                case Constantes.ERROR_CONSULTA:
+                    MessageBox.Show(Properties.Resources.msgErrorConsulta);
+                    break;
+                case Constantes.ERROR_CONEXION_SERVIDOR:
+                    MessageBox.Show(Properties.Resources.msgErrorConexion);
+                    break;
+                case Constantes.ERROR_TIEMPO_ESPERA_SERVIDOR:
+                    MessageBox.Show(Properties.Resources.msgErrorTiempoEsperaServidor);
                     break;
                 case Constantes.OPERACION_EXITOSA_VACIA:
-                    MessageBox.Show(Properties.Resources.msgErrorConexion);
-                    IrMenuPrincipal();
-                    break;
-                default:
+                    MessageBox.Show(Properties.Resources.msgJugadoresLobbyRecuperar);
                     break;
 
             }
+            IrMenuPrincipal();
         }
 
         private void CrearBorders(CuentaSet[] cuentas) 
@@ -179,7 +177,7 @@ namespace VistasSorrySliders
             catch (TimeoutException ex)
             {
                 Console.WriteLine(ex);
-                respuesta = Constantes.ERROR_CONEXION_SERVIDOR;
+                respuesta = Constantes.ERROR_TIEMPO_ESPERA_SERVIDOR;
                 log.LogWarn("Se agoto el tiempo de espera del servidor", ex);
             }
             catch (Exception ex)
@@ -190,51 +188,53 @@ namespace VistasSorrySliders
             }
             switch (respuesta)
             {
+                case Constantes.OPERACION_EXITOSA:
+                    CargarDatosPartida();
+                    return;
                 case Constantes.ERROR_CONEXION_BD:
-                    MessageBox.Show(Properties.Resources.msgErrorBaseDatos );
-                    IrMenuPrincipal();
+                    MessageBox.Show(Properties.Resources.msgErrorBaseDatos);
                     break;
                 case Constantes.ERROR_CONSULTA:
-                    MessageBox.Show(Properties.Resources.msgErrorBaseDatos + "8");
-                    IrMenuPrincipal();
+                    MessageBox.Show(Properties.Resources.msgErrorConsulta);
                     break;
                 case Constantes.ERROR_CONEXION_SERVIDOR:
                     MessageBox.Show(Properties.Resources.msgErrorConexion);
-                    IrMenuPrincipal();
                     break;
-                case Constantes.OPERACION_EXITOSA:
-                    txtBoxCodigoPartida.Text = _partidaActual.CodigoPartida.ToString();
-                    txtBoxJugadores.Text = ""+ _partidaActual.CantidadJugadores;
-                    switch (_partidaActual.CantidadJugadores)
-                    {
-                        case 2:
-                            lblCantidadJugadoresPartida.Content = Properties.Resources.lblDosJugadores;
-                            Uri urlRelativa1 = new Uri("/Recursos/TableroDosConFondo.png", UriKind.Relative);
-                            mgTablero.Source = new BitmapImage(urlRelativa1);
-                            break;
-                        case 3:
-                            lblCantidadJugadoresPartida.Content = Properties.Resources.lblTresJugadores;
-                            Uri urlRelativa2 = new Uri("/Recursos/TableroTresConFondo.png", UriKind.Relative);
-                            mgTablero.Source = new BitmapImage(urlRelativa2);
-                            break;
-                        case 4:
-                            lblCantidadJugadoresPartida.Content = Properties.Resources.lblCuatroJugadores;
-                            Uri urlRelativa3 = new Uri("/Recursos/TableroCuatroConFondo.png", UriKind.Relative);
-                            mgTablero.Source = new BitmapImage(urlRelativa3);
-                            break;
-                        default:
-                            break;
-                    }
-                    
+                case Constantes.ERROR_TIEMPO_ESPERA_SERVIDOR:
+                    MessageBox.Show(Properties.Resources.msgErrorTiempoEsperaServidor);
                     break;
                 case Constantes.OPERACION_EXITOSA_VACIA:
-                    MessageBox.Show(Properties.Resources.msgErrorBaseDatos);
-                    _juegoYLobbyVentana.CerrarVentanaActual();
+                    MessageBox.Show(Properties.Resources.msgPartidaRecuperarVacia);
+                    break;
+            }
+            IrMenuPrincipal();
+        }
+
+        private void CargarDatosPartida()
+        {
+            txtBoxCodigoPartida.Text = _partidaActual.CodigoPartida.ToString();
+            txtBoxJugadores.Text = "" + _partidaActual.CantidadJugadores;
+            switch (_partidaActual.CantidadJugadores)
+            {
+                case 2:
+                    lblCantidadJugadoresPartida.Content = Properties.Resources.lblDosJugadores;
+                    Uri urlRelativa1 = new Uri("/Recursos/TableroDosConFondo.png", UriKind.Relative);
+                    mgTablero.Source = new BitmapImage(urlRelativa1);
+                    break;
+                case 3:
+                    lblCantidadJugadoresPartida.Content = Properties.Resources.lblTresJugadores;
+                    Uri urlRelativa2 = new Uri("/Recursos/TableroTresConFondo.png", UriKind.Relative);
+                    mgTablero.Source = new BitmapImage(urlRelativa2);
+                    break;
+                case 4:
+                    lblCantidadJugadoresPartida.Content = Properties.Resources.lblCuatroJugadores;
+                    Uri urlRelativa3 = new Uri("/Recursos/TableroCuatroConFondo.png", UriKind.Relative);
+                    mgTablero.Source = new BitmapImage(urlRelativa3);
                     break;
                 default:
                     break;
             }
-            
+
         }
 
         private void ClickSalirLobbyJugadores(object sender, RoutedEventArgs e)
@@ -265,17 +265,14 @@ namespace VistasSorrySliders
             }
             catch (CommunicationException ex)
             {
-                Console.WriteLine(ex);
                 log.LogError("Error de Comunicación con el Servidor", ex);
             }
             catch (TimeoutException ex)
             {
-                Console.WriteLine(ex);
                 log.LogWarn("Se agoto el tiempo de espera del servidor", ex);
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex);
                 log.LogFatal("Ha ocurrido un error inesperado", ex);
             }
         }
@@ -303,14 +300,12 @@ namespace VistasSorrySliders
             }
             catch (CommunicationException ex)
             {
-                Console.WriteLine(ex);
-                System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorConexion);
+                MessageBox.Show(Properties.Resources.msgErrorConexion);
                 log.LogError("Error de Comunicación con el Servidor", ex);
             }
             catch (TimeoutException ex)
             {
-                Console.WriteLine(ex);
-                System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorConexion);
+                MessageBox.Show(Properties.Resources.msgErrorTiempoEsperaServidor);
                 log.LogWarn("Se agoto el tiempo de espera del servidor", ex);
             }
         }
@@ -335,20 +330,17 @@ namespace VistasSorrySliders
             }
             catch (CommunicationException ex)
             {
-                Console.WriteLine(ex);
-                System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorConexion);
+                MessageBox.Show(Properties.Resources.msgErrorConexion);
                 log.LogError("Error de Comunicación con el Servidor", ex);
             }
             catch (TimeoutException ex)
             {
-                Console.WriteLine(ex);
-                System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorConexion);
+                MessageBox.Show(Properties.Resources.msgErrorTiempoEsperaServidor);
                 log.LogWarn("Se agoto el tiempo de espera del servidor", ex);
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex);
-                System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorConexion);
+                MessageBox.Show(Properties.Resources.msgErrorConexion);
                 log.LogFatal("Ha ocurrido un error inesperado", ex);
             }
         }

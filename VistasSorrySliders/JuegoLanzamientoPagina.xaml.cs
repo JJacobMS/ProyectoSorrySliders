@@ -87,21 +87,18 @@ namespace VistasSorrySliders
             }
             catch (CommunicationException ex)
             {
-                Console.WriteLine(ex);
                 System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorConexion);
                 log.LogError("Error de Comunicación con el Servidor", ex);
                 RegresarMenuPrincipal();
             }
             catch (TimeoutException ex)
             {
-                Console.WriteLine(ex);
-                System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorConexion);
+                System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorTiempoEsperaServidor);
                 log.LogWarn("Se agoto el tiempo de espera del servidor", ex);
                 RegresarMenuPrincipal();
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex);
                 System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorConexion);
                 log.LogFatal("Ha ocurrido un error inesperado", ex);
                 RegresarMenuPrincipal();
@@ -216,15 +213,11 @@ namespace VistasSorrySliders
             }
             return listaNoValidos;
         }
-
-
         private void ClickDetenerDado(object sender, RoutedEventArgs e)
         {
-            
             int numeroDadoTirado = _tablero.RetornarDado();
             _tablero.DetenerDadoPosicion(numeroDadoTirado);
             MandarDadoJugadores(numeroDadoTirado);
-
         }
         private void ClickLanzarPeon(object sender, RoutedEventArgs e)
         {
@@ -251,12 +244,12 @@ namespace VistasSorrySliders
                 _botonesTirarDadoJugador[jugadorTurnoActual.DireccionJugador].IsEnabled = true;
             }
 
-            lblTurnoJugador.Content = "TURNO DEL JUGADOR: " + jugadorTurnoActual.Nickname;
+            lblTurnoJugador.Content = Properties.Resources.lblTurnoJugador + " " + jugadorTurnoActual.Nickname;
         }
         private void MostrarPotenciaLanzamiento(int potencia, int potenciaAgregada)
         {
             JugadorLanzamiento jugadorTurno = _tablero.ListaJugadores[_tablero.TurnoActual];
-            string potenciaLanzamiento = "Potencia de Lanzamiento: " + potencia + " + " + potenciaAgregada;
+            string potenciaLanzamiento = Properties.Resources.txtBlockPotenciaLanzamiento + potencia + " + " + potenciaAgregada;
             _etiquetasJugadoresLanzamientoPotencia[jugadorTurno.DireccionJugador].Text = potenciaLanzamiento;
             if (_correoJugadorActual.Equals(jugadorTurno.CorreElectronico))
             {
@@ -272,7 +265,7 @@ namespace VistasSorrySliders
             {
                 cnvEspacioJuego.Children.Remove(lineaJugador);
             }
-            _etiquetasJugadoresLanzamientoPotencia[jugadorTurnoActual.DireccionJugador].Text = "Potencia de Lanzamiento: -";
+            _etiquetasJugadoresLanzamientoPotencia[jugadorTurnoActual.DireccionJugador].Text = Properties.Resources.txtBlockPotenciaLanzamiento + " -";
         }
         private void ColocarPiezasJugadores()
         {
@@ -335,7 +328,7 @@ namespace VistasSorrySliders
             }
         }
 
-        private void RevivirProxy()
+        /*private void RevivirProxy()
         {
             Logger log = new Logger(this.GetType());
             try
@@ -351,21 +344,11 @@ namespace VistasSorrySliders
             {
                 log.LogWarn("Se agoto el tiempo de espera del servidor", ex);
             }
-        }
+        }*/
 
         public void JugadorTiroDado(int numeroDado)
         {
             _tablero.DetenerDadoPosicion(numeroDado);
-        }
-
-        public void JugadorSalioJuegoLanzamiento(string correoElectronicoSalido)
-        {
-            //Por implementar
-        }
-
-        private void RegresarMenuPrincipal()
-        {
-            Console.WriteLine("Regresando a menú principal por un error....");
         }
 
         private void MandarDadoJugadores(int numeroDado)
@@ -411,5 +394,15 @@ namespace VistasSorrySliders
         {
             _tablero.CambiarTurnoSiguiente();
         }
+        public void JugadorSalioJuegoLanzamiento(string correoElectronicoSalido)
+        {
+            //Por implementar
+        }
+        private void RegresarMenuPrincipal()
+        {
+            Console.WriteLine("Regresando a menú principal por un error....");
+        }
+
+
     }
 }
