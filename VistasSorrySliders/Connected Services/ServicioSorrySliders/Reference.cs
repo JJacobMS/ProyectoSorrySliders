@@ -1646,6 +1646,30 @@ namespace VistasSorrySliders.ServicioSorrySliders {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IListaAmigos/EliminarAmistad", ReplyAction="http://tempuri.org/IListaAmigos/EliminarAmistadResponse")]
         System.Threading.Tasks.Task<VistasSorrySliders.ServicioSorrySliders.Constantes> EliminarAmistadAsync(string correoElectronicoPrincipal, string correoElectronicoAmigo);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IListaAmigos/RecuperarBaneados", ReplyAction="http://tempuri.org/IListaAmigos/RecuperarBaneadosResponse")]
+        System.ValueTuple<VistasSorrySliders.ServicioSorrySliders.Constantes, VistasSorrySliders.ServicioSorrySliders.CuentaSet[]> RecuperarBaneados(string correoElectronico);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IListaAmigos/RecuperarBaneados", ReplyAction="http://tempuri.org/IListaAmigos/RecuperarBaneadosResponse")]
+        System.Threading.Tasks.Task<System.ValueTuple<VistasSorrySliders.ServicioSorrySliders.Constantes, VistasSorrySliders.ServicioSorrySliders.CuentaSet[]>> RecuperarBaneadosAsync(string correoElectronico);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IListaAmigos/RecuperarSolicitudesAmistad", ReplyAction="http://tempuri.org/IListaAmigos/RecuperarSolicitudesAmistadResponse")]
+        System.ValueTuple<VistasSorrySliders.ServicioSorrySliders.Constantes, VistasSorrySliders.ServicioSorrySliders.CuentaSet[]> RecuperarSolicitudesAmistad(string correoElectronico);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IListaAmigos/RecuperarSolicitudesAmistad", ReplyAction="http://tempuri.org/IListaAmigos/RecuperarSolicitudesAmistadResponse")]
+        System.Threading.Tasks.Task<System.ValueTuple<VistasSorrySliders.ServicioSorrySliders.Constantes, VistasSorrySliders.ServicioSorrySliders.CuentaSet[]>> RecuperarSolicitudesAmistadAsync(string correoElectronico);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IListaAmigos/BanearJugador", ReplyAction="http://tempuri.org/IListaAmigos/BanearJugadorResponse")]
+        VistasSorrySliders.ServicioSorrySliders.Constantes BanearJugador(string correoElectronicoPrincipal, string correoElectronicoBaneado);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IListaAmigos/BanearJugador", ReplyAction="http://tempuri.org/IListaAmigos/BanearJugadorResponse")]
+        System.Threading.Tasks.Task<VistasSorrySliders.ServicioSorrySliders.Constantes> BanearJugadorAsync(string correoElectronicoPrincipal, string correoElectronicoBaneado);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IListaAmigos/EliminarBaneo", ReplyAction="http://tempuri.org/IListaAmigos/EliminarBaneoResponse")]
+        VistasSorrySliders.ServicioSorrySliders.Constantes EliminarBaneo(string correoElectronicoPrincipal, string correoElectronicoBaneado);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IListaAmigos/EliminarBaneo", ReplyAction="http://tempuri.org/IListaAmigos/EliminarBaneoResponse")]
+        System.Threading.Tasks.Task<VistasSorrySliders.ServicioSorrySliders.Constantes> EliminarBaneoAsync(string correoElectronicoPrincipal, string correoElectronicoBaneado);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -1753,6 +1777,38 @@ namespace VistasSorrySliders.ServicioSorrySliders {
         
         public System.Threading.Tasks.Task<VistasSorrySliders.ServicioSorrySliders.Constantes> EliminarAmistadAsync(string correoElectronicoPrincipal, string correoElectronicoAmigo) {
             return base.Channel.EliminarAmistadAsync(correoElectronicoPrincipal, correoElectronicoAmigo);
+        }
+        
+        public System.ValueTuple<VistasSorrySliders.ServicioSorrySliders.Constantes, VistasSorrySliders.ServicioSorrySliders.CuentaSet[]> RecuperarBaneados(string correoElectronico) {
+            return base.Channel.RecuperarBaneados(correoElectronico);
+        }
+        
+        public System.Threading.Tasks.Task<System.ValueTuple<VistasSorrySliders.ServicioSorrySliders.Constantes, VistasSorrySliders.ServicioSorrySliders.CuentaSet[]>> RecuperarBaneadosAsync(string correoElectronico) {
+            return base.Channel.RecuperarBaneadosAsync(correoElectronico);
+        }
+        
+        public System.ValueTuple<VistasSorrySliders.ServicioSorrySliders.Constantes, VistasSorrySliders.ServicioSorrySliders.CuentaSet[]> RecuperarSolicitudesAmistad(string correoElectronico) {
+            return base.Channel.RecuperarSolicitudesAmistad(correoElectronico);
+        }
+        
+        public System.Threading.Tasks.Task<System.ValueTuple<VistasSorrySliders.ServicioSorrySliders.Constantes, VistasSorrySliders.ServicioSorrySliders.CuentaSet[]>> RecuperarSolicitudesAmistadAsync(string correoElectronico) {
+            return base.Channel.RecuperarSolicitudesAmistadAsync(correoElectronico);
+        }
+        
+        public VistasSorrySliders.ServicioSorrySliders.Constantes BanearJugador(string correoElectronicoPrincipal, string correoElectronicoBaneado) {
+            return base.Channel.BanearJugador(correoElectronicoPrincipal, correoElectronicoBaneado);
+        }
+        
+        public System.Threading.Tasks.Task<VistasSorrySliders.ServicioSorrySliders.Constantes> BanearJugadorAsync(string correoElectronicoPrincipal, string correoElectronicoBaneado) {
+            return base.Channel.BanearJugadorAsync(correoElectronicoPrincipal, correoElectronicoBaneado);
+        }
+        
+        public VistasSorrySliders.ServicioSorrySliders.Constantes EliminarBaneo(string correoElectronicoPrincipal, string correoElectronicoBaneado) {
+            return base.Channel.EliminarBaneo(correoElectronicoPrincipal, correoElectronicoBaneado);
+        }
+        
+        public System.Threading.Tasks.Task<VistasSorrySliders.ServicioSorrySliders.Constantes> EliminarBaneoAsync(string correoElectronicoPrincipal, string correoElectronicoBaneado) {
+            return base.Channel.EliminarBaneoAsync(correoElectronicoPrincipal, correoElectronicoBaneado);
         }
     }
     

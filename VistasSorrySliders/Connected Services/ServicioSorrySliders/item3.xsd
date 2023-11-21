@@ -337,6 +337,64 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="RecuperarBaneados">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="correoElectronico" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RecuperarBaneadosResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q27="http://schemas.datacontract.org/2004/07/System" minOccurs="0" name="RecuperarBaneadosResult" type="q27:ValueTupleOfConstantesArrayOfCuentaSetalmaccdW" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RecuperarSolicitudesAmistad">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="correoElectronico" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RecuperarSolicitudesAmistadResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q28="http://schemas.datacontract.org/2004/07/System" minOccurs="0" name="RecuperarSolicitudesAmistadResult" type="q28:ValueTupleOfConstantesArrayOfCuentaSetalmaccdW" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="BanearJugador">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="correoElectronicoPrincipal" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="correoElectronicoBaneado" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="BanearJugadorResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q29="http://schemas.datacontract.org/2004/07/DatosSorrySliders" minOccurs="0" name="BanearJugadorResult" type="q29:Constantes" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="EliminarBaneo">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="correoElectronicoPrincipal" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="correoElectronicoBaneado" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="EliminarBaneoResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q30="http://schemas.datacontract.org/2004/07/DatosSorrySliders" minOccurs="0" name="EliminarBaneoResult" type="q30:Constantes" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="AgregarProxy">
     <xs:complexType>
       <xs:sequence>
@@ -347,7 +405,7 @@
   <xs:element name="AgregarProxyResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q27="http://schemas.datacontract.org/2004/07/DatosSorrySliders" minOccurs="0" name="AgregarProxyResult" type="q27:Constantes" />
+        <xs:element xmlns:q31="http://schemas.datacontract.org/2004/07/DatosSorrySliders" minOccurs="0" name="AgregarProxyResult" type="q31:Constantes" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -385,35 +443,35 @@
   <xs:element name="RecuperarDatosUsuarioDeCuentaResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q28="http://schemas.datacontract.org/2004/07/System" minOccurs="0" name="RecuperarDatosUsuarioDeCuentaResult" type="q28:ValueTupleOfConstantesUsuarioSetalmaccdW" />
+        <xs:element xmlns:q32="http://schemas.datacontract.org/2004/07/System" minOccurs="0" name="RecuperarDatosUsuarioDeCuentaResult" type="q32:ValueTupleOfConstantesUsuarioSetalmaccdW" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="VerificarContrasenaActual">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q29="http://schemas.datacontract.org/2004/07/DatosSorrySliders" minOccurs="0" name="cuenta" nillable="true" type="q29:CuentaSet" />
+        <xs:element xmlns:q33="http://schemas.datacontract.org/2004/07/DatosSorrySliders" minOccurs="0" name="cuenta" nillable="true" type="q33:CuentaSet" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="VerificarContrasenaActualResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q30="http://schemas.datacontract.org/2004/07/DatosSorrySliders" minOccurs="0" name="VerificarContrasenaActualResult" type="q30:Constantes" />
+        <xs:element xmlns:q34="http://schemas.datacontract.org/2004/07/DatosSorrySliders" minOccurs="0" name="VerificarContrasenaActualResult" type="q34:Constantes" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="CambiarContrasena">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q31="http://schemas.datacontract.org/2004/07/DatosSorrySliders" minOccurs="0" name="cuenta" nillable="true" type="q31:CuentaSet" />
+        <xs:element xmlns:q35="http://schemas.datacontract.org/2004/07/DatosSorrySliders" minOccurs="0" name="cuenta" nillable="true" type="q35:CuentaSet" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="CambiarContrasenaResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q32="http://schemas.datacontract.org/2004/07/DatosSorrySliders" minOccurs="0" name="CambiarContrasenaResult" type="q32:Constantes" />
+        <xs:element xmlns:q36="http://schemas.datacontract.org/2004/07/DatosSorrySliders" minOccurs="0" name="CambiarContrasenaResult" type="q36:Constantes" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -425,7 +483,7 @@
   <xs:element name="RecuperarPuntuacionesResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q33="http://schemas.datacontract.org/2004/07/System" minOccurs="0" name="RecuperarPuntuacionesResult" type="q33:ValueTupleOfConstantesArrayOfPuntuacionK_Pmi0k2_P" />
+        <xs:element xmlns:q37="http://schemas.datacontract.org/2004/07/System" minOccurs="0" name="RecuperarPuntuacionesResult" type="q37:ValueTupleOfConstantesArrayOfPuntuacionK_Pmi0k2_P" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

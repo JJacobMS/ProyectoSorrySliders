@@ -24,5 +24,10 @@ namespace VistasSorrySliders
         {
             InitializeComponent();
         }
+
+        private void CerrarVentana(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+
+        }
     }
 }
