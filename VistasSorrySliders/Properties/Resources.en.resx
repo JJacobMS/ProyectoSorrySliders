@@ -375,6 +375,15 @@
   <data name="msgErrorTituloImagenPermisos" xml:space="preserve">
     <value>No permissions for the file</value>
   </data>
+  <data name="msgExpulsadoTitulo" xml:space="preserve">
+    <value>EXPELLED FROM THE GAME</value>
+  </data>
+  <data name="msgExpulsarJugador" xml:space="preserve">
+    <value>The game host has banned you from the game</value>
+  </data>
+  <data name="msgFaltaJugadores" xml:space="preserve">
+    <value>All other players have left the game, exiting the game</value>
+  </data>
   <data name="msgGuardarCuentaError" xml:space="preserve">
     <value>There was an error registering, please try again later</value>
   </data>
@@ -456,6 +465,9 @@
   <data name="txtBlockConfigurarPartida" xml:space="preserve">
     <value>SET UP GAME</value>
   </data>
+  <data name="txtBlockContandoPuntuaciones" xml:space="preserve">
+    <value>Counting scores....</value>
+  </data>
   <data name="txtBlockContrasenaAnterior" xml:space="preserve">
     <value>OLD PASSWORD</value>
   </data>
@@ -483,6 +495,9 @@
   <data name="txtBlockCuentaYaEnLobby" xml:space="preserve">
     <value>Your account is already in the lobby</value>
   </data>
+  <data name="txtBlockEnLinea" xml:space="preserve">
+    <value>Online</value>
+  </data>
   <data name="txtBlockJugadoresAmigos" xml:space="preserve">
     <value>PLAYER'S AND FRIENDS</value>
   </data>
@@ -495,11 +510,17 @@
   <data name="txtBlockNicknameNoValido" xml:space="preserve">
     <value>Invalid Nickname</value>
   </data>
+  <data name="txtBlockNoEnLinea" xml:space="preserve">
+    <value>Offline</value>
+  </data>
   <data name="txtBlockPotenciaLanzamiento" xml:space="preserve">
     <value>Launch Power:</value>
   </data>
   <data name="txtBlockRepetirContrasena" xml:space="preserve">
     <value>REPEAT NEW PASSWORD</value>
+  </data>
+  <data name="txtBlockRondaLanzamientoTerminada" xml:space="preserve">
+    <value>Launch Round Completed</value>
   </data>
   <data name="txtBlockRondasGanadas" xml:space="preserve">
     <value>ROUNDS WON</value>

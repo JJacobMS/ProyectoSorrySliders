@@ -1594,10 +1594,10 @@ namespace VistasSorrySliders.ServicioSorrySliders {
         System.Threading.Tasks.Task<System.ValueTuple<VistasSorrySliders.ServicioSorrySliders.Constantes, VistasSorrySliders.ServicioSorrySliders.CuentaSet[]>> RecuperarAmigosCuentaAsync(string correoElectronico);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IListaAmigos/RecuperarJugadoresCuenta", ReplyAction="http://tempuri.org/IListaAmigos/RecuperarJugadoresCuentaResponse")]
-        System.ValueTuple<VistasSorrySliders.ServicioSorrySliders.Constantes, VistasSorrySliders.ServicioSorrySliders.CuentaSet[]> RecuperarJugadoresCuenta(string informacionJugador);
+        System.ValueTuple<VistasSorrySliders.ServicioSorrySliders.Constantes, VistasSorrySliders.ServicioSorrySliders.CuentaSet[]> RecuperarJugadoresCuenta(string informacionJugador, string correoJugador);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IListaAmigos/RecuperarJugadoresCuenta", ReplyAction="http://tempuri.org/IListaAmigos/RecuperarJugadoresCuentaResponse")]
-        System.Threading.Tasks.Task<System.ValueTuple<VistasSorrySliders.ServicioSorrySliders.Constantes, VistasSorrySliders.ServicioSorrySliders.CuentaSet[]>> RecuperarJugadoresCuentaAsync(string informacionJugador);
+        System.Threading.Tasks.Task<System.ValueTuple<VistasSorrySliders.ServicioSorrySliders.Constantes, VistasSorrySliders.ServicioSorrySliders.CuentaSet[]>> RecuperarJugadoresCuentaAsync(string informacionJugador, string correoJugador);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IListaAmigos/RecuperarTipoNotificacion", ReplyAction="http://tempuri.org/IListaAmigos/RecuperarTipoNotificacionResponse")]
         System.ValueTuple<VistasSorrySliders.ServicioSorrySliders.Constantes, VistasSorrySliders.ServicioSorrySliders.TipoNotificacion[]> RecuperarTipoNotificacion();
@@ -1707,12 +1707,12 @@ namespace VistasSorrySliders.ServicioSorrySliders {
             return base.Channel.RecuperarAmigosCuentaAsync(correoElectronico);
         }
         
-        public System.ValueTuple<VistasSorrySliders.ServicioSorrySliders.Constantes, VistasSorrySliders.ServicioSorrySliders.CuentaSet[]> RecuperarJugadoresCuenta(string informacionJugador) {
-            return base.Channel.RecuperarJugadoresCuenta(informacionJugador);
+        public System.ValueTuple<VistasSorrySliders.ServicioSorrySliders.Constantes, VistasSorrySliders.ServicioSorrySliders.CuentaSet[]> RecuperarJugadoresCuenta(string informacionJugador, string correoJugador) {
+            return base.Channel.RecuperarJugadoresCuenta(informacionJugador, correoJugador);
         }
         
-        public System.Threading.Tasks.Task<System.ValueTuple<VistasSorrySliders.ServicioSorrySliders.Constantes, VistasSorrySliders.ServicioSorrySliders.CuentaSet[]>> RecuperarJugadoresCuentaAsync(string informacionJugador) {
-            return base.Channel.RecuperarJugadoresCuentaAsync(informacionJugador);
+        public System.Threading.Tasks.Task<System.ValueTuple<VistasSorrySliders.ServicioSorrySliders.Constantes, VistasSorrySliders.ServicioSorrySliders.CuentaSet[]>> RecuperarJugadoresCuentaAsync(string informacionJugador, string correoJugador) {
+            return base.Channel.RecuperarJugadoresCuentaAsync(informacionJugador, correoJugador);
         }
         
         public System.ValueTuple<VistasSorrySliders.ServicioSorrySliders.Constantes, VistasSorrySliders.ServicioSorrySliders.TipoNotificacion[]> RecuperarTipoNotificacion() {
@@ -2032,6 +2032,18 @@ namespace VistasSorrySliders.ServicioSorrySliders {
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IChat/IngresarAlChat")]
         System.Threading.Tasks.Task IngresarAlChatAsync(string uid, string correo);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IChat/ExpulsarJugadorPartida")]
+        void ExpulsarJugadorPartida(string uid, string correo);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IChat/ExpulsarJugadorPartida")]
+        System.Threading.Tasks.Task ExpulsarJugadorPartidaAsync(string uid, string correo);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IChat/SalirChatListaJugadores")]
+        void SalirChatListaJugadores(string uid, string correo);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IChat/SalirChatListaJugadores")]
+        System.Threading.Tasks.Task SalirChatListaJugadoresAsync(string uid, string correo);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -2039,6 +2051,12 @@ namespace VistasSorrySliders.ServicioSorrySliders {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IChat/DevolverMensaje", ReplyAction="http://tempuri.org/IChat/DevolverMensajeResponse")]
         void DevolverMensaje(string nickname, string mensaje);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IChat/ExpulsadoDeJugador", ReplyAction="http://tempuri.org/IChat/ExpulsadoDeJugadorResponse")]
+        void ExpulsadoDeJugador(string correoElectronico);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IChat/JugadorSalioListaJugadores", ReplyAction="http://tempuri.org/IChat/JugadorSalioListaJugadoresResponse")]
+        void JugadorSalioListaJugadores(string correoElectronico);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -2083,6 +2101,22 @@ namespace VistasSorrySliders.ServicioSorrySliders {
         
         public System.Threading.Tasks.Task IngresarAlChatAsync(string uid, string correo) {
             return base.Channel.IngresarAlChatAsync(uid, correo);
+        }
+        
+        public void ExpulsarJugadorPartida(string uid, string correo) {
+            base.Channel.ExpulsarJugadorPartida(uid, correo);
+        }
+        
+        public System.Threading.Tasks.Task ExpulsarJugadorPartidaAsync(string uid, string correo) {
+            return base.Channel.ExpulsarJugadorPartidaAsync(uid, correo);
+        }
+        
+        public void SalirChatListaJugadores(string uid, string correo) {
+            base.Channel.SalirChatListaJugadores(uid, correo);
+        }
+        
+        public System.Threading.Tasks.Task SalirChatListaJugadoresAsync(string uid, string correo) {
+            return base.Channel.SalirChatListaJugadoresAsync(uid, correo);
         }
     }
     

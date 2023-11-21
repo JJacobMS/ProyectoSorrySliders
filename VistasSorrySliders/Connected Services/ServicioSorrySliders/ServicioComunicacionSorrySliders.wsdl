@@ -621,11 +621,29 @@
   <wsdl:message name="IChat_IngresarAlChat_InputMessage">
     <wsdl:part name="parameters" element="tns:IngresarAlChat" />
   </wsdl:message>
+  <wsdl:message name="IChat_ExpulsarJugadorPartida_InputMessage">
+    <wsdl:part name="parameters" element="tns:ExpulsarJugadorPartida" />
+  </wsdl:message>
+  <wsdl:message name="IChat_SalirChatListaJugadores_InputMessage">
+    <wsdl:part name="parameters" element="tns:SalirChatListaJugadores" />
+  </wsdl:message>
   <wsdl:message name="IChat_DevolverMensaje_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:DevolverMensaje" />
   </wsdl:message>
   <wsdl:message name="IChat_DevolverMensaje_InputCallbackMessage">
     <wsdl:part name="parameters" element="tns:DevolverMensajeResponse" />
+  </wsdl:message>
+  <wsdl:message name="IChat_ExpulsadoDeJugador_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:ExpulsadoDeJugador" />
+  </wsdl:message>
+  <wsdl:message name="IChat_ExpulsadoDeJugador_InputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:ExpulsadoDeJugadorResponse" />
+  </wsdl:message>
+  <wsdl:message name="IChat_JugadorSalioListaJugadores_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:JugadorSalioListaJugadores" />
+  </wsdl:message>
+  <wsdl:message name="IChat_JugadorSalioListaJugadores_InputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:JugadorSalioListaJugadoresResponse" />
   </wsdl:message>
   <wsdl:message name="IJuegoLanzamiento_AgregarJugadorJuegoLanzamiento_InputMessage">
     <wsdl:part name="parameters" element="tns:AgregarJugadorJuegoLanzamiento" />
@@ -831,9 +849,23 @@
     <wsdl:operation name="IngresarAlChat">
       <wsdl:input wsaw:Action="http://tempuri.org/IChat/IngresarAlChat" message="tns:IChat_IngresarAlChat_InputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="ExpulsarJugadorPartida">
+      <wsdl:input wsaw:Action="http://tempuri.org/IChat/ExpulsarJugadorPartida" message="tns:IChat_ExpulsarJugadorPartida_InputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SalirChatListaJugadores">
+      <wsdl:input wsaw:Action="http://tempuri.org/IChat/SalirChatListaJugadores" message="tns:IChat_SalirChatListaJugadores_InputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="DevolverMensaje">
       <wsdl:output wsaw:Action="http://tempuri.org/IChat/DevolverMensaje" message="tns:IChat_DevolverMensaje_OutputCallbackMessage" />
       <wsdl:input wsaw:Action="http://tempuri.org/IChat/DevolverMensajeResponse" message="tns:IChat_DevolverMensaje_InputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ExpulsadoDeJugador">
+      <wsdl:output wsaw:Action="http://tempuri.org/IChat/ExpulsadoDeJugador" message="tns:IChat_ExpulsadoDeJugador_OutputCallbackMessage" />
+      <wsdl:input wsaw:Action="http://tempuri.org/IChat/ExpulsadoDeJugadorResponse" message="tns:IChat_ExpulsadoDeJugador_InputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="JugadorSalioListaJugadores">
+      <wsdl:output wsaw:Action="http://tempuri.org/IChat/JugadorSalioListaJugadores" message="tns:IChat_JugadorSalioListaJugadores_OutputCallbackMessage" />
+      <wsdl:input wsaw:Action="http://tempuri.org/IChat/JugadorSalioListaJugadoresResponse" message="tns:IChat_JugadorSalioListaJugadores_InputCallbackMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:portType name="IJuegoLanzamiento">
@@ -1250,8 +1282,38 @@
         <soap12:body use="literal" />
       </wsdl:input>
     </wsdl:operation>
+    <wsdl:operation name="ExpulsarJugadorPartida">
+      <soap12:operation soapAction="http://tempuri.org/IChat/ExpulsarJugadorPartida" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="SalirChatListaJugadores">
+      <soap12:operation soapAction="http://tempuri.org/IChat/SalirChatListaJugadores" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
     <wsdl:operation name="DevolverMensaje">
       <soap12:operation soapAction="http://tempuri.org/IChat/DevolverMensaje" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ExpulsadoDeJugador">
+      <soap12:operation soapAction="http://tempuri.org/IChat/ExpulsadoDeJugador" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="JugadorSalioListaJugadores">
+      <soap12:operation soapAction="http://tempuri.org/IChat/JugadorSalioListaJugadores" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -1324,7 +1386,7 @@
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:5455/ServidorSorrySliders</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>LAPTOP-SF103ATP\monti</Upn>
+          <Upn>LAPTOP-H4AE1QJ9\sulem</Upn>
         </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>
@@ -1333,7 +1395,7 @@
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:5455/ServidorSorrySliders</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>LAPTOP-SF103ATP\monti</Upn>
+          <Upn>LAPTOP-H4AE1QJ9\sulem</Upn>
         </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>
@@ -1342,7 +1404,7 @@
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:5455/ServidorSorrySliders</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>LAPTOP-SF103ATP\monti</Upn>
+          <Upn>LAPTOP-H4AE1QJ9\sulem</Upn>
         </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>
@@ -1351,7 +1413,7 @@
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:5455/ServidorSorrySliders</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>LAPTOP-SF103ATP\monti</Upn>
+          <Upn>LAPTOP-H4AE1QJ9\sulem</Upn>
         </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>
@@ -1360,7 +1422,7 @@
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:5455/ServidorSorrySliders</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>LAPTOP-SF103ATP\monti</Upn>
+          <Upn>LAPTOP-H4AE1QJ9\sulem</Upn>
         </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>
@@ -1369,7 +1431,7 @@
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:5455/ServidorSorrySliders</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>LAPTOP-SF103ATP\monti</Upn>
+          <Upn>LAPTOP-H4AE1QJ9\sulem</Upn>
         </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>
@@ -1378,7 +1440,7 @@
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:5455/ServidorSorrySliders</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>LAPTOP-SF103ATP\monti</Upn>
+          <Upn>LAPTOP-H4AE1QJ9\sulem</Upn>
         </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>
@@ -1387,7 +1449,7 @@
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:5455/ServidorSorrySliders</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>LAPTOP-SF103ATP\monti</Upn>
+          <Upn>LAPTOP-H4AE1QJ9\sulem</Upn>
         </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>
@@ -1396,7 +1458,7 @@
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:5455/ServidorSorrySliders</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>LAPTOP-SF103ATP\monti</Upn>
+          <Upn>LAPTOP-H4AE1QJ9\sulem</Upn>
         </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>
@@ -1405,7 +1467,7 @@
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:5455/ServidorSorrySliders</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>LAPTOP-SF103ATP\monti</Upn>
+          <Upn>LAPTOP-H4AE1QJ9\sulem</Upn>
         </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>
@@ -1414,7 +1476,7 @@
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:5455/ServidorSorrySliders</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>LAPTOP-SF103ATP\monti</Upn>
+          <Upn>LAPTOP-H4AE1QJ9\sulem</Upn>
         </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>
@@ -1423,7 +1485,7 @@
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:5455/ServidorSorrySliders</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>LAPTOP-SF103ATP\monti</Upn>
+          <Upn>LAPTOP-H4AE1QJ9\sulem</Upn>
         </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>

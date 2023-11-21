@@ -844,6 +844,33 @@ namespace VistasSorrySliders.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a EXPULSADO DE LA PARTIDA.
+        /// </summary>
+        public static string msgExpulsadoTitulo {
+            get {
+                return ResourceManager.GetString("msgExpulsadoTitulo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a El host del juego lo ha expulsado de la partida.
+        /// </summary>
+        public static string msgExpulsarJugador {
+            get {
+                return ResourceManager.GetString("msgExpulsarJugador", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Todos los demás jugadores se han salido de la partida, saliendo de la partida.
+        /// </summary>
+        public static string msgFaltaJugadores {
+            get {
+                return ResourceManager.GetString("msgFaltaJugadores", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Hubo un error al registrarse, por favor inténtelo más tarde.
         /// </summary>
         public static string msgGuardarCuentaError {
@@ -1087,6 +1114,15 @@ namespace VistasSorrySliders.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Contando puntuaciones.....
+        /// </summary>
+        public static string txtBlockContandoPuntuaciones {
+            get {
+                return ResourceManager.GetString("txtBlockContandoPuntuaciones", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a CONTRASEÑA ANTERIOR.
         /// </summary>
         public static string txtBlockContrasenaAnterior {
@@ -1168,6 +1204,15 @@ namespace VistasSorrySliders.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a En línea.
+        /// </summary>
+        public static string txtBlockEnLinea {
+            get {
+                return ResourceManager.GetString("txtBlockEnLinea", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a JUGADORES Y AMIGOS.
         /// </summary>
         public static string txtBlockJugadoresAmigos {
@@ -1204,6 +1249,15 @@ namespace VistasSorrySliders.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a No en línea.
+        /// </summary>
+        public static string txtBlockNoEnLinea {
+            get {
+                return ResourceManager.GetString("txtBlockNoEnLinea", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Potencia de Lanzamiento:.
         /// </summary>
         public static string txtBlockPotenciaLanzamiento {
@@ -1218,6 +1272,15 @@ namespace VistasSorrySliders.Properties {
         public static string txtBlockRepetirContrasena {
             get {
                 return ResourceManager.GetString("txtBlockRepetirContrasena", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Ronda de Lanzamiento Terminada.
+        /// </summary>
+        public static string txtBlockRondaLanzamientoTerminada {
+            get {
+                return ResourceManager.GetString("txtBlockRondaLanzamientoTerminada", resourceCulture);
             }
         }
         

@@ -36,6 +36,8 @@ namespace VistasSorrySliders
         {
             InitializeComponent();
             _juegoYLobbyVentana = ventana;
+            _juegoYLobbyVentana.EliminarContexto += SalirLobbyServidor;
+
             _esInvitado = esInvitado;
             _cuentaUsuario = cuentaUsuario;
             _codigoPartida = codigoPartida;
@@ -313,8 +315,8 @@ namespace VistasSorrySliders
         public void HostInicioPartida()
         {
             List<CuentaSet> cuentasJugadores = _cuentas.ToList();
-            Page paginaJuego = new JuegoLanzamientoPagina(cuentasJugadores, _partidaActual.CantidadJugadores, _partidaActual.CodigoPartida.ToString(), _cuentaUsuario.CorreoElectronico);
-            Page paginaChat = new JugadoresChatPagina(_cuentas, _cuentaUsuario, _partidaActual);
+            Page paginaJuego = new JuegoLanzamientoPagina(cuentasJugadores, _partidaActual.CantidadJugadores, _partidaActual.CodigoPartida.ToString(), _cuentaUsuario.CorreoElectronico, _juegoYLobbyVentana);
+            Page paginaChat = new JugadoresChatPagina(_cuentas, _cuentaUsuario, _partidaActual, _juegoYLobbyVentana);
             _juegoYLobbyVentana.CambiarFrameLobby(paginaJuego);
             _juegoYLobbyVentana.CambiarFrameListaAmigos(paginaChat);
 
@@ -327,6 +329,7 @@ namespace VistasSorrySliders
             try
             {
                 _proxyLobby.SalirPartida(_codigoPartida);
+                _juegoYLobbyVentana.EliminarContexto -= SalirLobbyServidor;
             }
             catch (CommunicationException ex)
             {

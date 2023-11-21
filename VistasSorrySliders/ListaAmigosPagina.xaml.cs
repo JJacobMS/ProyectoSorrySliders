@@ -171,7 +171,7 @@ namespace VistasSorrySliders
             try
             {
                 CuentaSet[] cuentas;
-                (resultado, cuentas) = _proxyAmigos.RecuperarJugadoresCuenta(informacionJugador);
+                (resultado, cuentas) = _proxyAmigos.RecuperarJugadoresCuenta(informacionJugador, _cuenta.CorreoElectronico);
                 if (cuentas != null)
                 {
                     jugadoresLista = cuentas.ToList();
