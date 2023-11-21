@@ -549,6 +549,30 @@
   <wsdl:message name="IListaAmigos_EliminarAmistad_OutputMessage">
     <wsdl:part name="parameters" element="tns:EliminarAmistadResponse" />
   </wsdl:message>
+  <wsdl:message name="IListaAmigos_RecuperarBaneados_InputMessage">
+    <wsdl:part name="parameters" element="tns:RecuperarBaneados" />
+  </wsdl:message>
+  <wsdl:message name="IListaAmigos_RecuperarBaneados_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RecuperarBaneadosResponse" />
+  </wsdl:message>
+  <wsdl:message name="IListaAmigos_RecuperarSolicitudesAmistad_InputMessage">
+    <wsdl:part name="parameters" element="tns:RecuperarSolicitudesAmistad" />
+  </wsdl:message>
+  <wsdl:message name="IListaAmigos_RecuperarSolicitudesAmistad_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RecuperarSolicitudesAmistadResponse" />
+  </wsdl:message>
+  <wsdl:message name="IListaAmigos_BanearJugador_InputMessage">
+    <wsdl:part name="parameters" element="tns:BanearJugador" />
+  </wsdl:message>
+  <wsdl:message name="IListaAmigos_BanearJugador_OutputMessage">
+    <wsdl:part name="parameters" element="tns:BanearJugadorResponse" />
+  </wsdl:message>
+  <wsdl:message name="IListaAmigos_EliminarBaneo_InputMessage">
+    <wsdl:part name="parameters" element="tns:EliminarBaneo" />
+  </wsdl:message>
+  <wsdl:message name="IListaAmigos_EliminarBaneo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:EliminarBaneoResponse" />
+  </wsdl:message>
   <wsdl:message name="INotificarJugadores_AgregarProxy_InputMessage">
     <wsdl:part name="parameters" element="tns:AgregarProxy" />
   </wsdl:message>
@@ -764,6 +788,22 @@
     <wsdl:operation name="EliminarAmistad">
       <wsdl:input wsaw:Action="http://tempuri.org/IListaAmigos/EliminarAmistad" message="tns:IListaAmigos_EliminarAmistad_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IListaAmigos/EliminarAmistadResponse" message="tns:IListaAmigos_EliminarAmistad_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="RecuperarBaneados">
+      <wsdl:input wsaw:Action="http://tempuri.org/IListaAmigos/RecuperarBaneados" message="tns:IListaAmigos_RecuperarBaneados_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IListaAmigos/RecuperarBaneadosResponse" message="tns:IListaAmigos_RecuperarBaneados_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="RecuperarSolicitudesAmistad">
+      <wsdl:input wsaw:Action="http://tempuri.org/IListaAmigos/RecuperarSolicitudesAmistad" message="tns:IListaAmigos_RecuperarSolicitudesAmistad_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IListaAmigos/RecuperarSolicitudesAmistadResponse" message="tns:IListaAmigos_RecuperarSolicitudesAmistad_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="BanearJugador">
+      <wsdl:input wsaw:Action="http://tempuri.org/IListaAmigos/BanearJugador" message="tns:IListaAmigos_BanearJugador_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IListaAmigos/BanearJugadorResponse" message="tns:IListaAmigos_BanearJugador_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="EliminarBaneo">
+      <wsdl:input wsaw:Action="http://tempuri.org/IListaAmigos/EliminarBaneo" message="tns:IListaAmigos_EliminarBaneo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IListaAmigos/EliminarBaneoResponse" message="tns:IListaAmigos_EliminarBaneo_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:portType name="INotificarJugadores">
@@ -1112,6 +1152,42 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="RecuperarBaneados">
+      <soap12:operation soapAction="http://tempuri.org/IListaAmigos/RecuperarBaneados" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RecuperarSolicitudesAmistad">
+      <soap12:operation soapAction="http://tempuri.org/IListaAmigos/RecuperarSolicitudesAmistad" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="BanearJugador">
+      <soap12:operation soapAction="http://tempuri.org/IListaAmigos/BanearJugador" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EliminarBaneo">
+      <soap12:operation soapAction="http://tempuri.org/IListaAmigos/EliminarBaneo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
   </wsdl:binding>
   <wsdl:binding name="NetTcpBinding_INotificarJugadores" type="tns:INotificarJugadores">
     <wsp:PolicyReference URI="#NetTcpBinding_INotificarJugadores_policy" />
@@ -1310,7 +1386,7 @@
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:5455/ServidorSorrySliders</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>LAPTOP-H4AE1QJ9\sulem</Upn>
+          <Upn>LAPTOP-SF103ATP\monti</Upn>
         </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>
@@ -1319,7 +1395,7 @@
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:5455/ServidorSorrySliders</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>LAPTOP-H4AE1QJ9\sulem</Upn>
+          <Upn>LAPTOP-SF103ATP\monti</Upn>
         </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>
@@ -1328,7 +1404,7 @@
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:5455/ServidorSorrySliders</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>LAPTOP-H4AE1QJ9\sulem</Upn>
+          <Upn>LAPTOP-SF103ATP\monti</Upn>
         </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>
@@ -1337,7 +1413,7 @@
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:5455/ServidorSorrySliders</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>LAPTOP-H4AE1QJ9\sulem</Upn>
+          <Upn>LAPTOP-SF103ATP\monti</Upn>
         </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>
@@ -1346,7 +1422,7 @@
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:5455/ServidorSorrySliders</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>LAPTOP-H4AE1QJ9\sulem</Upn>
+          <Upn>LAPTOP-SF103ATP\monti</Upn>
         </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>
@@ -1355,7 +1431,7 @@
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:5455/ServidorSorrySliders</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>LAPTOP-H4AE1QJ9\sulem</Upn>
+          <Upn>LAPTOP-SF103ATP\monti</Upn>
         </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>
@@ -1364,7 +1440,7 @@
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:5455/ServidorSorrySliders</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>LAPTOP-H4AE1QJ9\sulem</Upn>
+          <Upn>LAPTOP-SF103ATP\monti</Upn>
         </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>
@@ -1373,7 +1449,7 @@
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:5455/ServidorSorrySliders</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>LAPTOP-H4AE1QJ9\sulem</Upn>
+          <Upn>LAPTOP-SF103ATP\monti</Upn>
         </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>
@@ -1382,7 +1458,7 @@
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:5455/ServidorSorrySliders</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>LAPTOP-H4AE1QJ9\sulem</Upn>
+          <Upn>LAPTOP-SF103ATP\monti</Upn>
         </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>
@@ -1391,7 +1467,7 @@
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:5455/ServidorSorrySliders</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>LAPTOP-H4AE1QJ9\sulem</Upn>
+          <Upn>LAPTOP-SF103ATP\monti</Upn>
         </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>
@@ -1400,7 +1476,7 @@
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:5455/ServidorSorrySliders</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>LAPTOP-H4AE1QJ9\sulem</Upn>
+          <Upn>LAPTOP-SF103ATP\monti</Upn>
         </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>
@@ -1409,7 +1485,7 @@
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:5455/ServidorSorrySliders</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>LAPTOP-H4AE1QJ9\sulem</Upn>
+          <Upn>LAPTOP-SF103ATP\monti</Upn>
         </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>
