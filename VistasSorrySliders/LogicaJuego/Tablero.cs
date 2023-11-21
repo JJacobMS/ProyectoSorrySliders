@@ -8,10 +8,12 @@ using System.Windows.Shapes;
 using System.Windows.Media;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media.Imaging;
+using VistasSorrySliders.ServicioSorrySliders;
 
 namespace VistasSorrySliders.LogicaJuego
 {
-    public abstract class Tablero
+    public class Tablero
     {
         public int NumeroJugadores;
         public int TurnoActual;
@@ -30,6 +32,7 @@ namespace VistasSorrySliders.LogicaJuego
         public List<PeonLanzamiento> ListaPeonesTablero;
         public List<Rectangle> ListaObstaculos;
         public List<Rectangle> ListaLugaresNoValidos;
+        public Dictionary<Ellipse, int> ListaPuntuaciones;
         public Dictionary<Direccion, ImageBrush> ColorPorJugador;
         public Dictionary<Direccion, Point> PosicionInicioJugadores;
         public Dictionary<Direccion, Point> PosicionLanzamientoInicial;
@@ -44,9 +47,25 @@ namespace VistasSorrySliders.LogicaJuego
         public event Action TerminarTurno;
         public event Action<PeonLanzamiento> EliminarPeonTablero;
         public event Action FinalizarMovimientoPeones;
+        public event Action AcabarJuegoFaltaJugadores;
+        public event Action<List<JugadorLanzamiento>> PasarPuntuacionesJuego;
 
-        public Tablero()
+        public Tablero(List<CuentaSet> listaJugadores, List<Rectangle> obstaculos,
+            List<Rectangle> noValidos, Dictionary<Ellipse, int> listaPuntuaciones)
         {
+            NumeroJugadores = listaJugadores.Count;
+            TurnoActual = 0;
+            ListaObstaculos = obstaculos;
+            ListaLugaresNoValidos = noValidos;
+            ListaPuntuaciones = listaPuntuaciones;
+            
+            IniciarColoresJugadores();
+            IniciarPosicionesInicioPeones();
+            IniciarPosicionLanzamiento();
+            IniciarPosicionDados();
+
+            AsignarLugaresJugadores(listaJugadores);
+
             ListaPeonesTablero = new List<PeonLanzamiento>();
 
             _temporizadorDado = new DispatcherTimer();
@@ -61,7 +80,37 @@ namespace VistasSorrySliders.LogicaJuego
             _temporizadorPeonesMovimiento.Tick += IniciarMovimientoPeones;
             _temporizadorPeonesMovimiento.Interval = TimeSpan.FromMilliseconds(50);
         }
-
+        private void AsignarLugaresJugadores(List<CuentaSet> listaJugadores)
+        {
+            switch (NumeroJugadores)
+            {
+                case 2:
+                    ListaJugadores = new List<JugadorLanzamiento>
+                    {
+                        new JugadorLanzamiento(Direccion.Abajo, this, listaJugadores[0]),
+                        new JugadorLanzamiento(Direccion.Arriba, this, listaJugadores[1])
+                    };
+                    break;
+                case 3:
+                    ListaJugadores = new List<JugadorLanzamiento>
+                    {
+                        new JugadorLanzamiento(Direccion.Abajo, this, listaJugadores[0]),
+                        new JugadorLanzamiento(Direccion.Derecha, this, listaJugadores[1]),
+                        new JugadorLanzamiento(Direccion.Izquierda, this, listaJugadores[2])
+                    };
+                    break;
+                case 4:
+                    ListaJugadores = new List<JugadorLanzamiento>
+                    {
+                        new JugadorLanzamiento(Direccion.Abajo, this, listaJugadores[0]),
+                        new JugadorLanzamiento(Direccion.Derecha, this, listaJugadores[1]),
+                        new JugadorLanzamiento(Direccion.Arriba, this, listaJugadores[2]),
+                        new JugadorLanzamiento(Direccion.Izquierda, this, listaJugadores[3])
+                    };
+                    break;
+            }
+            
+        }
         private void IniciarMovimientoDados(object sender, EventArgs e)
         {
             ListaJugadores[TurnoActual].CambiarDados();
@@ -105,8 +154,19 @@ namespace VistasSorrySliders.LogicaJuego
         private void FinalizarTurno()
         {
             _temporizadorPeonesMovimiento.Stop();
-            Task.Delay(500).Wait();
+            Task.Delay(2500).Wait();
             FinalizarMovimientoPeones?.Invoke();            
+        }
+
+        public void DesconectarJugador(string correoElectronico)
+        {
+            foreach (JugadorLanzamiento jugador in ListaJugadores)
+            {
+                if (jugador.CorreElectronico.Equals(correoElectronico))
+                {
+                    jugador.EstaConectado = false;
+                }
+            }
         }
 
         public void CambiarTurnoSiguiente()
@@ -115,7 +175,7 @@ namespace VistasSorrySliders.LogicaJuego
             TerminarTurno?.Invoke();
             ListaJugadores[TurnoActual].TerminarTurno();
 
-            TurnoActual = (TurnoActual + 1 >= NumeroJugadores) ? 0 : TurnoActual + 1;
+            AumentarTurnoActual(NumeroJugadores);
 
             if (ListaJugadores[TurnoActual].PeonTurnoActual < NUMERO_PEONES_POR_JUGADOR)
             {
@@ -123,8 +183,22 @@ namespace VistasSorrySliders.LogicaJuego
             }
             else
             {
-                //ACABAR RONDA PARTE DE JACOB
+                RecolectarPuntuacionesTablero();
             }
+        }
+
+        private void AumentarTurnoActual(int numeroJugadoresTotales)
+        {
+            if (numeroJugadoresTotales <= 1)
+            {
+                AcabarJuegoFaltaJugadores?.Invoke();
+            }
+            TurnoActual = (TurnoActual + 1 >= NumeroJugadores) ? 0 : TurnoActual + 1;
+            if (!ListaJugadores[TurnoActual].EstaConectado)
+            {
+                AumentarTurnoActual(numeroJugadoresTotales - 1);
+            }
+            
         }
 
         public void IniciarTurno()
@@ -196,5 +270,71 @@ namespace VistasSorrySliders.LogicaJuego
             LanzarPeonActual();
         }
 
+        public void RecolectarPuntuacionesTablero()
+        {
+            foreach (JugadorLanzamiento jugador in ListaJugadores)
+            {
+                jugador.CalcularPuntajePeonesTablero(ListaPuntuaciones);
+            }
+            PasarPuntuacionesJuego?.Invoke(ListaJugadores);
+        }
+
+        private void IniciarColoresJugadores()
+        {
+            ImageBrush pintarImagenAzul = new ImageBrush
+            {
+                ImageSource = new BitmapImage(new Uri("pack://application:,,,/Recursos/peonMorado.png"))
+            };
+            ImageBrush pintarImagenRojo = new ImageBrush
+            {
+                ImageSource = new BitmapImage(new Uri("pack://application:,,,/Recursos/peonRosa.png"))
+            };
+            ImageBrush pintarImagenVerde = new ImageBrush
+            {
+                ImageSource = new BitmapImage(new Uri("pack://application:,,,/Recursos/peonNegro.png"))
+            };
+            ImageBrush pintarImagenAmarillo = new ImageBrush
+            {
+                ImageSource = new BitmapImage(new Uri("pack://application:,,,/Recursos/peonGris.png"))
+            };
+
+            ColorPorJugador = new Dictionary<Direccion, ImageBrush>
+            {
+                { Direccion.Abajo, pintarImagenAzul }, //Morado
+                { Direccion.Arriba, pintarImagenRojo }, //Rosa
+                { Direccion.Derecha, pintarImagenVerde }, //Negro
+                { Direccion.Izquierda, pintarImagenAmarillo }, //Gris
+            };
+        }
+        private void IniciarPosicionesInicioPeones()
+        {
+            PosicionInicioJugadores = new Dictionary<Direccion, Point>
+            {
+                { Direccion.Abajo,  new Point(36, 384)},
+                { Direccion.Arriba,  new Point(511, 128)},
+                { Direccion.Derecha,  new Point(511, 384)},
+                { Direccion.Izquierda,  new Point(36, 128)}
+            };
+        }
+        private void IniciarPosicionLanzamiento()
+        {
+            PosicionLanzamientoInicial = new Dictionary<Direccion, Point>
+            {
+                { Direccion.Abajo,  new Point(300, 535)},
+                { Direccion.Arriba,  new Point(300, 25)},
+                { Direccion.Derecha,  new Point(576, 279)},
+                { Direccion.Izquierda,  new Point(28, 279)}
+            };
+        }
+        private void IniciarPosicionDados()
+        {
+            PosicionDados = new Dictionary<Direccion, (Point, Point)>
+            {
+                { Direccion.Abajo, (new Point(33,465), new Point(144,465)) },
+                { Direccion.Arriba, (new Point(402,31), new Point(509,31)) },
+                { Direccion.Derecha, (new Point(402,465), new Point(509,465)) },
+                { Direccion.Izquierda, (new Point(33,33), new Point(144,33)) }
+            };
+        }
     }
 }

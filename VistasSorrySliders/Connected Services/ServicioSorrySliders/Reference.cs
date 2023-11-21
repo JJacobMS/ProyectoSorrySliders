@@ -1976,6 +1976,18 @@ namespace VistasSorrySliders.ServicioSorrySliders {
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IChat/IngresarAlChat")]
         System.Threading.Tasks.Task IngresarAlChatAsync(string uid, string correo);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IChat/ExpulsarJugadorPartida")]
+        void ExpulsarJugadorPartida(string uid, string correo);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IChat/ExpulsarJugadorPartida")]
+        System.Threading.Tasks.Task ExpulsarJugadorPartidaAsync(string uid, string correo);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IChat/SalirChatListaJugadores")]
+        void SalirChatListaJugadores(string uid, string correo);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IChat/SalirChatListaJugadores")]
+        System.Threading.Tasks.Task SalirChatListaJugadoresAsync(string uid, string correo);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -1983,6 +1995,12 @@ namespace VistasSorrySliders.ServicioSorrySliders {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IChat/DevolverMensaje", ReplyAction="http://tempuri.org/IChat/DevolverMensajeResponse")]
         void DevolverMensaje(string nickname, string mensaje);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IChat/ExpulsadoDeJugador", ReplyAction="http://tempuri.org/IChat/ExpulsadoDeJugadorResponse")]
+        void ExpulsadoDeJugador(string correoElectronico);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IChat/JugadorSalioListaJugadores", ReplyAction="http://tempuri.org/IChat/JugadorSalioListaJugadoresResponse")]
+        void JugadorSalioListaJugadores(string correoElectronico);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -2027,6 +2045,22 @@ namespace VistasSorrySliders.ServicioSorrySliders {
         
         public System.Threading.Tasks.Task IngresarAlChatAsync(string uid, string correo) {
             return base.Channel.IngresarAlChatAsync(uid, correo);
+        }
+        
+        public void ExpulsarJugadorPartida(string uid, string correo) {
+            base.Channel.ExpulsarJugadorPartida(uid, correo);
+        }
+        
+        public System.Threading.Tasks.Task ExpulsarJugadorPartidaAsync(string uid, string correo) {
+            return base.Channel.ExpulsarJugadorPartidaAsync(uid, correo);
+        }
+        
+        public void SalirChatListaJugadores(string uid, string correo) {
+            base.Channel.SalirChatListaJugadores(uid, correo);
+        }
+        
+        public System.Threading.Tasks.Task SalirChatListaJugadoresAsync(string uid, string correo) {
+            return base.Channel.SalirChatListaJugadoresAsync(uid, correo);
         }
     }
     

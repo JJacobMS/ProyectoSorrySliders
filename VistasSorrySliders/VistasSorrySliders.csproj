@@ -97,6 +97,9 @@
     <Compile Include="JuegoLanzamientoPagina.xaml.cs">
       <DependentUpon>JuegoLanzamientoPagina.xaml</DependentUpon>
     </Compile>
+    <Compile Include="JuegoPuntuacionesPagina.xaml.cs">
+      <DependentUpon>JuegoPuntuacionesPagina.xaml</DependentUpon>
+    </Compile>
     <Compile Include="JuegoYLobbyVentana.xaml.cs">
       <DependentUpon>JuegoYLobbyVentana.xaml</DependentUpon>
     </Compile>
@@ -120,9 +123,6 @@
     <Compile Include="LogicaJuego\LineaMovimiento.cs" />
     <Compile Include="LogicaJuego\PeonLanzamiento.cs" />
     <Compile Include="LogicaJuego\Tablero.cs" />
-    <Compile Include="LogicaJuego\TableroCuatroJugadores.cs" />
-    <Compile Include="LogicaJuego\TableroDosJugadores.cs" />
-    <Compile Include="LogicaJuego\TableroTresJugadores.cs" />
     <Compile Include="MenuPrincipalPagina.xaml.cs">
       <DependentUpon>MenuPrincipalPagina.xaml</DependentUpon>
     </Compile>
@@ -207,6 +207,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="JuegoLanzamientoPagina.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="JuegoPuntuacionesPagina.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -416,6 +420,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Recursos\tableroTres.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Recursos\peon.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

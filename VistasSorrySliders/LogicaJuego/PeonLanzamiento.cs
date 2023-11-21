@@ -117,6 +117,20 @@ namespace VistasSorrySliders.LogicaJuego
             return true;
         }
 
+        public int CalcularPuntuacion(Dictionary<Ellipse, int> circulosPuntuaciones)
+        {
+            foreach (KeyValuePair< Ellipse, int> parDiccionario in circulosPuntuaciones)
+            {
+                Ellipse circulo = parDiccionario.Key;
+                int puntuacion = parDiccionario.Value;
+                if (IntersectaConOtroCirculo(circulo))
+                {
+                    return puntuacion;
+                }
+            }
+            return 0;
+        }
+
         public void RealizarMovimiento(List<Rectangle> paredes, List<PeonLanzamiento> peonesTablero)
         {
             if (VelocidadHorizontal <= 0 && VelocidadVertical <= 0)
@@ -189,6 +203,23 @@ namespace VistasSorrySliders.LogicaJuego
 
             double radioFiguraActual = Figura.Width / 2;
             double radioFiguraEnemiga = peonEnemigo.Figura.Width / 2;
+
+            return distancia < (radioFiguraActual + radioFiguraEnemiga);
+        }
+
+        private bool IntersectaConOtroCirculo(Ellipse circulo)
+        {
+            //Si la distancia entre los centros es menor que la suma de los radios, los círculos se intersectan; de lo contrario, no se intersectan.
+            double centroXPeonActual = Canvas.GetLeft(Figura) + Figura.Width / 2;
+            double centroYPeonActual = Canvas.GetTop(Figura) + Figura.Height / 2;
+
+            double centroXPeonEnemigo = Canvas.GetLeft(circulo) + circulo.Width / 2;
+            double centroYPeonEnemigo = Canvas.GetTop(circulo) + circulo.Height / 2;
+
+            double distancia = Math.Sqrt(Math.Pow(centroXPeonEnemigo - centroXPeonActual, 2) + Math.Pow(centroYPeonEnemigo - centroYPeonActual, 2));
+
+            double radioFiguraActual = Figura.Width / 2;
+            double radioFiguraEnemiga = circulo.Width / 2;
 
             return distancia < (radioFiguraActual + radioFiguraEnemiga);
         }

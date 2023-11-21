@@ -14,14 +14,15 @@ namespace VistasSorrySliders.LogicaJuego
     {
         public string Nickname { get; set; }
         public string CorreElectronico { get; set; }
-        public bool EstaExpulsado { get; set; }
+        public bool EstaConectado { get; set; }
         public Direccion DireccionJugador { get; set; }
         public LineaMovimiento LineaMovimiento { get; set; }
         public List<PeonLanzamiento> PeonesLanzamiento { get; set; }
         public int PeonTurnoActual { get; set; }
         public List<DadoPotencia> DadosJugador { get; set; }
         public int NumeroDadosLanzados { get; set; }
-        private Tablero _tablero;
+        public List<int> Puntuaciones { get; set; }
+        private readonly Tablero _tablero;
         public JugadorLanzamiento(Direccion direccionJugador, Tablero tablero, CuentaSet cuentaJugador)
         {
             _tablero = tablero;
@@ -29,6 +30,7 @@ namespace VistasSorrySliders.LogicaJuego
             CorreElectronico = cuentaJugador.CorreoElectronico;
             DireccionJugador = direccionJugador;
             NumeroDadosLanzados = 0;
+            EstaConectado = true;
 
             GenerarPeonesLanzamiento();
             GenerarLineaMovimiento();
@@ -54,7 +56,7 @@ namespace VistasSorrySliders.LogicaJuego
                 };
                 PeonesLanzamiento.Add(new PeonLanzamiento(elipse, new Point(posicionX, posicionY)));
             }
-            PeonTurnoActual = 0;
+            PeonTurnoActual = 3;
         }
         private void GenerarLineaMovimiento()
         {
@@ -200,6 +202,15 @@ namespace VistasSorrySliders.LogicaJuego
             int distanciaVertical = Math.Abs(Convert.ToInt32(sumaPotencia * Math.Sin(anguloValorAbsoluto)));
             int distanciaHorizontal = Math.Abs(Convert.ToInt32(sumaPotencia * Math.Cos(anguloValorAbsoluto)));
             return (distanciaVertical, distanciaHorizontal);
+        }
+
+        public void CalcularPuntajePeonesTablero(Dictionary<Ellipse, int> circulosPuntuacion)
+        {
+            Puntuaciones = new List<int>();
+            foreach (PeonLanzamiento peonJugador in PeonesLanzamiento)
+            {
+                Puntuaciones.Add(peonJugador.CalcularPuntuacion(circulosPuntuacion));
+            }
         }
     }
 }

@@ -7,93 +7,115 @@
       xmlns:p="clr-namespace:VistasSorrySliders.Properties" 
       xmlns:serviciosorrysliders="clr-namespace:VistasSorrySliders.ServicioSorrySliders" d:DataContext="{d:DesignInstance Type=serviciosorrysliders:CuentaSet}"
       mc:Ignorable="d" 
-      d:DesignHeight="576" d:DesignWidth="409"
-      Title="JugadoresChatPagina">
+      d:DesignHeight="576" d:DesignWidth="409">
 
     <Grid>
         <Grid.Background>
             <ImageBrush ImageSource="/Recursos/tableroLanzamientoFondo.png" />
         </Grid.Background>
         <Grid.RowDefinitions>
+            <RowDefinition Height="1.4*"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="219"/>
-            <RowDefinition Height="50"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        
-        <Button Grid.Row="3" Height="40" Width="220" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,15,0" Style="{StaticResource estiloBtnSalir}" Content="{x:Static p:Resources.btnSalir}" Click="ClickSalirPartida"/>
-        <Grid Grid.Row="0">
-            <Border BorderBrush="Black" BorderThickness="1.5" Margin="10,10,10,10" CornerRadius="10">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="50" />
-                        <RowDefinition Height="*" />
-                    </Grid.RowDefinitions>
-                    <Label Content="{x:Static p:Resources.lblListaDeJugadores}" Height="50" FontSize="35" Style="{StaticResource estiloLblTituloTextos}" Grid.Row="0" />
-                    <DataGrid Grid.Row="1" ColumnHeaderStyle="{StaticResource estiloDtGridColumnHeaderListaJugadores}" Style="{StaticResource estiloDtGridListaJugadores}"
-                              RowStyle="{StaticResource estiloDtGridRowFilaTablaJugadores}"
-                              Name="dtGridJugadores">
-                        <DataGrid.Columns>
-                            <DataGridTemplateColumn Header="{x:Static p:Resources.dtGridTemplateColumnJugador}" Width="*">
-                                <DataGridTemplateColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <TextBlock Text="{Binding Path=Nickname}"></TextBlock>
-                                    </DataTemplate>
-                                </DataGridTemplateColumn.CellTemplate>
-                            </DataGridTemplateColumn>
-                            <DataGridTemplateColumn Header="{x:Static p:Resources.dtGridTemplateColumnEstado}" Width="Auto" CellStyle="{DynamicResource estiloDtCellEstadoInternet}"/>
-                            <DataGridTemplateColumn Header="" Width="Auto">
-                                <DataGridTemplateColumn.CellStyle>
-                                    <Style TargetType="DataGridCell">
-                                        <Setter Property="ContentTemplate">
-                                            <Setter.Value>
-                                                <DataTemplate>
-                                                    <Button Style="{StaticResource estiloBtnExpulsar}" CommandParameter="{Binding}" Content="{x:Static p:Resources.btnExpulsar}"></Button>
-                                                </DataTemplate>
-                                            </Setter.Value>
-                                        </Setter>
-                                        <Style.Triggers>
-                                            <DataTrigger Binding="{Binding Path=EsHost}" Value="True">
-                                                <Setter Property="ContentTemplate">
-                                                    <Setter.Value>
-                                                        <DataTemplate>
-                                                            <Button Style="{StaticResource estiloBtnHostPartida}" Content="{x:Static p:Resources.btnHost}"></Button>
-                                                        </DataTemplate>
-                                                    </Setter.Value>
-                                                </Setter>
-                                            </DataTrigger>
-
-                                            <DataTrigger Binding="{Binding Path=EstaExpulsado}" Value="True">
-                                                <Setter Property="ContentTemplate">
-                                                    <Setter.Value>
-                                                        <DataTemplate>
-                                                            <Button Style="{StaticResource estiloBtnDesactivado}" Content="{x:Static p:Resources.btnExpulsar}"></Button>
-                                                        </DataTemplate>
-                                                    </Setter.Value>
-                                                </Setter>
-                                            </DataTrigger>
-                                        </Style.Triggers>
-                                    </Style>
-                                </DataGridTemplateColumn.CellStyle>
-                            </DataGridTemplateColumn>
-                        </DataGrid.Columns>
-                    </DataGrid>
-                </Grid>
-            </Border>
-        </Grid>
-        <Grid Grid.Row="1">
-            <Border BorderBrush="Black" BorderThickness="1.5" Margin="10,10,10,10" CornerRadius="10">
-                <Grid Grid.Row="1" >
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="40"/>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="40"/>
-                    </Grid.RowDefinitions>
-                    <TextBox x:Name="txtBoxMensajeChat" Grid.Row="2" Width="320" Height="30" BorderBrush="Black" BorderThickness="1.5" HorizontalAlignment="Left"  TextChanged="TextChangedTamañoChat"/>
-                    <TextBlock x:Name="txtBlockMensajeChat" Grid.Row="1" Width="400" Height="30" HorizontalAlignment="Left" Text="" FontSize="25"/>
-                    <Button x:Name="btnEnviar" Grid.Row="2" Width="60" Height="30" HorizontalAlignment="Right" Style="{StaticResource estiloBtnTableroAzul}" Content="{x:Static p:Resources.btnEnviar}" Click="ClickEnviarMensaje"/>
-                </Grid>
-            </Border>
-        </Grid>
-        
+        <Button Grid.Row="2" Width="200" Height="40" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="10,5,10,10" Style="{StaticResource estiloBtnSalir}" Content="{x:Static p:Resources.btnSalir}" Click="ClickSalirPartida"/>
+        <Viewbox Grid.Row="0">
+            <Grid  Width="409" Height="305">
+                <Border BorderBrush="Black" BorderThickness="2" Margin="10,10,10,5" CornerRadius="10">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="50" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <Label Content="{x:Static p:Resources.lblListaDeJugadores}" Height="50" FontSize="35" Style="{StaticResource estiloLblTituloTextos}" Grid.Row="0" />
+                        <DataGrid Grid.Row="1" ColumnHeaderStyle="{StaticResource estiloDtGridColumnHeaderListaJugadores}" Style="{StaticResource estiloDtGridListaJugadores}"
+                                  RowStyle="{StaticResource estiloDtGridRowFilaTablaJugadores}"
+                                  Name="dtGridJugadores">
+                            <DataGrid.Columns>
+                                <DataGridTemplateColumn Header="{x:Static p:Resources.dtGridTemplateColumnJugador}" Width="*">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Style="{StaticResource estiloTxtBlockNicknameLista}" Text="{Binding Path=Nickname}"></TextBlock>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                <DataGridTemplateColumn x:Name="dtGridTemplateColumnEstado" Header="{x:Static p:Resources.dtGridTemplateColumnEstado}" Width="Auto">
+                                    <DataGridTemplateColumn.CellStyle>
+                                        <Style TargetType="DataGridCell" BasedOn="{StaticResource estiloDtGridCellEstadoInternet}">
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding Path=EstaEnLinea, UpdateSourceTrigger=PropertyChanged}" Value="False">
+                                                    <Setter Property="ContentTemplate">
+                                                        <Setter.Value>
+                                                            <DataTemplate>
+                                                                <Grid Height="35" Width="35">
+                                                                    <Ellipse Fill="#B21928"></Ellipse>
+                                                                    <TextBlock Margin="0,0,0,2" VerticalAlignment="Center" HorizontalAlignment="Center" TextWrapping="Wrap" 
+                                                                                TextAlignment="Center" FontSize="10" Foreground="White" FontWeight="Bold" Text="{x:Static p:Resources.txtBlockNoEnLinea}"/>
+                                                                </Grid>
+                                                            </DataTemplate>
+                                                        </Setter.Value>
+                                                    </Setter>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </DataGridTemplateColumn.CellStyle>
+                                </DataGridTemplateColumn>
+                                <DataGridTemplateColumn Header="" Width="Auto">
+                                    <DataGridTemplateColumn.CellStyle>
+                                        <Style TargetType="DataGridCell">
+                                            <Setter Property="ContentTemplate">
+                                                <Setter.Value>
+                                                    <DataTemplate>
+                                                        <Button Style="{StaticResource estiloBtnExpulsar}" CommandParameter="{Binding}" Content="{x:Static p:Resources.btnExpulsar}" 
+                                                                PreviewMouseLeftButtonDown="PreviewMouseLeftButtonDownExpulsarJugadorJuego"></Button>
+                                                    </DataTemplate>
+                                                </Setter.Value>
+                                            </Setter>
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding Path=EsHost}" Value="True">
+                                                    <Setter Property="ContentTemplate">
+                                                        <Setter.Value>
+                                                            <DataTemplate>
+                                                                <Button Style="{StaticResource estiloBtnHostPartida}" Content="{x:Static p:Resources.btnHost}"></Button>
+                                                            </DataTemplate>
+                                                        </Setter.Value>
+                                                    </Setter>
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding Path=EstaExpulsado}" Value="True">
+                                                    <Setter Property="ContentTemplate">
+                                                        <Setter.Value>
+                                                            <DataTemplate>
+                                                                <Button Style="{StaticResource estiloBtnDesactivado}" Content="{x:Static p:Resources.btnExpulsar}"></Button>
+                                                            </DataTemplate>
+                                                        </Setter.Value>
+                                                    </Setter>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </DataGridTemplateColumn.CellStyle>
+                                </DataGridTemplateColumn>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </Grid>
+                </Border>
+            </Grid>
+        </Viewbox>
+        <Viewbox Grid.Row="1">
+            <Grid Width="425" Height="225">
+                <Border BorderBrush="Black" BorderThickness="2" Margin="10,5,10,5" CornerRadius="10">
+                    <Grid Grid.Row="1" >
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="40"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="40"/>
+                        </Grid.RowDefinitions>
+                        <TextBox x:Name="txtBoxMensajeChat" Grid.Row="2" Width="320" Height="30" BorderBrush="Black" BorderThickness="1.5" HorizontalAlignment="Left"  TextChanged="TextChangedTamañoChat"/>
+                        <TextBlock x:Name="txtBlockMensajeChat" Grid.Row="1" Width="400" Height="30" HorizontalAlignment="Left" Text="" FontSize="25"/>
+                        <Button x:Name="btnEnviar" Grid.Row="2" Width="60" Height="30" HorizontalAlignment="Right" Margin="3"
+                                Style="{StaticResource estiloBtnTableroAzul}" Content="{x:Static p:Resources.btnEnviar}" Click="ClickEnviarMensaje"/>
+                    </Grid>
+                </Border>
+            </Grid>
+        </Viewbox>
     </Grid>
 </Page>

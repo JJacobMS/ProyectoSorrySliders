@@ -29,6 +29,7 @@ namespace VistasSorrySliders
         private string _codigoPartida;
 
         public event Action EliminarContexto;
+        public event Action<string> ExpulsarJugador;
         public JuegoYLobbyVentana()
         {
             InitializeComponent();
@@ -67,6 +68,11 @@ namespace VistasSorrySliders
         {
             //_frame = pagina nueva;, ponerle a pagina nueva salirPartida();, y en ese metodo poner el RecargarListaJugadores
             frameListaAmigos.Content = paginaNueva;
+        }
+        public void ExpulsarJugadorJuego(string correoElectronico)
+        {
+            
+            ExpulsarJugador?.Invoke(correoElectronico);
         }
 
         private void SalirCuentaRegistroPartidaBD()

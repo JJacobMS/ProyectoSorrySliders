@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.ServiceModel;
 using System.Text;
@@ -27,16 +28,20 @@ namespace VistasSorrySliders
         private CuentaSet[] _cuentas;
         private PartidaSet _partida;
         private ChatClient _proxyChat;
-        private List<JugadorLista> _jugadoresListas;
+        private ObservableCollection<JugadorLista> _jugadoresListas;
+        private JuegoYLobbyVentana _juegoYLobbyVentana;
 
-        public JugadoresChatPagina(CuentaSet[] cuentas, CuentaSet cuentaUsuario, PartidaSet partida )
+        public JugadoresChatPagina(CuentaSet[] cuentas, CuentaSet cuentaUsuario, PartidaSet partida, JuegoYLobbyVentana ventana )
         {
             InitializeComponent();
             _cuentas = cuentas;
             _cuentaUsuario = cuentaUsuario;
             _partida = partida;
+
+            _juegoYLobbyVentana = ventana;
+            _juegoYLobbyVentana.EliminarContexto += RemoverCallbacks;
+
             IngresarCallbacks();
-            RemoverCallbacks();
             CargarJugadores();
         }
 
@@ -51,7 +56,27 @@ namespace VistasSorrySliders
         }
         private void RemoverCallbacks() 
         {
-            
+            Logger log = new Logger(this.GetType());
+            try
+            {
+                _proxyChat.SalirChatListaJugadores(_partida.CodigoPartida.ToString(), _cuentaUsuario.CorreoElectronico);
+                _juegoYLobbyVentana.EliminarContexto -= RemoverCallbacks;
+            }
+            catch (CommunicationException ex)
+            {
+                MessageBox.Show(Properties.Resources.msgErrorConexion);
+                log.LogError("Error de Comunicación con el Servidor", ex);
+            }
+            catch (TimeoutException ex)
+            {
+                MessageBox.Show(Properties.Resources.msgErrorTiempoEsperaServidor);
+                log.LogWarn("Se agoto el tiempo de espera del servidor", ex);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(Properties.Resources.msgErrorConexion);
+                log.LogFatal("Ha ocurrido un error inesperado", ex);
+            }
         }
 
         private void IngresarCallbacks() 
@@ -116,14 +141,15 @@ namespace VistasSorrySliders
 
         private void CargarJugadores()
         {
-            _jugadoresListas = new List<JugadorLista>();
+            _jugadoresListas = new ObservableCollection<JugadorLista>();
             for (int i = 0; i < _cuentas.Count(); i++)
             {
                 JugadorLista jugador = new JugadorLista
                 {
                     Nickname = _cuentas[i].Nickname,
                     CorreoElectronico = _cuentas[i].CorreoElectronico,
-                    EstaExpulsado = false
+                    EstaExpulsado = false,
+                    EstaEnLinea = true
                 };
                 if (i == 0)
                 {
@@ -132,6 +158,73 @@ namespace VistasSorrySliders
                 _jugadoresListas.Add(jugador);
             }
             dtGridJugadores.ItemsSource = _jugadoresListas;
+            if (!_cuentaUsuario.CorreoElectronico.Equals(_jugadoresListas[0].CorreoElectronico))
+            {
+                dtGridJugadores.IsEnabled = false;
+            }
+        }
+
+        private void PreviewMouseLeftButtonDownExpulsarJugadorJuego(object sender, MouseButtonEventArgs e)
+        {
+            Button botonExpulsar = (Button)sender;
+            JugadorLista jugador = (JugadorLista) botonExpulsar.CommandParameter;
+            EnviarJugadorExpulsado(jugador);
+            botonExpulsar.IsEnabled = false;
+        }
+
+        private void EnviarJugadorExpulsado(JugadorLista jugador)
+        {
+            Logger log = new Logger(this.GetType());
+            try
+            {
+                _proxyChat.ExpulsarJugadorPartida(_partida.CodigoPartida.ToString(), jugador.CorreoElectronico);
+            }
+            catch (CommunicationException ex)
+            {
+                log.LogError("Error de Comunicación con el Servidor", ex);
+            }
+            catch (TimeoutException ex)
+            {
+                log.LogWarn("Se agoto el tiempo de espera del servidor", ex);
+            }
+            catch (Exception ex)
+            {
+                log.LogFatal("Ha ocurrido un error inesperado", ex);
+            }
+        }
+
+        public void ExpulsadoDeJugador(string correoElectronico)
+        {
+            if (correoElectronico.Equals(_cuentaUsuario.CorreoElectronico))
+            {
+                Window.GetWindow(this).Close();
+                MessageBox.Show(Properties.Resources.msgExpulsarJugador, Properties.Resources.msgExpulsadoTitulo);
+            }
+            else
+            {
+                NotificarExpulsionJuego(correoElectronico);
+            }
+        }
+
+        public void JugadorSalioListaJugadores(string correoElectronico)
+        {
+            NotificarExpulsionJuego(correoElectronico);
+        }
+
+        private void NotificarExpulsionJuego(string correoElectronico)
+        {
+            _juegoYLobbyVentana.ExpulsarJugadorJuego(correoElectronico);
+            for (int i = 0; i < _jugadoresListas.Count; i++)
+            {
+                if (_jugadoresListas[i].CorreoElectronico.Equals(correoElectronico))
+                {
+                    _jugadoresListas[i].EstaExpulsado = true;
+                    _jugadoresListas[i].EstaEnLinea = false;
+                    Console.WriteLine(correoElectronico);
+
+                    dtGridJugadores.Items.Refresh();
+                }
+            }
         }
     }
 }

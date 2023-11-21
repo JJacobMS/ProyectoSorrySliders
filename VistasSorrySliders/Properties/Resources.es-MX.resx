@@ -375,6 +375,15 @@
   <data name="msgErrorTituloImagenPermisos" xml:space="preserve">
     <value>Sin permisos para el archivo</value>
   </data>
+  <data name="msgExpulsadoTitulo" xml:space="preserve">
+    <value>EXPULSADO DE LA PARTIDA</value>
+  </data>
+  <data name="msgExpulsarJugador" xml:space="preserve">
+    <value>El host del juego lo ha expulsado de la partida</value>
+  </data>
+  <data name="msgFaltaJugadores" xml:space="preserve">
+    <value>Todos los demás jugadores se han salido de la partida, saliendo de la partida</value>
+  </data>
   <data name="msgGuardarCuentaError" xml:space="preserve">
     <value>Hubo un error al registrarse, por favor inténtelo más tarde</value>
   </data>
@@ -456,6 +465,9 @@
   <data name="txtBlockConfigurarPartida" xml:space="preserve">
     <value>CONFIGURAR PARTIDA</value>
   </data>
+  <data name="txtBlockContandoPuntuaciones" xml:space="preserve">
+    <value>Contando puntuaciones....</value>
+  </data>
   <data name="txtBlockContrasenaAnterior" xml:space="preserve">
     <value>CONTRASEÑA ANTERIOR</value>
   </data>
@@ -483,6 +495,9 @@
   <data name="txtBlockCuentaYaEnLobby" xml:space="preserve">
     <value>Su cuenta ya está jugando dentro del lobby</value>
   </data>
+  <data name="txtBlockEnLinea" xml:space="preserve">
+    <value>En línea</value>
+  </data>
   <data name="txtBlockJugadoresAmigos" xml:space="preserve">
     <value>JUGADORES Y AMIGOS</value>
   </data>
@@ -495,11 +510,17 @@
   <data name="txtBlockNicknameNoValido" xml:space="preserve">
     <value>Nickname no es válido</value>
   </data>
+  <data name="txtBlockNoEnLinea" xml:space="preserve">
+    <value>No en línea</value>
+  </data>
   <data name="txtBlockPotenciaLanzamiento" xml:space="preserve">
     <value>Potencia de Lanzamiento:</value>
   </data>
   <data name="txtBlockRepetirContrasena" xml:space="preserve">
     <value>REPETIR CONTRASEÑA NUEVA</value>
+  </data>
+  <data name="txtBlockRondaLanzamientoTerminada" xml:space="preserve">
+    <value>Ronda de Lanzamiento Terminada</value>
   </data>
   <data name="txtBlockRondasGanadas" xml:space="preserve">
     <value>RONDAS GANADAS</value>
