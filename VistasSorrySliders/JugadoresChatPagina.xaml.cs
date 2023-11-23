@@ -48,7 +48,7 @@ namespace VistasSorrySliders
         private void TextChangedTamañoChat(object sender, TextChangedEventArgs e)
         {
             int tamañoMaximoMensaje = 20;
-            if (txtBoxMensajeChat.Text.Length == tamañoMaximoMensaje) 
+            if (txtBoxMensajeChat.Text.Length > tamañoMaximoMensaje) 
             {
                 txtBoxMensajeChat.Text = txtBoxMensajeChat.Text.Substring(0, tamañoMaximoMensaje);
                 txtBoxMensajeChat.SelectionStart = txtBoxMensajeChat.Text.Length;
@@ -136,7 +136,15 @@ namespace VistasSorrySliders
 
         public void DevolverMensaje(string nickname, string mensaje)
         {
-            txtBlockMensajeChat.Text = nickname + ": " + mensaje;
+            AgregarMensaje(nickname, mensaje);
+        }
+
+        private void AgregarMensaje(string nickname, string mensaje) 
+        {
+            Label mensajeChat = new Label();
+            mensajeChat.Style = (Style) FindResource("estiloLblMensajeChat");
+            mensajeChat.Content = nickname+": "+mensaje;
+            stcPanelMensaje.Children.Add(mensajeChat);
         }
 
         private void CargarJugadores()
@@ -220,7 +228,6 @@ namespace VistasSorrySliders
                 {
                     _jugadoresListas[i].EstaExpulsado = true;
                     _jugadoresListas[i].EstaEnLinea = false;
-                    Console.WriteLine(correoElectronico);
 
                     dtGridJugadores.Items.Refresh();
                 }

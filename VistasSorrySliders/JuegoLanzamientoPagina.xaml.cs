@@ -441,7 +441,7 @@ namespace VistasSorrySliders
             brdConteoPuntuaciones.Visibility = Visibility.Visible;
             await Task.Delay(3500);
             brdConteoPuntuaciones.Visibility = Visibility.Hidden;
-            _juegoYLobbyVentana.CambiarFrameLobby(new JuegoPuntuacionesPagina(jugadoresConPuntuaciones));
+            _juegoYLobbyVentana.CambiarFrameLobby(new JuegoPuntuacionesPagina(jugadoresConPuntuaciones, _correoJugadorActual));
             _juegoYLobbyVentana.ExpulsarJugador -= JugadorSalioJuegoLanzamiento;
             EliminarContextoJuegoLanzamiento();
         }

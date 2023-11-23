@@ -10,7 +10,40 @@
         <Setter Property="Foreground" Value="White"/>
     </Style>
 
-    
+    <Style x:Key="estiloTxtBlockChat" TargetType="TextBlock">
+        <Setter Property="Width" Value="400"/>
+        <Setter Property="Height" Value="30"/>
+        <Setter Property="FontSize" Value="18"/>
+        <Setter Property="Foreground" Value="Blue"/>
+
+    </Style>
+
+    <Style x:Key="estiloBrdChat" TargetType="Border">
+        <Setter Property="BorderBrush" Value="#B26C1A"/>
+        <Setter Property="CornerRadius" Value="10"/>
+        <Setter Property="Background" Value="#F6DE7B"/>
+    </Style>
+
+    <Style x:Key="estiloLblMensajeChat" TargetType="Label">
+        <Setter Property="Foreground" Value="#B26C1A"/>
+        <Setter Property="Width" Value="400"/>
+        <Setter Property="FontFamily" Value="{StaticResource FuentesTitulo}"/>
+        <Setter Property="Height" Value="35"/>
+        <Setter Property="FontSize" Value="19"/>
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Label}">
+                    <Border SnapsToDevicePixels="true"  BorderBrush="#B26C1A" BorderThickness="2.5"  CornerRadius="5" Background="#FFF4A7">
+                        <ContentPresenter Margin="5"  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
+                        </ContentPresenter>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
     <Style x:Key="estiloBtnTablaPuntuaciones" TargetType="Button">
         <Setter Property="FontFamily" Value="{StaticResource FuentesTexto}"/>
         <Setter Property="Height" Value="60"/>
@@ -63,6 +96,19 @@
                     <Setter.Value>
                         <ControlTemplate TargetType="{x:Type Button}">
                             <Border CornerRadius="5" BorderThickness="0" Background="#012413">
+                                <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                            </Border>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="Cursor" Value="No"/>
+                <Setter Property="Foreground" Value="#FFFFFF"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type Button}">
+                            <Border CornerRadius="5" BorderThickness="0" Background="#999999">
                                 <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
                             </Border>
                         </ControlTemplate>

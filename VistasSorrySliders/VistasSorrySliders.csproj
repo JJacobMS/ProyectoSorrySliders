@@ -424,5 +424,10 @@
   <ItemGroup>
     <Resource Include="Recursos\peon.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Recursos\tableroPuntuacionCuatro.png" />
+    <Resource Include="Recursos\tableroPuntuacionDos.png" />
+    <Resource Include="Recursos\tableroPuntuacionTres.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

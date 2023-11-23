@@ -5,10 +5,240 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:VistasSorrySliders"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      d:DesignHeight="576" d:DesignWidth="614"
       Title="JuegoPuntuacionesPagina">
-
+    <Page.Resources>
+        <Style x:Key="estiloBrdPuntuacion" TargetType="Border">
+            <Setter Property="Height" Value="50"/>
+            <Setter Property="Width" Value="50"/>
+            <Setter Property="CornerRadius" Value="10"/>
+            <Setter Property="BorderThickness" Value="2.5"/>
+            <Setter Property="BorderBrush" Value="Black"/>
+        </Style>
+        <Style x:Key="estiloLblPuntuacion" TargetType="Label">
+            <Setter Property="Height" Value="60"/>
+            <Setter Property="Width" Value="35"/>
+            <Setter Property="VerticalContentAlignment" Value="Top"/>
+            <Setter Property="FontFamily" Value="{StaticResource FuentesTexto}"/>
+            <Setter Property="FontSize" Value="40"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="Margin" Value="0,-17,2,-10"/>
+        </Style>
+        <Style x:Key="estiloBtnPuntuacion" TargetType="Button">
+            <Setter Property="Height" Value="50"/>
+            <Setter Property="Width" Value="50"/>
+            <Setter Property="BorderBrush" Value="Black"/>
+            <Setter Property="ContentTemplate">
+                <Setter.Value>
+                    <DataTemplate>
+                        <Label Content="{Binding}" Style="{StaticResource estiloLblPuntuacion}"/>
+                    </DataTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border CornerRadius="10" BorderThickness="2.5"  BorderBrush="{TemplateBinding BorderBrush}" Background="{TemplateBinding Background}">
+                            <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Cursor" Value="Hand"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Page.Resources>
     <Grid>
-        
+        <Grid.Background>
+            <ImageBrush ImageSource="Recursos/tableroLanzamientoFondo.png" />
+        </Grid.Background>
+        <Viewbox>
+            <Border  Name="brdFondoTablero" BorderBrush="#604111" BorderThickness="3" CornerRadius="5">
+                <Grid Width="440" Height="410">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="80"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="80"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Image x:Name="mgTablero" Source="Recursos/tableroPuntuacionCuatro.png" Grid.ColumnSpan="3" Grid.RowSpan="3"/>
+
+                    <Grid x:Name="grdAmarillo" Grid.Column="0" Grid.Row="0" IsEnabled="False" Visibility="Hidden">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Label Name="lblJugadorAmarillo" Grid.Column="0" Grid.Row="0" Content="Jacob" HorizontalContentAlignment="Left" Style="{StaticResource estiloLblTextoLanzamiento}" Foreground="#E8A02C" HorizontalAlignment="Left" VerticalAlignment="Top" Width="126" />
+                        <Label Name="lblPuntuacionJugadorAmarillo" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Content="Puntuación Última Jugada: " HorizontalContentAlignment="Left" Style="{StaticResource estiloLblTextoLanzamiento}" Foreground="#604111" HorizontalAlignment="Center" VerticalAlignment="Bottom" Width="170" />
+
+                        <Button x:Name="btnPuntuacionAmarillo1" Grid.Column="0" Grid.Row="0"  Background="#F6DE7B" BorderBrush="Black" Style="{StaticResource estiloBtnPuntuacion}" Click="ClickBtnAmarillo"  VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,0,5,5"/>
+                        <Button x:Name="btnPuntuacionAmarillo2" Grid.Column="1" Grid.Row="0" Background="#F6DE7B"  BorderBrush="Black" Style="{StaticResource estiloBtnPuntuacion}" Click="ClickBtnAmarillo"  VerticalAlignment="Bottom" HorizontalAlignment="Left"  Margin="0,0,5,5"/>
+                        <Button x:Name="btnPuntuacionAmarillo3" Grid.Column="0" Grid.Row="1"  Background="#F6DE7B" BorderBrush="Black" Style="{StaticResource estiloBtnPuntuacion}" Click="ClickBtnAmarillo"   VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,0,5,5"/>
+                        <Button x:Name="btnPuntuacionAmarillo4" Grid.Column="1" Grid.Row="1"  Background="#F6DE7B" BorderBrush="Black" Style="{StaticResource estiloBtnPuntuacion}" Click="ClickBtnAmarillo"   VerticalAlignment="Top" HorizontalAlignment="Left" Margin="0,0,5,5"/>
+
+                    </Grid>
+                    <Grid x:Name="grdRojo" Grid.Column="2" Grid.Row="0" IsEnabled="False" Visibility="Hidden">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Label Name="lblJugadorRojo" Grid.Column="0" Grid.Row="0" Content="Jacob" HorizontalContentAlignment="Left" Style="{StaticResource estiloLblTextoLanzamiento}" Foreground="#B21928" HorizontalAlignment="Left" VerticalAlignment="Top" Width="126" />
+                        <Label Name="lblPuntuacionJugadorRojo" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1" Content="Puntuación Última Jugada: " HorizontalContentAlignment="Left" Style="{StaticResource estiloLblTextoLanzamiento}" Foreground="#5B0F16" HorizontalAlignment="Center" VerticalAlignment="Bottom" Width="170" />
+
+                        <Button x:Name="btnPuntuacionRojo1" Grid.Column="0" Grid.Row="0"  Background="#EB626F" BorderBrush="Black" Style="{StaticResource estiloBtnPuntuacion}" Click="ClickBtnRojo" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,0,5,5"/>
+                        <Button x:Name="btnPuntuacionRojo2" Grid.Column="1" Grid.Row="0" Background="#EB626F"  BorderBrush="Black" Style="{StaticResource estiloBtnPuntuacion}" Click="ClickBtnRojo" VerticalAlignment="Bottom" HorizontalAlignment="Left"  Margin="0,0,5,5"/>
+                        <Button x:Name="btnPuntuacionRojo3" Grid.Column="0" Grid.Row="1"  Background="#EB626F" BorderBrush="Black" Style="{StaticResource estiloBtnPuntuacion}" Click="ClickBtnRojo" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,0,5,5"/>
+                        <Button x:Name="btnPuntuacionRojo4" Grid.Column="1" Grid.Row="1"  Background="#EB626F" BorderBrush="Black" Style="{StaticResource estiloBtnPuntuacion}" Click="ClickBtnRojo" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="0,0,5,5"/>
+                    </Grid>
+                    <Grid x:Name="grdAzul" Grid.Column="0" Grid.Row="2" IsEnabled="False" Visibility="Hidden">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Label Name="lblJugadorAzul" Grid.Column="0" Grid.Row="2" Content="Jacob" HorizontalContentAlignment="Left" Style="{StaticResource estiloLblTextoLanzamiento}" Foreground="#10689D" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="126" />
+                        <Label Name="lblPuntuacionJugadorAzul" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Content="Puntuación Última Jugada: " HorizontalContentAlignment="Left" Style="{StaticResource estiloLblTextoLanzamiento}" Foreground="#0A527D" HorizontalAlignment="Center" VerticalAlignment="Top" Width="170" />
+
+                        <Button x:Name="btnPuntuacionAzul1" Grid.Column="0" Grid.Row="0"  Background="#369EDD" BorderBrush="Black" Style="{StaticResource estiloBtnPuntuacion}" Click="ClickBtnAzul"  VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,0,5,5"/>
+                        <Button x:Name="btnPuntuacionAzul2" Grid.Column="1" Grid.Row="0" Background="#369EDD"  BorderBrush="Black" Style="{StaticResource estiloBtnPuntuacion}" Click="ClickBtnAzul"  VerticalAlignment="Bottom" HorizontalAlignment="Left"  Margin="0,0,5,5"/>
+                        <Button x:Name="btnPuntuacionAzul3" Grid.Column="0" Grid.Row="1"  Background="#369EDD" BorderBrush="Black" Style="{StaticResource estiloBtnPuntuacion}" Click="ClickBtnAzul"  VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,0,5,5"/>
+                        <Button x:Name="btnPuntuacionAzul4" Grid.Column="1" Grid.Row="1"  Background="#369EDD" BorderBrush="Black" Style="{StaticResource estiloBtnPuntuacion}" Click="ClickBtnAzul"  VerticalAlignment="Top" HorizontalAlignment="Left" Margin="0,0,5,5"/>
+                    </Grid>
+                    <Grid x:Name="grdVerde" Grid.Column="2" Grid.Row="2" IsEnabled="False" Visibility="Hidden">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Label Name="lblJugadorVerde" Grid.Column="0" Grid.Row="2" Content="Jacob" HorizontalContentAlignment="Left" Style="{StaticResource estiloLblTextoLanzamiento}" Foreground="#0E7D3C" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="126" />
+                        <Label Name="lblPuntuacionJugadorVerde" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Content="Puntuación Última Jugada: " HorizontalContentAlignment="Left" Style="{StaticResource estiloLblTextoLanzamiento}" Foreground="#033B20" HorizontalAlignment="Center" VerticalAlignment="Top" Width="170"/>
+
+                        <Button x:Name="btnPuntuacionVerde1" Grid.Column="0" Grid.Row="0"  Background="#14BB6A" BorderBrush="Black" Style="{StaticResource estiloBtnPuntuacion}" Click="ClickBtnVerde"  VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,0,5,5"/>
+                        <Button x:Name="btnPuntuacionVerde2" Grid.Column="1" Grid.Row="0" Background="#14BB6A"  BorderBrush="Black" Style="{StaticResource estiloBtnPuntuacion}" Click="ClickBtnVerde"  VerticalAlignment="Bottom" HorizontalAlignment="Left"  Margin="0,0,5,5"/>
+                        <Button x:Name="btnPuntuacionVerde3" Grid.Column="0" Grid.Row="1"  Background="#14BB6A" BorderBrush="Black" Style="{StaticResource estiloBtnPuntuacion}" Click="ClickBtnVerde"  VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,0,5,5"/>
+                        <Button x:Name="btnPuntuacionVerde4" Grid.Column="1" Grid.Row="1"  Background="#14BB6A" BorderBrush="Black" Style="{StaticResource estiloBtnPuntuacion}" Click="ClickBtnVerde"  VerticalAlignment="Top" HorizontalAlignment="Left" Margin="0,0,5,5"/>
+
+                    </Grid>
+                    <Viewbox Grid.Column="1" Grid.Row="0">
+                        <Canvas x:Name="cnvRojo" Width="50" Height="98" IsEnabled="False" Visibility="Hidden">
+                            <Ellipse x:Name="llpPeonRojo1" Width="8" Height="8" Canvas.Left="5" Canvas.Top="1" MouseLeftButtonDown="MouseLeftButtonDownPeonRojo" > 
+                                <Ellipse.Fill >
+                                    <ImageBrush ImageSource="/Recursos/peonRosa.png"/>
+                                </Ellipse.Fill>
+                            </Ellipse>
+                            <Ellipse x:Name="llpPeonRojo2" Width="8" Height="8" Canvas.Left="15" Canvas.Top="1" MouseLeftButtonDown="MouseLeftButtonDownPeonRojo" >
+                                <Ellipse.Fill >
+                                    <ImageBrush ImageSource="/Recursos/peonRosa.png"/>
+                                </Ellipse.Fill>
+                            </Ellipse>
+                            <Ellipse x:Name="llpPeonRojo3" Width="8" Height="8" Canvas.Left="25" Canvas.Top="1" MouseLeftButtonDown="MouseLeftButtonDownPeonRojo" >
+                                <Ellipse.Fill >
+                                    <ImageBrush ImageSource="/Recursos/peonRosa.png"/>
+                                </Ellipse.Fill>
+                            </Ellipse>
+                            <Ellipse x:Name="llpPeonRojo4" Width="8" Height="8" Canvas.Left="35" Canvas.Top="1" MouseLeftButtonDown="MouseLeftButtonDownPeonRojo" >
+                                <Ellipse.Fill >
+                                    <ImageBrush ImageSource="/Recursos/peonRosa.png"/>
+                                </Ellipse.Fill>
+                            </Ellipse>
+                        </Canvas>
+                    </Viewbox>
+
+                    <Viewbox Grid.Column="1" Grid.Row="2">
+                        <Canvas x:Name="cnvAzul" Width="50" Height="98" IsEnabled="False" Visibility="Visible">
+                            <Ellipse x:Name="llpPeonAzul1" Width="8" Height="8" Canvas.Left="6" Canvas.Bottom="1" MouseLeftButtonDown="MouseLeftButtonDownPeonAzul" >
+                                <Ellipse.Fill >
+                                    <ImageBrush ImageSource="/Recursos/peonMorado.png"/>
+                                </Ellipse.Fill>
+                            </Ellipse>
+                            <Ellipse x:Name="llpPeonAzul2" Width="8" Height="8" Canvas.Left="16" Canvas.Bottom="1" MouseLeftButtonDown="MouseLeftButtonDownPeonAzul" >
+                                <Ellipse.Fill >
+                                    <ImageBrush ImageSource="/Recursos/peonMorado.png"/>
+                                </Ellipse.Fill>
+                            </Ellipse>
+                            <Ellipse x:Name="llpPeonAzul3" Width="8" Height="8" Canvas.Left="26" Canvas.Bottom="1" MouseLeftButtonDown="MouseLeftButtonDownPeonAzul" >
+                                <Ellipse.Fill >
+                                    <ImageBrush ImageSource="/Recursos/peonMorado.png"/>
+                                </Ellipse.Fill>
+                            </Ellipse>
+                            <Ellipse x:Name="llpPeonAzul4" Width="8" Height="8" Canvas.Left="36" Canvas.Bottom="1" MouseLeftButtonDown="MouseLeftButtonDownPeonAzul" >
+                                <Ellipse.Fill >
+                                    <ImageBrush ImageSource="/Recursos/peonMorado.png"/>
+                                </Ellipse.Fill>
+                            </Ellipse>
+                        </Canvas>
+                    </Viewbox>
+                    <Viewbox Grid.Column="2" Grid.Row="1">
+                        <Canvas x:Name="cnvVerde" Width="98" Height="50" IsEnabled="False" Visibility="Hidden">
+                            <Ellipse x:Name="llpPeonVerde1" Width="8" Height="8" Canvas.Bottom="8" Canvas.Right="4" MouseLeftButtonDown="MouseLeftButtonDownPeonVerde">
+                                <Ellipse.Fill >
+                                    <ImageBrush ImageSource="/Recursos/peonNegro.png"/>
+                                </Ellipse.Fill>
+                            </Ellipse>
+                            <Ellipse x:Name="llpPeonVerde2" Width="8" Height="8" Canvas.Bottom="18" Canvas.Right="4" MouseLeftButtonDown="MouseLeftButtonDownPeonVerde">
+                                <Ellipse.Fill >
+                                    <ImageBrush ImageSource="/Recursos/peonNegro.png"/>
+                                </Ellipse.Fill>
+                            </Ellipse>
+                            <Ellipse x:Name="llpPeonVerde3" Width="8" Height="8" Canvas.Bottom="28" Canvas.Right="4" MouseLeftButtonDown="MouseLeftButtonDownPeonVerde" >
+                                <Ellipse.Fill >
+                                    <ImageBrush ImageSource="/Recursos/peonNegro.png"/>
+                                </Ellipse.Fill>
+                            </Ellipse>
+                            <Ellipse x:Name="llpPeonVerde4" Width="8" Height="8" Canvas.Bottom="38" Canvas.Right="4" MouseLeftButtonDown="MouseLeftButtonDownPeonVerde" >
+                                <Ellipse.Fill >
+                                    <ImageBrush ImageSource="/Recursos/peonNegro.png"/>
+                                </Ellipse.Fill>
+                            </Ellipse>
+                        </Canvas>
+                    </Viewbox>
+                    <Viewbox Grid.Column="0" Grid.Row="1">
+                        <Canvas x:Name="cnvAmarillo" Width="98" Height="50" IsEnabled="False" Visibility="Hidden">
+                            <Ellipse x:Name="llpPeonAmarillo1" Width="8" Height="8" Canvas.Bottom="8" Canvas.Left="4" MouseLeftButtonDown="MouseLeftButtonDownPeonAmarillo">
+                                <Ellipse.Fill >
+                                    <ImageBrush ImageSource="/Recursos/peonGris.png"/>
+                                </Ellipse.Fill>
+                            </Ellipse>
+                            <Ellipse x:Name="llpPeonAmarillo2" Width="8" Height="8" Canvas.Bottom="18" Canvas.Left="4" MouseLeftButtonDown="MouseLeftButtonDownPeonAmarillo" >
+                                <Ellipse.Fill >
+                                    <ImageBrush ImageSource="/Recursos/peonGris.png"/>
+                                </Ellipse.Fill>
+                            </Ellipse>
+                            <Ellipse x:Name="llpPeonAmarillo3" Width="8" Height="8" Canvas.Bottom="28" Canvas.Left="4" MouseLeftButtonDown="MouseLeftButtonDownPeonAmarillo" >
+                                <Ellipse.Fill >
+                                    <ImageBrush ImageSource="/Recursos/peonGris.png"/>
+                                </Ellipse.Fill>
+                            </Ellipse>
+                            <Ellipse x:Name="llpPeonAmarillo4" Width="8" Height="8" Canvas.Bottom="38" Canvas.Left="4" MouseLeftButtonDown="MouseLeftButtonDownPeonAmarillo" >
+                                <Ellipse.Fill >
+                                    <ImageBrush ImageSource="/Recursos/peonGris.png"/>
+                                </Ellipse.Fill>
+                            </Ellipse>
+                        </Canvas>
+                    </Viewbox>
+                </Grid>
+            </Border>
+        </Viewbox>
     </Grid>
 </Page>
