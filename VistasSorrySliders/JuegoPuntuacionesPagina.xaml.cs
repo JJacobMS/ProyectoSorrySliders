@@ -27,10 +27,15 @@ namespace VistasSorrySliders
         private int _numeroJugadores;
         private const int AVANZAR_UNA_FILA = 9;
         private const int POSICION_FINAL_HOME = 79;
-        private const int LIMITE_FILAS = 60;
+        private const int LIMITE_FILAS = 50;
+        private Dictionary<string, List<Ellipse>> _diccionarioElementos = new Dictionary<string, List<Ellipse>>();
         private List<JugadorLanzamiento> _jugadoresLanzamiento;
-        Button btnAnterior;
-        Button btnSeleccionado;
+        private List<Ellipse> _listaEllipseRoja;
+        private List<Ellipse> _listaEllipseAmarilla;
+        private List<Ellipse> _listaEllipseVerde;
+        private List<Ellipse> _listaEllipseAzul;
+        private Button btnAnterior;
+        private Button btnSeleccionado;
 
         //VALIDAR QUE YA LLEGO A SU LIMITE LA FICHA
         //SOLO VOLVER ENABLE SI ES EL JUGADOR -- SI ES SU TURNO
@@ -41,6 +46,10 @@ namespace VistasSorrySliders
         public JuegoPuntuacionesPagina(List<JugadorLanzamiento> jugadores, string correo)
         {
             InitializeComponent();
+            _listaEllipseRoja = new List<Ellipse> { llpPeonRojo1, llpPeonRojo2, llpPeonRojo3, llpPeonRojo4 };
+            _listaEllipseAmarilla = new List<Ellipse> { llpPeonAmarillo1, llpPeonAmarillo2, llpPeonAmarillo3, llpPeonAmarillo4 };
+            _listaEllipseVerde = new List<Ellipse> { llpPeonVerde1, llpPeonVerde2, llpPeonVerde3, llpPeonVerde4 };
+            _listaEllipseAzul = new List<Ellipse> { llpPeonAzul1, llpPeonAzul2, llpPeonAzul3, llpPeonAzul4 };
             _correoUsuario = correo;
             _jugadoresLanzamiento = jugadores;
             Mostrar(jugadores);
@@ -54,13 +63,10 @@ namespace VistasSorrySliders
 
         private void Mostrar(List<JugadorLanzamiento> jugadores)
         {
+
             foreach (JugadorLanzamiento jugador in jugadores)
             {
-                Console.WriteLine(jugador.CorreElectronico + ": ");
-                foreach (int puntuacionPeon in jugador.Puntuaciones)
-                {
-                    Console.Write(puntuacionPeon + " - ");
-                }
+                _diccionarioElementos.Add(jugador.CorreElectronico, _listaEllipseRoja);
             }
         }
         private void InicializarTablero()
@@ -199,8 +205,6 @@ namespace VistasSorrySliders
             cnvVerde.IsEnabled = true;
             grdVerde.IsEnabled = true;
         }
-        
-
         private int CalcularPuntuacion(List<int> puntuaciones) 
         {
             int puntuacion= 0;
@@ -267,28 +271,31 @@ namespace VistasSorrySliders
 
         private void MouseLeftButtonDownPeonRojo(object sender, MouseButtonEventArgs e)
         {
-            Console.WriteLine("Elipse roja");
+            MoverPeonRojoAsync(sender);
+        }
+        private async void MoverPeonRojoAsync(object sender) 
+        {
             if (btnSeleccionado != null)
             {
                 Ellipse llpSeleccionada = sender as Ellipse;
-                double posicion = Canvas.GetTop(llpSeleccionada);
                 int puntosObtenidos = ObtenerFilas();
                 if (puntosObtenidos >= 0)
                 {
                     btnSeleccionado.IsEnabled = false;
+                    btnSeleccionado = null;
                     for (int i = 0; i < puntosObtenidos; i++)
                     {
-                        Console.WriteLine("Puntos obtenidos " + puntosObtenidos);
+                        double posicion = Canvas.GetTop(llpSeleccionada);
                         if (posicion < LIMITE_FILAS)
                         {
-                            Console.WriteLine("Avanza una fila");
-                            Canvas.SetTop(llpSeleccionada, posicion + (AVANZAR_UNA_FILA * puntosObtenidos));
-                            Thread.Sleep(750);
+                            Canvas.SetTop(llpSeleccionada, posicion + AVANZAR_UNA_FILA);
+                            await Task.Delay(1000);
                         }
-                        else 
+                        else
                         {
                             Canvas.SetTop(llpSeleccionada, POSICION_FINAL_HOME);
                             llpSeleccionada.IsEnabled = false;
+                            ComprobarGanador();
                         }
                     }
                 }
@@ -297,7 +304,10 @@ namespace VistasSorrySliders
 
         private void MouseLeftButtonDownPeonAzul(object sender, MouseButtonEventArgs e)
         {
-            Console.WriteLine("Elipse azul");
+            MoverPeonAzulAsync(sender);    
+        }
+        private async void MoverPeonAzulAsync(object sender)
+        {
             if (btnSeleccionado != null)
             {
                 Ellipse llpSeleccionada = sender as Ellipse;
@@ -307,19 +317,20 @@ namespace VistasSorrySliders
                 if (puntosObtenidos >= 0)
                 {
                     btnSeleccionado.IsEnabled = false;
+                    btnSeleccionado = null;
                     for (int i = 0; i < puntosObtenidos; i++)
                     {
                         Console.WriteLine("Puntos obtenidos " + puntosObtenidos);
                         if (posicion < LIMITE_FILAS)
                         {
-                            Console.WriteLine("Avanza una fila");
-                            Canvas.SetBottom(llpSeleccionada, posicion + (AVANZAR_UNA_FILA * puntosObtenidos));
-                            Thread.Sleep(750);
+                            Canvas.SetBottom(llpSeleccionada, posicion + AVANZAR_UNA_FILA);
+                            await Task.Delay(1000);
                         }
-                        else 
+                        else
                         {
                             Canvas.SetBottom(llpSeleccionada, POSICION_FINAL_HOME);
                             llpSeleccionada.IsEnabled = false;
+                            ComprobarGanador();
                         }
                     }
                 }
@@ -328,28 +339,31 @@ namespace VistasSorrySliders
 
         private void MouseLeftButtonDownPeonVerde(object sender, MouseButtonEventArgs e)
         {
-            Console.WriteLine("Elipse verde");
+            MoverPeonVerdeAsync(sender);
+        }
+        private async void MoverPeonVerdeAsync(object sender)
+        {
             if (btnSeleccionado != null)
             {
                 Ellipse llpSeleccionada = sender as Ellipse;
-                double posicion = Canvas.GetRight(llpSeleccionada);
                 int puntosObtenidos = ObtenerFilas();
                 if (puntosObtenidos >= 0)
                 {
                     btnSeleccionado.IsEnabled = false;
+                    btnSeleccionado = null;
                     for (int i = 0; i < puntosObtenidos; i++)
                     {
-                        Console.WriteLine("Puntos obtenidos " + puntosObtenidos);
+                        double posicion = Canvas.GetRight(llpSeleccionada);
                         if (posicion < LIMITE_FILAS)
                         {
-                            Console.WriteLine("Avanza una fila");
                             Canvas.SetRight(llpSeleccionada, posicion + AVANZAR_UNA_FILA);
-                            Thread.Sleep(750);
+                            await Task.Delay(1000);
                         }
-                        else 
+                        else
                         {
                             Canvas.SetRight(llpSeleccionada, POSICION_FINAL_HOME);
                             llpSeleccionada.IsEnabled = false;
+                            ComprobarGanador();
                         }
                     }
                 }
@@ -358,28 +372,34 @@ namespace VistasSorrySliders
 
         private void MouseLeftButtonDownPeonAmarillo(object sender, MouseButtonEventArgs e)
         {
-            Console.WriteLine("Elipse amarillo");
+            MoverPeonAmarilloAsync(sender);
+        }
+
+        private async void MoverPeonAmarilloAsync(object sender)
+        {
             if (btnSeleccionado != null)
             {
                 Ellipse llpSeleccionada = sender as Ellipse;
-                double posicion = Canvas.GetLeft(llpSeleccionada);
                 int puntosObtenidos = ObtenerFilas();
                 if (puntosObtenidos >= 0)
                 {
                     Console.WriteLine("Puntos obtenidos " + puntosObtenidos);
                     btnSeleccionado.IsEnabled = false;
+                    btnSeleccionado = null;
                     for (int i = 0; i < puntosObtenidos; i++)
                     {
+                        double posicion = Canvas.GetLeft(llpSeleccionada);
                         if (posicion < LIMITE_FILAS)
                         {
-                            Console.WriteLine("Avanza una fila");
-                            Canvas.SetLeft(llpSeleccionada, posicion + (AVANZAR_UNA_FILA * puntosObtenidos));
-                            Thread.Sleep(750);
+                            Canvas.SetLeft(llpSeleccionada, posicion + AVANZAR_UNA_FILA);
+                            await Task.Delay(1000);
                         }
-                        else 
+                        else
                         {
                             Canvas.SetLeft(llpSeleccionada, POSICION_FINAL_HOME);
                             llpSeleccionada.IsEnabled = false;
+                            //NotificarJugador
+                            ComprobarGanador();
                         }
                     }
                 }
@@ -434,5 +454,47 @@ namespace VistasSorrySliders
             btnAnterior = btnSeleccionado;
             return btnSeleccionado;
         }
+
+        private void ComprobarGanador()
+        {
+            int contadorRojo = 0;
+            int contadorAzul = 0;
+            int contadorVerde = 0;
+            int contadorAmarillo = 0;
+            int tamañoListas = 4;
+            int fichasEnHome = 4;
+            for (int i = 0; i < tamañoListas; i++)
+            {
+                if (Canvas.GetTop(_listaEllipseRoja[i]) == POSICION_FINAL_HOME)
+                {
+                    contadorRojo++;
+                }
+                if (Canvas.GetBottom(_listaEllipseAzul[i]) == POSICION_FINAL_HOME)
+                {
+                    contadorAzul++;
+                }
+                if (Canvas.GetRight(_listaEllipseVerde[i]) == POSICION_FINAL_HOME)
+                {
+                    contadorVerde++;
+                }
+                if (Canvas.GetLeft(_listaEllipseAmarilla[i]) == POSICION_FINAL_HOME)
+                {
+                    contadorAmarillo++;
+                }
+            }
+            if (contadorRojo == fichasEnHome || contadorAzul == fichasEnHome || contadorVerde == fichasEnHome || contadorAmarillo == fichasEnHome) 
+            {
+                Console.WriteLine("Contador Rojo " + contadorRojo);
+                Console.WriteLine("Contador Rojo " + contadorAzul);
+                Console.WriteLine("Contador Rojo " + contadorVerde);
+                Console.WriteLine("Contador Rojo " + contadorAmarillo);
+
+                //
+                //Guardar datos de cada jugador en la bd
+                //
+            }
+        }
+
+        //Metodo mover ficha compañero, que ocupe el findname y lo mueva segun el int
     }
 }

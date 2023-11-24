@@ -141,7 +141,7 @@
 
                     </Grid>
                     <Viewbox Grid.Column="1" Grid.Row="0">
-                        <Canvas x:Name="cnvRojo" Width="50" Height="98" IsEnabled="False" Visibility="Hidden">
+                        <Canvas x:Name="cnvRojo" Width="50" Height="98" IsEnabled="False" Visibility="Visible">
                             <Ellipse x:Name="llpPeonRojo1" Width="8" Height="8" Canvas.Left="5" Canvas.Top="1" MouseLeftButtonDown="MouseLeftButtonDownPeonRojo" > 
                                 <Ellipse.Fill >
                                     <ImageBrush ImageSource="/Recursos/peonRosa.png"/>
@@ -166,7 +166,7 @@
                     </Viewbox>
 
                     <Viewbox Grid.Column="1" Grid.Row="2">
-                        <Canvas x:Name="cnvAzul" Width="50" Height="98" IsEnabled="False" Visibility="Visible">
+                        <Canvas x:Name="cnvAzul" Width="50" Height="98" IsEnabled="False" Visibility="Hidden">
                             <Ellipse x:Name="llpPeonAzul1" Width="8" Height="8" Canvas.Left="6" Canvas.Bottom="1" MouseLeftButtonDown="MouseLeftButtonDownPeonAzul" >
                                 <Ellipse.Fill >
                                     <ImageBrush ImageSource="/Recursos/peonMorado.png"/>
