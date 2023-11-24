@@ -58,7 +58,7 @@ namespace VistasSorrySliders
             if(esValido && !EsUniqueIdentifierValido(codigoPartida))
             {
                 txtBoxCodigo.Style = (Style)FindResource("estiloTxtBoxDatosRojo");
-                lblCodigoNoValido.Visibility = Visibility.Visible;
+                txtBlockCodigoNoValido.Visibility = Visibility.Visible;
                 esValido = false;
             }
 
@@ -123,17 +123,8 @@ namespace VistasSorrySliders
                 case Constantes.OPERACION_EXITOSA_VACIA:
                     MostrarErrorJugadores(numeroMaximoJugadores);
                     break;
-                case Constantes.ERROR_CONEXION_BD:
-                    MessageBox.Show(Properties.Resources.msgErrorBaseDatos);
-                    break;
-                case Constantes.ERROR_CONSULTA:
-                    MessageBox.Show(Properties.Resources.msgErrorConsulta);
-                    break;
-                case Constantes.ERROR_CONEXION_SERVIDOR:
-                    MessageBox.Show(Properties.Resources.msgErrorConexion);
-                    break;
-                case Constantes.ERROR_TIEMPO_ESPERA_SERVIDOR:
-                    MessageBox.Show(Properties.Resources.msgErrorTiempoEsperaServidor);
+                default:
+                    Utilidades.MostrarMensajesError(resultado);
                     break;
             }
         }
@@ -145,6 +136,7 @@ namespace VistasSorrySliders
             if (avatar == null)
             {
                 MessageBox.Show("Ocurrió un error, inténtelo de nuevo o más tarde");
+                SalirDeUnirse();
                 return;
             }
 
@@ -183,61 +175,50 @@ namespace VistasSorrySliders
                 case Constantes.OPERACION_EXITOSA:
                     UnirsePartida(codigo);
                     break;
-                case Constantes.OPERACION_EXITOSA_VACIA:
-                    break;
-                case Constantes.ERROR_CONEXION_BD:
-                    MessageBox.Show(Properties.Resources.msgErrorBaseDatos);
-                    break;
-                case Constantes.ERROR_CONSULTA:
-                    MessageBox.Show(Properties.Resources.msgErrorConsulta);
-                    break;
-                case Constantes.ERROR_CONEXION_SERVIDOR:
-                    MessageBox.Show(Properties.Resources.msgErrorConexion);
-                    break;
-                case Constantes.ERROR_TIEMPO_ESPERA_SERVIDOR:
-                    MessageBox.Show(Properties.Resources.msgErrorTiempoEsperaServidor);
+                default:
+                    Utilidades.MostrarMensajesError(resultado);
+                    SalirDeUnirse();
                     break;
             }
         }
 
         private void EntrarLobby(string codigo)
         {
-            JuegoYLobbyVentana lobbyUnirse;
-            if (_esInvitado)
+            JuegoYLobbyVentana lobbyUnirse = new JuegoYLobbyVentana(_cuentaActual, codigo, _esInvitado);
+            if (lobbyUnirse.EntrarSistemaEnLinea())
             {
-                lobbyUnirse = new JuegoYLobbyVentana(_cuentaActual, codigo, true);
+                lobbyUnirse.Show();
+                Window.GetWindow(this).Close();
             }
-            else
-            {
-                lobbyUnirse = new JuegoYLobbyVentana(_cuentaActual, codigo, false);
-            }
-            
-            lobbyUnirse.Show();
-            Window.GetWindow(this).Close();
         }
 
         private void MostrarErrorJugadores(int numeroMaximoJugadores)
         {
             switch (numeroMaximoJugadores)
             {
+                case -2:
+                    txtBlockJugadorBaneado.Visibility = Visibility.Visible;
+                    break;
                 case -1:
-                    lblCuentaYaEnJuego.Visibility = Visibility.Visible; 
+                    txtBlockCuentaYaEnJuego.Visibility = Visibility.Visible; 
                     break;
                 case 0:
-                    lblCodigoNoValido.Visibility = Visibility.Visible;
+                    txtBlockCodigoNoValido.Visibility = Visibility.Visible;
                     break;
             }
 
             if (numeroMaximoJugadores > 0)
             {
-                lblMaximoJugadores.Visibility = Visibility.Visible;
+                txtBlockMaximoJugadores.Visibility = Visibility.Visible;
             }
         }
 
         private void ReiniciarEstilosPantalla()
         {
-            lblCodigoNoValido.Visibility = Visibility.Hidden;
-            lblMaximoJugadores.Visibility = Visibility.Hidden;
+            txtBlockJugadorBaneado.Visibility = Visibility.Hidden;
+            txtBlockCuentaYaEnJuego.Visibility = Visibility.Hidden;
+            txtBlockCodigoNoValido.Visibility = Visibility.Hidden;
+            txtBlockMaximoJugadores.Visibility = Visibility.Hidden;
             txtBlockNicknameNoValido.Visibility = Visibility.Hidden;
             txtBoxNickname.Style = (Style)FindResource("estiloTxtBoxDatosAzul");
             txtBoxCodigo.Style = (Style)FindResource("estiloTxtBoxDatosAzul");
@@ -248,8 +229,9 @@ namespace VistasSorrySliders
             Logger log = new Logger(this.GetType());
             try
             {
+                int segundos = 3;
                 string patron = @"^[0-9A-Fa-f]{8}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{12}$";
-                TimeSpan tiempoAgotadoPatron = TimeSpan.FromSeconds(1);
+                TimeSpan tiempoAgotadoPatron = TimeSpan.FromSeconds(segundos);
                 return Regex.IsMatch(uid, patron, RegexOptions.None, tiempoAgotadoPatron);
             }
             catch (RegexMatchTimeoutException ex)
@@ -267,6 +249,11 @@ namespace VistasSorrySliders
         }
 
         private void ClickSalir(object sender, RoutedEventArgs e)
+        {
+            SalirDeUnirse();
+        }
+
+        private void SalirDeUnirse()
         {
             if (_esInvitado)
             {

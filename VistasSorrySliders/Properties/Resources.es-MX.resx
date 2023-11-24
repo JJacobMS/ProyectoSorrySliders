@@ -309,6 +309,9 @@
   <data name="mgsCuentaDetalleErrorRecuperar" xml:space="preserve">
     <value>No se han podido recuperar los datos de la cuenta de usuario</value>
   </data>
+  <data name="msgAceptarNotificacion" xml:space="preserve">
+    <value>Se ha confirmado la notificación</value>
+  </data>
   <data name="msgActualizarCuentaError" xml:space="preserve">
     <value>Hubo un error al actualizar la cuenta, por favor inténtelo más tarde</value>
   </data>
@@ -323,6 +326,9 @@
   </data>
   <data name="msgAmistadGuardarError" xml:space="preserve">
     <value>Hubo un error al enviar la solicitud de amistad, por favor inténtelo más tarde</value>
+  </data>
+  <data name="msgBanearJugador" xml:space="preserve">
+    <value>Se ha baneado al jugador correctamente</value>
   </data>
   <data name="msgContrasenaNuevaCambiada" xml:space="preserve">
     <value>La contraseña nueva se ha cambiado exitosamente</value>
@@ -344,6 +350,15 @@
   </data>
   <data name="msgDatosCuentaVacia" xml:space="preserve">
     <value>Hubo un error al recuperar los datos de su cuenta, por favor inténtelo más tarde</value>
+  </data>
+  <data name="msgEliminarAmigo" xml:space="preserve">
+    <value>Se ha eliminado de amigos al jugador correctamente</value>
+  </data>
+  <data name="msgEliminarBaneoJugador" xml:space="preserve">
+    <value>Se ha removido el baneado del jugador correctamente</value>
+  </data>
+  <data name="msgEliminarNotificacion" xml:space="preserve">
+    <value>Se ha eliminado la notificación</value>
   </data>
   <data name="msgErrorAvatarDefault" xml:space="preserve">
     <value>Error al cargar la imagen del avatar por defecto</value>
@@ -404,6 +419,9 @@
   </data>
   <data name="msgPartidaRecuperarVacia" xml:space="preserve">
     <value>Hubo un error al recuperar la partida, por favor inténtelo más tarde</value>
+  </data>
+  <data name="msgSolicitudAmistadEnviada" xml:space="preserve">
+    <value>Se ha enviado la solicitud de amistad correctamente</value>
   </data>
   <data name="msgTablaVacia" xml:space="preserve">
     <value>Aun no hay ganadores, sé el primero en ganar</value>
@@ -497,6 +515,9 @@
   </data>
   <data name="txtBlockEnLinea" xml:space="preserve">
     <value>En línea</value>
+  </data>
+  <data name="txtBlockJugadorBaneado" xml:space="preserve">
+    <value>Uno de los jugadores del lobby lo ha baneado</value>
   </data>
   <data name="txtBlockJugadoresAmigos" xml:space="preserve">
     <value>JUGADORES Y AMIGOS</value>

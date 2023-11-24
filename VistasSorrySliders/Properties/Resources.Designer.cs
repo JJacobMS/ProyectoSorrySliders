@@ -646,6 +646,15 @@ namespace VistasSorrySliders.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Se ha confirmado la notificación.
+        /// </summary>
+        public static string msgAceptarNotificacion {
+            get {
+                return ResourceManager.GetString("msgAceptarNotificacion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Hubo un error al actualizar la cuenta, por favor inténtelo más tarde.
         /// </summary>
         public static string msgActualizarCuentaError {
@@ -687,6 +696,15 @@ namespace VistasSorrySliders.Properties {
         public static string msgAmistadGuardarError {
             get {
                 return ResourceManager.GetString("msgAmistadGuardarError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Se ha baneado al jugador correctamente.
+        /// </summary>
+        public static string msgBanearJugador {
+            get {
+                return ResourceManager.GetString("msgBanearJugador", resourceCulture);
             }
         }
         
@@ -750,6 +768,33 @@ namespace VistasSorrySliders.Properties {
         public static string msgDatosCuentaVacia {
             get {
                 return ResourceManager.GetString("msgDatosCuentaVacia", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Se ha eliminado de amigos al jugador correctamente.
+        /// </summary>
+        public static string msgEliminarAmigo {
+            get {
+                return ResourceManager.GetString("msgEliminarAmigo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Se ha removido el baneado del jugador correctamente.
+        /// </summary>
+        public static string msgEliminarBaneoJugador {
+            get {
+                return ResourceManager.GetString("msgEliminarBaneoJugador", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Se ha eliminado la notificación.
+        /// </summary>
+        public static string msgEliminarNotificacion {
+            get {
+                return ResourceManager.GetString("msgEliminarNotificacion", resourceCulture);
             }
         }
         
@@ -930,6 +975,15 @@ namespace VistasSorrySliders.Properties {
         public static string msgPartidaRecuperarVacia {
             get {
                 return ResourceManager.GetString("msgPartidaRecuperarVacia", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Se ha enviado la solicitud de amistad correctamente.
+        /// </summary>
+        public static string msgSolicitudAmistadEnviada {
+            get {
+                return ResourceManager.GetString("msgSolicitudAmistadEnviada", resourceCulture);
             }
         }
         
@@ -1209,6 +1263,15 @@ namespace VistasSorrySliders.Properties {
         public static string txtBlockEnLinea {
             get {
                 return ResourceManager.GetString("txtBlockEnLinea", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Uno de los jugadores del lobby lo ha baneado.
+        /// </summary>
+        public static string txtBlockJugadorBaneado {
+            get {
+                return ResourceManager.GetString("txtBlockJugadorBaneado", resourceCulture);
             }
         }
         

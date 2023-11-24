@@ -396,6 +396,39 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
+  <wsp:Policy wsu:Id="NetTcpBinding_IUsuariosEnLinea_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <wsrm:RMAssertion xmlns:wsrm="http://schemas.xmlsoap.org/ws/2005/02/rm/policy">
+          <wsrm:InactivityTimeout Milliseconds="600000" />
+          <wsrm:AcknowledgementInterval Milliseconds="200" />
+        </wsrm:RMAssertion>
+        <msb:BinaryEncoding xmlns:msb="http://schemas.microsoft.com/ws/06/2004/mspolicy/netbinary1" />
+        <sp:TransportBinding xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <wsp:Policy>
+            <sp:TransportToken>
+              <wsp:Policy>
+                <msf:WindowsTransportSecurity xmlns:msf="http://schemas.microsoft.com/ws/2006/05/framing/policy">
+                  <msf:ProtectionLevel>EncryptAndSign</msf:ProtectionLevel>
+                </msf:WindowsTransportSecurity>
+              </wsp:Policy>
+            </sp:TransportToken>
+            <sp:AlgorithmSuite>
+              <wsp:Policy>
+                <sp:Basic256 />
+              </wsp:Policy>
+            </sp:AlgorithmSuite>
+            <sp:Layout>
+              <wsp:Policy>
+                <sp:Strict />
+              </wsp:Policy>
+            </sp:Layout>
+          </wsp:Policy>
+        </sp:TransportBinding>
+        <wsaw:UsingAddressing />
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
   <wsdl:types>
     <xsd:schema targetNamespace="http://tempuri.org/Imports">
       <xsd:import schemaLocation="http://localhost:5454/?xsd=xsd0" namespace="http://tempuri.org/" />
@@ -416,6 +449,12 @@
   </wsdl:message>
   <wsdl:message name="IInicioSesion_VerificarContrasenaDeCuenta_OutputMessage">
     <wsdl:part name="parameters" element="tns:VerificarContrasenaDeCuentaResponse" />
+  </wsdl:message>
+  <wsdl:message name="IInicioSesion_JugadorEstaEnLinea_InputMessage">
+    <wsdl:part name="parameters" element="tns:JugadorEstaEnLinea" />
+  </wsdl:message>
+  <wsdl:message name="IInicioSesion_JugadorEstaEnLinea_OutputMessage">
+    <wsdl:part name="parameters" element="tns:JugadorEstaEnLineaResponse" />
   </wsdl:message>
   <wsdl:message name="IMenuPrincipal_RecuperarDatosUsuario_InputMessage">
     <wsdl:part name="parameters" element="tns:RecuperarDatosUsuario" />
@@ -672,6 +711,15 @@
   <wsdl:message name="IJuegoLanzamiento_JugadoresListosParaSiguienteTurno_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:JugadoresListosParaSiguienteTurno" />
   </wsdl:message>
+  <wsdl:message name="IUsuariosEnLinea_EntrarConCuenta_InputMessage">
+    <wsdl:part name="parameters" element="tns:EntrarConCuenta" />
+  </wsdl:message>
+  <wsdl:message name="IUsuariosEnLinea_SalirDelSistema_InputMessage">
+    <wsdl:part name="parameters" element="tns:SalirDelSistema" />
+  </wsdl:message>
+  <wsdl:message name="IUsuariosEnLinea_ComprobarJugador_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:ComprobarJugador" />
+  </wsdl:message>
   <wsdl:portType name="IInicioSesion">
     <wsdl:operation name="VerificarExistenciaCorreoCuenta">
       <wsdl:input wsaw:Action="http://tempuri.org/IInicioSesion/VerificarExistenciaCorreoCuenta" message="tns:IInicioSesion_VerificarExistenciaCorreoCuenta_InputMessage" />
@@ -680,6 +728,10 @@
     <wsdl:operation name="VerificarContrasenaDeCuenta">
       <wsdl:input wsaw:Action="http://tempuri.org/IInicioSesion/VerificarContrasenaDeCuenta" message="tns:IInicioSesion_VerificarContrasenaDeCuenta_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IInicioSesion/VerificarContrasenaDeCuentaResponse" message="tns:IInicioSesion_VerificarContrasenaDeCuenta_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="JugadorEstaEnLinea">
+      <wsdl:input wsaw:Action="http://tempuri.org/IInicioSesion/JugadorEstaEnLinea" message="tns:IInicioSesion_JugadorEstaEnLinea_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IInicioSesion/JugadorEstaEnLineaResponse" message="tns:IInicioSesion_JugadorEstaEnLinea_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:portType name="IMenuPrincipal">
@@ -897,6 +949,17 @@
       <wsdl:output wsaw:Action="http://tempuri.org/IJuegoLanzamiento/JugadoresListosParaSiguienteTurno" message="tns:IJuegoLanzamiento_JugadoresListosParaSiguienteTurno_OutputCallbackMessage" />
     </wsdl:operation>
   </wsdl:portType>
+  <wsdl:portType name="IUsuariosEnLinea">
+    <wsdl:operation name="EntrarConCuenta">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUsuariosEnLinea/EntrarConCuenta" message="tns:IUsuariosEnLinea_EntrarConCuenta_InputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SalirDelSistema">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUsuariosEnLinea/SalirDelSistema" message="tns:IUsuariosEnLinea_SalirDelSistema_InputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ComprobarJugador">
+      <wsdl:output wsaw:Action="http://tempuri.org/IUsuariosEnLinea/ComprobarJugador" message="tns:IUsuariosEnLinea_ComprobarJugador_OutputCallbackMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
   <wsdl:binding name="NetTcpBinding_IInicioSesion" type="tns:IInicioSesion">
     <wsp:PolicyReference URI="#NetTcpBinding_IInicioSesion_policy" />
     <soap12:binding transport="http://schemas.microsoft.com/soap/tcp" />
@@ -911,6 +974,15 @@
     </wsdl:operation>
     <wsdl:operation name="VerificarContrasenaDeCuenta">
       <soap12:operation soapAction="http://tempuri.org/IInicioSesion/VerificarContrasenaDeCuenta" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="JugadorEstaEnLinea">
+      <soap12:operation soapAction="http://tempuri.org/IInicioSesion/JugadorEstaEnLinea" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -1380,6 +1452,28 @@
       </wsdl:output>
     </wsdl:operation>
   </wsdl:binding>
+  <wsdl:binding name="NetTcpBinding_IUsuariosEnLinea" type="tns:IUsuariosEnLinea">
+    <wsp:PolicyReference URI="#NetTcpBinding_IUsuariosEnLinea_policy" />
+    <soap12:binding transport="http://schemas.microsoft.com/soap/tcp" />
+    <wsdl:operation name="EntrarConCuenta">
+      <soap12:operation soapAction="http://tempuri.org/IUsuariosEnLinea/EntrarConCuenta" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="SalirDelSistema">
+      <soap12:operation soapAction="http://tempuri.org/IUsuariosEnLinea/SalirDelSistema" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="ComprobarJugador">
+      <soap12:operation soapAction="http://tempuri.org/IUsuariosEnLinea/ComprobarJugador" style="document" />
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
   <wsdl:service name="ServicioComunicacionSorrySliders">
     <wsdl:port name="NetTcpBinding_IInicioSesion" binding="tns:NetTcpBinding_IInicioSesion">
       <soap12:address location="net.tcp://localhost:5455/ServidorSorrySliders" />
@@ -1481,6 +1575,15 @@
       </wsa10:EndpointReference>
     </wsdl:port>
     <wsdl:port name="NetTcpBinding_IJuegoLanzamiento" binding="tns:NetTcpBinding_IJuegoLanzamiento">
+      <soap12:address location="net.tcp://localhost:5455/ServidorSorrySliders" />
+      <wsa10:EndpointReference>
+        <wsa10:Address>net.tcp://localhost:5455/ServidorSorrySliders</wsa10:Address>
+        <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
+          <Upn>LAPTOP-H4AE1QJ9\sulem</Upn>
+        </Identity>
+      </wsa10:EndpointReference>
+    </wsdl:port>
+    <wsdl:port name="NetTcpBinding_IUsuariosEnLinea" binding="tns:NetTcpBinding_IUsuariosEnLinea">
       <soap12:address location="net.tcp://localhost:5455/ServidorSorrySliders" />
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:5455/ServidorSorrySliders</wsa10:Address>

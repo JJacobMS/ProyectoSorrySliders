@@ -30,6 +30,20 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="JugadorEstaEnLinea">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="jugadorCorreo" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="JugadorEstaEnLineaResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="JugadorEstaEnLineaResult" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="RecuperarDatosUsuario">
     <xs:complexType>
       <xs:sequence>
@@ -40,7 +54,7 @@
   <xs:element name="RecuperarDatosUsuarioResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/System" minOccurs="0" name="RecuperarDatosUsuarioResult" type="q4:ValueTupleOfConstantesstringbase64Binarystring_PIB9N_S6v" />
+        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/System" minOccurs="0" name="RecuperarDatosUsuarioResult" type="q4:ValueTupleOfConstantesstringbase64BinarywTLIru0k" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -623,6 +637,25 @@
     </xs:complexType>
   </xs:element>
   <xs:element name="JugadoresListosParaSiguienteTurno">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="EntrarConCuenta">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="jugadorCorreo" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SalirDelSistema">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="jugadorCorreo" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ComprobarJugador">
     <xs:complexType>
       <xs:sequence />
     </xs:complexType>

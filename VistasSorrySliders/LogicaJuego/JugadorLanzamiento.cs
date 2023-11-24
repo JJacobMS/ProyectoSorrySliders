@@ -56,7 +56,7 @@ namespace VistasSorrySliders.LogicaJuego
                 };
                 PeonesLanzamiento.Add(new PeonLanzamiento(elipse, new Point(posicionX, posicionY)));
             }
-            PeonTurnoActual = 0;
+            PeonTurnoActual = 3;
         }
         private void GenerarLineaMovimiento()
         {
@@ -204,12 +204,20 @@ namespace VistasSorrySliders.LogicaJuego
             return (distanciaVertical, distanciaHorizontal);
         }
 
-        public void CalcularPuntajePeonesTablero(Dictionary<Ellipse, int> circulosPuntuacion)
+        public void CalcularPuntajePeonesTablero(Dictionary<Ellipse, int> circulosPuntuacion, List<PeonLanzamiento> peonesTablero)
         {
             Puntuaciones = new List<int>();
             foreach (PeonLanzamiento peonJugador in PeonesLanzamiento)
             {
-                Puntuaciones.Add(peonJugador.CalcularPuntuacion(circulosPuntuacion));
+                if (peonesTablero.Contains(peonJugador))
+                {
+                    Puntuaciones.Add(peonJugador.CalcularPuntuacion(circulosPuntuacion));
+                }
+                else
+                {
+                    Puntuaciones.Add(0);
+                }
+                
             }
         }
     }

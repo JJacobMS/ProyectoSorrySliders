@@ -8,6 +8,28 @@
       mc:Ignorable="d" 
       d:DesignHeight="576" d:DesignWidth="409">
 
+    <Page.Resources>
+        <Style x:Key="estiloLstBoxAmigosVacia" TargetType="ListBox">
+            <Setter Property="Height" Value="150"/>
+            <Setter Property="Margin" Value="10,0,10,0"/>
+            <Setter Property="BorderThickness" Value="3"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ListBox">
+                        <Border Name="Border" BorderThickness="3" BorderBrush="Black" CornerRadius="2" Background="#E0B7F1">
+                            <Border Height="60" Width="100" BorderBrush="Black" CornerRadius="15" 
+                                    BorderThickness="3" Background="#B886CD">
+                                <TextBlock x:Name="txtBlockMensajeCaja" HorizontalAlignment="Center" VerticalAlignment="Center" 
+                                           FontSize="20" TextAlignment="Center" FontFamily="{StaticResource FuentesTitulo}"
+                                    TextWrapping="Wrap" Text="{x:Static p:Resources.msgAmigosErrorRecuperacion}"></TextBlock>
+                            </Border>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Page.Resources>
+
     <Viewbox>
         <Grid Height="576" Width="409" >
             <Border BorderBrush="#17033B" BorderThickness="3" CornerRadius="10" Margin="15">
@@ -21,7 +43,7 @@
                     <Label Content="{x:Static p:Resources.lblInvitarJugador}" Style="{StaticResource estiloLblTituloTextos}"/>
                     <StackPanel Grid.Row="1" VerticalAlignment="Center">
                         <Label Content="{x:Static p:Resources.lblListaAmigos}" Style="{StaticResource estiloLblTextoListaAmigos}"/>
-                        <ListBox Style="{StaticResource estiloLstBoxAmigos}" Name="lstBoxAmigos">
+                        <ListBox Style="{StaticResource estiloLstBoxAmigosVacia}" Name="lstBoxAmigos">
                             <ListBox.ItemContainerStyle>
                                 <Style TargetType="ListBoxItem" BasedOn="{StaticResource estiloLstBoxItemListaAmigos}">
                                     <EventSetter Event="Button.Click" Handler="ClickEnviarCodigo" />
@@ -33,7 +55,7 @@
                         <Label Content="{x:Static p:Resources.lblListaDeJugadores}" Style="{StaticResource estiloLblTextoListaAmigos}"/>
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                             <TextBox x:Name="txtBoxBuscadorJugadores" Width="230" Margin="10,5,5,5" HorizontalAlignment="Left" Style="{StaticResource estiloTxtBoxDatosMorado}"></TextBox>
-                            <Button Content="{x:Static p:Resources.btnBuscar}" Margin="5" Height="25" Width="90" FontSize="14" Click="ClicBuscarJugador"
+                            <Button Content="{x:Static p:Resources.btnBuscar}" Margin="5" Height="25" Width="90" FontSize="14" Click="ClickBuscarJugador"
                                     Style="{StaticResource estiloBtnMorado}" HorizontalAlignment="Right"/>
                         </StackPanel>
                         <ListBox Name="lstBoxJugadores" Style="{StaticResource estiloLstBoxAmigos}">

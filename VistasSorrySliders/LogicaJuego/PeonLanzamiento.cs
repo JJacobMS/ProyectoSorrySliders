@@ -213,15 +213,15 @@ namespace VistasSorrySliders.LogicaJuego
             double centroXPeonActual = Canvas.GetLeft(Figura) + Figura.Width / 2;
             double centroYPeonActual = Canvas.GetTop(Figura) + Figura.Height / 2;
 
-            double centroXPeonEnemigo = Canvas.GetLeft(circulo) + circulo.Width / 2;
-            double centroYPeonEnemigo = Canvas.GetTop(circulo) + circulo.Height / 2;
+            double centroXCirculoPuntuacion = Canvas.GetLeft(circulo) + circulo.Width / 2;
+            double centroYCirculoPuntuacion = Canvas.GetTop(circulo) + circulo.Height / 2;
 
-            double distancia = Math.Sqrt(Math.Pow(centroXPeonEnemigo - centroXPeonActual, 2) + Math.Pow(centroYPeonEnemigo - centroYPeonActual, 2));
+            double distancia = Math.Sqrt(Math.Pow(centroXCirculoPuntuacion - centroXPeonActual, 2) + Math.Pow(centroYCirculoPuntuacion - centroYPeonActual, 2));
 
             double radioFiguraActual = Figura.Width / 2;
-            double radioFiguraEnemiga = circulo.Width / 2;
-
-            return distancia < (radioFiguraActual + radioFiguraEnemiga);
+            double radioCirculoPuntuacion = circulo.Width / 2;
+            
+            return distancia < (radioFiguraActual + radioCirculoPuntuacion);
         }
 
         private void CambiarDireccionPeones(PeonLanzamiento peonConElQueChocaron)

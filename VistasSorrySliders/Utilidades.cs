@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using VistasSorrySliders.ServicioSorrySliders;
 
 namespace VistasSorrySliders
 {
@@ -159,17 +160,34 @@ namespace VistasSorrySliders
             }
             catch (RegexMatchTimeoutException ex)
             {
-                Console.WriteLine(ex);
                 log.LogWarn("El tiempo de espera para la expresión se ha agotado", ex);
                 //MessageBox.Show();
                 return false;
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex);
                 log.LogFatal("Ha ocurrido un error inesperado", ex);
                 //MessageBox.Show();
                 return false;
+            }
+        }
+
+        public static void MostrarMensajesError(Constantes respuesta)
+        {
+            switch (respuesta)
+            {
+                case Constantes.ERROR_CONEXION_BD:
+                    MessageBox.Show(Properties.Resources.msgErrorBaseDatos);
+                    break;
+                case Constantes.ERROR_CONSULTA:
+                    MessageBox.Show(Properties.Resources.msgErrorConsulta);
+                    break;
+                case Constantes.ERROR_CONEXION_SERVIDOR:
+                    MessageBox.Show(Properties.Resources.msgErrorConexion);
+                    break;
+                case Constantes.ERROR_TIEMPO_ESPERA_SERVIDOR:
+                    MessageBox.Show(Properties.Resources.msgErrorTiempoEsperaServidor);
+                    break;
             }
         }
 

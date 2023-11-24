@@ -108,22 +108,12 @@ namespace VistasSorrySliders
             {
                 case Constantes.OPERACION_EXITOSA:
                     CrearVentanaLobby(_cuentaUsuario, codigoPartida);
-                    Window.GetWindow(this).Close();
-                    break;
-                case Constantes.ERROR_CONEXION_BD:
-                    MessageBox.Show(Properties.Resources.msgErrorBaseDatos);
-                    break;
-                case Constantes.ERROR_CONSULTA:
-                    MessageBox.Show(Properties.Resources.msgErrorConsulta);
-                    break;
-                case Constantes.ERROR_CONEXION_SERVIDOR:
-                    MessageBox.Show(Properties.Resources.msgErrorConexion);
                     break;
                 case Constantes.OPERACION_EXITOSA_VACIA:
                     MessageBox.Show(Properties.Resources.msgCrearLobbySinExito);
                     break;
-                case Constantes.ERROR_TIEMPO_ESPERA_SERVIDOR:
-                    MessageBox.Show(Properties.Resources.msgErrorTiempoEsperaServidor);
+                default:
+                    Utilidades.MostrarMensajesError(respuesta);
                     break;
             }
         }
@@ -131,7 +121,11 @@ namespace VistasSorrySliders
         private void CrearVentanaLobby(CuentaSet _cuentaUsuario, string codigoPartida) 
         {
             JuegoYLobbyVentana lobbyUnirse = new JuegoYLobbyVentana(_cuentaUsuario, codigoPartida, false);
-            lobbyUnirse.Show();
+            if (lobbyUnirse.EntrarSistemaEnLinea())
+            {
+                lobbyUnirse.Show();
+                Window.GetWindow(this).Close();
+            }
         }
 
         private void ClickSalirConfigurarLobby(object sender, RoutedEventArgs e)

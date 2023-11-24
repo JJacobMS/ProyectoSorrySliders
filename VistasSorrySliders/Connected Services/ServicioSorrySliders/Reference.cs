@@ -1176,6 +1176,12 @@ namespace VistasSorrySliders.ServicioSorrySliders {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IInicioSesion/VerificarContrasenaDeCuenta", ReplyAction="http://tempuri.org/IInicioSesion/VerificarContrasenaDeCuentaResponse")]
         System.Threading.Tasks.Task<VistasSorrySliders.ServicioSorrySliders.Constantes> VerificarContrasenaDeCuentaAsync(VistasSorrySliders.ServicioSorrySliders.CuentaSet cuentaPorVerificar);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IInicioSesion/JugadorEstaEnLinea", ReplyAction="http://tempuri.org/IInicioSesion/JugadorEstaEnLineaResponse")]
+        bool JugadorEstaEnLinea(string jugadorCorreo);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IInicioSesion/JugadorEstaEnLinea", ReplyAction="http://tempuri.org/IInicioSesion/JugadorEstaEnLineaResponse")]
+        System.Threading.Tasks.Task<bool> JugadorEstaEnLineaAsync(string jugadorCorreo);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -1220,6 +1226,14 @@ namespace VistasSorrySliders.ServicioSorrySliders {
         public System.Threading.Tasks.Task<VistasSorrySliders.ServicioSorrySliders.Constantes> VerificarContrasenaDeCuentaAsync(VistasSorrySliders.ServicioSorrySliders.CuentaSet cuentaPorVerificar) {
             return base.Channel.VerificarContrasenaDeCuentaAsync(cuentaPorVerificar);
         }
+        
+        public bool JugadorEstaEnLinea(string jugadorCorreo) {
+            return base.Channel.JugadorEstaEnLinea(jugadorCorreo);
+        }
+        
+        public System.Threading.Tasks.Task<bool> JugadorEstaEnLineaAsync(string jugadorCorreo) {
+            return base.Channel.JugadorEstaEnLineaAsync(jugadorCorreo);
+        }
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -1227,10 +1241,10 @@ namespace VistasSorrySliders.ServicioSorrySliders {
     public interface IMenuPrincipal {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMenuPrincipal/RecuperarDatosUsuario", ReplyAction="http://tempuri.org/IMenuPrincipal/RecuperarDatosUsuarioResponse")]
-        System.ValueTuple<VistasSorrySliders.ServicioSorrySliders.Constantes, string, byte[], string> RecuperarDatosUsuario(string correoElectronico);
+        System.ValueTuple<VistasSorrySliders.ServicioSorrySliders.Constantes, string, byte[]> RecuperarDatosUsuario(string correoElectronico);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMenuPrincipal/RecuperarDatosUsuario", ReplyAction="http://tempuri.org/IMenuPrincipal/RecuperarDatosUsuarioResponse")]
-        System.Threading.Tasks.Task<System.ValueTuple<VistasSorrySliders.ServicioSorrySliders.Constantes, string, byte[], string>> RecuperarDatosUsuarioAsync(string correoElectronico);
+        System.Threading.Tasks.Task<System.ValueTuple<VistasSorrySliders.ServicioSorrySliders.Constantes, string, byte[]>> RecuperarDatosUsuarioAsync(string correoElectronico);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -1260,11 +1274,11 @@ namespace VistasSorrySliders.ServicioSorrySliders {
                 base(binding, remoteAddress) {
         }
         
-        public System.ValueTuple<VistasSorrySliders.ServicioSorrySliders.Constantes, string, byte[], string> RecuperarDatosUsuario(string correoElectronico) {
+        public System.ValueTuple<VistasSorrySliders.ServicioSorrySliders.Constantes, string, byte[]> RecuperarDatosUsuario(string correoElectronico) {
             return base.Channel.RecuperarDatosUsuario(correoElectronico);
         }
         
-        public System.Threading.Tasks.Task<System.ValueTuple<VistasSorrySliders.ServicioSorrySliders.Constantes, string, byte[], string>> RecuperarDatosUsuarioAsync(string correoElectronico) {
+        public System.Threading.Tasks.Task<System.ValueTuple<VistasSorrySliders.ServicioSorrySliders.Constantes, string, byte[]>> RecuperarDatosUsuarioAsync(string correoElectronico) {
             return base.Channel.RecuperarDatosUsuarioAsync(correoElectronico);
         }
     }
@@ -2237,6 +2251,75 @@ namespace VistasSorrySliders.ServicioSorrySliders {
         
         public System.Threading.Tasks.Task NotificarFinalizarLanzamientoAsync(string codigoPartida, string correo) {
             return base.Channel.NotificarFinalizarLanzamientoAsync(codigoPartida, correo);
+        }
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServicioSorrySliders.IUsuariosEnLinea", CallbackContract=typeof(VistasSorrySliders.ServicioSorrySliders.IUsuariosEnLineaCallback))]
+    public interface IUsuariosEnLinea {
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IUsuariosEnLinea/EntrarConCuenta")]
+        void EntrarConCuenta(string jugadorCorreo);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IUsuariosEnLinea/EntrarConCuenta")]
+        System.Threading.Tasks.Task EntrarConCuentaAsync(string jugadorCorreo);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IUsuariosEnLinea/SalirDelSistema")]
+        void SalirDelSistema(string jugadorCorreo);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IUsuariosEnLinea/SalirDelSistema")]
+        System.Threading.Tasks.Task SalirDelSistemaAsync(string jugadorCorreo);
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public interface IUsuariosEnLineaCallback {
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IUsuariosEnLinea/ComprobarJugador")]
+        void ComprobarJugador();
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public interface IUsuariosEnLineaChannel : VistasSorrySliders.ServicioSorrySliders.IUsuariosEnLinea, System.ServiceModel.IClientChannel {
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class UsuariosEnLineaClient : System.ServiceModel.DuplexClientBase<VistasSorrySliders.ServicioSorrySliders.IUsuariosEnLinea>, VistasSorrySliders.ServicioSorrySliders.IUsuariosEnLinea {
+        
+        public UsuariosEnLineaClient(System.ServiceModel.InstanceContext callbackInstance) : 
+                base(callbackInstance) {
+        }
+        
+        public UsuariosEnLineaClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName) : 
+                base(callbackInstance, endpointConfigurationName) {
+        }
+        
+        public UsuariosEnLineaClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName, string remoteAddress) : 
+                base(callbackInstance, endpointConfigurationName, remoteAddress) {
+        }
+        
+        public UsuariosEnLineaClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(callbackInstance, endpointConfigurationName, remoteAddress) {
+        }
+        
+        public UsuariosEnLineaClient(System.ServiceModel.InstanceContext callbackInstance, System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(callbackInstance, binding, remoteAddress) {
+        }
+        
+        public void EntrarConCuenta(string jugadorCorreo) {
+            base.Channel.EntrarConCuenta(jugadorCorreo);
+        }
+        
+        public System.Threading.Tasks.Task EntrarConCuentaAsync(string jugadorCorreo) {
+            return base.Channel.EntrarConCuentaAsync(jugadorCorreo);
+        }
+        
+        public void SalirDelSistema(string jugadorCorreo) {
+            base.Channel.SalirDelSistema(jugadorCorreo);
+        }
+        
+        public System.Threading.Tasks.Task SalirDelSistemaAsync(string jugadorCorreo) {
+            return base.Channel.SalirDelSistemaAsync(jugadorCorreo);
         }
     }
 }

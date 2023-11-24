@@ -28,17 +28,14 @@ namespace VistasSorrySliders
         private LobbyClient _proxyLobby;
         private CuentaSet[] _cuentas;
         private PartidaSet _partidaActual;
-        private bool _esInvitado;
         private JuegoYLobbyVentana _juegoYLobbyVentana;
-        private InstanceContext _contextoCallback;
 
-        public LobbyPagina(CuentaSet cuentaUsuario, string codigoPartida, bool esInvitado, JuegoYLobbyVentana ventana)
+        public LobbyPagina(CuentaSet cuentaUsuario, string codigoPartida, JuegoYLobbyVentana ventana)
         {
             InitializeComponent();
             _juegoYLobbyVentana = ventana;
             _juegoYLobbyVentana.EliminarContexto += SalirLobbyServidor;
 
-            _esInvitado = esInvitado;
             _cuentaUsuario = cuentaUsuario;
             _codigoPartida = codigoPartida;
             EntrarPartida();
@@ -90,20 +87,11 @@ namespace VistasSorrySliders
                     CrearLabels(_cuentas);
                     txtBoxHost.Text = _cuentas[0].Nickname;
                     return;
-                case Constantes.ERROR_CONEXION_BD:
-                    MessageBox.Show(Properties.Resources.msgErrorBaseDatos);
-                    break;
-                case Constantes.ERROR_CONSULTA:
-                    MessageBox.Show(Properties.Resources.msgErrorConsulta);
-                    break;
-                case Constantes.ERROR_CONEXION_SERVIDOR:
-                    MessageBox.Show(Properties.Resources.msgErrorConexion);
-                    break;
-                case Constantes.ERROR_TIEMPO_ESPERA_SERVIDOR:
-                    MessageBox.Show(Properties.Resources.msgErrorTiempoEsperaServidor);
-                    break;
                 case Constantes.OPERACION_EXITOSA_VACIA:
                     MessageBox.Show(Properties.Resources.msgJugadoresLobbyRecuperar);
+                    break;
+                default:
+                    Utilidades.MostrarMensajesError(respuesta);
                     break;
 
             }
@@ -193,21 +181,13 @@ namespace VistasSorrySliders
                 case Constantes.OPERACION_EXITOSA:
                     CargarDatosPartida();
                     return;
-                case Constantes.ERROR_CONEXION_BD:
-                    MessageBox.Show(Properties.Resources.msgErrorBaseDatos);
-                    break;
-                case Constantes.ERROR_CONSULTA:
-                    MessageBox.Show(Properties.Resources.msgErrorConsulta);
-                    break;
-                case Constantes.ERROR_CONEXION_SERVIDOR:
-                    MessageBox.Show(Properties.Resources.msgErrorConexion);
-                    break;
-                case Constantes.ERROR_TIEMPO_ESPERA_SERVIDOR:
-                    MessageBox.Show(Properties.Resources.msgErrorTiempoEsperaServidor);
-                    break;
                 case Constantes.OPERACION_EXITOSA_VACIA:
                     MessageBox.Show(Properties.Resources.msgPartidaRecuperarVacia);
                     break;
+                default:
+                    Utilidades.MostrarMensajesError(respuesta);
+                    break;
+
             }
             IrMenuPrincipal();
         }
@@ -261,9 +241,9 @@ namespace VistasSorrySliders
             try
             {
                 InstanceContext contextoCallback = new InstanceContext(this);
-                _contextoCallback = contextoCallback;
                 _proxyLobby = new LobbyClient(contextoCallback);
                 _proxyLobby.EntrarPartida(_codigoPartida, _cuentaUsuario.CorreoElectronico);
+                return;
             }
             catch (CommunicationException ex)
             {
@@ -277,6 +257,7 @@ namespace VistasSorrySliders
             {
                 log.LogFatal("Ha ocurrido un error inesperado", ex);
             }
+            IrMenuPrincipal();
         }
 
         public void JugadorSalioPartida()
@@ -299,6 +280,7 @@ namespace VistasSorrySliders
             try
             {
                 _proxyLobby.IniciarPartida(_codigoPartida);
+                return;
             }
             catch (CommunicationException ex)
             {
@@ -310,6 +292,7 @@ namespace VistasSorrySliders
                 MessageBox.Show(Properties.Resources.msgErrorTiempoEsperaServidor);
                 log.LogWarn("Se agoto el tiempo de espera del servidor", ex);
             }
+            IrMenuPrincipal();
         }
 
         public void HostInicioPartida()
