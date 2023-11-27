@@ -31,7 +31,7 @@ namespace VistasSorrySliders
         {
             InitializeComponent();
             _cuenta = cuenta;
-            RecuperarDatos();
+            //RecuperarDatos();
         }
 
         public void MostrarVentana()

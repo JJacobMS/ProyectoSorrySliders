@@ -28,18 +28,22 @@ namespace VistasSorrySliders
     public partial class MenuPrincipalPagina : Page
     {
         private CuentaSet _cuentaUsuario;
+        public event Action<MenuPrincipalPagina> CambiarPaginaMenu;
 
-        public MenuPrincipalPagina(string correoUsuario)
+        public MenuPrincipalPagina()
         {
             InitializeComponent();
-            RecuperarDatosUsuario(correoUsuario);
-
         }
         public MenuPrincipalPagina(CuentaSet cuentaActual)
         {
             InitializeComponent();
             _cuentaUsuario = cuentaActual;
             InicializarDatosMenu();
+        }
+
+        public void LlamarRecuperarDatosUsuario(string correo)
+        {
+            RecuperarDatosUsuario(correo);
         }
 
         private void InicializarDatosMenu()
@@ -68,6 +72,7 @@ namespace VistasSorrySliders
                         CorreoElectronico = correoUsuario
                     };
                     InicializarDatosMenu();
+                    CambiarPaginaMenu?.Invoke(this);
                 }
                 proxyRegistrarUsuario.Close();
             }
@@ -97,7 +102,7 @@ namespace VistasSorrySliders
                     Utilidades.MostrarMensajesError(resultado);
                     break;
             }
-            IrInicioSesion();
+            
         }
 
         private void ClickMostrarAjustes(object sender, RoutedEventArgs e)

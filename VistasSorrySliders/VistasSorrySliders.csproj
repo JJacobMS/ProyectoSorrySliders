@@ -364,24 +364,6 @@
     <Resource Include="Recursos\tableroLanzamientoFondo.png" />
   </ItemGroup>
   <ItemGroup>
-    <WCFMetadataStorage Include="Connected Services\ServicioSorrySliders\" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Connected Services\ServicioSorrySliders\item.disco" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Connected Services\ServicioSorrySliders\configuration91.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Connected Services\ServicioSorrySliders\configuration.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Connected Services\ServicioSorrySliders\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Recursos\ajustesIcono.png" />
     <Resource Include="Recursos\crearLobbyIcono.png" />
     <Resource Include="Recursos\dadoRojo.png" />
@@ -431,6 +413,24 @@
     <Resource Include="Recursos\tableroPuntuacionCuatro.png" />
     <Resource Include="Recursos\tableroPuntuacionDos.png" />
     <Resource Include="Recursos\tableroPuntuacionTres.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Connected Services\ServicioSorrySliders\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\ServicioSorrySliders\item.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\ServicioSorrySliders\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\ServicioSorrySliders\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\ServicioSorrySliders\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

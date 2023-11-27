@@ -207,9 +207,15 @@ namespace VistasSorrySliders
 
             if (ventanaPrincipal.EntrarSistemaEnLineaMenu())
             {
-                MenuPrincipalPagina menuPrincipal = new MenuPrincipalPagina(correoVerificado);
-                this.NavigationService.Navigate(menuPrincipal);
+                MenuPrincipalPagina menuPrincipal = new MenuPrincipalPagina();
+                menuPrincipal.CambiarPaginaMenu += CambiarPaginaMenu;
+                menuPrincipal.LlamarRecuperarDatosUsuario(correoVerificado);
             }
+        }
+
+        private void CambiarPaginaMenu(MenuPrincipalPagina pagina)
+        {
+            this.NavigationService.Navigate(pagina);
         }
 
     }
