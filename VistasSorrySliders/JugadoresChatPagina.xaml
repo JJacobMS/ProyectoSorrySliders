@@ -49,7 +49,7 @@
                         </Grid.RowDefinitions>
                         <Label Content="{x:Static p:Resources.lblListaDeJugadores}" Height="50" FontSize="35" Style="{StaticResource estiloLblTituloTextos}" Grid.Row="0" />
                         <DataGrid Grid.Row="1" ColumnHeaderStyle="{StaticResource estiloDtGridColumnHeaderListaJugadores}" Style="{StaticResource estiloDtGridListaJugadores}"
-                                  RowStyle="{StaticResource estiloDtGridRowFilaTablaJugadores}"
+                                  RowStyle="{StaticResource estiloDtGridRowFilaTablaJugadores}" CanUserReorderColumns="False"
                                   Name="dtGridJugadores">
                             <DataGrid.Columns>
                                 <DataGridTemplateColumn Header="{x:Static p:Resources.dtGridTemplateColumnJugador}" Width="*">
@@ -129,9 +129,16 @@
                             <RowDefinition Height="*"/>
                             <RowDefinition Height="40"/>
                         </Grid.RowDefinitions>
-                        <TextBox x:Name="txtBoxMensajeChat" Grid.Row="2" Width="320" Height="30" BorderBrush="Black" BorderThickness="1.5" HorizontalAlignment="Left"  TextChanged="TextChangedTamañoChat"/>
-                        <TextBlock x:Name="txtBlockMensajeChat" Grid.Row="1" Width="400" Height="30" HorizontalAlignment="Left" Text="" FontSize="25"/>
-                        <Button x:Name="btnEnviar" Grid.Row="2" Width="60" Height="30" HorizontalAlignment="Right" Margin="3"
+                        <Border  Style="{StaticResource estiloBrdChat}" Grid.Row="2"/>
+                        <TextBox x:Name="txtBoxMensajeChat" Grid.Row="2" Margin="10,3,0,0" Width="320" Height="30" BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left"  TextChanged="TextChangedTamañoChat"/>
+                        <Border  Style="{StaticResource estiloBrdChat}">
+                            <Label  Content="Chat" Width="100" Height="50" VerticalAlignment="Center"  HorizontalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Style="{StaticResource estiloLblDatosJugador}" FontSize="25"/>
+                        </Border>
+                        <ScrollViewer x:Name="scrViewerChat" VerticalScrollBarVisibility="Auto" Grid.Row="1" Background="White" HorizontalScrollBarVisibility="Disabled" Margin="0,-5,0,-3" >
+                            <StackPanel Name="stcPanelMensaje">
+                            </StackPanel>
+                        </ScrollViewer>
+                        <Button x:Name="btnEnviar" Grid.Row="2" Width="60" Height="30" HorizontalAlignment="Right" Margin="3" 
                                 Style="{StaticResource estiloBtnTableroAzul}" Content="{x:Static p:Resources.btnEnviar}" Click="ClickEnviarMensaje"/>
                     </Grid>
                 </Border>

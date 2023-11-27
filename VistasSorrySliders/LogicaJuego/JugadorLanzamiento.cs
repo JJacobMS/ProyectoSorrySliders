@@ -56,7 +56,7 @@ namespace VistasSorrySliders.LogicaJuego
                 };
                 PeonesLanzamiento.Add(new PeonLanzamiento(elipse, new Point(posicionX, posicionY)));
             }
-            PeonTurnoActual = 0;
+            PeonTurnoActual = 3;
         }
         private void GenerarLineaMovimiento()
         {

@@ -427,5 +427,10 @@
   <ItemGroup>
     <Resource Include="Recursos\desconectado.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Recursos\tableroPuntuacionCuatro.png" />
+    <Resource Include="Recursos\tableroPuntuacionDos.png" />
+    <Resource Include="Recursos\tableroPuntuacionTres.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
