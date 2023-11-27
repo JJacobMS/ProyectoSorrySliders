@@ -119,18 +119,18 @@ namespace VistasSorrySliders
             switch(_numeroJugadores)
             {
                 case 2:
-                    fondo.ImageSource = new BitmapImage(new Uri("pack://application:,,,/Recursos/tableroDos.png"));
+                    fondo.ImageSource = new BitmapImage(new Uri(Properties.Resources.uriTableroLanzamientoDosJugadores));
                     brdFondoTablero.Background = fondo;
                     cnvEspacioAmarillo.Visibility = Visibility.Hidden;
                     cnvEspacioVerde.Visibility = Visibility.Hidden;
                     break;
                 case 3:
-                    fondo.ImageSource = new BitmapImage(new Uri("pack://application:,,,/Recursos/tableroTres.png"));
+                    fondo.ImageSource = new BitmapImage(new Uri(Properties.Resources.uriTableroLanzamientoTresJugadores));
                     brdFondoTablero.Background = fondo;
                     cnvEspacioRojo.Visibility = Visibility.Hidden;
                     break;
                 case 4:
-                    fondo.ImageSource = new BitmapImage(new Uri("pack://application:,,,/Recursos/tableroCuatro.png"));
+                    fondo.ImageSource = new BitmapImage(new Uri(Properties.Resources.uriTableroLanzamientoCuatroJugadores));
                     brdFondoTablero.Background = fondo;
                     break;
             }
@@ -146,8 +146,8 @@ namespace VistasSorrySliders
                     break;
                 case 3:
                     lblJugadorAzul.Content = jugadores[0].Nickname;
-                    lblJugadorVerde.Content = jugadores[2].Nickname;
-                    lblJugadorAmarillo.Content = jugadores[1].Nickname;
+                    lblJugadorVerde.Content = jugadores[1].Nickname;
+                    lblJugadorAmarillo.Content = jugadores[2].Nickname;
                     break;
                 case 4:
                     lblJugadorAzul.Content = jugadores[0].Nickname;
@@ -333,24 +333,6 @@ namespace VistasSorrySliders
             }
         }
 
-        /*private void RevivirProxy()
-        {
-            Logger log = new Logger(this.GetType());
-            try
-            {
-                InstanceContext contexto = new InstanceContext(this);
-                //_proxyLobby = new LobbyClient(contexto);
-            }
-            catch (CommunicationException ex)
-            {
-                log.LogError("Error de Comunicación con el Servidor", ex);
-            }
-            catch (TimeoutException ex)
-            {
-                log.LogWarn("Se agoto el tiempo de espera del servidor", ex);
-            }
-        }*/
-
         public void JugadorTiroDado(int numeroDado)
         {
             _tablero.DetenerDadoPosicion(numeroDado);
@@ -443,7 +425,7 @@ namespace VistasSorrySliders
             brdConteoPuntuaciones.Visibility = Visibility.Hidden;
             _juegoYLobbyVentana.CambiarFrameLobby(new JuegoPuntuacionesPagina(jugadoresConPuntuaciones));
             _juegoYLobbyVentana.ExpulsarJugador -= JugadorSalioJuegoLanzamiento;
-            EliminarContextoJuegoLanzamiento();
+            _juegoYLobbyVentana.EliminarContexto -= EliminarContextoJuegoLanzamiento;
         }
 
     }

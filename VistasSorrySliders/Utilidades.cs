@@ -13,7 +13,7 @@ using VistasSorrySliders.ServicioSorrySliders;
 
 namespace VistasSorrySliders
 {
-    public class Utilidades
+    public static class Utilidades
     {
         public static void IngresarImagen(byte[] avatar, ImageBrush mgBrush)
         {
@@ -36,24 +36,20 @@ namespace VistasSorrySliders
             {
                 MessageBox.Show(Properties.Resources.msgErrorImagen, Properties.Resources.msgTituloErrorImagen, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 log.LogWarn("Se ha proporcionado un argumento invalido", ex);
-                Console.WriteLine(ex);
             }
             catch (OutOfMemoryException ex)
             {
                 MessageBox.Show(Properties.Resources.msgErrorImagen, Properties.Resources.msgTituloErrorImagen, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 log.LogWarn("Se ha agotado la memoria", ex);
-                Console.WriteLine(ex);
             }
             catch (IOException ex)
             {
                 MessageBox.Show(Properties.Resources.msgErrorImagen, Properties.Resources.msgTituloErrorImagen, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 log.LogWarn("Error al acceder a la imagen", ex);
-                Console.WriteLine(ex);
             }
             catch (Exception ex)
             {
                 MessageBox.Show(Properties.Resources.msgErrorImagen, Properties.Resources.msgTituloErrorImagen, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                Console.WriteLine(ex);
                 log.LogFatal("Ha ocurrido un error inesperado", ex);
             }
         }
@@ -120,25 +116,25 @@ namespace VistasSorrySliders
             {
                 MessageBox.Show(Properties.Resources.msgErrorImagen, Properties.Resources.msgTituloErrorImagen, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 log.LogWarn("Error al acceder a la imagen", ex);
-                return null;
+                return new byte[0];
             }
             catch (ArgumentException ex)
             {
                 MessageBox.Show(Properties.Resources.msgErrorImagen, Properties.Resources.msgTituloErrorImagen, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 log.LogWarn("Se ha proporcionado un argumento invalido", ex);
-                return null;
+                return new byte[0];
             }
             catch (OutOfMemoryException ex)
             {
                 MessageBox.Show(Properties.Resources.msgErrorImagen, Properties.Resources.msgTituloErrorImagen, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 log.LogWarn("Se ha agotado la memoria", ex);
-                return null;
+                return new byte[0];
             }
             catch (Exception ex)
             {
                 MessageBox.Show(Properties.Resources.msgErrorImagen, Properties.Resources.msgTituloErrorImagen, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 log.LogFatal("Ha ocurrido un error inesperado", ex);
-                return null;
+                return new byte[0];
             }
 
         }
@@ -148,9 +144,10 @@ namespace VistasSorrySliders
             Logger log = new Logger(typeof(Utilidades));
             try
             {
+                int segundos = 3;
                 string patron = @"^(?=.*[0-9!@#$%^&*()\-=_+.,:;])[A-Za-z0-9!@#$%^&*()\-=_+.,:;]{8,}$";
-                Regex regex = new Regex(patron);
-                bool correoValidado = regex.IsMatch(contraseña);
+                TimeSpan tiempoAgotadoPatron = TimeSpan.FromSeconds(segundos);
+                bool correoValidado = Regex.IsMatch(contraseña, patron, RegexOptions.None, tiempoAgotadoPatron);
                 if (correoValidado)
                 {
                     return correoValidado;
@@ -161,13 +158,11 @@ namespace VistasSorrySliders
             catch (RegexMatchTimeoutException ex)
             {
                 log.LogWarn("El tiempo de espera para la expresión se ha agotado", ex);
-                //MessageBox.Show();
                 return false;
             }
             catch (Exception ex)
             {
                 log.LogFatal("Ha ocurrido un error inesperado", ex);
-                //MessageBox.Show();
                 return false;
             }
         }

@@ -56,7 +56,7 @@ namespace VistasSorrySliders.LogicaJuego
                 };
                 PeonesLanzamiento.Add(new PeonLanzamiento(elipse, new Point(posicionX, posicionY)));
             }
-            PeonTurnoActual = 3;
+            PeonTurnoActual = 0;
         }
         private void GenerarLineaMovimiento()
         {
@@ -120,22 +120,22 @@ namespace VistasSorrySliders.LogicaJuego
 
             if (DireccionJugador == Direccion.Izquierda || DireccionJugador == Direccion.Derecha)
             {
-                if (Math.Abs(LineaMovimiento.CoordenadaX) != LineaMovimiento.Longitud)
+                (distanciaVertical, distanciaHorizontal) = CalcularDistanciasConBaseMultiplicador();
+                if (distanciaVertical > 0)
                 {
                     peonActual.CambiarDireccionVertical(LineaMovimiento.RecuperarLadoVertical());
                 }
-                (distanciaVertical, distanciaHorizontal) = CalcularDistanciasConBaseMultiplicador();
                 peonActual.VelocidadVertical = distanciaVertical;
                 peonActual.VelocidadHorizontal = distanciaHorizontal;
             }
 
             if (DireccionJugador == Direccion.Abajo || DireccionJugador == Direccion.Arriba)
             {
-                if (LineaMovimiento.CoordenadaY != LineaMovimiento.Longitud)
+                (distanciaVertical, distanciaHorizontal) = CalcularDistanciasConBaseMultiplicador();
+                if (distanciaHorizontal > 0)
                 {
                     peonActual.CambiarDireccionHorizontal(LineaMovimiento.RecuperarLadoHorizontal());
                 }
-                (distanciaVertical, distanciaHorizontal) = CalcularDistanciasConBaseMultiplicador();
                 peonActual.VelocidadVertical = distanciaVertical;
                 peonActual.VelocidadHorizontal = distanciaHorizontal;
             }
@@ -152,7 +152,6 @@ namespace VistasSorrySliders.LogicaJuego
             if (NumeroDadosLanzados == 1)
             {
                 DadosJugador[1].CambiarNumeroDado();
-                return;
             }
         }
         public void AumentarDadosLanzados()

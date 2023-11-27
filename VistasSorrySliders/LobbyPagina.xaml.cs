@@ -23,12 +23,12 @@ namespace VistasSorrySliders
     /// </summary>
     public partial class LobbyPagina : Page, ILobbyCallback
     {
-        private CuentaSet _cuentaUsuario;
-        private string _codigoPartida;
+        private readonly CuentaSet _cuentaUsuario;
+        private readonly string _codigoPartida;
         private LobbyClient _proxyLobby;
         private CuentaSet[] _cuentas;
         private PartidaSet _partidaActual;
-        private JuegoYLobbyVentana _juegoYLobbyVentana;
+        private readonly JuegoYLobbyVentana _juegoYLobbyVentana;
 
         public LobbyPagina(CuentaSet cuentaUsuario, string codigoPartida, JuegoYLobbyVentana ventana)
         {

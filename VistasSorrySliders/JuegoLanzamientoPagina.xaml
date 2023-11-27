@@ -94,9 +94,9 @@
                     <Border x:Name="brdConteoPuntuaciones" Width="250" Height="250" BorderThickness="10" BorderBrush="#B26C1A" CornerRadius="20" 
                             Canvas.Left="183" Canvas.Top="160" Background="#FFF4A7" Visibility="Hidden" Canvas.ZIndex="2">
                         <StackPanel VerticalAlignment="Center">
-                            <TextBlock Style="{StaticResource estiloTxtBlockCambioRonda}">Ronda de Lanzamiento Terminada</TextBlock>
+                            <TextBlock Style="{StaticResource estiloTxtBlockCambioRonda}" Text="{x:Static p:Resources.txtBlockRondaLanzamientoTerminada}"></TextBlock>
                             <Image Height="50" Source="/Recursos/peon.png"/>
-                            <TextBlock FontSize="20" Style="{StaticResource estiloTxtBlockCambioRonda}">Contando puntuaciones....</TextBlock>
+                            <TextBlock FontSize="20" Style="{StaticResource estiloTxtBlockCambioRonda}" Text="{x:Static p:Resources.txtBlockContandoPuntuaciones}"></TextBlock>
                         </StackPanel>
                     </Border>
                 </Canvas>

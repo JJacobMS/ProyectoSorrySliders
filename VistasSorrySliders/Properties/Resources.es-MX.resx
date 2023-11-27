@@ -397,7 +397,7 @@
     <value>El host del juego lo ha expulsado de la partida</value>
   </data>
   <data name="msgFaltaJugadores" xml:space="preserve">
-    <value>Todos los demás jugadores se han salido de la partida, saliendo de la partida</value>
+    <value>Todos los demás jugadores se han salido de la partida. Se terminará la partida</value>
   </data>
   <data name="msgGuardarCuentaError" xml:space="preserve">
     <value>Hubo un error al registrarse, por favor inténtelo más tarde</value>
@@ -410,6 +410,12 @@
   </data>
   <data name="msgJugadoresRecuperacion" xml:space="preserve">
     <value>No hay jugadores que coincidan con la búsqueda</value>
+  </data>
+  <data name="msgJugadorHaSalidoJuego" xml:space="preserve">
+    <value>El jugador {0} se ha desconectado</value>
+  </data>
+  <data name="msgJugadorHaSidoExpulsado" xml:space="preserve">
+    <value>El jugador {0} ha sido expulsado del juego</value>
   </data>
   <data name="msgNotificacionGuardarError" xml:space="preserve">
     <value>Hubo un error al guardar la notificación, por favor inténtelo más tarde</value>
@@ -511,7 +517,7 @@
     <value>CREAR LOBBY</value>
   </data>
   <data name="txtBlockCuentaYaEnLobby" xml:space="preserve">
-    <value>Su cuenta ya está jugando dentro del lobby</value>
+    <value>Su cuenta ya está en línea, y no puede ingresar más de una vez al mismo tiempo</value>
   </data>
   <data name="txtBlockEnLinea" xml:space="preserve">
     <value>En línea</value>

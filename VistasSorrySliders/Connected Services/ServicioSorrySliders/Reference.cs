@@ -1555,10 +1555,10 @@ namespace VistasSorrySliders.ServicioSorrySliders {
     public interface ICrearLobby {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICrearLobby/CrearPartida", ReplyAction="http://tempuri.org/ICrearLobby/CrearPartidaResponse")]
-        System.ValueTuple<VistasSorrySliders.ServicioSorrySliders.Constantes, string> CrearPartida(string correoHost, int NumeroJugadores);
+        System.ValueTuple<VistasSorrySliders.ServicioSorrySliders.Constantes, string> CrearPartida(string correoHost, int numeroJugadores);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICrearLobby/CrearPartida", ReplyAction="http://tempuri.org/ICrearLobby/CrearPartidaResponse")]
-        System.Threading.Tasks.Task<System.ValueTuple<VistasSorrySliders.ServicioSorrySliders.Constantes, string>> CrearPartidaAsync(string correoHost, int NumeroJugadores);
+        System.Threading.Tasks.Task<System.ValueTuple<VistasSorrySliders.ServicioSorrySliders.Constantes, string>> CrearPartidaAsync(string correoHost, int numeroJugadores);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -1588,12 +1588,12 @@ namespace VistasSorrySliders.ServicioSorrySliders {
                 base(binding, remoteAddress) {
         }
         
-        public System.ValueTuple<VistasSorrySliders.ServicioSorrySliders.Constantes, string> CrearPartida(string correoHost, int NumeroJugadores) {
-            return base.Channel.CrearPartida(correoHost, NumeroJugadores);
+        public System.ValueTuple<VistasSorrySliders.ServicioSorrySliders.Constantes, string> CrearPartida(string correoHost, int numeroJugadores) {
+            return base.Channel.CrearPartida(correoHost, numeroJugadores);
         }
         
-        public System.Threading.Tasks.Task<System.ValueTuple<VistasSorrySliders.ServicioSorrySliders.Constantes, string>> CrearPartidaAsync(string correoHost, int NumeroJugadores) {
-            return base.Channel.CrearPartidaAsync(correoHost, NumeroJugadores);
+        public System.Threading.Tasks.Task<System.ValueTuple<VistasSorrySliders.ServicioSorrySliders.Constantes, string>> CrearPartidaAsync(string correoHost, int numeroJugadores) {
+            return base.Channel.CrearPartidaAsync(correoHost, numeroJugadores);
         }
     }
     
@@ -2063,13 +2063,13 @@ namespace VistasSorrySliders.ServicioSorrySliders {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public interface IChatCallback {
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IChat/DevolverMensaje", ReplyAction="http://tempuri.org/IChat/DevolverMensajeResponse")]
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IChat/DevolverMensaje")]
         void DevolverMensaje(string nickname, string mensaje);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IChat/ExpulsadoDeJugador", ReplyAction="http://tempuri.org/IChat/ExpulsadoDeJugadorResponse")]
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IChat/ExpulsadoDeJugador")]
         void ExpulsadoDeJugador(string correoElectronico);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IChat/JugadorSalioListaJugadores", ReplyAction="http://tempuri.org/IChat/JugadorSalioListaJugadoresResponse")]
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IChat/JugadorSalioListaJugadores")]
         void JugadorSalioListaJugadores(string correoElectronico);
     }
     

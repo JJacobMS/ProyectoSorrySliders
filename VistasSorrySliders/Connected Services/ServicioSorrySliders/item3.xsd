@@ -201,7 +201,7 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="correoHost" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="NumeroJugadores" type="xs:int" />
+        <xs:element minOccurs="0" name="numeroJugadores" type="xs:int" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -543,11 +543,6 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="DevolverMensajeResponse">
-    <xs:complexType>
-      <xs:sequence />
-    </xs:complexType>
-  </xs:element>
   <xs:element name="ExpulsadoDeJugador">
     <xs:complexType>
       <xs:sequence>
@@ -555,21 +550,11 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="ExpulsadoDeJugadorResponse">
-    <xs:complexType>
-      <xs:sequence />
-    </xs:complexType>
-  </xs:element>
   <xs:element name="JugadorSalioListaJugadores">
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="correoElectronico" nillable="true" type="xs:string" />
       </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="JugadorSalioListaJugadoresResponse">
-    <xs:complexType>
-      <xs:sequence />
     </xs:complexType>
   </xs:element>
   <xs:element name="AgregarJugadorJuegoLanzamiento">

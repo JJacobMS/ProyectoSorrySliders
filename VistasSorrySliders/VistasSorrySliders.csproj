@@ -424,5 +424,8 @@
   <ItemGroup>
     <Resource Include="Recursos\peon.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Recursos\desconectado.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

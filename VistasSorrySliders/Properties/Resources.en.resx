@@ -397,7 +397,7 @@
     <value>The game host has banned you from the game</value>
   </data>
   <data name="msgFaltaJugadores" xml:space="preserve">
-    <value>All other players have left the game, exiting the game</value>
+    <value>All other players have left the game. The game will end</value>
   </data>
   <data name="msgGuardarCuentaError" xml:space="preserve">
     <value>There was an error registering, please try again later</value>
@@ -410,6 +410,12 @@
   </data>
   <data name="msgJugadoresRecuperacion" xml:space="preserve">
     <value>There are no players matching the search</value>
+  </data>
+  <data name="msgJugadorHaSalidoJuego" xml:space="preserve">
+    <value>Player {0} has disconnected</value>
+  </data>
+  <data name="msgJugadorHaSidoExpulsado" xml:space="preserve">
+    <value>Player {0} has been kicked out of the game</value>
   </data>
   <data name="msgNotificacionGuardarError" xml:space="preserve">
     <value>There was an error saving the notification, please try again later</value>
@@ -511,7 +517,7 @@
     <value>CREATE LOBBY</value>
   </data>
   <data name="txtBlockCuentaYaEnLobby" xml:space="preserve">
-    <value>Your account is already in the lobby</value>
+    <value>Your account is now online, and you cannot log in more than once at a time</value>
   </data>
   <data name="txtBlockEnLinea" xml:space="preserve">
     <value>Online</value>

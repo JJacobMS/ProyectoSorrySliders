@@ -131,9 +131,9 @@ namespace VistasSorrySliders
 
         private void CrearCuentaProvisionalInvitado(string codigo)
         {
-            Byte[] avatar = Utilidades.GenerarImagenDefectoBytes();
+            byte[] avatar = Utilidades.GenerarImagenDefectoBytes();
 
-            if (avatar == null)
+            if (avatar == null || avatar.Length == 0)
             {
                 MessageBox.Show("Ocurrió un error, inténtelo de nuevo o más tarde");
                 SalirDeUnirse();

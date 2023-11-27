@@ -907,7 +907,7 @@ namespace VistasSorrySliders.Properties {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Todos los demás jugadores se han salido de la partida, saliendo de la partida.
+        ///   Busca una cadena traducida similar a Todos los demás jugadores se han salido de la partida. Se terminará la partida.
         /// </summary>
         public static string msgFaltaJugadores {
             get {
@@ -948,6 +948,24 @@ namespace VistasSorrySliders.Properties {
         public static string msgJugadoresRecuperacion {
             get {
                 return ResourceManager.GetString("msgJugadoresRecuperacion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a El jugador {0} se ha desconectado.
+        /// </summary>
+        public static string msgJugadorHaSalidoJuego {
+            get {
+                return ResourceManager.GetString("msgJugadorHaSalidoJuego", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a El jugador {0} ha sido expulsado del juego.
+        /// </summary>
+        public static string msgJugadorHaSidoExpulsado {
+            get {
+                return ResourceManager.GetString("msgJugadorHaSidoExpulsado", resourceCulture);
             }
         }
         
@@ -1249,7 +1267,7 @@ namespace VistasSorrySliders.Properties {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Su cuenta ya está jugando dentro del lobby.
+        ///   Busca una cadena traducida similar a Su cuenta ya está en línea, y no puede ingresar más de una vez al mismo tiempo.
         /// </summary>
         public static string txtBlockCuentaYaEnLobby {
             get {
@@ -1371,6 +1389,132 @@ namespace VistasSorrySliders.Properties {
         public static string txtBlockUnirsePartida {
             get {
                 return ResourceManager.GetString("txtBlockUnirsePartida", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a pack://application:,,,/Recursos/avatarPredefinido.jpg.
+        /// </summary>
+        public static string uriAvatarPredefinido {
+            get {
+                return ResourceManager.GetString("uriAvatarPredefinido", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a pack://application:,,,/Recursos/gato1.png.
+        /// </summary>
+        public static string uriImagenDadoNumero1 {
+            get {
+                return ResourceManager.GetString("uriImagenDadoNumero1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a pack://application:,,,/Recursos/gato2.png.
+        /// </summary>
+        public static string uriImagenDadoNumero2 {
+            get {
+                return ResourceManager.GetString("uriImagenDadoNumero2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a pack://application:,,,/Recursos/gato3.png.
+        /// </summary>
+        public static string uriImagenDadoNumero3 {
+            get {
+                return ResourceManager.GetString("uriImagenDadoNumero3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a pack://application:,,,/Recursos/gato4.png.
+        /// </summary>
+        public static string uriImagenDadoNumero4 {
+            get {
+                return ResourceManager.GetString("uriImagenDadoNumero4", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a pack://application:,,,/Recursos/gato5.png.
+        /// </summary>
+        public static string uriImagenDadoNumero5 {
+            get {
+                return ResourceManager.GetString("uriImagenDadoNumero5", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a pack://application:,,,/Recursos/gato6.png.
+        /// </summary>
+        public static string uriImagenDadoNumero6 {
+            get {
+                return ResourceManager.GetString("uriImagenDadoNumero6", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a pack://application:,,,/Recursos/peonGris.png.
+        /// </summary>
+        public static string uriPeonGris {
+            get {
+                return ResourceManager.GetString("uriPeonGris", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a pack://application:,,,/Recursos/peonMorado.png.
+        /// </summary>
+        public static string uriPeonMorado {
+            get {
+                return ResourceManager.GetString("uriPeonMorado", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a pack://application:,,,/Recursos/peonNegro.png.
+        /// </summary>
+        public static string uriPeonNegro {
+            get {
+                return ResourceManager.GetString("uriPeonNegro", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a pack://application:,,,/Recursos/peonRosa.png.
+        /// </summary>
+        public static string uriPeonRosa {
+            get {
+                return ResourceManager.GetString("uriPeonRosa", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a pack://application:,,,/Recursos/tableroCuatro.png.
+        /// </summary>
+        public static string uriTableroLanzamientoCuatroJugadores {
+            get {
+                return ResourceManager.GetString("uriTableroLanzamientoCuatroJugadores", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a pack://application:,,,/Recursos/tableroDos.png.
+        /// </summary>
+        public static string uriTableroLanzamientoDosJugadores {
+            get {
+                return ResourceManager.GetString("uriTableroLanzamientoDosJugadores", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a pack://application:,,,/Recursos/tableroTres.png.
+        /// </summary>
+        public static string uriTableroLanzamientoTresJugadores {
+            get {
+                return ResourceManager.GetString("uriTableroLanzamientoTresJugadores", resourceCulture);
             }
         }
     }
