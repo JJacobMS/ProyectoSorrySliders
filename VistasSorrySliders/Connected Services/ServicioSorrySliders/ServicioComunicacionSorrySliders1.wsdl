@@ -964,6 +964,21 @@
       <wsdl:output wsaw:Action="http://tempuri.org/IUsuariosEnLinea/ComprobarJugador" message="tns:IUsuariosEnLinea_ComprobarJugador_OutputCallbackMessage" />
     </wsdl:operation>
   </wsdl:portType>
+  <wsdl:portType name="IJuegoPuntuacion">
+    <wsdl:operation name="AgregarJugador">
+      <wsdl:input wsaw:Action="http://tempuri.org/IJuegoPuntuacion/AgregarJugador" message="tns:IJuegoPuntuacion_AgregarJugador_InputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="EliminarJugador">
+      <wsdl:input wsaw:Action="http://tempuri.org/IJuegoPuntuacion/EliminarJugador" message="tns:IJuegoPuntuacion_EliminarJugador_InputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="NotificarJugadores">
+      <wsdl:input wsaw:Action="http://tempuri.org/IJuegoPuntuacion/NotificarJugadores" message="tns:IJuegoPuntuacion_NotificarJugadores_InputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="NotificarJugadorMovimiento">
+      <wsdl:output wsaw:Action="http://tempuri.org/IJuegoPuntuacion/NotificarJugadorMovimiento" message="tns:IJuegoPuntuacion_NotificarJugadorMovimiento_OutputCallbackMessage" />
+      <wsdl:input wsaw:Action="http://tempuri.org/IJuegoPuntuacion/NotificarJugadorMovimientoResponse" message="tns:IJuegoPuntuacion_NotificarJugadorMovimiento_InputCallbackMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
   <wsdl:binding name="NetTcpBinding_IInicioSesion" type="tns:IInicioSesion">
     <wsp:PolicyReference URI="#NetTcpBinding_IInicioSesion_policy" />
     <soap12:binding transport="http://schemas.microsoft.com/soap/tcp" />
@@ -1481,13 +1496,44 @@
       </wsdl:output>
     </wsdl:operation>
   </wsdl:binding>
+  <wsdl:binding name="NetTcpBinding_IJuegoPuntuacion" type="tns:IJuegoPuntuacion">
+    <wsp:PolicyReference URI="#NetTcpBinding_IJuegoPuntuacion_policy" />
+    <soap12:binding transport="http://schemas.microsoft.com/soap/tcp" />
+    <wsdl:operation name="AgregarJugador">
+      <soap12:operation soapAction="http://tempuri.org/IJuegoPuntuacion/AgregarJugador" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="EliminarJugador">
+      <soap12:operation soapAction="http://tempuri.org/IJuegoPuntuacion/EliminarJugador" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="NotificarJugadores">
+      <soap12:operation soapAction="http://tempuri.org/IJuegoPuntuacion/NotificarJugadores" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="NotificarJugadorMovimiento">
+      <soap12:operation soapAction="http://tempuri.org/IJuegoPuntuacion/NotificarJugadorMovimiento" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
   <wsdl:service name="ServicioComunicacionSorrySliders">
     <wsdl:port name="NetTcpBinding_IInicioSesion" binding="tns:NetTcpBinding_IInicioSesion">
       <soap12:address location="net.tcp://localhost:5455/ServidorSorrySliders" />
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:5455/ServidorSorrySliders</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>LAPTOP-H4AE1QJ9\sulem</Upn>
+          <Upn>LAPTOP-SF103ATP\monti</Upn>
         </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>
@@ -1496,7 +1542,7 @@
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:5455/ServidorSorrySliders</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>LAPTOP-H4AE1QJ9\sulem</Upn>
+          <Upn>LAPTOP-SF103ATP\monti</Upn>
         </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>
@@ -1505,7 +1551,7 @@
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:5455/ServidorSorrySliders</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>LAPTOP-H4AE1QJ9\sulem</Upn>
+          <Upn>LAPTOP-SF103ATP\monti</Upn>
         </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>
@@ -1514,7 +1560,7 @@
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:5455/ServidorSorrySliders</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>LAPTOP-H4AE1QJ9\sulem</Upn>
+          <Upn>LAPTOP-SF103ATP\monti</Upn>
         </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>
@@ -1523,7 +1569,7 @@
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:5455/ServidorSorrySliders</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>LAPTOP-H4AE1QJ9\sulem</Upn>
+          <Upn>LAPTOP-SF103ATP\monti</Upn>
         </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>
@@ -1532,7 +1578,7 @@
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:5455/ServidorSorrySliders</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>LAPTOP-H4AE1QJ9\sulem</Upn>
+          <Upn>LAPTOP-SF103ATP\monti</Upn>
         </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>
@@ -1541,7 +1587,7 @@
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:5455/ServidorSorrySliders</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>LAPTOP-H4AE1QJ9\sulem</Upn>
+          <Upn>LAPTOP-SF103ATP\monti</Upn>
         </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>
@@ -1550,7 +1596,7 @@
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:5455/ServidorSorrySliders</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>LAPTOP-H4AE1QJ9\sulem</Upn>
+          <Upn>LAPTOP-SF103ATP\monti</Upn>
         </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>
@@ -1559,7 +1605,7 @@
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:5455/ServidorSorrySliders</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>LAPTOP-H4AE1QJ9\sulem</Upn>
+          <Upn>LAPTOP-SF103ATP\monti</Upn>
         </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>
@@ -1568,7 +1614,7 @@
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:5455/ServidorSorrySliders</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>LAPTOP-H4AE1QJ9\sulem</Upn>
+          <Upn>LAPTOP-SF103ATP\monti</Upn>
         </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>
@@ -1577,7 +1623,7 @@
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:5455/ServidorSorrySliders</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>LAPTOP-H4AE1QJ9\sulem</Upn>
+          <Upn>LAPTOP-SF103ATP\monti</Upn>
         </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>
@@ -1586,7 +1632,16 @@
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:5455/ServidorSorrySliders</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>LAPTOP-H4AE1QJ9\sulem</Upn>
+          <Upn>LAPTOP-SF103ATP\monti</Upn>
+        </Identity>
+      </wsa10:EndpointReference>
+    </wsdl:port>
+    <wsdl:port name="NetTcpBinding_IJuegoPuntuacion" binding="tns:NetTcpBinding_IJuegoPuntuacion">
+      <soap12:address location="net.tcp://localhost:5455/ServidorSorrySliders" />
+      <wsa10:EndpointReference>
+        <wsa10:Address>net.tcp://localhost:5455/ServidorSorrySliders</wsa10:Address>
+        <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
+          <Upn>LAPTOP-SF103ATP\monti</Upn>
         </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>
