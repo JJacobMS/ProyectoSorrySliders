@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.ServiceModel;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -43,15 +44,8 @@ namespace VistasSorrySliders
         private Button _btnSeleccionado;
         private int _turnoActualJuego;
         private int _turnoJugador;
-
-        /*SOLO VOLVER ENABLE SI ES EL JUGADOR -- SI ES SU TURNO
-        SI una puntuacion es 0 entonces volver enabled ese boton
-        VALIDAR QUE LAS 4 FICHAS YA LLEGARON
-        COMUNICAR POSICIONES A LOS DEMAS CADA QUE MUEVA UNA FICHA
-        GUARDAR DATOS EN BD
-        asignar lista ellipse Y HACERLO ENABLE TRUE
-        Hacer ellipses FALSE EN ENABLED
-         */
+        private JuegoPuntuacionClient _proxyJuegoPuntuacion;
+        
 
 
         public JuegoPuntuacionesPagina(List<JugadorLanzamiento> jugadores, string correo)
@@ -70,18 +64,62 @@ namespace VistasSorrySliders
 
             _correoUsuario = correo;
             _jugadoresLanzamiento = jugadores;
+            AgregarProxy();
             Mostrar(jugadores);
             InicializarTablero();
             _turnoActualJuego = 0;
-            //ActivarComponentesAzul();
-            //ActivarComponentesRojo();
-            //ActivarComponentesVerde();
-            //ActivarComponentesAmarillo();
-
             EmpezarTurno(_turnoActualJuego);
+        }
 
-            // (si es el primer jugador con el turno 0 y todos son enabled, que pase al siguiente, ese metodo va a servvir
-            // para el notificacion, porque debe comprobar que el siguiente puede tirar)
+        private void AgregarProxy() 
+        {
+            Logger log = new Logger(this.GetType());
+            Constantes respuesta;
+            try
+            {
+                InstanceContext contexto = new InstanceContext(this);
+                _proxyJuegoPuntuacion = new JuegoPuntuacionClient(contexto);
+                //_proxyJuegoPuntuacion.AgregarJugador();
+                respuesta = Constantes.OPERACION_EXITOSA;
+            }
+            catch (CommunicationException ex)
+            {
+                log.LogError("Error de Comunicación con el Servidor", ex);
+                respuesta = Constantes.ERROR_CONEXION_SERVIDOR;
+            }
+            catch (TimeoutException ex)
+            {
+                log.LogWarn("Se agoto el tiempo de espera del servidor", ex);
+                respuesta = Constantes.ERROR_TIEMPO_ESPERA_SERVIDOR;
+            }
+            switch (respuesta)
+            {
+                case Constantes.ERROR_CONEXION_BD:
+                    MessageBox.Show(Properties.Resources.msgErrorBaseDatos);
+                    //SACAR AL MENU
+                    break;
+                case Constantes.ERROR_CONSULTA:
+                    MessageBox.Show(Properties.Resources.msgErrorConsulta);
+                    //
+                    break;
+                case Constantes.ERROR_CONEXION_SERVIDOR:
+                    MessageBox.Show(Properties.Resources.msgErrorConexion);
+                    break;
+                case Constantes.OPERACION_EXITOSA:
+                    //
+
+
+                    break;
+                case Constantes.OPERACION_EXITOSA_VACIA:
+                    //
+                    break;
+                case Constantes.ERROR_TIEMPO_ESPERA_SERVIDOR:
+                    MessageBox.Show(Properties.Resources.msgErrorTiempoEsperaServidor);
+                    //
+                    break;
+                default:
+                    break;
+            }
         }
         private void AsignarDados()
         {
@@ -329,7 +367,7 @@ namespace VistasSorrySliders
             */
             btnPuntuacionAzul1.Content = 1;//puntuaciones[0];
             btnPuntuacionAzul2.Content = 0;// puntuaciones[1];
-            btnPuntuacionAzul3.Content = 1;// puntuaciones[2];
+            btnPuntuacionAzul3.Content = 0;// puntuaciones[2];
             btnPuntuacionAzul4.Content = 0;// puntuaciones[3];
         }
 
@@ -354,10 +392,10 @@ namespace VistasSorrySliders
                 _listaBotonVerde[i].Content = puntuaciones[i];
             }
             */
-            btnPuntuacionVerde1.Content = 1;//puntuaciones[0];
-            btnPuntuacionVerde2.Content = 0;//puntuaciones[1];
-            btnPuntuacionVerde3.Content = 1;//puntuaciones[2];
-            btnPuntuacionVerde4.Content = 0;//puntuaciones[3];
+            btnPuntuacionVerde1.Content = 9;//puntuaciones[0];
+            btnPuntuacionVerde2.Content = 9;//puntuaciones[1];
+            btnPuntuacionVerde3.Content = 9;//puntuaciones[2];
+            btnPuntuacionVerde4.Content = 9;//puntuaciones[3];
         }
         private void IngresarPuntuacionesAmarillo(List<int> puntuaciones)
         {
@@ -367,10 +405,10 @@ namespace VistasSorrySliders
                 _listaBotonAmarillo[i].Content = puntuaciones[i];
             }
             */
-            btnPuntuacionAmarillo1.Content = 1;//puntuaciones[0];
-            btnPuntuacionAmarillo2.Content = 0;//puntuaciones[1];
-            btnPuntuacionAmarillo3.Content = 1;//puntuaciones[2];
-            btnPuntuacionAmarillo4.Content = 0;//puntuaciones[3];
+            btnPuntuacionAmarillo1.Content = 9;//puntuaciones[0];
+            btnPuntuacionAmarillo2.Content = 9;//puntuaciones[1];
+            btnPuntuacionAmarillo3.Content = 9;//puntuaciones[2];
+            btnPuntuacionAmarillo4.Content = 9;//puntuaciones[3];
         }
 
         private void MouseLeftButtonDownPeonRojo(object sender, MouseButtonEventArgs e)
@@ -401,6 +439,10 @@ namespace VistasSorrySliders
                             llpSeleccionada.IsEnabled = false;
                             ComprobarGanador();
                         }
+                    }
+                    if (!ComprobarDadosActuales())
+                    {
+                        Console.WriteLine("CAMBIAR DE TURNO");
                     }
                 }
             }
@@ -437,6 +479,10 @@ namespace VistasSorrySliders
                             ComprobarGanador();
                         }
                     }
+                    if (!ComprobarDadosActuales())
+                    {
+                        Console.WriteLine("CAMBIAR DE TURNO");
+                    }
                 }
             }
         }
@@ -469,6 +515,10 @@ namespace VistasSorrySliders
                             llpSeleccionada.IsEnabled = false;
                             ComprobarGanador();
                         }
+                    }
+                    if (!ComprobarDadosActuales())
+                    {
+                        Console.WriteLine("CAMBIAR DE TURNO");
                     }
                 }
             }
@@ -507,6 +557,10 @@ namespace VistasSorrySliders
                         }
                         //ComprobarCambiarTurno Si todos los dados estan desabilitados CambiarTurno()
                         //NotificarJugador
+                    }
+                    if (!ComprobarDadosActuales())
+                    {
+                        Console.WriteLine("CAMBIAR DE TURNO");
                     }
                 }
             }
@@ -626,11 +680,11 @@ namespace VistasSorrySliders
                 if (!ComprobarDadosActuales())
                 {
                     Console.WriteLine("CAMBIAR DE TURNO");
+                    //Llamar a Notificar Cambio Turno del servidor
                 }
                 else
                 {
                     ActivarEllipses();
-                    Console.WriteLine("CONTINUA EL TURNO");
                 }
             }
         }
@@ -644,7 +698,6 @@ namespace VistasSorrySliders
                 if (ObtenerValorBoton(boton) <= 0)
                 {
                     boton.IsEnabled = desactivarBoton;
-                    Console.WriteLine("Desabilitar Boton");
                 }
                 else
                 {
@@ -662,7 +715,29 @@ namespace VistasSorrySliders
                 ellipse.IsEnabled = activarEllipse;
             }
         }
-        //Metodo mover ficha compañero, que ocupe el correo, int de ficha y lo mueva segun el int de movimiento
+
+        //Se llama cada que se cambia el tturn
+        private void CambiarTurno() 
+        {
+            _turnoActualJuego = _turnoActualJuego + 1;
+            EmpezarTurno(_turnoActualJuego);
+        }
+        //Se llama cada qjue empieza ora vez est a pantalla
+        private void EmpezarJuegoPuntuacionNuevo() 
+        {
+            //InicializarTablero(); //NO TODOS
+            //Llamar a los labels de puntuacion, **esto solo se hace al empezar**
+            //Ingresar puntuaciones  **esto solo se hace al empezar**
+            //Activar Dados y ellipses
+            _turnoActualJuego = 0;
+            EmpezarTurno(_turnoActualJuego);
+        }
+
+
+        //Lista de turnos//, asignarle uno a cada jugador, si falla el callback llamar a otro metodo callback que llame a todos y que quiten ese correo de us lista
+        //Metod guardar las puntuaciones //GUARDAR DATOS EN BD
+        //Metodo mover ficha compañero, que ocupe el correo, int de ficha y lo mueva segun el int de movimiento COMUNICAR POSICIONES A LOS DEMAS CADA QUE MUEVA UNA FICHA
+        //Cambiar Pantalla
 
     }
 }
