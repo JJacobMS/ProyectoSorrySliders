@@ -2322,4 +2322,87 @@ namespace VistasSorrySliders.ServicioSorrySliders {
             return base.Channel.SalirDelSistemaAsync(jugadorCorreo);
         }
     }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServicioSorrySliders.IJuegoPuntuacion", CallbackContract=typeof(VistasSorrySliders.ServicioSorrySliders.IJuegoPuntuacionCallback))]
+    public interface IJuegoPuntuacion {
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IJuegoPuntuacion/AgregarJugador")]
+        void AgregarJugador(string uid, string correoElectronico);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IJuegoPuntuacion/AgregarJugador")]
+        System.Threading.Tasks.Task AgregarJugadorAsync(string uid, string correoElectronico);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IJuegoPuntuacion/EliminarJugador")]
+        void EliminarJugador(string uid, string correoElectronico);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IJuegoPuntuacion/EliminarJugador")]
+        System.Threading.Tasks.Task EliminarJugadorAsync(string uid, string correoElectronico);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IJuegoPuntuacion/NotificarJugadores")]
+        void NotificarJugadores(string uid, string nombrePeon, int movimientoCanvas);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IJuegoPuntuacion/NotificarJugadores")]
+        System.Threading.Tasks.Task NotificarJugadoresAsync(string uid, string nombrePeon, int movimientoCanvas);
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public interface IJuegoPuntuacionCallback {
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IJuegoPuntuacion/NotificarJugadorMovimiento", ReplyAction="http://tempuri.org/IJuegoPuntuacion/NotificarJugadorMovimientoResponse")]
+        void NotificarJugadorMovimiento(string uid, string nombrePeon, int movimientoCanvas);
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public interface IJuegoPuntuacionChannel : VistasSorrySliders.ServicioSorrySliders.IJuegoPuntuacion, System.ServiceModel.IClientChannel {
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class JuegoPuntuacionClient : System.ServiceModel.DuplexClientBase<VistasSorrySliders.ServicioSorrySliders.IJuegoPuntuacion>, VistasSorrySliders.ServicioSorrySliders.IJuegoPuntuacion {
+        
+        public JuegoPuntuacionClient(System.ServiceModel.InstanceContext callbackInstance) : 
+                base(callbackInstance) {
+        }
+        
+        public JuegoPuntuacionClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName) : 
+                base(callbackInstance, endpointConfigurationName) {
+        }
+        
+        public JuegoPuntuacionClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName, string remoteAddress) : 
+                base(callbackInstance, endpointConfigurationName, remoteAddress) {
+        }
+        
+        public JuegoPuntuacionClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(callbackInstance, endpointConfigurationName, remoteAddress) {
+        }
+        
+        public JuegoPuntuacionClient(System.ServiceModel.InstanceContext callbackInstance, System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(callbackInstance, binding, remoteAddress) {
+        }
+        
+        public void AgregarJugador(string uid, string correoElectronico) {
+            base.Channel.AgregarJugador(uid, correoElectronico);
+        }
+        
+        public System.Threading.Tasks.Task AgregarJugadorAsync(string uid, string correoElectronico) {
+            return base.Channel.AgregarJugadorAsync(uid, correoElectronico);
+        }
+        
+        public void EliminarJugador(string uid, string correoElectronico) {
+            base.Channel.EliminarJugador(uid, correoElectronico);
+        }
+        
+        public System.Threading.Tasks.Task EliminarJugadorAsync(string uid, string correoElectronico) {
+            return base.Channel.EliminarJugadorAsync(uid, correoElectronico);
+        }
+        
+        public void NotificarJugadores(string uid, string nombrePeon, int movimientoCanvas) {
+            base.Channel.NotificarJugadores(uid, nombrePeon, movimientoCanvas);
+        }
+        
+        public System.Threading.Tasks.Task NotificarJugadoresAsync(string uid, string nombrePeon, int movimientoCanvas) {
+            return base.Channel.NotificarJugadoresAsync(uid, nombrePeon, movimientoCanvas);
+        }
+    }
 }
