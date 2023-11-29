@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-  <xs:import schemaLocation="http://192.168.100.4:5454/?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/DatosSorrySliders" />
-  <xs:import schemaLocation="http://192.168.100.4:5454/?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/System" />
+  <xs:import schemaLocation="http://localhost:5454/?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/DatosSorrySliders" />
+  <xs:import schemaLocation="http://localhost:5454/?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/System" />
   <xs:element name="VerificarExistenciaCorreoCuenta">
     <xs:complexType>
       <xs:sequence>
@@ -606,12 +606,22 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="JugadorTiroDadoResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
   <xs:element name="JugadorDetuvoLinea">
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="posicionX" type="xs:double" />
         <xs:element minOccurs="0" name="posicionY" type="xs:double" />
       </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="JugadorDetuvoLineaResponse">
+    <xs:complexType>
+      <xs:sequence />
     </xs:complexType>
   </xs:element>
   <xs:element name="JugadorSalioJuegoLanzamiento">
@@ -621,7 +631,17 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="JugadorSalioJuegoLanzamientoResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
   <xs:element name="JugadoresListosParaSiguienteTurno">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="JugadoresListosParaSiguienteTurnoResponse">
     <xs:complexType>
       <xs:sequence />
     </xs:complexType>

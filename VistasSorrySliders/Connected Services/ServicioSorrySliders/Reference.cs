@@ -2172,16 +2172,16 @@ namespace VistasSorrySliders.ServicioSorrySliders {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public interface IJuegoLanzamientoCallback {
         
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IJuegoLanzamiento/JugadorTiroDado")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IJuegoLanzamiento/JugadorTiroDado", ReplyAction="http://tempuri.org/IJuegoLanzamiento/JugadorTiroDadoResponse")]
         void JugadorTiroDado(int numeroDado);
         
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IJuegoLanzamiento/JugadorDetuvoLinea")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IJuegoLanzamiento/JugadorDetuvoLinea", ReplyAction="http://tempuri.org/IJuegoLanzamiento/JugadorDetuvoLineaResponse")]
         void JugadorDetuvoLinea(double posicionX, double posicionY);
         
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IJuegoLanzamiento/JugadorSalioJuegoLanzamiento")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IJuegoLanzamiento/JugadorSalioJuegoLanzamiento", ReplyAction="http://tempuri.org/IJuegoLanzamiento/JugadorSalioJuegoLanzamientoResponse")]
         void JugadorSalioJuegoLanzamiento(string correoElectronicoSalido);
         
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IJuegoLanzamiento/JugadoresListosParaSiguienteTurno")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IJuegoLanzamiento/JugadoresListosParaSiguienteTurno", ReplyAction="http://tempuri.org/IJuegoLanzamiento/JugadoresListosParaSiguienteTurnoResponse")]
         void JugadoresListosParaSiguienteTurno();
     }
     

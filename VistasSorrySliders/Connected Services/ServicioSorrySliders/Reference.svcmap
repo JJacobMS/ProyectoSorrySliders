@@ -19,16 +19,16 @@
     <ServiceContractMappings />
   </ClientOptions>
   <MetadataSources>
-    <MetadataSource Address="http://192.168.100.4:5454" Protocol="http" SourceId="1" />
+    <MetadataSource Address="http://localhost:5454" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="item.xsd" MetadataType="Schema" ID="9d6cb8e4-ac84-475c-a6fb-6ffedbd5627f" SourceId="1" SourceUrl="http://192.168.100.4:5454/?xsd=xsd4" />
-    <MetadataFile FileName="item1.xsd" MetadataType="Schema" ID="640596ff-d8ba-4f67-93bb-b1334db7c235" SourceId="1" SourceUrl="http://192.168.100.4:5454/?xsd=xsd2" />
-    <MetadataFile FileName="item.disco" MetadataType="Disco" ID="866463d9-0bdd-492a-9266-6b70e8a6668d" SourceId="1" SourceUrl="http://192.168.100.4:5454/?disco" />
-    <MetadataFile FileName="item2.xsd" MetadataType="Schema" ID="3ec2f973-f387-4643-9c03-79c3eccbc04f" SourceId="1" SourceUrl="http://192.168.100.4:5454/?xsd=xsd0" />
-    <MetadataFile FileName="item3.xsd" MetadataType="Schema" ID="8ccc7716-acf1-4eab-a081-57eea92ae405" SourceId="1" SourceUrl="http://192.168.100.4:5454/?xsd=xsd1" />
-    <MetadataFile FileName="ServicioComunicacionSorrySliders.wsdl" MetadataType="Wsdl" ID="e7916d7d-1693-458d-896d-35cda78aa3b3" SourceId="1" SourceUrl="http://192.168.100.4:5454/?wsdl" />
-    <MetadataFile FileName="item4.xsd" MetadataType="Schema" ID="8c37e9db-cdb7-4c8f-8b26-482394cfa2a3" SourceId="1" SourceUrl="http://192.168.100.4:5454/?xsd=xsd3" />
+    <MetadataFile FileName="item1.disco" MetadataType="Disco" ID="c6b433f6-273d-482c-a35d-86d7fa52183d" SourceId="1" SourceUrl="http://localhost:5454/?disco" />
+    <MetadataFile FileName="item5.xsd" MetadataType="Schema" ID="db87d50f-225e-4501-87d9-d1316cc00e9f" SourceId="1" SourceUrl="http://localhost:5454/?xsd=xsd2" />
+    <MetadataFile FileName="item51.xsd" MetadataType="Schema" ID="521dc62c-6a1b-4d46-a9ad-6d46f35fc6db" SourceId="1" SourceUrl="http://localhost:5454/?xsd=xsd3" />
+    <MetadataFile FileName="item52.xsd" MetadataType="Schema" ID="6b791fdc-2584-4021-a9f9-e471bdb7f901" SourceId="1" SourceUrl="http://localhost:5454/?xsd=xsd0" />
+    <MetadataFile FileName="item53.xsd" MetadataType="Schema" ID="817f42b0-b02f-426e-9484-f4899fee4910" SourceId="1" SourceUrl="http://localhost:5454/?xsd=xsd1" />
+    <MetadataFile FileName="item54.xsd" MetadataType="Schema" ID="4c0f3325-9edc-48b0-838c-c97552250d4b" SourceId="1" SourceUrl="http://localhost:5454/?xsd=xsd4" />
+    <MetadataFile FileName="ServicioComunicacionSorrySliders1.wsdl" MetadataType="Wsdl" ID="7893e93c-1744-414e-8b03-0f7e24c10aee" SourceId="1" SourceUrl="http://localhost:5454/?wsdl" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
