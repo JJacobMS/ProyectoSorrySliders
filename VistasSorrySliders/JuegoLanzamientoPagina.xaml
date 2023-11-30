@@ -85,7 +85,7 @@
                     <Rectangle Name="rctPistaAmarillo" Height="78" Width="228" Fill="Transparent" HorizontalAlignment="Center" VerticalAlignment="Center" Canvas.Top="246" Canvas.Left="0"/>
                     <Rectangle Name="rctPistaVerde" Height="78" Width="225" Fill="Transparent" HorizontalAlignment="Left" VerticalAlignment="Center" Canvas.Top="246" Canvas.Left="388"/>
 
-                    <Ellipse Name="llpPuntuacion1" Height="155" Width="169" Canvas.Left="223" Canvas.Top="208" HorizontalAlignment="Center" VerticalAlignment="Center"></Ellipse>
+                    <Ellipse Name="llpPuntuacion1" Height="169" Width="169" Canvas.Left="222" Canvas.Top="201" HorizontalAlignment="Left" VerticalAlignment="Top"></Ellipse>
                     <Ellipse Name="llpPuntuacion2" Fill="Transparent" Height="105" Width="114" Canvas.Left="251" Canvas.Top="233" HorizontalAlignment="Center" VerticalAlignment="Center"></Ellipse>
                     <Ellipse Name="llpPuntuacion3" Fill="Transparent" Height="74" Width="80" Canvas.Left="268" Canvas.Top="248" HorizontalAlignment="Left" VerticalAlignment="Center"></Ellipse>
                     <Ellipse Name="llpPuntuacion4" Fill="Transparent" Height="43" Width="48" Canvas.Left="284" Canvas.Top="264" HorizontalAlignment="Left" VerticalAlignment="Center"></Ellipse>
@@ -94,9 +94,9 @@
                     <Border x:Name="brdConteoPuntuaciones" Width="250" Height="250" BorderThickness="10" BorderBrush="#B26C1A" CornerRadius="20" 
                             Canvas.Left="183" Canvas.Top="160" Background="#FFF4A7" Visibility="Hidden" Canvas.ZIndex="2">
                         <StackPanel VerticalAlignment="Center">
-                            <TextBlock Style="{StaticResource estiloTxtBlockCambioRonda}">Ronda de Lanzamiento Terminada</TextBlock>
+                            <TextBlock Style="{StaticResource estiloTxtBlockCambioRonda}" Text="{x:Static p:Resources.txtBlockRondaLanzamientoTerminada}"></TextBlock>
                             <Image Height="50" Source="/Recursos/peon.png"/>
-                            <TextBlock FontSize="20" Style="{StaticResource estiloTxtBlockCambioRonda}">Contando puntuaciones....</TextBlock>
+                            <TextBlock FontSize="20" Style="{StaticResource estiloTxtBlockCambioRonda}" Text="{x:Static p:Resources.txtBlockContandoPuntuaciones}"></TextBlock>
                         </StackPanel>
                     </Border>
                 </Canvas>

@@ -32,6 +32,8 @@ namespace VistasSorrySliders
         private CuentaSet _cuenta;
         private UsuarioSet _usuario;
         private bool _esModificacion;
+        private string _rutaImagen;
+        private byte[] _avatarByte = null;
 
         public RegistroUsuariosPagina()
         {
@@ -48,12 +50,11 @@ namespace VistasSorrySliders
             _usuario = usuario;
             InicializarDatosModificarUsuario();
         }
-        private String _rutaImagen;
-        private byte[] _avatarByte = null;
+        
         private void EstablecerImagenPorDefecto()
         {
             Logger log = new Logger(this.GetType());
-            _rutaImagen = "pack://application:,,,/Recursos/avatarPredefinido.jpg";
+            _rutaImagen = Properties.Resources.uriAvatarPredefinido;
             try
             {
                 imgBrushAvatar.ImageSource = new BitmapImage(new Uri(_rutaImagen));
@@ -74,13 +75,11 @@ namespace VistasSorrySliders
             {
                 System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorImagen, Properties.Resources.msgTituloErrorImagen, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 log.LogWarn("Se ha proporcionado un argumento invalido", ex);
-                Console.WriteLine(ex);
             }
             catch (OutOfMemoryException ex)
             {
                 System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorImagen, Properties.Resources.msgTituloErrorImagen, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 log.LogWarn("Se ha agotado la memoria", ex);
-                Console.WriteLine(ex);
             }
             catch (System.IO.IOException ex)
             {
@@ -89,7 +88,6 @@ namespace VistasSorrySliders
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex);
                 System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorAvatarDefault, Properties.Resources.msgTituloErrorAvatarDefault, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 log.LogFatal("Ha ocurrido un error inesperado", ex);
             }
@@ -149,7 +147,7 @@ namespace VistasSorrySliders
                 validacionCampos = false;
             }
 
-            if (_esModificacion == false)
+            if (!_esModificacion)
             {
                 if (!string.IsNullOrWhiteSpace(txtBoxCorreoElectronico.Text) && ValidarCorreo(txtBoxCorreoElectronico.Text) && ValidarExistenciaCorreo())
                 {
@@ -214,19 +212,16 @@ namespace VistasSorrySliders
             }
             catch (RegexMatchTimeoutException ex)
             {
-                Console.WriteLine(ex);
                 log.LogWarn("El tiempo de espera para la expresión se ha agotado", ex);
                 return false;
             }
             catch (ArgumentException ex)
             {
-                Console.WriteLine(ex);
                 log.LogWarn("Se ha proporcionado un argumento invalido", ex);
                 return false;
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex);
                 log.LogFatal("Ha ocurrido un error inesperado", ex);
                 return false;
             }
@@ -234,12 +229,12 @@ namespace VistasSorrySliders
 
         private void AñadirCuenta()
         {
-            String nombre = txtBoxNombre.Text;
-            String apellidos = txtBoxApellidos.Text;
-            String correoElectronico = txtBoxCorreoElectronico.Text;
-            String contraseña = pssBoxContrasena.Password;
+            string nombre = txtBoxNombre.Text;
+            string apellidos = txtBoxApellidos.Text;
+            string correoElectronico = txtBoxCorreoElectronico.Text;
+            string contraseña = pssBoxContrasena.Password;
 
-            String nickname = txtBoxNickname.Text;
+            string nickname = txtBoxNickname.Text;
             var nuevaCuenta = new CuentaSet
             {
                 CorreoElectronico = correoElectronico,
@@ -283,28 +278,17 @@ namespace VistasSorrySliders
                 case Constantes.OPERACION_EXITOSA_VACIA:
                     System.Windows.Forms.MessageBox.Show(Properties.Resources.msgGuardarCuentaError);
                     break;
-                case Constantes.ERROR_CONEXION_BD:
-                    System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorBaseDatos);
-                    break;
-                case Constantes.ERROR_CONSULTA:
-                    System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorConsulta);
-                    break;
-                case Constantes.ERROR_CONEXION_SERVIDOR:
-                    System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorConexion);
-                    break;
-                case Constantes.ERROR_TIEMPO_ESPERA_SERVIDOR:
-                    System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorTiempoEsperaServidor);
+                default:
+                    Utilidades.MostrarMensajesError(resultado);
                     break;
             }
-            
-
         }
 
         private void ActualizarCuenta()
         {
-            String nombre = txtBoxNombre.Text;
-            String apellidos = txtBoxApellidos.Text;
-            String nickname = txtBoxNickname.Text;
+            string nombre = txtBoxNombre.Text;
+            string apellidos = txtBoxApellidos.Text;
+            string nickname = txtBoxNickname.Text;
             _cuenta.Nickname = nickname;
             _cuenta.Avatar = _avatarByte;
             var cuentaActualizada = new CuentaSet
@@ -350,17 +334,8 @@ namespace VistasSorrySliders
                 case Constantes.OPERACION_EXITOSA_VACIA:
                     System.Windows.Forms.MessageBox.Show(Properties.Resources.msgActualizarCuentaError);
                     break;
-                case Constantes.ERROR_CONEXION_BD:
-                    System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorBaseDatos);
-                    break;
-                case Constantes.ERROR_CONSULTA:
-                    System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorConsulta);
-                    break;
-                case Constantes.ERROR_CONEXION_SERVIDOR:
-                    System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorConexion);
-                    break;
-                case Constantes.ERROR_TIEMPO_ESPERA_SERVIDOR:
-                    System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorTiempoEsperaServidor);
+                default:
+                    Utilidades.MostrarMensajesError(resultado);
                     break;
             }
         }
@@ -393,20 +368,14 @@ namespace VistasSorrySliders
             }
             switch (resultado)
             {
+                case Constantes.OPERACION_EXITOSA_VACIA:
+                    return true;
                 case Constantes.OPERACION_EXITOSA:
                     System.Windows.Forms.MessageBox.Show(Properties.Resources.msgCorreoEncontrado, Properties.Resources.msgTituloCorreoEncontrado, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return false;
-                case Constantes.OPERACION_EXITOSA_VACIA:
-                    return true;
-                case Constantes.ERROR_CONEXION_BD:
-                    System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorBaseDatos);
-                    return false;
-                case Constantes.ERROR_CONSULTA:
-                    System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorConsulta);
-                    return false;
-                case Constantes.ERROR_CONEXION_SERVIDOR:
-                    System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorConexion);
-                    return false;
+                default:
+                    Utilidades.MostrarMensajesError(resultado);
+                    break;
             }
             return false;
         }
@@ -489,17 +458,14 @@ namespace VistasSorrySliders
             {
                 System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorImagen, Properties.Resources.msgTituloErrorImagen, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 log.LogWarn("Se ha proporcionado un argumento invalido", ex);
-                Console.WriteLine(ex);
             }
             catch (OutOfMemoryException ex)
             {
                 System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorImagen, Properties.Resources.msgTituloErrorImagen, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 log.LogWarn("Se ha agotado la memoria", ex);
-                Console.WriteLine(ex);
             }
             catch (UnauthorizedAccessException ex)
             {
-                Console.WriteLine(ex);
                 log.LogWarn("Error al acceder a la imagen", ex);
                 System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorImagenPermisos, Properties.Resources.msgErrorTituloImagenPermisos);
             }
@@ -507,11 +473,9 @@ namespace VistasSorrySliders
             {
                 System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorImagen, Properties.Resources.msgTituloErrorImagen, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 log.LogWarn("Error al acceder a la imagen", ex);
-                Console.WriteLine(ex);
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex);
                 System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorImagen, Properties.Resources.msgTituloErrorImagen, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 log.LogFatal("Ha ocurrido un error inesperado", ex);
             }
@@ -592,21 +556,18 @@ namespace VistasSorrySliders
             }
             catch (IOException ex)
             {
-                Console.WriteLine(ex);
                 log.LogWarn("Error al acceder a la imagen", ex);
                 System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorImagen, Properties.Resources.msgTituloErrorImagen, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
             catch (UnauthorizedAccessException ex)
             {
-                Console.WriteLine(ex);
                 log.LogWarn("Error al acceder a la imagen", ex);
                 System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorImagen, Properties.Resources.msgTituloErrorImagen, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex);
                 log.LogFatal("Ha ocurrido un error inesperado", ex);
                 System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorImagen, Properties.Resources.msgTituloErrorImagen, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;

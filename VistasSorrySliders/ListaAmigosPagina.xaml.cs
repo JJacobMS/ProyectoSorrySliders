@@ -16,9 +16,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using VistasSorrySliders.ServicioSorrySliders;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.TextBox;
-using System.Drawing;
 using System.Net.NetworkInformation;
+using VistasSorrySliders.LogicaJuego;
 
 namespace VistasSorrySliders
 {
@@ -75,22 +74,15 @@ namespace VistasSorrySliders
             switch (resultado)
             {
                 case Constantes.OPERACION_EXITOSA:
+                    lstBoxAmigos.Style = (Style)FindResource("estiloLstBoxAmigos");
                     lstBoxAmigos.ItemsSource = amigosLista;
                     break;
                 case Constantes.OPERACION_EXITOSA_VACIA:
-                    MessageBox.Show(Properties.Resources.msgAmigosErrorRecuperacion);
+                    lstBoxAmigos.Style = (Style)FindResource("estiloLstBoxAmigosVacia");
                     break;
-                case Constantes.ERROR_CONEXION_BD:
-                    MessageBox.Show(Properties.Resources.msgErrorBaseDatos);
-                    break;
-                case Constantes.ERROR_CONSULTA:
-                    MessageBox.Show(Properties.Resources.msgErrorConsulta);
-                    break;
-                case Constantes.ERROR_CONEXION_SERVIDOR:
-                    MessageBox.Show(Properties.Resources.msgErrorConexion);
-                    break;
-                case Constantes.ERROR_TIEMPO_ESPERA_SERVIDOR:
-                    MessageBox.Show(Properties.Resources.msgErrorTiempoEsperaServidor);
+                default:
+                    Window.GetWindow(this).Close();
+                    Utilidades.MostrarMensajesError(resultado); 
                     break;
             }
         }
@@ -152,8 +144,10 @@ namespace VistasSorrySliders
             }
         }
 
-        private void ClicBuscarJugador(object sender, RoutedEventArgs e)
+        private void ClickBuscarJugador(object sender, RoutedEventArgs e)
         {
+            lstBoxJugadores.Style = (Style)FindResource("estiloLstBoxAmigos");
+            lstBoxJugadores.Items.Clear();
             lstBoxJugadores.ItemsSource = null;
             string informacionJugador = txtBoxBuscadorJugadores.Text;
 
@@ -164,18 +158,26 @@ namespace VistasSorrySliders
         }
         private void CargarJugadores(string informacionJugador)
         {
-            Console.WriteLine(informacionJugador);
             Constantes resultado;
             List<CuentaSet> jugadoresLista = new List<CuentaSet>();
+            List<CuentaSet> jugadoresBaneados = new List<CuentaSet>();
             Logger log = new Logger(this.GetType());
             try
             {
-                CuentaSet[] cuentas;
-                (resultado, cuentas) = _proxyAmigos.RecuperarJugadoresCuenta(informacionJugador, _cuenta.CorreoElectronico);
-                if (cuentas != null)
+                CuentaSet[] cuentasBusqueda;
+                (resultado, cuentasBusqueda) = _proxyAmigos.RecuperarJugadoresCuenta(informacionJugador, _cuenta.CorreoElectronico);
+                
+                if (resultado == Constantes.OPERACION_EXITOSA)
                 {
-                    jugadoresLista = cuentas.ToList();
+                    jugadoresLista = cuentasBusqueda.ToList();
+                    CuentaSet[] cuentasBaneadas;
+                    (resultado, cuentasBaneadas) = _proxyAmigos.RecuperarBaneados(_cuenta.CorreoElectronico);
+                    if (cuentasBaneadas != null)
+                    {
+                        jugadoresBaneados = cuentasBaneadas.ToList();
+                    }
                 }
+                
             }
             catch (CommunicationException ex)
             {
@@ -196,23 +198,37 @@ namespace VistasSorrySliders
             switch (resultado)
             {
                 case Constantes.OPERACION_EXITOSA:
-                    lstBoxJugadores.ItemsSource = jugadoresLista;
+                    MostrarJugadoresBuscados(jugadoresLista, jugadoresBaneados);
                     break;
                 case Constantes.OPERACION_EXITOSA_VACIA:
-                    MessageBox.Show(Properties.Resources.msgJugadoresRecuperacion);
+                    lstBoxJugadores.Style = (Style)FindResource("estiloLstBoxJugadoresVacia");
                     break;
-                case Constantes.ERROR_CONEXION_BD:
-                    MessageBox.Show(Properties.Resources.msgErrorBaseDatos);
+                default:
+                    Window.GetWindow(this).Close();
+                    Utilidades.MostrarMensajesError(resultado);
                     break;
-                case Constantes.ERROR_CONSULTA:
-                    MessageBox.Show(Properties.Resources.msgErrorConsulta);
-                    break;
-                case Constantes.ERROR_CONEXION_SERVIDOR:
-                    MessageBox.Show(Properties.Resources.msgErrorConexion);
-                    break;
-                case Constantes.ERROR_TIEMPO_ESPERA_SERVIDOR:
-                    MessageBox.Show(Properties.Resources.msgErrorTiempoEsperaServidor);
-                    break;
+            }
+        }
+
+        private void MostrarJugadoresBuscados(List<CuentaSet> jugadoresLista, List<CuentaSet> jugadoresBaneados)
+        {
+            lstBoxJugadores.Style = (Style)FindResource("estiloLstBoxAmigos");
+            foreach (CuentaSet cuenta in jugadoresLista)
+            {
+                ListBoxItem lstBoxItemCuenta = new ListBoxItem
+                {
+                    DataContext = cuenta
+                };
+                Console.WriteLine(cuenta.CorreoElectronico);
+                foreach (CuentaSet jugadorBaneado in jugadoresBaneados)
+                {
+                    if (jugadorBaneado.CorreoElectronico.Equals(cuenta.CorreoElectronico))
+                    {
+                        lstBoxItemCuenta.IsEnabled = false;
+                    }
+                }
+                
+                lstBoxJugadores.Items.Add(lstBoxItemCuenta);
             }
         }
 
@@ -255,23 +271,15 @@ namespace VistasSorrySliders
             {
                 case Constantes.OPERACION_EXITOSA:
                     NotificarUsuarioInvitado(cuentaJugadorClickeado);
-                    break;
-                case Constantes.ERROR_CONEXION_BD:
-                    MessageBox.Show(Properties.Resources.msgErrorBaseDatos);
-                    break;
-                case Constantes.ERROR_CONSULTA:
-                    MessageBox.Show(Properties.Resources.msgErrorConsulta);
-                    break;
-                case Constantes.ERROR_CONEXION_SERVIDOR:
-                    MessageBox.Show(Properties.Resources.msgErrorConexion);
-                    break;
+                    return;
                 case Constantes.OPERACION_EXITOSA_VACIA:
                     MessageBox.Show(Properties.Resources.msgNotificacionGuardarError);
                     break;
-                case Constantes.ERROR_TIEMPO_ESPERA_SERVIDOR:
-                    MessageBox.Show(Properties.Resources.msgErrorTiempoEsperaServidor);
+                default:
+                    Utilidades.MostrarMensajesError(resultado);
                     break;
             }
+            Window.GetWindow(this).Close();
         }
 
         private void NotificarUsuarioInvitado(CuentaSet cuentaJugadorClickeado)
@@ -326,22 +334,14 @@ namespace VistasSorrySliders
             }
             switch (resultado)
             {
-                case Constantes.ERROR_CONEXION_BD:
-                    MessageBox.Show(Properties.Resources.msgErrorBaseDatos);
-                    break;
-                case Constantes.ERROR_CONSULTA:
+                case Constantes.OPERACION_EXITOSA_VACIA:
                     MessageBox.Show(Properties.Resources.msgTiposNotificacionVacios);
                     break;
-                case Constantes.ERROR_CONEXION_SERVIDOR:
-                    MessageBox.Show(Properties.Resources.msgErrorConexion);
-                    break;
-                case Constantes.OPERACION_EXITOSA_VACIA:
-                    MessageBox.Show(Properties.Resources.msgErrorBaseDatos);
-                    break;
-                case Constantes.ERROR_TIEMPO_ESPERA_SERVIDOR:
-                    MessageBox.Show(Properties.Resources.msgErrorTiempoEsperaServidor);
+                default:
+                    Utilidades.MostrarMensajesError(resultado);
                     break;
             }
+            Window.GetWindow(this).Close();
         }
     }
 }

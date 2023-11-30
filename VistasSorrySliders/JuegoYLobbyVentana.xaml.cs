@@ -21,12 +21,13 @@ namespace VistasSorrySliders
     /// <summary>
     /// Lógica de interacción para JuegoYLobbyVentana.xaml
     /// </summary>
-    public partial class JuegoYLobbyVentana : Window
+    public partial class JuegoYLobbyVentana : Window, IUsuariosEnLineaCallback
     {
         private LobbyPagina _frameLobby;
         private bool _esInvitado;
         private CuentaSet _cuenta;
         private string _codigoPartida;
+        private UsuariosEnLineaClient _proxyLinea;
 
         public event Action EliminarContexto;
         public event Action<string> ExpulsarJugador;
@@ -41,7 +42,7 @@ namespace VistasSorrySliders
             _codigoPartida = codigoPartida;
             _esInvitado = esInvitado;
             InitializeComponent();
-            _frameLobby = new LobbyPagina(cuenta, codigoPartida, esInvitado, this);
+            _frameLobby = new LobbyPagina(cuenta, codigoPartida, this);
             frameLobby.Content = _frameLobby;
             
             if (!esInvitado)
@@ -59,6 +60,10 @@ namespace VistasSorrySliders
             EliminarContexto?.Invoke();
             SalirCuentaRegistroPartidaBD();
             IrMenuUsuario();
+            if (_proxyLinea != null)
+            {
+                SalirSistemaEnLinea();
+            }
         }
         public void CambiarFrameLobby(Page paginaNueva)
         {
@@ -77,7 +82,6 @@ namespace VistasSorrySliders
 
         private void SalirCuentaRegistroPartidaBD()
         {
-            Console.WriteLine("Eliminar registro");
             Logger log = new Logger(this.GetType());
             try
             {
@@ -106,18 +110,22 @@ namespace VistasSorrySliders
 
         public void IrMenuUsuario()
         {
-            var ventanaPrincipal = new MainWindow();
+            var ventanaPrincipal = new MainWindow(_cuenta.CorreoElectronico);
+
+            if (!_esInvitado && ventanaPrincipal.EntrarSistemaEnLineaMenu())
+            {
+                MenuPrincipalPagina menu = new MenuPrincipalPagina(_cuenta);
+                ventanaPrincipal.Content = menu;
+            }
+            else
+            {
+                InicioSesionPagina inicio = new InicioSesionPagina();
+                ventanaPrincipal.Content = inicio;
+            }
 
             if (_esInvitado)
             {
                 EliminarCuentaProvisionalInvitado(_cuenta.CorreoElectronico);
-                InicioSesionPagina inicio = new InicioSesionPagina();
-                ventanaPrincipal.Content = inicio;
-            }
-            else
-            {
-                MenuPrincipalPagina menu = new MenuPrincipalPagina(_cuenta);
-                ventanaPrincipal.Content = menu;
             }
             ventanaPrincipal.Show();
         }
@@ -139,5 +147,62 @@ namespace VistasSorrySliders
             }
         }
 
+        public void ComprobarJugador()
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool EntrarSistemaEnLinea()
+        {
+            if (_esInvitado)
+            {
+                return true;
+            }
+            Logger log = new Logger(this.GetType());
+            try
+            {
+                InstanceContext contexto = new InstanceContext(this);
+                _proxyLinea = new UsuariosEnLineaClient(contexto);
+                _proxyLinea.EntrarConCuenta(_cuenta.CorreoElectronico);
+                return true;
+            }
+            catch (CommunicationException ex)
+            {
+                MessageBox.Show(Properties.Resources.msgErrorConexion);
+                log.LogError("Error de Comunicación con el Servidor", ex);
+            }
+            catch (TimeoutException ex)
+            {
+                MessageBox.Show(Properties.Resources.msgErrorTiempoEsperaServidor);
+                log.LogWarn("Se agoto el tiempo de espera del servidor", ex);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(Properties.Resources.msgErrorConexion);
+                log.LogFatal("Ha ocurrido un error inesperado", ex);
+            }
+            return false;
+        }
+
+        private void SalirSistemaEnLinea()
+        {
+            Logger log = new Logger(this.GetType());
+            try
+            {
+                _proxyLinea.SalirDelSistema(_cuenta.CorreoElectronico);
+            }
+            catch (CommunicationException ex)
+            {
+                log.LogError("Error de Comunicación con el Servidor", ex);
+            }
+            catch (TimeoutException ex)
+            {
+                log.LogWarn("Se agoto el tiempo de espera del servidor", ex);
+            }
+            catch (Exception ex)
+            {
+                log.LogFatal("Ha ocurrido un error inesperado", ex);
+            }
+        }
     }
 }

@@ -3,14 +3,13 @@
   <xs:import schemaLocation="http://localhost:5454/?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/DatosSorrySliders" />
   <xs:import schemaLocation="http://localhost:5454/?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
   <xs:import schemaLocation="http://localhost:5454/?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/ServidorSorrySliders" />
-  <xs:complexType name="ValueTupleOfConstantesstringbase64Binarystring_PIB9N_S6v">
+  <xs:complexType name="ValueTupleOfConstantesstringbase64BinarywTLIru0k">
     <xs:annotation>
       <xs:appinfo>
-        <GenericType Name="ValueTupleOf{0}{1}{2}{3}{#}" Namespace="http://schemas.datacontract.org/2004/07/System" xmlns="http://schemas.microsoft.com/2003/10/Serialization/">
+        <GenericType Name="ValueTupleOf{0}{1}{2}{#}" Namespace="http://schemas.datacontract.org/2004/07/System" xmlns="http://schemas.microsoft.com/2003/10/Serialization/">
           <GenericParameter Name="Constantes" Namespace="http://schemas.datacontract.org/2004/07/DatosSorrySliders" />
           <GenericParameter Name="string" Namespace="http://www.w3.org/2001/XMLSchema" />
           <GenericParameter Name="base64Binary" Namespace="http://www.w3.org/2001/XMLSchema" />
-          <GenericParameter Name="string" Namespace="http://www.w3.org/2001/XMLSchema" />
         </GenericType>
         <IsValueType xmlns="http://schemas.microsoft.com/2003/10/Serialization/">true</IsValueType>
       </xs:appinfo>
@@ -19,10 +18,9 @@
       <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/DatosSorrySliders" name="Item1" type="q1:Constantes" />
       <xs:element name="Item2" nillable="true" type="xs:string" />
       <xs:element name="Item3" nillable="true" type="xs:base64Binary" />
-      <xs:element name="Item4" nillable="true" type="xs:string" />
     </xs:sequence>
   </xs:complexType>
-  <xs:element name="ValueTupleOfConstantesstringbase64Binarystring_PIB9N_S6v" nillable="true" type="tns:ValueTupleOfConstantesstringbase64Binarystring_PIB9N_S6v" />
+  <xs:element name="ValueTupleOfConstantesstringbase64BinarywTLIru0k" nillable="true" type="tns:ValueTupleOfConstantesstringbase64BinarywTLIru0k" />
   <xs:complexType name="ValueTupleOfConstantesintW4mnvVr6">
     <xs:annotation>
       <xs:appinfo>

@@ -294,22 +294,22 @@
     <Resource Include="Fuentes\Prompt-Medium.ttf" />
     <Resource Include="Fuentes\WixMadeforText-Bold.ttf" />
     <Resource Include="Fuentes\WixMadeforText-Regular.ttf" />
-    <None Include="Connected Services\ServicioSorrySliders\item.xsd">
+    <None Include="Connected Services\ServicioSorrySliders\item5.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\ServicioSorrySliders\item1.xsd">
+    <None Include="Connected Services\ServicioSorrySliders\item51.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\ServicioSorrySliders\item2.xsd">
+    <None Include="Connected Services\ServicioSorrySliders\item52.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\ServicioSorrySliders\item3.xsd">
+    <None Include="Connected Services\ServicioSorrySliders\item53.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\ServicioSorrySliders\item4.xsd">
+    <None Include="Connected Services\ServicioSorrySliders\item54.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\ServicioSorrySliders\ServicioComunicacionSorrySliders.wsdl" />
+    <None Include="Connected Services\ServicioSorrySliders\ServicioComunicacionSorrySliders1.wsdl" />
     <None Include="Connected Services\ServicioSorrySliders\VistasSorrySliders.ServicioSorrySliders.Constantes.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
@@ -364,24 +364,6 @@
     <Resource Include="Recursos\tableroLanzamientoFondo.png" />
   </ItemGroup>
   <ItemGroup>
-    <WCFMetadataStorage Include="Connected Services\ServicioSorrySliders\" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Connected Services\ServicioSorrySliders\item.disco" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Connected Services\ServicioSorrySliders\configuration91.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Connected Services\ServicioSorrySliders\configuration.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Connected Services\ServicioSorrySliders\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Recursos\ajustesIcono.png" />
     <Resource Include="Recursos\crearLobbyIcono.png" />
     <Resource Include="Recursos\dadoRojo.png" />
@@ -425,9 +407,30 @@
     <Resource Include="Recursos\peon.png" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Recursos\desconectado.png" />
+  </ItemGroup>
+  <ItemGroup>
     <Resource Include="Recursos\tableroPuntuacionCuatro.png" />
     <Resource Include="Recursos\tableroPuntuacionDos.png" />
     <Resource Include="Recursos\tableroPuntuacionTres.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Connected Services\ServicioSorrySliders\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\ServicioSorrySliders\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\ServicioSorrySliders\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\ServicioSorrySliders\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\ServicioSorrySliders\item1.disco" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

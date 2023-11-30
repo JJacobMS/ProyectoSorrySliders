@@ -160,12 +160,26 @@ namespace VistasSorrySliders.LogicaJuego
 
         public void DesconectarJugador(string correoElectronico)
         {
-            foreach (JugadorLanzamiento jugador in ListaJugadores)
+            int posicionJugadorDesconectado = ListaJugadores.FindIndex(jugadorLista => jugadorLista.CorreElectronico.Equals(correoElectronico));
+
+            if (posicionJugadorDesconectado != -1)
             {
-                if (jugador.CorreElectronico.Equals(correoElectronico))
+                ListaJugadores[posicionJugadorDesconectado].EstaConectado = false;
+
+                if (posicionJugadorDesconectado == TurnoActual)
                 {
-                    jugador.EstaConectado = false;
+                    PararTurnoJugador();
                 }
+            }
+        }
+
+        private void PararTurnoJugador()
+        {
+            if (_temporizadorDado.IsEnabled || _temporizadorLinea.IsEnabled)
+            {
+                _temporizadorDado.Stop();
+                _temporizadorLinea.Stop();
+                CambiarTurnoSiguiente();
             }
         }
 
@@ -274,7 +288,8 @@ namespace VistasSorrySliders.LogicaJuego
         {
             foreach (JugadorLanzamiento jugador in ListaJugadores)
             {
-                jugador.CalcularPuntajePeonesTablero(ListaPuntuaciones);
+                Logger log = new Logger(this.GetType());
+                jugador.CalcularPuntajePeonesTablero(ListaPuntuaciones, ListaPeonesTablero);
             }
             PasarPuntuacionesJuego?.Invoke(ListaJugadores);
         }
@@ -283,27 +298,27 @@ namespace VistasSorrySliders.LogicaJuego
         {
             ImageBrush pintarImagenAzul = new ImageBrush
             {
-                ImageSource = new BitmapImage(new Uri("pack://application:,,,/Recursos/peonMorado.png"))
+                ImageSource = new BitmapImage(new Uri(Properties.Resources.uriPeonMorado))
             };
             ImageBrush pintarImagenRojo = new ImageBrush
             {
-                ImageSource = new BitmapImage(new Uri("pack://application:,,,/Recursos/peonRosa.png"))
+                ImageSource = new BitmapImage(new Uri(Properties.Resources.uriPeonRosa))
             };
             ImageBrush pintarImagenVerde = new ImageBrush
             {
-                ImageSource = new BitmapImage(new Uri("pack://application:,,,/Recursos/peonNegro.png"))
+                ImageSource = new BitmapImage(new Uri(Properties.Resources.uriPeonNegro))
             };
             ImageBrush pintarImagenAmarillo = new ImageBrush
             {
-                ImageSource = new BitmapImage(new Uri("pack://application:,,,/Recursos/peonGris.png"))
+                ImageSource = new BitmapImage(new Uri(Properties.Resources.uriPeonGris))
             };
 
             ColorPorJugador = new Dictionary<Direccion, ImageBrush>
             {
-                { Direccion.Abajo, pintarImagenAzul }, //Morado
-                { Direccion.Arriba, pintarImagenRojo }, //Rosa
-                { Direccion.Derecha, pintarImagenVerde }, //Negro
-                { Direccion.Izquierda, pintarImagenAmarillo }, //Gris
+                { Direccion.Abajo, pintarImagenAzul }, 
+                { Direccion.Arriba, pintarImagenRojo }, 
+                { Direccion.Derecha, pintarImagenVerde }, 
+                { Direccion.Izquierda, pintarImagenAmarillo }, 
             };
         }
         private void IniciarPosicionesInicioPeones()

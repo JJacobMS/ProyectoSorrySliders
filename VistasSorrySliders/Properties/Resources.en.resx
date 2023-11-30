@@ -187,7 +187,7 @@
     <value>REGISTER ACCOUNT</value>
   </data>
   <data name="btnRegresarMenuPrincipal" xml:space="preserve">
-    <value>RETORN TO MAIN MENU</value>
+    <value>RETURN TO MAIN MENU</value>
   </data>
   <data name="btnSalir" xml:space="preserve">
     <value>EXIT</value>
@@ -309,6 +309,9 @@
   <data name="mgsCuentaDetalleErrorRecuperar" xml:space="preserve">
     <value>User account data could not be recovered</value>
   </data>
+  <data name="msgAceptarNotificacion" xml:space="preserve">
+    <value>The notification has been confirmed</value>
+  </data>
   <data name="msgActualizarCuentaError" xml:space="preserve">
     <value>There was an error updating your account, please try again later</value>
   </data>
@@ -323,6 +326,9 @@
   </data>
   <data name="msgAmistadGuardarError" xml:space="preserve">
     <value>There was an error sending the friend request, please try again later</value>
+  </data>
+  <data name="msgBanearJugador" xml:space="preserve">
+    <value>The player has been successfully banned</value>
   </data>
   <data name="msgContrasenaNuevaCambiada" xml:space="preserve">
     <value>The new password has been changed successfully</value>
@@ -344,6 +350,15 @@
   </data>
   <data name="msgDatosCuentaVacia" xml:space="preserve">
     <value>There was an error retrieving your account data, please try again later</value>
+  </data>
+  <data name="msgEliminarAmigo" xml:space="preserve">
+    <value>The player has been successfully removed from friends</value>
+  </data>
+  <data name="msgEliminarBaneoJugador" xml:space="preserve">
+    <value>The player has been successfully unbanned</value>
+  </data>
+  <data name="msgEliminarNotificacion" xml:space="preserve">
+    <value>Notification has been removed</value>
   </data>
   <data name="msgErrorAvatarDefault" xml:space="preserve">
     <value>Error loading default avatar image</value>
@@ -382,7 +397,7 @@
     <value>The game host has banned you from the game</value>
   </data>
   <data name="msgFaltaJugadores" xml:space="preserve">
-    <value>All other players have left the game, exiting the game</value>
+    <value>All other players have left the game. The game will end</value>
   </data>
   <data name="msgGuardarCuentaError" xml:space="preserve">
     <value>There was an error registering, please try again later</value>
@@ -396,6 +411,12 @@
   <data name="msgJugadoresRecuperacion" xml:space="preserve">
     <value>There are no players matching the search</value>
   </data>
+  <data name="msgJugadorHaSalidoJuego" xml:space="preserve">
+    <value>Player {0} has disconnected</value>
+  </data>
+  <data name="msgJugadorHaSidoExpulsado" xml:space="preserve">
+    <value>Player {0} has been kicked out of the game</value>
+  </data>
   <data name="msgNotificacionGuardarError" xml:space="preserve">
     <value>There was an error saving the notification, please try again later</value>
   </data>
@@ -404,6 +425,9 @@
   </data>
   <data name="msgPartidaRecuperarVacia" xml:space="preserve">
     <value>There was an error recovering the game, please try again later</value>
+  </data>
+  <data name="msgSolicitudAmistadEnviada" xml:space="preserve">
+    <value>Friend request has been sent successfully</value>
   </data>
   <data name="msgTablaVacia" xml:space="preserve">
     <value>No winners yet, be the first winner</value>
@@ -493,10 +517,13 @@
     <value>CREATE LOBBY</value>
   </data>
   <data name="txtBlockCuentaYaEnLobby" xml:space="preserve">
-    <value>Your account is already in the lobby</value>
+    <value>Your account is now online, and you cannot log in more than once at a time</value>
   </data>
   <data name="txtBlockEnLinea" xml:space="preserve">
     <value>Online</value>
+  </data>
+  <data name="txtBlockJugadorBaneado" xml:space="preserve">
+    <value>One of the players in the lobby has banned you</value>
   </data>
   <data name="txtBlockJugadoresAmigos" xml:space="preserve">
     <value>PLAYER'S AND FRIENDS</value>

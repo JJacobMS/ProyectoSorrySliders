@@ -97,17 +97,8 @@ namespace VistasSorrySliders
                     case Constantes.OPERACION_EXITOSA_VACIA:
                         txtBlockCorreoInvalido.Visibility = Visibility.Visible;
                         break;
-                    case Constantes.ERROR_CONEXION_BD:
-                        MessageBox.Show(Properties.Resources.msgErrorBaseDatos);
-                        break;
-                    case Constantes.ERROR_CONSULTA:
-                        MessageBox.Show(Properties.Resources.msgErrorConsulta);
-                        break;
-                    case Constantes.ERROR_CONEXION_SERVIDOR:
-                        MessageBox.Show(Properties.Resources.msgErrorConexion);
-                        break;
-                    case Constantes.ERROR_TIEMPO_ESPERA_SERVIDOR:
-                        MessageBox.Show(Properties.Resources.msgErrorTiempoEsperaServidor);
+                    default:
+                        Utilidades.MostrarMensajesError(resultado);
                         break;
                 }
             }
@@ -143,30 +134,15 @@ namespace VistasSorrySliders
             switch (resultado)
             {
                 case Constantes.OPERACION_EXITOSA:
-                    CambiarPantallaMenuPrincipal(cuentaPorVerificar.CorreoElectronico);
+                    VerificarUsuarioUnicoSistema(cuentaPorVerificar.CorreoElectronico);
                     break;
                 case Constantes.OPERACION_EXITOSA_VACIA:
                     txtBlockContrasenaInvalida.Visibility = Visibility.Visible;
                     break;
-                case Constantes.ERROR_CONEXION_BD:
-                    MessageBox.Show(Properties.Resources.msgErrorBaseDatos);
-                    break;
-                case Constantes.ERROR_CONSULTA:
-                    MessageBox.Show(Properties.Resources.msgErrorBaseDatos);
-                    break;
-                case Constantes.ERROR_CONEXION_SERVIDOR:
-                    MessageBox.Show(Properties.Resources.msgErrorConexion);
-                    break;
-                case Constantes.ERROR_TIEMPO_ESPERA_SERVIDOR:
-                    MessageBox.Show(Properties.Resources.msgErrorTiempoEsperaServidor);
+                default:
+                    Utilidades.MostrarMensajesError(resultado);
                     break;
             }
-        }
-
-        private void CambiarPantallaMenuPrincipal(string correoVerificado)
-        {
-            MenuPrincipalPagina menuPrincipal = new MenuPrincipalPagina(correoVerificado);
-            this.NavigationService.Navigate(menuPrincipal);
         }
 
         private void ReiniciarPantalla()
@@ -191,5 +167,56 @@ namespace VistasSorrySliders
             UnirsePartidaPagina unirsePaginaInvitado = new UnirsePartidaPagina();
             this.NavigationService.Navigate(unirsePaginaInvitado);
         }
+
+        private void VerificarUsuarioUnicoSistema(string correoJugador)
+        {
+            Logger log = new Logger(this.GetType());
+            try
+            {
+                bool estaEnLinea;
+                InicioSesionClient proxyInicioSesion = new InicioSesionClient();
+                estaEnLinea = proxyInicioSesion.JugadorEstaEnLinea(correoJugador);
+                if (estaEnLinea)
+                {
+                    MessageBox.Show(Properties.Resources.txtBlockCuentaYaEnLobby);
+                    return;
+                }
+                CambiarPantallaMenuPrincipal(correoJugador);
+            }
+            catch (CommunicationException ex)
+            {
+                MessageBox.Show(Properties.Resources.msgErrorConexion);
+                log.LogError("Error de Comunicación con el Servidor", ex);
+            }
+            catch (TimeoutException ex)
+            {
+                MessageBox.Show(Properties.Resources.msgErrorTiempoEsperaServidor);
+                log.LogWarn("Se agoto el tiempo de espera del servidor", ex);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(Properties.Resources.msgErrorConexion);
+                log.LogFatal("Ha ocurrido un error inesperado", ex);
+            }
+        }
+
+        private void CambiarPantallaMenuPrincipal(string correoVerificado)
+        {
+            MainWindow ventanaPrincipal = Window.GetWindow(this) as MainWindow;
+            ventanaPrincipal.IndicarCorreoCuenta(correoVerificado);
+
+            if (ventanaPrincipal.EntrarSistemaEnLineaMenu())
+            {
+                MenuPrincipalPagina menuPrincipal = new MenuPrincipalPagina();
+                menuPrincipal.CambiarPaginaMenu += CambiarPaginaMenu;
+                menuPrincipal.LlamarRecuperarDatosUsuario(correoVerificado);
+            }
+        }
+
+        private void CambiarPaginaMenu(MenuPrincipalPagina pagina)
+        {
+            this.NavigationService.Navigate(pagina);
+        }
+
     }
 }

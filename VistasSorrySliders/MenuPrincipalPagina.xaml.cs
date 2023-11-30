@@ -28,18 +28,22 @@ namespace VistasSorrySliders
     public partial class MenuPrincipalPagina : Page
     {
         private CuentaSet _cuentaUsuario;
+        public event Action<MenuPrincipalPagina> CambiarPaginaMenu;
 
-        public MenuPrincipalPagina(string correoUsuario)
+        public MenuPrincipalPagina()
         {
             InitializeComponent();
-            RecuperarDatosUsuario(correoUsuario);
-
         }
         public MenuPrincipalPagina(CuentaSet cuentaActual)
         {
             InitializeComponent();
             _cuentaUsuario = cuentaActual;
             InicializarDatosMenu();
+        }
+
+        public void LlamarRecuperarDatosUsuario(string correo)
+        {
+            RecuperarDatosUsuario(correo);
         }
 
         private void InicializarDatosMenu()
@@ -57,37 +61,33 @@ namespace VistasSorrySliders
             {
                 MenuPrincipalClient proxyRegistrarUsuario = new MenuPrincipalClient();
                 string nickname;
-                string contraseña;
                 byte[] avatar;
-                (resultado, nickname, avatar, contraseña) = proxyRegistrarUsuario.RecuperarDatosUsuario(correoUsuario);
+                (resultado, nickname, avatar) = proxyRegistrarUsuario.RecuperarDatosUsuario(correoUsuario);
                 if (resultado == Constantes.OPERACION_EXITOSA)
                 {
                     _cuentaUsuario = new CuentaSet
                     {
                         Nickname = nickname,
                         Avatar = avatar,
-                        CorreoElectronico = correoUsuario,
-                        Contraseña = contraseña
+                        CorreoElectronico = correoUsuario
                     };
                     InicializarDatosMenu();
+                    CambiarPaginaMenu?.Invoke(this);
                 }
                 proxyRegistrarUsuario.Close();
             }
             catch (CommunicationException ex)
             {
-                Console.WriteLine(ex);
                 resultado = Constantes.ERROR_CONEXION_SERVIDOR;
                 log.LogError("Error de Comunicación con el Servidor", ex);
             }
             catch (TimeoutException ex)
             {
-                Console.WriteLine(ex);
                 resultado = Constantes.ERROR_TIEMPO_ESPERA_SERVIDOR;
                 log.LogWarn("Se agoto el tiempo de espera del servidor", ex);
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex);
                 resultado = Constantes.ERROR_CONEXION_SERVIDOR;
                 log.LogFatal("Ha ocurrido un error inesperado", ex);
             }
@@ -98,20 +98,11 @@ namespace VistasSorrySliders
                 case Constantes.OPERACION_EXITOSA_VACIA:
                     MessageBox.Show(Properties.Resources.msgDatosCuentaVacia);
                     break;
-                case Constantes.ERROR_CONEXION_BD:
-                    MessageBox.Show(Properties.Resources.msgErrorBaseDatos);
-                    break;
-                case Constantes.ERROR_CONSULTA:
-                    MessageBox.Show(Properties.Resources.msgErrorConsulta);
-                    break;
-                case Constantes.ERROR_CONEXION_SERVIDOR:
-                    MessageBox.Show(Properties.Resources.msgErrorConexion);
-                    break;
-                case Constantes.ERROR_TIEMPO_ESPERA_SERVIDOR:
-                    MessageBox.Show(Properties.Resources.msgErrorTiempoEsperaServidor);
+                default:
+                    Utilidades.MostrarMensajesError(resultado);
                     break;
             }
-            IrInicioSesion();
+            
         }
 
         private void ClickMostrarAjustes(object sender, RoutedEventArgs e)
@@ -138,6 +129,8 @@ namespace VistasSorrySliders
         }
         private void IrInicioSesion()
         {
+            MainWindow ventana = Window.GetWindow(this) as MainWindow;
+            ventana.SalirSistema();
             InicioSesionPagina inicio = new InicioSesionPagina();
             this.NavigationService.Navigate(inicio);
         }

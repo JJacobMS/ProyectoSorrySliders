@@ -105,6 +105,20 @@
         </Setter>
     </Style>
 
+    <Style x:Key="estiloLstBoxJugadoresVacia" TargetType="ListBox">
+        <Setter Property="Height" Value="150"/>
+        <Setter Property="Margin" Value="10,0,10,0"/>
+        <Setter Property="BorderThickness" Value="3" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ListBox">
+                    <Border Name="Border" BorderThickness="3" BorderBrush="Black" CornerRadius="2" Background="#B886CD">
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
     <Style x:Key="estiloTbItemListaJugadores" TargetType="TabItem">
         <Setter Property="FontFamily" Value="{StaticResource FuentesTitulo}"/>
         <Setter Property="FontSize" Value="25"/>

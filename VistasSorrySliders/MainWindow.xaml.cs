@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -12,22 +14,93 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using VistasSorrySliders.ServicioSorrySliders;
 
 namespace VistasSorrySliders
 {
     /// <summary>
     /// Lógica de interacción para MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : NavigationWindow
+    public partial class MainWindow : NavigationWindow, IUsuariosEnLineaCallback
     {
+        private UsuariosEnLineaClient _proxyLinea;
+        private string _correo;
         public MainWindow()
         {
             InitializeComponent();
         }
 
-        private void CerrarVentana(object sender, System.ComponentModel.CancelEventArgs e)
+        public MainWindow(string correo)
         {
+            InitializeComponent();
+            _correo = correo;
+        }
 
+        private void CerrarVentana(object sender, CancelEventArgs e)
+        {
+            if (_proxyLinea != null)
+            {
+                SalirSistema();
+            }
+        }
+
+        public void IndicarCorreoCuenta(string correo)
+        {
+            _correo = correo;
+        }
+
+        public bool EntrarSistemaEnLineaMenu()
+        {
+            Logger log = new Logger(this.GetType());
+            try
+            {
+                InstanceContext contexto = new InstanceContext(this);
+                _proxyLinea = new UsuariosEnLineaClient(contexto);
+                _proxyLinea.EntrarConCuenta(_correo);
+                return true;
+            }
+            catch (CommunicationException ex)
+            {
+                MessageBox.Show(Properties.Resources.msgErrorConexion);
+                log.LogError("Error de Comunicación con el Servidor", ex);
+            }
+            catch (TimeoutException ex)
+            {
+                MessageBox.Show(Properties.Resources.msgErrorTiempoEsperaServidor);
+                log.LogWarn("Se agoto el tiempo de espera del servidor", ex);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(Properties.Resources.msgErrorConexion);
+                log.LogFatal("Ha ocurrido un error inesperado", ex);
+            }
+            return false;
+        }
+
+        public void SalirSistema()
+        {
+            Logger log = new Logger(this.GetType());
+            try
+            {
+                _proxyLinea.SalirDelSistema(_correo);
+            }
+            catch (CommunicationException ex)
+            {
+                log.LogError("Error de Comunicación con el Servidor", ex);
+            }
+            catch (TimeoutException ex)
+            {
+                log.LogWarn("Se agoto el tiempo de espera del servidor", ex);
+            }
+            catch (Exception ex)
+            {
+                log.LogFatal("Ha ocurrido un error inesperado", ex);
+            }
+        }
+
+        public void ComprobarJugador()
+        {
+            throw new NotImplementedException();
         }
     }
 }

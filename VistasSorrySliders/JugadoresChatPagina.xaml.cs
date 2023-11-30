@@ -131,7 +131,7 @@ namespace VistasSorrySliders
 
         private void ClickSalirPartida(object sender, RoutedEventArgs e)
         {
-
+            Window.GetWindow(this).Close();
         }
 
         public void DevolverMensaje(string nickname, string mensaje)
@@ -211,12 +211,14 @@ namespace VistasSorrySliders
             else
             {
                 NotificarExpulsionJuego(correoElectronico);
+                MostrarAvisoJugadorSalioJuego(correoElectronico, true);
             }
         }
 
         public void JugadorSalioListaJugadores(string correoElectronico)
         {
             NotificarExpulsionJuego(correoElectronico);
+            MostrarAvisoJugadorSalioJuego(correoElectronico, false);
         }
 
         private void NotificarExpulsionJuego(string correoElectronico)
@@ -232,6 +234,30 @@ namespace VistasSorrySliders
                     dtGridJugadores.Items.Refresh();
                 }
             }
+        }
+
+        private async void MostrarAvisoJugadorSalioJuego(string correoJugador, bool esBaneo)
+        {
+            string nicknameJugador = DevolverNicknameDelCorreo(correoJugador);
+            string mensaje;
+            if (esBaneo)
+            {
+                mensaje = string.Format(Properties.Resources.msgJugadorHaSidoExpulsado, nicknameJugador);
+            }
+            else
+            {
+                mensaje = string.Format(Properties.Resources.msgJugadorHaSalidoJuego, nicknameJugador);
+            }
+            txtBlockJugadorDesconectado.Text = mensaje;
+            brdJugadorDesconectado.Visibility = Visibility.Visible;
+            await Task.Delay(2500);
+            brdJugadorDesconectado.Visibility = Visibility.Hidden;
+        }
+
+        private string DevolverNicknameDelCorreo(string correo)
+        {
+            JugadorLista jugadorLista = _jugadoresListas.Where(jugador => jugador.CorreoElectronico.Equals(correo)).FirstOrDefault();
+            return jugadorLista.Nickname;
         }
     }
 }

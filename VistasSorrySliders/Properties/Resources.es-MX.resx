@@ -309,6 +309,9 @@
   <data name="mgsCuentaDetalleErrorRecuperar" xml:space="preserve">
     <value>No se han podido recuperar los datos de la cuenta de usuario</value>
   </data>
+  <data name="msgAceptarNotificacion" xml:space="preserve">
+    <value>Se ha confirmado la notificación</value>
+  </data>
   <data name="msgActualizarCuentaError" xml:space="preserve">
     <value>Hubo un error al actualizar la cuenta, por favor inténtelo más tarde</value>
   </data>
@@ -323,6 +326,9 @@
   </data>
   <data name="msgAmistadGuardarError" xml:space="preserve">
     <value>Hubo un error al enviar la solicitud de amistad, por favor inténtelo más tarde</value>
+  </data>
+  <data name="msgBanearJugador" xml:space="preserve">
+    <value>Se ha baneado al jugador correctamente</value>
   </data>
   <data name="msgContrasenaNuevaCambiada" xml:space="preserve">
     <value>La contraseña nueva se ha cambiado exitosamente</value>
@@ -344,6 +350,15 @@
   </data>
   <data name="msgDatosCuentaVacia" xml:space="preserve">
     <value>Hubo un error al recuperar los datos de su cuenta, por favor inténtelo más tarde</value>
+  </data>
+  <data name="msgEliminarAmigo" xml:space="preserve">
+    <value>Se ha eliminado de amigos al jugador correctamente</value>
+  </data>
+  <data name="msgEliminarBaneoJugador" xml:space="preserve">
+    <value>Se ha removido el baneado del jugador correctamente</value>
+  </data>
+  <data name="msgEliminarNotificacion" xml:space="preserve">
+    <value>Se ha eliminado la notificación</value>
   </data>
   <data name="msgErrorAvatarDefault" xml:space="preserve">
     <value>Error al cargar la imagen del avatar por defecto</value>
@@ -382,7 +397,7 @@
     <value>El host del juego lo ha expulsado de la partida</value>
   </data>
   <data name="msgFaltaJugadores" xml:space="preserve">
-    <value>Todos los demás jugadores se han salido de la partida, saliendo de la partida</value>
+    <value>Todos los demás jugadores se han salido de la partida. Se terminará la partida</value>
   </data>
   <data name="msgGuardarCuentaError" xml:space="preserve">
     <value>Hubo un error al registrarse, por favor inténtelo más tarde</value>
@@ -396,6 +411,12 @@
   <data name="msgJugadoresRecuperacion" xml:space="preserve">
     <value>No hay jugadores que coincidan con la búsqueda</value>
   </data>
+  <data name="msgJugadorHaSalidoJuego" xml:space="preserve">
+    <value>El jugador {0} se ha desconectado</value>
+  </data>
+  <data name="msgJugadorHaSidoExpulsado" xml:space="preserve">
+    <value>El jugador {0} ha sido expulsado del juego</value>
+  </data>
   <data name="msgNotificacionGuardarError" xml:space="preserve">
     <value>Hubo un error al guardar la notificación, por favor inténtelo más tarde</value>
   </data>
@@ -404,6 +425,9 @@
   </data>
   <data name="msgPartidaRecuperarVacia" xml:space="preserve">
     <value>Hubo un error al recuperar la partida, por favor inténtelo más tarde</value>
+  </data>
+  <data name="msgSolicitudAmistadEnviada" xml:space="preserve">
+    <value>Se ha enviado la solicitud de amistad correctamente</value>
   </data>
   <data name="msgTablaVacia" xml:space="preserve">
     <value>Aun no hay ganadores, sé el primero en ganar</value>
@@ -493,10 +517,13 @@
     <value>CREAR LOBBY</value>
   </data>
   <data name="txtBlockCuentaYaEnLobby" xml:space="preserve">
-    <value>Su cuenta ya está jugando dentro del lobby</value>
+    <value>Su cuenta ya está en línea, y no puede ingresar más de una vez al mismo tiempo</value>
   </data>
   <data name="txtBlockEnLinea" xml:space="preserve">
     <value>En línea</value>
+  </data>
+  <data name="txtBlockJugadorBaneado" xml:space="preserve">
+    <value>Uno de los jugadores del lobby lo ha baneado</value>
   </data>
   <data name="txtBlockJugadoresAmigos" xml:space="preserve">
     <value>JUGADORES Y AMIGOS</value>

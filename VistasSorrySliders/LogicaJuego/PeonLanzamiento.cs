@@ -81,23 +81,31 @@ namespace VistasSorrySliders.LogicaJuego
 
         public void DisminuirVelocidad()
         {
+            DisminuirVelocidadHorizontal();
+            DisminuirVelocidadVertical();  
+        }
+
+        private void DisminuirVelocidadHorizontal()
+        {
             if (VelocidadHorizontal >= 7)
             {
                 VelocidadHorizontal = 5;
             }
-            if (VelocidadVertical >= 7)
-            {
-                VelocidadVertical = 5;
-            }
-
             VelocidadHorizontal = (VelocidadHorizontal - 1 <= 0) ? 0 : VelocidadHorizontal - 1;
-            VelocidadVertical = (VelocidadVertical - 1 <= 0) ? 0 : VelocidadVertical - 1;
             if (VelocidadHorizontal <= 0)
             {
                 EnMovimientoDerecha = false;
                 EnMovimientoIzquierda = false;
             }
+        }
 
+        private void DisminuirVelocidadVertical()
+        {
+            if (VelocidadVertical >= 7)
+            {
+                VelocidadVertical = 5;
+            }
+            VelocidadVertical = (VelocidadVertical - 1 <= 0) ? 0 : VelocidadVertical - 1;
             if (VelocidadVertical <= 0)
             {
                 EnMovimientoAbajo = false;
@@ -107,14 +115,7 @@ namespace VistasSorrySliders.LogicaJuego
 
         public bool EstaLugarValido(List<Rectangle> LugaresNoValidos)
         {
-            foreach (Rectangle lugarNoValido in LugaresNoValidos)
-            {
-                if (IntersectaConRectangulo(lugarNoValido))
-                {
-                    return false;
-                }
-            }
-            return true;
+            return !LugaresNoValidos.Any(lugarNoValido => IntersectaConRectangulo(lugarNoValido));
         }
 
         public int CalcularPuntuacion(Dictionary<Ellipse, int> circulosPuntuaciones)
@@ -158,26 +159,22 @@ namespace VistasSorrySliders.LogicaJuego
                 HacerMovimientoAbajo();
             }
 
+            ComprobarColosionElementos(paredes, peonesTablero);
+            
+        }
 
-            foreach (Rectangle rectangulo in paredes)
+        private void ComprobarColosionElementos(List<Rectangle> paredes, List<PeonLanzamiento> peonesTablero)
+        {
+            foreach (Rectangle rectangulo in paredes.Where(rectangulo => IntersectaConRectangulo(rectangulo)))
             {
-                if (IntersectaConRectangulo(rectangulo))
-                {
-                    CambiarDireccionPared(rectangulo);
-                    RealizarMovimiento(paredes, peonesTablero);
-                }
+                CambiarDireccionPared(rectangulo);
+                RealizarMovimiento(paredes, peonesTablero);
             }
 
-            foreach (PeonLanzamiento peon in peonesTablero)
+            foreach (PeonLanzamiento peon in peonesTablero.Where(peon => peon != this && IntersectaConOtroCirculo(peon.Figura)))
             {
-                if (peon != this)
-                {
-                    if (IntersectaConOtroCirculo(peon))
-                    {
-                        CambiarDireccionPeones(peon);
-                        peon.RealizarMovimiento(paredes, peonesTablero);
-                    }
-                }
+                CambiarDireccionPeones(peon);
+                peon.RealizarMovimiento(paredes, peonesTablero);
             }
 
             if (_numeroDisminuirVelocidad >= _disminuyeVelocidad)
@@ -190,22 +187,6 @@ namespace VistasSorrySliders.LogicaJuego
                 _numeroDisminuirVelocidad++;
             }
         }
-        private bool IntersectaConOtroCirculo(PeonLanzamiento peonEnemigo)
-        {
-            //Si la distancia entre los centros es menor que la suma de los radios, los círculos se intersectan; de lo contrario, no se intersectan.
-            double centroXPeonActual = Canvas.GetLeft(Figura) + Figura.Width / 2;
-            double centroYPeonActual = Canvas.GetTop(Figura) + Figura.Height / 2;
-
-            double centroXPeonEnemigo = Canvas.GetLeft(peonEnemigo.Figura) + peonEnemigo.Figura.Width / 2;
-            double centroYPeonEnemigo = Canvas.GetTop(peonEnemigo.Figura) + peonEnemigo.Figura.Height / 2;
-
-            double distancia = Math.Sqrt(Math.Pow(centroXPeonEnemigo - centroXPeonActual, 2) + Math.Pow(centroYPeonEnemigo - centroYPeonActual, 2));
-
-            double radioFiguraActual = Figura.Width / 2;
-            double radioFiguraEnemiga = peonEnemigo.Figura.Width / 2;
-
-            return distancia < (radioFiguraActual + radioFiguraEnemiga);
-        }
 
         private bool IntersectaConOtroCirculo(Ellipse circulo)
         {
@@ -213,20 +194,20 @@ namespace VistasSorrySliders.LogicaJuego
             double centroXPeonActual = Canvas.GetLeft(Figura) + Figura.Width / 2;
             double centroYPeonActual = Canvas.GetTop(Figura) + Figura.Height / 2;
 
-            double centroXPeonEnemigo = Canvas.GetLeft(circulo) + circulo.Width / 2;
-            double centroYPeonEnemigo = Canvas.GetTop(circulo) + circulo.Height / 2;
+            double centroXCirculo = Canvas.GetLeft(circulo) + circulo.Width / 2;
+            double centroYCirculo = Canvas.GetTop(circulo) + circulo.Height / 2;
 
-            double distancia = Math.Sqrt(Math.Pow(centroXPeonEnemigo - centroXPeonActual, 2) + Math.Pow(centroYPeonEnemigo - centroYPeonActual, 2));
+            double distancia = Math.Sqrt(Math.Pow(centroXCirculo - centroXPeonActual, 2) + Math.Pow(centroYCirculo - centroYPeonActual, 2));
 
             double radioFiguraActual = Figura.Width / 2;
-            double radioFiguraEnemiga = circulo.Width / 2;
-
-            return distancia < (radioFiguraActual + radioFiguraEnemiga);
+            double radioCirculo = circulo.Width / 2;
+            
+            return distancia < (radioFiguraActual + radioCirculo);
         }
 
         private void CambiarDireccionPeones(PeonLanzamiento peonConElQueChocaron)
         {
-            if (DireccionHorizontal != Direccion.Ninguna)
+            if (VelocidadHorizontal > 0)
             {
                 if (DireccionHorizontal == Direccion.Derecha)
                 {
@@ -239,10 +220,10 @@ namespace VistasSorrySliders.LogicaJuego
                     peonConElQueChocaron.CambiarDireccionHorizontal(Direccion.Izquierda);
                 }
                 peonConElQueChocaron.VelocidadHorizontal += VelocidadHorizontal;
-                VelocidadHorizontal --;
+                DisminuirVelocidadHorizontal();
             }
 
-            if (DireccionVertical != Direccion.Ninguna)
+            if (VelocidadVertical > 0)
             {
                 if (DireccionVertical == Direccion.Arriba)
                 {
@@ -251,11 +232,11 @@ namespace VistasSorrySliders.LogicaJuego
                 }
                 else
                 {
-                    CambiarDireccionHorizontal(Direccion.Arriba);
+                    CambiarDireccionVertical(Direccion.Arriba);
                     peonConElQueChocaron.CambiarDireccionVertical(Direccion.Abajo);
                 }
                 peonConElQueChocaron.VelocidadVertical += VelocidadVertical;
-                VelocidadVertical --;
+                DisminuirVelocidadVertical();
             }
         }
 
@@ -263,21 +244,8 @@ namespace VistasSorrySliders.LogicaJuego
         {
             if (DireccionVertical != Direccion.Ninguna)
             {
-                switch (DireccionVertical)
-                {
-                    case Direccion.Abajo:
-                        if ((Canvas.GetTop(Figura) + Figura.Height) >= Canvas.GetTop(rectangulo) && Canvas.GetTop(Figura) <= Canvas.GetTop(rectangulo))
-                        {
-                            CambiarDireccionVertical(Direccion.Arriba);
-                        }
-                        break;
-                    case Direccion.Arriba:
-                        if ((Canvas.GetTop(Figura) + Figura.Height) >= (Canvas.GetTop(rectangulo) + rectangulo.Height) && Canvas.GetTop(Figura) <= (Canvas.GetTop(rectangulo) + rectangulo.Height))
-                        {
-                            CambiarDireccionVertical(Direccion.Abajo);
-                        }
-                        break;
-                }
+                CambiarDireccionVerticalPared(rectangulo);
+
                 if (VelocidadVertical > 1)
                 {
                     VelocidadVertical--;
@@ -286,21 +254,8 @@ namespace VistasSorrySliders.LogicaJuego
 
             if (DireccionHorizontal != Direccion.Ninguna)
             {
-                switch (DireccionHorizontal)
-                {
-                    case Direccion.Derecha:
-                        if ((Canvas.GetLeft(Figura) + Figura.Width) >= Canvas.GetLeft(rectangulo) && Canvas.GetLeft(Figura) <= Canvas.GetLeft(rectangulo))
-                        {
-                            CambiarDireccionHorizontal(Direccion.Izquierda);
-                        }
-                        break;
-                    case Direccion.Izquierda:
-                        if ((Canvas.GetLeft(Figura) + Figura.Width) >= (Canvas.GetLeft(rectangulo) + rectangulo.Width) && Canvas.GetLeft(Figura) <= (Canvas.GetLeft(rectangulo) + rectangulo.Width))
-                        {
-                            CambiarDireccionHorizontal(Direccion.Derecha);
-                        }
-                        break;
-                }
+                CambiarDireccionHorizontalPared(rectangulo);
+
                 if (VelocidadHorizontal > 1)
                 {
                     VelocidadHorizontal--;
@@ -309,6 +264,43 @@ namespace VistasSorrySliders.LogicaJuego
 
         }
 
+        private void CambiarDireccionVerticalPared(Rectangle rectangulo)
+        {
+            switch (DireccionVertical)
+            {
+                case Direccion.Abajo:
+                    if ((Canvas.GetTop(Figura) + Figura.Height) >= Canvas.GetTop(rectangulo) && Canvas.GetTop(Figura) <= Canvas.GetTop(rectangulo))
+                    {
+                        CambiarDireccionVertical(Direccion.Arriba);
+                    }
+                    break;
+                case Direccion.Arriba:
+                    if ((Canvas.GetTop(Figura) + Figura.Height) >= (Canvas.GetTop(rectangulo) + rectangulo.Height) && Canvas.GetTop(Figura) <= (Canvas.GetTop(rectangulo) + rectangulo.Height))
+                    {
+                        CambiarDireccionVertical(Direccion.Abajo);
+                    }
+                    break;
+            }
+        }
+
+        private void CambiarDireccionHorizontalPared(Rectangle rectangulo)
+        {
+            switch (DireccionHorizontal)
+            {
+                case Direccion.Derecha:
+                    if ((Canvas.GetLeft(Figura) + Figura.Width) >= Canvas.GetLeft(rectangulo) && Canvas.GetLeft(Figura) <= Canvas.GetLeft(rectangulo))
+                    {
+                        CambiarDireccionHorizontal(Direccion.Izquierda);
+                    }
+                    break;
+                case Direccion.Izquierda:
+                    if ((Canvas.GetLeft(Figura) + Figura.Width) >= (Canvas.GetLeft(rectangulo) + rectangulo.Width) && Canvas.GetLeft(Figura) <= (Canvas.GetLeft(rectangulo) + rectangulo.Width))
+                    {
+                        CambiarDireccionHorizontal(Direccion.Derecha);
+                    }
+                    break;
+            }
+        }
         private bool IntersectaConRectangulo(Rectangle rectangulo)
         {
             double radioPeon = Figura.Width / 2;
