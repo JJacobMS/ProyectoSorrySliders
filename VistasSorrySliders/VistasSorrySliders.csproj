@@ -124,8 +124,10 @@
     <Compile Include="Logger.cs" />
     <Compile Include="LogicaJuego\DadoPotencia.cs" />
     <Compile Include="LogicaJuego\Direccion.cs" />
+    <Compile Include="LogicaJuego\JugadorGanador.cs" />
     <Compile Include="LogicaJuego\JugadorLanzamiento.cs" />
     <Compile Include="LogicaJuego\JugadorLista.cs" />
+    <Compile Include="LogicaJuego\JugadorTurno.cs" />
     <Compile Include="LogicaJuego\LineaMovimiento.cs" />
     <Compile Include="LogicaJuego\PeonLanzamiento.cs" />
     <Compile Include="LogicaJuego\Tablero.cs" />
@@ -144,6 +146,9 @@
     </Compile>
     <Compile Include="RegistroUsuariosPagina.xaml.cs">
       <DependentUpon>RegistroUsuariosPagina.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="TableroGanadoresPartidaPagina.xaml.cs">
+      <DependentUpon>TableroGanadoresPartidaPagina.xaml</DependentUpon>
     </Compile>
     <Compile Include="TableroPuntuacionesPagina.xaml.cs">
       <DependentUpon>TableroPuntuacionesPagina.xaml</DependentUpon>
@@ -261,6 +266,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="RegistroUsuariosPagina.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="TableroGanadoresPartidaPagina.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -450,6 +459,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="iconoJuego.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Recursos\ganadoresPartidaIcono.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

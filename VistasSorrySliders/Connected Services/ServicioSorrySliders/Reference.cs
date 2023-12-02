@@ -2340,17 +2340,44 @@ namespace VistasSorrySliders.ServicioSorrySliders {
         System.Threading.Tasks.Task EliminarJugadorAsync(string uid, string correoElectronico);
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IJuegoPuntuacion/NotificarJugadores")]
-        void NotificarJugadores(string uid, string nombrePeon, int movimientoCanvas);
+        void NotificarJugadores(string uid, string correoJugador, string nombrePeon, int puntosObtenidos);
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IJuegoPuntuacion/NotificarJugadores")]
-        System.Threading.Tasks.Task NotificarJugadoresAsync(string uid, string nombrePeon, int movimientoCanvas);
+        System.Threading.Tasks.Task NotificarJugadoresAsync(string uid, string correoJugador, string nombrePeon, int puntosObtenidos);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IJuegoPuntuacion/NotificarCambioTurno")]
+        void NotificarCambioTurno(string uid);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IJuegoPuntuacion/NotificarCambioTurno")]
+        System.Threading.Tasks.Task NotificarCambioTurnoAsync(string uid);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IJuegoPuntuacion/ActualizarGanador", ReplyAction="http://tempuri.org/IJuegoPuntuacion/ActualizarGanadorResponse")]
+        VistasSorrySliders.ServicioSorrySliders.Constantes ActualizarGanador(string uid, string correoElectronico, int posicion);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IJuegoPuntuacion/ActualizarGanador", ReplyAction="http://tempuri.org/IJuegoPuntuacion/ActualizarGanadorResponse")]
+        System.Threading.Tasks.Task<VistasSorrySliders.ServicioSorrySliders.Constantes> ActualizarGanadorAsync(string uid, string correoElectronico, int posicion);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IJuegoPuntuacion/NotificarCambiarPagina")]
+        void NotificarCambiarPagina(string uid);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IJuegoPuntuacion/NotificarCambiarPagina")]
+        System.Threading.Tasks.Task NotificarCambiarPaginaAsync(string uid);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public interface IJuegoPuntuacionCallback {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IJuegoPuntuacion/NotificarJugadorMovimiento", ReplyAction="http://tempuri.org/IJuegoPuntuacion/NotificarJugadorMovimientoResponse")]
-        void NotificarJugadorMovimiento(string uid, string nombrePeon, int movimientoCanvas);
+        void NotificarJugadorMovimiento(string nombrePeon, int puntosObtenidos);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IJuegoPuntuacion/CambiarTurno", ReplyAction="http://tempuri.org/IJuegoPuntuacion/CambiarTurnoResponse")]
+        void CambiarTurno();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IJuegoPuntuacion/EliminarTurnoJugador", ReplyAction="http://tempuri.org/IJuegoPuntuacion/EliminarTurnoJugadorResponse")]
+        void EliminarTurnoJugador(string correoElectronico);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IJuegoPuntuacion/CambiarPagina", ReplyAction="http://tempuri.org/IJuegoPuntuacion/CambiarPaginaResponse")]
+        void CambiarPagina();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -2397,12 +2424,36 @@ namespace VistasSorrySliders.ServicioSorrySliders {
             return base.Channel.EliminarJugadorAsync(uid, correoElectronico);
         }
         
-        public void NotificarJugadores(string uid, string nombrePeon, int movimientoCanvas) {
-            base.Channel.NotificarJugadores(uid, nombrePeon, movimientoCanvas);
+        public void NotificarJugadores(string uid, string correoJugador, string nombrePeon, int puntosObtenidos) {
+            base.Channel.NotificarJugadores(uid, correoJugador, nombrePeon, puntosObtenidos);
         }
         
-        public System.Threading.Tasks.Task NotificarJugadoresAsync(string uid, string nombrePeon, int movimientoCanvas) {
-            return base.Channel.NotificarJugadoresAsync(uid, nombrePeon, movimientoCanvas);
+        public System.Threading.Tasks.Task NotificarJugadoresAsync(string uid, string correoJugador, string nombrePeon, int puntosObtenidos) {
+            return base.Channel.NotificarJugadoresAsync(uid, correoJugador, nombrePeon, puntosObtenidos);
+        }
+        
+        public void NotificarCambioTurno(string uid) {
+            base.Channel.NotificarCambioTurno(uid);
+        }
+        
+        public System.Threading.Tasks.Task NotificarCambioTurnoAsync(string uid) {
+            return base.Channel.NotificarCambioTurnoAsync(uid);
+        }
+        
+        public VistasSorrySliders.ServicioSorrySliders.Constantes ActualizarGanador(string uid, string correoElectronico, int posicion) {
+            return base.Channel.ActualizarGanador(uid, correoElectronico, posicion);
+        }
+        
+        public System.Threading.Tasks.Task<VistasSorrySliders.ServicioSorrySliders.Constantes> ActualizarGanadorAsync(string uid, string correoElectronico, int posicion) {
+            return base.Channel.ActualizarGanadorAsync(uid, correoElectronico, posicion);
+        }
+        
+        public void NotificarCambiarPagina(string uid) {
+            base.Channel.NotificarCambiarPagina(uid);
+        }
+        
+        public System.Threading.Tasks.Task NotificarCambiarPaginaAsync(string uid) {
+            return base.Channel.NotificarCambiarPaginaAsync(uid);
         }
     }
 }

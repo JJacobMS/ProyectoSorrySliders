@@ -32,14 +32,15 @@ namespace VistasSorrySliders
         private IJuegoLanzamiento _proxyLanzamiento;
         private string _codigoPartida;
         private string _correoJugadorActual;
+        private CuentaSet _cuentaUsuario;
         public JuegoLanzamientoPagina(List<CuentaSet> listaCuentas, int numeroJugadores, string codigoPartida, 
-            string correoElectronicoActual, JuegoYLobbyVentana ventana)
+            CuentaSet cuentaUsuario, JuegoYLobbyVentana ventana)
         {
             _juegoYLobbyVentana = ventana;
             _juegoYLobbyVentana.EliminarContexto += EliminarContextoJuegoLanzamiento;
             _juegoYLobbyVentana.ExpulsarJugador += JugadorSalioJuegoLanzamiento;
-
-            _correoJugadorActual = correoElectronicoActual;
+            _cuentaUsuario = cuentaUsuario;
+            _correoJugadorActual = cuentaUsuario.CorreoElectronico;
             _codigoPartida = codigoPartida;
             _numeroJugadores = numeroJugadores;
             InitializeComponent();
@@ -423,7 +424,7 @@ namespace VistasSorrySliders
             brdConteoPuntuaciones.Visibility = Visibility.Visible;
             await Task.Delay(3500);
             brdConteoPuntuaciones.Visibility = Visibility.Hidden;
-            _juegoYLobbyVentana.CambiarFrameLobby(new JuegoPuntuacionesPagina(jugadoresConPuntuaciones, _correoJugadorActual));
+            _juegoYLobbyVentana.CambiarFrameLobby(new JuegoPuntuacionesPagina(jugadoresConPuntuaciones, _cuentaUsuario, _codigoPartida));
             _juegoYLobbyVentana.ExpulsarJugador -= JugadorSalioJuegoLanzamiento;
             _juegoYLobbyVentana.EliminarContexto -= EliminarContextoJuegoLanzamiento;
         }

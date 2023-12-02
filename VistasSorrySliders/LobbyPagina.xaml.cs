@@ -281,7 +281,7 @@ namespace VistasSorrySliders
         public void HostInicioPartida()
         {
             List<CuentaSet> cuentasJugadores = _cuentas.ToList();
-            Page paginaJuego = new JuegoLanzamientoPagina(cuentasJugadores, _partidaActual.CantidadJugadores, _partidaActual.CodigoPartida.ToString(), _cuentaUsuario.CorreoElectronico, _juegoYLobbyVentana);
+            Page paginaJuego = new JuegoLanzamientoPagina(cuentasJugadores, _partidaActual.CantidadJugadores, _partidaActual.CodigoPartida.ToString(), _cuentaUsuario, _juegoYLobbyVentana);
             Page paginaChat = new JugadoresChatPagina(_cuentas, _cuentaUsuario, _partidaActual, _juegoYLobbyVentana);
             _juegoYLobbyVentana.CambiarFrameLobby(paginaJuego);
             _juegoYLobbyVentana.CambiarFrameListaAmigos(paginaChat);
