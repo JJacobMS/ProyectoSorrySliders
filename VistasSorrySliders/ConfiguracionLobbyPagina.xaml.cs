@@ -118,12 +118,26 @@ namespace VistasSorrySliders
         private void CrearVentanaLobby(CuentaSet _cuentaUsuario, string codigoPartida) 
         {
             JuegoYLobbyVentana lobbyUnirse = new JuegoYLobbyVentana(_cuentaUsuario, codigoPartida, false);
+            Constantes respuesta = lobbyUnirse.InicializarPaginas();
+            switch (respuesta)
+            {
+                case Constantes.OPERACION_EXITOSA:
+                    MostrarVentanaLobby(lobbyUnirse);
+                    break;
+                case Constantes.ERROR_CONEXION_SERVIDOR:
+                    Utilidades.SalirInicioSesionDesdeVentanaPrincipal(Window.GetWindow(this), this);
+                    break;
+            }
+        }
+
+        private void MostrarVentanaLobby(JuegoYLobbyVentana lobbyUnirse)
+        {
             if (lobbyUnirse.EntrarSistemaEnLinea())
             {
-                lobbyUnirse.Show();
                 MainWindow ventanaPrincipal = (MainWindow)Window.GetWindow(this);
                 ventanaPrincipal.EliminarProxyLineaAnterior();
                 Window.GetWindow(this).Close();
+                lobbyUnirse.Show();
             }
         }
 

@@ -34,12 +34,12 @@ namespace VistasSorrySliders
             _cuenta = cuenta;
         }
 
-        public bool InicializarPuntuaciones()
+        public Constantes InicializarPuntuaciones()
         {
             return RecuperarPuntuaciones();
         }
 
-        private bool RecuperarPuntuaciones() 
+        private Constantes RecuperarPuntuaciones() 
         {
             Constantes resultado;
             Puntuacion[] puntuaciones = new Puntuacion[] { };
@@ -69,7 +69,7 @@ namespace VistasSorrySliders
                         ListaPuntuaciones.Add(puntuacion);
                     }
                     this.DataContext = this;
-                    return true;
+                    break;
                 case Constantes.OPERACION_EXITOSA_VACIA:
                     Utilidades.MostrarUnMensajeError(Properties.Resources.msgTablaVacia);
                     break;
@@ -77,7 +77,7 @@ namespace VistasSorrySliders
                     Utilidades.MostrarMensajesError(resultado);
                     break;
             }
-            return false;
+            return resultado;
         }
 
         private void ClickSalirMenuPrincipal(object sender, RoutedEventArgs e)

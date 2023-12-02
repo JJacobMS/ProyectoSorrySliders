@@ -31,6 +31,7 @@ namespace VistasSorrySliders
 
         public event Action EliminarContexto;
         public event Action<string> ExpulsarJugador;
+
         public JuegoYLobbyVentana()
         {
             InitializeComponent();
@@ -42,17 +43,38 @@ namespace VistasSorrySliders
             _codigoPartida = codigoPartida;
             _esInvitado = esInvitado;
             InitializeComponent();
-            _frameLobby = new LobbyPagina(cuenta, codigoPartida, this);
-            frameLobby.Content = _frameLobby;
-            
-            if (!esInvitado)
+            frameLobby.Content = null;
+            frameListaAmigos.Content = null;
+        }
+
+        public Constantes InicializarPaginas()
+        {
+            _frameLobby = new LobbyPagina(_cuenta, _codigoPartida, this);
+            Constantes respuestaLobby = _frameLobby.InicializarPagina();
+
+            switch (respuestaLobby)
             {
-                ListaAmigosPagina amigos = new ListaAmigosPagina(cuenta, codigoPartida);
-                if (amigos.InicializarPagina())
-                {
-                    frameListaAmigos.Content = amigos;
-                }
+                case Constantes.ERROR_CONEXION_BD:
+                case Constantes.ERROR_CONEXION_SERVIDOR:
+                    return respuestaLobby;
             }
+
+            frameLobby.Content = _frameLobby;
+
+            if (!_esInvitado)
+            {
+                ListaAmigosPagina amigos = new ListaAmigosPagina(_cuenta, _codigoPartida);
+                Constantes resultadoAmigos = amigos.InicializarPagina();
+                switch (resultadoAmigos)
+                {
+                    case Constantes.ERROR_CONEXION_BD:
+                    case Constantes.ERROR_CONEXION_SERVIDOR:
+                        return resultadoAmigos;
+                }
+                frameListaAmigos.Content = amigos;
+            }
+
+            return Constantes.OPERACION_EXITOSA;
         }
 
         public void CerrarVentana(object sender, CancelEventArgs e) 
@@ -90,21 +112,13 @@ namespace VistasSorrySliders
             }
             catch (CommunicationException ex)
             {
-                Console.WriteLine(ex);
-                System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorConexion);
+                Utilidades.MostrarUnMensajeError(Properties.Resources.msgErrorConexion);
                 log.LogError("Error de Comunicación con el Servidor", ex);
             }
             catch (TimeoutException ex)
             {
-                Console.WriteLine(ex);
-                System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorConexion);
+                Utilidades.MostrarUnMensajeError(Properties.Resources.msgErrorConexion);
                 log.LogWarn("Se agoto el tiempo de espera del servidor", ex);
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex);
-                System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorConexion);
-                log.LogFatal("Ha ocurrido un error inesperado", ex);
             }
         }
 
@@ -169,18 +183,13 @@ namespace VistasSorrySliders
             }
             catch (CommunicationException ex)
             {
-                MessageBox.Show(Properties.Resources.msgErrorConexion);
+                Utilidades.MostrarUnMensajeError(Properties.Resources.msgErrorConexion);
                 log.LogError("Error de Comunicación con el Servidor", ex);
             }
             catch (TimeoutException ex)
             {
-                MessageBox.Show(Properties.Resources.msgErrorTiempoEsperaServidor);
+                Utilidades.MostrarUnMensajeError(Properties.Resources.msgErrorTiempoEsperaServidor);
                 log.LogWarn("Se agoto el tiempo de espera del servidor", ex);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(Properties.Resources.msgErrorConexion);
-                log.LogFatal("Ha ocurrido un error inesperado", ex);
             }
             return false;
         }
