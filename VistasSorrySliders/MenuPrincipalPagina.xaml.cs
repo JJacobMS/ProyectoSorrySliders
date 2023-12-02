@@ -146,9 +146,15 @@ namespace VistasSorrySliders
         private void ClickMostrarPuntuaciones(object sender, RoutedEventArgs e)
         {
             TableroPuntuacionesPagina tablero = new TableroPuntuacionesPagina(_cuentaUsuario);
-            if (tablero.InicializarPuntuaciones())
+            Constantes respuesta = tablero.InicializarPuntuaciones();
+            switch (respuesta)
             {
-                this.NavigationService.Navigate(tablero);
+                case Constantes.OPERACION_EXITOSA:
+                    this.NavigationService.Navigate(tablero);
+                    break;
+                case Constantes.ERROR_CONEXION_SERVIDOR:
+                    Utilidades.SalirInicioSesionDesdeVentanaPrincipal(Window.GetWindow(this), this);
+                    break;
             }
         }
 
@@ -158,6 +164,7 @@ namespace VistasSorrySliders
             detalles.ModificarUsuarioCuenta += ActualizarPaginaMenuPrincipal;
             detalles.ModificarContrasena += CambiarPaginaModificarContrasena;
             detalles.AbrirVentana += AbrirVentanaDetalles;
+            detalles.RegresarInicioSesion += IrInicioSesion;
             detalles.MostrarVentana();
         }
 

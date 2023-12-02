@@ -18,6 +18,7 @@ using System.Windows.Shapes;
 using VistasSorrySliders.ServicioSorrySliders;
 using System.Net.NetworkInformation;
 using VistasSorrySliders.LogicaJuego;
+using System.Data.Entity.Core;
 
 namespace VistasSorrySliders
 {
@@ -39,12 +40,29 @@ namespace VistasSorrySliders
             
         }
 
-        public bool InicializarPagina()
+        public Constantes InicializarPagina()
         {
-            return RecuperarAmigos() && RecuperarTiposNotificacion();
+            try
+            {
+                RecuperarAmigos();
+                RecuperarTiposNotificacion();
+            }
+            catch (CommunicationException ex)
+            {
+                Logger log = new Logger(this.GetType());
+                log.LogError("Error de Comunicación con el Servidor", ex);
+                return Constantes.ERROR_CONEXION_SERVIDOR;
+            }
+            catch (EntitySqlException ex)
+            {
+                Logger log = new Logger(this.GetType());
+                log.LogError("Error Con Base de Datos", ex);
+                return Constantes.ERROR_CONEXION_BD;
+            }
+            return Constantes.OPERACION_EXITOSA;
         }
 
-        private bool RecuperarAmigos()
+        private void RecuperarAmigos()
         {
             Constantes resultado;
             Logger log = new Logger(this.GetType());
@@ -69,20 +87,21 @@ namespace VistasSorrySliders
                 resultado = Constantes.ERROR_TIEMPO_ESPERA_SERVIDOR;
                 log.LogWarn("Se agoto el tiempo de espera del servidor", ex);
             }
-
+            Utilidades.MostrarMensajesError(resultado);
             switch (resultado)
             {
                 case Constantes.OPERACION_EXITOSA:
                     lstBoxAmigos.Style = (Style)FindResource("estiloLstBoxAmigos");
                     lstBoxAmigos.ItemsSource = amigosLista;
-                    return true;
+                    return;
                 case Constantes.OPERACION_EXITOSA_VACIA:
                     lstBoxAmigos.Style = (Style)FindResource("estiloLstBoxAmigosVacia");
-                    return true;
-                default:
-                    Utilidades.MostrarMensajesError(resultado); 
-                    return false;
+                    break;
+                case Constantes.ERROR_TIEMPO_ESPERA_SERVIDOR:
+                case Constantes.ERROR_CONEXION_SERVIDOR:
+                    throw new CommunicationException();
             }
+            throw new EntitySqlException();
         }
         private void ClickEnviarCodigo(object sender, RoutedEventArgs e)
         {
@@ -286,7 +305,7 @@ namespace VistasSorrySliders
             }
         }
 
-        private bool RecuperarTiposNotificacion() 
+        private void RecuperarTiposNotificacion() 
         {
             Logger log = new Logger(this.GetType());
             Constantes resultado;
@@ -297,7 +316,7 @@ namespace VistasSorrySliders
                 if (resultado == Constantes.OPERACION_EXITOSA)
                 {
                     _tiposNotificacion = listaTiposNotificaciones.ToList();
-                    return true;
+                    return;
                 }
             }
             catch (CommunicationException ex)
@@ -310,16 +329,17 @@ namespace VistasSorrySliders
                 resultado = Constantes.ERROR_TIEMPO_ESPERA_SERVIDOR;
                 log.LogWarn("Se agoto el tiempo de espera del servidor", ex);
             }
+            Utilidades.MostrarMensajesError(resultado);
             switch (resultado)
             {
                 case Constantes.OPERACION_EXITOSA_VACIA:
                     Utilidades.MostrarUnMensajeError(Properties.Resources.msgTiposNotificacionVacios);
                     break;
-                default:
-                    Utilidades.MostrarMensajesError(resultado);
-                    break;
+                case Constantes.ERROR_TIEMPO_ESPERA_SERVIDOR:
+                case Constantes.ERROR_CONEXION_SERVIDOR:
+                    throw new CommunicationException();
             }
-            return false;
+            throw new EntitySqlException();
         }
     }
 }

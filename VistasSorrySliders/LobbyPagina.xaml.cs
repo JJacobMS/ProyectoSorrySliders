@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity.Core;
 using System.Linq;
 using System.ServiceModel;
 using System.Text;
@@ -38,13 +39,38 @@ namespace VistasSorrySliders
 
             _cuentaUsuario = cuentaUsuario;
             _codigoPartida = codigoPartida;
-            EntrarPartida();
-            InicializarDatosPartida(codigoPartida);
-            RecuperarDatosPartida(codigoPartida);
+            
+        }
+
+        public Constantes InicializarPagina()
+        {
+            try
+            {
+                EntrarPartida();
+                InicializarDatosPartida(_codigoPartida);
+                RecuperarDatosPartida(_codigoPartida);
+            }
+            catch (CommunicationException ex)
+            {
+                Logger log = new Logger(this.GetType());
+                log.LogError("Error de Comunicación con el Servidor", ex);
+                return Constantes.ERROR_CONEXION_SERVIDOR;
+            }
+            catch (EntitySqlException ex)
+            {
+                Logger log = new Logger(this.GetType());
+                log.LogError("Error Con Base de Datos", ex);
+                return Constantes.ERROR_CONEXION_BD;
+            }
+            return Constantes.OPERACION_EXITOSA;
         }
 
         public void RecuperarDatosPartida(string codigoPartida) 
         {
+            if (_partidaActual == null)
+            {
+                return;
+            }
             Constantes respuesta;
             Logger log = new Logger(this.GetType());
             try
@@ -63,15 +89,14 @@ namespace VistasSorrySliders
             catch (CommunicationException ex)
             {
                 respuesta = Constantes.ERROR_CONEXION_SERVIDOR;
-                Console.WriteLine(ex);
                 log.LogError("Error de Comunicación con el Servidor", ex);
             }
             catch (TimeoutException ex)
             {
-                Console.WriteLine(ex);
                 respuesta = Constantes.ERROR_TIEMPO_ESPERA_SERVIDOR;
                 log.LogWarn("Se agoto el tiempo de espera del servidor", ex);
             }
+            Utilidades.MostrarMensajesError(respuesta);
             switch (respuesta)
             {
                 case Constantes.OPERACION_EXITOSA:
@@ -84,12 +109,11 @@ namespace VistasSorrySliders
                 case Constantes.OPERACION_EXITOSA_VACIA:
                     Utilidades.MostrarUnMensajeError(Properties.Resources.msgJugadoresLobbyRecuperar);
                     break;
-                default:
-                    Utilidades.MostrarMensajesError(respuesta);
-                    break;
-
+                case Constantes.ERROR_TIEMPO_ESPERA_SERVIDOR:
+                case Constantes.ERROR_CONEXION_SERVIDOR:
+                    throw new CommunicationException();
             }
-            IrMenuPrincipal();
+            throw new EntitySqlException();
         }
 
         private void CrearBorders(CuentaSet[] cuentas) 
@@ -162,6 +186,8 @@ namespace VistasSorrySliders
                 respuesta = Constantes.ERROR_TIEMPO_ESPERA_SERVIDOR;
                 log.LogWarn("Se agoto el tiempo de espera del servidor", ex);
             }
+
+            Utilidades.MostrarMensajesError(respuesta);
             switch (respuesta)
             {
                 case Constantes.OPERACION_EXITOSA:
@@ -170,12 +196,12 @@ namespace VistasSorrySliders
                 case Constantes.OPERACION_EXITOSA_VACIA:
                     Utilidades.MostrarUnMensajeError(Properties.Resources.msgPartidaRecuperarVacia);
                     break;
-                default:
-                    Utilidades.MostrarMensajesError(respuesta);
-                    break;
-
+                case Constantes.ERROR_TIEMPO_ESPERA_SERVIDOR:
+                case Constantes.ERROR_CONEXION_SERVIDOR:
+                    throw new CommunicationException();
             }
-            IrMenuPrincipal();
+            Console.WriteLine("EXCEPCION TIRADA");
+            throw new EntitySqlException();
         }
 
         private void CargarDatosPartida()
@@ -218,7 +244,22 @@ namespace VistasSorrySliders
 
         public void JugadorEntroPartida()
         {
-            RecuperarDatosPartida(_codigoPartida);
+            try
+            {
+                RecuperarDatosPartida(_codigoPartida);
+            }
+            catch (CommunicationException ex)
+            {
+                Logger log = new Logger(this.GetType());
+                log.LogError("Error de Comunicación con el Servidor", ex);
+                Window.GetWindow(this).Close();
+            }
+            catch (EntitySqlException ex)
+            {
+                Logger log = new Logger(this.GetType());
+                log.LogError("Error Con Base de Datos", ex);
+                Window.GetWindow(this).Close();
+            }
         }
 
         public void EntrarPartida()
@@ -239,12 +280,27 @@ namespace VistasSorrySliders
             {
                 log.LogWarn("Se agoto el tiempo de espera del servidor", ex);
             }
-            IrMenuPrincipal();
+            throw new CommunicationException();
         }
 
         public void JugadorSalioPartida()
         {
-            RecuperarDatosPartida(_codigoPartida);
+            try
+            {
+                RecuperarDatosPartida(_codigoPartida);
+            }
+            catch (CommunicationException ex)
+            {
+                Logger log = new Logger(this.GetType());
+                log.LogError("Error de Comunicación con el Servidor", ex);
+                Window.GetWindow(this).Close();
+            }
+            catch (EntitySqlException ex)
+            {
+                Logger log = new Logger(this.GetType());
+                log.LogError("Error Con Base de Datos", ex);
+                Window.GetWindow(this).Close();
+            }
         }
 
         private void ClickIniciarPartida(object sender, RoutedEventArgs e)
