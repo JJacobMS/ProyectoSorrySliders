@@ -340,10 +340,10 @@ namespace VistasSorrySliders
                 _listaBotonAzul[i].Content = puntuaciones[i];
             }
             */
-            btnPuntuacionAzul1.Content = 5;//puntuaciones[0];
-            btnPuntuacionAzul2.Content = 5;// puntuaciones[1];
-            btnPuntuacionAzul3.Content = 5;// puntuaciones[2];
-            btnPuntuacionAzul4.Content = 5;// puntuaciones[3];
+            btnPuntuacionAzul1.Content = 7;//puntuaciones[0];
+            btnPuntuacionAzul2.Content = 7;// puntuaciones[1];
+            btnPuntuacionAzul3.Content = 7;// puntuaciones[2];
+            btnPuntuacionAzul4.Content = 6;// puntuaciones[3];
         }
 
         private void IngresarPuntuacionesRojo(List<int> puntuaciones)
@@ -380,10 +380,10 @@ namespace VistasSorrySliders
                 _listaBotonAmarillo[i].Content = puntuaciones[i];
             }
             */
-            btnPuntuacionAmarillo1.Content = 3;//puntuaciones[0];
-            btnPuntuacionAmarillo2.Content = 3;//puntuaciones[1];
-            btnPuntuacionAmarillo3.Content = 3;//puntuaciones[2];
-            btnPuntuacionAmarillo4.Content = 3;//puntuaciones[3];
+            btnPuntuacionAmarillo1.Content = 0;//puntuaciones[0];
+            btnPuntuacionAmarillo2.Content = 0;//puntuaciones[1];
+            btnPuntuacionAmarillo3.Content = 0;//puntuaciones[2];
+            btnPuntuacionAmarillo4.Content = 9;//puntuaciones[3];
         }
 
         private void MouseLeftButtonDownPeonRojo(object sender, MouseButtonEventArgs e)
@@ -744,7 +744,7 @@ namespace VistasSorrySliders
             }
         }
 
-        private async void MoverPeonJugador(string nombrePeon, int puntosObtenidos) 
+        private  void MoverPeonJugador(string nombrePeon, int puntosObtenidos) 
         {
             if (puntosObtenidos >= 0)
             {
@@ -754,7 +754,6 @@ namespace VistasSorrySliders
                     if (posicion < LIMITE_FILAS)
                     {
                         SettearPosicionFicha(nombrePeon, posicion + AVANZAR_UNA_FILA);
-                        await Task.Delay(1000);
                     }
                     else
                     {
