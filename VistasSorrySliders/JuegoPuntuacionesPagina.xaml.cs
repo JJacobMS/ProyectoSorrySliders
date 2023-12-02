@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.ServiceModel;
 using System.Text;
@@ -22,10 +23,9 @@ namespace VistasSorrySliders
     /// <summary>
     /// Lógica de interacción para JuegoPuntuacionesPagina.xaml
     /// </summary>
-    public partial class JuegoPuntuacionesPagina : Page
+    public partial class JuegoPuntuacionesPagina : Page, IJuegoPuntuacionCallback
     {
         private string _correoUsuario;
-        private int _numeroJugadores;
         private const int AVANZAR_UNA_FILA = 9;
         private const int POSICION_FINAL_HOME = 79;
         private const int LIMITE_FILAS = 50;
@@ -45,10 +45,13 @@ namespace VistasSorrySliders
         private int _turnoActualJuego;
         private int _turnoJugador;
         private JuegoPuntuacionClient _proxyJuegoPuntuacion;
-        
+        private string _codigoPartida;
+        private List<JugadorTurno> _listaTurnos;
+        private List<JugadorGanador> _listaPuntuaciones;
+        private List<(string, string, int)> _listaDesordenada;
+        private CuentaSet _cuentaUsuario;
 
-
-        public JuegoPuntuacionesPagina(List<JugadorLanzamiento> jugadores, string correo)
+        public JuegoPuntuacionesPagina(List<JugadorLanzamiento> jugadores, CuentaSet cuentaUsuario, string codigoPartida)
         {
             InitializeComponent();
 
@@ -61,11 +64,12 @@ namespace VistasSorrySliders
             _listaBotonAmarillo = new List<Button> { btnPuntuacionAmarillo1, btnPuntuacionAmarillo2, btnPuntuacionAmarillo3, btnPuntuacionAmarillo4 };
             _listaBotonVerde = new List<Button> { btnPuntuacionVerde1, btnPuntuacionVerde2, btnPuntuacionVerde3, btnPuntuacionVerde4 };
             _listaBotonAzul = new List<Button> { btnPuntuacionAzul1, btnPuntuacionAzul2, btnPuntuacionAzul3, btnPuntuacionAzul4 };
-
-            _correoUsuario = correo;
+            _listaTurnos = new List<JugadorTurno>();
+            _codigoPartida = codigoPartida;
+            _cuentaUsuario = cuentaUsuario;
+            _correoUsuario = cuentaUsuario.CorreoElectronico;
             _jugadoresLanzamiento = jugadores;
             AgregarProxy();
-            Mostrar(jugadores);
             InicializarTablero();
             _turnoActualJuego = 0;
             EmpezarTurno(_turnoActualJuego);
@@ -79,7 +83,7 @@ namespace VistasSorrySliders
             {
                 InstanceContext contexto = new InstanceContext(this);
                 _proxyJuegoPuntuacion = new JuegoPuntuacionClient(contexto);
-                //_proxyJuegoPuntuacion.AgregarJugador();
+                _proxyJuegoPuntuacion.AgregarJugador(_codigoPartida, _correoUsuario);
                 respuesta = Constantes.OPERACION_EXITOSA;
             }
             catch (CommunicationException ex)
@@ -96,26 +100,19 @@ namespace VistasSorrySliders
             {
                 case Constantes.ERROR_CONEXION_BD:
                     MessageBox.Show(Properties.Resources.msgErrorBaseDatos);
-                    //SACAR AL MENU
                     break;
                 case Constantes.ERROR_CONSULTA:
                     MessageBox.Show(Properties.Resources.msgErrorConsulta);
-                    //
                     break;
                 case Constantes.ERROR_CONEXION_SERVIDOR:
                     MessageBox.Show(Properties.Resources.msgErrorConexion);
                     break;
                 case Constantes.OPERACION_EXITOSA:
-                    //
-
-
                     break;
                 case Constantes.OPERACION_EXITOSA_VACIA:
-                    //
                     break;
                 case Constantes.ERROR_TIEMPO_ESPERA_SERVIDOR:
                     MessageBox.Show(Properties.Resources.msgErrorTiempoEsperaServidor);
-                    //
                     break;
                 default:
                     break;
@@ -169,9 +166,6 @@ namespace VistasSorrySliders
             }
         }
 
-        private void Mostrar(List<JugadorLanzamiento> jugadores)
-        {
-        }
         private void InicializarTablero()
         {
             InicializarImagen();
@@ -247,18 +241,12 @@ namespace VistasSorrySliders
             switch (_jugadoresLanzamiento.Count())
             {
                 case 2:
-                    //OTRO METODO PARA ACTIVAR, ahí debo poner un metodo para _diccionarioEllipses y _diccionarioBotones
-                    //Activar si es el 0 y es el turno de 0
                     MostrarComponentesAzul();
-                    //Activar si es el 1 y es el turno de 1
                     MostrarComponentesRojo();
                     break;
                 case 3:
-                    //Activar si es el 0...
                     MostrarComponentesAzul();
-                    //Activar si es el 2...
                     MostrarComponentesVerde();
-                    //Activar si es el 1...
                     MostrarComponentesAmarillo();
                     break;
                 case 4:
@@ -292,34 +280,21 @@ namespace VistasSorrySliders
             cnvVerde.Visibility = Visibility.Visible;
             grdVerde.Visibility = Visibility.Visible;
         }
-        private void ActivarComponentesAzul()
-        {
-            cnvAzul.IsEnabled = true;
-            grdAzul.IsEnabled = true;
-        }
-        private void ActivarComponentesRojo()
-        {
-            cnvRojo.IsEnabled = true;
-            grdRojo.IsEnabled = true;
-        }
-        private void ActivarComponentesAmarillo()
-        {
-            cnvAmarillo.IsEnabled = true;
-            grdAmarillo.IsEnabled = true;
-        }
-        private void ActivarComponentesVerde()
-        {
-            cnvVerde.IsEnabled = true;
-            grdVerde.IsEnabled = true;
-        }
+
 
         private void AsignarTurno()
         {
             for (int i = 0; i < _jugadoresLanzamiento.Count(); i++)
             {
-                if (_jugadoresLanzamiento[i].CorreElectronico == _correoUsuario)
+                JugadorTurno jugadorTurno = new JugadorTurno()
                 {
-                    _turnoJugador = i;
+                    CorreoJugador = _jugadoresLanzamiento[i].CorreElectronico,
+                    TurnoJugador = i
+                };
+                _listaTurnos.Add(jugadorTurno);
+                if (jugadorTurno.CorreoJugador == _correoUsuario) 
+                {
+                    _turnoJugador = jugadorTurno.TurnoJugador;
                 }
             }
         }
@@ -365,10 +340,10 @@ namespace VistasSorrySliders
                 _listaBotonAzul[i].Content = puntuaciones[i];
             }
             */
-            btnPuntuacionAzul1.Content = 1;//puntuaciones[0];
-            btnPuntuacionAzul2.Content = 0;// puntuaciones[1];
-            btnPuntuacionAzul3.Content = 0;// puntuaciones[2];
-            btnPuntuacionAzul4.Content = 0;// puntuaciones[3];
+            btnPuntuacionAzul1.Content = 5;//puntuaciones[0];
+            btnPuntuacionAzul2.Content = 5;// puntuaciones[1];
+            btnPuntuacionAzul3.Content = 5;// puntuaciones[2];
+            btnPuntuacionAzul4.Content = 5;// puntuaciones[3];
         }
 
         private void IngresarPuntuacionesRojo(List<int> puntuaciones)
@@ -379,10 +354,10 @@ namespace VistasSorrySliders
                 _listaBotonRojo[i].Content = puntuaciones[i];
             }
             */
-            btnPuntuacionRojo1.Content = 1;// puntuaciones[0];
-            btnPuntuacionRojo2.Content = 0;// puntuaciones[1];
-            btnPuntuacionRojo3.Content = 1;// puntuaciones[2];
-            btnPuntuacionRojo4.Content = 0;// puntuaciones[3];
+            btnPuntuacionRojo1.Content = 3;// puntuaciones[0];
+            btnPuntuacionRojo2.Content = 3;// puntuaciones[1];
+            btnPuntuacionRojo3.Content = 3;// puntuaciones[2];
+            btnPuntuacionRojo4.Content = 3;// puntuaciones[3];
         }
         private void IngresarPuntuacionesVerde(List<int> puntuaciones)
         {
@@ -392,10 +367,10 @@ namespace VistasSorrySliders
                 _listaBotonVerde[i].Content = puntuaciones[i];
             }
             */
-            btnPuntuacionVerde1.Content = 9;//puntuaciones[0];
-            btnPuntuacionVerde2.Content = 9;//puntuaciones[1];
-            btnPuntuacionVerde3.Content = 9;//puntuaciones[2];
-            btnPuntuacionVerde4.Content = 9;//puntuaciones[3];
+            btnPuntuacionVerde1.Content = 3;//puntuaciones[0];
+            btnPuntuacionVerde2.Content = 3;//puntuaciones[1];
+            btnPuntuacionVerde3.Content = 3;//puntuaciones[2];
+            btnPuntuacionVerde4.Content = 3;//puntuaciones[3];
         }
         private void IngresarPuntuacionesAmarillo(List<int> puntuaciones)
         {
@@ -405,131 +380,55 @@ namespace VistasSorrySliders
                 _listaBotonAmarillo[i].Content = puntuaciones[i];
             }
             */
-            btnPuntuacionAmarillo1.Content = 9;//puntuaciones[0];
-            btnPuntuacionAmarillo2.Content = 9;//puntuaciones[1];
-            btnPuntuacionAmarillo3.Content = 9;//puntuaciones[2];
-            btnPuntuacionAmarillo4.Content = 9;//puntuaciones[3];
+            btnPuntuacionAmarillo1.Content = 3;//puntuaciones[0];
+            btnPuntuacionAmarillo2.Content = 3;//puntuaciones[1];
+            btnPuntuacionAmarillo3.Content = 3;//puntuaciones[2];
+            btnPuntuacionAmarillo4.Content = 3;//puntuaciones[3];
         }
 
         private void MouseLeftButtonDownPeonRojo(object sender, MouseButtonEventArgs e)
         {
-            MoverPeonRojoAsync(sender);
-        }
-        private async void MoverPeonRojoAsync(object sender)
-        {
-            if (_btnSeleccionado != null)
+            MoverPeonAsync(sender);
+
+            if (!ComprobarDadosActuales())
             {
-                Ellipse llpSeleccionada = sender as Ellipse;
-                int puntosObtenidos = ObtenerValorBoton(_btnSeleccionado);
-                if (puntosObtenidos >= 0)
-                {
-                    _btnSeleccionado.IsEnabled = false;
-                    _btnSeleccionado = null;
-                    for (int i = 0; i < puntosObtenidos; i++)
-                    {
-                        double posicion = Canvas.GetTop(llpSeleccionada);
-                        if (posicion < LIMITE_FILAS)
-                        {
-                            Canvas.SetTop(llpSeleccionada, posicion + AVANZAR_UNA_FILA);
-                            await Task.Delay(1000);
-                        }
-                        else
-                        {
-                            Canvas.SetTop(llpSeleccionada, POSICION_FINAL_HOME);
-                            llpSeleccionada.IsEnabled = false;
-                            ComprobarGanador();
-                        }
-                    }
-                    if (!ComprobarDadosActuales())
-                    {
-                        Console.WriteLine("CAMBIAR DE TURNO");
-                    }
-                }
+                NotificarCambiarTurno();
+                Console.WriteLine("CAMBIAR DE TURNO en tirada");
             }
         }
-
         private void MouseLeftButtonDownPeonAzul(object sender, MouseButtonEventArgs e)
         {
-            MoverPeonAzulAsync(sender);
-        }
-        private async void MoverPeonAzulAsync(object sender)
-        {
-            if (_btnSeleccionado != null)
-            {
-                Ellipse llpSeleccionada = sender as Ellipse;
-                int puntosObtenidos = ObtenerValorBoton(_btnSeleccionado);
-                if (puntosObtenidos >= 0)
-                {
-                    _btnSeleccionado.IsEnabled = false;
-                    _btnSeleccionado = null;
-                    for (int i = 0; i < puntosObtenidos; i++)
-                    {
-                        double posicion = Canvas.GetBottom(llpSeleccionada);
+            MoverPeonAsync(sender);
 
-                        Console.WriteLine("Puntos obtenidos " + puntosObtenidos);
-                        if (posicion < LIMITE_FILAS)
-                        {
-                            Canvas.SetBottom(llpSeleccionada, posicion + AVANZAR_UNA_FILA);
-                            await Task.Delay(1000);
-                        }
-                        else
-                        {
-                            Canvas.SetBottom(llpSeleccionada, POSICION_FINAL_HOME);
-                            llpSeleccionada.IsEnabled = false;
-                            ComprobarGanador();
-                        }
-                    }
-                    if (!ComprobarDadosActuales())
-                    {
-                        Console.WriteLine("CAMBIAR DE TURNO");
-                    }
-                }
+            if (!ComprobarDadosActuales())
+            {
+                NotificarCambiarTurno();
+                Console.WriteLine("CAMBIAR DE TURNO en tirada");
             }
         }
 
         private void MouseLeftButtonDownPeonVerde(object sender, MouseButtonEventArgs e)
         {
-            MoverPeonVerdeAsync(sender);
-        }
-        private async void MoverPeonVerdeAsync(object sender)
-        {
-            if (_btnSeleccionado != null)
+            MoverPeonAsync(sender);
+
+            if (!ComprobarDadosActuales())
             {
-                Ellipse llpSeleccionada = sender as Ellipse;
-                int puntosObtenidos = ObtenerValorBoton(_btnSeleccionado);
-                if (puntosObtenidos >= 0)
-                {
-                    _btnSeleccionado.IsEnabled = false;
-                    _btnSeleccionado = null;
-                    for (int i = 0; i < puntosObtenidos; i++)
-                    {
-                        double posicion = Canvas.GetRight(llpSeleccionada);
-                        if (posicion < LIMITE_FILAS)
-                        {
-                            Canvas.SetRight(llpSeleccionada, posicion + AVANZAR_UNA_FILA);
-                            await Task.Delay(1000);
-                        }
-                        else
-                        {
-                            Canvas.SetRight(llpSeleccionada, POSICION_FINAL_HOME);
-                            llpSeleccionada.IsEnabled = false;
-                            ComprobarGanador();
-                        }
-                    }
-                    if (!ComprobarDadosActuales())
-                    {
-                        Console.WriteLine("CAMBIAR DE TURNO");
-                    }
-                }
+                NotificarCambiarTurno();
+                Console.WriteLine("CAMBIAR DE TURNO en tirada");
             }
         }
 
         private void MouseLeftButtonDownPeonAmarillo(object sender, MouseButtonEventArgs e)
         {
-            MoverPeonAmarilloAsync(sender);
+            MoverPeonAsync(sender);
+            if (!ComprobarDadosActuales())
+            {
+                NotificarCambiarTurno();
+                Console.WriteLine("CAMBIAR DE TURNO en tirada");
+            }
         }
 
-        private async void MoverPeonAmarilloAsync(object sender)
+        private async void MoverPeonAsync(object sender)
         {
             if (_btnSeleccionado != null)
             {
@@ -537,30 +436,25 @@ namespace VistasSorrySliders
                 int puntosObtenidos = ObtenerValorBoton(_btnSeleccionado);
                 if (puntosObtenidos >= 0)
                 {
-                    Console.WriteLine("Puntos obtenidos " + puntosObtenidos);
+                    NotificarJugadores(llpSeleccionada, puntosObtenidos);
                     _btnSeleccionado.IsEnabled = false;
+                    _btnSeleccionado.BorderBrush = Brushes.Black;
                     _btnSeleccionado = null;
                     for (int i = 0; i < puntosObtenidos; i++)
                     {
-                        double posicion = Canvas.GetLeft(llpSeleccionada);
+                        double posicion = ObtenerPosicionFicha(llpSeleccionada.Name);
                         if (posicion < LIMITE_FILAS)
                         {
-                            Canvas.SetLeft(llpSeleccionada, posicion + AVANZAR_UNA_FILA);
+                            SettearPosicionFicha(llpSeleccionada.Name, posicion + AVANZAR_UNA_FILA);
                             await Task.Delay(1000);
                         }
                         else
                         {
-                            Canvas.SetLeft(llpSeleccionada, POSICION_FINAL_HOME);
+                            SettearPosicionFicha(llpSeleccionada.Name, POSICION_FINAL_HOME);
                             llpSeleccionada.IsEnabled = false;
-
                             ComprobarGanador();
+                            i = puntosObtenidos;
                         }
-                        //ComprobarCambiarTurno Si todos los dados estan desabilitados CambiarTurno()
-                        //NotificarJugador
-                    }
-                    if (!ComprobarDadosActuales())
-                    {
-                        Console.WriteLine("CAMBIAR DE TURNO");
                     }
                 }
             }
@@ -582,22 +476,7 @@ namespace VistasSorrySliders
             }
         }
 
-        private void ClickBtnAmarillo(object sender, RoutedEventArgs e)
-        {
-            _btnSeleccionado = CambiarColorSeleccion(sender);
-        }
-
-        private void ClickBtnRojo(object sender, RoutedEventArgs e)
-        {
-            _btnSeleccionado = CambiarColorSeleccion(sender);
-        }
-
-        private void ClickBtnAzul(object sender, RoutedEventArgs e)
-        {
-            _btnSeleccionado = CambiarColorSeleccion(sender);
-        }
-
-        private void ClickBtnVerde(object sender, RoutedEventArgs e)
+        private void ClickObtenerBoton(object sender, RoutedEventArgs e)
         {
             _btnSeleccionado = CambiarColorSeleccion(sender);
         }
@@ -643,14 +522,103 @@ namespace VistasSorrySliders
             }
             if (contadorRojo == fichasEnHome || contadorAzul == fichasEnHome || contadorVerde == fichasEnHome || contadorAmarillo == fichasEnHome)
             {
-                Console.WriteLine("Contador Rojo " + contadorRojo);
-                Console.WriteLine("Contador Azul " + contadorAzul);
-                Console.WriteLine("Contador Verde " + contadorVerde);
-                Console.WriteLine("Contador Amarillo " + contadorAmarillo);
+                OrdenarPuntuaciones(contadorRojo, contadorAzul, contadorVerde, contadorAmarillo);
+            }
+        }
 
-                //
-                //Guardar datos de cada jugador en la bd y pasar a la siguiente pantalla
-                //
+        private void OrdenarPuntuaciones(int contadorRojo, int contadorAzul, int contadorVerde, int contadorAmarillo) 
+        {
+            _listaDesordenada = new List<(string, string, int)>();
+            switch (_jugadoresLanzamiento.Count())
+            {
+                case 2:
+                    _listaDesordenada.Add((_jugadoresLanzamiento[0].CorreElectronico, _jugadoresLanzamiento[0].Nickname, contadorAzul));
+                    _listaDesordenada.Add((_jugadoresLanzamiento[1].CorreElectronico, _jugadoresLanzamiento[1].Nickname, contadorRojo));
+                    break;
+                case 3:
+                    _listaDesordenada.Add((_jugadoresLanzamiento[0].CorreElectronico, _jugadoresLanzamiento[0].Nickname, contadorAzul));
+                    _listaDesordenada.Add((_jugadoresLanzamiento[1].CorreElectronico, _jugadoresLanzamiento[1].Nickname, contadorVerde));
+                    _listaDesordenada.Add((_jugadoresLanzamiento[2].CorreElectronico, _jugadoresLanzamiento[2].Nickname, contadorAmarillo));
+                    break;
+                case 4:
+                    _listaDesordenada.Add((_jugadoresLanzamiento[0].CorreElectronico, _jugadoresLanzamiento[0].Nickname, contadorAzul));
+                    _listaDesordenada.Add((_jugadoresLanzamiento[1].CorreElectronico, _jugadoresLanzamiento[1].Nickname, contadorVerde));
+                    _listaDesordenada.Add((_jugadoresLanzamiento[2].CorreElectronico, _jugadoresLanzamiento[2].Nickname, contadorRojo));
+                    _listaDesordenada.Add((_jugadoresLanzamiento[3].CorreElectronico, _jugadoresLanzamiento[3].Nickname, contadorAmarillo));
+                    break;
+                default:
+                    break;
+            }
+            _listaDesordenada = _listaDesordenada.OrderByDescending(contador => contador.Item3).ToList();
+            IngresarRelacionPuntuacion(_listaDesordenada);
+        }
+
+        private void IngresarRelacionPuntuacion(List<(string, string, int)> listaOrdenada) 
+        {
+            _listaPuntuaciones = new List<JugadorGanador>();
+            for (int i = 0; i < listaOrdenada.Count(); i++)
+            {
+                JugadorGanador jugadorGanador = new JugadorGanador()
+                {
+                    CorreoElectronico = listaOrdenada[i].Item1,
+                    Nickname = listaOrdenada[i].Item2,
+                    Posicion = i + 1
+                };
+                _listaPuntuaciones.Add(jugadorGanador);
+                if (i > 0 && listaOrdenada[i].Item3 == listaOrdenada[i - 1].Item3)
+                {
+                    jugadorGanador.Posicion = _listaPuntuaciones[i - 1].Posicion;
+                    _listaPuntuaciones[i] = jugadorGanador;
+                }
+            }
+            if (_listaPuntuaciones[0].CorreoElectronico == _correoUsuario) 
+            {
+                GuardarGanador();
+            }
+        }
+
+        private void GuardarGanador() 
+        {
+            Logger log = new Logger(this.GetType());
+            Constantes respuesta;
+            try
+            {
+                _proxyJuegoPuntuacion.ActualizarGanador(_codigoPartida, _listaPuntuaciones[0].CorreoElectronico, _listaPuntuaciones[0].Posicion);
+                respuesta = Constantes.OPERACION_EXITOSA;
+            }
+            catch (CommunicationException ex)
+            {
+                log.LogError("Error de Comunicación con el Servidor", ex);
+                respuesta = Constantes.ERROR_CONEXION_SERVIDOR;
+            }
+            catch (TimeoutException ex)
+            {
+                log.LogWarn("Se agoto el tiempo de espera del servidor", ex);
+                respuesta = Constantes.ERROR_TIEMPO_ESPERA_SERVIDOR;
+            }
+            switch (respuesta)
+            {
+                case Constantes.ERROR_CONEXION_BD:
+                    //ERROR CONEXION
+                    break;
+                case Constantes.ERROR_CONSULTA:
+                    //ERROR CONSULTA
+                    break;
+                case Constantes.ERROR_CONEXION_SERVIDOR:
+                    MessageBox.Show(Properties.Resources.msgErrorConexion);
+                    break;
+                case Constantes.OPERACION_EXITOSA:
+                    NotificarCambiarPantalla();
+                    
+                    break;
+                case Constantes.OPERACION_EXITOSA_VACIA:
+                    //ERRROR NO SE PUDO ACTUALIZAR
+                    break;
+                case Constantes.ERROR_TIEMPO_ESPERA_SERVIDOR:
+                    MessageBox.Show(Properties.Resources.msgErrorTiempoEsperaServidor);
+                    break;
+                default:
+                    break;
             }
         }
 
@@ -679,8 +647,8 @@ namespace VistasSorrySliders
                 ActivarDados();
                 if (!ComprobarDadosActuales())
                 {
-                    Console.WriteLine("CAMBIAR DE TURNO");
-                    //Llamar a Notificar Cambio Turno del servidor
+                    NotificarCambiarTurno();
+                    Console.WriteLine("CAMBIAR DE TURNO en Empezar Turno");
                 }
                 else
                 {
@@ -709,19 +677,21 @@ namespace VistasSorrySliders
         private void ActivarEllipses()
         {
             bool activarEllipse = true;
+            bool desactivarEllipse = false;
             foreach (Ellipse ellipse in _diccionarioEllipses[_correoUsuario])
             {
-                Console.WriteLine("Activar ellipse "+ellipse.Name);
-                ellipse.IsEnabled = activarEllipse;
+                if (ObtenerPosicionFicha(ellipse.Name) < POSICION_FINAL_HOME)
+                {
+                    ellipse.IsEnabled = activarEllipse;
+                }
+                else 
+                {
+                    ellipse.IsEnabled = desactivarEllipse;
+                }
             }
         }
 
-        //Se llama cada que se cambia el tturn
-        private void CambiarTurno() 
-        {
-            _turnoActualJuego = _turnoActualJuego + 1;
-            EmpezarTurno(_turnoActualJuego);
-        }
+        
         //Se llama cada qjue empieza ora vez est a pantalla
         private void EmpezarJuegoPuntuacionNuevo() 
         {
@@ -733,11 +703,262 @@ namespace VistasSorrySliders
             EmpezarTurno(_turnoActualJuego);
         }
 
-
         //Lista de turnos//, asignarle uno a cada jugador, si falla el callback llamar a otro metodo callback que llame a todos y que quiten ese correo de us lista
         //Metod guardar las puntuaciones //GUARDAR DATOS EN BD
-        //Metodo mover ficha compañero, que ocupe el correo, int de ficha y lo mueva segun el int de movimiento COMUNICAR POSICIONES A LOS DEMAS CADA QUE MUEVA UNA FICHA
         //Cambiar Pantalla
 
+        public void NotificarJugadorMovimiento(string nombrePeon, int puntosObtenidos)
+        {
+            MoverPeonJugador(nombrePeon, puntosObtenidos);
+        }
+
+        private void NotificarCambiarTurno() 
+        {
+            Logger log = new Logger(this.GetType());
+            Constantes respuesta;
+            try
+            {
+                _proxyJuegoPuntuacion.NotificarCambioTurno(_codigoPartida);
+                respuesta = Constantes.OPERACION_EXITOSA;
+            }
+            catch (CommunicationException ex)
+            {
+                log.LogError("Error de Comunicación con el Servidor", ex);
+                respuesta = Constantes.ERROR_CONEXION_SERVIDOR;
+            }
+            catch (TimeoutException ex)
+            {
+                log.LogWarn("Se agoto el tiempo de espera del servidor", ex);
+                respuesta = Constantes.ERROR_TIEMPO_ESPERA_SERVIDOR;
+            }
+            switch (respuesta)
+            {
+                case Constantes.ERROR_CONEXION_SERVIDOR:
+                    MessageBox.Show(Properties.Resources.msgErrorConexion);
+                    break;
+                case Constantes.OPERACION_EXITOSA:
+                    break;
+                case Constantes.ERROR_TIEMPO_ESPERA_SERVIDOR:
+                    MessageBox.Show(Properties.Resources.msgErrorTiempoEsperaServidor);
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        private async void MoverPeonJugador(string nombrePeon, int puntosObtenidos) 
+        {
+            if (puntosObtenidos >= 0)
+            {
+                for (int i = 0; i < puntosObtenidos; i++)
+                {
+                    double posicion = ObtenerPosicionFicha(nombrePeon);
+                    if (posicion < LIMITE_FILAS)
+                    {
+                        SettearPosicionFicha(nombrePeon, posicion + AVANZAR_UNA_FILA);
+                        await Task.Delay(1000);
+                    }
+                    else
+                    {
+                        SettearPosicionFicha(nombrePeon, POSICION_FINAL_HOME);
+                    }
+                }
+            }
+        }
+
+        private double ObtenerPosicionFicha(string nombreEllipse) 
+        {
+            foreach (Ellipse llpFicha in _listaEllipseRojo)
+            {
+                if (llpFicha.Name == nombreEllipse) 
+                {
+                    return Canvas.GetTop(llpFicha);
+                }
+            }
+            foreach (Ellipse llpFicha in _listaEllipseAzul)
+            {
+                if (llpFicha.Name == nombreEllipse)
+                {
+                    return Canvas.GetBottom(llpFicha);
+                }
+            }
+            foreach (Ellipse llpFicha in _listaEllipseVerde)
+            {
+                if (llpFicha.Name == nombreEllipse)
+                {
+                    return Canvas.GetRight(llpFicha);
+                }
+            }
+            foreach (Ellipse llpFicha in _listaEllipseAmarillo)
+            {
+                if (llpFicha.Name == nombreEllipse)
+                {
+                    return Canvas.GetLeft(llpFicha);
+                }
+            }
+            double posicionErronea = 0.0;
+            return posicionErronea;
+        }
+
+        private void SettearPosicionFicha(string nombreEllipse, double posicion)
+        {
+            foreach (Ellipse llpFicha in _listaEllipseRojo)
+            {
+                if (llpFicha.Name == nombreEllipse)
+                {
+                    Canvas.SetTop(llpFicha, posicion);
+                }
+            }
+            foreach (Ellipse llpFicha in _listaEllipseAzul)
+            {
+                if (llpFicha.Name == nombreEllipse)
+                {
+                    Canvas.SetBottom(llpFicha, posicion);
+                }
+            }
+            foreach (Ellipse llpFicha in _listaEllipseVerde)
+            {
+                if (llpFicha.Name == nombreEllipse)
+                {
+                    Canvas.SetRight(llpFicha, posicion);
+                }
+            }
+            foreach (Ellipse llpFicha in _listaEllipseAmarillo)
+            {
+                if (llpFicha.Name == nombreEllipse)
+                {
+                    Canvas.SetLeft(llpFicha, posicion);
+                }
+            }
+        }
+
+
+        private void NotificarJugadores(Ellipse llpSeleccionada, int puntosObtenidos)
+        {
+            Logger log = new Logger(this.GetType());
+            Constantes respuesta;
+            try
+            {
+                _proxyJuegoPuntuacion.NotificarJugadores(_codigoPartida,_correoUsuario, llpSeleccionada.Name, puntosObtenidos);
+                respuesta = Constantes.OPERACION_EXITOSA;
+            }
+            catch (CommunicationException ex)
+            {
+                log.LogError("Error de Comunicación con el Servidor", ex);
+                respuesta = Constantes.ERROR_CONEXION_SERVIDOR;
+            }
+            catch (TimeoutException ex)
+            {
+                log.LogWarn("Se agoto el tiempo de espera del servidor", ex);
+                respuesta = Constantes.ERROR_TIEMPO_ESPERA_SERVIDOR;
+            }
+            switch (respuesta)
+            {
+                case Constantes.ERROR_CONEXION_SERVIDOR:
+                    MessageBox.Show(Properties.Resources.msgErrorConexion);
+                    break;
+                case Constantes.OPERACION_EXITOSA:
+                    break;
+                case Constantes.ERROR_TIEMPO_ESPERA_SERVIDOR:
+                    MessageBox.Show(Properties.Resources.msgErrorTiempoEsperaServidor);
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        public void CambiarTurno()
+        {
+            _turnoActualJuego = _turnoActualJuego + 1;
+            if (_turnoActualJuego > _listaTurnos.Count() - 1)
+            {
+                _turnoActualJuego = 0;
+                Console.WriteLine("Ir a Lanzamiento");
+                EmpezarTurno(_turnoActualJuego);
+            }
+            else 
+            {
+                //Comprobar que existe un jugador con ese turno o sumarle uno y volver a ocupar el metodo
+                EmpezarTurno(_turnoActualJuego);
+            }
+        }
+
+        public void EliminarTurnoJugador(string correoElectronico)
+        {
+            JugadorTurno jugadorSalido = new JugadorTurno();
+            foreach (JugadorTurno jugadorTurno in _listaTurnos)
+            {
+                if (jugadorTurno.CorreoJugador == correoElectronico)
+                {
+                    jugadorSalido = jugadorTurno;
+                    _listaTurnos.Remove(jugadorSalido);
+                }
+            }
+            foreach (JugadorTurno jugadorTurno in _listaTurnos)
+            {
+                if (jugadorTurno.TurnoJugador > jugadorSalido.TurnoJugador)
+                {
+                    jugadorTurno.TurnoJugador = jugadorTurno.TurnoJugador - 1;
+                }
+            }
+        }
+
+        private void NotificarCambiarPantalla()
+        {
+            Logger log = new Logger(this.GetType());
+            Constantes respuesta;
+            try
+            {
+                _proxyJuegoPuntuacion.NotificarCambiarPagina(_codigoPartida);
+                respuesta = Constantes.OPERACION_EXITOSA;
+            }
+            catch (CommunicationException ex)
+            {
+                log.LogError("Error de Comunicación con el Servidor", ex);
+                respuesta = Constantes.ERROR_CONEXION_SERVIDOR;
+            }
+            catch (TimeoutException ex)
+            {
+                log.LogWarn("Se agoto el tiempo de espera del servidor", ex);
+                respuesta = Constantes.ERROR_TIEMPO_ESPERA_SERVIDOR;
+            }
+            switch (respuesta)
+            {
+                case Constantes.ERROR_CONEXION_SERVIDOR:
+                    MessageBox.Show(Properties.Resources.msgErrorConexion);
+                    break;
+                case Constantes.OPERACION_EXITOSA:
+                    EliminarDiccionarios();
+                    break;
+                case Constantes.ERROR_TIEMPO_ESPERA_SERVIDOR:
+                    MessageBox.Show(Properties.Resources.msgErrorTiempoEsperaServidor);
+                    break;
+                default:
+                    break;
+            }
+            //Le digo a todos los jugadores que cambien de pantalla
+            //SI ES EXITOSO ELIMINO DICCIONARIOS y INVITADO
+            //TIENE QUE HACER AGUNOS METODOS, eliminar diciconarios de uid de chat, juego puntuacion, juego lanzamiento y eliminar invitados
+
+        }
+        private void EliminarDiccionarios() 
+        {
+            
+        }
+
+        public void CambiarPagina()
+        {
+            if (_listaPuntuaciones == null) 
+            {
+                ComprobarGanador();
+            }
+            MainWindow ventanaNueva = new MainWindow();
+            TableroGanadoresPartidaPagina paginaGanadores = new TableroGanadoresPartidaPagina(_cuentaUsuario, _listaPuntuaciones);
+            ventanaNueva.Navigate(paginaGanadores);
+            ventanaNueva.Show();
+            JuegoYLobbyVentana ventanaActual = (JuegoYLobbyVentana)Window.GetWindow(this);
+            ventanaActual.Closing -= ventanaActual.CerrarVentana;
+            Window.GetWindow(this).Close();
+        }
     }
 }

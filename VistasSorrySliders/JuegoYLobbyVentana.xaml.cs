@@ -51,7 +51,7 @@ namespace VistasSorrySliders
             }
         }
 
-        private void CerrarVentana(object sender, CancelEventArgs e) 
+        public void CerrarVentana(object sender, CancelEventArgs e) 
         {
             CerrarVentanaActual();
         }
