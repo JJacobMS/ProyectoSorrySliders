@@ -39,17 +39,15 @@ namespace VistasSorrySliders
             InitializeComponent();
             _cuentaUsuario = cuenta;
             _listaTodasCuentasBuscadas = new List<CuentaSet>();
-
-            CrearProxyAmigos();
-            GuardarContexto();
-            RecuperarTiposNotificacion();
-            RecuperarBaneados();
-            RecuperarCuentasConSolicituPendiente();
-            CargarAmigos();
-            CargarNotificaciones();
         }
 
-        private void CrearProxyAmigos()
+        public bool InicializarListaJugadores()
+        {
+            return CrearProxyAmigos() && GuardarContexto() && RecuperarTiposNotificacion() && RecuperarBaneados() 
+                && RecuperarCuentasConSolicituPendiente() && CargarAmigos() && CargarNotificaciones();
+        }
+
+        private bool CrearProxyAmigos()
         {
             Logger log = new Logger(this.GetType());
             Constantes resultado;
@@ -68,23 +66,17 @@ namespace VistasSorrySliders
                 resultado = Constantes.ERROR_TIEMPO_ESPERA_SERVIDOR;
                 log.LogWarn("Se agoto el tiempo de espera del servidor", ex);
             }
-            catch (Exception ex)
-            {
-                resultado = Constantes.ERROR_CONEXION_SERVIDOR;
-                log.LogFatal("Ha ocurrido un error inesperado", ex);
-            }
             switch (resultado)
             {
                 case Constantes.OPERACION_EXITOSA:
-                    return;
+                    return true;
                 default:
                     Utilidades.MostrarMensajesError(resultado);
-                    break;
+                    return false;
             }
-            SalirAlMenu();
         }
 
-        private void GuardarContexto()
+        private bool GuardarContexto()
         {
             Logger log = new Logger(this.GetType());
             Constantes resultado;
@@ -105,24 +97,18 @@ namespace VistasSorrySliders
                 resultado = Constantes.ERROR_TIEMPO_ESPERA_SERVIDOR;
                 log.LogWarn("Se agoto el tiempo de espera del servidor", ex);
             }
-            catch (Exception ex)
-            {
-                resultado = Constantes.ERROR_CONEXION_SERVIDOR;
-                log.LogFatal("Ha ocurrido un error inesperado", ex);
-            }
             switch (resultado)
             {
                 case Constantes.OPERACION_EXITOSA:
-                    return;
+                    return true;
                 default:
                     Utilidades.MostrarMensajesError(resultado);
-                    break;
+                    return false;
             }
-            SalirAlMenu();
         }
 
 
-        private void RecuperarTiposNotificacion()
+        private bool RecuperarTiposNotificacion()
         {
             Logger log = new Logger(this.GetType());
             Constantes resultado;
@@ -133,7 +119,7 @@ namespace VistasSorrySliders
                 if (resultado == Constantes.OPERACION_EXITOSA)
                 {
                     _tiposNotificacion = listaTiposNotificaciones.ToList();
-                    return;
+                    return true;
                 }
             }
             catch (CommunicationException ex)
@@ -146,21 +132,16 @@ namespace VistasSorrySliders
                 resultado = Constantes.ERROR_TIEMPO_ESPERA_SERVIDOR;
                 log.LogWarn("Se agoto el tiempo de espera del servidor", ex);
             }
-            catch (Exception ex)
-            {
-                resultado = Constantes.ERROR_CONEXION_SERVIDOR;
-                log.LogFatal("Ha ocurrido un error inesperado", ex);
-            }
             switch (resultado)
             {
                 case Constantes.OPERACION_EXITOSA_VACIA:
-                    MessageBox.Show(Properties.Resources.msgTiposNotificacionVacios);
+                    Utilidades.MostrarUnMensajeError(Properties.Resources.msgTiposNotificacionVacios);
                     break;
                 default:
                     Utilidades.MostrarMensajesError(resultado);
                     break;
             }
-            SalirAlMenu();
+            return false;
         }
         private void RecuperarJugadoresEspecificos(string informacionJugador)
         {
@@ -187,25 +168,20 @@ namespace VistasSorrySliders
                 resultado = Constantes.ERROR_TIEMPO_ESPERA_SERVIDOR;
                 log.LogWarn("Se agoto el tiempo de espera del servidor", ex);
             }
-            catch (Exception ex)
-            {
-                resultado = Constantes.ERROR_CONEXION_SERVIDOR;
-                log.LogFatal("Ha ocurrido un error inesperado", ex);
-            }
             switch (resultado)
             {
                 case Constantes.OPERACION_EXITOSA_VACIA:
                     lstBoxJugadores.Style = (Style)FindResource("estiloLstBoxJugadoresVacia");
-                    MessageBox.Show(Properties.Resources.msgJugadoresRecuperacion);
+                    Utilidades.MostrarMensajeInformacion(Properties.Resources.msgJugadoresRecuperacion);
                     return;
                 default:
-                    Utilidades.MostrarMensajesError(resultado); 
+                    Utilidades.MostrarMensajesError(resultado);
+                    SalirAlMenu();
                     break;
             }
-            SalirAlMenu();
         }
 
-        private void RecuperarBaneados()
+        private bool RecuperarBaneados()
         {
             Constantes resultado;
             Logger log = new Logger(this.GetType());
@@ -216,7 +192,7 @@ namespace VistasSorrySliders
                 if (resultado == Constantes.OPERACION_EXITOSA)
                 {
                     _baneados = listaBaneados.ToList();
-                    return;
+                    return true;
                 }
             }
             catch (CommunicationException ex)
@@ -229,23 +205,17 @@ namespace VistasSorrySliders
                 resultado = Constantes.ERROR_TIEMPO_ESPERA_SERVIDOR;
                 log.LogWarn("Se agoto el tiempo de espera del servidor", ex);
             }
-            catch (Exception ex)
-            {
-                resultado = Constantes.ERROR_CONEXION_SERVIDOR;
-                log.LogFatal("Ha ocurrido un error inesperado", ex);
-            }
             switch (resultado)
             {
                 case Constantes.OPERACION_EXITOSA_VACIA:
-                    return;
+                    return true;
                 default:
                     Utilidades.MostrarMensajesError(resultado);
-                    break;
+                    return false;
             }
-            SalirAlMenu();
         }
 
-        private void RecuperarCuentasConSolicituPendiente()
+        private bool RecuperarCuentasConSolicituPendiente()
         {
             Constantes resultado;
             Logger log = new Logger(this.GetType());
@@ -257,7 +227,7 @@ namespace VistasSorrySliders
                 if (resultado == Constantes.OPERACION_EXITOSA)
                 {
                     _cuentasSolicitudesPendientes = listaPendientes.ToList();
-                    return;
+                    return true;
                 }
             }
             catch (CommunicationException ex)
@@ -270,20 +240,14 @@ namespace VistasSorrySliders
                 resultado = Constantes.ERROR_TIEMPO_ESPERA_SERVIDOR;
                 log.LogWarn("Se agoto el tiempo de espera del servidor", ex);
             }
-            catch (Exception ex)
-            {
-                resultado = Constantes.ERROR_CONEXION_SERVIDOR;
-                log.LogFatal("Ha ocurrido un error inesperado", ex);
-            }
             switch (resultado)
             {
                 case Constantes.OPERACION_EXITOSA_VACIA:
-                    return;
+                    return true;
                 default:
                     Utilidades.MostrarMensajesError(resultado);
-                    break;
+                    return false;
             }
-            SalirAlMenu();
         }
 
         private void MostrarJugadores()
@@ -305,24 +269,21 @@ namespace VistasSorrySliders
                     if (EsCuentaAmigo(cuenta))
                     {
                         lstBoxItemCuenta.Style = (Style)FindResource("estiloLstBoxItemAmigo");
-                        Console.WriteLine("es amigo " + cuenta.CorreoElectronico);
                     }
                     if (EsPendienteRecibida(cuenta))
                     {
                         lstBoxItemCuenta.Style = (Style)FindResource("estiloLstBoxItemJugadorPendiente");
-                        Console.WriteLine("es pendiente " + cuenta.CorreoElectronico);
                     }
                     if (EsCuentaBaneada(cuenta))
                     {
                         lstBoxItemCuenta.Style = (Style)FindResource("estiloLstBoxItemJugadorBaneado");
-                        Console.WriteLine("es baneado " + cuenta.CorreoElectronico);
                     }
                     lstBoxJugadores.Items.Add(lstBoxItemCuenta);
                 }
             }
         }
 
-        private void CargarAmigos()
+        private bool CargarAmigos()
         {
             Constantes resultado;
             Logger log = new Logger(this.GetType());
@@ -337,7 +298,7 @@ namespace VistasSorrySliders
                     lstBoxAmigos.ItemsSource = null;
                     lstBoxAmigos.Items.Clear();
                     lstBoxAmigos.ItemsSource = _amigos;
-                    return;
+                    return true;
                 }
             }
             catch (CommunicationException ex)
@@ -350,26 +311,20 @@ namespace VistasSorrySliders
                 resultado = Constantes.ERROR_TIEMPO_ESPERA_SERVIDOR;
                 log.LogWarn("Se agoto el tiempo de espera del servidor", ex);
             }
-            catch (Exception ex)
-            {
-                resultado = Constantes.ERROR_CONEXION_SERVIDOR;
-                log.LogFatal("Ha ocurrido un error inesperado", ex);
-            }
             switch (resultado)
             {
                 case Constantes.OPERACION_EXITOSA_VACIA:
                     lstBoxAmigos.Style = (Style)FindResource("estiloLstBoxAmigosVacia");
                     lstBoxAmigos.ItemsSource = null;
                     lstBoxAmigos.Items.Clear();
-                    return;
+                    return true;
                 default:
                     Utilidades.MostrarMensajesError(resultado);
-                    break;
+                    return false;
             }
-            SalirAlMenu();
         }
 
-        private void CargarNotificaciones()
+        private bool CargarNotificaciones()
         {
             Constantes resultado;
             Logger log = new Logger(this.GetType());
@@ -383,7 +338,7 @@ namespace VistasSorrySliders
                     lstBoxNotificaciones.Items.Clear();
                     _notificaciones = listaNotificacionesResultado.ToList();
                     MostrarNotificaciones();
-                    return;
+                    return true;
                 }
             }
             catch (CommunicationException ex)
@@ -396,22 +351,16 @@ namespace VistasSorrySliders
                 resultado = Constantes.ERROR_TIEMPO_ESPERA_SERVIDOR;
                 log.LogWarn("Se agoto el tiempo de espera del servidor", ex);
             }
-            catch (Exception ex)
-            {
-                resultado = Constantes.ERROR_CONEXION_SERVIDOR;
-                log.LogFatal("Ha ocurrido un error inesperado", ex);
-            }
             switch (resultado)
             {
                 case Constantes.OPERACION_EXITOSA_VACIA:
                     lstBoxNotificaciones.Items.Clear();
                     lstBoxNotificaciones.Style = (Style)FindResource("estiloLstBoxNotificacionesVacia");
-                    return;
+                    return true;
                 default:
                     Utilidades.MostrarMensajesError(resultado); 
-                    break;
+                    return false;
             }
-            SalirAlMenu();
         }
 
         private void MostrarNotificaciones()
@@ -525,7 +474,6 @@ namespace VistasSorrySliders
         private void ClickRegresarMenu(object sender, RoutedEventArgs e)
         {
             SalirAlMenu();
-            
         }
         public void SalirAlMenu() 
         {
@@ -541,10 +489,6 @@ namespace VistasSorrySliders
             catch (TimeoutException ex)
             {
                 log.LogWarn("Se agoto el tiempo de espera del servidor", ex);
-            }
-            catch (Exception ex)
-            {
-                log.LogFatal("Ha ocurrido un error inesperado", ex);
             }
             this.NavigationService.GoBack();
         }
@@ -625,11 +569,6 @@ namespace VistasSorrySliders
                 resultado = Constantes.ERROR_TIEMPO_ESPERA_SERVIDOR;
                 log.LogWarn("Se agoto el tiempo de espera del servidor", ex);
             }
-            catch (Exception ex)
-            {
-                resultado = Constantes.ERROR_CONEXION_SERVIDOR;
-                log.LogFatal("Ha ocurrido un error inesperado", ex);
-            }
             switch (resultado)
             {
                 case Constantes.OPERACION_EXITOSA:
@@ -638,7 +577,7 @@ namespace VistasSorrySliders
                     RecargarPantalla();
                     return;
                 case Constantes.OPERACION_EXITOSA_VACIA:
-                    MessageBox.Show(Properties.Resources.msgNotificacionGuardarError);
+                    Utilidades.MostrarUnMensajeError(Properties.Resources.msgNotificacionGuardarError);
                     break;
                 default:
                     Utilidades.MostrarMensajesError(resultado);
@@ -664,11 +603,6 @@ namespace VistasSorrySliders
             {
                 resultado = Constantes.ERROR_TIEMPO_ESPERA_SERVIDOR;
                 log.LogWarn("Se agoto el tiempo de espera del servidor", ex);
-            }
-            catch (Exception ex)
-            {
-                resultado = Constantes.ERROR_CONEXION_SERVIDOR;
-                log.LogFatal("Ha ocurrido un error inesperado", ex);
             }
             switch (resultado)
             {
@@ -700,11 +634,6 @@ namespace VistasSorrySliders
                 resultado = Constantes.ERROR_TIEMPO_ESPERA_SERVIDOR;
                 log.LogWarn("Se agoto el tiempo de espera del servidor", ex);
             }
-            catch (Exception ex)
-            {
-                resultado = Constantes.ERROR_CONEXION_SERVIDOR;
-                log.LogFatal("Ha ocurrido un error inesperado", ex);
-            }
             switch (resultado)
             {
                 case Constantes.OPERACION_EXITOSA:
@@ -735,11 +664,6 @@ namespace VistasSorrySliders
             {
                 resultado = Constantes.ERROR_TIEMPO_ESPERA_SERVIDOR;
                 log.LogWarn("Se agoto el tiempo de espera del servidor", ex);
-            } 
-            catch (Exception ex) 
-            {
-                resultado = Constantes.ERROR_CONEXION_SERVIDOR;
-                log.LogFatal("Ha ocurrido un error inesperado", ex);
             }
             switch (resultado)
             {
@@ -773,11 +697,6 @@ namespace VistasSorrySliders
                 resultado = Constantes.ERROR_TIEMPO_ESPERA_SERVIDOR;
                 log.LogWarn("Se agoto el tiempo de espera del servidor", ex);
             }
-            catch (Exception ex)
-            {
-                resultado = Constantes.ERROR_CONEXION_SERVIDOR;
-                log.LogFatal("Ha ocurrido un error inesperado", ex);
-            }
             switch (resultado)
             {
                 case Constantes.OPERACION_EXITOSA:
@@ -789,7 +708,7 @@ namespace VistasSorrySliders
                     RecargarPantalla();
                     return;
                 case Constantes.OPERACION_EXITOSA_VACIA:
-                    MessageBox.Show(Properties.Resources.msgAmistadEliminarError);
+                    Utilidades.MostrarUnMensajeError(Properties.Resources.msgAmistadEliminarError);
                     break;
                 default:
                     Utilidades.MostrarMensajesError(resultado);
@@ -816,11 +735,6 @@ namespace VistasSorrySliders
                 resultado = Constantes.ERROR_TIEMPO_ESPERA_SERVIDOR;
                 log.LogWarn("Se agoto el tiempo de espera del servidor", ex);
             }
-            catch (Exception ex)
-            {
-                resultado = Constantes.ERROR_CONEXION_SERVIDOR;
-                log.LogFatal("Ha ocurrido un error inesperado", ex);
-            }
             switch (resultado)
             {
                 case Constantes.OPERACION_EXITOSA:
@@ -829,7 +743,7 @@ namespace VistasSorrySliders
                     RecargarPantalla();
                     return;
                 case Constantes.OPERACION_EXITOSA_VACIA:
-                    MessageBox.Show(Properties.Resources.msgAmistadEliminarError);
+                    Utilidades.MostrarUnMensajeError(Properties.Resources.msgAmistadEliminarError);
                     break;
                 default:
                     Utilidades.MostrarMensajesError(resultado);
@@ -852,10 +766,6 @@ namespace VistasSorrySliders
             catch (TimeoutException ex)
             {
                 log.LogWarn("Se agoto el tiempo de espera del servidor", ex);
-            }
-            catch (Exception ex)
-            {
-                log.LogFatal("Ha ocurrido un error inesperado", ex);
             }
         }
 

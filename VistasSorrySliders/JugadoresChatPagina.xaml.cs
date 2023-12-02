@@ -64,18 +64,13 @@ namespace VistasSorrySliders
             }
             catch (CommunicationException ex)
             {
-                MessageBox.Show(Properties.Resources.msgErrorConexion);
+                Utilidades.MostrarUnMensajeError(Properties.Resources.msgErrorConexion);
                 log.LogError("Error de Comunicación con el Servidor", ex);
             }
             catch (TimeoutException ex)
             {
-                MessageBox.Show(Properties.Resources.msgErrorTiempoEsperaServidor);
+                Utilidades.MostrarUnMensajeError(Properties.Resources.msgErrorTiempoEsperaServidor);
                 log.LogWarn("Se agoto el tiempo de espera del servidor", ex);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(Properties.Resources.msgErrorConexion);
-                log.LogFatal("Ha ocurrido un error inesperado", ex);
             }
         }
 
@@ -119,10 +114,6 @@ namespace VistasSorrySliders
                 catch (TimeoutException ex)
                 {
                     log.LogWarn("Se agoto el tiempo de espera del servidor", ex);
-                }
-                catch (Exception ex)
-                {
-                    log.LogFatal("Ha ocurrido un error inesperado", ex);
                 }
                 txtBoxMensajeChat.Text = "";
             }
@@ -176,8 +167,8 @@ namespace VistasSorrySliders
         {
             Button botonExpulsar = (Button)sender;
             JugadorLista jugador = (JugadorLista) botonExpulsar.CommandParameter;
-            EnviarJugadorExpulsado(jugador);
             botonExpulsar.IsEnabled = false;
+            EnviarJugadorExpulsado(jugador);
         }
 
         private void EnviarJugadorExpulsado(JugadorLista jugador)
@@ -195,10 +186,6 @@ namespace VistasSorrySliders
             {
                 log.LogWarn("Se agoto el tiempo de espera del servidor", ex);
             }
-            catch (Exception ex)
-            {
-                log.LogFatal("Ha ocurrido un error inesperado", ex);
-            }
         }
 
         public void ExpulsadoDeJugador(string correoElectronico)
@@ -206,7 +193,7 @@ namespace VistasSorrySliders
             if (correoElectronico.Equals(_cuentaUsuario.CorreoElectronico))
             {
                 Window.GetWindow(this).Close();
-                MessageBox.Show(Properties.Resources.msgExpulsarJugador, Properties.Resources.msgExpulsadoTitulo);
+                Utilidades.MostrarMensajeInformacion(Properties.Resources.msgExpulsarJugador, Properties.Resources.msgExpulsadoTitulo);
             }
             else
             {

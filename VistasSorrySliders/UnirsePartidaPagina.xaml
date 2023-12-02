@@ -41,13 +41,7 @@
                     </Grid>
                     <Grid Height="40">
                         <TextBlock Style="{StaticResource estiloTxtBlockErrorUnirsePartida}" Visibility="Hidden" Margin="0"
-                                Name="txtBlockJugadorBaneado" Text="{x:Static p:Resources.txtBlockJugadorBaneado}"></TextBlock>
-                        <TextBlock Style="{StaticResource estiloTxtBlockErrorUnirsePartida}" Visibility="Hidden" Margin="0"
-                               Name="txtBlockMaximoJugadores" Text="{x:Static p:Resources.txtBlockJugadoresMaximosExcedidos}"></TextBlock>
-                        <TextBlock Style="{StaticResource estiloTxtBlockErrorUnirsePartida}" Margin="0" Visibility="Hidden"
-                               Name="txtBlockCodigoNoValido" Text="{x:Static p:Resources.txtBlockCodigoNoValido}"></TextBlock>
-                        <TextBlock Style="{StaticResource estiloTxtBlockErrorUnirsePartida}" Margin="0" Visibility="Hidden"
-                                Name="txtBlockCuentaYaEnJuego" Text="{x:Static p:Resources.txtBlockCuentaYaEnLobby}"></TextBlock>
+                                Name="txtBlockErrorPartida"></TextBlock>
                     </Grid>
                     <Grid x:Name="grdNickname" Visibility="Collapsed" >
                         <Grid.ColumnDefinitions>

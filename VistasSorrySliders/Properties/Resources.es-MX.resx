@@ -522,6 +522,9 @@
   <data name="txtBlockEnLinea" xml:space="preserve">
     <value>En línea</value>
   </data>
+  <data name="txtBlockJuegoNoValido" xml:space="preserve">
+    <value>El juego se está jugando o ya ha terminado</value>
+  </data>
   <data name="txtBlockJugadorBaneado" xml:space="preserve">
     <value>Uno de los jugadores del lobby lo ha baneado</value>
   </data>

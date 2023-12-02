@@ -83,11 +83,6 @@ namespace VistasSorrySliders
                     resultado = Constantes.ERROR_TIEMPO_ESPERA_SERVIDOR;
                     log.LogWarn("Se agoto el tiempo de espera del servidor", ex);
                 }
-                catch (Exception ex)
-                {
-                    resultado = Constantes.ERROR_CONEXION_SERVIDOR;
-                    log.LogFatal("Ha ocurrido un error inesperado", ex);
-                }
                 switch (resultado)
                 {
                     case Constantes.OPERACION_EXITOSA:
@@ -124,11 +119,6 @@ namespace VistasSorrySliders
             {
                 resultado = Constantes.ERROR_TIEMPO_ESPERA_SERVIDOR;
                 log.LogWarn("Se agoto el tiempo de espera del servidor", ex);
-            }
-            catch (Exception ex)
-            {
-                resultado = Constantes.ERROR_CONEXION_SERVIDOR;
-                log.LogFatal("Ha ocurrido un error inesperado", ex);
             }
 
             switch (resultado)
@@ -178,25 +168,20 @@ namespace VistasSorrySliders
                 estaEnLinea = proxyInicioSesion.JugadorEstaEnLinea(correoJugador);
                 if (estaEnLinea)
                 {
-                    MessageBox.Show(Properties.Resources.txtBlockCuentaYaEnLobby);
+                    Utilidades.MostrarUnMensajeError(Properties.Resources.txtBlockCuentaYaEnLobby);
                     return;
                 }
                 CambiarPantallaMenuPrincipal(correoJugador);
             }
             catch (CommunicationException ex)
             {
-                MessageBox.Show(Properties.Resources.msgErrorConexion);
+                Utilidades.MostrarUnMensajeError(Properties.Resources.msgErrorConexion);
                 log.LogError("Error de Comunicación con el Servidor", ex);
             }
             catch (TimeoutException ex)
             {
-                MessageBox.Show(Properties.Resources.msgErrorTiempoEsperaServidor);
+                Utilidades.MostrarUnMensajeError(Properties.Resources.msgErrorTiempoEsperaServidor);
                 log.LogWarn("Se agoto el tiempo de espera del servidor", ex);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(Properties.Resources.msgErrorConexion);
-                log.LogFatal("Ha ocurrido un error inesperado", ex);
             }
         }
 

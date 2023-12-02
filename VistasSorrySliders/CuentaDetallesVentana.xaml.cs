@@ -31,7 +31,6 @@ namespace VistasSorrySliders
         {
             InitializeComponent();
             _cuenta = cuenta;
-            //RecuperarDatos();
         }
 
         public void MostrarVentana()
@@ -67,11 +66,6 @@ namespace VistasSorrySliders
                 resultado = Constantes.ERROR_TIEMPO_ESPERA_SERVIDOR;
                 log.LogWarn("Se agoto el tiempo de espera del servidor", ex);
             }
-            catch (Exception ex)
-            {
-                resultado = Constantes.ERROR_CONEXION_SERVIDOR;
-                log.LogFatal("Ha ocurrido un error inesperado", ex);
-            }
             switch (resultado)
             {
                 case Constantes.OPERACION_EXITOSA:
@@ -79,7 +73,7 @@ namespace VistasSorrySliders
                     AbrirVentana?.Invoke(this);
                     break;
                 case Constantes.OPERACION_EXITOSA_VACIA:
-                    MessageBox.Show(Properties.Resources.mgsCuentaDetalleErrorRecuperar);
+                    Utilidades.MostrarUnMensajeError(Properties.Resources.mgsCuentaDetalleErrorRecuperar);
                     break;
                 default:
                     Utilidades.MostrarMensajesError(resultado);

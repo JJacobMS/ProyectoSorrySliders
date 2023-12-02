@@ -30,11 +30,16 @@ namespace VistasSorrySliders
         public TableroPuntuacionesPagina(CuentaSet cuenta)
         {
             InitializeComponent();
-            RecuperarPuntuaciones();
+            
             _cuenta = cuenta;
         }
 
-        private void RecuperarPuntuaciones() 
+        public bool InicializarPuntuaciones()
+        {
+            return RecuperarPuntuaciones();
+        }
+
+        private bool RecuperarPuntuaciones() 
         {
             Constantes resultado;
             Puntuacion[] puntuaciones = new Puntuacion[] { };
@@ -55,11 +60,6 @@ namespace VistasSorrySliders
                 resultado = Constantes.ERROR_TIEMPO_ESPERA_SERVIDOR;
                 log.LogWarn("Se agoto el tiempo de espera del servidor", ex);
             }
-            catch (Exception ex)
-            {
-                resultado = Constantes.ERROR_CONEXION_SERVIDOR;
-                log.LogFatal("Ha ocurrido un error inesperado", ex);
-            }
             switch (resultado)
             {
                 case Constantes.OPERACION_EXITOSA:
@@ -69,15 +69,15 @@ namespace VistasSorrySliders
                         ListaPuntuaciones.Add(puntuacion);
                     }
                     this.DataContext = this;
-                    return;
+                    return true;
                 case Constantes.OPERACION_EXITOSA_VACIA:
-                    MessageBox.Show(Properties.Resources.msgTablaVacia);
+                    Utilidades.MostrarUnMensajeError(Properties.Resources.msgTablaVacia);
                     break;
                 default:
                     Utilidades.MostrarMensajesError(resultado);
                     break;
             }
-            this.NavigationService.GoBack();
+            return false;
         }
 
         private void ClickSalirMenuPrincipal(object sender, RoutedEventArgs e)

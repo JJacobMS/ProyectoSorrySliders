@@ -525,6 +525,9 @@
   <data name="txtBlockEnLinea" xml:space="preserve">
     <value>En línea</value>
   </data>
+  <data name="txtBlockJuegoNoValido" xml:space="preserve">
+    <value>El juego se está jugando o ya ha terminado</value>
+  </data>
   <data name="txtBlockJugadorBaneado" xml:space="preserve">
     <value>Uno de los jugadores del lobby lo ha baneado</value>
   </data>
@@ -564,6 +567,9 @@
   <data name="uriAvatarPredefinido" xml:space="preserve">
     <value>pack://application:,,,/Recursos/avatarPredefinido.jpg</value>
   </data>
+  <data name="uriIconoInformacion" xml:space="preserve">
+    <value>pack://application:,,,/Recursos/informacion.png</value>
+  </data>
   <data name="uriImagenDadoNumero1" xml:space="preserve">
     <value>pack://application:,,,/Recursos/gato1.png</value>
   </data>
@@ -594,6 +600,12 @@
   <data name="uriPeonRosa" xml:space="preserve">
     <value>pack://application:,,,/Recursos/peonRosa.png</value>
   </data>
+  <data name="uriTableroCuatroJugadoresConFondo" xml:space="preserve">
+    <value>/Recursos/TableroCuatroConFondo.png</value>
+  </data>
+  <data name="uriTableroDosJugadoresConFondo" xml:space="preserve">
+    <value>/Recursos/TableroDosConFondo.png</value>
+  </data>
   <data name="uriTableroLanzamientoCuatroJugadores" xml:space="preserve">
     <value>pack://application:,,,/Recursos/tableroCuatro.png</value>
   </data>
@@ -602,5 +614,8 @@
   </data>
   <data name="uriTableroLanzamientoTresJugadores" xml:space="preserve">
     <value>pack://application:,,,/Recursos/tableroTres.png</value>
+  </data>
+  <data name="uriTableroTresJugadoresConFondo" xml:space="preserve">
+    <value>/Recursos/TableroTresConFondo.png</value>
   </data>
 </root>
