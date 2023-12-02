@@ -25,6 +25,7 @@ namespace VistasSorrySliders
     {
         private UsuariosEnLineaClient _proxyLinea;
         private string _correo;
+        
         public MainWindow()
         {
             InitializeComponent();
@@ -34,6 +35,10 @@ namespace VistasSorrySliders
         {
             InitializeComponent();
             _correo = correo;
+        }
+        public void EliminarProxyLineaAnterior()
+        {
+            _proxyLinea = null;
         }
 
         private void CerrarVentana(object sender, CancelEventArgs e)
@@ -61,18 +66,13 @@ namespace VistasSorrySliders
             }
             catch (CommunicationException ex)
             {
-                MessageBox.Show(Properties.Resources.msgErrorConexion);
+                Utilidades.MostrarUnMensajeError(Properties.Resources.msgErrorConexion);
                 log.LogError("Error de Comunicación con el Servidor", ex);
             }
             catch (TimeoutException ex)
             {
-                MessageBox.Show(Properties.Resources.msgErrorTiempoEsperaServidor);
+                Utilidades.MostrarUnMensajeError(Properties.Resources.msgErrorTiempoEsperaServidor);
                 log.LogWarn("Se agoto el tiempo de espera del servidor", ex);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(Properties.Resources.msgErrorConexion);
-                log.LogFatal("Ha ocurrido un error inesperado", ex);
             }
             return false;
         }
@@ -92,15 +92,12 @@ namespace VistasSorrySliders
             {
                 log.LogWarn("Se agoto el tiempo de espera del servidor", ex);
             }
-            catch (Exception ex)
-            {
-                log.LogFatal("Ha ocurrido un error inesperado", ex);
-            }
         }
 
         public void ComprobarJugador()
         {
-            throw new NotImplementedException();
+            Logger log = new Logger(this.GetType());
+            log.LogInfo("Jugador en línea");
         }
     }
 }

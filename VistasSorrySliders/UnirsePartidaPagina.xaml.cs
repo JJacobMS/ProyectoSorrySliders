@@ -58,7 +58,8 @@ namespace VistasSorrySliders
             if(esValido && !EsUniqueIdentifierValido(codigoPartida))
             {
                 txtBoxCodigo.Style = (Style)FindResource("estiloTxtBoxDatosRojo");
-                txtBlockCodigoNoValido.Visibility = Visibility.Visible;
+                txtBlockErrorPartida.Visibility = Visibility.Visible;
+                txtBlockErrorPartida.Text = Properties.Resources.txtBlockCodigoNoValido;
                 esValido = false;
             }
 
@@ -109,11 +110,6 @@ namespace VistasSorrySliders
                 resultado = Constantes.ERROR_TIEMPO_ESPERA_SERVIDOR;
                 log.LogWarn("Se agoto el tiempo de espera del servidor", ex);
             }
-            catch (Exception ex)
-            {
-                resultado = Constantes.ERROR_CONEXION_SERVIDOR;
-                log.LogFatal("Ha ocurrido un error inesperado", ex);
-            }
 
             switch (resultado)
             {
@@ -135,7 +131,6 @@ namespace VistasSorrySliders
 
             if (avatar == null || avatar.Length == 0)
             {
-                MessageBox.Show("Ocurrió un error, inténtelo de nuevo o más tarde");
                 SalirDeUnirse();
                 return;
             }
@@ -165,11 +160,6 @@ namespace VistasSorrySliders
                 resultado = Constantes.ERROR_CONEXION_SERVIDOR;
                 log.LogWarn("Se agoto el tiempo de espera del servidor", ex);
             }
-            catch (Exception ex)
-            {
-                resultado = Constantes.ERROR_CONEXION_SERVIDOR;
-                log.LogFatal("Ha ocurrido un error inesperado", ex);
-            }
             switch (resultado)
             {
                 case Constantes.OPERACION_EXITOSA:
@@ -188,37 +178,40 @@ namespace VistasSorrySliders
             if (lobbyUnirse.EntrarSistemaEnLinea())
             {
                 lobbyUnirse.Show();
+                MainWindow ventanaPrincipal = (MainWindow) Window.GetWindow(this);
+                ventanaPrincipal.EliminarProxyLineaAnterior();
                 Window.GetWindow(this).Close();
             }
         }
 
         private void MostrarErrorJugadores(int numeroMaximoJugadores)
         {
+            txtBlockErrorPartida.Visibility = Visibility.Visible;
             switch (numeroMaximoJugadores)
             {
+                case -3:
+                    txtBlockErrorPartida.Text = Properties.Resources.txtBlockJuegoNoValido;
+                    break;
                 case -2:
-                    txtBlockJugadorBaneado.Visibility = Visibility.Visible;
+                    txtBlockErrorPartida.Text = Properties.Resources.txtBlockJugadorBaneado;
                     break;
                 case -1:
-                    txtBlockCuentaYaEnJuego.Visibility = Visibility.Visible; 
+                    txtBlockErrorPartida.Text = Properties.Resources.txtBlockCuentaYaEnLobby;
                     break;
                 case 0:
-                    txtBlockCodigoNoValido.Visibility = Visibility.Visible;
+                    txtBlockErrorPartida.Text = Properties.Resources.txtBlockCodigoNoValido;
                     break;
             }
 
             if (numeroMaximoJugadores > 0)
             {
-                txtBlockMaximoJugadores.Visibility = Visibility.Visible;
+                txtBlockErrorPartida.Text = Properties.Resources.txtBlockJugadoresMaximosExcedidos;
             }
         }
 
         private void ReiniciarEstilosPantalla()
         {
-            txtBlockJugadorBaneado.Visibility = Visibility.Hidden;
-            txtBlockCuentaYaEnJuego.Visibility = Visibility.Hidden;
-            txtBlockCodigoNoValido.Visibility = Visibility.Hidden;
-            txtBlockMaximoJugadores.Visibility = Visibility.Hidden;
+            txtBlockErrorPartida.Visibility = Visibility.Hidden;
             txtBlockNicknameNoValido.Visibility = Visibility.Hidden;
             txtBoxNickname.Style = (Style)FindResource("estiloTxtBoxDatosAzul");
             txtBoxCodigo.Style = (Style)FindResource("estiloTxtBoxDatosAzul");
@@ -236,14 +229,7 @@ namespace VistasSorrySliders
             }
             catch (RegexMatchTimeoutException ex)
             {
-                Console.WriteLine(ex);
                 log.LogWarn("El tiempo de espera para la expresión se ha agotado", ex);
-                return false;
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex);
-                log.LogFatal("Ha ocurrido un error inesperado", ex);
                 return false;
             }
         }

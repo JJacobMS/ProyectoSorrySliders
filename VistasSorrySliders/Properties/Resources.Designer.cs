@@ -1285,6 +1285,15 @@ namespace VistasSorrySliders.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a El juego se está jugando o ya ha terminado.
+        /// </summary>
+        public static string txtBlockJuegoNoValido {
+            get {
+                return ResourceManager.GetString("txtBlockJuegoNoValido", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Uno de los jugadores del lobby lo ha baneado.
         /// </summary>
         public static string txtBlockJugadorBaneado {
@@ -1402,6 +1411,15 @@ namespace VistasSorrySliders.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a pack://application:,,,/Recursos/informacion.png.
+        /// </summary>
+        public static string uriIconoInformacion {
+            get {
+                return ResourceManager.GetString("uriIconoInformacion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a pack://application:,,,/Recursos/gato1.png.
         /// </summary>
         public static string uriImagenDadoNumero1 {
@@ -1492,6 +1510,24 @@ namespace VistasSorrySliders.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a /Recursos/TableroCuatroConFondo.png.
+        /// </summary>
+        public static string uriTableroCuatroJugadoresConFondo {
+            get {
+                return ResourceManager.GetString("uriTableroCuatroJugadoresConFondo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a /Recursos/TableroDosConFondo.png.
+        /// </summary>
+        public static string uriTableroDosJugadoresConFondo {
+            get {
+                return ResourceManager.GetString("uriTableroDosJugadoresConFondo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a pack://application:,,,/Recursos/tableroCuatro.png.
         /// </summary>
         public static string uriTableroLanzamientoCuatroJugadores {
@@ -1515,6 +1551,15 @@ namespace VistasSorrySliders.Properties {
         public static string uriTableroLanzamientoTresJugadores {
             get {
                 return ResourceManager.GetString("uriTableroLanzamientoTresJugadores", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a /Recursos/TableroTresConFondo.png.
+        /// </summary>
+        public static string uriTableroTresJugadoresConFondo {
+            get {
+                return ResourceManager.GetString("uriTableroTresJugadoresConFondo", resourceCulture);
             }
         }
     }

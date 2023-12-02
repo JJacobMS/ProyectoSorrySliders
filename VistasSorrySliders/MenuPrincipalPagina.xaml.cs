@@ -86,17 +86,12 @@ namespace VistasSorrySliders
                 resultado = Constantes.ERROR_TIEMPO_ESPERA_SERVIDOR;
                 log.LogWarn("Se agoto el tiempo de espera del servidor", ex);
             }
-            catch (Exception ex)
-            {
-                resultado = Constantes.ERROR_CONEXION_SERVIDOR;
-                log.LogFatal("Ha ocurrido un error inesperado", ex);
-            }
             switch (resultado)
             {
                 case Constantes.OPERACION_EXITOSA:
                     return;
                 case Constantes.OPERACION_EXITOSA_VACIA:
-                    MessageBox.Show(Properties.Resources.msgDatosCuentaVacia);
+                    Utilidades.MostrarUnMensajeError(Properties.Resources.msgDatosCuentaVacia);
                     break;
                 default:
                     Utilidades.MostrarMensajesError(resultado);
@@ -151,8 +146,10 @@ namespace VistasSorrySliders
         private void ClickMostrarPuntuaciones(object sender, RoutedEventArgs e)
         {
             TableroPuntuacionesPagina tablero = new TableroPuntuacionesPagina(_cuentaUsuario);
-            this.NavigationService.Navigate(tablero);
-            
+            if (tablero.InicializarPuntuaciones())
+            {
+                this.NavigationService.Navigate(tablero);
+            }
         }
 
         private void MouseLeftButtonDownMostrarDetallesCuenta(object sender, MouseButtonEventArgs e)
@@ -184,7 +181,10 @@ namespace VistasSorrySliders
         private void ClickIrJugadoresAmigos(object sender, RoutedEventArgs e)
         {
             ListaJugadoresPagina jugadores = new ListaJugadoresPagina(_cuentaUsuario);
-            this.NavigationService.Navigate(jugadores);
+            if (jugadores.InicializarListaJugadores())
+            {
+                this.NavigationService.Navigate(jugadores);
+            }
         }
     }
 }

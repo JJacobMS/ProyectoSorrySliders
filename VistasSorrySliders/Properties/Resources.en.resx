@@ -522,6 +522,9 @@
   <data name="txtBlockEnLinea" xml:space="preserve">
     <value>Online</value>
   </data>
+  <data name="txtBlockJuegoNoValido" xml:space="preserve">
+    <value>Game is being played or has already ended</value>
+  </data>
   <data name="txtBlockJugadorBaneado" xml:space="preserve">
     <value>One of the players in the lobby has banned you</value>
   </data>

@@ -34,6 +34,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>iconoJuego.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
@@ -87,6 +90,9 @@
     </Compile>
     <Compile Include="CuentaDetallesVentana.xaml.cs">
       <DependentUpon>CuentaDetallesVentana.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="InformacionVentana.xaml.cs">
+      <DependentUpon>InformacionVentana.xaml</DependentUpon>
     </Compile>
     <Compile Include="InicioPagina.xaml.cs">
       <DependentUpon>InicioPagina.xaml</DependentUpon>
@@ -202,6 +208,10 @@
     <Page Include="DiccionarioEstilos\DiccionarioPrincipal.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="InformacionVentana.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="InicioPagina.xaml">
       <SubType>Designer</SubType>
@@ -440,6 +450,15 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Connected Services\ServicioSorrySliders\item1.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Recursos\informacion.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Recursos\error.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="iconoJuego.ico" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Recursos\ganadoresPartidaIcono.png" />

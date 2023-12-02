@@ -98,22 +98,19 @@ namespace VistasSorrySliders
                 respuesta = Constantes.ERROR_TIEMPO_ESPERA_SERVIDOR;
                 log.LogWarn("Se agoto el tiempo de espera del servidor", ex);
             }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex);
-                respuesta = Constantes.ERROR_CONEXION_SERVIDOR;
-                log.LogFatal("Ha ocurrido un error inesperado", ex);
-            }
+
+            Utilidades.MostrarMensajesError(respuesta);
             switch (respuesta)
             {
                 case Constantes.OPERACION_EXITOSA:
                     CrearVentanaLobby(_cuentaUsuario, codigoPartida);
                     break;
                 case Constantes.OPERACION_EXITOSA_VACIA:
-                    MessageBox.Show(Properties.Resources.msgCrearLobbySinExito);
+                    Utilidades.MostrarUnMensajeError(Properties.Resources.msgCrearLobbySinExito);
                     break;
-                default:
-                    Utilidades.MostrarMensajesError(respuesta);
+                case Constantes.ERROR_CONEXION_SERVIDOR:
+                case Constantes.ERROR_TIEMPO_ESPERA_SERVIDOR:
+                    Utilidades.SalirInicioSesionDesdeVentanaPrincipal(Window.GetWindow(this), this);
                     break;
             }
         }
@@ -124,6 +121,8 @@ namespace VistasSorrySliders
             if (lobbyUnirse.EntrarSistemaEnLinea())
             {
                 lobbyUnirse.Show();
+                MainWindow ventanaPrincipal = (MainWindow)Window.GetWindow(this);
+                ventanaPrincipal.EliminarProxyLineaAnterior();
                 Window.GetWindow(this).Close();
             }
         }

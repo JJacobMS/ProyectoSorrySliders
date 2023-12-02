@@ -47,7 +47,11 @@ namespace VistasSorrySliders
             
             if (!esInvitado)
             {
-                frameListaAmigos.Content = new ListaAmigosPagina(cuenta, codigoPartida);
+                ListaAmigosPagina amigos = new ListaAmigosPagina(cuenta, codigoPartida);
+                if (amigos.InicializarPagina())
+                {
+                    frameListaAmigos.Content = amigos;
+                }
             }
         }
 
@@ -60,10 +64,6 @@ namespace VistasSorrySliders
             EliminarContexto?.Invoke();
             SalirCuentaRegistroPartidaBD();
             IrMenuUsuario();
-            if (_proxyLinea != null)
-            {
-                SalirSistemaEnLinea();
-            }
         }
         public void CambiarFrameLobby(Page paginaNueva)
         {
@@ -129,7 +129,7 @@ namespace VistasSorrySliders
             }
             ventanaPrincipal.Show();
         }
-
+        
         private void EliminarCuentaProvisionalInvitado(string correoProvisional)
         {
             try
@@ -149,7 +149,8 @@ namespace VistasSorrySliders
 
         public void ComprobarJugador()
         {
-            throw new NotImplementedException();
+            Logger log = new Logger(this.GetType());
+            log.LogInfo("Jugador en línea");
         }
 
         public bool EntrarSistemaEnLinea()
@@ -184,25 +185,5 @@ namespace VistasSorrySliders
             return false;
         }
 
-        private void SalirSistemaEnLinea()
-        {
-            Logger log = new Logger(this.GetType());
-            try
-            {
-                _proxyLinea.SalirDelSistema(_cuenta.CorreoElectronico);
-            }
-            catch (CommunicationException ex)
-            {
-                log.LogError("Error de Comunicación con el Servidor", ex);
-            }
-            catch (TimeoutException ex)
-            {
-                log.LogWarn("Se agoto el tiempo de espera del servidor", ex);
-            }
-            catch (Exception ex)
-            {
-                log.LogFatal("Ha ocurrido un error inesperado", ex);
-            }
-        }
     }
 }

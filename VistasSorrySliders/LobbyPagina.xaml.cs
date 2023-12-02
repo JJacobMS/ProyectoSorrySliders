@@ -72,12 +72,6 @@ namespace VistasSorrySliders
                 respuesta = Constantes.ERROR_TIEMPO_ESPERA_SERVIDOR;
                 log.LogWarn("Se agoto el tiempo de espera del servidor", ex);
             }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex);
-                respuesta = Constantes.ERROR_CONEXION_SERVIDOR;
-                log.LogFatal("Ha ocurrido un error inesperado", ex);
-            }
             switch (respuesta)
             {
                 case Constantes.OPERACION_EXITOSA:
@@ -88,7 +82,7 @@ namespace VistasSorrySliders
                     txtBoxHost.Text = _cuentas[0].Nickname;
                     return;
                 case Constantes.OPERACION_EXITOSA_VACIA:
-                    MessageBox.Show(Properties.Resources.msgJugadoresLobbyRecuperar);
+                    Utilidades.MostrarUnMensajeError(Properties.Resources.msgJugadoresLobbyRecuperar);
                     break;
                 default:
                     Utilidades.MostrarMensajesError(respuesta);
@@ -160,21 +154,13 @@ namespace VistasSorrySliders
             }
             catch (CommunicationException ex)
             {
-                Console.WriteLine(ex);
                 respuesta = Constantes.ERROR_CONEXION_SERVIDOR;
                 log.LogError("Error de Comunicación con el Servidor", ex);
             }
             catch (TimeoutException ex)
             {
-                Console.WriteLine(ex);
                 respuesta = Constantes.ERROR_TIEMPO_ESPERA_SERVIDOR;
                 log.LogWarn("Se agoto el tiempo de espera del servidor", ex);
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex);
-                respuesta = Constantes.ERROR_CONEXION_SERVIDOR;
-                log.LogFatal("Ha ocurrido un error inesperado", ex);
             }
             switch (respuesta)
             {
@@ -182,7 +168,7 @@ namespace VistasSorrySliders
                     CargarDatosPartida();
                     return;
                 case Constantes.OPERACION_EXITOSA_VACIA:
-                    MessageBox.Show(Properties.Resources.msgPartidaRecuperarVacia);
+                    Utilidades.MostrarUnMensajeError(Properties.Resources.msgPartidaRecuperarVacia);
                     break;
                 default:
                     Utilidades.MostrarMensajesError(respuesta);
@@ -200,17 +186,17 @@ namespace VistasSorrySliders
             {
                 case 2:
                     lblCantidadJugadoresPartida.Content = Properties.Resources.lblDosJugadores;
-                    Uri urlRelativa1 = new Uri("/Recursos/TableroDosConFondo.png", UriKind.Relative);
+                    Uri urlRelativa1 = new Uri(Properties.Resources.uriTableroDosJugadoresConFondo, UriKind.Relative);
                     mgTablero.Source = new BitmapImage(urlRelativa1);
                     break;
                 case 3:
                     lblCantidadJugadoresPartida.Content = Properties.Resources.lblTresJugadores;
-                    Uri urlRelativa2 = new Uri("/Recursos/TableroTresConFondo.png", UriKind.Relative);
+                    Uri urlRelativa2 = new Uri(Properties.Resources.uriTableroTresJugadoresConFondo, UriKind.Relative);
                     mgTablero.Source = new BitmapImage(urlRelativa2);
                     break;
                 case 4:
                     lblCantidadJugadoresPartida.Content = Properties.Resources.lblCuatroJugadores;
-                    Uri urlRelativa3 = new Uri("/Recursos/TableroCuatroConFondo.png", UriKind.Relative);
+                    Uri urlRelativa3 = new Uri(Properties.Resources.uriTableroCuatroJugadoresConFondo, UriKind.Relative);
                     mgTablero.Source = new BitmapImage(urlRelativa3);
                     break;
                 default:
@@ -253,10 +239,6 @@ namespace VistasSorrySliders
             {
                 log.LogWarn("Se agoto el tiempo de espera del servidor", ex);
             }
-            catch (Exception ex)
-            {
-                log.LogFatal("Ha ocurrido un error inesperado", ex);
-            }
             IrMenuPrincipal();
         }
 
@@ -270,6 +252,7 @@ namespace VistasSorrySliders
             //SWITCH -JACOB
             if (_cuentas.Count() == _partidaActual.CantidadJugadores && txtBoxHost.Text == _cuentaUsuario.Nickname)
             {
+                btnIniciarPartida.IsEnabled = false;
                 CambiarPaginas();
             }
         }
@@ -284,12 +267,12 @@ namespace VistasSorrySliders
             }
             catch (CommunicationException ex)
             {
-                MessageBox.Show(Properties.Resources.msgErrorConexion);
+                Utilidades.MostrarUnMensajeError(Properties.Resources.msgErrorConexion);
                 log.LogError("Error de Comunicación con el Servidor", ex);
             }
             catch (TimeoutException ex)
             {
-                MessageBox.Show(Properties.Resources.msgErrorTiempoEsperaServidor);
+                Utilidades.MostrarUnMensajeError(Properties.Resources.msgErrorTiempoEsperaServidor);
                 log.LogWarn("Se agoto el tiempo de espera del servidor", ex);
             }
             IrMenuPrincipal();
@@ -316,18 +299,13 @@ namespace VistasSorrySliders
             }
             catch (CommunicationException ex)
             {
-                MessageBox.Show(Properties.Resources.msgErrorConexion);
+                Utilidades.MostrarUnMensajeError(Properties.Resources.msgErrorConexion);
                 log.LogError("Error de Comunicación con el Servidor", ex);
             }
             catch (TimeoutException ex)
             {
-                MessageBox.Show(Properties.Resources.msgErrorTiempoEsperaServidor);
+                Utilidades.MostrarUnMensajeError(Properties.Resources.msgErrorTiempoEsperaServidor);
                 log.LogWarn("Se agoto el tiempo de espera del servidor", ex);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(Properties.Resources.msgErrorConexion);
-                log.LogFatal("Ha ocurrido un error inesperado", ex);
             }
         }
     }

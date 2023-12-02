@@ -36,11 +36,15 @@ namespace VistasSorrySliders
             InitializeComponent();
             _cuenta = cuenta;
             _codigoPartida = codigoPartida;
-            RecuperarAmigos();
-            RecuperarTiposNotificacion();
+            
         }
 
-        private void RecuperarAmigos()
+        public bool InicializarPagina()
+        {
+            return RecuperarAmigos() && RecuperarTiposNotificacion();
+        }
+
+        private bool RecuperarAmigos()
         {
             Constantes resultado;
             Logger log = new Logger(this.GetType());
@@ -65,25 +69,19 @@ namespace VistasSorrySliders
                 resultado = Constantes.ERROR_TIEMPO_ESPERA_SERVIDOR;
                 log.LogWarn("Se agoto el tiempo de espera del servidor", ex);
             }
-            catch (Exception ex)
-            {
-                resultado = Constantes.ERROR_CONEXION_SERVIDOR;
-                log.LogFatal("Ha ocurrido un error inesperado", ex);
-            }
 
             switch (resultado)
             {
                 case Constantes.OPERACION_EXITOSA:
                     lstBoxAmigos.Style = (Style)FindResource("estiloLstBoxAmigos");
                     lstBoxAmigos.ItemsSource = amigosLista;
-                    break;
+                    return true;
                 case Constantes.OPERACION_EXITOSA_VACIA:
                     lstBoxAmigos.Style = (Style)FindResource("estiloLstBoxAmigosVacia");
-                    break;
+                    return true;
                 default:
-                    Window.GetWindow(this).Close();
                     Utilidades.MostrarMensajesError(resultado); 
-                    break;
+                    return false;
             }
         }
         private void ClickEnviarCodigo(object sender, RoutedEventArgs e)
@@ -189,11 +187,6 @@ namespace VistasSorrySliders
                 resultado = Constantes.ERROR_TIEMPO_ESPERA_SERVIDOR;
                 log.LogWarn("Se agoto el tiempo de espera del servidor", ex);
             }
-            catch (Exception ex)
-            {
-                resultado = Constantes.ERROR_CONEXION_SERVIDOR;
-                log.LogFatal("Ha ocurrido un error inesperado", ex);
-            }
 
             switch (resultado)
             {
@@ -219,7 +212,6 @@ namespace VistasSorrySliders
                 {
                     DataContext = cuenta
                 };
-                Console.WriteLine(cuenta.CorreoElectronico);
                 foreach (CuentaSet jugadorBaneado in jugadoresBaneados)
                 {
                     if (jugadorBaneado.CorreoElectronico.Equals(cuenta.CorreoElectronico))
@@ -262,18 +254,13 @@ namespace VistasSorrySliders
                 resultado = Constantes.ERROR_TIEMPO_ESPERA_SERVIDOR;
                 log.LogWarn("Se agoto el tiempo de espera del servidor", ex);
             }
-            catch (Exception ex)
-            {
-                resultado = Constantes.ERROR_CONEXION_SERVIDOR;
-                log.LogFatal("Ha ocurrido un error inesperado", ex);
-            }
             switch (resultado)
             {
                 case Constantes.OPERACION_EXITOSA:
                     NotificarUsuarioInvitado(cuentaJugadorClickeado);
                     return;
                 case Constantes.OPERACION_EXITOSA_VACIA:
-                    MessageBox.Show(Properties.Resources.msgNotificacionGuardarError);
+                    Utilidades.MostrarUnMensajeError(Properties.Resources.msgNotificacionGuardarError);
                     break;
                 default:
                     Utilidades.MostrarMensajesError(resultado);
@@ -297,13 +284,9 @@ namespace VistasSorrySliders
             {
                 log.LogWarn("Se agoto el tiempo de espera del servidor", ex);
             }
-            catch (Exception ex)
-            {
-                log.LogFatal("Ha ocurrido un error inesperado", ex);
-            }
         }
 
-        private void RecuperarTiposNotificacion() 
+        private bool RecuperarTiposNotificacion() 
         {
             Logger log = new Logger(this.GetType());
             Constantes resultado;
@@ -314,7 +297,7 @@ namespace VistasSorrySliders
                 if (resultado == Constantes.OPERACION_EXITOSA)
                 {
                     _tiposNotificacion = listaTiposNotificaciones.ToList();
-                    return;
+                    return true;
                 }
             }
             catch (CommunicationException ex)
@@ -327,21 +310,16 @@ namespace VistasSorrySliders
                 resultado = Constantes.ERROR_TIEMPO_ESPERA_SERVIDOR;
                 log.LogWarn("Se agoto el tiempo de espera del servidor", ex);
             }
-            catch (Exception ex)
-            {
-                resultado = Constantes.ERROR_CONEXION_SERVIDOR;
-                log.LogFatal("Ha ocurrido un error inesperado", ex);
-            }
             switch (resultado)
             {
                 case Constantes.OPERACION_EXITOSA_VACIA:
-                    MessageBox.Show(Properties.Resources.msgTiposNotificacionVacios);
+                    Utilidades.MostrarUnMensajeError(Properties.Resources.msgTiposNotificacionVacios);
                     break;
                 default:
                     Utilidades.MostrarMensajesError(resultado);
                     break;
             }
-            Window.GetWindow(this).Close();
+            return false;
         }
     }
 }

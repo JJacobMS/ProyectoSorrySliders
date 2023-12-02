@@ -73,23 +73,18 @@ namespace VistasSorrySliders
             }
             catch (ArgumentException ex)
             {
-                System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorImagen, Properties.Resources.msgTituloErrorImagen, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                Utilidades.MostrarUnMensajeError(Properties.Resources.msgErrorImagen, Properties.Resources.msgTituloErrorImagen);
                 log.LogWarn("Se ha proporcionado un argumento invalido", ex);
             }
             catch (OutOfMemoryException ex)
             {
-                System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorImagen, Properties.Resources.msgTituloErrorImagen, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                Utilidades.MostrarUnMensajeError(Properties.Resources.msgErrorImagen, Properties.Resources.msgTituloErrorImagen);
                 log.LogWarn("Se ha agotado la memoria", ex);
             }
-            catch (System.IO.IOException ex)
+            catch (IOException ex)
             {
-                System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorImagen, Properties.Resources.msgTituloErrorImagen, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                Utilidades.MostrarUnMensajeError(Properties.Resources.msgErrorImagen, Properties.Resources.msgTituloErrorImagen);
                 log.LogWarn("Error al acceder a la imagen", ex);
-            }
-            catch (Exception ex)
-            {
-                System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorAvatarDefault, Properties.Resources.msgTituloErrorAvatarDefault, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                log.LogFatal("Ha ocurrido un error inesperado", ex);
             }
         }
 
@@ -206,7 +201,7 @@ namespace VistasSorrySliders
                 }
                 else
                 {
-                    System.Windows.Forms.MessageBox.Show(Properties.Resources.msgCorreoInvalido, Properties.Resources.msgTituloCorreoInvalido, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    Utilidades.MostrarUnMensajeError(Properties.Resources.msgCorreoInvalido, Properties.Resources.msgTituloCorreoInvalido);
                     return false;
                 }
             }
@@ -218,11 +213,6 @@ namespace VistasSorrySliders
             catch (ArgumentException ex)
             {
                 log.LogWarn("Se ha proporcionado un argumento invalido", ex);
-                return false;
-            }
-            catch (Exception ex)
-            {
-                log.LogFatal("Ha ocurrido un error inesperado", ex);
                 return false;
             }
         }
@@ -265,18 +255,13 @@ namespace VistasSorrySliders
                 resultado = Constantes.ERROR_TIEMPO_ESPERA_SERVIDOR;
                 log.LogWarn("Se agoto el tiempo de espera del servidor", ex);
             }
-            catch (Exception ex)
-            {
-                resultado = Constantes.ERROR_CONEXION_SERVIDOR;
-                log.LogFatal("Ha ocurrido un error inesperado", ex);
-            }
             switch (resultado)
             {
                 case Constantes.OPERACION_EXITOSA:
-                    System.Windows.Forms.MessageBox.Show(Properties.Resources.msgCuentaCreada, Properties.Resources.msgTituloCuentaCreada, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    Utilidades.MostrarMensajeInformacion(Properties.Resources.msgCuentaCreada, Properties.Resources.msgTituloCuentaCreada);
                     break;
                 case Constantes.OPERACION_EXITOSA_VACIA:
-                    System.Windows.Forms.MessageBox.Show(Properties.Resources.msgGuardarCuentaError);
+                    Utilidades.MostrarUnMensajeError(Properties.Resources.msgGuardarCuentaError);
                     break;
                 default:
                     Utilidades.MostrarMensajesError(resultado);
@@ -321,18 +306,13 @@ namespace VistasSorrySliders
                 resultado = Constantes.ERROR_TIEMPO_ESPERA_SERVIDOR;
                 log.LogWarn("Se agoto el tiempo de espera del servidor", ex);
             }
-            catch (Exception ex)
-            {
-                resultado = Constantes.ERROR_CONEXION_SERVIDOR;
-                log.LogFatal("Ha ocurrido un error inesperado", ex);
-            }
             switch (resultado)
             {
                 case Constantes.OPERACION_EXITOSA:
-                    System.Windows.Forms.MessageBox.Show(Properties.Resources.msgActualizarCuentaExito);
+                    Utilidades.MostrarMensajeInformacion(Properties.Resources.msgActualizarCuentaExito);
                     break;
                 case Constantes.OPERACION_EXITOSA_VACIA:
-                    System.Windows.Forms.MessageBox.Show(Properties.Resources.msgActualizarCuentaError);
+                    Utilidades.MostrarUnMensajeError(Properties.Resources.msgActualizarCuentaError);
                     break;
                 default:
                     Utilidades.MostrarMensajesError(resultado);
@@ -361,17 +341,12 @@ namespace VistasSorrySliders
                 resultado = Constantes.ERROR_TIEMPO_ESPERA_SERVIDOR;
                 log.LogWarn("Se agoto el tiempo de espera del servidor", ex);
             }
-            catch (Exception ex)
-            {
-                resultado = Constantes.ERROR_CONEXION_SERVIDOR;
-                log.LogFatal("Ha ocurrido un error inesperado", ex);
-            }
             switch (resultado)
             {
                 case Constantes.OPERACION_EXITOSA_VACIA:
                     return true;
                 case Constantes.OPERACION_EXITOSA:
-                    System.Windows.Forms.MessageBox.Show(Properties.Resources.msgCorreoEncontrado, Properties.Resources.msgTituloCorreoEncontrado, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    Utilidades.MostrarUnMensajeError(Properties.Resources.msgCorreoEncontrado, Properties.Resources.msgTituloCorreoEncontrado);
                     return false;
                 default:
                     Utilidades.MostrarMensajesError(resultado);
@@ -404,18 +379,13 @@ namespace VistasSorrySliders
             }
             catch (CommunicationException ex)
             {
-                System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorConexion);
+                Utilidades.MostrarUnMensajeError(Properties.Resources.msgErrorConexion);
                 log.LogError("Error de Comunicación con el Servidor", ex);
             }
             catch (TimeoutException ex)
             {
-                System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorConexion);
+                Utilidades.MostrarUnMensajeError(Properties.Resources.msgErrorConexion);
                 log.LogWarn("Se agoto el tiempo de espera del servidor", ex);
-            }
-            catch (Exception ex)
-            {
-                System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorConexion);
-                log.LogFatal("Ha ocurrido un error inesperado", ex);
             }
 
         }
@@ -450,34 +420,29 @@ namespace VistasSorrySliders
                     }
                     else
                     {
-                        System.Windows.Forms.MessageBox.Show(Properties.Resources.msgImagenInvalida, Properties.Resources.msgTituloErrorImagen, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        Utilidades.MostrarUnMensajeError(Properties.Resources.msgImagenInvalida, Properties.Resources.msgTituloErrorImagen);
                     }
                 }
             }
             catch (ArgumentException ex)
             {
-                System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorImagen, Properties.Resources.msgTituloErrorImagen, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                Utilidades.MostrarUnMensajeError(Properties.Resources.msgErrorImagen, Properties.Resources.msgTituloErrorImagen);
                 log.LogWarn("Se ha proporcionado un argumento invalido", ex);
             }
             catch (OutOfMemoryException ex)
             {
-                System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorImagen, Properties.Resources.msgTituloErrorImagen, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                Utilidades.MostrarUnMensajeError(Properties.Resources.msgErrorImagen, Properties.Resources.msgTituloErrorImagen);
                 log.LogWarn("Se ha agotado la memoria", ex);
             }
             catch (UnauthorizedAccessException ex)
             {
                 log.LogWarn("Error al acceder a la imagen", ex);
-                System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorImagenPermisos, Properties.Resources.msgErrorTituloImagenPermisos);
+                Utilidades.MostrarUnMensajeError(Properties.Resources.msgErrorImagenPermisos, Properties.Resources.msgErrorTituloImagenPermisos);
             }
-            catch (System.IO.IOException ex)
+            catch (IOException ex)
             {
-                System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorImagen, Properties.Resources.msgTituloErrorImagen, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                Utilidades.MostrarUnMensajeError(Properties.Resources.msgErrorImagen, Properties.Resources.msgTituloErrorImagen);
                 log.LogWarn("Error al acceder a la imagen", ex);
-            }
-            catch (Exception ex)
-            {
-                System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorImagen, Properties.Resources.msgTituloErrorImagen, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                log.LogFatal("Ha ocurrido un error inesperado", ex);
             }
         }
 
@@ -533,7 +498,7 @@ namespace VistasSorrySliders
             {
                 if (ruta == null)
                 {
-                    System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorImagen, Properties.Resources.msgTituloErrorImagen, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    Utilidades.MostrarUnMensajeError(Properties.Resources.msgErrorImagen, Properties.Resources.msgTituloErrorImagen);
                     return false;
                 }
                 {
@@ -548,7 +513,7 @@ namespace VistasSorrySliders
                         }
                         else
                         {
-                            System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorTamañoImagen, Properties.Resources.msgErrorTituloImagenPermisos, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            Utilidades.MostrarUnMensajeError(Properties.Resources.msgErrorTamañoImagen, Properties.Resources.msgErrorTituloImagenPermisos);
                             return false;
                         }
                     }
@@ -557,19 +522,13 @@ namespace VistasSorrySliders
             catch (IOException ex)
             {
                 log.LogWarn("Error al acceder a la imagen", ex);
-                System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorImagen, Properties.Resources.msgTituloErrorImagen, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Utilidades.MostrarUnMensajeError(Properties.Resources.msgErrorImagen, Properties.Resources.msgTituloErrorImagen);
                 return false;
             }
             catch (UnauthorizedAccessException ex)
             {
                 log.LogWarn("Error al acceder a la imagen", ex);
-                System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorImagen, Properties.Resources.msgTituloErrorImagen, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return false;
-            }
-            catch (Exception ex)
-            {
-                log.LogFatal("Ha ocurrido un error inesperado", ex);
-                System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorImagen, Properties.Resources.msgTituloErrorImagen, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Utilidades.MostrarUnMensajeError(Properties.Resources.msgErrorImagen, Properties.Resources.msgTituloErrorImagen);
                 return false;
             }
         }
