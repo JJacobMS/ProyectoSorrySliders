@@ -704,8 +704,6 @@ namespace VistasSorrySliders
         }
 
         //Lista de turnos//, asignarle uno a cada jugador, si falla el callback llamar a otro metodo callback que llame a todos y que quiten ese correo de us lista
-        //Metod guardar las puntuaciones //GUARDAR DATOS EN BD
-        //Cambiar Pantalla
 
         public void NotificarJugadorMovimiento(string nombrePeon, int puntosObtenidos)
         {
@@ -905,6 +903,7 @@ namespace VistasSorrySliders
 
         private void NotificarCambiarPantalla()
         {
+            Console.WriteLine("NOTIFICARCAMBIARPAGINA");
             Logger log = new Logger(this.GetType());
             Constantes respuesta;
             try
@@ -928,7 +927,6 @@ namespace VistasSorrySliders
                     MessageBox.Show(Properties.Resources.msgErrorConexion);
                     break;
                 case Constantes.OPERACION_EXITOSA:
-                    EliminarDiccionarios();
                     break;
                 case Constantes.ERROR_TIEMPO_ESPERA_SERVIDOR:
                     MessageBox.Show(Properties.Resources.msgErrorTiempoEsperaServidor);
@@ -936,22 +934,56 @@ namespace VistasSorrySliders
                 default:
                     break;
             }
-            //Le digo a todos los jugadores que cambien de pantalla
-            //SI ES EXITOSO ELIMINO DICCIONARIOS y INVITADO
-            //TIENE QUE HACER AGUNOS METODOS, eliminar diciconarios de uid de chat, juego puntuacion, juego lanzamiento y eliminar invitados
+            //SI ES EXITOSO ELIMINO DICCIONARIOS y INVITADO eliminar invitados
 
         }
         private void EliminarDiccionarios() 
         {
-            
+            Logger log = new Logger(this.GetType());
+            Constantes respuesta;
+            try
+            {
+                _proxyJuegoPuntuacion.EliminarDiccionariosJuego(_codigoPartida);
+                respuesta = Constantes.OPERACION_EXITOSA;
+            }
+            catch (CommunicationException ex)
+            {
+                log.LogError("Error de Comunicación con el Servidor", ex);
+                respuesta = Constantes.ERROR_CONEXION_SERVIDOR;
+            }
+            catch (TimeoutException ex)
+            {
+                log.LogWarn("Se agoto el tiempo de espera del servidor", ex);
+                respuesta = Constantes.ERROR_TIEMPO_ESPERA_SERVIDOR;
+            }
+            switch (respuesta)
+            {
+                case Constantes.ERROR_CONEXION_SERVIDOR:
+                    MessageBox.Show(Properties.Resources.msgErrorConexion);
+                    break;
+                case Constantes.OPERACION_EXITOSA:
+                    break;
+                case Constantes.ERROR_TIEMPO_ESPERA_SERVIDOR:
+                    MessageBox.Show(Properties.Resources.msgErrorTiempoEsperaServidor);
+                    break;
+                default:
+                    break;
+            }
         }
 
         public void CambiarPagina()
         {
-            if (_listaPuntuaciones == null) 
+            Console.WriteLine("CAMBIARPAGINA");            
+            if (_listaPuntuaciones == null || _listaPuntuaciones.Count() == 0)
             {
                 ComprobarGanador();
             }
+            else 
+            {
+
+                EliminarDiccionarios();
+            }
+            _proxyJuegoPuntuacion.Close();
             MainWindow ventanaNueva = new MainWindow();
             TableroGanadoresPartidaPagina paginaGanadores = new TableroGanadoresPartidaPagina(_cuentaUsuario, _listaPuntuaciones);
             ventanaNueva.Navigate(paginaGanadores);

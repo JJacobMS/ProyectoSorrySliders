@@ -2362,6 +2362,12 @@ namespace VistasSorrySliders.ServicioSorrySliders {
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IJuegoPuntuacion/NotificarCambiarPagina")]
         System.Threading.Tasks.Task NotificarCambiarPaginaAsync(string uid);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IJuegoPuntuacion/EliminarDiccionariosJuego")]
+        void EliminarDiccionariosJuego(string uid);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IJuegoPuntuacion/EliminarDiccionariosJuego")]
+        System.Threading.Tasks.Task EliminarDiccionariosJuegoAsync(string uid);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -2376,7 +2382,7 @@ namespace VistasSorrySliders.ServicioSorrySliders {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IJuegoPuntuacion/EliminarTurnoJugador", ReplyAction="http://tempuri.org/IJuegoPuntuacion/EliminarTurnoJugadorResponse")]
         void EliminarTurnoJugador(string correoElectronico);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IJuegoPuntuacion/CambiarPagina", ReplyAction="http://tempuri.org/IJuegoPuntuacion/CambiarPaginaResponse")]
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IJuegoPuntuacion/CambiarPagina")]
         void CambiarPagina();
     }
     
@@ -2454,6 +2460,14 @@ namespace VistasSorrySliders.ServicioSorrySliders {
         
         public System.Threading.Tasks.Task NotificarCambiarPaginaAsync(string uid) {
             return base.Channel.NotificarCambiarPaginaAsync(uid);
+        }
+        
+        public void EliminarDiccionariosJuego(string uid) {
+            base.Channel.EliminarDiccionariosJuego(uid);
+        }
+        
+        public System.Threading.Tasks.Task EliminarDiccionariosJuegoAsync(string uid) {
+            return base.Channel.EliminarDiccionariosJuegoAsync(uid);
         }
     }
 }

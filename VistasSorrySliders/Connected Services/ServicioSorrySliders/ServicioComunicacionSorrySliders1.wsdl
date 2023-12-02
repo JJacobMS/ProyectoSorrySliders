@@ -777,6 +777,9 @@
   <wsdl:message name="IJuegoPuntuacion_NotificarCambiarPagina_InputMessage">
     <wsdl:part name="parameters" element="tns:NotificarCambiarPagina" />
   </wsdl:message>
+  <wsdl:message name="IJuegoPuntuacion_EliminarDiccionariosJuego_InputMessage">
+    <wsdl:part name="parameters" element="tns:EliminarDiccionariosJuego" />
+  </wsdl:message>
   <wsdl:message name="IJuegoPuntuacion_NotificarJugadorMovimiento_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:NotificarJugadorMovimiento" />
   </wsdl:message>
@@ -797,9 +800,6 @@
   </wsdl:message>
   <wsdl:message name="IJuegoPuntuacion_CambiarPagina_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:CambiarPagina" />
-  </wsdl:message>
-  <wsdl:message name="IJuegoPuntuacion_CambiarPagina_InputCallbackMessage">
-    <wsdl:part name="parameters" element="tns:CambiarPaginaResponse" />
   </wsdl:message>
   <wsdl:portType name="IInicioSesion">
     <wsdl:operation name="VerificarExistenciaCorreoCuenta">
@@ -1062,6 +1062,9 @@
     <wsdl:operation name="NotificarCambiarPagina">
       <wsdl:input wsaw:Action="http://tempuri.org/IJuegoPuntuacion/NotificarCambiarPagina" message="tns:IJuegoPuntuacion_NotificarCambiarPagina_InputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="EliminarDiccionariosJuego">
+      <wsdl:input wsaw:Action="http://tempuri.org/IJuegoPuntuacion/EliminarDiccionariosJuego" message="tns:IJuegoPuntuacion_EliminarDiccionariosJuego_InputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="NotificarJugadorMovimiento">
       <wsdl:output wsaw:Action="http://tempuri.org/IJuegoPuntuacion/NotificarJugadorMovimiento" message="tns:IJuegoPuntuacion_NotificarJugadorMovimiento_OutputCallbackMessage" />
       <wsdl:input wsaw:Action="http://tempuri.org/IJuegoPuntuacion/NotificarJugadorMovimientoResponse" message="tns:IJuegoPuntuacion_NotificarJugadorMovimiento_InputCallbackMessage" />
@@ -1076,7 +1079,6 @@
     </wsdl:operation>
     <wsdl:operation name="CambiarPagina">
       <wsdl:output wsaw:Action="http://tempuri.org/IJuegoPuntuacion/CambiarPagina" message="tns:IJuegoPuntuacion_CambiarPagina_OutputCallbackMessage" />
-      <wsdl:input wsaw:Action="http://tempuri.org/IJuegoPuntuacion/CambiarPaginaResponse" message="tns:IJuegoPuntuacion_CambiarPagina_InputCallbackMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="NetTcpBinding_IInicioSesion" type="tns:IInicioSesion">
@@ -1638,6 +1640,12 @@
         <soap12:body use="literal" />
       </wsdl:input>
     </wsdl:operation>
+    <wsdl:operation name="EliminarDiccionariosJuego">
+      <soap12:operation soapAction="http://tempuri.org/IJuegoPuntuacion/EliminarDiccionariosJuego" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
     <wsdl:operation name="NotificarJugadorMovimiento">
       <soap12:operation soapAction="http://tempuri.org/IJuegoPuntuacion/NotificarJugadorMovimiento" style="document" />
       <wsdl:input>
@@ -1667,9 +1675,6 @@
     </wsdl:operation>
     <wsdl:operation name="CambiarPagina">
       <soap12:operation soapAction="http://tempuri.org/IJuegoPuntuacion/CambiarPagina" style="document" />
-      <wsdl:input>
-        <soap12:body use="literal" />
-      </wsdl:input>
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>
