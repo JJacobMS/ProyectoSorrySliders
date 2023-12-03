@@ -1684,6 +1684,12 @@ namespace VistasSorrySliders.ServicioSorrySliders {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IListaAmigos/EliminarBaneo", ReplyAction="http://tempuri.org/IListaAmigos/EliminarBaneoResponse")]
         System.Threading.Tasks.Task<VistasSorrySliders.ServicioSorrySliders.Constantes> EliminarBaneoAsync(string correoElectronicoPrincipal, string correoElectronicoBaneado);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IListaAmigos/EnviarCorreo", ReplyAction="http://tempuri.org/IListaAmigos/EnviarCorreoResponse")]
+        VistasSorrySliders.ServicioSorrySliders.Constantes EnviarCorreo(string correoElectronicoDestinatario, string asuntoCorreo, string cuerpoCorreo);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IListaAmigos/EnviarCorreo", ReplyAction="http://tempuri.org/IListaAmigos/EnviarCorreoResponse")]
+        System.Threading.Tasks.Task<VistasSorrySliders.ServicioSorrySliders.Constantes> EnviarCorreoAsync(string correoElectronicoDestinatario, string asuntoCorreo, string cuerpoCorreo);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -1823,6 +1829,14 @@ namespace VistasSorrySliders.ServicioSorrySliders {
         
         public System.Threading.Tasks.Task<VistasSorrySliders.ServicioSorrySliders.Constantes> EliminarBaneoAsync(string correoElectronicoPrincipal, string correoElectronicoBaneado) {
             return base.Channel.EliminarBaneoAsync(correoElectronicoPrincipal, correoElectronicoBaneado);
+        }
+        
+        public VistasSorrySliders.ServicioSorrySliders.Constantes EnviarCorreo(string correoElectronicoDestinatario, string asuntoCorreo, string cuerpoCorreo) {
+            return base.Channel.EnviarCorreo(correoElectronicoDestinatario, asuntoCorreo, cuerpoCorreo);
+        }
+        
+        public System.Threading.Tasks.Task<VistasSorrySliders.ServicioSorrySliders.Constantes> EnviarCorreoAsync(string correoElectronicoDestinatario, string asuntoCorreo, string cuerpoCorreo) {
+            return base.Channel.EnviarCorreoAsync(correoElectronicoDestinatario, asuntoCorreo, cuerpoCorreo);
         }
     }
     

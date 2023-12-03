@@ -199,38 +199,38 @@ namespace VistasSorrySliders
         }
         private void InicializarLabels()
         {
+            string puntuacionUltima = Properties.Resources.lblPuntuacionUltimaJugada;
             switch (_jugadoresLanzamiento.Count())
             {
                 case 2:
                     lblJugadorAzul.Content = _jugadoresLanzamiento[0].Nickname;
-                    lblPuntuacionJugadorAzul.Content = "Puntuación Última Jugada: " + CalcularPuntuacion(_jugadoresLanzamiento[0].Puntuaciones);
+                    lblPuntuacionJugadorAzul.Content = puntuacionUltima + " " + CalcularPuntuacion(_jugadoresLanzamiento[0].Puntuaciones);
                     lblJugadorRojo.Content = _jugadoresLanzamiento[1].Nickname;
-                    lblPuntuacionJugadorRojo.Content = "Puntuación Última Jugada: " + CalcularPuntuacion(_jugadoresLanzamiento[1].Puntuaciones);
+                    lblPuntuacionJugadorRojo.Content = puntuacionUltima+ " " + CalcularPuntuacion(_jugadoresLanzamiento[1].Puntuaciones);
                     break;
                 case 3:
                     lblJugadorAzul.Content = _jugadoresLanzamiento[0].Nickname;
-                    lblPuntuacionJugadorAzul.Content = "Puntuación Última Jugada: " + CalcularPuntuacion(_jugadoresLanzamiento[0].Puntuaciones);
+                    lblPuntuacionJugadorAzul.Content = puntuacionUltima+ " " + CalcularPuntuacion(_jugadoresLanzamiento[0].Puntuaciones);
 
                     lblJugadorVerde.Content = _jugadoresLanzamiento[1].Nickname;
-                    lblPuntuacionJugadorVerde.Content = "Puntuación Última Jugada: " + CalcularPuntuacion(_jugadoresLanzamiento[1].Puntuaciones);
+                    lblPuntuacionJugadorVerde.Content = puntuacionUltima+ " " +CalcularPuntuacion(_jugadoresLanzamiento[1].Puntuaciones);
 
                     lblJugadorAmarillo.Content = _jugadoresLanzamiento[2].Nickname;
-                    lblPuntuacionJugadorAmarillo.Content = "Puntuación Última Jugada: " + CalcularPuntuacion(_jugadoresLanzamiento[2].Puntuaciones);
+                    lblPuntuacionJugadorAmarillo.Content = puntuacionUltima+ " " + CalcularPuntuacion(_jugadoresLanzamiento[2].Puntuaciones);
 
                     break;
                 case 4:
                     lblJugadorAzul.Content = _jugadoresLanzamiento[0].Nickname;
-                    lblPuntuacionJugadorAzul.Content = "Puntuación Última Jugada: " + CalcularPuntuacion(_jugadoresLanzamiento[0].Puntuaciones);
+                    lblPuntuacionJugadorAzul.Content = puntuacionUltima + " " + CalcularPuntuacion(_jugadoresLanzamiento[0].Puntuaciones);
 
                     lblJugadorVerde.Content = _jugadoresLanzamiento[1].Nickname;
-                    lblPuntuacionJugadorVerde.Content = "Puntuación Última Jugada: " + CalcularPuntuacion(_jugadoresLanzamiento[1].Puntuaciones);
+                    lblPuntuacionJugadorVerde.Content = puntuacionUltima + " " + CalcularPuntuacion(_jugadoresLanzamiento[1].Puntuaciones);
 
                     lblJugadorRojo.Content = _jugadoresLanzamiento[2].Nickname;
-                    lblPuntuacionJugadorRojo.Content = "Puntuación Última Jugada: " + CalcularPuntuacion(_jugadoresLanzamiento[2].Puntuaciones);
+                    lblPuntuacionJugadorRojo.Content = puntuacionUltima + " " + CalcularPuntuacion(_jugadoresLanzamiento[2].Puntuaciones);
 
                     lblJugadorAmarillo.Content = _jugadoresLanzamiento[3].Nickname;
-                    lblPuntuacionJugadorAmarillo.Content = "Puntuación Última Jugada: " + CalcularPuntuacion(_jugadoresLanzamiento[3].Puntuaciones);
-
+                    lblPuntuacionJugadorAmarillo.Content = puntuacionUltima + " " + CalcularPuntuacion(_jugadoresLanzamiento[3].Puntuaciones);
                     break;
                 default:
                     break;

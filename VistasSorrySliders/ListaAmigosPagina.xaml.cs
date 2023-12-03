@@ -19,6 +19,9 @@ using VistasSorrySliders.ServicioSorrySliders;
 using System.Net.NetworkInformation;
 using VistasSorrySliders.LogicaJuego;
 using System.Data.Entity.Core;
+using System.Security.Authentication;
+using System.Globalization;
+using System.Text.RegularExpressions;
 
 namespace VistasSorrySliders
 {
@@ -123,41 +126,78 @@ namespace VistasSorrySliders
             return (CuentaSet)botonJugador.CommandParameter;
         }
         //Cambiar Enviar Correo a Servidor
-        private void EnviarCorreo()
+        private void EnviarCorreo(string correoDestinatario)
         {
             Logger log = new Logger(this.GetType());
+            string cuerpoCorreo = string.Format(Properties.Resources.msgCorreoInvitacion, _cuenta.CorreoElectronico, _codigoPartida);
+            string asuntoCorreo = Properties.Resources.msgTituloCorreoInvitacion;
+            Constantes resultado;
             try
             {
-                if (NetworkInterface.GetIsNetworkAvailable())
+                resultado = _proxyAmigos.EnviarCorreo(correoDestinatario, asuntoCorreo, cuerpoCorreo);
+            }
+            catch (CommunicationException ex)
+            {
+                resultado = Constantes.ERROR_CONEXION_SERVIDOR;
+                log.LogError("Error de Comunicación con el Servidor", ex);
+            }
+            catch (TimeoutException ex)
+            {
+                resultado = Constantes.ERROR_TIEMPO_ESPERA_SERVIDOR;
+                log.LogWarn("Se agoto el tiempo de espera del servidor", ex);
+            }
+            switch (resultado)
+            {
+                case Constantes.OPERACION_EXITOSA:
+                    Utilidades.MostrarMensajeInformacion(Properties.Resources.msgInvitacionExitosa);
+                    break;
+                case Constantes.OPERACION_EXITOSA_VACIA:
+                    Utilidades.MostrarUnMensajeError(Properties.Resources.msgNotificacionGuardarError);
+                    break;
+                case Constantes.ERROR_CONSULTA:
+                    Utilidades.MostrarUnMensajeError(Properties.Resources.msgNotificacionGuardarError);
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        private bool ValidarCorreo(string correo)
+        {
+            Logger log = new Logger(this.GetType());
+            if (string.IsNullOrWhiteSpace(correo))
+            {
+                return false;
+            }
+            try
+            {
+                correo = Regex.Replace(correo, @"(@)(.+)$", DomainMapper, RegexOptions.None, TimeSpan.FromMilliseconds(200));
+                string DomainMapper(Match match)
                 {
-
-                    MailMessage correo = new MailMessage();
-                    string correoJuego = "TheSorrySliders@gmail.com";
-                    string contraseñaAplicacion = "nsnd wsuu kqeb qayk";
-                    correo.From = new MailAddress(correoJuego);
-                    correo.To.Add("montielsalasjesus@gmail.com");
-                    correo.Subject = "Invitación a Sorry Sliders";
-
-                    correo.Body = $"<p>El jugador {_cuenta.CorreoElectronico} te ha invitado a jugar Sorry Sliders \n " +
-                        $"Únete como invitado con el siguiente código de partida: {_codigoPartida} \n " +
-                        $"</p><img src='VistasSorrySliders/Recursos/logoSliders.png' alt='Sorry Sliders'>";
-                    correo.IsBodyHtml = true;
-
-                    SmtpClient clienteSmtp = new SmtpClient("smtp.gmail.com");
-                    clienteSmtp.Port = 587;
-                    clienteSmtp.Credentials = new NetworkCredential(correoJuego, contraseñaAplicacion);
-                    clienteSmtp.EnableSsl = true;
-                    clienteSmtp.Send(correo);
+                    var idn = new IdnMapping();
+                    string domainName = idn.GetAscii(match.Groups[2].Value);
+                    return match.Groups[1].Value + domainName;
+                }
+                bool correoValido = Regex.IsMatch(correo, @"^[^@\s]+@[^@\s]+\.[^@\s]+$", RegexOptions.IgnoreCase, TimeSpan.FromMilliseconds(250));
+                if (correoValido)
+                {
+                    return true;
                 }
                 else
                 {
-                    Console.WriteLine("No hay conexión a Internet");
+                    Utilidades.MostrarUnMensajeError(Properties.Resources.msgCorreoInvalido, Properties.Resources.msgTituloCorreoInvalido);
+                    return false;
                 }
             }
-            catch (Exception ex)
+            catch (RegexMatchTimeoutException ex)
             {
-                Console.WriteLine("Error al enviar el correo: " + ex.StackTrace);
-                log.LogFatal("Ha ocurrido un error inesperado", ex);
+                log.LogWarn("El tiempo de espera para la expresión se ha agotado", ex);
+                return false;
+            }
+            catch (ArgumentException ex)
+            {
+                log.LogWarn("Se ha proporcionado un argumento invalido", ex);
+                return false;
             }
         }
 
@@ -245,7 +285,11 @@ namespace VistasSorrySliders
 
         private void ClickEnviarCodigoJugadorSinCuenta(object sender, RoutedEventArgs e)
         {
-            //EnviarCorreo();
+            if (txtBoxCorreoInvitacion.Text.Length > 0 && ValidarCorreo(txtBoxCorreoInvitacion.Text))
+            {
+                EnviarCorreo(txtBoxCorreoInvitacion.Text);
+                txtBoxCorreoInvitacion.Text = "";
+            }
         }
 
         private void EnviarInvitacionJugador(CuentaSet cuentaJugadorClickeado) 
@@ -340,6 +384,16 @@ namespace VistasSorrySliders
                     throw new CommunicationException();
             }
             throw new EntitySqlException();
+        }
+
+        private void TextChangedTamañoCorreoElectronicoInvitacion(object sender, TextChangedEventArgs e)
+        {
+            int tamañoMaximoCorreo = 100;
+            if (txtBoxCorreoInvitacion.Text.Length > tamañoMaximoCorreo)
+            {
+                txtBoxCorreoInvitacion.Text = txtBoxCorreoInvitacion.Text.Substring(0, tamañoMaximoCorreo);
+                txtBoxCorreoInvitacion.SelectionStart = txtBoxCorreoInvitacion.Text.Length;
+            }
         }
     }
 }
