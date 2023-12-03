@@ -645,6 +645,12 @@
   <wsdl:message name="IListaAmigos_EliminarBaneo_OutputMessage">
     <wsdl:part name="parameters" element="tns:EliminarBaneoResponse" />
   </wsdl:message>
+  <wsdl:message name="IListaAmigos_EnviarCorreo_InputMessage">
+    <wsdl:part name="parameters" element="tns:EnviarCorreo" />
+  </wsdl:message>
+  <wsdl:message name="IListaAmigos_EnviarCorreo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:EnviarCorreoResponse" />
+  </wsdl:message>
   <wsdl:message name="INotificarJugadores_AgregarProxy_InputMessage">
     <wsdl:part name="parameters" element="tns:AgregarProxy" />
   </wsdl:message>
@@ -937,6 +943,10 @@
     <wsdl:operation name="EliminarBaneo">
       <wsdl:input wsaw:Action="http://tempuri.org/IListaAmigos/EliminarBaneo" message="tns:IListaAmigos_EliminarBaneo_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IListaAmigos/EliminarBaneoResponse" message="tns:IListaAmigos_EliminarBaneo_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="EnviarCorreo">
+      <wsdl:input wsaw:Action="http://tempuri.org/IListaAmigos/EnviarCorreo" message="tns:IListaAmigos_EnviarCorreo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IListaAmigos/EnviarCorreoResponse" message="tns:IListaAmigos_EnviarCorreo_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:portType name="INotificarJugadores">
@@ -1374,6 +1384,15 @@
     </wsdl:operation>
     <wsdl:operation name="EliminarBaneo">
       <soap12:operation soapAction="http://tempuri.org/IListaAmigos/EliminarBaneo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EnviarCorreo">
+      <soap12:operation soapAction="http://tempuri.org/IListaAmigos/EnviarCorreo" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
