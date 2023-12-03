@@ -197,6 +197,7 @@ namespace VistasSorrySliders
             }
             else
             {
+                _juegoYLobbyVentana.ExpulsarJugadorJuego(correoElectronico);
                 NotificarExpulsionJuego(correoElectronico);
                 MostrarAvisoJugadorSalioJuego(correoElectronico, true);
             }
@@ -210,7 +211,6 @@ namespace VistasSorrySliders
 
         private void NotificarExpulsionJuego(string correoElectronico)
         {
-            _juegoYLobbyVentana.ExpulsarJugadorJuego(correoElectronico);
             for (int i = 0; i < _jugadoresListas.Count; i++)
             {
                 if (_jugadoresListas[i].CorreoElectronico.Equals(correoElectronico))

@@ -96,7 +96,7 @@ namespace VistasSorrySliders
                     return;
                 case Constantes.OPERACION_EXITOSA_VACIA:
                     lstBoxAmigos.Style = (Style)FindResource("estiloLstBoxAmigosVacia");
-                    break;
+                    return;
                 case Constantes.ERROR_TIEMPO_ESPERA_SERVIDOR:
                 case Constantes.ERROR_CONEXION_SERVIDOR:
                     throw new CommunicationException();
