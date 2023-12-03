@@ -75,21 +75,13 @@ namespace VistasSorrySliders
                 }
                 catch (CommunicationException ex)
                 {
-                    Console.WriteLine(ex);
                     resultado = Constantes.ERROR_CONEXION_SERVIDOR;
                     log.LogError("Error de Comunicación con el Servidor", ex);
                 }
                 catch (TimeoutException ex)
                 {
-                    Console.WriteLine(ex);
-                    resultado = Constantes.ERROR_CONEXION_SERVIDOR;
+                    resultado = Constantes.ERROR_TIEMPO_ESPERA_SERVIDOR;
                     log.LogWarn("Se agoto el tiempo de espera del servidor", ex);
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine(ex);
-                    resultado = Constantes.ERROR_CONEXION_SERVIDOR;
-                    log.LogFatal("Ha ocurrido un error inesperado", ex);
                 }
                 switch (resultado)
                 {
@@ -100,12 +92,8 @@ namespace VistasSorrySliders
                     case Constantes.OPERACION_EXITOSA_VACIA:
                         txtBlockCorreoInvalido.Visibility = Visibility.Visible;
                         break;
-                    case Constantes.ERROR_CONEXION_BD:
-                    case Constantes.ERROR_CONSULTA:
-                        MessageBox.Show(Properties.Resources.msgErrorBaseDatos);
-                        break;
-                    case Constantes.ERROR_CONEXION_SERVIDOR:
-                        MessageBox.Show(Properties.Resources.msgErrorConexion);
+                    default:
+                        Utilidades.MostrarMensajesError(resultado);
                         break;
                 }
             }
@@ -124,45 +112,27 @@ namespace VistasSorrySliders
             }
             catch (CommunicationException ex)
             {
-                Console.WriteLine(ex);
                 resultado = Constantes.ERROR_CONEXION_SERVIDOR;
                 log.LogError("Error de Comunicación con el Servidor", ex);
             }
             catch (TimeoutException ex)
             {
-                Console.WriteLine(ex);
-                resultado = Constantes.ERROR_CONEXION_SERVIDOR;
+                resultado = Constantes.ERROR_TIEMPO_ESPERA_SERVIDOR;
                 log.LogWarn("Se agoto el tiempo de espera del servidor", ex);
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex);
-                resultado = Constantes.ERROR_CONEXION_SERVIDOR;
-                log.LogFatal("Ha ocurrido un error inesperado", ex);
             }
 
             switch (resultado)
             {
                 case Constantes.OPERACION_EXITOSA:
-                    CambiarPantallaMenuPrincipal(cuentaPorVerificar.CorreoElectronico);
+                    VerificarUsuarioUnicoSistema(cuentaPorVerificar.CorreoElectronico);
                     break;
                 case Constantes.OPERACION_EXITOSA_VACIA:
                     txtBlockContrasenaInvalida.Visibility = Visibility.Visible;
                     break;
-                case Constantes.ERROR_CONEXION_BD:
-                case Constantes.ERROR_CONSULTA:
-                    MessageBox.Show(Properties.Resources.msgErrorBaseDatos);
-                    break;
-                case Constantes.ERROR_CONEXION_SERVIDOR:
-                    MessageBox.Show(Properties.Resources.msgErrorConexion);
+                default:
+                    Utilidades.MostrarMensajesError(resultado);
                     break;
             }
-        }
-
-        private void CambiarPantallaMenuPrincipal(string correoVerificado)
-        {
-            MenuPrincipalPagina menuPrincipal = new MenuPrincipalPagina(correoVerificado);
-            this.NavigationService.Navigate(menuPrincipal);
         }
 
         private void ReiniciarPantalla()
@@ -187,5 +157,51 @@ namespace VistasSorrySliders
             UnirsePartidaPagina unirsePaginaInvitado = new UnirsePartidaPagina();
             this.NavigationService.Navigate(unirsePaginaInvitado);
         }
+
+        private void VerificarUsuarioUnicoSistema(string correoJugador)
+        {
+            Logger log = new Logger(this.GetType());
+            try
+            {
+                bool estaEnLinea;
+                InicioSesionClient proxyInicioSesion = new InicioSesionClient();
+                estaEnLinea = proxyInicioSesion.JugadorEstaEnLinea(correoJugador);
+                if (estaEnLinea)
+                {
+                    Utilidades.MostrarUnMensajeError(Properties.Resources.txtBlockCuentaYaEnLobby);
+                    return;
+                }
+                CambiarPantallaMenuPrincipal(correoJugador);
+            }
+            catch (CommunicationException ex)
+            {
+                Utilidades.MostrarUnMensajeError(Properties.Resources.msgErrorConexion);
+                log.LogError("Error de Comunicación con el Servidor", ex);
+            }
+            catch (TimeoutException ex)
+            {
+                Utilidades.MostrarUnMensajeError(Properties.Resources.msgErrorTiempoEsperaServidor);
+                log.LogWarn("Se agoto el tiempo de espera del servidor", ex);
+            }
+        }
+
+        private void CambiarPantallaMenuPrincipal(string correoVerificado)
+        {
+            MainWindow ventanaPrincipal = Window.GetWindow(this) as MainWindow;
+            ventanaPrincipal.IndicarCorreoCuenta(correoVerificado);
+
+            if (ventanaPrincipal.EntrarSistemaEnLineaMenu())
+            {
+                MenuPrincipalPagina menuPrincipal = new MenuPrincipalPagina();
+                menuPrincipal.CambiarPaginaMenu += CambiarPaginaMenu;
+                menuPrincipal.LlamarRecuperarDatosUsuario(correoVerificado);
+            }
+        }
+
+        private void CambiarPaginaMenu(MenuPrincipalPagina pagina)
+        {
+            this.NavigationService.Navigate(pagina);
+        }
+
     }
 }

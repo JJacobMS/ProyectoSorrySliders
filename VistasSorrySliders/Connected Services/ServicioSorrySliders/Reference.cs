@@ -31,6 +31,9 @@ namespace VistasSorrySliders.ServicioSorrySliders {
         
         [System.Runtime.Serialization.EnumMemberAttribute()]
         OPERACION_EXITOSA_VACIA = 4,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        ERROR_TIEMPO_ESPERA_SERVIDOR = 5,
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -1173,6 +1176,12 @@ namespace VistasSorrySliders.ServicioSorrySliders {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IInicioSesion/VerificarContrasenaDeCuenta", ReplyAction="http://tempuri.org/IInicioSesion/VerificarContrasenaDeCuentaResponse")]
         System.Threading.Tasks.Task<VistasSorrySliders.ServicioSorrySliders.Constantes> VerificarContrasenaDeCuentaAsync(VistasSorrySliders.ServicioSorrySliders.CuentaSet cuentaPorVerificar);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IInicioSesion/JugadorEstaEnLinea", ReplyAction="http://tempuri.org/IInicioSesion/JugadorEstaEnLineaResponse")]
+        bool JugadorEstaEnLinea(string jugadorCorreo);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IInicioSesion/JugadorEstaEnLinea", ReplyAction="http://tempuri.org/IInicioSesion/JugadorEstaEnLineaResponse")]
+        System.Threading.Tasks.Task<bool> JugadorEstaEnLineaAsync(string jugadorCorreo);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -1217,6 +1226,14 @@ namespace VistasSorrySliders.ServicioSorrySliders {
         public System.Threading.Tasks.Task<VistasSorrySliders.ServicioSorrySliders.Constantes> VerificarContrasenaDeCuentaAsync(VistasSorrySliders.ServicioSorrySliders.CuentaSet cuentaPorVerificar) {
             return base.Channel.VerificarContrasenaDeCuentaAsync(cuentaPorVerificar);
         }
+        
+        public bool JugadorEstaEnLinea(string jugadorCorreo) {
+            return base.Channel.JugadorEstaEnLinea(jugadorCorreo);
+        }
+        
+        public System.Threading.Tasks.Task<bool> JugadorEstaEnLineaAsync(string jugadorCorreo) {
+            return base.Channel.JugadorEstaEnLineaAsync(jugadorCorreo);
+        }
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -1224,10 +1241,10 @@ namespace VistasSorrySliders.ServicioSorrySliders {
     public interface IMenuPrincipal {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMenuPrincipal/RecuperarDatosUsuario", ReplyAction="http://tempuri.org/IMenuPrincipal/RecuperarDatosUsuarioResponse")]
-        System.ValueTuple<VistasSorrySliders.ServicioSorrySliders.Constantes, string, byte[], string> RecuperarDatosUsuario(string correoElectronico);
+        System.ValueTuple<VistasSorrySliders.ServicioSorrySliders.Constantes, string, byte[]> RecuperarDatosUsuario(string correoElectronico);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMenuPrincipal/RecuperarDatosUsuario", ReplyAction="http://tempuri.org/IMenuPrincipal/RecuperarDatosUsuarioResponse")]
-        System.Threading.Tasks.Task<System.ValueTuple<VistasSorrySliders.ServicioSorrySliders.Constantes, string, byte[], string>> RecuperarDatosUsuarioAsync(string correoElectronico);
+        System.Threading.Tasks.Task<System.ValueTuple<VistasSorrySliders.ServicioSorrySliders.Constantes, string, byte[]>> RecuperarDatosUsuarioAsync(string correoElectronico);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -1257,11 +1274,11 @@ namespace VistasSorrySliders.ServicioSorrySliders {
                 base(binding, remoteAddress) {
         }
         
-        public System.ValueTuple<VistasSorrySliders.ServicioSorrySliders.Constantes, string, byte[], string> RecuperarDatosUsuario(string correoElectronico) {
+        public System.ValueTuple<VistasSorrySliders.ServicioSorrySliders.Constantes, string, byte[]> RecuperarDatosUsuario(string correoElectronico) {
             return base.Channel.RecuperarDatosUsuario(correoElectronico);
         }
         
-        public System.Threading.Tasks.Task<System.ValueTuple<VistasSorrySliders.ServicioSorrySliders.Constantes, string, byte[], string>> RecuperarDatosUsuarioAsync(string correoElectronico) {
+        public System.Threading.Tasks.Task<System.ValueTuple<VistasSorrySliders.ServicioSorrySliders.Constantes, string, byte[]>> RecuperarDatosUsuarioAsync(string correoElectronico) {
             return base.Channel.RecuperarDatosUsuarioAsync(correoElectronico);
         }
     }
@@ -1538,10 +1555,10 @@ namespace VistasSorrySliders.ServicioSorrySliders {
     public interface ICrearLobby {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICrearLobby/CrearPartida", ReplyAction="http://tempuri.org/ICrearLobby/CrearPartidaResponse")]
-        System.ValueTuple<VistasSorrySliders.ServicioSorrySliders.Constantes, string> CrearPartida(string correoHost, int NumeroJugadores);
+        System.ValueTuple<VistasSorrySliders.ServicioSorrySliders.Constantes, string> CrearPartida(string correoHost, int numeroJugadores);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICrearLobby/CrearPartida", ReplyAction="http://tempuri.org/ICrearLobby/CrearPartidaResponse")]
-        System.Threading.Tasks.Task<System.ValueTuple<VistasSorrySliders.ServicioSorrySliders.Constantes, string>> CrearPartidaAsync(string correoHost, int NumeroJugadores);
+        System.Threading.Tasks.Task<System.ValueTuple<VistasSorrySliders.ServicioSorrySliders.Constantes, string>> CrearPartidaAsync(string correoHost, int numeroJugadores);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -1571,12 +1588,12 @@ namespace VistasSorrySliders.ServicioSorrySliders {
                 base(binding, remoteAddress) {
         }
         
-        public System.ValueTuple<VistasSorrySliders.ServicioSorrySliders.Constantes, string> CrearPartida(string correoHost, int NumeroJugadores) {
-            return base.Channel.CrearPartida(correoHost, NumeroJugadores);
+        public System.ValueTuple<VistasSorrySliders.ServicioSorrySliders.Constantes, string> CrearPartida(string correoHost, int numeroJugadores) {
+            return base.Channel.CrearPartida(correoHost, numeroJugadores);
         }
         
-        public System.Threading.Tasks.Task<System.ValueTuple<VistasSorrySliders.ServicioSorrySliders.Constantes, string>> CrearPartidaAsync(string correoHost, int NumeroJugadores) {
-            return base.Channel.CrearPartidaAsync(correoHost, NumeroJugadores);
+        public System.Threading.Tasks.Task<System.ValueTuple<VistasSorrySliders.ServicioSorrySliders.Constantes, string>> CrearPartidaAsync(string correoHost, int numeroJugadores) {
+            return base.Channel.CrearPartidaAsync(correoHost, numeroJugadores);
         }
     }
     
@@ -1591,10 +1608,10 @@ namespace VistasSorrySliders.ServicioSorrySliders {
         System.Threading.Tasks.Task<System.ValueTuple<VistasSorrySliders.ServicioSorrySliders.Constantes, VistasSorrySliders.ServicioSorrySliders.CuentaSet[]>> RecuperarAmigosCuentaAsync(string correoElectronico);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IListaAmigos/RecuperarJugadoresCuenta", ReplyAction="http://tempuri.org/IListaAmigos/RecuperarJugadoresCuentaResponse")]
-        System.ValueTuple<VistasSorrySliders.ServicioSorrySliders.Constantes, VistasSorrySliders.ServicioSorrySliders.CuentaSet[]> RecuperarJugadoresCuenta(string informacionJugador);
+        System.ValueTuple<VistasSorrySliders.ServicioSorrySliders.Constantes, VistasSorrySliders.ServicioSorrySliders.CuentaSet[]> RecuperarJugadoresCuenta(string informacionJugador, string correoJugador);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IListaAmigos/RecuperarJugadoresCuenta", ReplyAction="http://tempuri.org/IListaAmigos/RecuperarJugadoresCuentaResponse")]
-        System.Threading.Tasks.Task<System.ValueTuple<VistasSorrySliders.ServicioSorrySliders.Constantes, VistasSorrySliders.ServicioSorrySliders.CuentaSet[]>> RecuperarJugadoresCuentaAsync(string informacionJugador);
+        System.Threading.Tasks.Task<System.ValueTuple<VistasSorrySliders.ServicioSorrySliders.Constantes, VistasSorrySliders.ServicioSorrySliders.CuentaSet[]>> RecuperarJugadoresCuentaAsync(string informacionJugador, string correoJugador);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IListaAmigos/RecuperarTipoNotificacion", ReplyAction="http://tempuri.org/IListaAmigos/RecuperarTipoNotificacionResponse")]
         System.ValueTuple<VistasSorrySliders.ServicioSorrySliders.Constantes, VistasSorrySliders.ServicioSorrySliders.TipoNotificacion[]> RecuperarTipoNotificacion();
@@ -1613,6 +1630,66 @@ namespace VistasSorrySliders.ServicioSorrySliders {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IListaAmigos/RecuperarNotificaciones", ReplyAction="http://tempuri.org/IListaAmigos/RecuperarNotificacionesResponse")]
         System.Threading.Tasks.Task<System.ValueTuple<VistasSorrySliders.ServicioSorrySliders.Constantes, VistasSorrySliders.ServicioSorrySliders.NotificacionSet[]>> RecuperarNotificacionesAsync(string correoElectronico);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IListaAmigos/RecuperarAmigos", ReplyAction="http://tempuri.org/IListaAmigos/RecuperarAmigosResponse")]
+        System.ValueTuple<VistasSorrySliders.ServicioSorrySliders.Constantes, VistasSorrySliders.ServicioSorrySliders.CuentaSet[]> RecuperarAmigos(string correoElectronico);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IListaAmigos/RecuperarAmigos", ReplyAction="http://tempuri.org/IListaAmigos/RecuperarAmigosResponse")]
+        System.Threading.Tasks.Task<System.ValueTuple<VistasSorrySliders.ServicioSorrySliders.Constantes, VistasSorrySliders.ServicioSorrySliders.CuentaSet[]>> RecuperarAmigosAsync(string correoElectronico);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IListaAmigos/EliminarNotificacionJugador", ReplyAction="http://tempuri.org/IListaAmigos/EliminarNotificacionJugadorResponse")]
+        VistasSorrySliders.ServicioSorrySliders.Constantes EliminarNotificacionJugador(string correoElectronico, int idNotificacion);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IListaAmigos/EliminarNotificacionJugador", ReplyAction="http://tempuri.org/IListaAmigos/EliminarNotificacionJugadorResponse")]
+        System.Threading.Tasks.Task<VistasSorrySliders.ServicioSorrySliders.Constantes> EliminarNotificacionJugadorAsync(string correoElectronico, int idNotificacion);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IListaAmigos/NotificarUsuario", ReplyAction="http://tempuri.org/IListaAmigos/NotificarUsuarioResponse")]
+        void NotificarUsuario(string correoElectronico);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IListaAmigos/NotificarUsuario", ReplyAction="http://tempuri.org/IListaAmigos/NotificarUsuarioResponse")]
+        System.Threading.Tasks.Task NotificarUsuarioAsync(string correoElectronico);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IListaAmigos/GuardarAmistad", ReplyAction="http://tempuri.org/IListaAmigos/GuardarAmistadResponse")]
+        VistasSorrySliders.ServicioSorrySliders.Constantes GuardarAmistad(string correoElectronicoDestinatario, string correoElectronicoRemitente);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IListaAmigos/GuardarAmistad", ReplyAction="http://tempuri.org/IListaAmigos/GuardarAmistadResponse")]
+        System.Threading.Tasks.Task<VistasSorrySliders.ServicioSorrySliders.Constantes> GuardarAmistadAsync(string correoElectronicoDestinatario, string correoElectronicoRemitente);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IListaAmigos/EliminarAmistad", ReplyAction="http://tempuri.org/IListaAmigos/EliminarAmistadResponse")]
+        VistasSorrySliders.ServicioSorrySliders.Constantes EliminarAmistad(string correoElectronicoPrincipal, string correoElectronicoAmigo);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IListaAmigos/EliminarAmistad", ReplyAction="http://tempuri.org/IListaAmigos/EliminarAmistadResponse")]
+        System.Threading.Tasks.Task<VistasSorrySliders.ServicioSorrySliders.Constantes> EliminarAmistadAsync(string correoElectronicoPrincipal, string correoElectronicoAmigo);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IListaAmigos/RecuperarBaneados", ReplyAction="http://tempuri.org/IListaAmigos/RecuperarBaneadosResponse")]
+        System.ValueTuple<VistasSorrySliders.ServicioSorrySliders.Constantes, VistasSorrySliders.ServicioSorrySliders.CuentaSet[]> RecuperarBaneados(string correoElectronico);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IListaAmigos/RecuperarBaneados", ReplyAction="http://tempuri.org/IListaAmigos/RecuperarBaneadosResponse")]
+        System.Threading.Tasks.Task<System.ValueTuple<VistasSorrySliders.ServicioSorrySliders.Constantes, VistasSorrySliders.ServicioSorrySliders.CuentaSet[]>> RecuperarBaneadosAsync(string correoElectronico);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IListaAmigos/RecuperarSolicitudesAmistad", ReplyAction="http://tempuri.org/IListaAmigos/RecuperarSolicitudesAmistadResponse")]
+        System.ValueTuple<VistasSorrySliders.ServicioSorrySliders.Constantes, VistasSorrySliders.ServicioSorrySliders.CuentaSet[]> RecuperarSolicitudesAmistad(string correoElectronico);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IListaAmigos/RecuperarSolicitudesAmistad", ReplyAction="http://tempuri.org/IListaAmigos/RecuperarSolicitudesAmistadResponse")]
+        System.Threading.Tasks.Task<System.ValueTuple<VistasSorrySliders.ServicioSorrySliders.Constantes, VistasSorrySliders.ServicioSorrySliders.CuentaSet[]>> RecuperarSolicitudesAmistadAsync(string correoElectronico);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IListaAmigos/BanearJugador", ReplyAction="http://tempuri.org/IListaAmigos/BanearJugadorResponse")]
+        VistasSorrySliders.ServicioSorrySliders.Constantes BanearJugador(string correoElectronicoPrincipal, string correoElectronicoBaneado);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IListaAmigos/BanearJugador", ReplyAction="http://tempuri.org/IListaAmigos/BanearJugadorResponse")]
+        System.Threading.Tasks.Task<VistasSorrySliders.ServicioSorrySliders.Constantes> BanearJugadorAsync(string correoElectronicoPrincipal, string correoElectronicoBaneado);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IListaAmigos/EliminarBaneo", ReplyAction="http://tempuri.org/IListaAmigos/EliminarBaneoResponse")]
+        VistasSorrySliders.ServicioSorrySliders.Constantes EliminarBaneo(string correoElectronicoPrincipal, string correoElectronicoBaneado);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IListaAmigos/EliminarBaneo", ReplyAction="http://tempuri.org/IListaAmigos/EliminarBaneoResponse")]
+        System.Threading.Tasks.Task<VistasSorrySliders.ServicioSorrySliders.Constantes> EliminarBaneoAsync(string correoElectronicoPrincipal, string correoElectronicoBaneado);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IListaAmigos/EnviarCorreo", ReplyAction="http://tempuri.org/IListaAmigos/EnviarCorreoResponse")]
+        VistasSorrySliders.ServicioSorrySliders.Constantes EnviarCorreo(string correoElectronicoDestinatario, string asuntoCorreo, string cuerpoCorreo);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IListaAmigos/EnviarCorreo", ReplyAction="http://tempuri.org/IListaAmigos/EnviarCorreoResponse")]
+        System.Threading.Tasks.Task<VistasSorrySliders.ServicioSorrySliders.Constantes> EnviarCorreoAsync(string correoElectronicoDestinatario, string asuntoCorreo, string cuerpoCorreo);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -1650,12 +1727,12 @@ namespace VistasSorrySliders.ServicioSorrySliders {
             return base.Channel.RecuperarAmigosCuentaAsync(correoElectronico);
         }
         
-        public System.ValueTuple<VistasSorrySliders.ServicioSorrySliders.Constantes, VistasSorrySliders.ServicioSorrySliders.CuentaSet[]> RecuperarJugadoresCuenta(string informacionJugador) {
-            return base.Channel.RecuperarJugadoresCuenta(informacionJugador);
+        public System.ValueTuple<VistasSorrySliders.ServicioSorrySliders.Constantes, VistasSorrySliders.ServicioSorrySliders.CuentaSet[]> RecuperarJugadoresCuenta(string informacionJugador, string correoJugador) {
+            return base.Channel.RecuperarJugadoresCuenta(informacionJugador, correoJugador);
         }
         
-        public System.Threading.Tasks.Task<System.ValueTuple<VistasSorrySliders.ServicioSorrySliders.Constantes, VistasSorrySliders.ServicioSorrySliders.CuentaSet[]>> RecuperarJugadoresCuentaAsync(string informacionJugador) {
-            return base.Channel.RecuperarJugadoresCuentaAsync(informacionJugador);
+        public System.Threading.Tasks.Task<System.ValueTuple<VistasSorrySliders.ServicioSorrySliders.Constantes, VistasSorrySliders.ServicioSorrySliders.CuentaSet[]>> RecuperarJugadoresCuentaAsync(string informacionJugador, string correoJugador) {
+            return base.Channel.RecuperarJugadoresCuentaAsync(informacionJugador, correoJugador);
         }
         
         public System.ValueTuple<VistasSorrySliders.ServicioSorrySliders.Constantes, VistasSorrySliders.ServicioSorrySliders.TipoNotificacion[]> RecuperarTipoNotificacion() {
@@ -1681,6 +1758,86 @@ namespace VistasSorrySliders.ServicioSorrySliders {
         public System.Threading.Tasks.Task<System.ValueTuple<VistasSorrySliders.ServicioSorrySliders.Constantes, VistasSorrySliders.ServicioSorrySliders.NotificacionSet[]>> RecuperarNotificacionesAsync(string correoElectronico) {
             return base.Channel.RecuperarNotificacionesAsync(correoElectronico);
         }
+        
+        public System.ValueTuple<VistasSorrySliders.ServicioSorrySliders.Constantes, VistasSorrySliders.ServicioSorrySliders.CuentaSet[]> RecuperarAmigos(string correoElectronico) {
+            return base.Channel.RecuperarAmigos(correoElectronico);
+        }
+        
+        public System.Threading.Tasks.Task<System.ValueTuple<VistasSorrySliders.ServicioSorrySliders.Constantes, VistasSorrySliders.ServicioSorrySliders.CuentaSet[]>> RecuperarAmigosAsync(string correoElectronico) {
+            return base.Channel.RecuperarAmigosAsync(correoElectronico);
+        }
+        
+        public VistasSorrySliders.ServicioSorrySliders.Constantes EliminarNotificacionJugador(string correoElectronico, int idNotificacion) {
+            return base.Channel.EliminarNotificacionJugador(correoElectronico, idNotificacion);
+        }
+        
+        public System.Threading.Tasks.Task<VistasSorrySliders.ServicioSorrySliders.Constantes> EliminarNotificacionJugadorAsync(string correoElectronico, int idNotificacion) {
+            return base.Channel.EliminarNotificacionJugadorAsync(correoElectronico, idNotificacion);
+        }
+        
+        public void NotificarUsuario(string correoElectronico) {
+            base.Channel.NotificarUsuario(correoElectronico);
+        }
+        
+        public System.Threading.Tasks.Task NotificarUsuarioAsync(string correoElectronico) {
+            return base.Channel.NotificarUsuarioAsync(correoElectronico);
+        }
+        
+        public VistasSorrySliders.ServicioSorrySliders.Constantes GuardarAmistad(string correoElectronicoDestinatario, string correoElectronicoRemitente) {
+            return base.Channel.GuardarAmistad(correoElectronicoDestinatario, correoElectronicoRemitente);
+        }
+        
+        public System.Threading.Tasks.Task<VistasSorrySliders.ServicioSorrySliders.Constantes> GuardarAmistadAsync(string correoElectronicoDestinatario, string correoElectronicoRemitente) {
+            return base.Channel.GuardarAmistadAsync(correoElectronicoDestinatario, correoElectronicoRemitente);
+        }
+        
+        public VistasSorrySliders.ServicioSorrySliders.Constantes EliminarAmistad(string correoElectronicoPrincipal, string correoElectronicoAmigo) {
+            return base.Channel.EliminarAmistad(correoElectronicoPrincipal, correoElectronicoAmigo);
+        }
+        
+        public System.Threading.Tasks.Task<VistasSorrySliders.ServicioSorrySliders.Constantes> EliminarAmistadAsync(string correoElectronicoPrincipal, string correoElectronicoAmigo) {
+            return base.Channel.EliminarAmistadAsync(correoElectronicoPrincipal, correoElectronicoAmigo);
+        }
+        
+        public System.ValueTuple<VistasSorrySliders.ServicioSorrySliders.Constantes, VistasSorrySliders.ServicioSorrySliders.CuentaSet[]> RecuperarBaneados(string correoElectronico) {
+            return base.Channel.RecuperarBaneados(correoElectronico);
+        }
+        
+        public System.Threading.Tasks.Task<System.ValueTuple<VistasSorrySliders.ServicioSorrySliders.Constantes, VistasSorrySliders.ServicioSorrySliders.CuentaSet[]>> RecuperarBaneadosAsync(string correoElectronico) {
+            return base.Channel.RecuperarBaneadosAsync(correoElectronico);
+        }
+        
+        public System.ValueTuple<VistasSorrySliders.ServicioSorrySliders.Constantes, VistasSorrySliders.ServicioSorrySliders.CuentaSet[]> RecuperarSolicitudesAmistad(string correoElectronico) {
+            return base.Channel.RecuperarSolicitudesAmistad(correoElectronico);
+        }
+        
+        public System.Threading.Tasks.Task<System.ValueTuple<VistasSorrySliders.ServicioSorrySliders.Constantes, VistasSorrySliders.ServicioSorrySliders.CuentaSet[]>> RecuperarSolicitudesAmistadAsync(string correoElectronico) {
+            return base.Channel.RecuperarSolicitudesAmistadAsync(correoElectronico);
+        }
+        
+        public VistasSorrySliders.ServicioSorrySliders.Constantes BanearJugador(string correoElectronicoPrincipal, string correoElectronicoBaneado) {
+            return base.Channel.BanearJugador(correoElectronicoPrincipal, correoElectronicoBaneado);
+        }
+        
+        public System.Threading.Tasks.Task<VistasSorrySliders.ServicioSorrySliders.Constantes> BanearJugadorAsync(string correoElectronicoPrincipal, string correoElectronicoBaneado) {
+            return base.Channel.BanearJugadorAsync(correoElectronicoPrincipal, correoElectronicoBaneado);
+        }
+        
+        public VistasSorrySliders.ServicioSorrySliders.Constantes EliminarBaneo(string correoElectronicoPrincipal, string correoElectronicoBaneado) {
+            return base.Channel.EliminarBaneo(correoElectronicoPrincipal, correoElectronicoBaneado);
+        }
+        
+        public System.Threading.Tasks.Task<VistasSorrySliders.ServicioSorrySliders.Constantes> EliminarBaneoAsync(string correoElectronicoPrincipal, string correoElectronicoBaneado) {
+            return base.Channel.EliminarBaneoAsync(correoElectronicoPrincipal, correoElectronicoBaneado);
+        }
+        
+        public VistasSorrySliders.ServicioSorrySliders.Constantes EnviarCorreo(string correoElectronicoDestinatario, string asuntoCorreo, string cuerpoCorreo) {
+            return base.Channel.EnviarCorreo(correoElectronicoDestinatario, asuntoCorreo, cuerpoCorreo);
+        }
+        
+        public System.Threading.Tasks.Task<VistasSorrySliders.ServicioSorrySliders.Constantes> EnviarCorreoAsync(string correoElectronicoDestinatario, string asuntoCorreo, string cuerpoCorreo) {
+            return base.Channel.EnviarCorreoAsync(correoElectronicoDestinatario, asuntoCorreo, cuerpoCorreo);
+        }
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -1699,11 +1856,11 @@ namespace VistasSorrySliders.ServicioSorrySliders {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/INotificarJugadores/EliminarProxy", ReplyAction="http://tempuri.org/INotificarJugadores/EliminarProxyResponse")]
         System.Threading.Tasks.Task EliminarProxyAsync(string correoElectronico);
         
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/INotificarJugadores/NotificarJugadorInvitado")]
-        void NotificarJugadorInvitado(string correoElectronico);
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/INotificarJugadores/LlamarCallback")]
+        void LlamarCallback(string correoElectronico);
         
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/INotificarJugadores/NotificarJugadorInvitado")]
-        System.Threading.Tasks.Task NotificarJugadorInvitadoAsync(string correoElectronico);
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/INotificarJugadores/LlamarCallback")]
+        System.Threading.Tasks.Task LlamarCallbackAsync(string correoElectronico);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -1757,12 +1914,12 @@ namespace VistasSorrySliders.ServicioSorrySliders {
             return base.Channel.EliminarProxyAsync(correoElectronico);
         }
         
-        public void NotificarJugadorInvitado(string correoElectronico) {
-            base.Channel.NotificarJugadorInvitado(correoElectronico);
+        public void LlamarCallback(string correoElectronico) {
+            base.Channel.LlamarCallback(correoElectronico);
         }
         
-        public System.Threading.Tasks.Task NotificarJugadorInvitadoAsync(string correoElectronico) {
-            return base.Channel.NotificarJugadorInvitadoAsync(correoElectronico);
+        public System.Threading.Tasks.Task LlamarCallbackAsync(string correoElectronico) {
+            return base.Channel.LlamarCallbackAsync(correoElectronico);
         }
     }
     
@@ -1903,13 +2060,31 @@ namespace VistasSorrySliders.ServicioSorrySliders {
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IChat/IngresarAlChat")]
         System.Threading.Tasks.Task IngresarAlChatAsync(string uid, string correo);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IChat/ExpulsarJugadorPartida")]
+        void ExpulsarJugadorPartida(string uid, string correo);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IChat/ExpulsarJugadorPartida")]
+        System.Threading.Tasks.Task ExpulsarJugadorPartidaAsync(string uid, string correo);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IChat/SalirChatListaJugadores")]
+        void SalirChatListaJugadores(string uid, string correo);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IChat/SalirChatListaJugadores")]
+        System.Threading.Tasks.Task SalirChatListaJugadoresAsync(string uid, string correo);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public interface IChatCallback {
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IChat/DevolverMensaje", ReplyAction="http://tempuri.org/IChat/DevolverMensajeResponse")]
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IChat/DevolverMensaje")]
         void DevolverMensaje(string nickname, string mensaje);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IChat/ExpulsadoDeJugador")]
+        void ExpulsadoDeJugador(string correoElectronico);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IChat/JugadorSalioListaJugadores")]
+        void JugadorSalioListaJugadores(string correoElectronico);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -1955,6 +2130,22 @@ namespace VistasSorrySliders.ServicioSorrySliders {
         public System.Threading.Tasks.Task IngresarAlChatAsync(string uid, string correo) {
             return base.Channel.IngresarAlChatAsync(uid, correo);
         }
+        
+        public void ExpulsarJugadorPartida(string uid, string correo) {
+            base.Channel.ExpulsarJugadorPartida(uid, correo);
+        }
+        
+        public System.Threading.Tasks.Task ExpulsarJugadorPartidaAsync(string uid, string correo) {
+            return base.Channel.ExpulsarJugadorPartidaAsync(uid, correo);
+        }
+        
+        public void SalirChatListaJugadores(string uid, string correo) {
+            base.Channel.SalirChatListaJugadores(uid, correo);
+        }
+        
+        public System.Threading.Tasks.Task SalirChatListaJugadoresAsync(string uid, string correo) {
+            return base.Channel.SalirChatListaJugadoresAsync(uid, correo);
+        }
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -1995,16 +2186,16 @@ namespace VistasSorrySliders.ServicioSorrySliders {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public interface IJuegoLanzamientoCallback {
         
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IJuegoLanzamiento/JugadorTiroDado")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IJuegoLanzamiento/JugadorTiroDado", ReplyAction="http://tempuri.org/IJuegoLanzamiento/JugadorTiroDadoResponse")]
         void JugadorTiroDado(int numeroDado);
         
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IJuegoLanzamiento/JugadorDetuvoLinea")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IJuegoLanzamiento/JugadorDetuvoLinea", ReplyAction="http://tempuri.org/IJuegoLanzamiento/JugadorDetuvoLineaResponse")]
         void JugadorDetuvoLinea(double posicionX, double posicionY);
         
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IJuegoLanzamiento/JugadorSalioJuegoLanzamiento")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IJuegoLanzamiento/JugadorSalioJuegoLanzamiento", ReplyAction="http://tempuri.org/IJuegoLanzamiento/JugadorSalioJuegoLanzamientoResponse")]
         void JugadorSalioJuegoLanzamiento(string correoElectronicoSalido);
         
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IJuegoLanzamiento/JugadoresListosParaSiguienteTurno")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IJuegoLanzamiento/JugadoresListosParaSiguienteTurno", ReplyAction="http://tempuri.org/IJuegoLanzamiento/JugadoresListosParaSiguienteTurnoResponse")]
         void JugadoresListosParaSiguienteTurno();
     }
     
@@ -2074,6 +2265,223 @@ namespace VistasSorrySliders.ServicioSorrySliders {
         
         public System.Threading.Tasks.Task NotificarFinalizarLanzamientoAsync(string codigoPartida, string correo) {
             return base.Channel.NotificarFinalizarLanzamientoAsync(codigoPartida, correo);
+        }
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServicioSorrySliders.IUsuariosEnLinea", CallbackContract=typeof(VistasSorrySliders.ServicioSorrySliders.IUsuariosEnLineaCallback))]
+    public interface IUsuariosEnLinea {
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IUsuariosEnLinea/EntrarConCuenta")]
+        void EntrarConCuenta(string jugadorCorreo);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IUsuariosEnLinea/EntrarConCuenta")]
+        System.Threading.Tasks.Task EntrarConCuentaAsync(string jugadorCorreo);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IUsuariosEnLinea/SalirDelSistema")]
+        void SalirDelSistema(string jugadorCorreo);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IUsuariosEnLinea/SalirDelSistema")]
+        System.Threading.Tasks.Task SalirDelSistemaAsync(string jugadorCorreo);
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public interface IUsuariosEnLineaCallback {
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IUsuariosEnLinea/ComprobarJugador")]
+        void ComprobarJugador();
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public interface IUsuariosEnLineaChannel : VistasSorrySliders.ServicioSorrySliders.IUsuariosEnLinea, System.ServiceModel.IClientChannel {
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class UsuariosEnLineaClient : System.ServiceModel.DuplexClientBase<VistasSorrySliders.ServicioSorrySliders.IUsuariosEnLinea>, VistasSorrySliders.ServicioSorrySliders.IUsuariosEnLinea {
+        
+        public UsuariosEnLineaClient(System.ServiceModel.InstanceContext callbackInstance) : 
+                base(callbackInstance) {
+        }
+        
+        public UsuariosEnLineaClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName) : 
+                base(callbackInstance, endpointConfigurationName) {
+        }
+        
+        public UsuariosEnLineaClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName, string remoteAddress) : 
+                base(callbackInstance, endpointConfigurationName, remoteAddress) {
+        }
+        
+        public UsuariosEnLineaClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(callbackInstance, endpointConfigurationName, remoteAddress) {
+        }
+        
+        public UsuariosEnLineaClient(System.ServiceModel.InstanceContext callbackInstance, System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(callbackInstance, binding, remoteAddress) {
+        }
+        
+        public void EntrarConCuenta(string jugadorCorreo) {
+            base.Channel.EntrarConCuenta(jugadorCorreo);
+        }
+        
+        public System.Threading.Tasks.Task EntrarConCuentaAsync(string jugadorCorreo) {
+            return base.Channel.EntrarConCuentaAsync(jugadorCorreo);
+        }
+        
+        public void SalirDelSistema(string jugadorCorreo) {
+            base.Channel.SalirDelSistema(jugadorCorreo);
+        }
+        
+        public System.Threading.Tasks.Task SalirDelSistemaAsync(string jugadorCorreo) {
+            return base.Channel.SalirDelSistemaAsync(jugadorCorreo);
+        }
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServicioSorrySliders.IJuegoPuntuacion", CallbackContract=typeof(VistasSorrySliders.ServicioSorrySliders.IJuegoPuntuacionCallback))]
+    public interface IJuegoPuntuacion {
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IJuegoPuntuacion/AgregarJugador")]
+        void AgregarJugador(string uid, string correoElectronico);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IJuegoPuntuacion/AgregarJugador")]
+        System.Threading.Tasks.Task AgregarJugadorAsync(string uid, string correoElectronico);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IJuegoPuntuacion/EliminarJugador")]
+        void EliminarJugador(string uid, string correoElectronico);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IJuegoPuntuacion/EliminarJugador")]
+        System.Threading.Tasks.Task EliminarJugadorAsync(string uid, string correoElectronico);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IJuegoPuntuacion/NotificarJugadores")]
+        void NotificarJugadores(string uid, string correoJugador, string nombrePeon, int puntosObtenidos);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IJuegoPuntuacion/NotificarJugadores")]
+        System.Threading.Tasks.Task NotificarJugadoresAsync(string uid, string correoJugador, string nombrePeon, int puntosObtenidos);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IJuegoPuntuacion/NotificarCambioTurno")]
+        void NotificarCambioTurno(string uid);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IJuegoPuntuacion/NotificarCambioTurno")]
+        System.Threading.Tasks.Task NotificarCambioTurnoAsync(string uid);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IJuegoPuntuacion/ActualizarGanador", ReplyAction="http://tempuri.org/IJuegoPuntuacion/ActualizarGanadorResponse")]
+        VistasSorrySliders.ServicioSorrySliders.Constantes ActualizarGanador(string uid, string correoElectronico, int posicion);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IJuegoPuntuacion/ActualizarGanador", ReplyAction="http://tempuri.org/IJuegoPuntuacion/ActualizarGanadorResponse")]
+        System.Threading.Tasks.Task<VistasSorrySliders.ServicioSorrySliders.Constantes> ActualizarGanadorAsync(string uid, string correoElectronico, int posicion);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IJuegoPuntuacion/NotificarCambiarPagina")]
+        void NotificarCambiarPagina(string uid);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IJuegoPuntuacion/NotificarCambiarPagina")]
+        System.Threading.Tasks.Task NotificarCambiarPaginaAsync(string uid);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IJuegoPuntuacion/EliminarDiccionariosJuego")]
+        void EliminarDiccionariosJuego(string uid);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IJuegoPuntuacion/EliminarDiccionariosJuego")]
+        System.Threading.Tasks.Task EliminarDiccionariosJuegoAsync(string uid);
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public interface IJuegoPuntuacionCallback {
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IJuegoPuntuacion/NotificarJugadorMovimiento", ReplyAction="http://tempuri.org/IJuegoPuntuacion/NotificarJugadorMovimientoResponse")]
+        void NotificarJugadorMovimiento(string nombrePeon, int puntosObtenidos);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IJuegoPuntuacion/CambiarTurno", ReplyAction="http://tempuri.org/IJuegoPuntuacion/CambiarTurnoResponse")]
+        void CambiarTurno();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IJuegoPuntuacion/EliminarTurnoJugador", ReplyAction="http://tempuri.org/IJuegoPuntuacion/EliminarTurnoJugadorResponse")]
+        void EliminarTurnoJugador(string correoElectronico);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IJuegoPuntuacion/CambiarPagina")]
+        void CambiarPagina();
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public interface IJuegoPuntuacionChannel : VistasSorrySliders.ServicioSorrySliders.IJuegoPuntuacion, System.ServiceModel.IClientChannel {
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class JuegoPuntuacionClient : System.ServiceModel.DuplexClientBase<VistasSorrySliders.ServicioSorrySliders.IJuegoPuntuacion>, VistasSorrySliders.ServicioSorrySliders.IJuegoPuntuacion {
+        
+        public JuegoPuntuacionClient(System.ServiceModel.InstanceContext callbackInstance) : 
+                base(callbackInstance) {
+        }
+        
+        public JuegoPuntuacionClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName) : 
+                base(callbackInstance, endpointConfigurationName) {
+        }
+        
+        public JuegoPuntuacionClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName, string remoteAddress) : 
+                base(callbackInstance, endpointConfigurationName, remoteAddress) {
+        }
+        
+        public JuegoPuntuacionClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(callbackInstance, endpointConfigurationName, remoteAddress) {
+        }
+        
+        public JuegoPuntuacionClient(System.ServiceModel.InstanceContext callbackInstance, System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(callbackInstance, binding, remoteAddress) {
+        }
+        
+        public void AgregarJugador(string uid, string correoElectronico) {
+            base.Channel.AgregarJugador(uid, correoElectronico);
+        }
+        
+        public System.Threading.Tasks.Task AgregarJugadorAsync(string uid, string correoElectronico) {
+            return base.Channel.AgregarJugadorAsync(uid, correoElectronico);
+        }
+        
+        public void EliminarJugador(string uid, string correoElectronico) {
+            base.Channel.EliminarJugador(uid, correoElectronico);
+        }
+        
+        public System.Threading.Tasks.Task EliminarJugadorAsync(string uid, string correoElectronico) {
+            return base.Channel.EliminarJugadorAsync(uid, correoElectronico);
+        }
+        
+        public void NotificarJugadores(string uid, string correoJugador, string nombrePeon, int puntosObtenidos) {
+            base.Channel.NotificarJugadores(uid, correoJugador, nombrePeon, puntosObtenidos);
+        }
+        
+        public System.Threading.Tasks.Task NotificarJugadoresAsync(string uid, string correoJugador, string nombrePeon, int puntosObtenidos) {
+            return base.Channel.NotificarJugadoresAsync(uid, correoJugador, nombrePeon, puntosObtenidos);
+        }
+        
+        public void NotificarCambioTurno(string uid) {
+            base.Channel.NotificarCambioTurno(uid);
+        }
+        
+        public System.Threading.Tasks.Task NotificarCambioTurnoAsync(string uid) {
+            return base.Channel.NotificarCambioTurnoAsync(uid);
+        }
+        
+        public VistasSorrySliders.ServicioSorrySliders.Constantes ActualizarGanador(string uid, string correoElectronico, int posicion) {
+            return base.Channel.ActualizarGanador(uid, correoElectronico, posicion);
+        }
+        
+        public System.Threading.Tasks.Task<VistasSorrySliders.ServicioSorrySliders.Constantes> ActualizarGanadorAsync(string uid, string correoElectronico, int posicion) {
+            return base.Channel.ActualizarGanadorAsync(uid, correoElectronico, posicion);
+        }
+        
+        public void NotificarCambiarPagina(string uid) {
+            base.Channel.NotificarCambiarPagina(uid);
+        }
+        
+        public System.Threading.Tasks.Task NotificarCambiarPaginaAsync(string uid) {
+            return base.Channel.NotificarCambiarPaginaAsync(uid);
+        }
+        
+        public void EliminarDiccionariosJuego(string uid) {
+            base.Channel.EliminarDiccionariosJuego(uid);
+        }
+        
+        public System.Threading.Tasks.Task EliminarDiccionariosJuegoAsync(string uid) {
+            return base.Channel.EliminarDiccionariosJuegoAsync(uid);
         }
     }
 }

@@ -8,6 +8,7 @@
       <xs:enumeration value="ERROR_CONEXION_SERVIDOR" />
       <xs:enumeration value="OPERACION_EXITOSA" />
       <xs:enumeration value="OPERACION_EXITOSA_VACIA" />
+      <xs:enumeration value="ERROR_TIEMPO_ESPERA_SERVIDOR" />
     </xs:restriction>
   </xs:simpleType>
   <xs:element name="Constantes" nillable="true" type="tns:Constantes" />

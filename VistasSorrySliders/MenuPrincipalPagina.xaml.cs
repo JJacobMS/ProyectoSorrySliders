@@ -12,7 +12,6 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
-using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Markup;
 using System.Windows.Media;
@@ -29,18 +28,22 @@ namespace VistasSorrySliders
     public partial class MenuPrincipalPagina : Page
     {
         private CuentaSet _cuentaUsuario;
+        public event Action<MenuPrincipalPagina> CambiarPaginaMenu;
 
-        public MenuPrincipalPagina(string correoUsuario)
+        public MenuPrincipalPagina()
         {
             InitializeComponent();
-            RecuperarDatosUsuario(correoUsuario);
-
         }
         public MenuPrincipalPagina(CuentaSet cuentaActual)
         {
             InitializeComponent();
             _cuentaUsuario = cuentaActual;
             InicializarDatosMenu();
+        }
+
+        public void LlamarRecuperarDatosUsuario(string correo)
+        {
+            RecuperarDatosUsuario(correo);
         }
 
         private void InicializarDatosMenu()
@@ -58,60 +61,43 @@ namespace VistasSorrySliders
             {
                 MenuPrincipalClient proxyRegistrarUsuario = new MenuPrincipalClient();
                 string nickname;
-                string contraseña;
                 byte[] avatar;
-                (resultado, nickname, avatar, contraseña) = proxyRegistrarUsuario.RecuperarDatosUsuario(correoUsuario);
+                (resultado, nickname, avatar) = proxyRegistrarUsuario.RecuperarDatosUsuario(correoUsuario);
                 if (resultado == Constantes.OPERACION_EXITOSA)
                 {
                     _cuentaUsuario = new CuentaSet
                     {
                         Nickname = nickname,
                         Avatar = avatar,
-                        CorreoElectronico = correoUsuario,
-                        Contraseña = contraseña
+                        CorreoElectronico = correoUsuario
                     };
+                    InicializarDatosMenu();
+                    CambiarPaginaMenu?.Invoke(this);
                 }
                 proxyRegistrarUsuario.Close();
             }
             catch (CommunicationException ex)
             {
-                Console.WriteLine(ex);
                 resultado = Constantes.ERROR_CONEXION_SERVIDOR;
                 log.LogError("Error de Comunicación con el Servidor", ex);
             }
             catch (TimeoutException ex)
             {
-                Console.WriteLine(ex);
-                resultado = Constantes.ERROR_CONEXION_SERVIDOR;
+                resultado = Constantes.ERROR_TIEMPO_ESPERA_SERVIDOR;
                 log.LogWarn("Se agoto el tiempo de espera del servidor", ex);
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex);
-                resultado = Constantes.ERROR_CONEXION_SERVIDOR;
-                log.LogFatal("Ha ocurrido un error inesperado", ex);
             }
             switch (resultado)
             {
                 case Constantes.OPERACION_EXITOSA:
-                    InicializarDatosMenu();
-                    break;
+                    return;
                 case Constantes.OPERACION_EXITOSA_VACIA:
+                    Utilidades.MostrarUnMensajeError(Properties.Resources.msgDatosCuentaVacia);
                     break;
-                case Constantes.ERROR_CONEXION_BD:
-                    IrInicioSesion();
-                    System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorBaseDatos);
-                    break;
-                case Constantes.ERROR_CONSULTA:
-                    IrInicioSesion();
-                    System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorBaseDatos);
-                    break;
-                case Constantes.ERROR_CONEXION_SERVIDOR:
-                    IrInicioSesion();
-                    System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorConexion);
+                default:
+                    Utilidades.MostrarMensajesError(resultado);
                     break;
             }
-
+            
         }
 
         private void ClickMostrarAjustes(object sender, RoutedEventArgs e)
@@ -138,6 +124,8 @@ namespace VistasSorrySliders
         }
         private void IrInicioSesion()
         {
+            MainWindow ventana = Window.GetWindow(this) as MainWindow;
+            ventana.SalirSistema();
             InicioSesionPagina inicio = new InicioSesionPagina();
             this.NavigationService.Navigate(inicio);
         }
@@ -158,8 +146,16 @@ namespace VistasSorrySliders
         private void ClickMostrarPuntuaciones(object sender, RoutedEventArgs e)
         {
             TableroPuntuacionesPagina tablero = new TableroPuntuacionesPagina(_cuentaUsuario);
-            this.NavigationService.Navigate(tablero);
-            
+            Constantes respuesta = tablero.InicializarPuntuaciones();
+            switch (respuesta)
+            {
+                case Constantes.OPERACION_EXITOSA:
+                    this.NavigationService.Navigate(tablero);
+                    break;
+                case Constantes.ERROR_CONEXION_SERVIDOR:
+                    Utilidades.SalirInicioSesionDesdeVentanaPrincipal(Window.GetWindow(this), this);
+                    break;
+            }
         }
 
         private void MouseLeftButtonDownMostrarDetallesCuenta(object sender, MouseButtonEventArgs e)
@@ -168,6 +164,7 @@ namespace VistasSorrySliders
             detalles.ModificarUsuarioCuenta += ActualizarPaginaMenuPrincipal;
             detalles.ModificarContrasena += CambiarPaginaModificarContrasena;
             detalles.AbrirVentana += AbrirVentanaDetalles;
+            detalles.RegresarInicioSesion += IrInicioSesion;
             detalles.MostrarVentana();
         }
 
@@ -191,7 +188,10 @@ namespace VistasSorrySliders
         private void ClickIrJugadoresAmigos(object sender, RoutedEventArgs e)
         {
             ListaJugadoresPagina jugadores = new ListaJugadoresPagina(_cuentaUsuario);
-            this.NavigationService.Navigate(jugadores);
+            if (jugadores.InicializarListaJugadores())
+            {
+                this.NavigationService.Navigate(jugadores);
+            }
         }
     }
 }

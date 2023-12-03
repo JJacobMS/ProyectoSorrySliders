@@ -58,7 +58,8 @@ namespace VistasSorrySliders
             if(esValido && !EsUniqueIdentifierValido(codigoPartida))
             {
                 txtBoxCodigo.Style = (Style)FindResource("estiloTxtBoxDatosRojo");
-                lblCodigoNoValido.Visibility = Visibility.Visible;
+                txtBlockErrorPartida.Visibility = Visibility.Visible;
+                txtBlockErrorPartida.Text = Properties.Resources.txtBlockCodigoNoValido;
                 esValido = false;
             }
 
@@ -102,22 +103,14 @@ namespace VistasSorrySliders
             catch (CommunicationException ex)
             {
                 resultado = Constantes.ERROR_CONEXION_SERVIDOR;
-                Console.WriteLine(ex);
                 log.LogError("Error de Comunicación con el Servidor", ex);
             }
             catch (TimeoutException ex)
             {
-                Console.WriteLine(ex);
-                resultado = Constantes.ERROR_CONEXION_SERVIDOR;
+                resultado = Constantes.ERROR_TIEMPO_ESPERA_SERVIDOR;
                 log.LogWarn("Se agoto el tiempo de espera del servidor", ex);
             }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex);
-                resultado = Constantes.ERROR_CONEXION_SERVIDOR;
-                log.LogFatal("Ha ocurrido un error inesperado", ex);
-            }
-
+            Utilidades.MostrarMensajesError(resultado);
             switch (resultado)
             {
                 case Constantes.OPERACION_EXITOSA:
@@ -126,23 +119,20 @@ namespace VistasSorrySliders
                 case Constantes.OPERACION_EXITOSA_VACIA:
                     MostrarErrorJugadores(numeroMaximoJugadores);
                     break;
-                case Constantes.ERROR_CONEXION_BD:
-                case Constantes.ERROR_CONSULTA:
-                    MessageBox.Show(Properties.Resources.msgErrorBaseDatos);
-                    break;
                 case Constantes.ERROR_CONEXION_SERVIDOR:
-                    MessageBox.Show(Properties.Resources.msgErrorConexion);
+                case Constantes.ERROR_TIEMPO_ESPERA_SERVIDOR:
+                    Utilidades.SalirInicioSesionDesdeVentanaPrincipal(Window.GetWindow(this), this);
                     break;
             }
         }
 
         private void CrearCuentaProvisionalInvitado(string codigo)
         {
-            Byte[] avatar = Utilidades.GenerarImagenDefectoBytes();
+            byte[] avatar = Utilidades.GenerarImagenDefectoBytes();
 
-            if (avatar == null)
+            if (avatar == null || avatar.Length == 0)
             {
-                MessageBox.Show("Ocurrió un error, inténtelo de nuevo o más tarde");
+                SalirDeUnirse();
                 return;
             }
 
@@ -163,79 +153,80 @@ namespace VistasSorrySliders
             }
             catch (CommunicationException ex)
             {
-                Console.WriteLine(ex);
                 resultado = Constantes.ERROR_CONEXION_SERVIDOR;
                 log.LogError("Error de Comunicación con el Servidor", ex);
             }
             catch (TimeoutException ex)
             {
-                Console.WriteLine(ex);
                 resultado = Constantes.ERROR_CONEXION_SERVIDOR;
                 log.LogWarn("Se agoto el tiempo de espera del servidor", ex);
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex);
-                resultado = Constantes.ERROR_CONEXION_SERVIDOR;
-                log.LogFatal("Ha ocurrido un error inesperado", ex);
             }
             switch (resultado)
             {
                 case Constantes.OPERACION_EXITOSA:
                     UnirsePartida(codigo);
                     break;
-                case Constantes.OPERACION_EXITOSA_VACIA:
-                    break;
-                case Constantes.ERROR_CONEXION_BD:
-                    MessageBox.Show(Properties.Resources.msgErrorBaseDatos);
-                    break;
-                case Constantes.ERROR_CONSULTA:
-                    MessageBox.Show(Properties.Resources.msgErrorBaseDatos);
-                    break;
-                case Constantes.ERROR_CONEXION_SERVIDOR:
-                    MessageBox.Show(Properties.Resources.msgErrorConexion);
+                default:
+                    Utilidades.MostrarMensajesError(resultado);
+                    SalirDeUnirse();
                     break;
             }
         }
 
         private void EntrarLobby(string codigo)
         {
-            JuegoYLobbyVentana lobbyUnirse;
-            if (_esInvitado)
+            JuegoYLobbyVentana lobbyUnirse = new JuegoYLobbyVentana(_cuentaActual, codigo, _esInvitado);
+            Constantes respuesta = lobbyUnirse.InicializarPaginas();
+            switch (respuesta)
             {
-                lobbyUnirse = new JuegoYLobbyVentana(_cuentaActual, codigo, true);
+                case Constantes.OPERACION_EXITOSA:
+                    MostrarVentanaLobby(lobbyUnirse);
+                    break;
+                case Constantes.ERROR_CONEXION_SERVIDOR:
+                    Utilidades.SalirInicioSesionDesdeVentanaPrincipal(Window.GetWindow(this), this);
+                    break;
             }
-            else
+        }
+
+        private void MostrarVentanaLobby(JuegoYLobbyVentana lobbyUnirse)
+        {
+            if (lobbyUnirse.EntrarSistemaEnLinea())
             {
-                lobbyUnirse = new JuegoYLobbyVentana(_cuentaActual, codigo, false);
+                MainWindow ventanaPrincipal = (MainWindow)Window.GetWindow(this);
+                ventanaPrincipal.EliminarProxyLineaAnterior();
+                Window.GetWindow(this).Close();
+                lobbyUnirse.Show();
             }
-            
-            lobbyUnirse.Show();
-            Window.GetWindow(this).Close();
         }
 
         private void MostrarErrorJugadores(int numeroMaximoJugadores)
         {
+            txtBlockErrorPartida.Visibility = Visibility.Visible;
             switch (numeroMaximoJugadores)
             {
+                case -3:
+                    txtBlockErrorPartida.Text = Properties.Resources.txtBlockJuegoNoValido;
+                    break;
+                case -2:
+                    txtBlockErrorPartida.Text = Properties.Resources.txtBlockJugadorBaneado;
+                    break;
                 case -1:
-                    lblCuentaYaEnJuego.Visibility = Visibility.Visible; 
+                    txtBlockErrorPartida.Text = Properties.Resources.txtBlockCuentaYaEnLobby;
                     break;
                 case 0:
-                    lblCodigoNoValido.Visibility = Visibility.Visible;
+                    txtBlockErrorPartida.Text = Properties.Resources.txtBlockCodigoNoValido;
                     break;
             }
 
             if (numeroMaximoJugadores > 0)
             {
-                lblMaximoJugadores.Visibility = Visibility.Visible;
+                txtBlockErrorPartida.Text = Properties.Resources.txtBlockJugadoresMaximosExcedidos;
             }
         }
 
         private void ReiniciarEstilosPantalla()
         {
-            lblCodigoNoValido.Visibility = Visibility.Hidden;
-            lblMaximoJugadores.Visibility = Visibility.Hidden;
+            txtBlockErrorPartida.Visibility = Visibility.Hidden;
             txtBlockNicknameNoValido.Visibility = Visibility.Hidden;
             txtBoxNickname.Style = (Style)FindResource("estiloTxtBoxDatosAzul");
             txtBoxCodigo.Style = (Style)FindResource("estiloTxtBoxDatosAzul");
@@ -246,24 +237,24 @@ namespace VistasSorrySliders
             Logger log = new Logger(this.GetType());
             try
             {
-                string pattern = @"^[0-9A-Fa-f]{8}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{12}$";
-                return Regex.IsMatch(uid, pattern);
+                int segundos = 3;
+                string patron = @"^[0-9A-Fa-f]{8}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{12}$";
+                TimeSpan tiempoAgotadoPatron = TimeSpan.FromSeconds(segundos);
+                return Regex.IsMatch(uid, patron, RegexOptions.None, tiempoAgotadoPatron);
             }
             catch (RegexMatchTimeoutException ex)
             {
-                Console.WriteLine(ex);
                 log.LogWarn("El tiempo de espera para la expresión se ha agotado", ex);
-                return false;
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex);
-                log.LogFatal("Ha ocurrido un error inesperado", ex);
                 return false;
             }
         }
 
         private void ClickSalir(object sender, RoutedEventArgs e)
+        {
+            SalirDeUnirse();
+        }
+
+        private void SalirDeUnirse()
         {
             if (_esInvitado)
             {

@@ -2,7 +2,8 @@
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:p="clr-namespace:VistasSorrySliders.Properties"
       xmlns:local="clr-namespace:VistasSorrySliders"
       mc:Ignorable="d" 
       d:DesignHeight="576" d:DesignWidth="1024" >
@@ -35,16 +36,16 @@
                         </Grid.RowDefinitions>
                         <Grid Grid.Row="0" Margin="10">
                             <Image Source="Recursos/Banner.png" Height="80"/>
-                            <Label Style="{StaticResource estiloLblInicioSesion}">CAMBIAR CONTRASEÑA</Label>
+                            <Label Style="{StaticResource estiloLblInicioSesion}" Content="{x:Static p:Resources.lblCambiarContrasena}"></Label>
                         </Grid>
                         <Grid Grid.Row="1">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width=".6*"/>
                                 <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
-                            <TextBlock Style="{StaticResource estiloTxtBlockCambiarContraseña}">CONTRASEÑA ANTERIOR</TextBlock>
+                            <TextBlock Style="{StaticResource estiloTxtBlockCambiarContraseña}" Text="{x:Static p:Resources.txtBlockContrasenaAnterior}"></TextBlock>
                             <StackPanel Grid.Column="1" VerticalAlignment="Center">
-                                <TextBlock Name="txtBlockContrasenaDiferenteActual" Visibility="Collapsed" Style="{StaticResource estiloTxtBlockMensajeError}" Height="20">Contraseña es diferente a la actual</TextBlock>
+                                <TextBlock Name="txtBlockContrasenaDiferenteActual" Visibility="Collapsed" Style="{StaticResource estiloTxtBlockMensajeError}" Height="20" Text="{x:Static p:Resources.txtBlockContrasenaDiferenteActual}"></TextBlock>
                                 <PasswordBox Name="pssBoxContrasenaAnterior"  Style="{StaticResource estiloPssBoxContrasenaAzul}"></PasswordBox>
                             </StackPanel>
                         </Grid>
@@ -53,9 +54,9 @@
                                 <ColumnDefinition Width=".6*"/>
                                 <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
-                            <TextBlock Style="{StaticResource estiloTxtBlockCambiarContraseña}">CONTRASEÑA NUEVA</TextBlock>
+                            <TextBlock Text="{x:Static p:Resources.txtBlockContrasenaNueva}" Style="{StaticResource estiloTxtBlockCambiarContraseña}" ></TextBlock>
                             <StackPanel Grid.Column="1" VerticalAlignment="Center">
-                                <TextBlock x:Name="txtBlockContrasenaNoCumpleNormas" Visibility="Collapsed" Style="{StaticResource estiloTxtBlockMensajeError}" Height="20" Width="350">La contraseña no cumple las normas requeridas</TextBlock>
+                                <TextBlock x:Name="txtBlockContrasenaNoCumpleNormas" Visibility="Collapsed" Style="{StaticResource estiloTxtBlockMensajeError}" Height="20" Width="350" Text="{x:Static p:Resources.txtBlockContrasenaNoNormasRequeridas}"></TextBlock>
                                 <PasswordBox Name="pssBoxContrasenaNueva" Grid.Column="1" Style="{StaticResource estiloPssBoxContrasenaAzul}"></PasswordBox>
                             </StackPanel>
                         </Grid>
@@ -64,9 +65,9 @@
                                 <ColumnDefinition Width=".6*"/>
                                 <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
-                            <TextBlock Style="{StaticResource estiloTxtBlockCambiarContraseña}">REPETIR CONTRASEÑA NUEVA</TextBlock>
+                            <TextBlock Style="{StaticResource estiloTxtBlockCambiarContraseña}" Text="{x:Static p:Resources.txtBlockRepetirContrasena}"></TextBlock>
                             <StackPanel Grid.Column="1" VerticalAlignment="Center">
-                                <TextBlock Name="txtBlockContrasenaDiferenteNueva" Visibility="Collapsed" Style="{StaticResource estiloTxtBlockMensajeError}" Height="20" Width="250">La contraseña no coincide</TextBlock>
+                                <TextBlock Name="txtBlockContrasenaDiferenteNueva" Visibility="Collapsed" Style="{StaticResource estiloTxtBlockMensajeError}" Height="20" Width="250" Text="{x:Static p:Resources.txtBlockContrasenaNoCoincide}"></TextBlock>
                                 <PasswordBox Name="pssBoxContrasenaRepetida" Grid.Column="1" Style="{StaticResource estiloPssBoxContrasenaAzul}"></PasswordBox>
                             </StackPanel>
                         </Grid>
@@ -75,9 +76,9 @@
                                 <ColumnDefinition/>
                                 <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
-                            <Button Content="GUARDAR NUEVA CONTRASEÑA" Width="220" Click="ClickGuardarContrasena"
+                            <Button Content="{x:Static p:Resources.btnGuardarNuevaContrasena}" Width="220" Click="ClickGuardarContrasena"
                                     Style="{StaticResource estiloBtnCrearCuenta}"/>
-                            <Button Content="CANCELAR" Width="220" Click="ClickCancelar"
+                            <Button Content="{x:Static p:Resources.btnCancelar}" Width="220" Click="ClickCancelar"
                                     Style="{StaticResource estiloBtnCancelar}" Grid.Column="1"/>
                         </Grid>
                     </Grid>

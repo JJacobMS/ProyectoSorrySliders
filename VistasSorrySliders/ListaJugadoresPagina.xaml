@@ -8,6 +8,44 @@
       mc:Ignorable="d" 
       d:DesignHeight="576" d:DesignWidth="1024">
     <Page.Resources>
+        <Style x:Key="estiloLstBoxAmigosVacia" TargetType="ListBox">
+            <Setter Property="Height" Value="150"/>
+            <Setter Property="Margin" Value="10,0,10,0"/>
+            <Setter Property="BorderThickness" Value="3"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ListBox">
+                        <Border Name="Border" BorderThickness="3" BorderBrush="Black" CornerRadius="2" Background="#E0B7F1">
+                            <Border Height="90" Width="150" BorderBrush="Black" CornerRadius="15" 
+                    BorderThickness="3" Background="#B886CD">
+                                <TextBlock x:Name="txtBlockMensajeCaja" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="35" TextAlignment="Center"
+                           TextWrapping="Wrap" Text="{x:Static p:Resources.msgAmigosErrorRecuperacion}"></TextBlock>
+                            </Border>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="estiloLstBoxNotificacionesVacia" TargetType="ListBox">
+            <Setter Property="Height" Value="150"/>
+            <Setter Property="Margin" Value="10,0,10,0"/>
+            <Setter Property="BorderThickness" Value="3" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ListBox">
+                        <Border Name="Border" BorderThickness="3" BorderBrush="Black" CornerRadius="2" Background="#E0B7F1">
+                            <Border Height="100" Width="150" BorderBrush="Black" CornerRadius="15" 
+                BorderThickness="3" Background="#B886CD">
+                                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="25" TextAlignment="Center"
+                       TextWrapping="Wrap" Text="{x:Static p:Resources.msgNotificacionRecuperar}"></TextBlock>
+                            </Border>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
         <Style x:Key="estiloLstBoxItemJugador" TargetType="ListBoxItem">
             <Setter Property="Height" Value="40"/>
             <Setter Property="Template">
@@ -25,11 +63,11 @@
                                     Style="{StaticResource estiloLblTextoListaAmigos}"/>
                                 <Label Content="{Binding Path=CorreoElectronico}" FontSize="12" Margin="0,0,0,3" HorizontalAlignment="Left" VerticalAlignment="Bottom"
                                         Style="{StaticResource estiloLblTextoListaAmigos}"/>
-                                <Button Grid.Column="1" Margin="0,-5,10,0" CommandParameter="{Binding}" PreviewMouseDown="PreviewMouseDownSolicitudAmistad"
+                                <Button x:Name="btnAmistad"  Grid.Column="1" Margin="0,-5,10,0" CommandParameter="{Binding}" PreviewMouseDown="PreviewMouseDownSolicitudAmistad"
                                         Style="{StaticResource estiloBtnAmistad}">
                                     <TextBlock Text="{x:Static p:Resources.btnEnviarSolicitudAmistad}" TextWrapping="Wrap" TextAlignment="Center"/>
                                 </Button>
-                                <Button Grid.Column="2" Content="{x:Static p:Resources.btnBanear}" Margin="0,-5,10,0" CommandParameter="{Binding}" PreviewMouseDown="PreviewMouseDownBanearJugador"
+                                <Button x:Name="btnBanear" Grid.Column="2" Content="{x:Static p:Resources.btnBanear}" Margin="0,-5,10,0" CommandParameter="{Binding}" PreviewMouseDown="PreviewMouseDownBanearJugador"
                                         Style="{StaticResource estiloBtnBanear}"/>
                             </Grid>
                         </Border>
@@ -37,6 +75,39 @@
                 </Setter.Value>
             </Setter>
         </Style>
+
+        <Style x:Key="estiloLstBoxItemJugadorPendiente" TargetType="ListBoxItem">
+            <Setter Property="Height" Value="40"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ListBoxItem">
+                        <Border BorderBrush="#17033B" BorderThickness="0,0,0,3">
+                            <Grid Height="40">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition Width=".3*"/>
+                                    <ColumnDefinition Width=".3*"/>
+                                </Grid.ColumnDefinitions>
+                                <Ellipse Height="10" Width="10" Fill="Black" Margin="5,5,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                                <Label Content="{Binding Path=Nickname}" FontSize="14" Margin="15,-3,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"
+                                    Style="{StaticResource estiloLblTextoListaAmigos}"/>
+                                <Label Content="{Binding Path=CorreoElectronico}" FontSize="12" Margin="0,0,0,3" HorizontalAlignment="Left" VerticalAlignment="Bottom"
+                                        Style="{StaticResource estiloLblTextoListaAmigos}"/>
+                                <Button IsEnabled="False" Background="#8899A6"  Grid.Column="1" Margin="0,-5,10,0" CommandParameter="{Binding}" PreviewMouseDown="PreviewMouseDownSolicitudAmistad"
+                                        Style="{StaticResource estiloBtnAmistad}">
+                                    <TextBlock Text="{x:Static p:Resources.btnEnviarSolicitudAmistad}" TextWrapping="Wrap" TextAlignment="Center"/>
+                                </Button>
+                                <Button IsEnabled="False" Background="#8899A6" Grid.Column="2"  Margin="0,-5,10,0" CommandParameter="{Binding}" PreviewMouseDown="PreviewMouseDownBanearJugador"
+                                        Style="{StaticResource estiloBtnBanear}">
+                                    <TextBlock Text="{x:Static p:Resources.btnBanear}" TextWrapping="Wrap" TextAlignment="Center"/>
+                                </Button>
+                            </Grid>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
 
         <Style x:Key="estiloLstBoxItemJugadorBaneado" TargetType="ListBoxItem">
             <Setter Property="Height" Value="40"/>
@@ -185,10 +256,11 @@
                                         </Grid.RowDefinitions>
                                         <Label Style="{StaticResource estiloLblTituloJugadores}" Content="{x:Static p:Resources.lblListaJugadores}"></Label>
                                         <StackPanel Grid.Row="1" Orientation="Horizontal">
-                                            <TextBox Width="270" Style="{StaticResource estiloTxtBoxDatosMorado}"/>
-                                            <Button Content="{x:Static p:Resources.btnBuscar}" Margin="5" Height="25" Width="90" FontSize="14" Style="{StaticResource estiloBtnMorado}"/>
+                                            <TextBox Width="270" Style="{StaticResource estiloTxtBoxDatosMorado}" Name="txtBlockBuscador"/>
+                                            <Button Content="{x:Static p:Resources.btnBuscar}" Margin="5" Height="25" Width="90" FontSize="14" Click="ClickBuscarJugadores"
+                                                    Style="{StaticResource estiloBtnMorado}"/>
                                         </StackPanel>
-                                        <ListBox Grid.Row="2" Name="lstBoxJugadores" Style="{StaticResource estiloLstBoxAmigos}" Height="360">
+                                        <ListBox Grid.Row="2" Name="lstBoxJugadores" Style="{StaticResource estiloLstBoxJugadoresVacia}" Height="360">
                                             <ListBox.ItemContainerStyle>
                                                 <Style TargetType="ListBoxItem" BasedOn="{StaticResource estiloLstBoxItemJugador}"/>
                                             </ListBox.ItemContainerStyle>
@@ -202,7 +274,7 @@
                                             <RowDefinition/>
                                         </Grid.RowDefinitions>
                                         <Label Style="{StaticResource estiloLblTituloJugadores}" Content="{x:Static p:Resources.lblListaAmigosMayuscula}"></Label>
-                                        <ListBox Grid.Row="2" Name="lstBoxAmigos" Style="{StaticResource estiloLstBoxAmigos}" Height="380">
+                                        <ListBox Grid.Row="2" Name="lstBoxAmigos" Style="{StaticResource estiloLstBoxAmigosVacia}" Height="380" >
                                             <ListBox.ItemContainerStyle>
                                                 <Style TargetType="ListBoxItem" BasedOn="{StaticResource estiloLstBoxItemAmigo}"/>
                                             </ListBox.ItemContainerStyle>
@@ -216,7 +288,7 @@
                                             <RowDefinition/>
                                         </Grid.RowDefinitions>
                                         <Label Style="{StaticResource estiloLblTituloJugadores}" Content="{x:Static p:Resources.tbItemNotificaciones}"></Label>
-                                        <ListBox Grid.Row="2" Name="lstBoxNotificaciones" Style="{StaticResource estiloLstBoxAmigos}" Height="380">
+                                        <ListBox Grid.Row="2" Name="lstBoxNotificaciones" Style="{StaticResource estiloLstBoxNotificacionesVacia}" Height="380">
                                             <ListBox.ItemContainerStyle>
                                                 <Style TargetType="ListBoxItem" BasedOn="{StaticResource estiloLstBoxItemNotificacionAmigo}"/>
                                             </ListBox.ItemContainerStyle>
@@ -227,6 +299,11 @@
                             <Border Grid.Row="1" BorderThickness="0,5,0,0" BorderBrush="#042437">
                                 <Button Click="ClickRegresarMenu" Content="{x:Static p:Resources.btnRegresarMenuPrincipal}"
                                     Style="{StaticResource estiloBtnCancelar}" Width="300" Margin="10"></Button>
+                            </Border>
+                            <Border x:Name="brdMensaje" BorderBrush="Black" BorderThickness="3" Height="50" Width="230" CornerRadius="10" 
+                                    Background="White" VerticalAlignment="Bottom" Margin="0,0,0,20" Visibility="Hidden">
+                                <TextBlock x:Name="txtBlockMensaje" Style="{StaticResource estiloTxtBlockNotificacion}" FontFamily="{StaticResource FuentesTitulo}">
+                                        </TextBlock>
                             </Border>
                         </Grid>
                         

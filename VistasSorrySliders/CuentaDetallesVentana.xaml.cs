@@ -25,13 +25,13 @@ namespace VistasSorrySliders
         public event Action<UsuarioSet> ModificarUsuarioCuenta; 
         public event Action ModificarContrasena;
         public event Action<Window> AbrirVentana;
+        public event Action RegresarInicioSesion;
         private CuentaSet _cuenta;
         private UsuarioSet _usuario;
         public CuentaDetallesVentana(CuentaSet cuenta)
         {
             InitializeComponent();
             _cuenta = cuenta;
-            RecuperarDatos();
         }
 
         public void MostrarVentana()
@@ -59,22 +59,16 @@ namespace VistasSorrySliders
             }
             catch (CommunicationException ex)
             {
-                Console.WriteLine(ex);
                 resultado = Constantes.ERROR_CONEXION_SERVIDOR;
                 log.LogError("Error de Comunicación con el Servidor", ex);
             }
             catch (TimeoutException ex)
             {
-                Console.WriteLine(ex);
-                resultado = Constantes.ERROR_CONEXION_SERVIDOR;
+                resultado = Constantes.ERROR_TIEMPO_ESPERA_SERVIDOR;
                 log.LogWarn("Se agoto el tiempo de espera del servidor", ex);
             }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex);
-                resultado = Constantes.ERROR_CONEXION_SERVIDOR;
-                log.LogFatal("Ha ocurrido un error inesperado", ex);
-            }
+
+            Utilidades.MostrarMensajesError(resultado);
             switch (resultado)
             {
                 case Constantes.OPERACION_EXITOSA:
@@ -82,16 +76,11 @@ namespace VistasSorrySliders
                     AbrirVentana?.Invoke(this);
                     break;
                 case Constantes.OPERACION_EXITOSA_VACIA:
-                    break;
-                case Constantes.ERROR_CONEXION_BD:
-
-                    MessageBox.Show(Properties.Resources.msgErrorBaseDatos);
-                    break;
-                case Constantes.ERROR_CONSULTA:
-                    MessageBox.Show(Properties.Resources.msgErrorBaseDatos);
+                    Utilidades.MostrarUnMensajeError(Properties.Resources.mgsCuentaDetalleErrorRecuperar);
                     break;
                 case Constantes.ERROR_CONEXION_SERVIDOR:
-                    MessageBox.Show(Properties.Resources.msgErrorConexion);
+                case Constantes.ERROR_TIEMPO_ESPERA_SERVIDOR:
+                    RegresarInicioSesion?.Invoke();
                     break;
             }
         }

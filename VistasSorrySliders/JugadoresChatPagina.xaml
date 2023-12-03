@@ -4,108 +4,145 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:VistasSorrySliders"
-      xmlns:p="clr-namespace:VistasSorrySliders.Properties" xmlns:serviciosorrysliders="clr-namespace:VistasSorrySliders.ServicioSorrySliders" d:DataContext="{d:DesignInstance Type=serviciosorrysliders:CuentaSet}"
+      xmlns:p="clr-namespace:VistasSorrySliders.Properties" 
+      xmlns:serviciosorrysliders="clr-namespace:VistasSorrySliders.ServicioSorrySliders" d:DataContext="{d:DesignInstance Type=serviciosorrysliders:CuentaSet}"
       mc:Ignorable="d" 
-      d:DesignHeight="576" d:DesignWidth="409"
-      Title="JugadoresChatPagina">
+      d:DesignHeight="576" d:DesignWidth="409">
+    <Page.Resources>
+        <Style x:Key="estiloTxtBlockJugadorDesconectado" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="#052B42"/>
+            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="TextWrapping" Value="Wrap"/>
+            <Setter Property="TextAlignment" Value="Center"/>
+            <Setter Property="FontFamily" Value="{StaticResource FuentesTitulo}"/>
+            <Setter Property="Margin" Value="0"/>
+            <Setter Property="Width" Value="180"/>
+        </Style>
+    </Page.Resources>
 
     <Grid>
         <Grid.Background>
             <ImageBrush ImageSource="/Recursos/tableroLanzamientoFondo.png" />
         </Grid.Background>
         <Grid.RowDefinitions>
+            <RowDefinition Height="1.4*"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="219"/>
-            <RowDefinition Height="50"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        
-        <Button Grid.Row="3" Height="40" Width="220" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,15,0" Style="{StaticResource estiloBtnSalir}" Content="{x:Static p:Resources.btnSalir}" Click="ClickSalirPartida"/>
-        <Grid Grid.Row="0">
-            <Border BorderBrush="Black" BorderThickness="1.5" Margin="10,10,10,10" CornerRadius="10">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="50" />
-                        <RowDefinition Height="*" />
-                    </Grid.RowDefinitions>
-                    <Label Content="Lista Jugadores" Height="50" FontSize="35" Style="{StaticResource estiloLblTituloTextos}" Grid.Row="0" />
-                    <ListView x:Name="lstViewJugadores" Grid.Row="1"  ScrollViewer.HorizontalScrollBarVisibility="Hidden" Background="Transparent" IsHitTestVisible="False"
-                     BorderBrush="Transparent" Margin="0,0,0,70" ItemsSource="{Binding CuentaSet}" Padding="-3,0,0,0" >
-                        <ListView.View>
-                            <GridView AllowsColumnReorder="False"  >
-                                
-                                <GridViewColumn x:Name="GrdViewColumnUno" Width="190" >
-                                    <GridViewColumn.HeaderTemplate  >
-                                        <DataTemplate>
-                                            <Border Background="#FAC93A" Width="188" Margin="-2,0,0,0" CornerRadius="0" BorderBrush="#604111" BorderThickness="1">
-                                                <TextBlock Text="Nombre Jugador" FontFamily="{StaticResource FuentesTitulo}" FontSize="30" Background="#FAC93A" HorizontalAlignment="Center"/>
-                                            </Border>
-                                        </DataTemplate>
-                                    </GridViewColumn.HeaderTemplate>
-                                    <GridViewColumn.CellTemplate>
-                                        <DataTemplate>
-                                            <Border Background="#FAC93A" Width="185" CornerRadius="0" BorderBrush="#604111" BorderThickness="1">
-                                                <TextBlock Text="{Binding Path=Nickname}" FontSize="20" HorizontalAlignment="Center" FontFamily="{StaticResource FuentesTexto}" Background="#EAD4F4" />
-                                            </Border>
-                                        </DataTemplate>
-                                    </GridViewColumn.CellTemplate>
-                                </GridViewColumn>
-                                
-                                <GridViewColumn x:Name="GrdViewColumnDos" Width="85">
-                                    <GridViewColumn.HeaderTemplate>
-                                        <DataTemplate>
-                                            <Border Background="#FAC93A" Width="80" CornerRadius="0" BorderBrush="#604111" BorderThickness="1">
-                                                <TextBlock Text="Estado" FontFamily="{StaticResource FuentesTitulo}" FontSize="30" Background="#FAC93A" HorizontalAlignment="Center"/>
-                                            </Border>
-                                        </DataTemplate>
-                                    </GridViewColumn.HeaderTemplate>
-                                    <GridViewColumn.CellTemplate>
-                                        <DataTemplate>
-                                            <Border Background="#FAC93A" Width="80" CornerRadius="0" BorderBrush="Black" BorderThickness="1">
-                                                <TextBlock Text="{Binding Path=Estado}" FontSize="20" HorizontalAlignment="Center" FontFamily="{StaticResource FuentesTexto}" Background="#FAC93A" />
-                                            </Border>
-                                        </DataTemplate>
-                                    </GridViewColumn.CellTemplate>
-                                </GridViewColumn>
-
-                                <GridViewColumn x:Name="GrdViewColumnTres" Width="110">
-                                    <GridViewColumn.HeaderTemplate>
-                                        <DataTemplate>
-                                            <Border Background="#FAC93A" Width="105" CornerRadius="0" BorderBrush="#604111" BorderThickness="1">
-                                                <TextBlock Text="" FontFamily="{StaticResource FuentesTitulo}" FontSize="30" Background="#FAC93A" HorizontalAlignment="Center"/>
-                                            </Border>
-                                        </DataTemplate>
-                                    </GridViewColumn.HeaderTemplate>
-                                    <GridViewColumn.CellTemplate>
-                                        <DataTemplate>
-                                            <Border Background="#FAC93A" Width="105" CornerRadius="0" BorderBrush="Black" BorderThickness="1">
-                                                <TextBlock Text="{Binding Path=Estado}" FontSize="20" HorizontalAlignment="Center" FontFamily="{StaticResource FuentesTexto}" Background="#FAC93A" />
-                                            </Border>
-                                        </DataTemplate>
-                                    </GridViewColumn.CellTemplate>
-                                </GridViewColumn>
-                            </GridView>
-                        </ListView.View>
-                    </ListView>
-
-
-                </Grid>
+        <Viewbox Canvas.ZIndex="1" Height="200" Width="250">
+            <Border x:Name="brdJugadorDesconectado" Width="250" Height="100" BorderThickness="5" BorderBrush="#052B42" CornerRadius="20" 
+                Background="#C4E2F4" Visibility="Hidden"  VerticalAlignment="Top">
+                <StackPanel VerticalAlignment="Center" Orientation="Horizontal" HorizontalAlignment="Center">
+                    <Image Source="/Recursos/desconectado.png" Height="50"></Image>
+                    <TextBlock x:Name="txtBlockJugadorDesconectado" Style="{StaticResource estiloTxtBlockJugadorDesconectado}">El jugador {0} se ha desconectado</TextBlock>
+                </StackPanel>
             </Border>
-        </Grid>
-        <Grid Grid.Row="1">
-            
-            <Border BorderBrush="Black" BorderThickness="1.5" Margin="10,10,10,10" CornerRadius="10">
-                <Grid Grid.Row="1" >
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="40"/>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="40"/>
-                    </Grid.RowDefinitions>
-                    <TextBox x:Name="txtBoxMensajeChat" Grid.Row="2" Width="320" Height="30" BorderBrush="Black" BorderThickness="1.5" HorizontalAlignment="Left"  TextChanged="TextChangedTamañoChat"/>
-                    <TextBlock x:Name="txtBlockMensajeChat" Grid.Row="1" Width="400" Height="30" HorizontalAlignment="Left" Text="HOLA" FontSize="25"/>
-                    <Button x:Name="btnEnviar" Grid.Row="2" Width="60" Height="30" HorizontalAlignment="Right" Style="{StaticResource estiloBtnTableroAzul}" Content="Enviar" Click="ClickEnviarMensaje"/>
-                </Grid>
-            </Border>
-        </Grid>
-        
+        </Viewbox>
+        <Button Grid.Row="2" Width="200" Height="40" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="10,5,10,10" Style="{StaticResource estiloBtnSalir}" Content="{x:Static p:Resources.btnSalir}" Click="ClickSalirPartida"/>
+        <Viewbox Grid.Row="0">
+            <Grid  Width="409" Height="305">
+                <Border BorderBrush="Black" BorderThickness="2" Margin="10,10,10,5" CornerRadius="10">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="50" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <Label Content="{x:Static p:Resources.lblListaDeJugadores}" Height="50" FontSize="35" Style="{StaticResource estiloLblTituloTextos}" Grid.Row="0" />
+                        <DataGrid Grid.Row="1" ColumnHeaderStyle="{StaticResource estiloDtGridColumnHeaderListaJugadores}" Style="{StaticResource estiloDtGridListaJugadores}"
+                                  RowStyle="{StaticResource estiloDtGridRowFilaTablaJugadores}" CanUserReorderColumns="False"
+                                  Name="dtGridJugadores">
+                            <DataGrid.Columns>
+                                <DataGridTemplateColumn Header="{x:Static p:Resources.dtGridTemplateColumnJugador}" Width="*">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Style="{StaticResource estiloTxtBlockNicknameLista}" Text="{Binding Path=Nickname}"></TextBlock>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                <DataGridTemplateColumn x:Name="dtGridTemplateColumnEstado" Header="{x:Static p:Resources.dtGridTemplateColumnEstado}" Width="Auto">
+                                    <DataGridTemplateColumn.CellStyle>
+                                        <Style TargetType="DataGridCell" BasedOn="{StaticResource estiloDtGridCellEstadoInternet}">
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding Path=EstaEnLinea, UpdateSourceTrigger=PropertyChanged}" Value="False">
+                                                    <Setter Property="ContentTemplate">
+                                                        <Setter.Value>
+                                                            <DataTemplate>
+                                                                <Grid Height="35" Width="35">
+                                                                    <Ellipse Fill="#B21928"></Ellipse>
+                                                                    <TextBlock Margin="0,0,0,2" VerticalAlignment="Center" HorizontalAlignment="Center" TextWrapping="Wrap" 
+                                                                                TextAlignment="Center" FontSize="10" Foreground="White" FontWeight="Bold" Text="{x:Static p:Resources.txtBlockNoEnLinea}"/>
+                                                                </Grid>
+                                                            </DataTemplate>
+                                                        </Setter.Value>
+                                                    </Setter>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </DataGridTemplateColumn.CellStyle>
+                                </DataGridTemplateColumn>
+                                <DataGridTemplateColumn Header="" Width="Auto">
+                                    <DataGridTemplateColumn.CellStyle>
+                                        <Style TargetType="DataGridCell">
+                                            <Setter Property="ContentTemplate">
+                                                <Setter.Value>
+                                                    <DataTemplate>
+                                                        <Button Style="{StaticResource estiloBtnExpulsar}" CommandParameter="{Binding}" Content="{x:Static p:Resources.btnExpulsar}" 
+                                                                PreviewMouseLeftButtonDown="PreviewMouseLeftButtonDownExpulsarJugadorJuego"></Button>
+                                                    </DataTemplate>
+                                                </Setter.Value>
+                                            </Setter>
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding Path=EsHost}" Value="True">
+                                                    <Setter Property="ContentTemplate">
+                                                        <Setter.Value>
+                                                            <DataTemplate>
+                                                                <Button Style="{StaticResource estiloBtnHostPartida}" Content="{x:Static p:Resources.btnHost}"></Button>
+                                                            </DataTemplate>
+                                                        </Setter.Value>
+                                                    </Setter>
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding Path=EstaExpulsado}" Value="True">
+                                                    <Setter Property="ContentTemplate">
+                                                        <Setter.Value>
+                                                            <DataTemplate>
+                                                                <Button Style="{StaticResource estiloBtnDesactivado}" Content="{x:Static p:Resources.btnExpulsar}"></Button>
+                                                            </DataTemplate>
+                                                        </Setter.Value>
+                                                    </Setter>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </DataGridTemplateColumn.CellStyle>
+                                </DataGridTemplateColumn>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </Grid>
+                </Border>
+            </Grid>
+        </Viewbox>
+        <Viewbox Grid.Row="1">
+            <Grid Width="425" Height="225">
+                <Border BorderBrush="Black" BorderThickness="2" Margin="10,5,10,5" CornerRadius="10">
+                    <Grid Grid.Row="1" >
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="40"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="40"/>
+                        </Grid.RowDefinitions>
+                        <Border  Style="{StaticResource estiloBrdChat}" Grid.Row="2"/>
+                        <TextBox x:Name="txtBoxMensajeChat" Grid.Row="2" Margin="10,3,0,0" Width="320" Height="30" BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left"  TextChanged="TextChangedTamañoChat"/>
+                        <Border  Style="{StaticResource estiloBrdChat}">
+                            <Label  Content="Chat" Width="100" Height="50" VerticalAlignment="Center"  HorizontalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Style="{StaticResource estiloLblDatosJugador}" FontSize="25"/>
+                        </Border>
+                        <ScrollViewer x:Name="scrViewerChat" VerticalScrollBarVisibility="Auto" Grid.Row="1" Background="White" HorizontalScrollBarVisibility="Disabled" Margin="0,-5,0,-3" >
+                            <StackPanel Name="stcPanelMensaje">
+                            </StackPanel>
+                        </ScrollViewer>
+                        <Button x:Name="btnEnviar" Grid.Row="2" Width="60" Height="30" HorizontalAlignment="Right" Margin="3" 
+                                Style="{StaticResource estiloBtnTableroAzul}" Content="{x:Static p:Resources.btnEnviar}" Click="ClickEnviarMensaje"/>
+                    </Grid>
+                </Border>
+            </Grid>
+        </Viewbox>
     </Grid>
 </Page>

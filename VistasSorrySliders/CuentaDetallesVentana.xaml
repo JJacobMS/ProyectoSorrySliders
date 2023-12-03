@@ -2,6 +2,7 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:p="clr-namespace:VistasSorrySliders.Properties"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:VistasSorrySliders"
         mc:Ignorable="d" Height="450" Width="650" WindowStartupLocation="CenterScreen">
@@ -15,8 +16,8 @@
         <Border Background="#D19028" BorderBrush="Black" BorderThickness="3" >
             <Viewbox>
                 <Grid Height="70" Width="650">
-                    <Button Style="{StaticResource estiloBtnSalir}" HorizontalAlignment="Left" Margin="5" Click="ClickSalir">SALIR</Button>
-                    <Label Style="{StaticResource estiloLblInicioSesion}" Margin="0,5,0,0">Perfil de Jugador</Label>
+                    <Button Style="{StaticResource estiloBtnSalir}" HorizontalAlignment="Left" Margin="5" Click="ClickSalir" Content="{x:Static p:Resources.btnSalir}"></Button>
+                    <Label Style="{StaticResource estiloLblInicioSesion}" Margin="0,5,0,0" Content="{x:Static p:Resources.lblPerfilJugador}"></Label>
                 </Grid>
             </Viewbox>
         </Border>
@@ -34,27 +35,27 @@
                         <RowDefinition/>
                     </Grid.RowDefinitions>
                     <StackPanel VerticalAlignment="Center">
-                        <Label Content="Nombre:" Style="{StaticResource estiloLblDatosJugador}"/>
+                        <Label Content="{x:Static p:Resources.lblNombres}" Style="{StaticResource estiloLblDatosJugador}"/>
                         <TextBox x:Name="txtBoxNombre" Style="{StaticResource estiloTxtBoxDatosPerfil}"/>
                     </StackPanel>
                     <StackPanel VerticalAlignment="Center" Grid.Row="1">
-                        <Label Content="Apellidos:" Style="{StaticResource estiloLblDatosJugador}"/>
+                        <Label Content="{x:Static p:Resources.lblApellidos}" Style="{StaticResource estiloLblDatosJugador}"/>
                         <TextBox x:Name="txtBoxApellidos" Style="{StaticResource estiloTxtBoxDatosPerfil}"/>
                     </StackPanel>
                     <StackPanel VerticalAlignment="Center" Grid.Row="2">
-                        <Label Content="Nickname:" Style="{StaticResource estiloLblDatosJugador}"/>
+                        <Label Content="{x:Static p:Resources.lblNickname}" Style="{StaticResource estiloLblDatosJugador}"/>
                         <TextBox x:Name="txtBoxNickname" Style="{StaticResource estiloTxtBoxDatosPerfil}"/>
                     </StackPanel>
                     <StackPanel VerticalAlignment="Center" Grid.Row="3">
-                        <Label Content="Correo Electrónico:" Style="{StaticResource estiloLblDatosJugador}"/>
+                        <Label Content="{x:Static p:Resources.lblCorreoElectronico}" Style="{StaticResource estiloLblDatosJugador}"/>
                         <TextBox x:Name="txtBoxCorreo" Style="{StaticResource estiloTxtBoxDatosPerfil}"/>
                     </StackPanel>
                     <Ellipse Grid.Column="1" Grid.RowSpan="2" Height="160" Width="160" Fill="Black"></Ellipse>
                     <Ellipse x:Name="llpAvatar" Grid.Column="1" Grid.RowSpan="2" Height="150" Width="150" Fill="White"></Ellipse>
                     <Button Grid.Row="2" Grid.Column="1" Style="{StaticResource estiloBtnMorado}" Click="ClickIrRegistroUsuarios"
-                                Height="50" Width="200" FontSize="20">Modificar Cuenta</Button>
+                                Height="50" Width="200" FontSize="20" Content="{x:Static p:Resources.btnModificarCuenta}"></Button>
                     <Button Grid.Row="3" Grid.Column="1" Style="{StaticResource estiloBtnListaAmigos}" Click="ClickModificarContrasena"
-                                Height="50" Width="200" FontSize="20">Cambiar Contraseña</Button>
+                                Height="50" Width="200" FontSize="20" Content="{x:Static p:Resources.btnCambiarContrasena}"></Button>
                 </Grid>
             </Viewbox>
             

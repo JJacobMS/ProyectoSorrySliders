@@ -20,12 +20,12 @@ namespace VistasSorrySliders.LogicaJuego
         {
             ImagenDadoCorrespondiente = new Dictionary<int, BitmapImage>
             {
-                { 1, new BitmapImage(new Uri("pack://application:,,,/Recursos/gato1.png")) },
-                { 2, new BitmapImage(new Uri("pack://application:,,,/Recursos/gato2.png")) },
-                { 3, new BitmapImage(new Uri("pack://application:,,,/Recursos/gato3.png")) },
-                { 4, new BitmapImage(new Uri("pack://application:,,,/Recursos/gato4.png")) },
-                { 5, new BitmapImage(new Uri("pack://application:,,,/Recursos/gato5.png")) },
-                { 6, new BitmapImage(new Uri("pack://application:,,,/Recursos/gato6.png")) }
+                { 1, new BitmapImage(new Uri(Properties.Resources.uriImagenDadoNumero1)) },
+                { 2, new BitmapImage(new Uri(Properties.Resources.uriImagenDadoNumero2)) },
+                { 3, new BitmapImage(new Uri(Properties.Resources.uriImagenDadoNumero3)) },
+                { 4, new BitmapImage(new Uri(Properties.Resources.uriImagenDadoNumero4)) },
+                { 5, new BitmapImage(new Uri(Properties.Resources.uriImagenDadoNumero5)) },
+                { 6, new BitmapImage(new Uri(Properties.Resources.uriImagenDadoNumero6)) }
             };
             PosicionCanva = posicion;
             NumeroDado = numeroInicial;

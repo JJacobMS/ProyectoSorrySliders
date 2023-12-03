@@ -30,13 +30,18 @@ namespace VistasSorrySliders
         public TableroPuntuacionesPagina(CuentaSet cuenta)
         {
             InitializeComponent();
-            RecuperarPuntuaciones();
+            
             _cuenta = cuenta;
         }
 
-        private void RecuperarPuntuaciones() 
+        public Constantes InicializarPuntuaciones()
         {
-            Constantes resultado = new Constantes();
+            return RecuperarPuntuaciones();
+        }
+
+        private Constantes RecuperarPuntuaciones() 
+        {
+            Constantes resultado;
             Puntuacion[] puntuaciones = new Puntuacion[] { };
             Logger log = new Logger(this.GetType());
             try
@@ -47,21 +52,13 @@ namespace VistasSorrySliders
             }
             catch (CommunicationException ex)
             {
-                Console.WriteLine(ex);
                 resultado = Constantes.ERROR_CONEXION_SERVIDOR;
                 log.LogError("Error de Comunicación con el Servidor", ex);
             }
             catch (TimeoutException ex)
             {
-                Console.WriteLine(ex);
-                resultado = Constantes.ERROR_CONEXION_SERVIDOR;
+                resultado = Constantes.ERROR_TIEMPO_ESPERA_SERVIDOR;
                 log.LogWarn("Se agoto el tiempo de espera del servidor", ex);
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex);
-                resultado = Constantes.ERROR_CONEXION_SERVIDOR;
-                log.LogFatal("Ha ocurrido un error inesperado", ex);
             }
             switch (resultado)
             {
@@ -74,23 +71,13 @@ namespace VistasSorrySliders
                     this.DataContext = this;
                     break;
                 case Constantes.OPERACION_EXITOSA_VACIA:
-                    System.Windows.Forms.MessageBox.Show(Properties.Resources.msgTablaVacia);
-                    break;
-                case Constantes.ERROR_CONEXION_BD:
-                    System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorBaseDatos);
-                    this.NavigationService.GoBack();
-                    break;
-                case Constantes.ERROR_CONSULTA:
-                    System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorBaseDatos);
-                    this.NavigationService.GoBack();
-                    break;
-                case Constantes.ERROR_CONEXION_SERVIDOR:
-                    System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorConexion);
-                    this.NavigationService.GoBack();
+                    Utilidades.MostrarUnMensajeError(Properties.Resources.msgTablaVacia);
                     break;
                 default:
+                    Utilidades.MostrarMensajesError(resultado);
                     break;
             }
+            return resultado;
         }
 
         private void ClickSalirMenuPrincipal(object sender, RoutedEventArgs e)

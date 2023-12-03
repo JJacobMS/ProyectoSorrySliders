@@ -34,6 +34,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>iconoJuego.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
@@ -88,6 +91,9 @@
     <Compile Include="CuentaDetallesVentana.xaml.cs">
       <DependentUpon>CuentaDetallesVentana.xaml</DependentUpon>
     </Compile>
+    <Compile Include="InformacionVentana.xaml.cs">
+      <DependentUpon>InformacionVentana.xaml</DependentUpon>
+    </Compile>
     <Compile Include="InicioPagina.xaml.cs">
       <DependentUpon>InicioPagina.xaml</DependentUpon>
     </Compile>
@@ -96,6 +102,9 @@
     </Compile>
     <Compile Include="JuegoLanzamientoPagina.xaml.cs">
       <DependentUpon>JuegoLanzamientoPagina.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="JuegoPuntuacionesPagina.xaml.cs">
+      <DependentUpon>JuegoPuntuacionesPagina.xaml</DependentUpon>
     </Compile>
     <Compile Include="JuegoYLobbyVentana.xaml.cs">
       <DependentUpon>JuegoYLobbyVentana.xaml</DependentUpon>
@@ -115,13 +124,13 @@
     <Compile Include="Logger.cs" />
     <Compile Include="LogicaJuego\DadoPotencia.cs" />
     <Compile Include="LogicaJuego\Direccion.cs" />
+    <Compile Include="LogicaJuego\JugadorGanador.cs" />
     <Compile Include="LogicaJuego\JugadorLanzamiento.cs" />
+    <Compile Include="LogicaJuego\JugadorLista.cs" />
+    <Compile Include="LogicaJuego\JugadorTurno.cs" />
     <Compile Include="LogicaJuego\LineaMovimiento.cs" />
     <Compile Include="LogicaJuego\PeonLanzamiento.cs" />
     <Compile Include="LogicaJuego\Tablero.cs" />
-    <Compile Include="LogicaJuego\TableroCuatroJugadores.cs" />
-    <Compile Include="LogicaJuego\TableroDosJugadores.cs" />
-    <Compile Include="LogicaJuego\TableroTresJugadores.cs" />
     <Compile Include="MenuPrincipalPagina.xaml.cs">
       <DependentUpon>MenuPrincipalPagina.xaml</DependentUpon>
     </Compile>
@@ -137,6 +146,9 @@
     </Compile>
     <Compile Include="RegistroUsuariosPagina.xaml.cs">
       <DependentUpon>RegistroUsuariosPagina.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="TableroGanadoresPartidaPagina.xaml.cs">
+      <DependentUpon>TableroGanadoresPartidaPagina.xaml</DependentUpon>
     </Compile>
     <Compile Include="TableroPuntuacionesPagina.xaml.cs">
       <DependentUpon>TableroPuntuacionesPagina.xaml</DependentUpon>
@@ -162,6 +174,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="DiccionarioEstilos\DiccionarioAjustes.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="DiccionarioEstilos\DiccionarioChatJugadores.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -193,6 +209,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="InformacionVentana.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="InicioPagina.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -202,6 +222,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="JuegoLanzamientoPagina.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="JuegoPuntuacionesPagina.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -245,6 +269,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="TableroGanadoresPartidaPagina.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="TableroPuntuacionesPagina.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -285,22 +313,22 @@
     <Resource Include="Fuentes\Prompt-Medium.ttf" />
     <Resource Include="Fuentes\WixMadeforText-Bold.ttf" />
     <Resource Include="Fuentes\WixMadeforText-Regular.ttf" />
-    <None Include="Connected Services\ServicioSorrySliders\item.xsd">
+    <None Include="Connected Services\ServicioSorrySliders\item5.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\ServicioSorrySliders\item1.xsd">
+    <None Include="Connected Services\ServicioSorrySliders\item51.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\ServicioSorrySliders\item2.xsd">
+    <None Include="Connected Services\ServicioSorrySliders\item52.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\ServicioSorrySliders\item3.xsd">
+    <None Include="Connected Services\ServicioSorrySliders\item53.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\ServicioSorrySliders\item4.xsd">
+    <None Include="Connected Services\ServicioSorrySliders\item54.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\ServicioSorrySliders\ServicioComunicacionSorrySliders.wsdl" />
+    <None Include="Connected Services\ServicioSorrySliders\ServicioComunicacionSorrySliders1.wsdl" />
     <None Include="Connected Services\ServicioSorrySliders\VistasSorrySliders.ServicioSorrySliders.Constantes.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
@@ -355,24 +383,6 @@
     <Resource Include="Recursos\tableroLanzamientoFondo.png" />
   </ItemGroup>
   <ItemGroup>
-    <WCFMetadataStorage Include="Connected Services\ServicioSorrySliders\" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Connected Services\ServicioSorrySliders\item.disco" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Connected Services\ServicioSorrySliders\configuration91.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Connected Services\ServicioSorrySliders\configuration.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Connected Services\ServicioSorrySliders\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Recursos\ajustesIcono.png" />
     <Resource Include="Recursos\crearLobbyIcono.png" />
     <Resource Include="Recursos\dadoRojo.png" />
@@ -411,6 +421,47 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Recursos\tableroTres.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Recursos\peon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Recursos\desconectado.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Recursos\tableroPuntuacionCuatro.png" />
+    <Resource Include="Recursos\tableroPuntuacionDos.png" />
+    <Resource Include="Recursos\tableroPuntuacionTres.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Connected Services\ServicioSorrySliders\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\ServicioSorrySliders\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\ServicioSorrySliders\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\ServicioSorrySliders\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\ServicioSorrySliders\item1.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Recursos\informacion.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Recursos\error.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="iconoJuego.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Recursos\ganadoresPartidaIcono.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

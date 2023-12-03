@@ -1,0 +1,126 @@
+﻿<Page x:Class="VistasSorrySliders.TableroGanadoresPartidaPagina"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:VistasSorrySliders"
+      xmlns:p="clr-namespace:VistasSorrySliders.Properties"
+      xmlns:e="clr-namespace:VistasSorrySliders.LogicaJuego"
+
+      mc:Ignorable="d" 
+      d:DesignHeight="574" d:DesignWidth="1024"
+      Title="TableroGanadoresPartidaPagina">
+
+    <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="/Recursos/tableroLanzamientoFondo.png"/>
+        </Grid.Background>
+        <Viewbox>
+            <Grid Height="574" Width="1024">
+            <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="360"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="150" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+
+
+        <Grid Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" Grid.ColumnSpan="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="190" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="190" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Rectangle Grid.Column="0" Grid.Row="0" Margin="0,70,-70,65">
+                <Rectangle.Fill>
+                    <ImageBrush ImageSource="/Recursos/ganadoresPartidaIcono.png"/>
+                </Rectangle.Fill>
+            </Rectangle>
+            <Rectangle Grid.Column="0" Grid.Row="3" Margin="0,70,-70,65">
+                <Rectangle.Fill>
+                    <ImageBrush ImageSource="/Recursos/ganadoresPartidaIcono.png"/>
+                </Rectangle.Fill>
+            </Rectangle>
+            <Rectangle Grid.Column="2" Grid.Row="0"  Margin="-60,70,0,65">
+                <Rectangle.Fill>
+                    <ImageBrush ImageSource="/Recursos/ganadoresPartidaIcono.png"/>
+                </Rectangle.Fill>
+            </Rectangle>
+            <Rectangle Grid.Column="2" Grid.Row="3"  Margin="-60,70,0,65">
+                <Rectangle.Fill>
+                    <ImageBrush ImageSource="/Recursos/ganadoresPartidaIcono.png"/>
+                </Rectangle.Fill>
+            </Rectangle>
+            <Rectangle Grid.Column="1" Grid.Row="3"  Margin="140,110,140,40">
+                <Rectangle.Fill>
+                    <ImageBrush ImageSource="/Recursos/logoSliders.png"/>
+                </Rectangle.Fill>
+            </Rectangle>
+            <Button Style="{StaticResource estiloBtnSalir}" Content="{x:Static p:Resources.btnSalir}" Grid.Column="0" Grid.Row="0" Margin="10,10,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Click="ClickSalirMenuPrincipal" />
+            <Border BorderBrush="Black" BorderThickness="2" Margin="45,60,45,45" CornerRadius="10" Grid.Column="0" Grid.Row="0" Grid.RowSpan="3" Grid.ColumnSpan="3" />
+            <ListView x:Name="lstViewGanadores"  ScrollViewer.HorizontalScrollBarVisibility="Hidden" Background="Transparent" IsHitTestVisible="False"
+                     BorderBrush="Transparent" Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" Width="600" Height="320" VerticalAlignment="Bottom" Margin="0,0,0,70" ItemsSource="{Binding ListaGanadores}" Padding="-3,0,0,0" >
+                <ListView.View>
+                    <GridView AllowsColumnReorder="False"  >
+                        <GridViewColumn x:Name="GrdViewColumnUno" Width="300" >
+                            <GridViewColumn.HeaderTemplate  >
+                                <DataTemplate>
+                                    <Border Background="#EAD4F4" Width="296" CornerRadius="6" BorderBrush="Black" BorderThickness="1">
+                                        <TextBlock Text="{x:Static p:Resources.txtBlockNickname}" FontFamily="{StaticResource FuentesTitulo}" FontSize="30" Background="#EAD4F4" HorizontalAlignment="Center"/>
+                                    </Border>
+                                </DataTemplate>
+                            </GridViewColumn.HeaderTemplate>
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Border Background="#EAD4F4" Width="285" CornerRadius="6" BorderBrush="Black" BorderThickness="1">
+                                        <TextBlock Text="{Binding Path=Nickname}" FontSize="20" HorizontalAlignment="Center" FontFamily="{StaticResource FuentesTexto}" Background="#EAD4F4" />
+                                    </Border>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn x:Name="GrdViewColumnDos" Width="300">
+                            <GridViewColumn.HeaderTemplate>
+                                <DataTemplate>
+                                    <Border Background="#EAD4F4" Width="294" CornerRadius="6" BorderBrush="Black" BorderThickness="1">
+                                         <TextBlock Text="{x:Static p:Resources.txtBlockPosicion}" FontFamily="{StaticResource FuentesTitulo}" FontSize="30" Background="#EAD4F4" HorizontalAlignment="Center"/>
+                                    </Border>
+                                </DataTemplate>
+                            </GridViewColumn.HeaderTemplate>
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Border Background="#EAD4F4" Width="285" CornerRadius="6" BorderBrush="Black" BorderThickness="1">
+                                        <TextBlock Text="{Binding Path=Posicion}" FontSize="20" HorizontalAlignment="Center" FontFamily="{StaticResource FuentesTexto}" Background="#EAD4F4" />
+                                    </Border>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+                    <Grid VerticalAlignment="Top" Grid.Column="1" Width="650">
+                        <Rectangle Width="620" Height="150" Grid.Row="0" Grid.ColumnSpan="3" Margin="0,10,0,0">
+                            <Rectangle.Fill>
+                                <ImageBrush ImageSource="/Recursos/bannerColorRojo.png" />
+                            </Rectangle.Fill>
+                        </Rectangle>
+                        <Label Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" Content="{x:Static p:Resources.lblBienJugado}" FontSize="50" Style="{StaticResource estiloLblInicioSesion}" />
+                        <Image Source="/Recursos/puntuacionIcono.png" Width="200" Height="150" Grid.Column="0" Margin="0,0,10,0" HorizontalAlignment="Right"/>
+                        <Image Source="/Recursos/puntuacionIcono.png" Width="200" Height="150" Grid.Column="2" Margin="10,0,0,0" HorizontalAlignment="Left"/>
+                    </Grid>
+                </Grid>
+            </Grid>
+        </Viewbox>
+
+        
+
+
+    </Grid>
+</Page>

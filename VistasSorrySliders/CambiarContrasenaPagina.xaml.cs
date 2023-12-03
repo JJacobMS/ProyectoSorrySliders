@@ -70,22 +70,16 @@ namespace VistasSorrySliders
             }
             catch (CommunicationException ex)
             {
-                Console.WriteLine(ex);
                 resultado = Constantes.ERROR_CONEXION_SERVIDOR;
                 log.LogError("Error de Comunicación con el Servidor",ex);
             }
             catch (TimeoutException ex)
             {
-                Console.WriteLine(ex);
-                resultado = Constantes.ERROR_CONEXION_SERVIDOR;
+                resultado = Constantes.ERROR_TIEMPO_ESPERA_SERVIDOR;
                 log.LogWarn("Se agoto el tiempo de espera del servidor", ex);
             }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex);
-                resultado = Constantes.ERROR_CONEXION_SERVIDOR;
-                log.LogFatal("Ha ocurrido un error inesperado", ex);
-            }
+
+            Utilidades.MostrarMensajesError(resultado);
             switch (resultado)
             {
                 case Constantes.OPERACION_EXITOSA:
@@ -94,14 +88,9 @@ namespace VistasSorrySliders
                 case Constantes.OPERACION_EXITOSA_VACIA:
                     txtBlockContrasenaDiferenteActual.Visibility = Visibility.Visible;
                     break;
-                case Constantes.ERROR_CONEXION_BD:
-                    MessageBox.Show(Properties.Resources.msgErrorBaseDatos);
-                    break;
-                case Constantes.ERROR_CONSULTA:
-                    MessageBox.Show(Properties.Resources.msgErrorBaseDatos);
-                    break;
                 case Constantes.ERROR_CONEXION_SERVIDOR:
-                    MessageBox.Show(Properties.Resources.msgErrorConexion);
+                case Constantes.ERROR_TIEMPO_ESPERA_SERVIDOR:
+                    Utilidades.SalirInicioSesionDesdeVentanaPrincipal(Window.GetWindow(this), this);
                     break;
             }
         }
@@ -129,7 +118,7 @@ namespace VistasSorrySliders
                 if (contrasenaNueva.Equals(pssBoxContrasenaAnterior.Password))
                 {
                     pssBoxContrasenaNueva.Style = (Style)FindResource("estiloPssBoxContrasenaRojo");
-                    MessageBox.Show("La contraseña no puede ser la misma que la anterior");
+                    Utilidades.MostrarUnMensajeError(Properties.Resources.msgContrasenaRepetida);
                     return;
                 }
 
@@ -168,39 +157,28 @@ namespace VistasSorrySliders
             }
             catch (CommunicationException ex)
             {
-                Console.WriteLine(ex);
                 resultado = Constantes.ERROR_CONEXION_SERVIDOR;
                 log.LogError("Error de Comunicación con el Servidor", ex);
             }
             catch (TimeoutException ex)
             {
-                Console.WriteLine(ex);
-                resultado = Constantes.ERROR_CONEXION_SERVIDOR;
+                resultado = Constantes.ERROR_TIEMPO_ESPERA_SERVIDOR;
                 log.LogWarn("Se agoto el tiempo de espera del servidor", ex);
             }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex);
-                resultado = Constantes.ERROR_CONEXION_SERVIDOR;
-                log.LogFatal("Ha ocurrido un error inesperado", ex);
-            }
+
+            Utilidades.MostrarMensajesError(resultado);
             switch (resultado)
             {
                 case Constantes.OPERACION_EXITOSA:
-                    MessageBox.Show("Cambio Contraseña Exitoso");
+                    Utilidades.MostrarMensajeInformacion(Properties.Resources.msgContrasenaNuevaCambiada);
                     this.NavigationService.GoBack();
                     break;
                 case Constantes.OPERACION_EXITOSA_VACIA:
                     txtBlockContrasenaDiferenteActual.Visibility = Visibility.Visible;
                     break;
-                case Constantes.ERROR_CONEXION_BD:
-                    MessageBox.Show(Properties.Resources.msgErrorBaseDatos);
-                    break;
-                case Constantes.ERROR_CONSULTA:
-                    MessageBox.Show(Properties.Resources.msgErrorBaseDatos);
-                    break;
                 case Constantes.ERROR_CONEXION_SERVIDOR:
-                    MessageBox.Show(Properties.Resources.msgErrorConexion);
+                case Constantes.ERROR_TIEMPO_ESPERA_SERVIDOR:
+                    Utilidades.SalirInicioSesionDesdeVentanaPrincipal(Window.GetWindow(this), this);
                     break;
             }
         }

@@ -6,13 +6,16 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Forms;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using VistasSorrySliders.ServicioSorrySliders;
 
 namespace VistasSorrySliders
 {
-    public class Utilidades
+    public static class Utilidades
     {
         public static void IngresarImagen(byte[] avatar, ImageBrush mgBrush)
         {
@@ -33,27 +36,18 @@ namespace VistasSorrySliders
             }
             catch (ArgumentException ex)
             {
-                System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorImagen, Properties.Resources.msgTituloErrorImagen, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MostrarUnMensajeError(Properties.Resources.msgErrorImagen, Properties.Resources.msgTituloErrorImagen);
                 log.LogWarn("Se ha proporcionado un argumento invalido", ex);
-                Console.WriteLine(ex);
             }
             catch (OutOfMemoryException ex)
             {
-                System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorImagen, Properties.Resources.msgTituloErrorImagen, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MostrarUnMensajeError(Properties.Resources.msgErrorImagen, Properties.Resources.msgTituloErrorImagen);
                 log.LogWarn("Se ha agotado la memoria", ex);
-                Console.WriteLine(ex);
             }
-            catch (System.IO.IOException ex)
+            catch (IOException ex)
             {
-                System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorImagen, Properties.Resources.msgTituloErrorImagen, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MostrarUnMensajeError(Properties.Resources.msgErrorImagen, Properties.Resources.msgTituloErrorImagen);
                 log.LogWarn("Error al acceder a la imagen", ex);
-                Console.WriteLine(ex);
-            }
-            catch (Exception ex)
-            {
-                System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorImagen, Properties.Resources.msgTituloErrorImagen, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                Console.WriteLine(ex);
-                log.LogFatal("Ha ocurrido un error inesperado", ex);
             }
         }
 
@@ -78,27 +72,18 @@ namespace VistasSorrySliders
             }
             catch (ArgumentException ex)
             {
-                System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorImagen, Properties.Resources.msgTituloErrorImagen, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MostrarUnMensajeError(Properties.Resources.msgErrorImagen, Properties.Resources.msgTituloErrorImagen);
                 log.LogWarn("Se ha proporcionado un argumento invalido", ex);
-                Console.WriteLine(ex);
             }
             catch (OutOfMemoryException ex)
             {
-                System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorImagen, Properties.Resources.msgTituloErrorImagen, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MostrarUnMensajeError(Properties.Resources.msgErrorImagen, Properties.Resources.msgTituloErrorImagen);
                 log.LogWarn("Se ha agotado la memoria", ex);
-                Console.WriteLine(ex);
             }
-            catch (System.IO.IOException ex)
+            catch (IOException ex)
             {
-                System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorImagen, Properties.Resources.msgTituloErrorImagen, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MostrarUnMensajeError(Properties.Resources.msgErrorImagen, Properties.Resources.msgTituloErrorImagen);
                 log.LogWarn("Error al acceder a la imagen", ex);
-                Console.WriteLine(ex);
-            }
-            catch (Exception ex)
-            {
-                System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorImagen, Properties.Resources.msgTituloErrorImagen, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                log.LogFatal("Ha ocurrido un error inesperado", ex);
-                Console.WriteLine(ex);
             }
 
             return null;
@@ -121,31 +106,21 @@ namespace VistasSorrySliders
             }
             catch (IOException ex)
             {
-                Console.WriteLine(ex);
-                System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorImagen, Properties.Resources.msgTituloErrorImagen, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MostrarUnMensajeError(Properties.Resources.msgErrorImagen, Properties.Resources.msgTituloErrorImagen);
                 log.LogWarn("Error al acceder a la imagen", ex);
-                return null;
+                return new byte[0];
             }
             catch (ArgumentException ex)
             {
-                System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorImagen, Properties.Resources.msgTituloErrorImagen, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MostrarUnMensajeError(Properties.Resources.msgErrorImagen, Properties.Resources.msgTituloErrorImagen);
                 log.LogWarn("Se ha proporcionado un argumento invalido", ex);
-                Console.WriteLine(ex);
-                return null;
+                return new byte[0];
             }
             catch (OutOfMemoryException ex)
             {
-                Console.WriteLine(ex);
-                System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorImagen, Properties.Resources.msgTituloErrorImagen, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MostrarUnMensajeError(Properties.Resources.msgErrorImagen, Properties.Resources.msgTituloErrorImagen);
                 log.LogWarn("Se ha agotado la memoria", ex);
-                return null;
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex);
-                System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorImagen, Properties.Resources.msgTituloErrorImagen, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                log.LogFatal("Ha ocurrido un error inesperado", ex);
-                return null;
+                return new byte[0];
             }
 
         }
@@ -155,31 +130,85 @@ namespace VistasSorrySliders
             Logger log = new Logger(typeof(Utilidades));
             try
             {
+                int segundos = 3;
                 string patron = @"^(?=.*[0-9!@#$%^&*()\-=_+.,:;])[A-Za-z0-9!@#$%^&*()\-=_+.,:;]{8,}$";
-                Regex regex = new Regex(patron);
-                bool correoValidado = regex.IsMatch(contraseña);
+                TimeSpan tiempoAgotadoPatron = TimeSpan.FromSeconds(segundos);
+                bool correoValidado = Regex.IsMatch(contraseña, patron, RegexOptions.None, tiempoAgotadoPatron);
                 if (correoValidado)
                 {
                     return correoValidado;
                 }
-                MessageBox.Show(Properties.Resources.msgErrorContrasenaInvalida, Properties.Resources.msgTituloContraseñaInvalida, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MostrarUnMensajeError(Properties.Resources.msgErrorContrasenaInvalida, Properties.Resources.msgTituloContraseñaInvalida);
                 return correoValidado;
             }
             catch (RegexMatchTimeoutException ex)
             {
-                Console.WriteLine(ex);
                 log.LogWarn("El tiempo de espera para la expresión se ha agotado", ex);
-                //MessageBox.Show();
                 return false;
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex);
                 log.LogFatal("Ha ocurrido un error inesperado", ex);
-                //MessageBox.Show();
                 return false;
             }
         }
 
+        public static void MostrarMensajesError(Constantes respuesta)
+        {
+            InformacionVentana informacion;
+            switch (respuesta)
+            {
+                case Constantes.ERROR_CONEXION_BD:
+                    informacion = new InformacionVentana(Properties.Resources.msgErrorBaseDatos, true);
+                    informacion.Show();
+                    break;
+                case Constantes.ERROR_CONSULTA:
+                    informacion = new InformacionVentana(Properties.Resources.msgErrorConsulta, true);
+                    informacion.Show();
+                    break;
+                case Constantes.ERROR_CONEXION_SERVIDOR:
+                    informacion = new InformacionVentana(Properties.Resources.msgErrorConexion, true);
+                    informacion.Show();
+                    break;
+                case Constantes.ERROR_TIEMPO_ESPERA_SERVIDOR:
+                    informacion = new InformacionVentana(Properties.Resources.msgErrorTiempoEsperaServidor, true);
+                    informacion.Show();
+                    break;
+            }
+        }
+
+        public static void MostrarUnMensajeError(string mensaje)
+        {
+            InformacionVentana informacion = new InformacionVentana(mensaje, true);
+            informacion.Show();
+        }
+
+        public static void MostrarUnMensajeError(string mensaje, string titulo)
+        {
+            InformacionVentana informacion = new InformacionVentana(mensaje, titulo, true);
+            informacion.Show();
+        }
+
+        public static void MostrarMensajeInformacion(string mensaje, string titulo)
+        {
+            InformacionVentana informacion = new InformacionVentana(mensaje, titulo, false);
+            informacion.Show();
+        }
+        public static void MostrarMensajeInformacion(string mensaje)
+        {
+            InformacionVentana informacion = new InformacionVentana(mensaje, false);
+            informacion.Show();
+        }
+
+        public static void SalirInicioSesionDesdeVentanaPrincipal(Window ventanaPrincipal, Page pagina)
+        {
+            MainWindow ventana = ventanaPrincipal as MainWindow;
+            if (ventana is MainWindow)
+            {
+                ventana.SalirSistema();
+            }
+            InicioSesionPagina inicio = new InicioSesionPagina();
+            pagina.NavigationService.Navigate(inicio);
+        }
     }
 }

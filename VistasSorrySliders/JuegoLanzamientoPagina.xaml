@@ -3,9 +3,21 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:p="clr-namespace:VistasSorrySliders.Properties"
       xmlns:local="clr-namespace:VistasSorrySliders"
       mc:Ignorable="d" 
       d:DesignHeight="576" d:DesignWidth="614">
+
+    <Page.Resources>
+        <Style x:Key="estiloTxtBlockCambioRonda" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="#B26C1A"/>
+            <Setter Property="FontSize" Value="32"/>
+            <Setter Property="TextWrapping" Value="Wrap"/>
+            <Setter Property="TextAlignment" Value="Center"/>
+            <Setter Property="FontFamily" Value="{StaticResource FuentesTitulo}"/>
+            <Setter Property="Margin" Value="10"/>
+        </Style>
+    </Page.Resources>
 
     <Grid>
         <Grid.Background>
@@ -18,42 +30,42 @@
                 </Border.Background>
                 <Canvas x:Name="cnvEspacioJuego">
                     <Canvas x:Name="cnvEspacioAmarillo">
-                        <Button Name="btnLanzarPeonAmarillo" Style="{StaticResource estiloBtnTableroAmarillo}" IsEnabled="False" Click="ClickLanzarPeon" Canvas.Left="134" Canvas.Top="129" HorizontalAlignment="Left" VerticalAlignment="Center">LANZAR PEÓN</Button>
-                        <Button Name="btnTirarDadoAmarillo" Style="{StaticResource estiloBtnTableroAmarillo}" IsEnabled="False" Click="ClickDetenerDado" Canvas.Left="133" Canvas.Top="169">TIRAR DADO</Button>
-                        <TextBlock Name="txtBlockPotenciaAmarillo" Text="Potencia de lanzamiento: -"  
+                        <Button Name="btnLanzarPeonAmarillo" Style="{StaticResource estiloBtnTableroAmarillo}" IsEnabled="False" Click="ClickLanzarPeon" Canvas.Left="134" Canvas.Top="129" HorizontalAlignment="Left" VerticalAlignment="Center" Content="{x:Static p:Resources.btnLanzarPeon}"></Button>
+                        <Button Name="btnTirarDadoAmarillo" Style="{StaticResource estiloBtnTableroAmarillo}" IsEnabled="False" Click="ClickDetenerDado" Canvas.Left="133" Canvas.Top="169" Content="{x:Static p:Resources.btnTirarDado}"></Button>
+                        <TextBlock Name="txtBlockPotenciaAmarillo" Text="{x:Static p:Resources.txtBlockPotenciaLanzamiento}"  
                                 Style="{StaticResource estiloTxtBlockTextoLanzamiento}" Foreground="#604111" VerticalAlignment="Top" Width="80" HorizontalAlignment="Left" Canvas.Left="138" Canvas.Top="208"/>
                         <Label Name="lblJugadorAmarillo" Canvas.Left="6" Canvas.Top="210"
                                 Style="{StaticResource estiloLblTextoLanzamiento}" Foreground="#604111" VerticalAlignment="Top" Width="127" Height="26"/>
                     </Canvas>
 
                     <Canvas x:Name="cnvEspacioRojo">
-                        <Button Name="btnLanzarPeonRojo" Canvas.Left="387" Canvas.Top="129" Style="{StaticResource estiloBtnTableroRojo}" IsEnabled="False" Click="ClickLanzarPeon">LANZAR PEÓN</Button>
-                        <Button Name="btnTirarDadoRojo" Canvas.Left="387" Canvas.Top="169" Style="{StaticResource estiloBtnTableroRojo}" IsEnabled="False" Click="ClickDetenerDado">TIRAR DADO</Button>
-                        <TextBlock Name="txtBlockPotenciaRojo" Text="Potencia de lanzamiento: -" Canvas.Left="392" Canvas.Top="207" 
+                        <Button Name="btnLanzarPeonRojo" Canvas.Left="387" Canvas.Top="129" Style="{StaticResource estiloBtnTableroRojo}" IsEnabled="False" Click="ClickLanzarPeon" Content="{x:Static p:Resources.btnLanzarPeon}"></Button>
+                        <Button Name="btnTirarDadoRojo" Canvas.Left="387" Canvas.Top="169" Style="{StaticResource estiloBtnTableroRojo}" IsEnabled="False" Click="ClickDetenerDado" Content="{x:Static p:Resources.btnTirarDado}"></Button>
+                        <TextBlock Name="txtBlockPotenciaRojo" Text="{x:Static p:Resources.txtBlockPotenciaLanzamiento}" Canvas.Left="392" Canvas.Top="207" 
                              Style="{StaticResource estiloTxtBlockTextoLanzamiento}" Foreground="#5B0F16" HorizontalAlignment="Left" VerticalAlignment="Center" Width="80"/>
                         <Label Name="lblJugadorRojo" Canvas.Left="477" Canvas.Top="211" HorizontalContentAlignment="Right"
                             Style="{StaticResource estiloLblTextoLanzamiento}" Foreground="#5B0F16" HorizontalAlignment="Left" VerticalAlignment="Center" Width="126"/>
                     </Canvas>
 
                     <Canvas x:Name="cnvEspacioVerde">
-                        <Button Name="btnLanzarPeonVerde" Canvas.Left="387" Canvas.Top="380" Style="{StaticResource estiloBtnTableroVerde}" IsEnabled="False" Click="ClickLanzarPeon">LANZAR PEÓN</Button>
-                        <Button Name="btnTirarDadoVerde" Canvas.Left="387" Canvas.Top="418" Style="{StaticResource estiloBtnTableroVerde}" IsEnabled="False" Click="ClickDetenerDado">TIRAR DADO</Button>
-                        <TextBlock Name="txtBlockPotenciaVerde" Text="Potencia de lanzamiento: -" Canvas.Left="392" Canvas.Top="334" 
+                        <Button Name="btnLanzarPeonVerde" Canvas.Left="387" Canvas.Top="380" Style="{StaticResource estiloBtnTableroVerde}" IsEnabled="False" Click="ClickLanzarPeon" Content="{x:Static p:Resources.btnLanzarPeon}"></Button>
+                        <Button Name="btnTirarDadoVerde" Canvas.Left="387" Canvas.Top="418" Style="{StaticResource estiloBtnTableroVerde}" IsEnabled="False" Click="ClickDetenerDado" Content="{x:Static p:Resources.btnTirarDado}"></Button>
+                        <TextBlock Name="txtBlockPotenciaVerde" Text="{x:Static p:Resources.txtBlockPotenciaLanzamiento}" Canvas.Left="392" Canvas.Top="334" 
                                Style="{StaticResource estiloTxtBlockTextoLanzamiento}" Foreground="#033B20" HorizontalAlignment="Left" VerticalAlignment="Center" Width="80"/>
                         <Label Name="lblJugadorVerde" Canvas.Left="472" Canvas.Top="336" HorizontalContentAlignment="Right"
                                 Style="{StaticResource estiloLblTextoLanzamiento}" Foreground="#033B20" Width="131"/>
                     </Canvas>
 
-                    <Button Name="btnLanzarPeonAzul" Canvas.Left="139" Canvas.Top="380" Style="{StaticResource estiloBtnTableroAzul}" IsEnabled="False" Click="ClickLanzarPeon">LANZAR PEÓN</Button>
-                    <Button Name="btnTirarDadoAzul" Canvas.Left="139" Canvas.Top="418" Style="{StaticResource estiloBtnTableroAzul}" IsEnabled="False" Click="ClickDetenerDado">TIRAR DADO</Button>
-                    <TextBlock Name="txtBlockPotenciaAzul" Text="Potencia de lanzamiento: -" Canvas.Left="139" Canvas.Top="335" 
+                    <Button Name="btnLanzarPeonAzul" Canvas.Left="139" Canvas.Top="380" Style="{StaticResource estiloBtnTableroAzul}" IsEnabled="False" Click="ClickLanzarPeon" Content="{x:Static p:Resources.btnLanzarPeon}"></Button>
+                    <Button Name="btnTirarDadoAzul" Canvas.Left="139" Canvas.Top="418" Style="{StaticResource estiloBtnTableroAzul}" IsEnabled="False" Click="ClickDetenerDado" Content="{x:Static p:Resources.btnTirarDado}"></Button>
+                    <TextBlock Name="txtBlockPotenciaAzul" Text="{x:Static p:Resources.txtBlockPotenciaLanzamiento}" Canvas.Left="139" Canvas.Top="335" 
                                Style="{StaticResource estiloTxtBlockTextoLanzamiento}" Foreground="#0A527D" HorizontalAlignment="Left" VerticalAlignment="Center" Width="80"/>
                     <Label Name="lblJugadorAzul" Canvas.Left="5" Canvas.Top="335" 
                            Style="{StaticResource estiloLblTextoLanzamiento}" Foreground="#0A527D" VerticalAlignment="Top" Width="127" Height="26" HorizontalAlignment="Left"/>
 
                     <Border Height="20" Width="240" Margin="5" Background="#052B42" CornerRadius="10">
                         <Label Name="lblTurnoJugador" Style="{StaticResource estiloLblTextoLanzamiento}" FontSize="10" Margin="20,0,0,0" HorizontalAlignment="Left"
-                            VerticalAlignment="Center" >TURNO DEL JUGADOR: ...</Label>
+                            VerticalAlignment="Center" Content="{x:Static p:Resources.lblTurnoJugador}"></Label>
                     </Border>
 
                     <Rectangle Name="rctParedAzulDerecha" Height="211" Width="38" Fill="Transparent" HorizontalAlignment="Left" VerticalAlignment="Center" Canvas.Top="359" Canvas.Left="349"/>
@@ -65,15 +77,28 @@
                     <Rectangle Name="rctParedVerdeArriba" Height="45" Width="227" Fill="Transparent" HorizontalAlignment="Center" VerticalAlignment="Top" Canvas.Left="387" Canvas.Top="201"/>
                     <Rectangle Name="rctParedVerdeAbajo" Height="39" Width="227" Fill="Transparent" HorizontalAlignment="Center" VerticalAlignment="Top" Canvas.Top="324" Canvas.Left="387"/>
                     <Rectangle Name="rctParedAzulArribaTres" Height="20" Width="163" Fill="Transparent" HorizontalAlignment="Left" VerticalAlignment="Center" Canvas.Top="191" Canvas.Left="225"/>
-                    <Rectangle Name="rctParedAzulIzquierdaDos" Height="152" Width="20" Fill="Transparent" HorizontalAlignment="Center" VerticalAlignment="Top" Canvas.Top="209" Canvas.Left="210"/>
-                    <Rectangle Name="rctParedRojaDerechaDos" Height="152" Width="20" Fill="Transparent" HorizontalAlignment="Left" VerticalAlignment="Center" Canvas.Top="209" Canvas.Left="379"/>
+                    <Rectangle Name="rctParedAzulIzquierdaDos" Height="152" Width="18" Fill="Transparent" HorizontalAlignment="Left" VerticalAlignment="Center" Canvas.Top="209" Canvas.Left="210"/>
+                    <Rectangle Name="rctParedRojaDerechaDos" Height="152" Width="20" Fill="Transparent" HorizontalAlignment="Left" VerticalAlignment="Center" Canvas.Top="209" Canvas.Left="388"/>
 
                     <Rectangle Name="rctPistaAzul" Height="210" Width="84" Fill="Transparent" HorizontalAlignment="Center" VerticalAlignment="Top" Canvas.Top="359" Canvas.Left="265"/>
-                    <Rectangle Name="rctPistaRojo" Height="210" Width="84" Fill="Transparent" HorizontalAlignment="Center" VerticalAlignment="Top" Canvas.Top="1" Canvas.Left="264"/>
-                    <Rectangle Name="rctPistaAmarillo" Height="78" Width="227" Fill="Transparent" HorizontalAlignment="Left" VerticalAlignment="Center" Canvas.Top="246"/>
-                    <Rectangle Name="rctPistaVerde" Height="78" Width="227" Fill="Transparent" HorizontalAlignment="Left" VerticalAlignment="Top" Canvas.Top="246" Canvas.Left="386"/>
+                    <Rectangle Name="rctPistaRojo" Height="210" Width="84" Fill="Transparent" HorizontalAlignment="Left" VerticalAlignment="Center" Canvas.Top="0" Canvas.Left="266"/>
+                    <Rectangle Name="rctPistaAmarillo" Height="78" Width="228" Fill="Transparent" HorizontalAlignment="Center" VerticalAlignment="Center" Canvas.Top="246" Canvas.Left="0"/>
+                    <Rectangle Name="rctPistaVerde" Height="78" Width="225" Fill="Transparent" HorizontalAlignment="Left" VerticalAlignment="Center" Canvas.Top="246" Canvas.Left="388"/>
 
+                    <Ellipse Name="llpPuntuacion1" Height="169" Width="169" Canvas.Left="222" Canvas.Top="201" HorizontalAlignment="Left" VerticalAlignment="Top"></Ellipse>
+                    <Ellipse Name="llpPuntuacion2" Fill="Transparent" Height="105" Width="114" Canvas.Left="251" Canvas.Top="233" HorizontalAlignment="Center" VerticalAlignment="Center"></Ellipse>
+                    <Ellipse Name="llpPuntuacion3" Fill="Transparent" Height="74" Width="80" Canvas.Left="268" Canvas.Top="248" HorizontalAlignment="Left" VerticalAlignment="Center"></Ellipse>
+                    <Ellipse Name="llpPuntuacion4" Fill="Transparent" Height="43" Width="48" Canvas.Left="284" Canvas.Top="264" HorizontalAlignment="Left" VerticalAlignment="Center"></Ellipse>
+                    <Ellipse Name="llpPuntuacion5" Fill="Transparent" Height="20" Width="21" Canvas.Left="298" Canvas.Top="275" HorizontalAlignment="Center" VerticalAlignment="Center"></Ellipse>
 
+                    <Border x:Name="brdConteoPuntuaciones" Width="250" Height="250" BorderThickness="10" BorderBrush="#B26C1A" CornerRadius="20" 
+                            Canvas.Left="183" Canvas.Top="160" Background="#FFF4A7" Visibility="Hidden" Canvas.ZIndex="2">
+                        <StackPanel VerticalAlignment="Center">
+                            <TextBlock Style="{StaticResource estiloTxtBlockCambioRonda}" Text="{x:Static p:Resources.txtBlockRondaLanzamientoTerminada}"></TextBlock>
+                            <Image Height="50" Source="/Recursos/peon.png"/>
+                            <TextBlock FontSize="20" Style="{StaticResource estiloTxtBlockCambioRonda}" Text="{x:Static p:Resources.txtBlockContandoPuntuaciones}"></TextBlock>
+                        </StackPanel>
+                    </Border>
                 </Canvas>
             </Border>
         </Viewbox>

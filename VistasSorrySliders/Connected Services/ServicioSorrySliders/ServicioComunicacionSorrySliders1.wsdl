@@ -396,6 +396,72 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
+  <wsp:Policy wsu:Id="NetTcpBinding_IUsuariosEnLinea_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <wsrm:RMAssertion xmlns:wsrm="http://schemas.xmlsoap.org/ws/2005/02/rm/policy">
+          <wsrm:InactivityTimeout Milliseconds="600000" />
+          <wsrm:AcknowledgementInterval Milliseconds="200" />
+        </wsrm:RMAssertion>
+        <msb:BinaryEncoding xmlns:msb="http://schemas.microsoft.com/ws/06/2004/mspolicy/netbinary1" />
+        <sp:TransportBinding xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <wsp:Policy>
+            <sp:TransportToken>
+              <wsp:Policy>
+                <msf:WindowsTransportSecurity xmlns:msf="http://schemas.microsoft.com/ws/2006/05/framing/policy">
+                  <msf:ProtectionLevel>EncryptAndSign</msf:ProtectionLevel>
+                </msf:WindowsTransportSecurity>
+              </wsp:Policy>
+            </sp:TransportToken>
+            <sp:AlgorithmSuite>
+              <wsp:Policy>
+                <sp:Basic256 />
+              </wsp:Policy>
+            </sp:AlgorithmSuite>
+            <sp:Layout>
+              <wsp:Policy>
+                <sp:Strict />
+              </wsp:Policy>
+            </sp:Layout>
+          </wsp:Policy>
+        </sp:TransportBinding>
+        <wsaw:UsingAddressing />
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="NetTcpBinding_IJuegoPuntuacion_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <wsrm:RMAssertion xmlns:wsrm="http://schemas.xmlsoap.org/ws/2005/02/rm/policy">
+          <wsrm:InactivityTimeout Milliseconds="600000" />
+          <wsrm:AcknowledgementInterval Milliseconds="200" />
+        </wsrm:RMAssertion>
+        <msb:BinaryEncoding xmlns:msb="http://schemas.microsoft.com/ws/06/2004/mspolicy/netbinary1" />
+        <sp:TransportBinding xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <wsp:Policy>
+            <sp:TransportToken>
+              <wsp:Policy>
+                <msf:WindowsTransportSecurity xmlns:msf="http://schemas.microsoft.com/ws/2006/05/framing/policy">
+                  <msf:ProtectionLevel>EncryptAndSign</msf:ProtectionLevel>
+                </msf:WindowsTransportSecurity>
+              </wsp:Policy>
+            </sp:TransportToken>
+            <sp:AlgorithmSuite>
+              <wsp:Policy>
+                <sp:Basic256 />
+              </wsp:Policy>
+            </sp:AlgorithmSuite>
+            <sp:Layout>
+              <wsp:Policy>
+                <sp:Strict />
+              </wsp:Policy>
+            </sp:Layout>
+          </wsp:Policy>
+        </sp:TransportBinding>
+        <wsaw:UsingAddressing />
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
   <wsdl:types>
     <xsd:schema targetNamespace="http://tempuri.org/Imports">
       <xsd:import schemaLocation="http://localhost:5454/?xsd=xsd0" namespace="http://tempuri.org/" />
@@ -416,6 +482,12 @@
   </wsdl:message>
   <wsdl:message name="IInicioSesion_VerificarContrasenaDeCuenta_OutputMessage">
     <wsdl:part name="parameters" element="tns:VerificarContrasenaDeCuentaResponse" />
+  </wsdl:message>
+  <wsdl:message name="IInicioSesion_JugadorEstaEnLinea_InputMessage">
+    <wsdl:part name="parameters" element="tns:JugadorEstaEnLinea" />
+  </wsdl:message>
+  <wsdl:message name="IInicioSesion_JugadorEstaEnLinea_OutputMessage">
+    <wsdl:part name="parameters" element="tns:JugadorEstaEnLineaResponse" />
   </wsdl:message>
   <wsdl:message name="IMenuPrincipal_RecuperarDatosUsuario_InputMessage">
     <wsdl:part name="parameters" element="tns:RecuperarDatosUsuario" />
@@ -519,6 +591,66 @@
   <wsdl:message name="IListaAmigos_RecuperarNotificaciones_OutputMessage">
     <wsdl:part name="parameters" element="tns:RecuperarNotificacionesResponse" />
   </wsdl:message>
+  <wsdl:message name="IListaAmigos_RecuperarAmigos_InputMessage">
+    <wsdl:part name="parameters" element="tns:RecuperarAmigos" />
+  </wsdl:message>
+  <wsdl:message name="IListaAmigos_RecuperarAmigos_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RecuperarAmigosResponse" />
+  </wsdl:message>
+  <wsdl:message name="IListaAmigos_EliminarNotificacionJugador_InputMessage">
+    <wsdl:part name="parameters" element="tns:EliminarNotificacionJugador" />
+  </wsdl:message>
+  <wsdl:message name="IListaAmigos_EliminarNotificacionJugador_OutputMessage">
+    <wsdl:part name="parameters" element="tns:EliminarNotificacionJugadorResponse" />
+  </wsdl:message>
+  <wsdl:message name="IListaAmigos_NotificarUsuario_InputMessage">
+    <wsdl:part name="parameters" element="tns:NotificarUsuario" />
+  </wsdl:message>
+  <wsdl:message name="IListaAmigos_NotificarUsuario_OutputMessage">
+    <wsdl:part name="parameters" element="tns:NotificarUsuarioResponse" />
+  </wsdl:message>
+  <wsdl:message name="IListaAmigos_GuardarAmistad_InputMessage">
+    <wsdl:part name="parameters" element="tns:GuardarAmistad" />
+  </wsdl:message>
+  <wsdl:message name="IListaAmigos_GuardarAmistad_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GuardarAmistadResponse" />
+  </wsdl:message>
+  <wsdl:message name="IListaAmigos_EliminarAmistad_InputMessage">
+    <wsdl:part name="parameters" element="tns:EliminarAmistad" />
+  </wsdl:message>
+  <wsdl:message name="IListaAmigos_EliminarAmistad_OutputMessage">
+    <wsdl:part name="parameters" element="tns:EliminarAmistadResponse" />
+  </wsdl:message>
+  <wsdl:message name="IListaAmigos_RecuperarBaneados_InputMessage">
+    <wsdl:part name="parameters" element="tns:RecuperarBaneados" />
+  </wsdl:message>
+  <wsdl:message name="IListaAmigos_RecuperarBaneados_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RecuperarBaneadosResponse" />
+  </wsdl:message>
+  <wsdl:message name="IListaAmigos_RecuperarSolicitudesAmistad_InputMessage">
+    <wsdl:part name="parameters" element="tns:RecuperarSolicitudesAmistad" />
+  </wsdl:message>
+  <wsdl:message name="IListaAmigos_RecuperarSolicitudesAmistad_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RecuperarSolicitudesAmistadResponse" />
+  </wsdl:message>
+  <wsdl:message name="IListaAmigos_BanearJugador_InputMessage">
+    <wsdl:part name="parameters" element="tns:BanearJugador" />
+  </wsdl:message>
+  <wsdl:message name="IListaAmigos_BanearJugador_OutputMessage">
+    <wsdl:part name="parameters" element="tns:BanearJugadorResponse" />
+  </wsdl:message>
+  <wsdl:message name="IListaAmigos_EliminarBaneo_InputMessage">
+    <wsdl:part name="parameters" element="tns:EliminarBaneo" />
+  </wsdl:message>
+  <wsdl:message name="IListaAmigos_EliminarBaneo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:EliminarBaneoResponse" />
+  </wsdl:message>
+  <wsdl:message name="IListaAmigos_EnviarCorreo_InputMessage">
+    <wsdl:part name="parameters" element="tns:EnviarCorreo" />
+  </wsdl:message>
+  <wsdl:message name="IListaAmigos_EnviarCorreo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:EnviarCorreoResponse" />
+  </wsdl:message>
   <wsdl:message name="INotificarJugadores_AgregarProxy_InputMessage">
     <wsdl:part name="parameters" element="tns:AgregarProxy" />
   </wsdl:message>
@@ -531,8 +663,8 @@
   <wsdl:message name="INotificarJugadores_EliminarProxy_OutputMessage">
     <wsdl:part name="parameters" element="tns:EliminarProxyResponse" />
   </wsdl:message>
-  <wsdl:message name="INotificarJugadores_NotificarJugadorInvitado_InputMessage">
-    <wsdl:part name="parameters" element="tns:NotificarJugadorInvitado" />
+  <wsdl:message name="INotificarJugadores_LlamarCallback_InputMessage">
+    <wsdl:part name="parameters" element="tns:LlamarCallback" />
   </wsdl:message>
   <wsdl:message name="INotificarJugadores_RecuperarNotificacion_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:RecuperarNotificacion" />
@@ -567,11 +699,20 @@
   <wsdl:message name="IChat_IngresarAlChat_InputMessage">
     <wsdl:part name="parameters" element="tns:IngresarAlChat" />
   </wsdl:message>
+  <wsdl:message name="IChat_ExpulsarJugadorPartida_InputMessage">
+    <wsdl:part name="parameters" element="tns:ExpulsarJugadorPartida" />
+  </wsdl:message>
+  <wsdl:message name="IChat_SalirChatListaJugadores_InputMessage">
+    <wsdl:part name="parameters" element="tns:SalirChatListaJugadores" />
+  </wsdl:message>
   <wsdl:message name="IChat_DevolverMensaje_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:DevolverMensaje" />
   </wsdl:message>
-  <wsdl:message name="IChat_DevolverMensaje_InputCallbackMessage">
-    <wsdl:part name="parameters" element="tns:DevolverMensajeResponse" />
+  <wsdl:message name="IChat_ExpulsadoDeJugador_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:ExpulsadoDeJugador" />
+  </wsdl:message>
+  <wsdl:message name="IChat_JugadorSalioListaJugadores_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:JugadorSalioListaJugadores" />
   </wsdl:message>
   <wsdl:message name="IJuegoLanzamiento_AgregarJugadorJuegoLanzamiento_InputMessage">
     <wsdl:part name="parameters" element="tns:AgregarJugadorJuegoLanzamiento" />
@@ -591,14 +732,80 @@
   <wsdl:message name="IJuegoLanzamiento_JugadorTiroDado_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:JugadorTiroDado" />
   </wsdl:message>
+  <wsdl:message name="IJuegoLanzamiento_JugadorTiroDado_InputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:JugadorTiroDadoResponse" />
+  </wsdl:message>
   <wsdl:message name="IJuegoLanzamiento_JugadorDetuvoLinea_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:JugadorDetuvoLinea" />
+  </wsdl:message>
+  <wsdl:message name="IJuegoLanzamiento_JugadorDetuvoLinea_InputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:JugadorDetuvoLineaResponse" />
   </wsdl:message>
   <wsdl:message name="IJuegoLanzamiento_JugadorSalioJuegoLanzamiento_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:JugadorSalioJuegoLanzamiento" />
   </wsdl:message>
+  <wsdl:message name="IJuegoLanzamiento_JugadorSalioJuegoLanzamiento_InputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:JugadorSalioJuegoLanzamientoResponse" />
+  </wsdl:message>
   <wsdl:message name="IJuegoLanzamiento_JugadoresListosParaSiguienteTurno_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:JugadoresListosParaSiguienteTurno" />
+  </wsdl:message>
+  <wsdl:message name="IJuegoLanzamiento_JugadoresListosParaSiguienteTurno_InputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:JugadoresListosParaSiguienteTurnoResponse" />
+  </wsdl:message>
+  <wsdl:message name="IUsuariosEnLinea_EntrarConCuenta_InputMessage">
+    <wsdl:part name="parameters" element="tns:EntrarConCuenta" />
+  </wsdl:message>
+  <wsdl:message name="IUsuariosEnLinea_SalirDelSistema_InputMessage">
+    <wsdl:part name="parameters" element="tns:SalirDelSistema" />
+  </wsdl:message>
+  <wsdl:message name="IUsuariosEnLinea_ComprobarJugador_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:ComprobarJugador" />
+  </wsdl:message>
+  <wsdl:message name="IJuegoPuntuacion_AgregarJugador_InputMessage">
+    <wsdl:part name="parameters" element="tns:AgregarJugador" />
+  </wsdl:message>
+  <wsdl:message name="IJuegoPuntuacion_EliminarJugador_InputMessage">
+    <wsdl:part name="parameters" element="tns:EliminarJugador" />
+  </wsdl:message>
+  <wsdl:message name="IJuegoPuntuacion_NotificarJugadores_InputMessage">
+    <wsdl:part name="parameters" element="tns:NotificarJugadores" />
+  </wsdl:message>
+  <wsdl:message name="IJuegoPuntuacion_NotificarCambioTurno_InputMessage">
+    <wsdl:part name="parameters" element="tns:NotificarCambioTurno" />
+  </wsdl:message>
+  <wsdl:message name="IJuegoPuntuacion_ActualizarGanador_InputMessage">
+    <wsdl:part name="parameters" element="tns:ActualizarGanador" />
+  </wsdl:message>
+  <wsdl:message name="IJuegoPuntuacion_ActualizarGanador_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ActualizarGanadorResponse" />
+  </wsdl:message>
+  <wsdl:message name="IJuegoPuntuacion_NotificarCambiarPagina_InputMessage">
+    <wsdl:part name="parameters" element="tns:NotificarCambiarPagina" />
+  </wsdl:message>
+  <wsdl:message name="IJuegoPuntuacion_EliminarDiccionariosJuego_InputMessage">
+    <wsdl:part name="parameters" element="tns:EliminarDiccionariosJuego" />
+  </wsdl:message>
+  <wsdl:message name="IJuegoPuntuacion_NotificarJugadorMovimiento_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:NotificarJugadorMovimiento" />
+  </wsdl:message>
+  <wsdl:message name="IJuegoPuntuacion_NotificarJugadorMovimiento_InputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:NotificarJugadorMovimientoResponse" />
+  </wsdl:message>
+  <wsdl:message name="IJuegoPuntuacion_CambiarTurno_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:CambiarTurno" />
+  </wsdl:message>
+  <wsdl:message name="IJuegoPuntuacion_CambiarTurno_InputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:CambiarTurnoResponse" />
+  </wsdl:message>
+  <wsdl:message name="IJuegoPuntuacion_EliminarTurnoJugador_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:EliminarTurnoJugador" />
+  </wsdl:message>
+  <wsdl:message name="IJuegoPuntuacion_EliminarTurnoJugador_InputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:EliminarTurnoJugadorResponse" />
+  </wsdl:message>
+  <wsdl:message name="IJuegoPuntuacion_CambiarPagina_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:CambiarPagina" />
   </wsdl:message>
   <wsdl:portType name="IInicioSesion">
     <wsdl:operation name="VerificarExistenciaCorreoCuenta">
@@ -608,6 +815,10 @@
     <wsdl:operation name="VerificarContrasenaDeCuenta">
       <wsdl:input wsaw:Action="http://tempuri.org/IInicioSesion/VerificarContrasenaDeCuenta" message="tns:IInicioSesion_VerificarContrasenaDeCuenta_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IInicioSesion/VerificarContrasenaDeCuentaResponse" message="tns:IInicioSesion_VerificarContrasenaDeCuenta_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="JugadorEstaEnLinea">
+      <wsdl:input wsaw:Action="http://tempuri.org/IInicioSesion/JugadorEstaEnLinea" message="tns:IInicioSesion_JugadorEstaEnLinea_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IInicioSesion/JugadorEstaEnLineaResponse" message="tns:IInicioSesion_JugadorEstaEnLinea_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:portType name="IMenuPrincipal">
@@ -697,6 +908,46 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IListaAmigos/RecuperarNotificaciones" message="tns:IListaAmigos_RecuperarNotificaciones_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IListaAmigos/RecuperarNotificacionesResponse" message="tns:IListaAmigos_RecuperarNotificaciones_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="RecuperarAmigos">
+      <wsdl:input wsaw:Action="http://tempuri.org/IListaAmigos/RecuperarAmigos" message="tns:IListaAmigos_RecuperarAmigos_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IListaAmigos/RecuperarAmigosResponse" message="tns:IListaAmigos_RecuperarAmigos_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="EliminarNotificacionJugador">
+      <wsdl:input wsaw:Action="http://tempuri.org/IListaAmigos/EliminarNotificacionJugador" message="tns:IListaAmigos_EliminarNotificacionJugador_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IListaAmigos/EliminarNotificacionJugadorResponse" message="tns:IListaAmigos_EliminarNotificacionJugador_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="NotificarUsuario">
+      <wsdl:input wsaw:Action="http://tempuri.org/IListaAmigos/NotificarUsuario" message="tns:IListaAmigos_NotificarUsuario_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IListaAmigos/NotificarUsuarioResponse" message="tns:IListaAmigos_NotificarUsuario_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GuardarAmistad">
+      <wsdl:input wsaw:Action="http://tempuri.org/IListaAmigos/GuardarAmistad" message="tns:IListaAmigos_GuardarAmistad_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IListaAmigos/GuardarAmistadResponse" message="tns:IListaAmigos_GuardarAmistad_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="EliminarAmistad">
+      <wsdl:input wsaw:Action="http://tempuri.org/IListaAmigos/EliminarAmistad" message="tns:IListaAmigos_EliminarAmistad_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IListaAmigos/EliminarAmistadResponse" message="tns:IListaAmigos_EliminarAmistad_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="RecuperarBaneados">
+      <wsdl:input wsaw:Action="http://tempuri.org/IListaAmigos/RecuperarBaneados" message="tns:IListaAmigos_RecuperarBaneados_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IListaAmigos/RecuperarBaneadosResponse" message="tns:IListaAmigos_RecuperarBaneados_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="RecuperarSolicitudesAmistad">
+      <wsdl:input wsaw:Action="http://tempuri.org/IListaAmigos/RecuperarSolicitudesAmistad" message="tns:IListaAmigos_RecuperarSolicitudesAmistad_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IListaAmigos/RecuperarSolicitudesAmistadResponse" message="tns:IListaAmigos_RecuperarSolicitudesAmistad_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="BanearJugador">
+      <wsdl:input wsaw:Action="http://tempuri.org/IListaAmigos/BanearJugador" message="tns:IListaAmigos_BanearJugador_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IListaAmigos/BanearJugadorResponse" message="tns:IListaAmigos_BanearJugador_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="EliminarBaneo">
+      <wsdl:input wsaw:Action="http://tempuri.org/IListaAmigos/EliminarBaneo" message="tns:IListaAmigos_EliminarBaneo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IListaAmigos/EliminarBaneoResponse" message="tns:IListaAmigos_EliminarBaneo_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="EnviarCorreo">
+      <wsdl:input wsaw:Action="http://tempuri.org/IListaAmigos/EnviarCorreo" message="tns:IListaAmigos_EnviarCorreo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IListaAmigos/EnviarCorreoResponse" message="tns:IListaAmigos_EnviarCorreo_OutputMessage" />
+    </wsdl:operation>
   </wsdl:portType>
   <wsdl:portType name="INotificarJugadores">
     <wsdl:operation name="AgregarProxy">
@@ -707,8 +958,8 @@
       <wsdl:input wsaw:Action="http://tempuri.org/INotificarJugadores/EliminarProxy" message="tns:INotificarJugadores_EliminarProxy_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/INotificarJugadores/EliminarProxyResponse" message="tns:INotificarJugadores_EliminarProxy_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="NotificarJugadorInvitado">
-      <wsdl:input wsaw:Action="http://tempuri.org/INotificarJugadores/NotificarJugadorInvitado" message="tns:INotificarJugadores_NotificarJugadorInvitado_InputMessage" />
+    <wsdl:operation name="LlamarCallback">
+      <wsdl:input wsaw:Action="http://tempuri.org/INotificarJugadores/LlamarCallback" message="tns:INotificarJugadores_LlamarCallback_InputMessage" />
     </wsdl:operation>
     <wsdl:operation name="RecuperarNotificacion">
       <wsdl:output wsaw:Action="http://tempuri.org/INotificarJugadores/RecuperarNotificacion" message="tns:INotificarJugadores_RecuperarNotificacion_OutputCallbackMessage" />
@@ -741,9 +992,20 @@
     <wsdl:operation name="IngresarAlChat">
       <wsdl:input wsaw:Action="http://tempuri.org/IChat/IngresarAlChat" message="tns:IChat_IngresarAlChat_InputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="ExpulsarJugadorPartida">
+      <wsdl:input wsaw:Action="http://tempuri.org/IChat/ExpulsarJugadorPartida" message="tns:IChat_ExpulsarJugadorPartida_InputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SalirChatListaJugadores">
+      <wsdl:input wsaw:Action="http://tempuri.org/IChat/SalirChatListaJugadores" message="tns:IChat_SalirChatListaJugadores_InputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="DevolverMensaje">
       <wsdl:output wsaw:Action="http://tempuri.org/IChat/DevolverMensaje" message="tns:IChat_DevolverMensaje_OutputCallbackMessage" />
-      <wsdl:input wsaw:Action="http://tempuri.org/IChat/DevolverMensajeResponse" message="tns:IChat_DevolverMensaje_InputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ExpulsadoDeJugador">
+      <wsdl:output wsaw:Action="http://tempuri.org/IChat/ExpulsadoDeJugador" message="tns:IChat_ExpulsadoDeJugador_OutputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="JugadorSalioListaJugadores">
+      <wsdl:output wsaw:Action="http://tempuri.org/IChat/JugadorSalioListaJugadores" message="tns:IChat_JugadorSalioListaJugadores_OutputCallbackMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:portType name="IJuegoLanzamiento">
@@ -764,15 +1026,69 @@
     </wsdl:operation>
     <wsdl:operation name="JugadorTiroDado">
       <wsdl:output wsaw:Action="http://tempuri.org/IJuegoLanzamiento/JugadorTiroDado" message="tns:IJuegoLanzamiento_JugadorTiroDado_OutputCallbackMessage" />
+      <wsdl:input wsaw:Action="http://tempuri.org/IJuegoLanzamiento/JugadorTiroDadoResponse" message="tns:IJuegoLanzamiento_JugadorTiroDado_InputCallbackMessage" />
     </wsdl:operation>
     <wsdl:operation name="JugadorDetuvoLinea">
       <wsdl:output wsaw:Action="http://tempuri.org/IJuegoLanzamiento/JugadorDetuvoLinea" message="tns:IJuegoLanzamiento_JugadorDetuvoLinea_OutputCallbackMessage" />
+      <wsdl:input wsaw:Action="http://tempuri.org/IJuegoLanzamiento/JugadorDetuvoLineaResponse" message="tns:IJuegoLanzamiento_JugadorDetuvoLinea_InputCallbackMessage" />
     </wsdl:operation>
     <wsdl:operation name="JugadorSalioJuegoLanzamiento">
       <wsdl:output wsaw:Action="http://tempuri.org/IJuegoLanzamiento/JugadorSalioJuegoLanzamiento" message="tns:IJuegoLanzamiento_JugadorSalioJuegoLanzamiento_OutputCallbackMessage" />
+      <wsdl:input wsaw:Action="http://tempuri.org/IJuegoLanzamiento/JugadorSalioJuegoLanzamientoResponse" message="tns:IJuegoLanzamiento_JugadorSalioJuegoLanzamiento_InputCallbackMessage" />
     </wsdl:operation>
     <wsdl:operation name="JugadoresListosParaSiguienteTurno">
       <wsdl:output wsaw:Action="http://tempuri.org/IJuegoLanzamiento/JugadoresListosParaSiguienteTurno" message="tns:IJuegoLanzamiento_JugadoresListosParaSiguienteTurno_OutputCallbackMessage" />
+      <wsdl:input wsaw:Action="http://tempuri.org/IJuegoLanzamiento/JugadoresListosParaSiguienteTurnoResponse" message="tns:IJuegoLanzamiento_JugadoresListosParaSiguienteTurno_InputCallbackMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="IUsuariosEnLinea">
+    <wsdl:operation name="EntrarConCuenta">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUsuariosEnLinea/EntrarConCuenta" message="tns:IUsuariosEnLinea_EntrarConCuenta_InputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SalirDelSistema">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUsuariosEnLinea/SalirDelSistema" message="tns:IUsuariosEnLinea_SalirDelSistema_InputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ComprobarJugador">
+      <wsdl:output wsaw:Action="http://tempuri.org/IUsuariosEnLinea/ComprobarJugador" message="tns:IUsuariosEnLinea_ComprobarJugador_OutputCallbackMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="IJuegoPuntuacion">
+    <wsdl:operation name="AgregarJugador">
+      <wsdl:input wsaw:Action="http://tempuri.org/IJuegoPuntuacion/AgregarJugador" message="tns:IJuegoPuntuacion_AgregarJugador_InputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="EliminarJugador">
+      <wsdl:input wsaw:Action="http://tempuri.org/IJuegoPuntuacion/EliminarJugador" message="tns:IJuegoPuntuacion_EliminarJugador_InputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="NotificarJugadores">
+      <wsdl:input wsaw:Action="http://tempuri.org/IJuegoPuntuacion/NotificarJugadores" message="tns:IJuegoPuntuacion_NotificarJugadores_InputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="NotificarCambioTurno">
+      <wsdl:input wsaw:Action="http://tempuri.org/IJuegoPuntuacion/NotificarCambioTurno" message="tns:IJuegoPuntuacion_NotificarCambioTurno_InputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ActualizarGanador">
+      <wsdl:input wsaw:Action="http://tempuri.org/IJuegoPuntuacion/ActualizarGanador" message="tns:IJuegoPuntuacion_ActualizarGanador_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IJuegoPuntuacion/ActualizarGanadorResponse" message="tns:IJuegoPuntuacion_ActualizarGanador_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="NotificarCambiarPagina">
+      <wsdl:input wsaw:Action="http://tempuri.org/IJuegoPuntuacion/NotificarCambiarPagina" message="tns:IJuegoPuntuacion_NotificarCambiarPagina_InputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="EliminarDiccionariosJuego">
+      <wsdl:input wsaw:Action="http://tempuri.org/IJuegoPuntuacion/EliminarDiccionariosJuego" message="tns:IJuegoPuntuacion_EliminarDiccionariosJuego_InputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="NotificarJugadorMovimiento">
+      <wsdl:output wsaw:Action="http://tempuri.org/IJuegoPuntuacion/NotificarJugadorMovimiento" message="tns:IJuegoPuntuacion_NotificarJugadorMovimiento_OutputCallbackMessage" />
+      <wsdl:input wsaw:Action="http://tempuri.org/IJuegoPuntuacion/NotificarJugadorMovimientoResponse" message="tns:IJuegoPuntuacion_NotificarJugadorMovimiento_InputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CambiarTurno">
+      <wsdl:output wsaw:Action="http://tempuri.org/IJuegoPuntuacion/CambiarTurno" message="tns:IJuegoPuntuacion_CambiarTurno_OutputCallbackMessage" />
+      <wsdl:input wsaw:Action="http://tempuri.org/IJuegoPuntuacion/CambiarTurnoResponse" message="tns:IJuegoPuntuacion_CambiarTurno_InputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="EliminarTurnoJugador">
+      <wsdl:output wsaw:Action="http://tempuri.org/IJuegoPuntuacion/EliminarTurnoJugador" message="tns:IJuegoPuntuacion_EliminarTurnoJugador_OutputCallbackMessage" />
+      <wsdl:input wsaw:Action="http://tempuri.org/IJuegoPuntuacion/EliminarTurnoJugadorResponse" message="tns:IJuegoPuntuacion_EliminarTurnoJugador_InputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CambiarPagina">
+      <wsdl:output wsaw:Action="http://tempuri.org/IJuegoPuntuacion/CambiarPagina" message="tns:IJuegoPuntuacion_CambiarPagina_OutputCallbackMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="NetTcpBinding_IInicioSesion" type="tns:IInicioSesion">
@@ -789,6 +1105,15 @@
     </wsdl:operation>
     <wsdl:operation name="VerificarContrasenaDeCuenta">
       <soap12:operation soapAction="http://tempuri.org/IInicioSesion/VerificarContrasenaDeCuenta" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="JugadorEstaEnLinea">
+      <soap12:operation soapAction="http://tempuri.org/IInicioSesion/JugadorEstaEnLinea" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -985,6 +1310,96 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="RecuperarAmigos">
+      <soap12:operation soapAction="http://tempuri.org/IListaAmigos/RecuperarAmigos" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EliminarNotificacionJugador">
+      <soap12:operation soapAction="http://tempuri.org/IListaAmigos/EliminarNotificacionJugador" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="NotificarUsuario">
+      <soap12:operation soapAction="http://tempuri.org/IListaAmigos/NotificarUsuario" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GuardarAmistad">
+      <soap12:operation soapAction="http://tempuri.org/IListaAmigos/GuardarAmistad" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EliminarAmistad">
+      <soap12:operation soapAction="http://tempuri.org/IListaAmigos/EliminarAmistad" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RecuperarBaneados">
+      <soap12:operation soapAction="http://tempuri.org/IListaAmigos/RecuperarBaneados" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RecuperarSolicitudesAmistad">
+      <soap12:operation soapAction="http://tempuri.org/IListaAmigos/RecuperarSolicitudesAmistad" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="BanearJugador">
+      <soap12:operation soapAction="http://tempuri.org/IListaAmigos/BanearJugador" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EliminarBaneo">
+      <soap12:operation soapAction="http://tempuri.org/IListaAmigos/EliminarBaneo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EnviarCorreo">
+      <soap12:operation soapAction="http://tempuri.org/IListaAmigos/EnviarCorreo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
   </wsdl:binding>
   <wsdl:binding name="NetTcpBinding_INotificarJugadores" type="tns:INotificarJugadores">
     <wsp:PolicyReference URI="#NetTcpBinding_INotificarJugadores_policy" />
@@ -1007,8 +1422,8 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="NotificarJugadorInvitado">
-      <soap12:operation soapAction="http://tempuri.org/INotificarJugadores/NotificarJugadorInvitado" style="document" />
+    <wsdl:operation name="LlamarCallback">
+      <soap12:operation soapAction="http://tempuri.org/INotificarJugadores/LlamarCallback" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -1079,11 +1494,32 @@
         <soap12:body use="literal" />
       </wsdl:input>
     </wsdl:operation>
-    <wsdl:operation name="DevolverMensaje">
-      <soap12:operation soapAction="http://tempuri.org/IChat/DevolverMensaje" style="document" />
+    <wsdl:operation name="ExpulsarJugadorPartida">
+      <soap12:operation soapAction="http://tempuri.org/IChat/ExpulsarJugadorPartida" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="SalirChatListaJugadores">
+      <soap12:operation soapAction="http://tempuri.org/IChat/SalirChatListaJugadores" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="DevolverMensaje">
+      <soap12:operation soapAction="http://tempuri.org/IChat/DevolverMensaje" style="document" />
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ExpulsadoDeJugador">
+      <soap12:operation soapAction="http://tempuri.org/IChat/ExpulsadoDeJugador" style="document" />
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="JugadorSalioListaJugadores">
+      <soap12:operation soapAction="http://tempuri.org/IChat/JugadorSalioListaJugadores" style="document" />
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>
@@ -1124,24 +1560,140 @@
     </wsdl:operation>
     <wsdl:operation name="JugadorTiroDado">
       <soap12:operation soapAction="http://tempuri.org/IJuegoLanzamiento/JugadorTiroDado" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="JugadorDetuvoLinea">
       <soap12:operation soapAction="http://tempuri.org/IJuegoLanzamiento/JugadorDetuvoLinea" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="JugadorSalioJuegoLanzamiento">
       <soap12:operation soapAction="http://tempuri.org/IJuegoLanzamiento/JugadorSalioJuegoLanzamiento" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="JugadoresListosParaSiguienteTurno">
       <soap12:operation soapAction="http://tempuri.org/IJuegoLanzamiento/JugadoresListosParaSiguienteTurno" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="NetTcpBinding_IUsuariosEnLinea" type="tns:IUsuariosEnLinea">
+    <wsp:PolicyReference URI="#NetTcpBinding_IUsuariosEnLinea_policy" />
+    <soap12:binding transport="http://schemas.microsoft.com/soap/tcp" />
+    <wsdl:operation name="EntrarConCuenta">
+      <soap12:operation soapAction="http://tempuri.org/IUsuariosEnLinea/EntrarConCuenta" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="SalirDelSistema">
+      <soap12:operation soapAction="http://tempuri.org/IUsuariosEnLinea/SalirDelSistema" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="ComprobarJugador">
+      <soap12:operation soapAction="http://tempuri.org/IUsuariosEnLinea/ComprobarJugador" style="document" />
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="NetTcpBinding_IJuegoPuntuacion" type="tns:IJuegoPuntuacion">
+    <wsp:PolicyReference URI="#NetTcpBinding_IJuegoPuntuacion_policy" />
+    <soap12:binding transport="http://schemas.microsoft.com/soap/tcp" />
+    <wsdl:operation name="AgregarJugador">
+      <soap12:operation soapAction="http://tempuri.org/IJuegoPuntuacion/AgregarJugador" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="EliminarJugador">
+      <soap12:operation soapAction="http://tempuri.org/IJuegoPuntuacion/EliminarJugador" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="NotificarJugadores">
+      <soap12:operation soapAction="http://tempuri.org/IJuegoPuntuacion/NotificarJugadores" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="NotificarCambioTurno">
+      <soap12:operation soapAction="http://tempuri.org/IJuegoPuntuacion/NotificarCambioTurno" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="ActualizarGanador">
+      <soap12:operation soapAction="http://tempuri.org/IJuegoPuntuacion/ActualizarGanador" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="NotificarCambiarPagina">
+      <soap12:operation soapAction="http://tempuri.org/IJuegoPuntuacion/NotificarCambiarPagina" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="EliminarDiccionariosJuego">
+      <soap12:operation soapAction="http://tempuri.org/IJuegoPuntuacion/EliminarDiccionariosJuego" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="NotificarJugadorMovimiento">
+      <soap12:operation soapAction="http://tempuri.org/IJuegoPuntuacion/NotificarJugadorMovimiento" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CambiarTurno">
+      <soap12:operation soapAction="http://tempuri.org/IJuegoPuntuacion/CambiarTurno" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EliminarTurnoJugador">
+      <soap12:operation soapAction="http://tempuri.org/IJuegoPuntuacion/EliminarTurnoJugador" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CambiarPagina">
+      <soap12:operation soapAction="http://tempuri.org/IJuegoPuntuacion/CambiarPagina" style="document" />
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>
@@ -1153,7 +1705,7 @@
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:5455/ServidorSorrySliders</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>LAPTOP-H4AE1QJ9\sulem</Upn>
+          <Upn>LAPTOP-SF103ATP\monti</Upn>
         </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>
@@ -1162,7 +1714,7 @@
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:5455/ServidorSorrySliders</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>LAPTOP-H4AE1QJ9\sulem</Upn>
+          <Upn>LAPTOP-SF103ATP\monti</Upn>
         </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>
@@ -1171,7 +1723,7 @@
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:5455/ServidorSorrySliders</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>LAPTOP-H4AE1QJ9\sulem</Upn>
+          <Upn>LAPTOP-SF103ATP\monti</Upn>
         </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>
@@ -1180,7 +1732,7 @@
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:5455/ServidorSorrySliders</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>LAPTOP-H4AE1QJ9\sulem</Upn>
+          <Upn>LAPTOP-SF103ATP\monti</Upn>
         </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>
@@ -1189,7 +1741,7 @@
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:5455/ServidorSorrySliders</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>LAPTOP-H4AE1QJ9\sulem</Upn>
+          <Upn>LAPTOP-SF103ATP\monti</Upn>
         </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>
@@ -1198,7 +1750,7 @@
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:5455/ServidorSorrySliders</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>LAPTOP-H4AE1QJ9\sulem</Upn>
+          <Upn>LAPTOP-SF103ATP\monti</Upn>
         </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>
@@ -1207,7 +1759,7 @@
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:5455/ServidorSorrySliders</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>LAPTOP-H4AE1QJ9\sulem</Upn>
+          <Upn>LAPTOP-SF103ATP\monti</Upn>
         </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>
@@ -1216,7 +1768,7 @@
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:5455/ServidorSorrySliders</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>LAPTOP-H4AE1QJ9\sulem</Upn>
+          <Upn>LAPTOP-SF103ATP\monti</Upn>
         </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>
@@ -1225,7 +1777,7 @@
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:5455/ServidorSorrySliders</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>LAPTOP-H4AE1QJ9\sulem</Upn>
+          <Upn>LAPTOP-SF103ATP\monti</Upn>
         </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>
@@ -1234,7 +1786,7 @@
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:5455/ServidorSorrySliders</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>LAPTOP-H4AE1QJ9\sulem</Upn>
+          <Upn>LAPTOP-SF103ATP\monti</Upn>
         </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>
@@ -1243,7 +1795,7 @@
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:5455/ServidorSorrySliders</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>LAPTOP-H4AE1QJ9\sulem</Upn>
+          <Upn>LAPTOP-SF103ATP\monti</Upn>
         </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>
@@ -1252,7 +1804,25 @@
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:5455/ServidorSorrySliders</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>LAPTOP-H4AE1QJ9\sulem</Upn>
+          <Upn>LAPTOP-SF103ATP\monti</Upn>
+        </Identity>
+      </wsa10:EndpointReference>
+    </wsdl:port>
+    <wsdl:port name="NetTcpBinding_IUsuariosEnLinea" binding="tns:NetTcpBinding_IUsuariosEnLinea">
+      <soap12:address location="net.tcp://localhost:5455/ServidorSorrySliders" />
+      <wsa10:EndpointReference>
+        <wsa10:Address>net.tcp://localhost:5455/ServidorSorrySliders</wsa10:Address>
+        <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
+          <Upn>LAPTOP-SF103ATP\monti</Upn>
+        </Identity>
+      </wsa10:EndpointReference>
+    </wsdl:port>
+    <wsdl:port name="NetTcpBinding_IJuegoPuntuacion" binding="tns:NetTcpBinding_IJuegoPuntuacion">
+      <soap12:address location="net.tcp://localhost:5455/ServidorSorrySliders" />
+      <wsa10:EndpointReference>
+        <wsa10:Address>net.tcp://localhost:5455/ServidorSorrySliders</wsa10:Address>
+        <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
+          <Upn>LAPTOP-SF103ATP\monti</Upn>
         </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>

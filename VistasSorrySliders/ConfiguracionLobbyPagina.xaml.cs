@@ -24,17 +24,16 @@ namespace VistasSorrySliders
     public partial class ConfiguracionLobby : Page
     {
         private CuentaSet _cuentaUsuario;
+        private Border bordeAnterior;
 
         public ConfiguracionLobby(CuentaSet cuentaUsuario)
         {
             InitializeComponent();
             _cuentaUsuario = new CuentaSet();
             _cuentaUsuario = cuentaUsuario;
+            txtBlockNickname.Text = _cuentaUsuario.Nickname;
             Utilidades.IngresarImagen(_cuentaUsuario.Avatar, this.mgBrushAvatar);
-            txtBlockNickname.Text = _cuentaUsuario.Nickname; 
         }
-
-        private Border bordeAnterior;
 
         private void MouseLeftButtonDownSeleccionarTablero(object sender, MouseButtonEventArgs e)
         {
@@ -49,7 +48,6 @@ namespace VistasSorrySliders
             bordeSeleccionado.BorderBrush = Brushes.Red;
             bordeAnterior = bordeSeleccionado;
 
-            
             btnCrearLobby.IsEnabled = (bordeAnterior != null);
         }
 
@@ -70,62 +68,77 @@ namespace VistasSorrySliders
                 {
                     numeroJugadoresInt = 2;
                 }
-                Constantes respuesta;
-                string codigoPartida = "";
-                Logger log = new Logger(this.GetType());
-                try
+
+                if (numeroJugadoresInt >= 2)
                 {
-                    CrearLobbyClient proxyCrearLobby = new CrearLobbyClient();
-                    (respuesta, codigoPartida) = proxyCrearLobby.CrearPartida(_cuentaUsuario.CorreoElectronico, numeroJugadoresInt);
+                    CrearLobby(numeroJugadoresInt);
                 }
-                catch (CommunicationException ex)
-                {
-                    Console.WriteLine(ex);
-                    respuesta = Constantes.ERROR_CONEXION_SERVIDOR;
-                    log.LogError("Error de Comunicación con el Servidor", ex);
-                }
-                catch (TimeoutException ex)
-                {
-                    Console.WriteLine(ex);
-                    respuesta = Constantes.ERROR_CONEXION_SERVIDOR;
-                    log.LogWarn("Se agoto el tiempo de espera del servidor", ex);
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine(ex);
-                    respuesta = Constantes.ERROR_CONEXION_SERVIDOR;
-                    log.LogFatal("Ha ocurrido un error inesperado", ex);
-                }
-                switch (respuesta)
-                {
-                    case Constantes.ERROR_CONEXION_BD:
-                        MessageBox.Show(Properties.Resources.msgErrorBaseDatos);
-                        break;
-                    case Constantes.ERROR_CONSULTA:
-                        MessageBox.Show(Properties.Resources.msgErrorBaseDatos);
-                        break;
-                    case Constantes.ERROR_CONEXION_SERVIDOR:
-                        MessageBox.Show(Properties.Resources.msgErrorConexion);
-                        break;
-                    case Constantes.OPERACION_EXITOSA:
-                        CrearVentanaLobby(numeroJugadoresInt.ToString(), _cuentaUsuario, codigoPartida);
-                        Window.GetWindow(this).Close();
-                        break;
-                    case Constantes.OPERACION_EXITOSA_VACIA:
-                        break;
-                    default:
-                        break;
-                }
-                    
-                
             }
         }
 
-        private void CrearVentanaLobby(string numeroJugadoresString, CuentaSet _cuentaUsuario, string codigoPartida) 
+        private void CrearLobby(int numeroJugadoresInt)
+        {
+            Constantes respuesta;
+            string codigoPartida = "";
+            Logger log = new Logger(this.GetType());
+            try
+            {
+                CrearLobbyClient proxyCrearLobby = new CrearLobbyClient();
+                (respuesta, codigoPartida) = proxyCrearLobby.CrearPartida(_cuentaUsuario.CorreoElectronico, numeroJugadoresInt);
+            }
+            catch (CommunicationException ex)
+            {
+                Console.WriteLine(ex);
+                respuesta = Constantes.ERROR_CONEXION_SERVIDOR;
+                log.LogError("Error de Comunicación con el Servidor", ex);
+            }
+            catch (TimeoutException ex)
+            {
+                Console.WriteLine(ex);
+                respuesta = Constantes.ERROR_TIEMPO_ESPERA_SERVIDOR;
+                log.LogWarn("Se agoto el tiempo de espera del servidor", ex);
+            }
+
+            Utilidades.MostrarMensajesError(respuesta);
+            switch (respuesta)
+            {
+                case Constantes.OPERACION_EXITOSA:
+                    CrearVentanaLobby(_cuentaUsuario, codigoPartida);
+                    break;
+                case Constantes.OPERACION_EXITOSA_VACIA:
+                    Utilidades.MostrarUnMensajeError(Properties.Resources.msgCrearLobbySinExito);
+                    break;
+                case Constantes.ERROR_CONEXION_SERVIDOR:
+                case Constantes.ERROR_TIEMPO_ESPERA_SERVIDOR:
+                    Utilidades.SalirInicioSesionDesdeVentanaPrincipal(Window.GetWindow(this), this);
+                    break;
+            }
+        }
+
+        private void CrearVentanaLobby(CuentaSet _cuentaUsuario, string codigoPartida) 
         {
             JuegoYLobbyVentana lobbyUnirse = new JuegoYLobbyVentana(_cuentaUsuario, codigoPartida, false);
-            lobbyUnirse.Show();
+            Constantes respuesta = lobbyUnirse.InicializarPaginas();
+            switch (respuesta)
+            {
+                case Constantes.OPERACION_EXITOSA:
+                    MostrarVentanaLobby(lobbyUnirse);
+                    break;
+                case Constantes.ERROR_CONEXION_SERVIDOR:
+                    Utilidades.SalirInicioSesionDesdeVentanaPrincipal(Window.GetWindow(this), this);
+                    break;
+            }
+        }
 
+        private void MostrarVentanaLobby(JuegoYLobbyVentana lobbyUnirse)
+        {
+            if (lobbyUnirse.EntrarSistemaEnLinea())
+            {
+                MainWindow ventanaPrincipal = (MainWindow)Window.GetWindow(this);
+                ventanaPrincipal.EliminarProxyLineaAnterior();
+                Window.GetWindow(this).Close();
+                lobbyUnirse.Show();
+            }
         }
 
         private void ClickSalirConfigurarLobby(object sender, RoutedEventArgs e)

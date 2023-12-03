@@ -32,7 +32,7 @@
         </Style.Triggers>
     </Style>
 
-    <Style x:Key="estiloBtnExpulsar" TargetType="Button">
+    <Style x:Key="estiloBtnExpulsar" TargetType="Button" BasedOn="{StaticResource estiloBtnDeshabilitadoTablero}">
         <Setter Property="Height" Value="25"/>
         <Setter Property="Width" Value="55"/>
         <Setter Property="FontFamily" Value="{StaticResource FuentesTitulo}"/>
@@ -214,57 +214,6 @@
                     </Setter.Value>
                 </Setter>
             </Trigger>
-        </Style.Triggers>
-    </Style>
-
-    <Style x:Key="estiloDtCellEstadoInternet" TargetType="DataGridCell">
-        <Setter Property="ContentTemplate">
-            <Setter.Value>
-                <DataTemplate>
-                    <Grid Height="35" Width="35">
-                        <Ellipse Fill="#02703B"></Ellipse>
-                        <TextBlock Margin="0,0,0,2" VerticalAlignment="Center" HorizontalAlignment="Center" TextWrapping="Wrap" 
-                                                TextAlignment="Center" FontSize="10" Foreground="White" FontWeight="Bold" Text="En Linea"
-                                                FontFamily="{StaticResource FuentesTexto}"/>
-                    </Grid>
-                </DataTemplate>
-            </Setter.Value>
-        </Setter>
-        <Style.Triggers>
-            <DataTrigger Binding="{Binding Path=EnLinea}" Value="False">
-                <Setter Property="ContentTemplate">
-                    <Setter.Value>
-                        <DataTemplate>
-                            <Grid Height="35" Width="35">
-                                <Ellipse Fill="#B21928"></Ellipse>
-                                <TextBlock Margin="0,0,0,2" VerticalAlignment="Center" HorizontalAlignment="Center" TextWrapping="Wrap" 
-                                                                    TextAlignment="Center" FontSize="10" Foreground="White" FontWeight="Bold" Text="No En Linea"/>
-                            </Grid>
-                        </DataTemplate>
-                    </Setter.Value>
-                </Setter>
-            </DataTrigger>
-        </Style.Triggers>
-    </Style>
-
-    <Style x:Key="estiloDtCellRolPartida" TargetType="DataGridCell">
-        <Setter Property="ContentTemplate">
-            <Setter.Value>
-                <DataTemplate>
-                    <Button Style="{StaticResource estiloBtnHostPartida}">HOST</Button>
-                </DataTemplate>
-            </Setter.Value>
-        </Setter>
-        <Style.Triggers>
-            <DataTrigger Binding="{Binding Path=EsHost}" Value="False">
-                <Setter Property="ContentTemplate">
-                    <Setter.Value>
-                        <DataTemplate>
-                            <Button Style="{StaticResource estiloBtnExpulsar}">EXPULSAR</Button>
-                        </DataTemplate>
-                    </Setter.Value>
-                </Setter>
-            </DataTrigger>
         </Style.Triggers>
     </Style>
 
