@@ -217,7 +217,7 @@ namespace VistasSorrySliders
             MostrarInicioSesion(ventanaJuego);
         }
 
-        private static void MostrarInicioSesion(Window ventanaAnterior)
+        public static void MostrarInicioSesion(Window ventanaAnterior)
         {
             MainWindow ventana = new MainWindow();
             InicioSesionPagina inicio = new InicioSesionPagina();
@@ -225,6 +225,15 @@ namespace VistasSorrySliders
 
             ventana.Show();
             ventanaAnterior.Close();
+        }
+
+        public static void MostrarInicioSesion()
+        {
+            MainWindow ventana = new MainWindow();
+            InicioSesionPagina inicio = new InicioSesionPagina();
+            ventana.Content = inicio;
+
+            ventana.Show();
         }
     }
 }

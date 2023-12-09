@@ -83,9 +83,18 @@ namespace VistasSorrySliders
         }
         public void CerrarVentanaActual()
         {
-            EliminarContexto?.Invoke();
-            SalirCuentaRegistroPartidaBD();
-            IrMenuUsuario();
+            try
+            {
+                EliminarContexto?.Invoke();
+                SalirCuentaRegistroPartidaBD();
+                IrMenuUsuario();
+            }
+            catch (CommunicationException ex)
+            {
+                Logger log = new Logger(this.GetType());
+                log.LogError("Error de Comunicación con el Servidor", ex);
+                Utilidades.MostrarInicioSesion();
+            }
         }
         public void DesucribirseDeCerrarVentana()
         {
