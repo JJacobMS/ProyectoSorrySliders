@@ -90,7 +90,7 @@ namespace VistasSorrySliders
                     break;
                 case Constantes.ERROR_CONEXION_SERVIDOR:
                 case Constantes.ERROR_TIEMPO_ESPERA_SERVIDOR:
-                    Utilidades.SalirInicioSesionDesdeVentanaPrincipal(Window.GetWindow(this), this);
+                    Utilidades.SalirInicioSesionDesdeVentanaPrincipal(this);
                     break;
             }
         }
@@ -178,7 +178,7 @@ namespace VistasSorrySliders
                     break;
                 case Constantes.ERROR_CONEXION_SERVIDOR:
                 case Constantes.ERROR_TIEMPO_ESPERA_SERVIDOR:
-                    Utilidades.SalirInicioSesionDesdeVentanaPrincipal(Window.GetWindow(this), this);
+                    Utilidades.SalirInicioSesionDesdeVentanaPrincipal(this);
                     break;
             }
         }

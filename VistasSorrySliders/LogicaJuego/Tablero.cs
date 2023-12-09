@@ -288,7 +288,6 @@ namespace VistasSorrySliders.LogicaJuego
         {
             foreach (JugadorLanzamiento jugador in ListaJugadores)
             {
-                Logger log = new Logger(this.GetType());
                 jugador.CalcularPuntajePeonesTablero(ListaPuntuaciones, ListaPeonesTablero);
             }
             PasarPuntuacionesJuego?.Invoke(ListaJugadores);

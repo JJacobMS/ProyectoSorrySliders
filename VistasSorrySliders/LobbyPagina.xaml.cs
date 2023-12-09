@@ -200,7 +200,6 @@ namespace VistasSorrySliders
                 case Constantes.ERROR_CONEXION_SERVIDOR:
                     throw new CommunicationException();
             }
-            Console.WriteLine("EXCEPCION TIRADA");
             throw new EntitySqlException();
         }
 
@@ -238,8 +237,18 @@ namespace VistasSorrySliders
         
         private void IrMenuPrincipal()
         {
-            SalirLobbyServidor();
-            Window.GetWindow(this).Close();
+            try
+            {
+                SalirLobbyServidor();
+                Window.GetWindow(this).Close();
+                return;
+            }
+            catch (CommunicationException ex)
+            {
+                Logger log = new Logger(this.GetType());
+                log.LogError("Error de Comunicación con el Servidor", ex);
+            }
+            Utilidades.SalirHastaInicioSesionDesdeJuegoYLobbyVentana(this);
         }
 
         public void JugadorEntroPartida()
@@ -337,12 +346,38 @@ namespace VistasSorrySliders
         public void HostInicioPartida()
         {
             List<CuentaSet> cuentasJugadores = _cuentas.ToList();
-            Page paginaJuego = new JuegoLanzamientoPagina(cuentasJugadores, _partidaActual.CantidadJugadores, _partidaActual.CodigoPartida.ToString(), _cuentaUsuario, _juegoYLobbyVentana);
-            Page paginaChat = new JugadoresChatPagina(_cuentas, _cuentaUsuario, _partidaActual, _juegoYLobbyVentana);
-            _juegoYLobbyVentana.CambiarFrameLobby(paginaJuego);
-            _juegoYLobbyVentana.CambiarFrameListaAmigos(paginaChat);
+            JuegoLanzamientoPagina paginaJuego = new JuegoLanzamientoPagina(cuentasJugadores, _partidaActual.CantidadJugadores, _partidaActual.CodigoPartida.ToString(), _cuentaUsuario, _juegoYLobbyVentana);
+            JugadoresChatPagina paginaChat = new JugadoresChatPagina(_cuentas, _cuentaUsuario, _partidaActual, _juegoYLobbyVentana);
 
-            SalirLobbyServidor();
+            Constantes respuestaInicio = (paginaJuego.InicializarConexionYJuego() == Constantes.ERROR_CONEXION_SERVIDOR || 
+                paginaChat.InicializarConexionServidorYChat() == Constantes.ERROR_CONEXION_SERVIDOR) ? Constantes.ERROR_CONEXION_SERVIDOR : Constantes.OPERACION_EXITOSA;
+
+            switch (respuestaInicio)
+            {
+                case Constantes.OPERACION_EXITOSA:
+                    CambiarPaginasAJuego(paginaJuego, paginaChat);
+                    break;
+                case Constantes.ERROR_CONEXION_SERVIDOR:
+                    Utilidades.SalirHastaInicioSesionDesdeJuegoYLobbyVentana(this);
+                    break;
+            }
+        }
+
+        private void CambiarPaginasAJuego(Page paginaJuego, Page paginaChat)
+        {
+            try
+            {
+                SalirLobbyServidor();
+                _juegoYLobbyVentana.CambiarFrameLobby(paginaJuego);
+                _juegoYLobbyVentana.CambiarFrameListaAmigos(paginaChat);
+                return;
+            }
+            catch (CommunicationException ex)
+            {
+                Logger log = new Logger(this.GetType());
+                log.LogError("Error de Comunicación con el Servidor", ex);
+            }
+            Utilidades.SalirHastaInicioSesionDesdeJuegoYLobbyVentana(this);
         }
 
         private void SalirLobbyServidor()
@@ -352,6 +387,7 @@ namespace VistasSorrySliders
             {
                 _proxyLobby.SalirPartida(_codigoPartida);
                 _juegoYLobbyVentana.EliminarContexto -= SalirLobbyServidor;
+                return;
             }
             catch (CommunicationException ex)
             {
@@ -363,6 +399,7 @@ namespace VistasSorrySliders
                 Utilidades.MostrarUnMensajeError(Properties.Resources.msgErrorTiempoEsperaServidor);
                 log.LogWarn("Se agoto el tiempo de espera del servidor", ex);
             }
+            throw new CommunicationException();
         }
     }
 }

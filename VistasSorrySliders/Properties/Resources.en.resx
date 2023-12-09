@@ -369,6 +369,9 @@
   <data name="msgEliminarNotificacion" xml:space="preserve">
     <value>Notification has been removed</value>
   </data>
+  <data name="msgErroEnviarCorreo" xml:space="preserve">
+    <value>Error sending notification by email, please try again later</value>
+  </data>
   <data name="msgErrorAvatarDefault" xml:space="preserve">
     <value>Error loading default avatar image</value>
   </data>

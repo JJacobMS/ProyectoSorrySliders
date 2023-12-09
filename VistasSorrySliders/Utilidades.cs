@@ -91,7 +91,7 @@ namespace VistasSorrySliders
 
         public static byte[] GenerarImagenDefectoBytes()
         {
-            string rutaImagen = "pack://application:,,,/Recursos/avatarPredefinido.jpg";
+            string rutaImagen = Properties.Resources.uriAvatarPorDefecto;
             Logger log = new Logger(typeof(Utilidades));
             try
             {
@@ -155,24 +155,19 @@ namespace VistasSorrySliders
 
         public static void MostrarMensajesError(Constantes respuesta)
         {
-            InformacionVentana informacion;
             switch (respuesta)
             {
                 case Constantes.ERROR_CONEXION_BD:
-                    informacion = new InformacionVentana(Properties.Resources.msgErrorBaseDatos, true);
-                    informacion.Show();
+                    MostrarUnMensajeError(Properties.Resources.msgErrorBaseDatos);
                     break;
                 case Constantes.ERROR_CONSULTA:
-                    informacion = new InformacionVentana(Properties.Resources.msgErrorConsulta, true);
-                    informacion.Show();
+                    MostrarUnMensajeError(Properties.Resources.msgErrorConsulta);
                     break;
                 case Constantes.ERROR_CONEXION_SERVIDOR:
-                    informacion = new InformacionVentana(Properties.Resources.msgErrorConexion, true);
-                    informacion.Show();
+                    MostrarUnMensajeError(Properties.Resources.msgErrorConexion);
                     break;
                 case Constantes.ERROR_TIEMPO_ESPERA_SERVIDOR:
-                    informacion = new InformacionVentana(Properties.Resources.msgErrorTiempoEsperaServidor, true);
-                    informacion.Show();
+                    MostrarUnMensajeError(Properties.Resources.msgErrorTiempoEsperaServidor);
                     break;
             }
         }
@@ -200,15 +195,45 @@ namespace VistasSorrySliders
             informacion.Show();
         }
 
-        public static void SalirInicioSesionDesdeVentanaPrincipal(Window ventanaPrincipal, Page pagina)
+        public static void SalirInicioSesionDesdeVentanaPrincipal(Page pagina)
         {
-            MainWindow ventana = ventanaPrincipal as MainWindow;
-            if (ventana is MainWindow)
+            MainWindow ventanaPrincipal = Window.GetWindow(pagina) as MainWindow;
+            if (ventanaPrincipal is MainWindow)
             {
-                ventana.SalirSistema();
+                ventanaPrincipal.EliminarProxyLineaAnterior();
             }
+
+            MostrarInicioSesion(ventanaPrincipal);
+        }
+
+        public static void SalirHastaInicioSesionDesdeJuegoYLobbyVentana(Page pagina)
+        {
+            JuegoYLobbyVentana ventanaJuego = Window.GetWindow(pagina) as JuegoYLobbyVentana;
+            if (ventanaJuego is JuegoYLobbyVentana)
+            {
+                ventanaJuego.DesucribirseDeCerrarVentana();
+            }
+
+            MostrarInicioSesion(ventanaJuego);
+        }
+
+        public static void MostrarInicioSesion(Window ventanaAnterior)
+        {
+            MainWindow ventana = new MainWindow();
             InicioSesionPagina inicio = new InicioSesionPagina();
-            pagina.NavigationService.Navigate(inicio);
+            ventana.Content = inicio;
+
+            ventana.Show();
+            ventanaAnterior.Close();
+        }
+
+        public static void MostrarInicioSesion()
+        {
+            MainWindow ventana = new MainWindow();
+            InicioSesionPagina inicio = new InicioSesionPagina();
+            ventana.Content = inicio;
+
+            ventana.Show();
         }
     }
 }
