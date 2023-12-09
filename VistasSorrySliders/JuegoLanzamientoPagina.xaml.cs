@@ -33,9 +33,23 @@ namespace VistasSorrySliders
         private string _codigoPartida;
         private string _correoJugadorActual;
         private CuentaSet _cuentaUsuario;
+        private List<CuentaSet> _listaCuentas;
+        private JuegoPuntuacionesPagina _juegoPuntuacionPagina;
         public JuegoLanzamientoPagina(List<CuentaSet> listaCuentas, int numeroJugadores, string codigoPartida, 
             CuentaSet cuentaUsuario, JuegoYLobbyVentana ventana)
         {
+            InicializarJuegoLanzamiento(listaCuentas,  numeroJugadores,  codigoPartida, cuentaUsuario, ventana);
+        }
+
+        public JuegoLanzamientoPagina(List<CuentaSet> listaCuentas, int numeroJugadores, string codigoPartida, CuentaSet cuentaUsuario, JuegoYLobbyVentana ventana, JuegoPuntuacionesPagina juegoPuntuacionPagina)
+        {
+            _juegoPuntuacionPagina = juegoPuntuacionPagina;
+            InicializarJuegoLanzamiento(listaCuentas, numeroJugadores, codigoPartida, cuentaUsuario, ventana);
+        }
+
+        private void InicializarJuegoLanzamiento(List<CuentaSet> listaCuentas, int numeroJugadores, string codigoPartida, CuentaSet cuentaUsuario, JuegoYLobbyVentana ventana) 
+        {
+            _listaCuentas = listaCuentas;
             _juegoYLobbyVentana = ventana;
             _juegoYLobbyVentana.EliminarContexto += EliminarContextoJuegoLanzamiento;
             _juegoYLobbyVentana.ExpulsarJugador += JugadorSalioJuegoLanzamiento;
@@ -419,7 +433,15 @@ namespace VistasSorrySliders
             brdConteoPuntuaciones.Visibility = Visibility.Visible;
             await Task.Delay(3500);
             brdConteoPuntuaciones.Visibility = Visibility.Hidden;
-            _juegoYLobbyVentana.CambiarFrameLobby(new JuegoPuntuacionesPagina(jugadoresConPuntuaciones, _cuentaUsuario, _codigoPartida));
+            if (_juegoPuntuacionPagina == null)
+            {
+                _juegoYLobbyVentana.CambiarFrameLobby(new JuegoPuntuacionesPagina(jugadoresConPuntuaciones, _cuentaUsuario, _codigoPartida, _listaCuentas, _juegoYLobbyVentana));
+            }
+            else 
+            {
+                _juegoPuntuacionPagina.EmpezarJuegoPuntuacionNuevo(jugadoresConPuntuaciones);
+                _juegoYLobbyVentana.CambiarFrameLobby(_juegoPuntuacionPagina);
+            }
             _juegoYLobbyVentana.ExpulsarJugador -= JugadorSalioJuegoLanzamiento;
             _juegoYLobbyVentana.EliminarContexto -= EliminarContextoJuegoLanzamiento;
         }
