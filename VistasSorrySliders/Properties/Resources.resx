@@ -372,6 +372,9 @@
   <data name="msgEliminarNotificacion" xml:space="preserve">
     <value>Se ha eliminado la notificación</value>
   </data>
+  <data name="msgErroEnviarCorreo" xml:space="preserve">
+    <value>Error al enviar la notificación por correo, inténtelo más tarde</value>
+  </data>
   <data name="msgErrorAvatarDefault" xml:space="preserve">
     <value>Error al cargar la imagen del avatar por defecto</value>
   </data>
@@ -581,6 +584,9 @@
   </data>
   <data name="txtBlockUnirsePartida" xml:space="preserve">
     <value>UNIRSE A PARTIDA</value>
+  </data>
+  <data name="uriAvatarPorDefecto" xml:space="preserve">
+    <value>pack://application:,,,/Recursos/avatarPredefinido.jpg</value>
   </data>
   <data name="uriAvatarPredefinido" xml:space="preserve">
     <value>pack://application:,,,/Recursos/avatarPredefinido.jpg</value>

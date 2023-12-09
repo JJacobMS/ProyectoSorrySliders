@@ -88,8 +88,6 @@ namespace VistasSorrySliders
             }
             switch (resultado)
             {
-                case Constantes.OPERACION_EXITOSA:
-                    return;
                 case Constantes.OPERACION_EXITOSA_VACIA:
                     Utilidades.MostrarUnMensajeError(Properties.Resources.msgDatosCuentaVacia);
                     break;
@@ -153,7 +151,7 @@ namespace VistasSorrySliders
                     this.NavigationService.Navigate(tablero);
                     break;
                 case Constantes.ERROR_CONEXION_SERVIDOR:
-                    Utilidades.SalirInicioSesionDesdeVentanaPrincipal(Window.GetWindow(this), this);
+                    Utilidades.SalirInicioSesionDesdeVentanaPrincipal(this);
                     break;
             }
         }

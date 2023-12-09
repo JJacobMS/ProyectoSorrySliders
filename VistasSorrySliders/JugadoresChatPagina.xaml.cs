@@ -41,8 +41,22 @@ namespace VistasSorrySliders
             _juegoYLobbyVentana = ventana;
             _juegoYLobbyVentana.EliminarContexto += RemoverCallbacks;
 
-            IngresarCallbacks();
+        }
+
+        public Constantes InicializarConexionServidorYChat()
+        {
+            Logger log = new Logger(this.GetType());
+            try
+            {
+                IngresarCallbacks();
+            }
+            catch (CommunicationException ex)
+            {
+                log.LogError("Error de Comunicación con el Servidor", ex);
+                return Constantes.ERROR_CONEXION_SERVIDOR;
+            }
             CargarJugadores();
+            return Constantes.OPERACION_EXITOSA;
         }
 
         private void TextChangedTamañoChat(object sender, TextChangedEventArgs e)
@@ -84,16 +98,19 @@ namespace VistasSorrySliders
                 ChatClient proxyChat = new ChatClient(contextoCallback);
                 _proxyChat = proxyChat;
                 _proxyChat.IngresarAlChat(codigoPartida, _cuentaUsuario.CorreoElectronico);
+                return;
             }
             catch (CommunicationException ex)
             {
+                Utilidades.MostrarUnMensajeError(Properties.Resources.msgErrorConexion);
                 log.LogError("Error de Comunicación con el Servidor", ex);
             }
             catch (TimeoutException ex)
             {
+                Utilidades.MostrarUnMensajeError(Properties.Resources.msgErrorTiempoEsperaServidor);
                 log.LogWarn("Se agoto el tiempo de espera del servidor", ex);
             }
-
+            throw new CommunicationException();
         }
 
         private void ClickEnviarMensaje(object sender, RoutedEventArgs e)

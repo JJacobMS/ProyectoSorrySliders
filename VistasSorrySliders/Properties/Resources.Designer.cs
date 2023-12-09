@@ -826,6 +826,15 @@ namespace VistasSorrySliders.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Error al enviar la notificación por correo, inténtelo más tarde.
+        /// </summary>
+        public static string msgErroEnviarCorreo {
+            get {
+                return ResourceManager.GetString("msgErroEnviarCorreo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Error al cargar la imagen del avatar por defecto.
         /// </summary>
         public static string msgErrorAvatarDefault {
@@ -1452,6 +1461,15 @@ namespace VistasSorrySliders.Properties {
         public static string txtBlockUnirsePartida {
             get {
                 return ResourceManager.GetString("txtBlockUnirsePartida", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a pack://application:,,,/Recursos/avatarPredefinido.jpg.
+        /// </summary>
+        public static string uriAvatarPorDefecto {
+            get {
+                return ResourceManager.GetString("uriAvatarPorDefecto", resourceCulture);
             }
         }
         

@@ -87,6 +87,10 @@ namespace VistasSorrySliders
             SalirCuentaRegistroPartidaBD();
             IrMenuUsuario();
         }
+        public void DesucribirseDeCerrarVentana()
+        {
+            Closing -= CerrarVentana;
+        }
         public void CambiarFrameLobby(Page paginaNueva)
         {
             frameLobby.Content = paginaNueva;
@@ -98,7 +102,6 @@ namespace VistasSorrySliders
         }
         public void ExpulsarJugadorJuego(string correoElectronico)
         {
-            
             ExpulsarJugador?.Invoke(correoElectronico);
         }
 

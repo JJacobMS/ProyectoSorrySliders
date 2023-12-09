@@ -46,7 +46,6 @@ namespace VistasSorrySliders
             InitializeComponent();
             ColocarNombres(listaCuentas);
             MostrarTableroElementosCorrespondientes();
-            InicializarProxyJuegoLanzamiento();
 
             _etiquetasJugadoresLanzamientoPotencia = new Dictionary<Direccion, TextBlock>
             {
@@ -82,7 +81,24 @@ namespace VistasSorrySliders
             _tablero.PasarPuntuacionesJuego += PasarPuntuaciones;
 
             ColocarPiezasJugadores();
+        }
+
+        public Constantes InicializarConexionYJuego()
+        {
+            Logger log = new Logger(this.GetType());
+            try
+            {
+                InicializarProxyJuegoLanzamiento();
+            }
+            catch (CommunicationException ex)
+            {
+                log.LogError("Error de Comunicación con el Servidor", ex);
+                return Constantes.ERROR_CONEXION_SERVIDOR;
+            }
+
             _tablero.IniciarTurno();
+            return Constantes.OPERACION_EXITOSA;
+
         }
 
         private void InicializarProxyJuegoLanzamiento()
@@ -105,15 +121,11 @@ namespace VistasSorrySliders
                 Utilidades.MostrarUnMensajeError(Properties.Resources.msgErrorTiempoEsperaServidor);
                 log.LogWarn("Se agoto el tiempo de espera del servidor", ex);
             }
-            catch (Exception ex)
-            {
-                Utilidades.MostrarUnMensajeError(Properties.Resources.msgErrorConexion);
-                log.LogFatal("Ha ocurrido un error inesperado", ex);
-            }
 
-            Window.GetWindow(this).Close();
+            throw new CommunicationException();
         }
 
+        
         private void MostrarTableroElementosCorrespondientes()
         {
             ImageBrush fondo = new ImageBrush();
@@ -323,15 +335,19 @@ namespace VistasSorrySliders
             try
             {
                 _proxyLanzamiento.NotificarFinalizarLanzamiento(_codigoPartida, _correoJugadorActual);
+                return;
             }
             catch (CommunicationException ex)
             {
+                Utilidades.MostrarUnMensajeError(Properties.Resources.msgErrorConexion);
                 log.LogError("Error de Comunicación con el Servidor", ex);
             }
             catch (TimeoutException ex)
             {
+                Utilidades.MostrarUnMensajeError(Properties.Resources.msgErrorTiempoEsperaServidor);
                 log.LogWarn("Se agoto el tiempo de espera del servidor", ex);
             }
+            Utilidades.SalirHastaInicioSesionDesdeJuegoYLobbyVentana(this);
         }
 
         public void JugadorTiroDado(int numeroDado)
@@ -345,15 +361,19 @@ namespace VistasSorrySliders
             try
             {
                 _proxyLanzamiento.NotificarLanzamientoDado(_codigoPartida, _correoJugadorActual, numeroDado);
+                return;
             }
             catch (CommunicationException ex)
             {
+                Utilidades.MostrarUnMensajeError(Properties.Resources.msgErrorConexion);
                 log.LogError("Error de Comunicación con el Servidor", ex);
             }
             catch (TimeoutException ex)
             {
+                Utilidades.MostrarUnMensajeError(Properties.Resources.msgErrorTiempoEsperaServidor);
                 log.LogWarn("Se agoto el tiempo de espera del servidor", ex);
             }
+            Utilidades.SalirHastaInicioSesionDesdeJuegoYLobbyVentana(this);
         }
 
         public void JugadorDetuvoLinea(double posicionX, double posicionY)
@@ -367,15 +387,19 @@ namespace VistasSorrySliders
             try
             {
                 _proxyLanzamiento.NotificarLanzamientoLinea(_codigoPartida, _correoJugadorActual, posicionX, posicionY);
+                return;
             }
             catch (CommunicationException ex)
             {
+                Utilidades.MostrarUnMensajeError(Properties.Resources.msgErrorConexion);
                 log.LogError("Error de Comunicación con el Servidor", ex);
             }
             catch (TimeoutException ex)
             {
+                Utilidades.MostrarUnMensajeError(Properties.Resources.msgErrorTiempoEsperaServidor);
                 log.LogWarn("Se agoto el tiempo de espera del servidor", ex);
             }
+            Utilidades.SalirHastaInicioSesionDesdeJuegoYLobbyVentana(this);
         }
 
         public void JugadoresListosParaSiguienteTurno()
@@ -409,7 +433,7 @@ namespace VistasSorrySliders
             }
             catch (TimeoutException ex)
             {
-                Utilidades.MostrarUnMensajeError(Properties.Resources.msgErrorTiempoEsperaServidor);
+                Utilidades.MostrarUnMensajeError(Properties.Resources.msgErrorConexion);
                 log.LogWarn("Se agoto el tiempo de espera del servidor", ex);
             }
         }
