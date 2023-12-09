@@ -50,8 +50,10 @@ namespace VistasSorrySliders
         private List<JugadorGanador> _listaPuntuaciones;
         private List<(string, string, int)> _listaDesordenada;
         private CuentaSet _cuentaUsuario;
+        private List<CuentaSet> _listaCuentas;
+        private JuegoYLobbyVentana _juegoYLobbyVentana;
 
-        public JuegoPuntuacionesPagina(List<JugadorLanzamiento> jugadores, CuentaSet cuentaUsuario, string codigoPartida)
+        public JuegoPuntuacionesPagina(List<JugadorLanzamiento> jugadores, CuentaSet cuentaUsuario, string codigoPartida, List<CuentaSet> listaCuentas, JuegoYLobbyVentana juegoYLobbyVentana)
         {
             InitializeComponent();
 
@@ -64,6 +66,8 @@ namespace VistasSorrySliders
             _listaBotonAmarillo = new List<Button> { btnPuntuacionAmarillo1, btnPuntuacionAmarillo2, btnPuntuacionAmarillo3, btnPuntuacionAmarillo4 };
             _listaBotonVerde = new List<Button> { btnPuntuacionVerde1, btnPuntuacionVerde2, btnPuntuacionVerde3, btnPuntuacionVerde4 };
             _listaBotonAzul = new List<Button> { btnPuntuacionAzul1, btnPuntuacionAzul2, btnPuntuacionAzul3, btnPuntuacionAzul4 };
+            _listaCuentas = listaCuentas;
+            _juegoYLobbyVentana = juegoYLobbyVentana;
             _listaTurnos = new List<JugadorTurno>();
             _codigoPartida = codigoPartida;
             _cuentaUsuario = cuentaUsuario;
@@ -284,12 +288,14 @@ namespace VistasSorrySliders
 
         private void AsignarTurno()
         {
+            bool estaConectado = true;
             for (int i = 0; i < _jugadoresLanzamiento.Count(); i++)
             {
                 JugadorTurno jugadorTurno = new JugadorTurno()
                 {
                     CorreoJugador = _jugadoresLanzamiento[i].CorreElectronico,
-                    TurnoJugador = i
+                    TurnoJugador = i,
+                    EstaConectado = estaConectado
                 };
                 _listaTurnos.Add(jugadorTurno);
                 if (jugadorTurno.CorreoJugador == _correoUsuario) 
@@ -343,7 +349,7 @@ namespace VistasSorrySliders
             btnPuntuacionAzul1.Content = 7;//puntuaciones[0];
             btnPuntuacionAzul2.Content = 7;// puntuaciones[1];
             btnPuntuacionAzul3.Content = 7;// puntuaciones[2];
-            btnPuntuacionAzul4.Content = 6;// puntuaciones[3];
+            btnPuntuacionAzul4.Content = 0;// puntuaciones[3];
         }
 
         private void IngresarPuntuacionesRojo(List<int> puntuaciones)
@@ -354,10 +360,10 @@ namespace VistasSorrySliders
                 _listaBotonRojo[i].Content = puntuaciones[i];
             }
             */
-            btnPuntuacionRojo1.Content = 3;// puntuaciones[0];
-            btnPuntuacionRojo2.Content = 3;// puntuaciones[1];
-            btnPuntuacionRojo3.Content = 3;// puntuaciones[2];
-            btnPuntuacionRojo4.Content = 3;// puntuaciones[3];
+            btnPuntuacionRojo1.Content = 7;// puntuaciones[0];
+            btnPuntuacionRojo2.Content = 7;// puntuaciones[1];
+            btnPuntuacionRojo3.Content = 7;// puntuaciones[2];
+            btnPuntuacionRojo4.Content = 6;// puntuaciones[3];
         }
         private void IngresarPuntuacionesVerde(List<int> puntuaciones)
         {
@@ -655,6 +661,18 @@ namespace VistasSorrySliders
                     ActivarEllipses();
                 }
             }
+            else
+            {
+                foreach (JugadorTurno jugador in _listaTurnos)
+                {
+                    Console.WriteLine("ESTA CONECTADO " + jugador.CorreoJugador + jugador.EstaConectado);
+                    if (jugador.TurnoJugador == turnoActual && jugador.EstaConectado == false) 
+                    {
+                        Console.WriteLine("ESTA DESCONECTADO "+ jugador.CorreoJugador);
+                        CambiarTurno();
+                    }
+                }
+            }
         }
 
         private void ActivarDados()
@@ -692,18 +710,15 @@ namespace VistasSorrySliders
         }
 
         
-        //Se llama cada qjue empieza ora vez est a pantalla
-        private void EmpezarJuegoPuntuacionNuevo() 
+        public void EmpezarJuegoPuntuacionNuevo(List<JugadorLanzamiento> jugadores) 
         {
-            //InicializarTablero(); //NO TODOS
-            //Llamar a los labels de puntuacion, **esto solo se hace al empezar**
-            //Ingresar puntuaciones  **esto solo se hace al empezar**
-            //Activar Dados y ellipses
             _turnoActualJuego = 0;
+            _jugadoresLanzamiento = jugadores;
+            InicializarLabels();
+            InicializarDados();
             EmpezarTurno(_turnoActualJuego);
         }
 
-        //Lista de turnos//, asignarle uno a cada jugador, si falla el callback llamar a otro metodo callback que llame a todos y que quiten ese correo de us lista
 
         public void NotificarJugadorMovimiento(string nombrePeon, int puntosObtenidos)
         {
@@ -870,39 +885,42 @@ namespace VistasSorrySliders
             if (_turnoActualJuego > _listaTurnos.Count() - 1)
             {
                 _turnoActualJuego = 0;
-                Console.WriteLine("Ir a Lanzamiento");
-                EmpezarTurno(_turnoActualJuego);
+                CambiarPaginaLanzamiento();
+
+                //Console.WriteLine("Ir a Lanzamiento");
+                //EmpezarTurno(_turnoActualJuego); //Esto es para pruebas
             }
             else 
             {
-                //Comprobar que existe un jugador con ese turno o sumarle uno y volver a ocupar el metodo
+                InicializarLabelTurno();
                 EmpezarTurno(_turnoActualJuego);
             }
+        }
+        private void CambiarPaginaLanzamiento()
+        {
+            _juegoYLobbyVentana.CambiarFrameLobby(new JuegoLanzamientoPagina(_listaCuentas, _listaCuentas.Count, _codigoPartida, _cuentaUsuario, _juegoYLobbyVentana, this));
+
+        }
+        private void InicializarLabelTurno() 
+        {
+            //Obtener el jugador
+            lblTurnoJugador.Content = Properties.Resources.lblTurnoJugador + "";
         }
 
         public void EliminarTurnoJugador(string correoElectronico)
         {
-            JugadorTurno jugadorSalido = new JugadorTurno();
+            bool estaConectado = false;
             foreach (JugadorTurno jugadorTurno in _listaTurnos)
             {
                 if (jugadorTurno.CorreoJugador == correoElectronico)
                 {
-                    jugadorSalido = jugadorTurno;
-                    _listaTurnos.Remove(jugadorSalido);
-                }
-            }
-            foreach (JugadorTurno jugadorTurno in _listaTurnos)
-            {
-                if (jugadorTurno.TurnoJugador > jugadorSalido.TurnoJugador)
-                {
-                    jugadorTurno.TurnoJugador = jugadorTurno.TurnoJugador - 1;
+                    jugadorTurno.EstaConectado = estaConectado;
                 }
             }
         }
 
         private void NotificarCambiarPantalla()
         {
-            Console.WriteLine("NOTIFICARCAMBIARPAGINA");
             Logger log = new Logger(this.GetType());
             Constantes respuesta;
             try
@@ -933,8 +951,6 @@ namespace VistasSorrySliders
                 default:
                     break;
             }
-            //SI ES EXITOSO ELIMINO DICCIONARIOS y INVITADO eliminar invitados
-
         }
         private void EliminarDiccionarios() 
         {
@@ -971,15 +987,13 @@ namespace VistasSorrySliders
         }
 
         public void CambiarPagina()
-        {
-            Console.WriteLine("CAMBIARPAGINA");            
+        {            
             if (_listaPuntuaciones == null || _listaPuntuaciones.Count() == 0)
             {
                 ComprobarGanador();
             }
             else 
             {
-
                 EliminarDiccionarios();
             }
             _proxyJuegoPuntuacion.Close();
