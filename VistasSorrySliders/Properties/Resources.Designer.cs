@@ -1222,6 +1222,15 @@ namespace VistasSorrySliders.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Comenzando Partida....
+        /// </summary>
+        public static string txtBlockCambiandoPartida {
+            get {
+                return ResourceManager.GetString("txtBlockCambiandoPartida", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Código no válido.
         /// </summary>
         public static string txtBlockCodigoNoValido {

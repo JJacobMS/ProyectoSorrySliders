@@ -501,6 +501,9 @@
   <data name="txtBlockAjustes" xml:space="preserve">
     <value>AJUSTES</value>
   </data>
+  <data name="txtBlockCambiandoPartida" xml:space="preserve">
+    <value>Comenzando Partida...</value>
+  </data>
   <data name="txtBlockCodigoNoValido" xml:space="preserve">
     <value>Código no válido</value>
   </data>

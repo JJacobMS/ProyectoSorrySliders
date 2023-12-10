@@ -463,5 +463,8 @@
   <ItemGroup>
     <Resource Include="Recursos\ganadoresPartidaIcono.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Recursos\iniciarPartida.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
