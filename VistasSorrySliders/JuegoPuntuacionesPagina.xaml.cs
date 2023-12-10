@@ -892,7 +892,7 @@ namespace VistasSorrySliders
                 //CambiarPaginaLanzamiento();
 
                 Console.WriteLine("Ir a Lanzamiento");
-                EmpezarTurno(_turnoActualJuego); //Esto es para pruebas
+                //EmpezarTurno(_turnoActualJuego); //Esto es para pruebas
             }
             else 
             {
@@ -902,8 +902,18 @@ namespace VistasSorrySliders
         }
         private void CambiarPaginaLanzamiento()
         {
-            _juegoYLobbyVentana.CambiarFrameLobby(new JuegoLanzamientoPagina(_listaCuentas, _listaCuentas.Count, _codigoPartida, _cuentaUsuario, _juegoYLobbyVentana, this));
+            JuegoLanzamientoPagina paginaJuego = new JuegoLanzamientoPagina(_listaCuentas, _listaCuentas.Count, _codigoPartida, _cuentaUsuario, this, _juegoYLobbyVentana);
+            Constantes respuestaInicio = paginaJuego.InicializarConexionYJuego();
 
+            switch (respuestaInicio)
+            {
+                case Constantes.OPERACION_EXITOSA:
+                    _juegoYLobbyVentana.CambiarFrameLobby(paginaJuego);
+                    break;
+                case Constantes.ERROR_CONEXION_SERVIDOR:
+                    Utilidades.SalirHastaInicioSesionDesdeJuegoYLobbyVentana(this);
+                    break;
+            }
         }
         private void InicializarLabelTurno() 
         {
@@ -1087,7 +1097,7 @@ namespace VistasSorrySliders
 
         public void CambiarPagina()
         {            
-            if (_listaPuntuaciones == null || _listaPuntuaciones.Count() == 0)
+            if (_listaPuntuaciones == null || _listaPuntuaciones.Count == 0)
             {
                 ComprobarGanador();
             }
@@ -1096,14 +1106,8 @@ namespace VistasSorrySliders
                 EliminarDiccionarios();
             }
             _proxyJuegoPuntuacion.Close();
-            MainWindow ventanaNueva = new MainWindow();
-            TableroGanadoresPartidaPagina paginaGanadores = new TableroGanadoresPartidaPagina(_cuentaUsuario, _listaPuntuaciones);
-            ventanaNueva.Navigate(paginaGanadores);
-            ventanaNueva.Show();
-            JuegoYLobbyVentana ventanaActual = (JuegoYLobbyVentana)Window.GetWindow(this);
-            ventanaActual.Closing -= ventanaActual.CerrarVentana;
 
-            Window.GetWindow(this).Close();
+            _juegoYLobbyVentana.CambiarVentanaGanadores(_listaPuntuaciones);
         }
     }
 }

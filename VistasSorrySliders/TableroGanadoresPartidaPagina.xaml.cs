@@ -24,9 +24,11 @@ namespace VistasSorrySliders
     public partial class TableroGanadoresPartidaPagina : Page
     {
         private CuentaSet _cuenta;
+        private bool _esInvitado;
         public ObservableCollection<JugadorGanador> ListaGanadores { get; set; }
-        public TableroGanadoresPartidaPagina(CuentaSet cuenta, List<JugadorGanador> listaGanadores)
+        public TableroGanadoresPartidaPagina(CuentaSet cuenta, List<JugadorGanador> listaGanadores, bool esInvitado)
         {
+            _esInvitado = esInvitado;
             _cuenta = cuenta;
             InitializeComponent();
             AgregarGanadores(listaGanadores);
@@ -43,8 +45,16 @@ namespace VistasSorrySliders
 
         private void ClickSalirMenuPrincipal(object sender, RoutedEventArgs e)
         {
-            MenuPrincipalPagina menu = new MenuPrincipalPagina(_cuenta);
-            this.NavigationService.Navigate(menu);
+            if (_esInvitado)
+            {
+                InicioSesionPagina inicio = new InicioSesionPagina();
+                this.NavigationService.Navigate(inicio);
+            }
+            else
+            {
+                MenuPrincipalPagina menu = new MenuPrincipalPagina(_cuenta);
+                this.NavigationService.Navigate(menu);
+            }
         }
     }
 }

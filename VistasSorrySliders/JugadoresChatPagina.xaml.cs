@@ -216,14 +216,14 @@ namespace VistasSorrySliders
             {
                 _juegoYLobbyVentana.ExpulsarJugadorJuego(correoElectronico);
                 NotificarExpulsionJuego(correoElectronico);
-                MostrarAvisoJugadorSalioJuego(correoElectronico, true);
+                _ = MostrarAvisoJugadorSalioJuego(correoElectronico, true);
             }
         }
 
         public void JugadorSalioListaJugadores(string correoElectronico)
         {
             NotificarExpulsionJuego(correoElectronico);
-            MostrarAvisoJugadorSalioJuego(correoElectronico, false);
+            _ = MostrarAvisoJugadorSalioJuego(correoElectronico, false);
         }
 
         private void NotificarExpulsionJuego(string correoElectronico)
@@ -240,7 +240,7 @@ namespace VistasSorrySliders
             }
         }
 
-        private async void MostrarAvisoJugadorSalioJuego(string correoJugador, bool esBaneo)
+        private async Task MostrarAvisoJugadorSalioJuego(string correoJugador, bool esBaneo)
         {
             string nicknameJugador = DevolverNicknameDelCorreo(correoJugador);
             string mensaje;
@@ -260,7 +260,8 @@ namespace VistasSorrySliders
 
         private string DevolverNicknameDelCorreo(string correo)
         {
-            JugadorLista jugadorLista = _jugadoresListas.Where(jugador => jugador.CorreoElectronico.Equals(correo)).FirstOrDefault();
+            JugadorLista jugadorLista = _jugadoresListas.FirstOrDefault(jugador => jugador.CorreoElectronico.Equals(correo));
+            if (jugadorLista == null) { return ""; }
             return jugadorLista.Nickname;
         }
     }

@@ -275,13 +275,10 @@ namespace VistasSorrySliders
                 {
                     DataContext = cuenta
                 };
-                foreach (CuentaSet jugadorBaneado in jugadoresBaneados)
+
+                if (jugadoresBaneados.Any(jugadorBaneado => jugadorBaneado.CorreoElectronico.Equals(cuenta.CorreoElectronico)))
                 {
-                    Console.WriteLine(cuenta.CorreoElectronico);
-                    if (jugadorBaneado.CorreoElectronico.Equals(cuenta.CorreoElectronico))
-                    {
-                        lstBoxItemCuenta.IsEnabled = false;
-                    }
+                    lstBoxItemCuenta.IsEnabled = false;
                 }
                 
                 lstBoxJugadores.Items.Add(lstBoxItemCuenta);
@@ -398,6 +395,16 @@ namespace VistasSorrySliders
             {
                 txtBoxCorreoInvitacion.Text = txtBoxCorreoInvitacion.Text.Substring(0, tamañoMaximoCorreo);
                 txtBoxCorreoInvitacion.SelectionStart = txtBoxCorreoInvitacion.Text.Length;
+            }
+        }
+
+        private void TextChangedTamanoBuscador(object sender, TextChangedEventArgs e)
+        {
+            int tamañoMaximoCorreo = 100;
+            if (txtBoxBuscadorJugadores.Text.Length > tamañoMaximoCorreo)
+            {
+                txtBoxBuscadorJugadores.Text = txtBoxBuscadorJugadores.Text.Substring(0, tamañoMaximoCorreo);
+                txtBoxBuscadorJugadores.SelectionStart = txtBoxBuscadorJugadores.Text.Length;
             }
         }
     }

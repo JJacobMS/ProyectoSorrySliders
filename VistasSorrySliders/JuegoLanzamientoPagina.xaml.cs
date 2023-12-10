@@ -35,13 +35,12 @@ namespace VistasSorrySliders
         private CuentaSet _cuentaUsuario;
         private List<CuentaSet> _listaCuentas;
         private JuegoPuntuacionesPagina _juegoPuntuacionPagina;
-        public JuegoLanzamientoPagina(List<CuentaSet> listaCuentas, int numeroJugadores, string codigoPartida, 
-            CuentaSet cuentaUsuario, JuegoYLobbyVentana ventana)
+        public JuegoLanzamientoPagina(List<CuentaSet> listaCuentas, int numeroJugadores, string codigoPartida,CuentaSet cuentaUsuario, JuegoYLobbyVentana ventana)
         {
             InicializarJuegoLanzamiento(listaCuentas,  numeroJugadores,  codigoPartida, cuentaUsuario, ventana);
         }
 
-        public JuegoLanzamientoPagina(List<CuentaSet> listaCuentas, int numeroJugadores, string codigoPartida, CuentaSet cuentaUsuario, JuegoYLobbyVentana ventana, JuegoPuntuacionesPagina juegoPuntuacionPagina)
+        public JuegoLanzamientoPagina(List<CuentaSet> listaCuentas, int numeroJugadores, string codigoPartida, CuentaSet cuentaUsuario, JuegoPuntuacionesPagina juegoPuntuacionPagina, JuegoYLobbyVentana ventana)
         {
             _juegoPuntuacionPagina = juegoPuntuacionPagina;
             InicializarJuegoLanzamiento(listaCuentas, numeroJugadores, codigoPartida, cuentaUsuario, ventana);
