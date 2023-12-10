@@ -56,7 +56,7 @@ namespace VistasSorrySliders
         public JuegoPuntuacionesPagina(List<JugadorLanzamiento> jugadores, CuentaSet cuentaUsuario, string codigoPartida, List<CuentaSet> listaCuentas, JuegoYLobbyVentana juegoYLobbyVentana)
         {
             InitializeComponent();
-            _juegoYLobbyVentana = juegoYLobbyVentana;
+            
 
             _listaEllipseRojo = new List<Ellipse> { llpPeonRojo1, llpPeonRojo2, llpPeonRojo3, llpPeonRojo4 };
             _listaEllipseAmarillo = new List<Ellipse> { llpPeonAmarillo1, llpPeonAmarillo2, llpPeonAmarillo3, llpPeonAmarillo4 };
@@ -68,6 +68,9 @@ namespace VistasSorrySliders
             _listaBotonVerde = new List<Button> { btnPuntuacionVerde1, btnPuntuacionVerde2, btnPuntuacionVerde3, btnPuntuacionVerde4 };
             _listaBotonAzul = new List<Button> { btnPuntuacionAzul1, btnPuntuacionAzul2, btnPuntuacionAzul3, btnPuntuacionAzul4 };
             _listaCuentas = listaCuentas;
+            _juegoYLobbyVentana = juegoYLobbyVentana;
+            _juegoYLobbyVentana.EliminarContexto += EliminarContextoJuegoPuntuacion;
+            _juegoYLobbyVentana.ExpulsarJugador += JugadorSalioJuegoPuntuacion;
             _listaTurnos = new List<JugadorTurno>();
             _codigoPartida = codigoPartida;
             _cuentaUsuario = cuentaUsuario;
@@ -295,7 +298,8 @@ namespace VistasSorrySliders
                 {
                     CorreoJugador = _jugadoresLanzamiento[i].CorreElectronico,
                     TurnoJugador = i,
-                    EstaConectado = estaConectado
+                    EstaConectado = estaConectado,
+                    Nickname = _jugadoresLanzamiento[i].Nickname
                 };
                 _listaTurnos.Add(jugadorTurno);
                 if (jugadorTurno.CorreoJugador == _correoUsuario) 
@@ -346,9 +350,9 @@ namespace VistasSorrySliders
                 _listaBotonAzul[i].Content = puntuaciones[i];
             }
             */
-            btnPuntuacionAzul1.Content = 7;//puntuaciones[0];
-            btnPuntuacionAzul2.Content = 7;// puntuaciones[1];
-            btnPuntuacionAzul3.Content = 7;// puntuaciones[2];
+            btnPuntuacionAzul1.Content = 1;//puntuaciones[0];
+            btnPuntuacionAzul2.Content = 1;// puntuaciones[1];
+            btnPuntuacionAzul3.Content = 1;// puntuaciones[2];
             btnPuntuacionAzul4.Content = 0;// puntuaciones[3];
         }
 
@@ -360,10 +364,10 @@ namespace VistasSorrySliders
                 _listaBotonRojo[i].Content = puntuaciones[i];
             }
             */
-            btnPuntuacionRojo1.Content = 7;// puntuaciones[0];
-            btnPuntuacionRojo2.Content = 7;// puntuaciones[1];
-            btnPuntuacionRojo3.Content = 7;// puntuaciones[2];
-            btnPuntuacionRojo4.Content = 6;// puntuaciones[3];
+            btnPuntuacionRojo1.Content = 1;// puntuaciones[0];
+            btnPuntuacionRojo2.Content = 1;// puntuaciones[1];
+            btnPuntuacionRojo3.Content = 1;// puntuaciones[2];
+            btnPuntuacionRojo4.Content = 1;// puntuaciones[3];
         }
         private void IngresarPuntuacionesVerde(List<int> puntuaciones)
         {
@@ -885,16 +889,16 @@ namespace VistasSorrySliders
             if (_turnoActualJuego > _listaTurnos.Count() - 1)
             {
                 _turnoActualJuego = 0;
-                CambiarPaginaLanzamiento();
+                //CambiarPaginaLanzamiento();
 
                 Console.WriteLine("Ir a Lanzamiento");
                 //EmpezarTurno(_turnoActualJuego); //Esto es para pruebas
             }
             else 
             {
-                InicializarLabelTurno();
                 EmpezarTurno(_turnoActualJuego);
             }
+            InicializarLabelTurno();
         }
         private void CambiarPaginaLanzamiento()
         {
@@ -913,8 +917,14 @@ namespace VistasSorrySliders
         }
         private void InicializarLabelTurno() 
         {
-            //Obtener el jugador
-            lblTurnoJugador.Content = Properties.Resources.lblTurnoJugador + "";
+            foreach (var jugadorTurno in _listaTurnos)
+            {
+                if (jugadorTurno.TurnoJugador == _turnoActualJuego) 
+                {
+                    lblTurnoJugador.Content = Properties.Resources.lblTurnoJugador + " "+ jugadorTurno.Nickname;
+
+                }
+            }
         }
 
         public void EliminarTurnoJugador(string correoElectronico)
@@ -927,7 +937,44 @@ namespace VistasSorrySliders
                     jugadorTurno.EstaConectado = estaConectado;
                 }
             }
+            VerificarNumeroJugadores();
+            VerificarTurnoSalido();
         }
+
+        private void VerificarNumeroJugadores() 
+        {
+            int contadorConectados = 0;
+            foreach (JugadorTurno jugadorTurno in _listaTurnos)
+            {
+                if (jugadorTurno.EstaConectado == true)
+                {
+                    contadorConectados = contadorConectados + 1;
+                }
+            }
+            if (contadorConectados == 1) 
+            {
+                SalirMenuPrincipal();
+            }
+        }
+
+        private void VerificarTurnoSalido() 
+        {
+            foreach (JugadorTurno jugadorTurno in _listaTurnos)
+            {
+                if (jugadorTurno.EstaConectado == false && jugadorTurno.TurnoJugador == _turnoActualJuego)
+                {
+                    CambiarTurno();
+                }
+            }
+        }
+
+        private void SalirMenuPrincipal() 
+        {
+            Utilidades.MostrarUnMensajeError(Properties.Resources.msgFaltaJugadores);
+
+            //Window.GetWindow(this).Close();
+        }
+
 
         private void NotificarCambiarPantalla()
         {
@@ -984,12 +1031,64 @@ namespace VistasSorrySliders
             switch (respuesta)
             {
                 case Constantes.ERROR_CONEXION_SERVIDOR:
-                    MessageBox.Show(Properties.Resources.msgErrorConexion);
+                    //MessageBox.Show(Properties.Resources.msgErrorConexion);
                     break;
                 case Constantes.OPERACION_EXITOSA:
                     break;
                 case Constantes.ERROR_TIEMPO_ESPERA_SERVIDOR:
-                    MessageBox.Show(Properties.Resources.msgErrorTiempoEsperaServidor);
+                    //MessageBox.Show(Properties.Resources.msgErrorTiempoEsperaServidor);
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        private void EliminarContextoJuegoPuntuacion() 
+        {
+            
+        }
+
+        private void JugadorSalioJuegoPuntuacion(string correoElectronicoSalido) 
+        {
+            Console.WriteLine("Expulsar a " +correoElectronicoSalido);
+            if (_correoUsuario == correoElectronicoSalido)
+            {
+
+            }
+            else 
+            {
+                NotificarEliminarJugadorServidor(correoElectronicoSalido);
+            }
+        }
+
+        private void NotificarEliminarJugadorServidor(string correoElectronicoSalido) 
+        {
+            Logger log = new Logger(this.GetType());
+            Constantes respuesta;
+            try
+            {
+                _proxyJuegoPuntuacion.EliminarJugador(_codigoPartida, correoElectronicoSalido);
+                respuesta = Constantes.OPERACION_EXITOSA;
+            }
+            catch (CommunicationException ex)
+            {
+                log.LogError("Error de Comunicación con el Servidor", ex);
+                respuesta = Constantes.ERROR_CONEXION_SERVIDOR;
+            }
+            catch (TimeoutException ex)
+            {
+                log.LogWarn("Se agoto el tiempo de espera del servidor", ex);
+                respuesta = Constantes.ERROR_TIEMPO_ESPERA_SERVIDOR;
+            }
+            switch (respuesta)
+            {
+                case Constantes.ERROR_CONEXION_SERVIDOR:
+                    //MessageBox.Show(Properties.Resources.msgErrorConexion);
+                    break;
+                case Constantes.OPERACION_EXITOSA:
+                    break;
+                case Constantes.ERROR_TIEMPO_ESPERA_SERVIDOR:
+                    //MessageBox.Show(Properties.Resources.msgErrorTiempoEsperaServidor);
                     break;
                 default:
                     break;
