@@ -28,19 +28,19 @@ namespace VistasSorrySliders.LogicaJuego
         public const int ANCHO_TABLERO = 615;
         public const int ALTO_TABLERO = 615;
 
-        public List<JugadorLanzamiento> ListaJugadores;
-        public List<PeonLanzamiento> ListaPeonesTablero;
-        public List<Rectangle> ListaObstaculos;
-        public List<Rectangle> ListaLugaresNoValidos;
-        public Dictionary<Ellipse, int> ListaPuntuaciones;
-        public Dictionary<Direccion, ImageBrush> ColorPorJugador;
-        public Dictionary<Direccion, Point> PosicionInicioJugadores;
-        public Dictionary<Direccion, Point> PosicionLanzamientoInicial;
-        public Dictionary<Direccion, (Point, Point)> PosicionDados;
-
         protected DispatcherTimer _temporizadorDado;
         protected DispatcherTimer _temporizadorLinea;
         protected DispatcherTimer _temporizadorPeonesMovimiento;
+
+        public List<JugadorLanzamiento> ListaJugadores { get; set; }
+        public List<PeonLanzamiento> ListaPeonesTablero { get; set; }
+        public List<Rectangle> ListaObstaculos { get; set; }
+        public List<Rectangle> ListaLugaresNoValidos { get; set; }
+        public Dictionary<Ellipse, int> ListaPuntuaciones { get; set; }
+        public Dictionary<Direccion, ImageBrush> ColorPorJugador { get; set; }
+        public Dictionary<Direccion, Point> PosicionInicioJugadores { get; set; }
+        public Dictionary<Direccion, Point> PosicionLanzamientoInicial { get; set; }
+        public Dictionary<Direccion, (Point, Point)> PosicionDados { get; set; }
 
         public event Action IniciarJuego;
         public event Action<int, int> MostrarPotenciaLanzamiento;

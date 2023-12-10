@@ -23,6 +23,7 @@
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
+
                     <Button x:Name="btnIniciarPartida" VerticalAlignment="Center" Grid.Column="0" Grid.Row="3" Width="225" 
                             Height="35" Content="{x:Static p:Resources.btnIniciarPartida}" Style="{StaticResource estiloBtnCrearCuenta}" Click="ClickIniciarPartida"/>
                     <Grid x:Name="grdJugadores" Grid.Column="0" Grid.Row="2" Height="190" Width="500" Margin="5">
@@ -113,8 +114,6 @@
                     </Border>
                 </Grid>
             </Viewbox>
-            
         </Border>
-
     </Grid>
 </Page>

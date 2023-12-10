@@ -211,7 +211,7 @@ namespace VistasSorrySliders
             JuegoYLobbyVentana ventanaJuego = Window.GetWindow(pagina) as JuegoYLobbyVentana;
             if (ventanaJuego is JuegoYLobbyVentana)
             {
-                ventanaJuego.DesucribirseDeCerrarVentana();
+                ventanaJuego.DesuscribirseDeCerrarVentana();
             }
 
             MostrarInicioSesion(ventanaJuego);

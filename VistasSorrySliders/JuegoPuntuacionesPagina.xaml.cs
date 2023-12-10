@@ -56,6 +56,7 @@ namespace VistasSorrySliders
         public JuegoPuntuacionesPagina(List<JugadorLanzamiento> jugadores, CuentaSet cuentaUsuario, string codigoPartida, List<CuentaSet> listaCuentas, JuegoYLobbyVentana juegoYLobbyVentana)
         {
             InitializeComponent();
+            _juegoYLobbyVentana = juegoYLobbyVentana;
 
             _listaEllipseRojo = new List<Ellipse> { llpPeonRojo1, llpPeonRojo2, llpPeonRojo3, llpPeonRojo4 };
             _listaEllipseAmarillo = new List<Ellipse> { llpPeonAmarillo1, llpPeonAmarillo2, llpPeonAmarillo3, llpPeonAmarillo4 };
@@ -67,7 +68,6 @@ namespace VistasSorrySliders
             _listaBotonVerde = new List<Button> { btnPuntuacionVerde1, btnPuntuacionVerde2, btnPuntuacionVerde3, btnPuntuacionVerde4 };
             _listaBotonAzul = new List<Button> { btnPuntuacionAzul1, btnPuntuacionAzul2, btnPuntuacionAzul3, btnPuntuacionAzul4 };
             _listaCuentas = listaCuentas;
-            _juegoYLobbyVentana = juegoYLobbyVentana;
             _listaTurnos = new List<JugadorTurno>();
             _codigoPartida = codigoPartida;
             _cuentaUsuario = cuentaUsuario;
@@ -887,7 +887,7 @@ namespace VistasSorrySliders
                 _turnoActualJuego = 0;
                 CambiarPaginaLanzamiento();
 
-                //Console.WriteLine("Ir a Lanzamiento");
+                Console.WriteLine("Ir a Lanzamiento");
                 //EmpezarTurno(_turnoActualJuego); //Esto es para pruebas
             }
             else 
@@ -898,8 +898,18 @@ namespace VistasSorrySliders
         }
         private void CambiarPaginaLanzamiento()
         {
-            _juegoYLobbyVentana.CambiarFrameLobby(new JuegoLanzamientoPagina(_listaCuentas, _listaCuentas.Count, _codigoPartida, _cuentaUsuario, _juegoYLobbyVentana, this));
+            JuegoLanzamientoPagina paginaJuego = new JuegoLanzamientoPagina(_listaCuentas, _listaCuentas.Count, _codigoPartida, _cuentaUsuario, this, _juegoYLobbyVentana);
+            Constantes respuestaInicio = paginaJuego.InicializarConexionYJuego();
 
+            switch (respuestaInicio)
+            {
+                case Constantes.OPERACION_EXITOSA:
+                    _juegoYLobbyVentana.CambiarFrameLobby(paginaJuego);
+                    break;
+                case Constantes.ERROR_CONEXION_SERVIDOR:
+                    Utilidades.SalirHastaInicioSesionDesdeJuegoYLobbyVentana(this);
+                    break;
+            }
         }
         private void InicializarLabelTurno() 
         {
@@ -988,7 +998,7 @@ namespace VistasSorrySliders
 
         public void CambiarPagina()
         {            
-            if (_listaPuntuaciones == null || _listaPuntuaciones.Count() == 0)
+            if (_listaPuntuaciones == null || _listaPuntuaciones.Count == 0)
             {
                 ComprobarGanador();
             }
@@ -997,13 +1007,8 @@ namespace VistasSorrySliders
                 EliminarDiccionarios();
             }
             _proxyJuegoPuntuacion.Close();
-            MainWindow ventanaNueva = new MainWindow();
-            TableroGanadoresPartidaPagina paginaGanadores = new TableroGanadoresPartidaPagina(_cuentaUsuario, _listaPuntuaciones);
-            ventanaNueva.Navigate(paginaGanadores);
-            ventanaNueva.Show();
-            JuegoYLobbyVentana ventanaActual = (JuegoYLobbyVentana)Window.GetWindow(this);
-            ventanaActual.Closing -= ventanaActual.CerrarVentana;
-            Window.GetWindow(this).Close();
+
+            _juegoYLobbyVentana.CambiarVentanaGanadores(_listaPuntuaciones);
         }
     }
 }

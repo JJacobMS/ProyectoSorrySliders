@@ -14,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using VistasSorrySliders.LogicaJuego;
 using VistasSorrySliders.ServicioSorrySliders;
 
 namespace VistasSorrySliders
@@ -77,7 +78,7 @@ namespace VistasSorrySliders
             return Constantes.OPERACION_EXITOSA;
         }
 
-        public void CerrarVentana(object sender, CancelEventArgs e) 
+        public void CerrarVentana(object sender, CancelEventArgs e)
         {
             CerrarVentanaActual();
         }
@@ -96,7 +97,41 @@ namespace VistasSorrySliders
                 Utilidades.MostrarInicioSesion();
             }
         }
-        public void DesucribirseDeCerrarVentana()
+
+        public void CambiarVentanaGanadores(List<JugadorGanador> listaPuntuaciones)
+        {
+            DesuscribirseDeCerrarVentana();
+            var ventanaPrincipal = new MainWindow(_cuenta.CorreoElectronico);
+            bool entrada = true;
+            if (_esInvitado)
+            {
+                SalirCuentaRegistroPartidaBD();
+                EliminarCuentaProvisionalInvitado(_cuenta.CorreoElectronico);
+            }
+            else
+            {
+                entrada = ventanaPrincipal.EntrarSistemaEnLineaMenu();
+            }
+
+            if(entrada)
+            {
+                IrVentanaGanadores(listaPuntuaciones, ventanaPrincipal);
+            }
+            else
+            {
+                Utilidades.MostrarInicioSesion(this);
+            }
+            
+        }
+        private void IrVentanaGanadores(List<JugadorGanador> listaPuntuaciones, MainWindow ventanaPrincipal)
+        {
+            TableroGanadoresPartidaPagina paginaGanadores = new TableroGanadoresPartidaPagina(_cuenta, listaPuntuaciones, _esInvitado);
+            ventanaPrincipal.Content = paginaGanadores;
+            ventanaPrincipal.Show();
+            Close();
+        }
+
+        public void DesuscribirseDeCerrarVentana()
         {
             Closing -= CerrarVentana;
         }
@@ -158,6 +193,7 @@ namespace VistasSorrySliders
         
         private void EliminarCuentaProvisionalInvitado(string correoProvisional)
         {
+            Logger log = new Logger(this.GetType());
             try
             {
                 UnirsePartidaClient proxyRecuperarJugadores = new UnirsePartidaClient();
@@ -165,11 +201,11 @@ namespace VistasSorrySliders
             }
             catch (CommunicationException ex)
             {
-                Console.WriteLine(ex);
+                log.LogError("Error de Comunicación con el Servidor", ex);
             }
             catch (TimeoutException ex)
             {
-                Console.WriteLine(ex);
+                log.LogWarn("Se agoto el tiempo de espera del servidor", ex);
             }
         }
 
