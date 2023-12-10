@@ -98,6 +98,11 @@ namespace VistasSorrySliders
             }
         }
 
+        public bool esInvitado() 
+        {
+            return _esInvitado;
+        }
+
         public void CambiarVentanaGanadores(List<JugadorGanador> listaPuntuaciones)
         {
             DesuscribirseDeCerrarVentana();
