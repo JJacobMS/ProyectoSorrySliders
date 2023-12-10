@@ -406,7 +406,7 @@
     <value>EXPELLED FROM THE GAME</value>
   </data>
   <data name="msgExpulsarJugador" xml:space="preserve">
-    <value>The game host has banned you from the game</value>
+    <value>You've been banned from the game</value>
   </data>
   <data name="msgFaltaJugadores" xml:space="preserve">
     <value>All other players have left the game. The game will end</value>

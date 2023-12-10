@@ -198,10 +198,7 @@ namespace VistasSorrySliders
         public static void SalirInicioSesionDesdeVentanaPrincipal(Page pagina)
         {
             MainWindow ventanaPrincipal = Window.GetWindow(pagina) as MainWindow;
-            if (ventanaPrincipal is MainWindow)
-            {
-                ventanaPrincipal.EliminarProxyLineaAnterior();
-            }
+            ventanaPrincipal?.EliminarProxyLineaAnterior();
 
             MostrarInicioSesion(ventanaPrincipal);
         }
@@ -209,10 +206,7 @@ namespace VistasSorrySliders
         public static void SalirHastaInicioSesionDesdeJuegoYLobbyVentana(Page pagina)
         {
             JuegoYLobbyVentana ventanaJuego = Window.GetWindow(pagina) as JuegoYLobbyVentana;
-            if (ventanaJuego is JuegoYLobbyVentana)
-            {
-                ventanaJuego.DesuscribirseDeCerrarVentana();
-            }
+            ventanaJuego?.DesuscribirseDeCerrarVentana();
 
             MostrarInicioSesion(ventanaJuego);
         }

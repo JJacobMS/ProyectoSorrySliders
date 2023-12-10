@@ -934,7 +934,7 @@ namespace VistasSorrySliders.Properties {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a El host del juego lo ha expulsado de la partida.
+        ///   Busca una cadena traducida similar a Ha expulsado de la partida.
         /// </summary>
         public static string msgExpulsarJugador {
             get {

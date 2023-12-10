@@ -15,9 +15,6 @@ namespace VistasSorrySliders.LogicaJuego
 {
     public class Tablero
     {
-        public int NumeroJugadores;
-        public int TurnoActual;
-
         public const int ESPACIO_COLOCAR_FICHAS = 40;
         public const int NUMERO_PEONES_POR_JUGADOR = 4;
         public const int TAMANO_PEON = 12;
@@ -41,6 +38,8 @@ namespace VistasSorrySliders.LogicaJuego
         public Dictionary<Direccion, Point> PosicionInicioJugadores { get; set; }
         public Dictionary<Direccion, Point> PosicionLanzamientoInicial { get; set; }
         public Dictionary<Direccion, (Point, Point)> PosicionDados { get; set; }
+        public int TurnoActual { get; set; }
+        public int NumeroJugadores { get; set; }
 
         public event Action IniciarJuego;
         public event Action<int, int> MostrarPotenciaLanzamiento;
