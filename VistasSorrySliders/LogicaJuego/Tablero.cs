@@ -79,6 +79,35 @@ namespace VistasSorrySliders.LogicaJuego
             _temporizadorPeonesMovimiento.Tick += IniciarMovimientoPeones;
             _temporizadorPeonesMovimiento.Interval = TimeSpan.FromMilliseconds(50);
         }
+
+        public void CambiarEstadosJugadores(List<JugadorTurno> jugadoresTurno)
+        {
+            foreach (JugadorTurno jugadorPuntuacion in jugadoresTurno)
+            {
+                foreach (JugadorLanzamiento jugadorLanzamiento in ListaJugadores)
+                {
+                    if (jugadorPuntuacion.CorreoJugador.Equals(jugadorLanzamiento.CorreElectronico))
+                    {
+                        jugadorLanzamiento.EstaConectado = jugadorPuntuacion.EstaConectado;
+                    }
+                }
+            }
+        }
+        public void ComprobarJugadoresRestantes()
+        {
+            int jugadoresEnLinea = 0;
+            foreach (JugadorLanzamiento jugador in ListaJugadores)
+            {
+                if (jugador.EstaConectado)
+                {
+                    jugadoresEnLinea++;
+                }
+            }
+            if (jugadoresEnLinea <= 1)
+            {
+                AcabarJuegoFaltaJugadores?.Invoke();
+            }
+        }
         private void AsignarLugaresJugadores(List<CuentaSet> listaJugadores)
         {
             switch (NumeroJugadores)

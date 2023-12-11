@@ -759,6 +759,9 @@
   <wsdl:message name="IUsuariosEnLinea_SalirDelSistema_InputMessage">
     <wsdl:part name="parameters" element="tns:SalirDelSistema" />
   </wsdl:message>
+  <wsdl:message name="IUsuariosEnLinea_SalirJuegoCompleto_InputMessage">
+    <wsdl:part name="parameters" element="tns:SalirJuegoCompleto" />
+  </wsdl:message>
   <wsdl:message name="IUsuariosEnLinea_ComprobarJugador_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:ComprobarJugador" />
   </wsdl:message>
@@ -1047,6 +1050,9 @@
     </wsdl:operation>
     <wsdl:operation name="SalirDelSistema">
       <wsdl:input wsaw:Action="http://tempuri.org/IUsuariosEnLinea/SalirDelSistema" message="tns:IUsuariosEnLinea_SalirDelSistema_InputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SalirJuegoCompleto">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUsuariosEnLinea/SalirJuegoCompleto" message="tns:IUsuariosEnLinea_SalirJuegoCompleto_InputMessage" />
     </wsdl:operation>
     <wsdl:operation name="ComprobarJugador">
       <wsdl:output wsaw:Action="http://tempuri.org/IUsuariosEnLinea/ComprobarJugador" message="tns:IUsuariosEnLinea_ComprobarJugador_OutputCallbackMessage" />
@@ -1606,6 +1612,12 @@
     </wsdl:operation>
     <wsdl:operation name="SalirDelSistema">
       <soap12:operation soapAction="http://tempuri.org/IUsuariosEnLinea/SalirDelSistema" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="SalirJuegoCompleto">
+      <soap12:operation soapAction="http://tempuri.org/IUsuariosEnLinea/SalirJuegoCompleto" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

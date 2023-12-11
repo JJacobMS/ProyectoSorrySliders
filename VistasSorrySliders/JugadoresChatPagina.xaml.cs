@@ -75,6 +75,7 @@ namespace VistasSorrySliders
             {
                 _proxyChat.SalirChatListaJugadores(_partida.CodigoPartida.ToString(), _cuentaUsuario.CorreoElectronico);
                 _juegoYLobbyVentana.EliminarContexto -= RemoverCallbacks;
+                return;
             }
             catch (CommunicationException ex)
             {
@@ -86,6 +87,7 @@ namespace VistasSorrySliders
                 Utilidades.MostrarUnMensajeError(Properties.Resources.msgErrorTiempoEsperaServidor);
                 log.LogWarn("Se agoto el tiempo de espera del servidor", ex);
             }
+            throw new CommunicationException();
         }
 
         private void IngresarCallbacks() 
@@ -212,7 +214,6 @@ namespace VistasSorrySliders
             }
             else
             {
-                _juegoYLobbyVentana.ExpulsarJugadorJuego(correoElectronico);
                 NotificarExpulsionJuego(correoElectronico);
                 _ = MostrarAvisoJugadorSalioJuego(correoElectronico, true);
             }

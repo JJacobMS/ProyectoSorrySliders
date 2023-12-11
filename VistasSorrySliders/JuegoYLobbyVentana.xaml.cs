@@ -30,8 +30,9 @@ namespace VistasSorrySliders
         private string _codigoPartida;
         private UsuariosEnLineaClient _proxyLinea;
 
+        public bool EsInvitado { get => _esInvitado; }
+
         public event Action EliminarContexto;
-        public event Action<string> ExpulsarJugador;
 
         public JuegoYLobbyVentana()
         {
@@ -87,6 +88,7 @@ namespace VistasSorrySliders
             try
             {
                 EliminarContexto?.Invoke();
+                EliminarDiccionariosRestantes();
                 SalirCuentaRegistroPartidaBD();
                 IrMenuUsuario();
             }
@@ -97,10 +99,23 @@ namespace VistasSorrySliders
                 Utilidades.MostrarInicioSesion();
             }
         }
-
-        public bool esInvitado() 
+        private void EliminarDiccionariosRestantes()
         {
-            return _esInvitado;
+            Logger log = new Logger(this.GetType());
+            try
+            {
+                _proxyLinea.SalirJuegoCompleto(_codigoPartida, _cuenta.CorreoElectronico);
+            }
+            catch (CommunicationException ex)
+            {
+                Utilidades.MostrarUnMensajeError(Properties.Resources.msgErrorConexion);
+                log.LogError("Error de Comunicación con el Servidor", ex);
+            }
+            catch (TimeoutException ex)
+            {
+                Utilidades.MostrarUnMensajeError(Properties.Resources.msgErrorConexion);
+                log.LogWarn("Se agoto el tiempo de espera del servidor", ex);
+            }
         }
 
         public void CambiarVentanaGanadores(List<JugadorGanador> listaPuntuaciones)
@@ -149,11 +164,6 @@ namespace VistasSorrySliders
             //_frame = pagina nueva;, ponerle a pagina nueva salirPartida();, y en ese metodo poner el RecargarListaJugadores
             frameListaAmigos.Content = paginaNueva;
         }
-        public void ExpulsarJugadorJuego(string correoElectronico)
-        {
-            ExpulsarJugador?.Invoke(correoElectronico);
-        }
-
         private void SalirCuentaRegistroPartidaBD()
         {
             Logger log = new Logger(this.GetType());

@@ -2283,6 +2283,12 @@ namespace VistasSorrySliders.ServicioSorrySliders {
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IUsuariosEnLinea/SalirDelSistema")]
         System.Threading.Tasks.Task SalirDelSistemaAsync(string jugadorCorreo);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IUsuariosEnLinea/SalirJuegoCompleto")]
+        void SalirJuegoCompleto(string uid, string correo);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IUsuariosEnLinea/SalirJuegoCompleto")]
+        System.Threading.Tasks.Task SalirJuegoCompletoAsync(string uid, string correo);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -2334,6 +2340,14 @@ namespace VistasSorrySliders.ServicioSorrySliders {
         
         public System.Threading.Tasks.Task SalirDelSistemaAsync(string jugadorCorreo) {
             return base.Channel.SalirDelSistemaAsync(jugadorCorreo);
+        }
+        
+        public void SalirJuegoCompleto(string uid, string correo) {
+            base.Channel.SalirJuegoCompleto(uid, correo);
+        }
+        
+        public System.Threading.Tasks.Task SalirJuegoCompletoAsync(string uid, string correo) {
+            return base.Channel.SalirJuegoCompletoAsync(uid, correo);
         }
     }
     
