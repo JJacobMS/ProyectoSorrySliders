@@ -305,7 +305,7 @@ namespace VistasSorrySliders
             
             for (int i = 0; i < puntuaciones.Count; i++)
             {
-                _listaBotonAzul[i].Content = puntuaciones[i];
+                _listaBotonAzul[i].Content = 10;//puntuaciones[i];
             }
         }
 
@@ -314,7 +314,7 @@ namespace VistasSorrySliders
             
             for (int i = 0; i < puntuaciones.Count; i++)
             {
-                _listaBotonRojo[i].Content = puntuaciones[i];
+                _listaBotonRojo[i].Content = 10;//puntuaciones[i];
             }
         }
         private void IngresarPuntuacionesVerde(List<int> puntuaciones)
@@ -322,7 +322,7 @@ namespace VistasSorrySliders
             
             for (int i = 0; i < puntuaciones.Count; i++)
             {
-                _listaBotonVerde[i].Content = puntuaciones[i];
+                _listaBotonVerde[i].Content = 10;// puntuaciones[i];
             }
         }
         private void IngresarPuntuacionesAmarillo(List<int> puntuaciones)
@@ -330,7 +330,7 @@ namespace VistasSorrySliders
             
             for (int i = 0; i < puntuaciones.Count; i++)
             {
-                _listaBotonAmarillo[i].Content = puntuaciones[i];
+                _listaBotonAmarillo[i].Content = 10;// puntuaciones[i];
             }
         }
         private void MouseLeftButtonDownMoverPeon(object sender, MouseButtonEventArgs e)
@@ -493,7 +493,7 @@ namespace VistasSorrySliders
                 {
                     GuardarGanador();
                 }
-                NotificarCambiarPantalla();
+                NotificarCambiarPantalla(_listaPuntuaciones);
             }
         }
 
@@ -846,12 +846,17 @@ namespace VistasSorrySliders
         {
             Window.GetWindow(this).Close();
         }
-        private void NotificarCambiarPantalla()
+        private void NotificarCambiarPantalla(List<JugadorGanador> jugadoresGanadores)
         {
+            foreach (var item in jugadoresGanadores)
+            {
+                Console.WriteLine(item.Nickname);
+                Console.WriteLine(item.Posicion);
+            }
             Logger log = new Logger(this.GetType());
             try
             {
-                _proxyJuegoPuntuacion.NotificarCambiarPagina(_codigoPartida);
+                _proxyJuegoPuntuacion.NotificarCambiarPagina(_codigoPartida, jugadoresGanadores.ToArray());
                 return;
             }
             catch (CommunicationException ex)
@@ -915,19 +920,17 @@ namespace VistasSorrySliders
             }
             Utilidades.SalirHastaInicioSesionDesdeJuegoYLobbyVentana(this);
         }
-        public void CambiarPagina()
-        {            
-            if (_listaPuntuaciones == null || _listaPuntuaciones.Count == 0)
+
+        public void CambiarPagina(JugadorGanador[] listaGanadores)
+        {
+            foreach (var item in listaGanadores)
             {
-                ComprobarGanador();
+                Console.WriteLine(item.Nickname);
+                Console.WriteLine(item.Posicion);
             }
-            else 
-            {
-                EliminarDiccionarios();
-            }
-            _proxyJuegoPuntuacion.Close();
-            _juegoYLobbyVentana.CambiarVentanaGanadores(_listaPuntuaciones);
+            _juegoYLobbyVentana.CambiarVentanaGanadores(listaGanadores.ToList());
         }
+
         //Pasar puntuaciones
     }
 }
