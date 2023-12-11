@@ -75,6 +75,7 @@ namespace VistasSorrySliders
             {
                 _proxyChat.SalirChatListaJugadores(_partida.CodigoPartida.ToString(), _cuentaUsuario.CorreoElectronico);
                 _juegoYLobbyVentana.EliminarContexto -= RemoverCallbacks;
+                return;
             }
             catch (CommunicationException ex)
             {
@@ -86,6 +87,7 @@ namespace VistasSorrySliders
                 Utilidades.MostrarUnMensajeError(Properties.Resources.msgErrorTiempoEsperaServidor);
                 log.LogWarn("Se agoto el tiempo de espera del servidor", ex);
             }
+            throw new CommunicationException();
         }
 
         private void IngresarCallbacks() 
@@ -165,19 +167,17 @@ namespace VistasSorrySliders
                     Nickname = _cuentas[i].Nickname,
                     CorreoElectronico = _cuentas[i].CorreoElectronico,
                     EstaExpulsado = false,
-                    EstaEnLinea = true
+                    EstaEnLinea = true,
+                    SePuedeExpulsar = true
                 };
-                if (i == 0)
+                if (_cuentas[i].CorreoElectronico.Equals(_cuentaUsuario.CorreoElectronico))
                 {
-                    jugador.EsHost = true;
+                    jugador.SePuedeExpulsar = false;
                 }
                 _jugadoresListas.Add(jugador);
             }
             dtGridJugadores.ItemsSource = _jugadoresListas;
-            if (!_cuentaUsuario.CorreoElectronico.Equals(_jugadoresListas[0].CorreoElectronico))
-            {
-                dtGridJugadores.IsEnabled = false;
-            }
+
         }
 
         private void PreviewMouseLeftButtonDownExpulsarJugadorJuego(object sender, MouseButtonEventArgs e)
@@ -209,12 +209,11 @@ namespace VistasSorrySliders
         {
             if (correoElectronico.Equals(_cuentaUsuario.CorreoElectronico))
             {
-                Window.GetWindow(this).Close();
+                Utilidades.SalirHastaInicioSesionDesdeJuegoYLobbyVentana(this);
                 Utilidades.MostrarMensajeInformacion(Properties.Resources.msgExpulsarJugador, Properties.Resources.msgExpulsadoTitulo);
             }
             else
             {
-                _juegoYLobbyVentana.ExpulsarJugadorJuego(correoElectronico);
                 NotificarExpulsionJuego(correoElectronico);
                 _ = MostrarAvisoJugadorSalioJuego(correoElectronico, true);
             }
@@ -234,6 +233,7 @@ namespace VistasSorrySliders
                 {
                     _jugadoresListas[i].EstaExpulsado = true;
                     _jugadoresListas[i].EstaEnLinea = false;
+                    _jugadoresListas[i].SePuedeExpulsar = false;
 
                     dtGridJugadores.Items.Refresh();
                 }

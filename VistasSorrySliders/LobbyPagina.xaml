@@ -8,6 +8,16 @@
       mc:Ignorable="d" 
       d:DesignHeight="576" d:DesignWidth="615"
       Title="LobbyPagina">
+
+    <Page.Resources>
+        <Style TargetType="TextBlock" x:Key="estiloTxtBlockPartidaComenzando">
+            <Setter Property="FontSize" Value="40"/>
+            <Setter Property="FontFamily" Value="{StaticResource FuentesTitulo}"/>
+            <Setter Property="TextWrapping" Value="Wrap"/>
+            <Setter Property="TextAlignment" Value="Center"/>
+            <Setter Property="Margin" Value="8"/>
+        </Style>
+    </Page.Resources>
     
     <Grid>
         <Grid.Background>
@@ -114,6 +124,19 @@
                     </Border>
                 </Grid>
             </Viewbox>
+        </Border>
+        <Border Height="250" Width="250" HorizontalAlignment="Center" VerticalAlignment="Center" BorderThickness="8" Name="brdComenzarPartida" Visibility="Hidden"
+                BorderBrush="#042437" CornerRadius="50">
+            <Border.Background>
+                <LinearGradientBrush>
+                    <GradientStop Offset="0.6" Color="#C4E2F4"/>
+                    <GradientStop Offset="1.4" Color="#E1F0F8"/>
+                </LinearGradientBrush>
+            </Border.Background>
+            <StackPanel VerticalAlignment="Center">
+                <TextBlock Style="{StaticResource estiloTxtBlockPartidaComenzando}" Text="{x:Static p:Resources.txtBlockCambiandoPartida}"></TextBlock>
+                <Image Source="/Recursos/iniciarPartida.png" Height="100" Width="100"/>
+            </StackPanel>
         </Border>
     </Grid>
 </Page>

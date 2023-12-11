@@ -415,5 +415,10 @@ namespace VistasSorrySliders.LogicaJuego
                 }
             }
         }
+
+        public (double, double) RecuperarPosicionPeon()
+        {
+            return (Canvas.GetLeft(Figura), Canvas.GetTop(Figura));
+        }
     }
 }

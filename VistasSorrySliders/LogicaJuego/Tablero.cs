@@ -15,9 +15,6 @@ namespace VistasSorrySliders.LogicaJuego
 {
     public class Tablero
     {
-        public int NumeroJugadores;
-        public int TurnoActual;
-
         public const int ESPACIO_COLOCAR_FICHAS = 40;
         public const int NUMERO_PEONES_POR_JUGADOR = 4;
         public const int TAMANO_PEON = 12;
@@ -41,6 +38,8 @@ namespace VistasSorrySliders.LogicaJuego
         public Dictionary<Direccion, Point> PosicionInicioJugadores { get; set; }
         public Dictionary<Direccion, Point> PosicionLanzamientoInicial { get; set; }
         public Dictionary<Direccion, (Point, Point)> PosicionDados { get; set; }
+        public int TurnoActual { get; set; }
+        public int NumeroJugadores { get; set; }
 
         public event Action IniciarJuego;
         public event Action<int, int> MostrarPotenciaLanzamiento;
@@ -79,6 +78,35 @@ namespace VistasSorrySliders.LogicaJuego
             _temporizadorPeonesMovimiento = new DispatcherTimer();
             _temporizadorPeonesMovimiento.Tick += IniciarMovimientoPeones;
             _temporizadorPeonesMovimiento.Interval = TimeSpan.FromMilliseconds(50);
+        }
+
+        public void CambiarEstadosJugadores(List<JugadorTurno> jugadoresTurno)
+        {
+            foreach (JugadorTurno jugadorPuntuacion in jugadoresTurno)
+            {
+                foreach (JugadorLanzamiento jugadorLanzamiento in ListaJugadores)
+                {
+                    if (jugadorPuntuacion.CorreoJugador.Equals(jugadorLanzamiento.CorreElectronico))
+                    {
+                        jugadorLanzamiento.EstaConectado = jugadorPuntuacion.EstaConectado;
+                    }
+                }
+            }
+        }
+        public void ComprobarJugadoresRestantes()
+        {
+            int jugadoresEnLinea = 0;
+            foreach (JugadorLanzamiento jugador in ListaJugadores)
+            {
+                if (jugador.EstaConectado)
+                {
+                    jugadoresEnLinea++;
+                }
+            }
+            if (jugadoresEnLinea <= 1)
+            {
+                AcabarJuegoFaltaJugadores?.Invoke();
+            }
         }
         private void AsignarLugaresJugadores(List<CuentaSet> listaJugadores)
         {
@@ -154,8 +182,56 @@ namespace VistasSorrySliders.LogicaJuego
         private void FinalizarTurno()
         {
             _temporizadorPeonesMovimiento.Stop();
-            Task.Delay(2500).Wait();
+            Task.Delay(2000).Wait();
             FinalizarMovimientoPeones?.Invoke();            
+        }
+
+        public PeonesTablero ObtenerPosicionPeonesActuales()
+        {
+            PeonesTablero peones = new PeonesTablero();
+            Dictionary<int, (double, double)[]> peonesActuales = new Dictionary<int, (double, double)[]>();
+            for (int i = 0; i < NumeroJugadores; i++)
+            {
+                (double, double)[] peonesJugador = new (double, double)[ListaJugadores[i].PeonTurnoActual];
+
+                for (int j = 0; j < ListaJugadores[i].PeonTurnoActual; j++)
+                {
+                    if (ListaPeonesTablero.Contains(ListaJugadores[i].PeonesLanzamiento[j]))
+                    {
+                        (double posicionX, double posicionY) = ListaJugadores[i].PeonesLanzamiento[j].RecuperarPosicionPeon();
+                        peonesJugador[j].Item1 = posicionX;
+                        peonesJugador[j].Item1 = posicionY;
+                    }
+                    else
+                    {
+                        peonesJugador[j].Item1 = -1;
+                        peonesJugador[j].Item1 = -1;
+                    }
+                }
+                peonesActuales.Add(i, peonesJugador);
+            }
+            peones.PeonesActualmenteTablero = peonesActuales;
+
+            return peones;
+        }
+        public void ModificarPosicionPeones(PeonesTablero peones)
+        {
+            Dictionary<int, (double, double)[]> peonesActuales = peones.PeonesActualmenteTablero;
+
+            for (int numeroJugador = 0; numeroJugador < peonesActuales.Count; numeroJugador++)
+            {
+                for (int numeroPeon = 0; numeroPeon < peonesActuales[numeroJugador].Length; numeroPeon++)
+                {
+                    (double posicionX, double posicionY) = peonesActuales[numeroJugador][numeroPeon];
+                    if (posicionX != -1 && posicionY != -1)
+                    {
+                        PeonLanzamiento peon = ListaJugadores[numeroJugador].PeonesLanzamiento[numeroPeon];
+                        Canvas.SetLeft(peon.Figura, posicionX);
+                        Canvas.SetTop(peon.Figura, posicionY);
+                    }
+                }
+            }
+            Console.WriteLine("SE MODIFICARON LAS POSICIONES");
         }
 
         public void DesconectarJugador(string correoElectronico)

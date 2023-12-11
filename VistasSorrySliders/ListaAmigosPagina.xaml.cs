@@ -276,7 +276,7 @@ namespace VistasSorrySliders
                     DataContext = cuenta
                 };
 
-                if (jugadoresBaneados.Any(jugadorBaneado => jugadorBaneado.CorreoElectronico.Equals(cuenta.CorreoElectronico)))
+                if (jugadoresBaneados.Exists(jugadorBaneado => jugadorBaneado.CorreoElectronico.Equals(cuenta.CorreoElectronico)))
                 {
                     lstBoxItemCuenta.IsEnabled = false;
                 }

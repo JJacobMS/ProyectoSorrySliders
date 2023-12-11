@@ -409,7 +409,7 @@
     <value>EXPULSADO DE LA PARTIDA</value>
   </data>
   <data name="msgExpulsarJugador" xml:space="preserve">
-    <value>El host del juego lo ha expulsado de la partida</value>
+    <value>Ha expulsado de la partida</value>
   </data>
   <data name="msgFaltaJugadores" xml:space="preserve">
     <value>Todos los demás jugadores se han salido de la partida. Se terminará la partida</value>
@@ -503,6 +503,9 @@
   </data>
   <data name="txtBlockAjustes" xml:space="preserve">
     <value>AJUSTES</value>
+  </data>
+  <data name="txtBlockCambiandoPartida" xml:space="preserve">
+    <value>Comenzando Partida...</value>
   </data>
   <data name="txtBlockCodigoNoValido" xml:space="preserve">
     <value>Código no válido</value>

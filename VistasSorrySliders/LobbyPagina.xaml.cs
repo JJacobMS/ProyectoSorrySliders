@@ -315,10 +315,26 @@ namespace VistasSorrySliders
         private void ClickIniciarPartida(object sender, RoutedEventArgs e)
         {
             //SWITCH -JACOB
-            if (_cuentas.Count() == _partidaActual.CantidadJugadores && txtBoxHost.Text == _cuentaUsuario.Nickname)
+            if (_cuentas.Length == _partidaActual.CantidadJugadores && txtBoxHost.Text == _cuentaUsuario.Nickname)
             {
                 btnIniciarPartida.IsEnabled = false;
+                _ = InicializarPartidaParaTodos();
+            }
+        }
+
+        private async Task InicializarPartidaParaTodos()
+        {
+            brdComenzarPartida.Visibility = Visibility.Visible;
+            await Task.Delay(3000);
+            JugadorSalioPartida();
+            btnIniciarPartida.IsEnabled = false;
+            if (_cuentas.Length == _partidaActual.CantidadJugadores && txtBoxHost.Text == _cuentaUsuario.Nickname)
+            {
                 CambiarPaginas();
+            }
+            else
+            {
+                brdComenzarPartida.Visibility = Visibility.Hidden;
             }
         }
 

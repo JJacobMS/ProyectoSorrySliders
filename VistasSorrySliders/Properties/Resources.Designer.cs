@@ -934,7 +934,7 @@ namespace VistasSorrySliders.Properties {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a El host del juego lo ha expulsado de la partida.
+        ///   Busca una cadena traducida similar a Ha expulsado de la partida.
         /// </summary>
         public static string msgExpulsarJugador {
             get {
@@ -1218,6 +1218,15 @@ namespace VistasSorrySliders.Properties {
         public static string txtBlockAjustes {
             get {
                 return ResourceManager.GetString("txtBlockAjustes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Comenzando Partida....
+        /// </summary>
+        public static string txtBlockCambiandoPartida {
+            get {
+                return ResourceManager.GetString("txtBlockCambiandoPartida", resourceCulture);
             }
         }
         

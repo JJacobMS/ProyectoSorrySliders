@@ -413,22 +413,22 @@ namespace VistasSorrySliders
 
         private bool EsCuentaBaneada(CuentaSet cuentaComparar)
         {
-            return _baneados?.Any(cuenta => cuenta.CorreoElectronico.Equals(cuentaComparar.CorreoElectronico)) ?? false;
+            return _baneados?.Exists(cuenta => cuenta.CorreoElectronico.Equals(cuentaComparar.CorreoElectronico)) ?? false;
         }
 
         private bool EsNotificacionCuentaBaneada(NotificacionSet notificacion)
         {
-            return _baneados?.Any(cuenta => cuenta.CorreoElectronico.Equals(notificacion.CorreoElectronicoRemitente)) ?? false;
+            return _baneados?.Exists(cuenta => cuenta.CorreoElectronico.Equals(notificacion.CorreoElectronicoRemitente)) ?? false;
         }
 
         private bool EsCuentaAmigo(CuentaSet cuentaComparar)
         {
-            return _amigos?.Any(cuenta => cuenta.CorreoElectronico.Equals(cuentaComparar.CorreoElectronico)) ?? false;
+            return _amigos?.Exists(cuenta => cuenta.CorreoElectronico.Equals(cuentaComparar.CorreoElectronico)) ?? false;
         }
 
         private bool EsPendienteRecibida(CuentaSet cuentaComparar)
         {
-            return _cuentasSolicitudesPendientes?.Any(cuenta => cuenta.CorreoElectronico.Equals(cuentaComparar.CorreoElectronico)) ?? false;
+            return _cuentasSolicitudesPendientes?.Exists(cuenta => cuenta.CorreoElectronico.Equals(cuentaComparar.CorreoElectronico)) ?? false;
         }
 
         private void ClickRegresarMenu(object sender, RoutedEventArgs e)

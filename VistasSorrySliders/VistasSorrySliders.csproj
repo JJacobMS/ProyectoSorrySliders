@@ -313,6 +313,9 @@
     <Resource Include="Fuentes\Prompt-Medium.ttf" />
     <Resource Include="Fuentes\WixMadeforText-Bold.ttf" />
     <Resource Include="Fuentes\WixMadeforText-Regular.ttf" />
+    <None Include="Connected Services\ServicioSorrySliders\item.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Connected Services\ServicioSorrySliders\item5.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -462,6 +465,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Recursos\ganadoresPartidaIcono.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Recursos\iniciarPartida.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
