@@ -409,7 +409,7 @@ namespace VistasSorrySliders
                 {
                     _rutaImagen = abrirBiblioteca.FileName;
                     string[] formatosSoportados = { ".jpg", ".jpeg" };
-                    if (formatosSoportados.Any(ext => _rutaImagen.EndsWith(ext, StringComparison.OrdinalIgnoreCase)))
+                    if (formatosSoportados.ToList().Exists(ext => _rutaImagen.EndsWith(ext, StringComparison.OrdinalIgnoreCase)))
                     {
                         BitmapImage mapaBits = new BitmapImage(new Uri(_rutaImagen));
                         if(ValidarTamañoImagen(_rutaImagen)) 
@@ -501,6 +501,7 @@ namespace VistasSorrySliders
                     Utilidades.MostrarUnMensajeError(Properties.Resources.msgErrorImagen, Properties.Resources.msgTituloErrorImagen);
                     return false;
                 }
+                else
                 {
                     using (FileStream flujoArchivo = new FileStream(ruta, FileMode.Open, FileAccess.Read))
                     {

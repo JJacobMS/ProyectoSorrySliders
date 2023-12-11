@@ -148,22 +148,22 @@
                     </Grid>
                     <Viewbox Grid.Column="1" Grid.Row="0">
                         <Canvas x:Name="cnvRojo" Width="50" Height="98" IsEnabled="True"  Visibility="Hidden">
-                            <Ellipse x:Name="llpPeonRojo1" IsEnabled="False" Width="8" Height="8" Canvas.Left="5" Canvas.Top="1" MouseLeftButtonDown="MouseLeftButtonDownPeonRojo" > 
+                            <Ellipse x:Name="llpPeonRojo1" IsEnabled="False" Width="8" Height="8" Canvas.Left="5" Canvas.Top="1" MouseLeftButtonDown="MouseLeftButtonDownMoverPeon" > 
                                 <Ellipse.Fill >
                                     <ImageBrush ImageSource="/Recursos/peonRosa.png"/>
                                 </Ellipse.Fill>
                             </Ellipse>
-                            <Ellipse x:Name="llpPeonRojo2" IsEnabled="False" Width="8" Height="8" Canvas.Left="15" Canvas.Top="1" MouseLeftButtonDown="MouseLeftButtonDownPeonRojo" >
+                            <Ellipse x:Name="llpPeonRojo2" IsEnabled="False" Width="8" Height="8" Canvas.Left="15" Canvas.Top="1" MouseLeftButtonDown="MouseLeftButtonDownMoverPeon" >
                                 <Ellipse.Fill >
                                     <ImageBrush ImageSource="/Recursos/peonRosa.png"/>
                                 </Ellipse.Fill>
                             </Ellipse>
-                            <Ellipse x:Name="llpPeonRojo3" IsEnabled="False" Width="8" Height="8" Canvas.Left="25" Canvas.Top="1" MouseLeftButtonDown="MouseLeftButtonDownPeonRojo" >
+                            <Ellipse x:Name="llpPeonRojo3" IsEnabled="False" Width="8" Height="8" Canvas.Left="25" Canvas.Top="1" MouseLeftButtonDown="MouseLeftButtonDownMoverPeon" >
                                 <Ellipse.Fill >
                                     <ImageBrush ImageSource="/Recursos/peonRosa.png"/>
                                 </Ellipse.Fill>
                             </Ellipse>
-                            <Ellipse x:Name="llpPeonRojo4" IsEnabled="False" Width="8" Height="8" Canvas.Left="35" Canvas.Top="1" MouseLeftButtonDown="MouseLeftButtonDownPeonRojo" >
+                            <Ellipse x:Name="llpPeonRojo4" IsEnabled="False" Width="8" Height="8" Canvas.Left="35" Canvas.Top="1" MouseLeftButtonDown="MouseLeftButtonDownMoverPeon" >
                                 <Ellipse.Fill >
                                     <ImageBrush ImageSource="/Recursos/peonRosa.png"/>
                                 </Ellipse.Fill>
@@ -173,22 +173,22 @@
 
                     <Viewbox Grid.Column="1" Grid.Row="2">
                         <Canvas x:Name="cnvAzul" Width="50" Height="98" IsEnabled="True" Visibility="Hidden">
-                            <Ellipse x:Name="llpPeonAzul1" IsEnabled="False" Width="8" Height="8" Canvas.Left="6" Canvas.Bottom="1" MouseLeftButtonDown="MouseLeftButtonDownPeonAzul" >
+                            <Ellipse x:Name="llpPeonAzul1" IsEnabled="False" Width="8" Height="8" Canvas.Left="6" Canvas.Bottom="1" MouseLeftButtonDown="MouseLeftButtonDownMoverPeon" >
                                 <Ellipse.Fill >
                                     <ImageBrush ImageSource="/Recursos/peonMorado.png"/>
                                 </Ellipse.Fill>
                             </Ellipse>
-                            <Ellipse x:Name="llpPeonAzul2" IsEnabled="False" Width="8" Height="8" Canvas.Left="16" Canvas.Bottom="1" MouseLeftButtonDown="MouseLeftButtonDownPeonAzul" >
+                            <Ellipse x:Name="llpPeonAzul2" IsEnabled="False" Width="8" Height="8" Canvas.Left="16" Canvas.Bottom="1" MouseLeftButtonDown="MouseLeftButtonDownMoverPeon" >
                                 <Ellipse.Fill >
                                     <ImageBrush ImageSource="/Recursos/peonMorado.png"/>
                                 </Ellipse.Fill>
                             </Ellipse>
-                            <Ellipse x:Name="llpPeonAzul3" IsEnabled="False" Width="8" Height="8" Canvas.Left="26" Canvas.Bottom="1" MouseLeftButtonDown="MouseLeftButtonDownPeonAzul" >
+                            <Ellipse x:Name="llpPeonAzul3" IsEnabled="False" Width="8" Height="8" Canvas.Left="26" Canvas.Bottom="1" MouseLeftButtonDown="MouseLeftButtonDownMoverPeon" >
                                 <Ellipse.Fill >
                                     <ImageBrush ImageSource="/Recursos/peonMorado.png"/>
                                 </Ellipse.Fill>
                             </Ellipse>
-                            <Ellipse x:Name="llpPeonAzul4" IsEnabled="False" Width="8" Height="8" Canvas.Left="36" Canvas.Bottom="1" MouseLeftButtonDown="MouseLeftButtonDownPeonAzul" >
+                            <Ellipse x:Name="llpPeonAzul4" IsEnabled="False" Width="8" Height="8" Canvas.Left="36" Canvas.Bottom="1" MouseLeftButtonDown="MouseLeftButtonDownMoverPeon" >
                                 <Ellipse.Fill >
                                     <ImageBrush ImageSource="/Recursos/peonMorado.png"/>
                                 </Ellipse.Fill>
@@ -197,22 +197,22 @@
                     </Viewbox>
                     <Viewbox Grid.Column="2" Grid.Row="1">
                         <Canvas x:Name="cnvVerde" Width="98" Height="50" IsEnabled="True" Visibility="Hidden">
-                            <Ellipse x:Name="llpPeonVerde1" IsEnabled="False" Width="8" Height="8" Canvas.Bottom="8" Canvas.Right="4" MouseLeftButtonDown="MouseLeftButtonDownPeonVerde">
+                            <Ellipse x:Name="llpPeonVerde1" IsEnabled="False" Width="8" Height="8" Canvas.Bottom="8" Canvas.Right="4" MouseLeftButtonDown="MouseLeftButtonDownMoverPeon">
                                 <Ellipse.Fill >
                                     <ImageBrush ImageSource="/Recursos/peonNegro.png"/>
                                 </Ellipse.Fill>
                             </Ellipse>
-                            <Ellipse x:Name="llpPeonVerde2" IsEnabled="False" Width="8" Height="8" Canvas.Bottom="18" Canvas.Right="4" MouseLeftButtonDown="MouseLeftButtonDownPeonVerde">
+                            <Ellipse x:Name="llpPeonVerde2" IsEnabled="False" Width="8" Height="8" Canvas.Bottom="18" Canvas.Right="4" MouseLeftButtonDown="MouseLeftButtonDownMoverPeon">
                                 <Ellipse.Fill >
                                     <ImageBrush ImageSource="/Recursos/peonNegro.png"/>
                                 </Ellipse.Fill>
                             </Ellipse>
-                            <Ellipse x:Name="llpPeonVerde3" IsEnabled="False" Width="8" Height="8" Canvas.Bottom="28" Canvas.Right="4" MouseLeftButtonDown="MouseLeftButtonDownPeonVerde" >
+                            <Ellipse x:Name="llpPeonVerde3" IsEnabled="False" Width="8" Height="8" Canvas.Bottom="28" Canvas.Right="4" MouseLeftButtonDown="MouseLeftButtonDownMoverPeon" >
                                 <Ellipse.Fill >
                                     <ImageBrush ImageSource="/Recursos/peonNegro.png"/>
                                 </Ellipse.Fill>
                             </Ellipse>
-                            <Ellipse x:Name="llpPeonVerde4" IsEnabled="False" Width="8" Height="8" Canvas.Bottom="38" Canvas.Right="4" MouseLeftButtonDown="MouseLeftButtonDownPeonVerde" >
+                            <Ellipse x:Name="llpPeonVerde4" IsEnabled="False" Width="8" Height="8" Canvas.Bottom="38" Canvas.Right="4" MouseLeftButtonDown="MouseLeftButtonDownMoverPeon" >
                                 <Ellipse.Fill >
                                     <ImageBrush ImageSource="/Recursos/peonNegro.png"/>
                                 </Ellipse.Fill>
@@ -221,22 +221,22 @@
                     </Viewbox>
                     <Viewbox Grid.Column="0" Grid.Row="1">
                         <Canvas x:Name="cnvAmarillo" Width="98" Height="50" IsEnabled="True" Visibility="Hidden">
-                            <Ellipse x:Name="llpPeonAmarillo1" IsEnabled="False" Width="8" Height="8" Canvas.Bottom="8" Canvas.Left="4" MouseLeftButtonDown="MouseLeftButtonDownPeonAmarillo">
+                            <Ellipse x:Name="llpPeonAmarillo1" IsEnabled="False" Width="8" Height="8" Canvas.Bottom="8" Canvas.Left="4" MouseLeftButtonDown="MouseLeftButtonDownMoverPeon">
                                 <Ellipse.Fill >
                                     <ImageBrush ImageSource="/Recursos/peonGris.png"/>
                                 </Ellipse.Fill>
                             </Ellipse>
-                            <Ellipse x:Name="llpPeonAmarillo2" IsEnabled="False" Width="8" Height="8" Canvas.Bottom="18" Canvas.Left="4" MouseLeftButtonDown="MouseLeftButtonDownPeonAmarillo" >
+                            <Ellipse x:Name="llpPeonAmarillo2" IsEnabled="False" Width="8" Height="8" Canvas.Bottom="18" Canvas.Left="4" MouseLeftButtonDown="MouseLeftButtonDownMoverPeon" >
                                 <Ellipse.Fill >
                                     <ImageBrush ImageSource="/Recursos/peonGris.png"/>
                                 </Ellipse.Fill>
                             </Ellipse>
-                            <Ellipse x:Name="llpPeonAmarillo3" IsEnabled="False" Width="8" Height="8" Canvas.Bottom="28" Canvas.Left="4" MouseLeftButtonDown="MouseLeftButtonDownPeonAmarillo" >
+                            <Ellipse x:Name="llpPeonAmarillo3" IsEnabled="False" Width="8" Height="8" Canvas.Bottom="28" Canvas.Left="4" MouseLeftButtonDown="MouseLeftButtonDownMoverPeon" >
                                 <Ellipse.Fill >
                                     <ImageBrush ImageSource="/Recursos/peonGris.png"/>
                                 </Ellipse.Fill>
                             </Ellipse>
-                            <Ellipse x:Name="llpPeonAmarillo4" IsEnabled="False" Width="8" Height="8" Canvas.Bottom="38" Canvas.Left="4" MouseLeftButtonDown="MouseLeftButtonDownPeonAmarillo" >
+                            <Ellipse x:Name="llpPeonAmarillo4" IsEnabled="False" Width="8" Height="8" Canvas.Bottom="38" Canvas.Left="4" MouseLeftButtonDown="MouseLeftButtonDownMoverPeon" >
                                 <Ellipse.Fill >
                                     <ImageBrush ImageSource="/Recursos/peonGris.png"/>
                                 </Ellipse.Fill>
