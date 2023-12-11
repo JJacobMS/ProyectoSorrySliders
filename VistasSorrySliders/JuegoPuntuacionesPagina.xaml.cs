@@ -1046,7 +1046,7 @@ namespace VistasSorrySliders
             {
                 EliminarDiccionarios();
             }
-            _proxyJuegoPuntuacion.Close();
+
             _juegoYLobbyVentana.CambiarVentanaGanadores(_listaPuntuaciones);
         }
     }

@@ -417,6 +417,36 @@ namespace VistasSorrySliders
 
         public void JugadoresListosParaSiguienteTurno()
         {
+            JugadorLanzamiento jugadorActual = _tablero.ListaJugadores[_tablero.TurnoActual];
+            if (jugadorActual.CorreElectronico.Equals(_correoJugadorActual))
+            {
+                EnviarTableroPeones(_tablero.ObtenerPosicionPeonesActuales());
+            }
+        }
+
+        private void EnviarTableroPeones(PeonesTablero peones)
+        {
+            Logger log = new Logger(this.GetType());
+            try
+            {
+                _proxyLanzamiento.NotificarPosicionFichasFinales(_codigoPartida, _correoJugadorActual, peones);
+                return;
+            }
+            catch (CommunicationException ex)
+            {
+                Utilidades.MostrarUnMensajeError(Properties.Resources.msgErrorConexion);
+                log.LogError("Error de Comunicación con el Servidor", ex);
+            }
+            catch (TimeoutException ex)
+            {
+                Utilidades.MostrarUnMensajeError(Properties.Resources.msgErrorConexion);
+                log.LogWarn("Se agoto el tiempo de espera del servidor", ex);
+            }
+            Utilidades.SalirHastaInicioSesionDesdeJuegoYLobbyVentana(this);
+        }
+        public void CambiarPosicionPeonesTableroYContinuar(PeonesTablero peones)
+        {
+            _tablero.ModificarPosicionPeones(peones);
             _tablero.CambiarTurnoSiguiente();
         }
 
@@ -478,6 +508,5 @@ namespace VistasSorrySliders
             }
             _juegoYLobbyVentana.EliminarContexto -= EliminarContextoJuegoLanzamiento;
         }
-
     }
 }
