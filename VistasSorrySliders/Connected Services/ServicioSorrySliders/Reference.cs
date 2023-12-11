@@ -1163,15 +1163,30 @@ namespace VistasSorrySliders.ServicioSorrySliders {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="PeonesTablero", Namespace="http://schemas.datacontract.org/2004/07/DatosSorrySliders")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="JugadorGanador", Namespace="http://schemas.datacontract.org/2004/07/ServidorSorrySliders")]
     [System.SerializableAttribute()]
-    public partial class PeonesTablero : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+    public partial class JugadorGanador : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
         [System.NonSerializedAttribute()]
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private System.Collections.Generic.Dictionary<int, System.ValueTuple<double, double>[]> PeonesActualmenteTableroField;
+        private string CorreoElectronicoField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string NicknameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int PosicionField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string _correoElectronicoField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string _nicknameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int _posicionField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -1184,14 +1199,79 @@ namespace VistasSorrySliders.ServicioSorrySliders {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Collections.Generic.Dictionary<int, System.ValueTuple<double, double>[]> PeonesActualmenteTablero {
+        public string CorreoElectronico {
             get {
-                return this.PeonesActualmenteTableroField;
+                return this.CorreoElectronicoField;
             }
             set {
-                if ((object.ReferenceEquals(this.PeonesActualmenteTableroField, value) != true)) {
-                    this.PeonesActualmenteTableroField = value;
-                    this.RaisePropertyChanged("PeonesActualmenteTablero");
+                if ((object.ReferenceEquals(this.CorreoElectronicoField, value) != true)) {
+                    this.CorreoElectronicoField = value;
+                    this.RaisePropertyChanged("CorreoElectronico");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Nickname {
+            get {
+                return this.NicknameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.NicknameField, value) != true)) {
+                    this.NicknameField = value;
+                    this.RaisePropertyChanged("Nickname");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Posicion {
+            get {
+                return this.PosicionField;
+            }
+            set {
+                if ((this.PosicionField.Equals(value) != true)) {
+                    this.PosicionField = value;
+                    this.RaisePropertyChanged("Posicion");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string _correoElectronico {
+            get {
+                return this._correoElectronicoField;
+            }
+            set {
+                if ((object.ReferenceEquals(this._correoElectronicoField, value) != true)) {
+                    this._correoElectronicoField = value;
+                    this.RaisePropertyChanged("_correoElectronico");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string _nickname {
+            get {
+                return this._nicknameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this._nicknameField, value) != true)) {
+                    this._nicknameField = value;
+                    this.RaisePropertyChanged("_nickname");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int _posicion {
+            get {
+                return this._posicionField;
+            }
+            set {
+                if ((this._posicionField.Equals(value) != true)) {
+                    this._posicionField = value;
+                    this.RaisePropertyChanged("_posicion");
                 }
             }
         }
@@ -2449,10 +2529,10 @@ namespace VistasSorrySliders.ServicioSorrySliders {
         System.Threading.Tasks.Task<VistasSorrySliders.ServicioSorrySliders.Constantes> ActualizarGanadorAsync(string uid, string correoElectronico, int posicion);
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IJuegoPuntuacion/NotificarCambiarPagina")]
-        void NotificarCambiarPagina(string uid);
+        void NotificarCambiarPagina(string uid, VistasSorrySliders.ServicioSorrySliders.JugadorGanador[] listaGanadores);
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IJuegoPuntuacion/NotificarCambiarPagina")]
-        System.Threading.Tasks.Task NotificarCambiarPaginaAsync(string uid);
+        System.Threading.Tasks.Task NotificarCambiarPaginaAsync(string uid, VistasSorrySliders.ServicioSorrySliders.JugadorGanador[] listaGanadores);
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IJuegoPuntuacion/EliminarDiccionariosJuego")]
         void EliminarDiccionariosJuego(string uid);
@@ -2474,7 +2554,7 @@ namespace VistasSorrySliders.ServicioSorrySliders {
         void EliminarTurnoJugador(string correoElectronico);
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IJuegoPuntuacion/CambiarPagina")]
-        void CambiarPagina();
+        void CambiarPagina(VistasSorrySliders.ServicioSorrySliders.JugadorGanador[] listaGanadores);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -2545,12 +2625,12 @@ namespace VistasSorrySliders.ServicioSorrySliders {
             return base.Channel.ActualizarGanadorAsync(uid, correoElectronico, posicion);
         }
         
-        public void NotificarCambiarPagina(string uid) {
-            base.Channel.NotificarCambiarPagina(uid);
+        public void NotificarCambiarPagina(string uid, VistasSorrySliders.ServicioSorrySliders.JugadorGanador[] listaGanadores) {
+            base.Channel.NotificarCambiarPagina(uid, listaGanadores);
         }
         
-        public System.Threading.Tasks.Task NotificarCambiarPaginaAsync(string uid) {
-            return base.Channel.NotificarCambiarPaginaAsync(uid);
+        public System.Threading.Tasks.Task NotificarCambiarPaginaAsync(string uid, VistasSorrySliders.ServicioSorrySliders.JugadorGanador[] listaGanadores) {
+            return base.Channel.NotificarCambiarPaginaAsync(uid, listaGanadores);
         }
         
         public void EliminarDiccionariosJuego(string uid) {

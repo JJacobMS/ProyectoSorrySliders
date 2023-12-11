@@ -15,4 +15,21 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="Puntuacion" nillable="true" type="tns:Puntuacion" />
+  <xs:complexType name="ArrayOfJugadorGanador">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="JugadorGanador" nillable="true" type="tns:JugadorGanador" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfJugadorGanador" nillable="true" type="tns:ArrayOfJugadorGanador" />
+  <xs:complexType name="JugadorGanador">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CorreoElectronico" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Nickname" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Posicion" type="xs:int" />
+      <xs:element minOccurs="0" name="_correoElectronico" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="_nickname" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="_posicion" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="JugadorGanador" nillable="true" type="tns:JugadorGanador" />
 </xs:schema>

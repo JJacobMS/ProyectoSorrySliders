@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace VistasSorrySliders.LogicaJuego
 {
+    /*
     public class JugadorGanador
     {
         private string _correoElectronico;
@@ -16,4 +17,5 @@ namespace VistasSorrySliders.LogicaJuego
         public string Nickname { get => _nickname; set => _nickname = value; }
         public int Posicion { get => _posicion; set => _posicion = value; }
     }
+    */
 }
