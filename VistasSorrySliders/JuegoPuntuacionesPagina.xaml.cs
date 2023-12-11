@@ -337,15 +337,15 @@ namespace VistasSorrySliders
         {
             RealizarJugada(sender);
         }
-        private void RealizarJugada(object sender) 
+        private async void RealizarJugada(object sender) 
         {
-            MoverPeonAsync(sender);
+            await MoverPeonAsync(sender);
             if (!ComprobarDadosActuales())
             {
                 NotificarCambiarTurno();
             }
         }
-        private async void MoverPeonAsync(object sender)
+        private async Task MoverPeonAsync(object sender)
         {
             if (_btnSeleccionado != null)
             {
@@ -372,8 +372,7 @@ namespace VistasSorrySliders
                             i = puntosObtenidos;
                         }
                     }
-                    await Task.Delay(1000);
-                    NotificarJugadores(llpSeleccionada, puntosObtenidos);
+                    await NotificarJugadores(llpSeleccionada, puntosObtenidos);
                 }
             }
         }
@@ -628,8 +627,14 @@ namespace VistasSorrySliders
             MoverPeonJugador(nombrePeon, puntosObtenidos);
         }
 
-        private void NotificarCambiarTurno() 
+        private async void NotificarCambiarTurno() 
         {
+            await LogicaNotificarCambiarTurno();
+        }
+
+        private async Task LogicaNotificarCambiarTurno() 
+        {
+            await Task.Delay(1500);
             Logger log = new Logger(this.GetType());
             try
             {
@@ -647,7 +652,7 @@ namespace VistasSorrySliders
             Utilidades.SalirHastaInicioSesionDesdeJuegoYLobbyVentana(this);
         }
 
-        private  void MoverPeonJugador(string nombrePeon, int puntosObtenidos) 
+        private void MoverPeonJugador(string nombrePeon, int puntosObtenidos) 
         {
             if (puntosObtenidos >= 0)
             {
@@ -731,8 +736,9 @@ namespace VistasSorrySliders
                 }
             }
         }
-        private void NotificarJugadores(Ellipse llpSeleccionada, int puntosObtenidos)
+        private async Task NotificarJugadores(Ellipse llpSeleccionada, int puntosObtenidos)
         {
+            await Task.Delay(1500);
             Logger log = new Logger(this.GetType());
             try
             {
@@ -752,23 +758,29 @@ namespace VistasSorrySliders
 
         public void CambiarTurno()
         {
+            LogicaCambiarTurno();
+        }
+
+        private async void LogicaCambiarTurno() 
+        {
             _turnoActualJuego = _turnoActualJuego + 1;
             if (_turnoActualJuego > _listaTurnos.Count - 1)
             {
                 _turnoActualJuego = 0;
-                CambiarPaginaLanzamiento();
+                await CambiarPaginaLanzamiento();
                 //EmpezarTurno(_turnoActualJuego);
             }
-            else 
+            else
             {
                 EmpezarTurno(_turnoActualJuego);
             }
             InicializarLabelTurno();
         }
-        private void CambiarPaginaLanzamiento()
+        private async Task CambiarPaginaLanzamiento()
         {
             JuegoLanzamientoPagina paginaJuego = new JuegoLanzamientoPagina(_listaCuentas, _listaCuentas.Count, _codigoPartida, _cuentaUsuario, this, _juegoYLobbyVentana);
             Constantes respuestaInicio = paginaJuego.InicializarConexionYJuego();
+            await Task.Delay(5000);
 
             switch (respuestaInicio)
             {
@@ -809,7 +821,7 @@ namespace VistasSorrySliders
             int contadorConectados = 0;
             foreach (JugadorTurno jugadorTurno in _listaTurnos)
             {
-                if (jugadorTurno.EstaConectado == true)
+                if (jugadorTurno.EstaConectado)
                 {
                     contadorConectados = contadorConectados + 1;
                 }
@@ -916,5 +928,6 @@ namespace VistasSorrySliders
             _proxyJuegoPuntuacion.Close();
             _juegoYLobbyVentana.CambiarVentanaGanadores(_listaPuntuaciones);
         }
+        //Pasar puntuaciones
     }
 }
