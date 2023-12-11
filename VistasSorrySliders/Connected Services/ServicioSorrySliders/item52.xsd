@@ -764,7 +764,7 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="uid" nillable="true" type="xs:string" />
-        <xs:element xmlns:q40="http://schemas.datacontract.org/2004/07/ServidorSorrySliders" minOccurs="0" name="listaGanadores" nillable="true" type="q40:ArrayOfJugadorGanador" />
+        <xs:element xmlns:q42="http://schemas.datacontract.org/2004/07/ServidorSorrySliders" minOccurs="0" name="listaGanadores" nillable="true" type="q42:ArrayOfJugadorGanador" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -813,7 +813,7 @@
   <xs:element name="CambiarPagina">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q41="http://schemas.datacontract.org/2004/07/ServidorSorrySliders" minOccurs="0" name="listaGanadores" nillable="true" type="q41:ArrayOfJugadorGanador" />
+        <xs:element xmlns:q43="http://schemas.datacontract.org/2004/07/ServidorSorrySliders" minOccurs="0" name="listaGanadores" nillable="true" type="q43:ArrayOfJugadorGanador" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

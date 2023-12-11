@@ -1163,6 +1163,51 @@ namespace VistasSorrySliders.ServicioSorrySliders {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="PeonesTablero", Namespace="http://schemas.datacontract.org/2004/07/DatosSorrySliders")]
+    [System.SerializableAttribute()]
+    public partial class PeonesTablero : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Collections.Generic.Dictionary<int, System.ValueTuple<double, double>[]> PeonesActualmenteTableroField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.Generic.Dictionary<int, System.ValueTuple<double, double>[]> PeonesActualmenteTablero {
+            get {
+                return this.PeonesActualmenteTableroField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.PeonesActualmenteTableroField, value) != true)) {
+                    this.PeonesActualmenteTableroField = value;
+                    this.RaisePropertyChanged("PeonesActualmenteTablero");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="JugadorGanador", Namespace="http://schemas.datacontract.org/2004/07/ServidorSorrySliders")]
     [System.SerializableAttribute()]
     public partial class JugadorGanador : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
