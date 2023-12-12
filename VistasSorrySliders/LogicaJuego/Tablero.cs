@@ -231,7 +231,6 @@ namespace VistasSorrySliders.LogicaJuego
                     }
                 }
             }
-            Console.WriteLine("SE MODIFICARON LAS POSICIONES");
         }
 
         public void DesconectarJugador(string correoElectronico)
