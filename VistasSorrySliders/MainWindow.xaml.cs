@@ -25,20 +25,23 @@ namespace VistasSorrySliders
     {
         private UsuariosEnLineaClient _proxyLinea;
         private string _correo;
-        
+
+        public UsuariosEnLineaClient ProxyLinea { get => _proxyLinea; }
+
         public MainWindow()
         {
             InitializeComponent();
         }
-
-        public MainWindow(string correo)
+        public MainWindow(UsuariosEnLineaClient proxyEnLinea, string correo)
         {
             InitializeComponent();
+            _proxyLinea = proxyEnLinea;
             _correo = correo;
         }
-        public void EliminarProxyLineaAnterior()
+
+        public void DesuscribirseCerrarVentana()
         {
-            _proxyLinea = null;
+            Closing -= CerrarVentana;
         }
 
         private void CerrarVentana(object sender, CancelEventArgs e)

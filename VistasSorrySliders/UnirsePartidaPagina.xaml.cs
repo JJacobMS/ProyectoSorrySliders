@@ -175,7 +175,8 @@ namespace VistasSorrySliders
 
         private void EntrarLobby(string codigo)
         {
-            JuegoYLobbyVentana lobbyUnirse = new JuegoYLobbyVentana(_cuentaActual, codigo, _esInvitado);
+            MainWindow ventanaPrincipal = Window.GetWindow(this) as MainWindow;
+            JuegoYLobbyVentana lobbyUnirse = new JuegoYLobbyVentana(_cuentaActual, codigo, _esInvitado, ventanaPrincipal.ProxyLinea);
             Constantes respuesta = lobbyUnirse.InicializarPaginas();
             switch (respuesta)
             {
@@ -190,13 +191,10 @@ namespace VistasSorrySliders
 
         private void MostrarVentanaLobby(JuegoYLobbyVentana lobbyUnirse)
         {
-            if (lobbyUnirse.EntrarSistemaEnLinea())
-            {
-                MainWindow ventanaPrincipal = (MainWindow)Window.GetWindow(this);
-                ventanaPrincipal.EliminarProxyLineaAnterior();
-                Window.GetWindow(this).Close();
-                lobbyUnirse.Show();
-            }
+            MainWindow ventanaPrincipal = Window.GetWindow(this) as MainWindow;
+            ventanaPrincipal.DesuscribirseCerrarVentana();
+            Window.GetWindow(this).Close();
+            lobbyUnirse.Show();
         }
 
         private void MostrarErrorJugadores(int numeroMaximoJugadores)

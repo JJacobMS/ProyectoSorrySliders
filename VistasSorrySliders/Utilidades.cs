@@ -198,7 +198,7 @@ namespace VistasSorrySliders
         public static void SalirInicioSesionDesdeVentanaPrincipal(Page pagina)
         {
             MainWindow ventanaPrincipal = Window.GetWindow(pagina) as MainWindow;
-            ventanaPrincipal?.EliminarProxyLineaAnterior();
+            ventanaPrincipal?.DesuscribirseCerrarVentana();
 
             MostrarInicioSesion(ventanaPrincipal);
         }
@@ -228,6 +228,15 @@ namespace VistasSorrySliders
             ventana.Content = inicio;
 
             ventana.Show();
+        }
+
+        public static void MostrarInicioSesion(Window ventanaAnterior, Window ventanaNueva)
+        {
+            InicioSesionPagina inicio = new InicioSesionPagina();
+            ventanaNueva.Content = inicio;
+
+            ventanaNueva.Show();
+            ventanaAnterior.Close();
         }
     }
 }
