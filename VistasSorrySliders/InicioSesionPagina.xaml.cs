@@ -191,7 +191,7 @@ namespace VistasSorrySliders
 
         private void CambiarPantallaMenuPrincipal(string correoVerificado)
         {
-            MainWindow ventanaPrincipal = Window.GetWindow(this) as MainWindow;
+            VentanaPrincipal ventanaPrincipal = Window.GetWindow(this) as VentanaPrincipal;
             ventanaPrincipal.IndicarCorreoCuenta(correoVerificado);
 
             if (ventanaPrincipal.EntrarSistemaEnLineaMenu())

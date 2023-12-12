@@ -243,14 +243,6 @@
                             </Ellipse>
                         </Canvas>
                     </Viewbox>
-                    <Border x:Name="brdGuardarPuntuaciones" Width="180" Height="140" BorderThickness="8" BorderBrush="#2E0437" CornerRadius="20" 
-                            Canvas.Left="183" Canvas.Top="160" Background="#F0D8FA" Visibility="Hidden" Grid.RowSpan="3" Grid.ColumnSpan="3">
-                        <StackPanel VerticalAlignment="Center">
-                            <TextBlock Style="{StaticResource estiloTxtBlockCambioRonda}" Text="{x:Static p:Resources.txtBlockGuardandoPuntuaciones}" Foreground="#2E0437" FontSize="33" Margin="0"></TextBlock>
-                            <Image Width="100" Source="/Recursos/puntuaciones.png"/>
-                        </StackPanel>
-                    </Border>
-
                     <Border x:Name="brdConteoPuntuaciones" Width="140" Height="140" BorderThickness="8" BorderBrush="#2E0437" CornerRadius="20" 
                             Background="#F0D8FA" Visibility="Hidden" Grid.RowSpan="3" Grid.ColumnSpan="3" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="10">
                         <StackPanel VerticalAlignment="Center">

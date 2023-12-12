@@ -789,7 +789,6 @@ namespace VistasSorrySliders
             {
                 _turnoActualJuego = 0;
                 await CambiarPaginaLanzamiento();
-                //EmpezarTurno(_turnoActualJuego);
             }
             else
             {

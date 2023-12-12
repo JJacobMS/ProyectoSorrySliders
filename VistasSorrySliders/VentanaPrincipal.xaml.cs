@@ -21,18 +21,18 @@ namespace VistasSorrySliders
     /// <summary>
     /// Lógica de interacción para MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : NavigationWindow, IUsuariosEnLineaCallback
+    public partial class VentanaPrincipal : NavigationWindow, IUsuariosEnLineaCallback
     {
         private UsuariosEnLineaClient _proxyLinea;
         private string _correo;
 
         public UsuariosEnLineaClient ProxyLinea { get => _proxyLinea; }
 
-        public MainWindow()
+        public VentanaPrincipal()
         {
             InitializeComponent();
         }
-        public MainWindow(UsuariosEnLineaClient proxyEnLinea, string correo)
+        public VentanaPrincipal(UsuariosEnLineaClient proxyEnLinea, string correo)
         {
             InitializeComponent();
             _proxyLinea = proxyEnLinea;

@@ -122,7 +122,7 @@ namespace VistasSorrySliders
         }
         private void IrInicioSesion()
         {
-            MainWindow ventana = Window.GetWindow(this) as MainWindow;
+            VentanaPrincipal ventana = Window.GetWindow(this) as VentanaPrincipal;
             ventana.SalirSistema();
             InicioSesionPagina inicio = new InicioSesionPagina();
             this.NavigationService.Navigate(inicio);

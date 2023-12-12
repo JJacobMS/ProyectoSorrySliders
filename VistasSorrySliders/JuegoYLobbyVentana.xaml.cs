@@ -138,7 +138,7 @@ namespace VistasSorrySliders
         }
         private void IrVentanaGanadores(List<JugadorGanador> listaPuntuaciones)
         {
-            MainWindow ventanaPrincipal = new MainWindow(_proxyLinea, _cuenta.CorreoElectronico);
+            VentanaPrincipal ventanaPrincipal = new VentanaPrincipal(_proxyLinea, _cuenta.CorreoElectronico);
             TableroGanadoresPartidaPagina paginaGanadores = new TableroGanadoresPartidaPagina(_cuenta, listaPuntuaciones, _esInvitado);
             ventanaPrincipal.Content = paginaGanadores;
             ventanaPrincipal.Show();
@@ -182,7 +182,7 @@ namespace VistasSorrySliders
 
         public void IrMenuUsuario()
         {
-            MainWindow ventanaPrincipal = new MainWindow(_proxyLinea, _cuenta.CorreoElectronico);
+            VentanaPrincipal ventanaPrincipal = new VentanaPrincipal(_proxyLinea, _cuenta.CorreoElectronico);
             if (!_esInvitado)
             {
                 MenuPrincipalPagina menu = new MenuPrincipalPagina(_cuenta);
