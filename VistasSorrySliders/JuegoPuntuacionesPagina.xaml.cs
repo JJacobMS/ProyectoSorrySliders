@@ -367,7 +367,7 @@ namespace VistasSorrySliders
                         {
                             SettearPosicionFicha(llpSeleccionada.Name, POSICION_FINAL_HOME);
                             llpSeleccionada.IsEnabled = false;
-                            
+                            ComprobarGanador();
                             i = puntosObtenidos;
                         }
                     }
