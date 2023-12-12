@@ -29,6 +29,7 @@ namespace VistasSorrySliders
     {
         private CuentaSet _cuentaUsuario;
         public event Action<MenuPrincipalPagina> CambiarPaginaMenu;
+        private InicioSesionClient _proxyInicioSesion;
 
         public MenuPrincipalPagina()
         {
@@ -41,9 +42,38 @@ namespace VistasSorrySliders
             InicializarDatosMenu();
         }
 
-        public void LlamarRecuperarDatosUsuario(string correo)
+        public void LlamarRecuperarDatosUsuario(string correo, InicioSesionClient proxyInicioSesion)
         {
+            _proxyInicioSesion = proxyInicioSesion;
             RecuperarDatosUsuario(correo);
+        }
+
+        private void VerificarConexion() 
+        {
+            Logger log = new Logger(this.GetType());
+            try
+            {
+                Constantes puedoPasar;
+                puedoPasar = _proxyInicioSesion.JugadorEstaEnLinea(_cuentaUsuario.CorreoElectronico);
+                switch (puedoPasar)
+                {
+                    case Constantes.ERROR_CONEXION_SERVIDOR:
+                        Utilidades.MostrarUnMensajeError("CUENTA SIN CONEXION");
+                        break;
+                    case Constantes.OPERACION_EXITOSA:
+                        break;
+                }
+            }
+            catch (CommunicationException ex)
+            {
+                Utilidades.MostrarUnMensajeError(Properties.Resources.msgErrorConexion);
+                log.LogError("Error de Comunicación con el Servidor", ex);
+            }
+            catch (TimeoutException ex)
+            {
+                Utilidades.MostrarUnMensajeError(Properties.Resources.msgErrorTiempoEsperaServidor);
+                log.LogWarn("Se agoto el tiempo de espera del servidor", ex);
+            }
         }
 
         private void InicializarDatosMenu()
@@ -100,6 +130,7 @@ namespace VistasSorrySliders
 
         private void ClickMostrarAjustes(object sender, RoutedEventArgs e)
         {
+            VerificarConexion();
             AjustesVentana ajustes = new AjustesVentana();
             ajustes.IdiomaCambiado += ActualizarIdiomaMenuPrincipal;
             ajustes.ShowDialog();
