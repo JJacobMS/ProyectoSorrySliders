@@ -213,6 +213,9 @@
   <data name="lblAvatar" xml:space="preserve">
     <value>Avatar</value>
   </data>
+  <data name="lblBienJugado" xml:space="preserve">
+    <value>BIEN JUGADO</value>
+  </data>
   <data name="lblBienvenido" xml:space="preserve">
     <value>Bienvenido</value>
   </data>
@@ -291,6 +294,9 @@
   <data name="lblPerfilJugador" xml:space="preserve">
     <value>Perfil de Jugador</value>
   </data>
+  <data name="lblPuntuacionUltimaJugada" xml:space="preserve">
+    <value>Puntuación Última Jugada:</value>
+  </data>
   <data name="lblTablaPuntuaciones" xml:space="preserve">
     <value>TABLERO DE PUNTUACIONES</value>
   </data>
@@ -342,6 +348,9 @@
   <data name="msgCorreoInvalido" xml:space="preserve">
     <value>El correo electrónico es inválido, ingresa una dirección valida</value>
   </data>
+  <data name="msgCorreoInvitacion" xml:space="preserve">
+    <value>&lt;p&gt;El jugador {0} te ha invitado a jugar Sorry Sliders Únete como invitado con el siguiente código de partida: {1}&lt;/p&gt;</value>
+  </data>
   <data name="msgCrearLobbySinExito" xml:space="preserve">
     <value>No se pudo crear el lobby, por favor inténtelo más tarde</value>
   </data>
@@ -359,6 +368,9 @@
   </data>
   <data name="msgEliminarNotificacion" xml:space="preserve">
     <value>Se ha eliminado la notificación</value>
+  </data>
+  <data name="msgErroEnviarCorreo" xml:space="preserve">
+    <value>Error al enviar la notificación por correo, inténtelo más tarde</value>
   </data>
   <data name="msgErrorAvatarDefault" xml:space="preserve">
     <value>Error al cargar la imagen del avatar por defecto</value>
@@ -394,7 +406,7 @@
     <value>EXPULSADO DE LA PARTIDA</value>
   </data>
   <data name="msgExpulsarJugador" xml:space="preserve">
-    <value>El host del juego lo ha expulsado de la partida</value>
+    <value>Ha expulsado de la partida</value>
   </data>
   <data name="msgFaltaJugadores" xml:space="preserve">
     <value>Todos los demás jugadores se han salido de la partida. Se terminará la partida</value>
@@ -404,6 +416,9 @@
   </data>
   <data name="msgImagenInvalida" xml:space="preserve">
     <value>Por favor, seleccione un archivo de imagen válida</value>
+  </data>
+  <data name="msgInvitacionExitosa" xml:space="preserve">
+    <value>Invitación enviada</value>
   </data>
   <data name="msgJugadoresLobbyRecuperar" xml:space="preserve">
     <value>Hubo un error al recuperar los jugadores del lobby, por favor inténtelo más tarde</value>
@@ -447,6 +462,9 @@
   <data name="msgTituloCorreoInvalido" xml:space="preserve">
     <value>Correo invalido</value>
   </data>
+  <data name="msgTituloCorreoInvitacion" xml:space="preserve">
+    <value>Invitación a Sorry Sliders</value>
+  </data>
   <data name="msgTituloCuentaCreada" xml:space="preserve">
     <value>Cuenta creada</value>
   </data>
@@ -482,6 +500,9 @@
   </data>
   <data name="txtBlockAjustes" xml:space="preserve">
     <value>AJUSTES</value>
+  </data>
+  <data name="txtBlockCambiandoPartida" xml:space="preserve">
+    <value>Comenzando Partida...</value>
   </data>
   <data name="txtBlockCodigoNoValido" xml:space="preserve">
     <value>Código no válido</value>
@@ -542,6 +563,9 @@
   </data>
   <data name="txtBlockNoEnLinea" xml:space="preserve">
     <value>No en línea</value>
+  </data>
+  <data name="txtBlockPosicion" xml:space="preserve">
+    <value>POSICIÓN</value>
   </data>
   <data name="txtBlockPotenciaLanzamiento" xml:space="preserve">
     <value>Potencia de Lanzamiento:</value>

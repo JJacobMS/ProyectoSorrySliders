@@ -213,6 +213,9 @@
   <data name="lblAvatar" xml:space="preserve">
     <value>Avatar</value>
   </data>
+  <data name="lblBienJugado" xml:space="preserve">
+    <value>GOOD GAME</value>
+  </data>
   <data name="lblBienvenido" xml:space="preserve">
     <value>Welcome</value>
   </data>
@@ -291,6 +294,9 @@
   <data name="lblPerfilJugador" xml:space="preserve">
     <value>Player's Profile</value>
   </data>
+  <data name="lblPuntuacionUltimaJugada" xml:space="preserve">
+    <value>Last Play Scrore:</value>
+  </data>
   <data name="lblTablaPuntuaciones" xml:space="preserve">
     <value>SCOREBOARD</value>
   </data>
@@ -342,6 +348,9 @@
   <data name="msgCorreoInvalido" xml:space="preserve">
     <value>The email is invalid, please enter a valid address</value>
   </data>
+  <data name="msgCorreoInvitacion" xml:space="preserve">
+    <value>&lt;p&gt;Player {0} has invited you to play Sorry Sliders. Join as a guest with the following game code: {1}&lt;/p&gt;</value>
+  </data>
   <data name="msgCrearLobbySinExito" xml:space="preserve">
     <value>Failed to create lobby, please try again later</value>
   </data>
@@ -359,6 +368,9 @@
   </data>
   <data name="msgEliminarNotificacion" xml:space="preserve">
     <value>Notification has been removed</value>
+  </data>
+  <data name="msgErroEnviarCorreo" xml:space="preserve">
+    <value>Error sending notification by email, please try again later</value>
   </data>
   <data name="msgErrorAvatarDefault" xml:space="preserve">
     <value>Error loading default avatar image</value>
@@ -394,7 +406,7 @@
     <value>EXPELLED FROM THE GAME</value>
   </data>
   <data name="msgExpulsarJugador" xml:space="preserve">
-    <value>The game host has banned you from the game</value>
+    <value>You've been banned from the game</value>
   </data>
   <data name="msgFaltaJugadores" xml:space="preserve">
     <value>All other players have left the game. The game will end</value>
@@ -404,6 +416,9 @@
   </data>
   <data name="msgImagenInvalida" xml:space="preserve">
     <value>Please select a valid image file</value>
+  </data>
+  <data name="msgInvitacionExitosa" xml:space="preserve">
+    <value>Invitation send</value>
   </data>
   <data name="msgJugadoresLobbyRecuperar" xml:space="preserve">
     <value>There was an error retrieving players from the lobby, please try again later</value>
@@ -447,6 +462,9 @@
   <data name="msgTituloCorreoInvalido" xml:space="preserve">
     <value>Invalid email</value>
   </data>
+  <data name="msgTituloCorreoInvitacion" xml:space="preserve">
+    <value>Invitation to Sorry Sliders</value>
+  </data>
   <data name="msgTituloCuentaCreada" xml:space="preserve">
     <value>Account created</value>
   </data>
@@ -482,6 +500,9 @@
   </data>
   <data name="txtBlockAjustes" xml:space="preserve">
     <value>SETTINGS</value>
+  </data>
+  <data name="txtBlockCambiandoPartida" xml:space="preserve">
+    <value>Starting game...</value>
   </data>
   <data name="txtBlockCodigoNoValido" xml:space="preserve">
     <value>Invalid code</value>
@@ -542,6 +563,9 @@
   </data>
   <data name="txtBlockNoEnLinea" xml:space="preserve">
     <value>Offline</value>
+  </data>
+  <data name="txtBlockPosicion" xml:space="preserve">
+    <value>POSITION</value>
   </data>
   <data name="txtBlockPotenciaLanzamiento" xml:space="preserve">
     <value>Launch Power:</value>

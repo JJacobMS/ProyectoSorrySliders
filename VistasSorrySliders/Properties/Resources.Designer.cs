@@ -358,6 +358,15 @@ namespace VistasSorrySliders.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a BIEN JUGADO.
+        /// </summary>
+        public static string lblBienJugado {
+            get {
+                return ResourceManager.GetString("lblBienJugado", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Bienvenido.
         /// </summary>
         public static string lblBienvenido {
@@ -592,6 +601,15 @@ namespace VistasSorrySliders.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Puntuación Última Jugada:.
+        /// </summary>
+        public static string lblPuntuacionUltimaJugada {
+            get {
+                return ResourceManager.GetString("lblPuntuacionUltimaJugada", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a TABLERO DE PUNTUACIONES.
         /// </summary>
         public static string lblTablaPuntuaciones {
@@ -745,6 +763,15 @@ namespace VistasSorrySliders.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a &lt;p&gt;El jugador {0} te ha invitado a jugar Sorry Sliders Únete como invitado con el siguiente código de partida: {1}&lt;/p&gt;.
+        /// </summary>
+        public static string msgCorreoInvitacion {
+            get {
+                return ResourceManager.GetString("msgCorreoInvitacion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a No se pudo crear el lobby, por favor inténtelo más tarde.
         /// </summary>
         public static string msgCrearLobbySinExito {
@@ -795,6 +822,15 @@ namespace VistasSorrySliders.Properties {
         public static string msgEliminarNotificacion {
             get {
                 return ResourceManager.GetString("msgEliminarNotificacion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Error al enviar la notificación por correo, inténtelo más tarde.
+        /// </summary>
+        public static string msgErroEnviarCorreo {
+            get {
+                return ResourceManager.GetString("msgErroEnviarCorreo", resourceCulture);
             }
         }
         
@@ -898,7 +934,7 @@ namespace VistasSorrySliders.Properties {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a El host del juego lo ha expulsado de la partida.
+        ///   Busca una cadena traducida similar a Ha expulsado de la partida.
         /// </summary>
         public static string msgExpulsarJugador {
             get {
@@ -930,6 +966,15 @@ namespace VistasSorrySliders.Properties {
         public static string msgImagenInvalida {
             get {
                 return ResourceManager.GetString("msgImagenInvalida", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Invitación enviada.
+        /// </summary>
+        public static string msgInvitacionExitosa {
+            get {
+                return ResourceManager.GetString("msgInvitacionExitosa", resourceCulture);
             }
         }
         
@@ -1060,6 +1105,15 @@ namespace VistasSorrySliders.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Invitación a Sorry Sliders.
+        /// </summary>
+        public static string msgTituloCorreoInvitacion {
+            get {
+                return ResourceManager.GetString("msgTituloCorreoInvitacion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Cuenta creada.
         /// </summary>
         public static string msgTituloCuentaCreada {
@@ -1164,6 +1218,15 @@ namespace VistasSorrySliders.Properties {
         public static string txtBlockAjustes {
             get {
                 return ResourceManager.GetString("txtBlockAjustes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Comenzando Partida....
+        /// </summary>
+        public static string txtBlockCambiandoPartida {
+            get {
+                return ResourceManager.GetString("txtBlockCambiandoPartida", resourceCulture);
             }
         }
         
@@ -1348,6 +1411,15 @@ namespace VistasSorrySliders.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a POSICIÓN.
+        /// </summary>
+        public static string txtBlockPosicion {
+            get {
+                return ResourceManager.GetString("txtBlockPosicion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Potencia de Lanzamiento:.
         /// </summary>
         public static string txtBlockPotenciaLanzamiento {
@@ -1398,6 +1470,15 @@ namespace VistasSorrySliders.Properties {
         public static string txtBlockUnirsePartida {
             get {
                 return ResourceManager.GetString("txtBlockUnirsePartida", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a pack://application:,,,/Recursos/avatarPredefinido.jpg.
+        /// </summary>
+        public static string uriAvatarPorDefecto {
+            get {
+                return ResourceManager.GetString("uriAvatarPorDefecto", resourceCulture);
             }
         }
         

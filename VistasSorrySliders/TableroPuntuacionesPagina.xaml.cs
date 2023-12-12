@@ -26,6 +26,8 @@ namespace VistasSorrySliders
     {
         private CuentaSet _cuenta;
         public ObservableCollection<Puntuacion> ListaPuntuaciones { get; set; }
+        private Puntuacion[] _puntuaciones;
+
 
         public TableroPuntuacionesPagina(CuentaSet cuenta)
         {
@@ -34,12 +36,12 @@ namespace VistasSorrySliders
             _cuenta = cuenta;
         }
 
-        public bool InicializarPuntuaciones()
+        public Constantes InicializarPuntuaciones()
         {
             return RecuperarPuntuaciones();
         }
 
-        private bool RecuperarPuntuaciones() 
+        private Constantes RecuperarPuntuaciones() 
         {
             Constantes resultado;
             Puntuacion[] puntuaciones = new Puntuacion[] { };
@@ -63,13 +65,9 @@ namespace VistasSorrySliders
             switch (resultado)
             {
                 case Constantes.OPERACION_EXITOSA:
-                    ListaPuntuaciones = new ObservableCollection<Puntuacion>();
-                    foreach (var puntuacion in puntuaciones)
-                    {
-                        ListaPuntuaciones.Add(puntuacion);
-                    }
-                    this.DataContext = this;
-                    return true;
+                    _puntuaciones = puntuaciones;
+                    AgregarPuntuacionesTablero();
+                    break;
                 case Constantes.OPERACION_EXITOSA_VACIA:
                     Utilidades.MostrarUnMensajeError(Properties.Resources.msgTablaVacia);
                     break;
@@ -77,7 +75,19 @@ namespace VistasSorrySliders
                     Utilidades.MostrarMensajesError(resultado);
                     break;
             }
-            return false;
+            return resultado;
+        }
+
+        private void AgregarPuntuacionesTablero() 
+        {
+            if (_puntuaciones != null) {
+                ListaPuntuaciones = new ObservableCollection<Puntuacion>();
+                foreach (var puntuacion in _puntuaciones)
+                {
+                    ListaPuntuaciones.Add(puntuacion);
+                }
+                this.DataContext = this;
+            }
         }
 
         private void ClickSalirMenuPrincipal(object sender, RoutedEventArgs e)

@@ -22,7 +22,7 @@ namespace VistasSorrySliders.LogicaJuego
         public Direccion DireccionVertical { get; set; }
         public Point PosicionPeon { get; set; }
         private int _numeroDisminuirVelocidad;
-        private int _disminuyeVelocidad;
+        private readonly int _disminuyeVelocidad;
 
         public PeonLanzamiento(Ellipse figura, Point posicion)
         {
@@ -414,6 +414,11 @@ namespace VistasSorrySliders.LogicaJuego
                     EnMovimientoIzquierda = false;
                 }
             }
+        }
+
+        public (double, double) RecuperarPosicionPeon()
+        {
+            return (Canvas.GetLeft(Figura), Canvas.GetTop(Figura));
         }
     }
 }

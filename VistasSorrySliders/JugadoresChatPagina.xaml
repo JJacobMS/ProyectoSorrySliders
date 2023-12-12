@@ -92,11 +92,11 @@
                                                 </Setter.Value>
                                             </Setter>
                                             <Style.Triggers>
-                                                <DataTrigger Binding="{Binding Path=EsHost}" Value="True">
+                                                <DataTrigger Binding="{Binding Path=SePuedeExpulsar}" Value="False">
                                                     <Setter Property="ContentTemplate">
                                                         <Setter.Value>
                                                             <DataTemplate>
-                                                                <Button Style="{StaticResource estiloBtnHostPartida}" Content="{x:Static p:Resources.btnHost}"></Button>
+                                                                <Button Style="{StaticResource estiloBtnHostPartida}"></Button>
                                                             </DataTemplate>
                                                         </Setter.Value>
                                                     </Setter>

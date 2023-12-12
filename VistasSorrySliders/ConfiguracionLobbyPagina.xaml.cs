@@ -88,13 +88,11 @@ namespace VistasSorrySliders
             }
             catch (CommunicationException ex)
             {
-                Console.WriteLine(ex);
                 respuesta = Constantes.ERROR_CONEXION_SERVIDOR;
                 log.LogError("Error de Comunicación con el Servidor", ex);
             }
             catch (TimeoutException ex)
             {
-                Console.WriteLine(ex);
                 respuesta = Constantes.ERROR_TIEMPO_ESPERA_SERVIDOR;
                 log.LogWarn("Se agoto el tiempo de espera del servidor", ex);
             }
@@ -110,7 +108,7 @@ namespace VistasSorrySliders
                     break;
                 case Constantes.ERROR_CONEXION_SERVIDOR:
                 case Constantes.ERROR_TIEMPO_ESPERA_SERVIDOR:
-                    Utilidades.SalirInicioSesionDesdeVentanaPrincipal(Window.GetWindow(this), this);
+                    Utilidades.SalirInicioSesionDesdeVentanaPrincipal(this);
                     break;
             }
         }
@@ -118,12 +116,26 @@ namespace VistasSorrySliders
         private void CrearVentanaLobby(CuentaSet _cuentaUsuario, string codigoPartida) 
         {
             JuegoYLobbyVentana lobbyUnirse = new JuegoYLobbyVentana(_cuentaUsuario, codigoPartida, false);
+            Constantes respuesta = lobbyUnirse.InicializarPaginas();
+            switch (respuesta)
+            {
+                case Constantes.OPERACION_EXITOSA:
+                    MostrarVentanaLobby(lobbyUnirse);
+                    break;
+                case Constantes.ERROR_CONEXION_SERVIDOR:
+                    Utilidades.SalirInicioSesionDesdeVentanaPrincipal(this);
+                    break;
+            }
+        }
+
+        private void MostrarVentanaLobby(JuegoYLobbyVentana lobbyUnirse)
+        {
             if (lobbyUnirse.EntrarSistemaEnLinea())
             {
-                lobbyUnirse.Show();
                 MainWindow ventanaPrincipal = (MainWindow)Window.GetWindow(this);
                 ventanaPrincipal.EliminarProxyLineaAnterior();
                 Window.GetWindow(this).Close();
+                lobbyUnirse.Show();
             }
         }
 

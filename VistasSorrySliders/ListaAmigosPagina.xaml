@@ -54,7 +54,7 @@
                     <StackPanel Grid.Row="2" VerticalAlignment="Center">
                         <Label Content="{x:Static p:Resources.lblListaDeJugadores}" Style="{StaticResource estiloLblTextoListaAmigos}"/>
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                            <TextBox x:Name="txtBoxBuscadorJugadores" Width="230" Margin="10,5,5,5" HorizontalAlignment="Left" Style="{StaticResource estiloTxtBoxDatosMorado}"></TextBox>
+                            <TextBox x:Name="txtBoxBuscadorJugadores" Width="230" Margin="10,5,5,5" HorizontalAlignment="Left" Style="{StaticResource estiloTxtBoxDatosMorado}" TextChanged="TextChangedTamanoBuscador"></TextBox>
                             <Button Content="{x:Static p:Resources.btnBuscar}" Margin="5" Height="25" Width="90" FontSize="14" Click="ClickBuscarJugador"
                                     Style="{StaticResource estiloBtnMorado}" HorizontalAlignment="Right"/>
                         </StackPanel>
@@ -69,7 +69,7 @@
                     <StackPanel Grid.Row="3" VerticalAlignment="Center">
                         <Label Content="{x:Static p:Resources.lblCorreoJugadorSinCuenta}" Style="{StaticResource estiloLblTextoListaAmigos}"/>
                         <StackPanel Orientation="Horizontal" Margin="0,0,0,10" HorizontalAlignment="Center">
-                            <TextBox Width="230" Style="{StaticResource estiloTxtBoxDatosMorado}"></TextBox>
+                            <TextBox x:Name="txtBoxCorreoInvitacion"  Width="230" TextChanged="TextChangedTamañoCorreoElectronicoInvitacion" Style="{StaticResource estiloTxtBoxDatosMorado}"></TextBox>
                             <Button Content="{x:Static p:Resources.btnEnviarCodigo}" Margin="5"
                                     Style="{StaticResource estiloBtnListaAmigos}" HorizontalAlignment="Right" Click="ClickEnviarCodigoJugadorSinCuenta"/>
                         </StackPanel>

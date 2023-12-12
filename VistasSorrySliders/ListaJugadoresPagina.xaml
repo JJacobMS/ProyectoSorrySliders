@@ -256,7 +256,7 @@
                                         </Grid.RowDefinitions>
                                         <Label Style="{StaticResource estiloLblTituloJugadores}" Content="{x:Static p:Resources.lblListaJugadores}"></Label>
                                         <StackPanel Grid.Row="1" Orientation="Horizontal">
-                                            <TextBox Width="270" Style="{StaticResource estiloTxtBoxDatosMorado}" Name="txtBlockBuscador"/>
+                                            <TextBox Width="270" Style="{StaticResource estiloTxtBoxDatosMorado}" Name="txtBoxBuscador" TextChanged="TextChangedBuscadorJugadores"/>
                                             <Button Content="{x:Static p:Resources.btnBuscar}" Margin="5" Height="25" Width="90" FontSize="14" Click="ClickBuscarJugadores"
                                                     Style="{StaticResource estiloBtnMorado}"/>
                                         </StackPanel>

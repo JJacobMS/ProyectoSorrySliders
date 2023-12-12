@@ -15,8 +15,9 @@
         <Grid.Background>
             <ImageBrush ImageSource="/Recursos/tableroLanzamientoFondo.png"/>
         </Grid.Background>
-
-        <Grid.ColumnDefinitions>
+        <Viewbox>
+            <Grid Height="574" Width="1024">
+            <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="360"/>
             <ColumnDefinition Width="*"/>
@@ -89,7 +90,7 @@
                             <GridViewColumn.HeaderTemplate>
                                 <DataTemplate>
                                     <Border Background="#EAD4F4" Width="294" CornerRadius="6" BorderBrush="Black" BorderThickness="1">
-                                        <TextBlock Text="POSICIÓN" FontFamily="{StaticResource FuentesTitulo}" FontSize="30" Background="#EAD4F4" HorizontalAlignment="Center"/>
+                                         <TextBlock Text="{x:Static p:Resources.txtBlockPosicion}" FontFamily="{StaticResource FuentesTitulo}" FontSize="30" Background="#EAD4F4" HorizontalAlignment="Center"/>
                                     </Border>
                                 </DataTemplate>
                             </GridViewColumn.HeaderTemplate>
@@ -104,17 +105,21 @@
                     </GridView>
                 </ListView.View>
             </ListView>
-        </Grid>
+                    <Grid VerticalAlignment="Top" Grid.Column="1" Width="650">
+                        <Rectangle Width="620" Height="150" Grid.Row="0" Grid.ColumnSpan="3" Margin="0,10,0,0">
+                            <Rectangle.Fill>
+                                <ImageBrush ImageSource="/Recursos/bannerColorRojo.png" />
+                            </Rectangle.Fill>
+                        </Rectangle>
+                        <Label Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" Content="{x:Static p:Resources.lblBienJugado}" FontSize="50" Style="{StaticResource estiloLblInicioSesion}" />
+                        <Image Source="/Recursos/puntuacionIcono.png" Width="200" Height="150" Grid.Column="0" Margin="0,0,10,0" HorizontalAlignment="Right"/>
+                        <Image Source="/Recursos/puntuacionIcono.png" Width="200" Height="150" Grid.Column="2" Margin="10,0,0,0" HorizontalAlignment="Left"/>
+                    </Grid>
+                </Grid>
+            </Grid>
+        </Viewbox>
 
-
-        <Rectangle Width="620" Height="150" Grid.Row="0" Grid.ColumnSpan="3" Margin="0,10,0,0">
-            <Rectangle.Fill>
-                <ImageBrush ImageSource="/Recursos/bannerColorRojo.png" />
-            </Rectangle.Fill>
-        </Rectangle>
-        <Label Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" Content="BIEN JUGADO" FontSize="50" Style="{StaticResource estiloLblInicioSesion}" />
-        <Image Source="/Recursos/puntuacionIcono.png" Width="200" Height="150" Grid.Column="0" Margin="0,0,-65,0" HorizontalAlignment="Right"/>
-        <Image Source="/Recursos/puntuacionIcono.png" Width="200" Height="150" Grid.Column="2" Margin="-65,0,0,0" HorizontalAlignment="Left"/>
+        
 
 
     </Grid>

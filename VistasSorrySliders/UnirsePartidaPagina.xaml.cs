@@ -110,7 +110,7 @@ namespace VistasSorrySliders
                 resultado = Constantes.ERROR_TIEMPO_ESPERA_SERVIDOR;
                 log.LogWarn("Se agoto el tiempo de espera del servidor", ex);
             }
-
+            Utilidades.MostrarMensajesError(resultado);
             switch (resultado)
             {
                 case Constantes.OPERACION_EXITOSA:
@@ -119,8 +119,9 @@ namespace VistasSorrySliders
                 case Constantes.OPERACION_EXITOSA_VACIA:
                     MostrarErrorJugadores(numeroMaximoJugadores);
                     break;
-                default:
-                    Utilidades.MostrarMensajesError(resultado);
+                case Constantes.ERROR_CONEXION_SERVIDOR:
+                case Constantes.ERROR_TIEMPO_ESPERA_SERVIDOR:
+                    Utilidades.SalirInicioSesionDesdeVentanaPrincipal(this);
                     break;
             }
         }
@@ -175,12 +176,26 @@ namespace VistasSorrySliders
         private void EntrarLobby(string codigo)
         {
             JuegoYLobbyVentana lobbyUnirse = new JuegoYLobbyVentana(_cuentaActual, codigo, _esInvitado);
+            Constantes respuesta = lobbyUnirse.InicializarPaginas();
+            switch (respuesta)
+            {
+                case Constantes.OPERACION_EXITOSA:
+                    MostrarVentanaLobby(lobbyUnirse);
+                    break;
+                case Constantes.ERROR_CONEXION_SERVIDOR:
+                    Utilidades.SalirInicioSesionDesdeVentanaPrincipal(this);
+                    break;
+            }
+        }
+
+        private void MostrarVentanaLobby(JuegoYLobbyVentana lobbyUnirse)
+        {
             if (lobbyUnirse.EntrarSistemaEnLinea())
             {
-                lobbyUnirse.Show();
-                MainWindow ventanaPrincipal = (MainWindow) Window.GetWindow(this);
+                MainWindow ventanaPrincipal = (MainWindow)Window.GetWindow(this);
                 ventanaPrincipal.EliminarProxyLineaAnterior();
                 Window.GetWindow(this).Close();
+                lobbyUnirse.Show();
             }
         }
 

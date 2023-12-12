@@ -14,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using VistasSorrySliders.LogicaJuego;
 using VistasSorrySliders.ServicioSorrySliders;
 
 namespace VistasSorrySliders
@@ -29,8 +30,10 @@ namespace VistasSorrySliders
         private string _codigoPartida;
         private UsuariosEnLineaClient _proxyLinea;
 
+        public bool EsInvitado { get => _esInvitado; }
+
         public event Action EliminarContexto;
-        public event Action<string> ExpulsarJugador;
+
         public JuegoYLobbyVentana()
         {
             InitializeComponent();
@@ -42,28 +45,115 @@ namespace VistasSorrySliders
             _codigoPartida = codigoPartida;
             _esInvitado = esInvitado;
             InitializeComponent();
-            _frameLobby = new LobbyPagina(cuenta, codigoPartida, this);
-            frameLobby.Content = _frameLobby;
-            
-            if (!esInvitado)
-            {
-                ListaAmigosPagina amigos = new ListaAmigosPagina(cuenta, codigoPartida);
-                if (amigos.InicializarPagina())
-                {
-                    frameListaAmigos.Content = amigos;
-                }
-            }
+            frameLobby.Content = null;
+            frameListaAmigos.Content = null;
         }
 
-        public void CerrarVentana(object sender, CancelEventArgs e) 
+        public Constantes InicializarPaginas()
+        {
+            _frameLobby = new LobbyPagina(_cuenta, _codigoPartida, this);
+            Constantes respuestaLobby = _frameLobby.InicializarPagina();
+
+            switch (respuestaLobby)
+            {
+                case Constantes.ERROR_CONEXION_BD:
+                case Constantes.ERROR_CONEXION_SERVIDOR:
+                    return respuestaLobby;
+            }
+
+            frameLobby.Content = _frameLobby;
+
+            if (!_esInvitado)
+            {
+                ListaAmigosPagina amigos = new ListaAmigosPagina(_cuenta, _codigoPartida);
+                Constantes resultadoAmigos = amigos.InicializarPagina();
+                switch (resultadoAmigos)
+                {
+                    case Constantes.ERROR_CONEXION_BD:
+                    case Constantes.ERROR_CONEXION_SERVIDOR:
+                        return resultadoAmigos;
+                }
+                frameListaAmigos.Content = amigos;
+            }
+
+            return Constantes.OPERACION_EXITOSA;
+        }
+
+        public void CerrarVentana(object sender, CancelEventArgs e)
         {
             CerrarVentanaActual();
         }
         public void CerrarVentanaActual()
         {
-            EliminarContexto?.Invoke();
-            SalirCuentaRegistroPartidaBD();
-            IrMenuUsuario();
+            try
+            {
+                EliminarContexto?.Invoke();
+                EliminarDiccionariosRestantes();
+                SalirCuentaRegistroPartidaBD();
+                IrMenuUsuario();
+            }
+            catch (CommunicationException ex)
+            {
+                Logger log = new Logger(this.GetType());
+                log.LogError("Error de Comunicación con el Servidor", ex);
+                Utilidades.MostrarInicioSesion();
+            }
+        }
+        private void EliminarDiccionariosRestantes()
+        {
+            Logger log = new Logger(this.GetType());
+            try
+            {
+                _proxyLinea.SalirJuegoCompleto(_codigoPartida, _cuenta.CorreoElectronico);
+            }
+            catch (CommunicationException ex)
+            {
+                Utilidades.MostrarUnMensajeError(Properties.Resources.msgErrorConexion);
+                log.LogError("Error de Comunicación con el Servidor", ex);
+            }
+            catch (TimeoutException ex)
+            {
+                Utilidades.MostrarUnMensajeError(Properties.Resources.msgErrorConexion);
+                log.LogWarn("Se agoto el tiempo de espera del servidor", ex);
+            }
+        }
+
+        public void CambiarVentanaGanadores(List<JugadorGanador> listaPuntuaciones)
+        {
+            DesuscribirseDeCerrarVentana();
+            var ventanaPrincipal = new MainWindow(_cuenta.CorreoElectronico);
+            bool entrada = true;
+            if (_esInvitado)
+            {
+                SalirCuentaRegistroPartidaBD();
+                EliminarCuentaProvisionalInvitado(_cuenta.CorreoElectronico);
+            }
+            else
+            {
+                entrada = ventanaPrincipal.EntrarSistemaEnLineaMenu();
+            }
+
+            if(entrada)
+            {
+                IrVentanaGanadores(listaPuntuaciones, ventanaPrincipal);
+            }
+            else
+            {
+                Utilidades.MostrarInicioSesion(this);
+            }
+            
+        }
+        private void IrVentanaGanadores(List<JugadorGanador> listaPuntuaciones, MainWindow ventanaPrincipal)
+        {
+            TableroGanadoresPartidaPagina paginaGanadores = new TableroGanadoresPartidaPagina(_cuenta, listaPuntuaciones, _esInvitado);
+            ventanaPrincipal.Content = paginaGanadores;
+            ventanaPrincipal.Show();
+            Close();
+        }
+
+        public void DesuscribirseDeCerrarVentana()
+        {
+            Closing -= CerrarVentana;
         }
         public void CambiarFrameLobby(Page paginaNueva)
         {
@@ -74,12 +164,6 @@ namespace VistasSorrySliders
             //_frame = pagina nueva;, ponerle a pagina nueva salirPartida();, y en ese metodo poner el RecargarListaJugadores
             frameListaAmigos.Content = paginaNueva;
         }
-        public void ExpulsarJugadorJuego(string correoElectronico)
-        {
-            
-            ExpulsarJugador?.Invoke(correoElectronico);
-        }
-
         private void SalirCuentaRegistroPartidaBD()
         {
             Logger log = new Logger(this.GetType());
@@ -90,21 +174,13 @@ namespace VistasSorrySliders
             }
             catch (CommunicationException ex)
             {
-                Console.WriteLine(ex);
-                System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorConexion);
+                Utilidades.MostrarUnMensajeError(Properties.Resources.msgErrorConexion);
                 log.LogError("Error de Comunicación con el Servidor", ex);
             }
             catch (TimeoutException ex)
             {
-                Console.WriteLine(ex);
-                System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorConexion);
+                Utilidades.MostrarUnMensajeError(Properties.Resources.msgErrorConexion);
                 log.LogWarn("Se agoto el tiempo de espera del servidor", ex);
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex);
-                System.Windows.Forms.MessageBox.Show(Properties.Resources.msgErrorConexion);
-                log.LogFatal("Ha ocurrido un error inesperado", ex);
             }
         }
 
@@ -132,6 +208,7 @@ namespace VistasSorrySliders
         
         private void EliminarCuentaProvisionalInvitado(string correoProvisional)
         {
+            Logger log = new Logger(this.GetType());
             try
             {
                 UnirsePartidaClient proxyRecuperarJugadores = new UnirsePartidaClient();
@@ -139,11 +216,11 @@ namespace VistasSorrySliders
             }
             catch (CommunicationException ex)
             {
-                Console.WriteLine(ex);
+                log.LogError("Error de Comunicación con el Servidor", ex);
             }
             catch (TimeoutException ex)
             {
-                Console.WriteLine(ex);
+                log.LogWarn("Se agoto el tiempo de espera del servidor", ex);
             }
         }
 
@@ -169,18 +246,13 @@ namespace VistasSorrySliders
             }
             catch (CommunicationException ex)
             {
-                MessageBox.Show(Properties.Resources.msgErrorConexion);
+                Utilidades.MostrarUnMensajeError(Properties.Resources.msgErrorConexion);
                 log.LogError("Error de Comunicación con el Servidor", ex);
             }
             catch (TimeoutException ex)
             {
-                MessageBox.Show(Properties.Resources.msgErrorTiempoEsperaServidor);
+                Utilidades.MostrarUnMensajeError(Properties.Resources.msgErrorTiempoEsperaServidor);
                 log.LogWarn("Se agoto el tiempo de espera del servidor", ex);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(Properties.Resources.msgErrorConexion);
-                log.LogFatal("Ha ocurrido un error inesperado", ex);
             }
             return false;
         }

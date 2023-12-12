@@ -41,8 +41,22 @@ namespace VistasSorrySliders
             _juegoYLobbyVentana = ventana;
             _juegoYLobbyVentana.EliminarContexto += RemoverCallbacks;
 
-            IngresarCallbacks();
+        }
+
+        public Constantes InicializarConexionServidorYChat()
+        {
+            Logger log = new Logger(this.GetType());
+            try
+            {
+                IngresarCallbacks();
+            }
+            catch (CommunicationException ex)
+            {
+                log.LogError("Error de Comunicación con el Servidor", ex);
+                return Constantes.ERROR_CONEXION_SERVIDOR;
+            }
             CargarJugadores();
+            return Constantes.OPERACION_EXITOSA;
         }
 
         private void TextChangedTamañoChat(object sender, TextChangedEventArgs e)
@@ -61,6 +75,7 @@ namespace VistasSorrySliders
             {
                 _proxyChat.SalirChatListaJugadores(_partida.CodigoPartida.ToString(), _cuentaUsuario.CorreoElectronico);
                 _juegoYLobbyVentana.EliminarContexto -= RemoverCallbacks;
+                return;
             }
             catch (CommunicationException ex)
             {
@@ -72,6 +87,7 @@ namespace VistasSorrySliders
                 Utilidades.MostrarUnMensajeError(Properties.Resources.msgErrorTiempoEsperaServidor);
                 log.LogWarn("Se agoto el tiempo de espera del servidor", ex);
             }
+            throw new CommunicationException();
         }
 
         private void IngresarCallbacks() 
@@ -84,16 +100,19 @@ namespace VistasSorrySliders
                 ChatClient proxyChat = new ChatClient(contextoCallback);
                 _proxyChat = proxyChat;
                 _proxyChat.IngresarAlChat(codigoPartida, _cuentaUsuario.CorreoElectronico);
+                return;
             }
             catch (CommunicationException ex)
             {
+                Utilidades.MostrarUnMensajeError(Properties.Resources.msgErrorConexion);
                 log.LogError("Error de Comunicación con el Servidor", ex);
             }
             catch (TimeoutException ex)
             {
+                Utilidades.MostrarUnMensajeError(Properties.Resources.msgErrorTiempoEsperaServidor);
                 log.LogWarn("Se agoto el tiempo de espera del servidor", ex);
             }
-
+            throw new CommunicationException();
         }
 
         private void ClickEnviarMensaje(object sender, RoutedEventArgs e)
@@ -148,19 +167,17 @@ namespace VistasSorrySliders
                     Nickname = _cuentas[i].Nickname,
                     CorreoElectronico = _cuentas[i].CorreoElectronico,
                     EstaExpulsado = false,
-                    EstaEnLinea = true
+                    EstaEnLinea = true,
+                    SePuedeExpulsar = true
                 };
-                if (i == 0)
+                if (_cuentas[i].CorreoElectronico.Equals(_cuentaUsuario.CorreoElectronico))
                 {
-                    jugador.EsHost = true;
+                    jugador.SePuedeExpulsar = false;
                 }
                 _jugadoresListas.Add(jugador);
             }
             dtGridJugadores.ItemsSource = _jugadoresListas;
-            if (!_cuentaUsuario.CorreoElectronico.Equals(_jugadoresListas[0].CorreoElectronico))
-            {
-                dtGridJugadores.IsEnabled = false;
-            }
+
         }
 
         private void PreviewMouseLeftButtonDownExpulsarJugadorJuego(object sender, MouseButtonEventArgs e)
@@ -192,38 +209,38 @@ namespace VistasSorrySliders
         {
             if (correoElectronico.Equals(_cuentaUsuario.CorreoElectronico))
             {
-                Window.GetWindow(this).Close();
+                Utilidades.SalirHastaInicioSesionDesdeJuegoYLobbyVentana(this);
                 Utilidades.MostrarMensajeInformacion(Properties.Resources.msgExpulsarJugador, Properties.Resources.msgExpulsadoTitulo);
             }
             else
             {
                 NotificarExpulsionJuego(correoElectronico);
-                MostrarAvisoJugadorSalioJuego(correoElectronico, true);
+                _ = MostrarAvisoJugadorSalioJuego(correoElectronico, true);
             }
         }
 
         public void JugadorSalioListaJugadores(string correoElectronico)
         {
             NotificarExpulsionJuego(correoElectronico);
-            MostrarAvisoJugadorSalioJuego(correoElectronico, false);
+            _ = MostrarAvisoJugadorSalioJuego(correoElectronico, false);
         }
 
         private void NotificarExpulsionJuego(string correoElectronico)
         {
-            _juegoYLobbyVentana.ExpulsarJugadorJuego(correoElectronico);
             for (int i = 0; i < _jugadoresListas.Count; i++)
             {
                 if (_jugadoresListas[i].CorreoElectronico.Equals(correoElectronico))
                 {
                     _jugadoresListas[i].EstaExpulsado = true;
                     _jugadoresListas[i].EstaEnLinea = false;
+                    _jugadoresListas[i].SePuedeExpulsar = false;
 
                     dtGridJugadores.Items.Refresh();
                 }
             }
         }
 
-        private async void MostrarAvisoJugadorSalioJuego(string correoJugador, bool esBaneo)
+        private async Task MostrarAvisoJugadorSalioJuego(string correoJugador, bool esBaneo)
         {
             string nicknameJugador = DevolverNicknameDelCorreo(correoJugador);
             string mensaje;
@@ -243,7 +260,8 @@ namespace VistasSorrySliders
 
         private string DevolverNicknameDelCorreo(string correo)
         {
-            JugadorLista jugadorLista = _jugadoresListas.Where(jugador => jugador.CorreoElectronico.Equals(correo)).FirstOrDefault();
+            JugadorLista jugadorLista = _jugadoresListas.FirstOrDefault(jugador => jugador.CorreoElectronico.Equals(correo));
+            if (jugadorLista == null) { return ""; }
             return jugadorLista.Nickname;
         }
     }

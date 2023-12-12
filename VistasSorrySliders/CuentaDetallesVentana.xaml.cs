@@ -25,6 +25,7 @@ namespace VistasSorrySliders
         public event Action<UsuarioSet> ModificarUsuarioCuenta; 
         public event Action ModificarContrasena;
         public event Action<Window> AbrirVentana;
+        public event Action RegresarInicioSesion;
         private CuentaSet _cuenta;
         private UsuarioSet _usuario;
         public CuentaDetallesVentana(CuentaSet cuenta)
@@ -66,6 +67,8 @@ namespace VistasSorrySliders
                 resultado = Constantes.ERROR_TIEMPO_ESPERA_SERVIDOR;
                 log.LogWarn("Se agoto el tiempo de espera del servidor", ex);
             }
+
+            Utilidades.MostrarMensajesError(resultado);
             switch (resultado)
             {
                 case Constantes.OPERACION_EXITOSA:
@@ -75,8 +78,9 @@ namespace VistasSorrySliders
                 case Constantes.OPERACION_EXITOSA_VACIA:
                     Utilidades.MostrarUnMensajeError(Properties.Resources.mgsCuentaDetalleErrorRecuperar);
                     break;
-                default:
-                    Utilidades.MostrarMensajesError(resultado);
+                case Constantes.ERROR_CONEXION_SERVIDOR:
+                case Constantes.ERROR_TIEMPO_ESPERA_SERVIDOR:
+                    RegresarInicioSesion?.Invoke();
                     break;
             }
         }

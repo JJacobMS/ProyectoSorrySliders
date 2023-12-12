@@ -8,9 +8,9 @@ namespace VistasSorrySliders.LogicaJuego
 {
     public class JugadorTurno
     {
-        private string _correoJugador;
-        private int _turnoJugador;
-        public string CorreoJugador { get => _correoJugador; set => _correoJugador = value; }
-        public int TurnoJugador { get => _turnoJugador; set => _turnoJugador = value; }
+        public string CorreoJugador { get; set ; }
+        public int TurnoJugador { get; set; }
+        public bool EstaConectado { get;  set; }
+        public string Nickname { get; set; }
     }
 }
