@@ -22,6 +22,7 @@ namespace VistasSorrySliders
     /// </summary>
     public partial class InicioSesionPagina : Page
     {
+        private InicioSesionClient _proxyInicioSesion;
         public InicioSesionPagina()
         {
             InitializeComponent();
@@ -163,15 +164,18 @@ namespace VistasSorrySliders
             Logger log = new Logger(this.GetType());
             try
             {
-                bool estaEnLinea;
-                InicioSesionClient proxyInicioSesion = new InicioSesionClient();
-                estaEnLinea = proxyInicioSesion.JugadorEstaEnLinea(correoJugador);
-                if (estaEnLinea)
+                Constantes puedoPasar;
+                _proxyInicioSesion = new InicioSesionClient();
+                puedoPasar = _proxyInicioSesion.JugadorEstaEnLinea(correoJugador);
+                switch (puedoPasar)
                 {
-                    Utilidades.MostrarUnMensajeError(Properties.Resources.txtBlockCuentaYaEnLobby);
-                    return;
+                    case Constantes.ERROR_CONEXION_SERVIDOR:
+                        CambiarPantallaMenuPrincipal(correoJugador);
+                        break;
+                    case Constantes.OPERACION_EXITOSA:
+                        Utilidades.MostrarUnMensajeError(Properties.Resources.txtBlockCuentaYaEnLobby);
+                        break;
                 }
-                CambiarPantallaMenuPrincipal(correoJugador);
             }
             catch (CommunicationException ex)
             {
@@ -194,7 +198,7 @@ namespace VistasSorrySliders
             {
                 MenuPrincipalPagina menuPrincipal = new MenuPrincipalPagina();
                 menuPrincipal.CambiarPaginaMenu += CambiarPaginaMenu;
-                menuPrincipal.LlamarRecuperarDatosUsuario(correoVerificado);
+                menuPrincipal.LlamarRecuperarDatosUsuario(correoVerificado, _proxyInicioSesion);
             }
         }
 

@@ -6,16 +6,10 @@ using System.Threading.Tasks;
 
 namespace VistasSorrySliders.LogicaJuego
 {
-    /*
     public class JugadorGanador
     {
-        private string _correoElectronico;
-        private string _nickname;
-        private int _posicion;
-
-        public string CorreoElectronico { get => _correoElectronico; set => _correoElectronico = value; }
-        public string Nickname { get => _nickname; set => _nickname = value; }
-        public int Posicion { get => _posicion; set => _posicion = value; }
+        public string CorreoElectronico { get ; set; }
+        public string Nickname { get ; set; }
+        public int Posicion { get ; set ; }
     }
-    */
 }

@@ -52,6 +52,7 @@ namespace VistasSorrySliders
         private CuentaSet _cuentaUsuario;
         private List<CuentaSet> _listaCuentas;
         private JuegoYLobbyVentana _juegoYLobbyVentana;
+        private List<JugadorGanador> _listaGanadores;
         public JuegoPuntuacionesPagina(List<JugadorLanzamiento> jugadores, CuentaSet cuentaUsuario, string codigoPartida, List<CuentaSet> listaCuentas, JuegoYLobbyVentana juegoYLobbyVentana)
         {
             InitializeComponent();
@@ -367,7 +368,7 @@ namespace VistasSorrySliders
                         {
                             SettearPosicionFicha(llpSeleccionada.Name, POSICION_FINAL_HOME);
                             llpSeleccionada.IsEnabled = false;
-                            
+                            ComprobarGanador();
                             i = puntosObtenidos;
                         }
                     }
@@ -470,6 +471,7 @@ namespace VistasSorrySliders
 
         private void IngresarRelacionPuntuacion(List<(string, string, int)> listaOrdenada) 
         {
+            Dictionary<int, (string, string, int)[]> diccionarioPuntuaciones = new Dictionary<int, (string, string, int)[]>();
             _listaPuntuaciones = new List<JugadorGanador>();
             for (int i = 0; i < listaOrdenada.Count; i++)
             {
@@ -494,6 +496,7 @@ namespace VistasSorrySliders
                 }
                 NotificarCambiarPantalla(_listaPuntuaciones);
             }
+            
         }
 
         private void GuardarGanador() 
@@ -647,7 +650,7 @@ namespace VistasSorrySliders
 
         private async Task LogicaNotificarCambiarTurno() 
         {
-            await Task.Delay(1500);
+            await Task.Delay(3000);
             Logger log = new Logger(this.GetType());
             try
             {
@@ -871,17 +874,22 @@ namespace VistasSorrySliders
                 log.LogInfo("Ventana no está disponible", ex);
             }
         }
-        private void NotificarCambiarPantalla(List<JugadorGanador> jugadoresGanadores)
+        private void NotificarCambiarPantalla(List<JugadorGanador> listaPuntuaciones)
         {
-            foreach (var item in jugadoresGanadores)
+            int[] arrayPosiciones = new int[listaPuntuaciones.Count];
+            string[] arrayNickname = new string[listaPuntuaciones.Count];
+            for (int i = 0; i < listaPuntuaciones.Count; i++)
             {
-                Console.WriteLine(item.Nickname);
-                Console.WriteLine(item.Posicion);
+                arrayNickname[i] = listaPuntuaciones[i].Nickname;
+                Console.WriteLine(arrayNickname[i]);
+                arrayPosiciones[i] = listaPuntuaciones[i].Posicion;
+                Console.WriteLine(arrayPosiciones[i]);
+
             }
             Logger log = new Logger(this.GetType());
             try
             {
-                _proxyJuegoPuntuacion.NotificarCambiarPagina(_codigoPartida, jugadoresGanadores.ToArray());
+                _proxyJuegoPuntuacion.NotificarCambiarPagina(_codigoPartida, arrayPosiciones, arrayNickname);
                 return;
             }
             catch (CommunicationException ex)
@@ -931,16 +939,27 @@ namespace VistasSorrySliders
             throw new CommunicationException();
         }
 
-        public void CambiarPagina(JugadorGanador[] listaGanadores)
+        public void CambiarPagina(int[] arrayPosiciones, string[] arrayNickname)
         {
-            foreach (var item in listaGanadores)
-            {
-                Console.WriteLine(item.Nickname);
-                Console.WriteLine(item.Posicion);
-            }
-            _juegoYLobbyVentana.CambiarVentanaGanadores(listaGanadores.ToList());
+            AcomodarPosiciones(arrayPosiciones, arrayNickname);
+            EliminarDiccionarios();
+            _juegoYLobbyVentana.CambiarVentanaGanadores(_listaGanadores);
         }
+        private void AcomodarPosiciones(int[] arrayPosiciones, string[] arrayNickname) 
+        {
+            _listaGanadores = new List<JugadorGanador>();
 
-        //Pasar puntuaciones
+            for (int i = 0; i < arrayPosiciones.Count(); i++)
+            {
+                Console.WriteLine(arrayPosiciones[i]);
+                Console.WriteLine(arrayNickname[i]);
+                JugadorGanador jugador = new JugadorGanador()
+                {
+                    Nickname = arrayNickname[i],
+                    Posicion = arrayPosiciones[i]
+                };
+                _listaGanadores.Add(jugador);
+            }
+        }
     }
 }
