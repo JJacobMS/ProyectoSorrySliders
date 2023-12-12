@@ -101,7 +101,6 @@ namespace VistasSorrySliders
 
         private void ClickMostrarAjustes(object sender, RoutedEventArgs e)
         {
-            VerificarConexion();
             AjustesVentana ajustes = new AjustesVentana();
             ajustes.IdiomaCambiado += ActualizarIdiomaMenuPrincipal;
             ajustes.ShowDialog();

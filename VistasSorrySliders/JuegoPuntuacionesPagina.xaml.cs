@@ -305,7 +305,7 @@ namespace VistasSorrySliders
             
             for (int i = 0; i < puntuaciones.Count; i++)
             {
-                _listaBotonAzul[i].Content = 10;//puntuaciones[i];
+                _listaBotonAzul[i].Content = 3;//puntuaciones[i];
             }
         }
 
@@ -314,7 +314,7 @@ namespace VistasSorrySliders
             
             for (int i = 0; i < puntuaciones.Count; i++)
             {
-                _listaBotonRojo[i].Content = 10;//puntuaciones[i];
+                _listaBotonRojo[i].Content = 3;//puntuaciones[i];
             }
         }
         private void IngresarPuntuacionesVerde(List<int> puntuaciones)
@@ -322,7 +322,7 @@ namespace VistasSorrySliders
             
             for (int i = 0; i < puntuaciones.Count; i++)
             {
-                _listaBotonVerde[i].Content = 10;// puntuaciones[i];
+                _listaBotonVerde[i].Content = 3;// puntuaciones[i];
             }
         }
         private void IngresarPuntuacionesAmarillo(List<int> puntuaciones)
@@ -330,7 +330,7 @@ namespace VistasSorrySliders
             
             for (int i = 0; i < puntuaciones.Count; i++)
             {
-                _listaBotonAmarillo[i].Content = 10;// puntuaciones[i];
+                _listaBotonAmarillo[i].Content = 3;// puntuaciones[i];
             }
         }
         private void MouseLeftButtonDownMoverPeon(object sender, MouseButtonEventArgs e)
@@ -358,11 +358,13 @@ namespace VistasSorrySliders
                     _btnSeleccionado = null;
                     for (int i = 0; i < puntosObtenidos; i++)
                     {
+                        llpSeleccionada.IsEnabled = false;
                         double posicion = ObtenerPosicionFicha(llpSeleccionada.Name);
                         if (posicion < LIMITE_FILAS)
                         {
                             SettearPosicionFicha(llpSeleccionada.Name, posicion + AVANZAR_UNA_FILA);
                             await Task.Delay(1000);
+                            llpSeleccionada.IsEnabled = true;
                         }
                         else
                         {
