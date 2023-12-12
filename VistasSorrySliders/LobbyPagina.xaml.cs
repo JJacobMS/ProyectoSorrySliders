@@ -48,7 +48,7 @@ namespace VistasSorrySliders
             {
                 EntrarPartida();
                 InicializarDatosPartida(_codigoPartida);
-                RecuperarDatosPartida(_codigoPartida);
+                _= RecuperarDatosPartidaAsync(_codigoPartida);
             }
             catch (CommunicationException ex)
             {
@@ -65,8 +65,10 @@ namespace VistasSorrySliders
             return Constantes.OPERACION_EXITOSA;
         }
 
-        public void RecuperarDatosPartida(string codigoPartida) 
+        public async Task RecuperarDatosPartidaAsync(string codigoPartida) 
         {
+            brdComenzarPartida.Visibility = Visibility.Hidden;
+            brdActualizarJugadores.Visibility = Visibility.Visible;
             if (_partidaActual == null)
             {
                 return;
@@ -75,6 +77,7 @@ namespace VistasSorrySliders
             Logger log = new Logger(this.GetType());
             try
             {
+                await Task.Delay(2000);
                 UnirsePartidaClient proxyRecuperarJugadores = new UnirsePartidaClient();
                 (respuesta, _cuentas) = proxyRecuperarJugadores.RecuperarJugadoresLobby(codigoPartida);
                 if (_cuentas.Count() == _partidaActual.CantidadJugadores && _cuentaUsuario.CorreoElectronico == _cuentas[0].CorreoElectronico)
@@ -96,6 +99,7 @@ namespace VistasSorrySliders
                 respuesta = Constantes.ERROR_TIEMPO_ESPERA_SERVIDOR;
                 log.LogWarn("Se agoto el tiempo de espera del servidor", ex);
             }
+            brdActualizarJugadores.Visibility = Visibility.Hidden;
             Utilidades.MostrarMensajesError(respuesta);
             switch (respuesta)
             {
@@ -255,7 +259,7 @@ namespace VistasSorrySliders
         {
             try
             {
-                RecuperarDatosPartida(_codigoPartida);
+                _ = RecuperarDatosPartidaAsync(_codigoPartida);
             }
             catch (CommunicationException ex)
             {
@@ -296,7 +300,7 @@ namespace VistasSorrySliders
         {
             try
             {
-                RecuperarDatosPartida(_codigoPartida);
+                _ = RecuperarDatosPartidaAsync(_codigoPartida);
             }
             catch (CommunicationException ex)
             {
@@ -325,7 +329,11 @@ namespace VistasSorrySliders
         private async Task InicializarPartidaParaTodos()
         {
             brdComenzarPartida.Visibility = Visibility.Visible;
-            await Task.Delay(3000);
+            if (!ComprobarJugadores())
+            {
+                return;
+            }
+            await Task.Delay(3500);
             JugadorSalioPartida();
             btnIniciarPartida.IsEnabled = false;
             if (_cuentas.Length == _partidaActual.CantidadJugadores && txtBoxHost.Text == _cuentaUsuario.Nickname)
@@ -336,6 +344,27 @@ namespace VistasSorrySliders
             {
                 brdComenzarPartida.Visibility = Visibility.Hidden;
             }
+        }
+        private bool ComprobarJugadores()
+        {
+            Logger log = new Logger(this.GetType());
+            try
+            {
+                _proxyLobby.ComprobarJugadoresExistentes(_codigoPartida);
+                return true;
+            }
+            catch (CommunicationException ex)
+            {
+                Utilidades.MostrarUnMensajeError(Properties.Resources.msgErrorConexion);
+                log.LogError("Error de Comunicación con el Servidor", ex);
+            }
+            catch (TimeoutException ex)
+            {
+                Utilidades.MostrarUnMensajeError(Properties.Resources.msgErrorTiempoEsperaServidor);
+                log.LogWarn("Se agoto el tiempo de espera del servidor", ex);
+            }
+            IrMenuPrincipal();
+            return false;
         }
 
         private void CambiarPaginas() 

@@ -218,7 +218,10 @@ namespace VistasSorrySliders
             ventana.Content = inicio;
 
             ventana.Show();
-            ventanaAnterior.Close();
+            if (ventanaAnterior != null)
+            {
+                ventanaAnterior.Close();
+            }
         }
 
         public static void MostrarInicioSesion()

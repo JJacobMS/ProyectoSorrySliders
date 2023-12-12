@@ -1213,6 +1213,15 @@ namespace VistasSorrySliders.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Actualizando Jugadores.
+        /// </summary>
+        public static string txtBlockActualizarJugadores {
+            get {
+                return ResourceManager.GetString("txtBlockActualizarJugadores", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a AJUSTES.
         /// </summary>
         public static string txtBlockAjustes {
@@ -1348,6 +1357,15 @@ namespace VistasSorrySliders.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Guardando puntuaciones.....
+        /// </summary>
+        public static string txtBlockGuardandoPuntuaciones {
+            get {
+                return ResourceManager.GetString("txtBlockGuardandoPuntuaciones", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a El juego se está jugando o ya ha terminado.
         /// </summary>
         public static string txtBlockJuegoNoValido {
@@ -1443,6 +1461,15 @@ namespace VistasSorrySliders.Properties {
         public static string txtBlockRondaLanzamientoTerminada {
             get {
                 return ResourceManager.GetString("txtBlockRondaLanzamientoTerminada", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Ronda de Puntuaciones Terminada.
+        /// </summary>
+        public static string txtBlockRondaPuntuacionesTerminada {
+            get {
+                return ResourceManager.GetString("txtBlockRondaPuntuacionesTerminada", resourceCulture);
             }
         }
         

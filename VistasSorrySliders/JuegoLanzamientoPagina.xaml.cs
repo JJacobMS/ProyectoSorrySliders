@@ -270,6 +270,7 @@ namespace VistasSorrySliders
         }
         private void IniciarTurno()
         {
+            CambiarBotonesADeshabilitado();
             JugadorLanzamiento jugadorTurnoActual = _tablero.ListaJugadores[_tablero.TurnoActual];
             PeonLanzamiento peonTurnoActual = jugadorTurnoActual.PeonesLanzamiento[jugadorTurnoActual.PeonTurnoActual];
             Canvas.SetTop(peonTurnoActual.Figura, peonTurnoActual.PosicionPeon.Y);
@@ -458,15 +459,10 @@ namespace VistasSorrySliders
 
         private void TerminarJuegoFaltaJugadores()
         {
-            try
+            if (Window.GetWindow(this) != null)
             {
                 Window.GetWindow(this).Close();
                 Utilidades.MostrarUnMensajeError(Properties.Resources.msgFaltaJugadores);
-            }
-            catch (NullReferenceException ex)
-            {
-                Logger log = new Logger(this.GetType());
-                log.LogInfo("Ventana no está disponible", ex);
             }
         }
 
@@ -499,7 +495,7 @@ namespace VistasSorrySliders
             brdConteoPuntuaciones.Visibility = Visibility.Hidden;
             if (_juegoPuntuacionPagina == null)
             {
-                _juegoYLobbyVentana.CambiarFrameLobby(new JuegoPuntuacionesPagina(jugadoresConPuntuaciones, _cuentaUsuario, _codigoPartida, _listaCuentas, _juegoYLobbyVentana));
+                CrearJuegoPuntuaciones(jugadoresConPuntuaciones);
             }
             else 
             {
@@ -507,6 +503,35 @@ namespace VistasSorrySliders
                 _juegoYLobbyVentana.CambiarFrameLobby(_juegoPuntuacionPagina);
             }
             _juegoYLobbyVentana.EliminarContexto -= EliminarContextoJuegoLanzamiento;
+        }
+
+        private void CrearJuegoPuntuaciones(List<JugadorLanzamiento> jugadoresConPuntuaciones)
+        {
+            JuegoPuntuacionesPagina puntuaciones = new JuegoPuntuacionesPagina(jugadoresConPuntuaciones, _cuentaUsuario, _codigoPartida, _listaCuentas, _juegoYLobbyVentana);
+            Constantes respuesta = puntuaciones.AgregarProxy();
+            switch (respuesta)
+            {
+                case Constantes.OPERACION_EXITOSA:
+                    _juegoYLobbyVentana.CambiarFrameLobby(puntuaciones);
+                    break;
+                case Constantes.ERROR_CONEXION_SERVIDOR:
+                    Utilidades.SalirHastaInicioSesionDesdeJuegoYLobbyVentana(this);
+                    break;
+            }
+            
+        }
+
+        private void CambiarBotonesADeshabilitado()
+        {
+            foreach (var botonLanzamientoDirreccion in _botonesLanzarPeonJugador)
+            {
+                botonLanzamientoDirreccion.Value.IsEnabled = false;
+            }
+
+            foreach (var botonesDadoDireccion in _botonesTirarDadoJugador)
+            {
+                botonesDadoDireccion.Value.IsEnabled |= false;
+            }
         }
     }
 }

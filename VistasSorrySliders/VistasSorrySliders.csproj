@@ -469,5 +469,11 @@
   <ItemGroup>
     <Resource Include="Recursos\iniciarPartida.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Recursos\recargar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Recursos\puntuaciones.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

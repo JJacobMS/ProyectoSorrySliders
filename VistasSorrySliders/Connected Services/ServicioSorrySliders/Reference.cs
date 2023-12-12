@@ -1410,6 +1410,12 @@ namespace VistasSorrySliders.ServicioSorrySliders {
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/ILobby/IniciarPartida")]
         System.Threading.Tasks.Task IniciarPartidaAsync(string uid);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/ILobby/ComprobarJugadoresExistentes")]
+        void ComprobarJugadoresExistentes(string uid);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/ILobby/ComprobarJugadoresExistentes")]
+        System.Threading.Tasks.Task ComprobarJugadoresExistentesAsync(string uid);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -1475,6 +1481,14 @@ namespace VistasSorrySliders.ServicioSorrySliders {
         
         public System.Threading.Tasks.Task IniciarPartidaAsync(string uid) {
             return base.Channel.IniciarPartidaAsync(uid);
+        }
+        
+        public void ComprobarJugadoresExistentes(string uid) {
+            base.Channel.ComprobarJugadoresExistentes(uid);
+        }
+        
+        public System.Threading.Tasks.Task ComprobarJugadoresExistentesAsync(string uid) {
+            return base.Channel.ComprobarJugadoresExistentesAsync(uid);
         }
     }
     

@@ -29,7 +29,6 @@ namespace VistasSorrySliders
     {
         private CuentaSet _cuentaUsuario;
         public event Action<MenuPrincipalPagina> CambiarPaginaMenu;
-        //private InicioSesionClient _proxyInicioSesion;
 
         public MenuPrincipalPagina()
         {

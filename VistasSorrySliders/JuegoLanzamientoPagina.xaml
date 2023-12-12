@@ -8,17 +8,6 @@
       mc:Ignorable="d" 
       d:DesignHeight="576" d:DesignWidth="614">
 
-    <Page.Resources>
-        <Style x:Key="estiloTxtBlockCambioRonda" TargetType="TextBlock">
-            <Setter Property="Foreground" Value="#B26C1A"/>
-            <Setter Property="FontSize" Value="32"/>
-            <Setter Property="TextWrapping" Value="Wrap"/>
-            <Setter Property="TextAlignment" Value="Center"/>
-            <Setter Property="FontFamily" Value="{StaticResource FuentesTitulo}"/>
-            <Setter Property="Margin" Value="10"/>
-        </Style>
-    </Page.Resources>
-
     <Grid>
         <Grid.Background>
             <ImageBrush ImageSource="/Recursos/TableroLanzamientoFondo.png"></ImageBrush>

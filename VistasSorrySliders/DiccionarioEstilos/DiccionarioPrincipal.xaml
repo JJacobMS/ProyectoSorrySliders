@@ -232,4 +232,13 @@
         <Setter Property="TextWrapping" Value="Wrap"/>
         <Setter Property="TextAlignment" Value="Center"/>
     </Style>
+
+    <Style x:Key="estiloTxtBlockCambioRonda" TargetType="TextBlock">
+        <Setter Property="Foreground" Value="#B26C1A"/>
+        <Setter Property="FontSize" Value="32"/>
+        <Setter Property="TextWrapping" Value="Wrap"/>
+        <Setter Property="TextAlignment" Value="Center"/>
+        <Setter Property="FontFamily" Value="{StaticResource FuentesTitulo}"/>
+        <Setter Property="Margin" Value="4"/>
+    </Style>
 </ResourceDictionary>
