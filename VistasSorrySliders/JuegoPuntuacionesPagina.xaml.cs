@@ -53,6 +53,7 @@ namespace VistasSorrySliders
         private List<CuentaSet> _listaCuentas;
         private JuegoYLobbyVentana _juegoYLobbyVentana;
         private List<JugadorGanador> _listaGanadores;
+        private int _contadorAvisarTurno = 0;
         public JuegoPuntuacionesPagina(List<JugadorLanzamiento> jugadores, CuentaSet cuentaUsuario, string codigoPartida, List<CuentaSet> listaCuentas, JuegoYLobbyVentana juegoYLobbyVentana)
         {
             InitializeComponent();
@@ -341,9 +342,10 @@ namespace VistasSorrySliders
         private async void RealizarJugada(object sender) 
         {
             await MoverPeonAsync(sender);
-            if (!ComprobarDadosActuales())
+            if (!ComprobarDadosActuales() && _contadorAvisarTurno==0)
             {
                 NotificarCambiarTurno();
+                _contadorAvisarTurno = _contadorAvisarTurno + 1;
             }
         }
         private async Task MoverPeonAsync(object sender)
@@ -354,6 +356,7 @@ namespace VistasSorrySliders
                 int puntosObtenidos = ObtenerValorBoton(_btnSeleccionado);
                 if (puntosObtenidos >= 0)
                 {
+                    //Settear enable false todos los demas botones
                     _btnSeleccionado.IsEnabled = false;
                     _btnSeleccionado.BorderBrush = Brushes.Black;
                     _btnSeleccionado = null;
@@ -376,6 +379,7 @@ namespace VistasSorrySliders
                         }
                     }
                     await NotificarJugadores(llpSeleccionada, puntosObtenidos);
+                    //Des settear
                 }
             }
         }
@@ -560,6 +564,7 @@ namespace VistasSorrySliders
         {
             if (turnoActual == _turnoJugador)
             {
+                _contadorAvisarTurno = 0;
                 ActivarDados();
                 if (!ComprobarDadosActuales())
                 {
@@ -619,6 +624,7 @@ namespace VistasSorrySliders
         
         public void EmpezarJuegoPuntuacionNuevo(List<JugadorLanzamiento> jugadores) 
         {
+            _contadorAvisarTurno = 0;
             _turnoActualJuego = 0;
             _jugadoresLanzamiento = jugadores;
             InicializarLabels();
