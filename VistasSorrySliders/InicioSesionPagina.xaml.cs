@@ -198,7 +198,7 @@ namespace VistasSorrySliders
             {
                 MenuPrincipalPagina menuPrincipal = new MenuPrincipalPagina();
                 menuPrincipal.CambiarPaginaMenu += CambiarPaginaMenu;
-                menuPrincipal.LlamarRecuperarDatosUsuario(correoVerificado, _proxyInicioSesion);
+                menuPrincipal.LlamarRecuperarDatosUsuario(correoVerificado);
             }
         }
 
