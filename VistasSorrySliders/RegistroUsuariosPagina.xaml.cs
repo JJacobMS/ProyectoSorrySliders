@@ -74,17 +74,17 @@ namespace VistasSorrySliders
             catch (ArgumentException ex)
             {
                 Utilidades.MostrarUnMensajeError(Properties.Resources.msgErrorImagen, Properties.Resources.msgTituloErrorImagen);
-                log.LogWarn("Se ha proporcionado un argumento invalido", ex);
+                log.LogError("Se ha proporcionado un argumento invalido", ex);
             }
             catch (OutOfMemoryException ex)
             {
                 Utilidades.MostrarUnMensajeError(Properties.Resources.msgErrorImagen, Properties.Resources.msgTituloErrorImagen);
-                log.LogWarn("Se ha agotado la memoria", ex);
+                log.LogError("Se ha agotado la memoria", ex);
             }
             catch (IOException ex)
             {
                 Utilidades.MostrarUnMensajeError(Properties.Resources.msgErrorImagen, Properties.Resources.msgTituloErrorImagen);
-                log.LogWarn("Error al acceder a la imagen", ex);
+                log.LogError("Error al acceder a la imagen", ex);
             }
         }
 
@@ -207,12 +207,12 @@ namespace VistasSorrySliders
             }
             catch (RegexMatchTimeoutException ex)
             {
-                log.LogWarn("El tiempo de espera para la expresión se ha agotado", ex);
+                log.LogError("El tiempo de espera para la expresión se ha agotado", ex);
                 return false;
             }
             catch (ArgumentException ex)
             {
-                log.LogWarn("Se ha proporcionado un argumento invalido", ex);
+                log.LogError("Se ha proporcionado un argumento invalido", ex);
                 return false;
             }
         }
@@ -248,7 +248,7 @@ namespace VistasSorrySliders
             catch (CommunicationException ex)
             {
                 resultado = Constantes.ERROR_CONEXION_SERVIDOR;
-                log.LogError("Error de Comunicación con el Servidor", ex);
+                log.LogWarn("Error de Comunicación con el Servidor", ex);
             }
             catch (TimeoutException ex)
             {
@@ -299,7 +299,7 @@ namespace VistasSorrySliders
             catch (CommunicationException ex)
             {
                 resultado = Constantes.ERROR_CONEXION_SERVIDOR;
-                log.LogError("Error de Comunicación con el Servidor", ex);
+                log.LogWarn("Error de Comunicación con el Servidor", ex);
             }
             catch (TimeoutException ex)
             {
@@ -334,7 +334,7 @@ namespace VistasSorrySliders
             catch (CommunicationException ex)
             {
                 resultado = Constantes.ERROR_CONEXION_SERVIDOR;
-                log.LogError("Error de Comunicación con el Servidor", ex);
+                log.LogWarn("Error de Comunicación con el Servidor", ex);
             }
             catch (TimeoutException ex)
             {
@@ -380,7 +380,7 @@ namespace VistasSorrySliders
             catch (CommunicationException ex)
             {
                 Utilidades.MostrarUnMensajeError(Properties.Resources.msgErrorConexion);
-                log.LogError("Error de Comunicación con el Servidor", ex);
+                log.LogWarn("Error de Comunicación con el Servidor", ex);
             }
             catch (TimeoutException ex)
             {
@@ -427,22 +427,22 @@ namespace VistasSorrySliders
             catch (ArgumentException ex)
             {
                 Utilidades.MostrarUnMensajeError(Properties.Resources.msgErrorImagen, Properties.Resources.msgTituloErrorImagen);
-                log.LogWarn("Se ha proporcionado un argumento invalido", ex);
+                log.LogError("Se ha proporcionado un argumento invalido", ex);
             }
             catch (OutOfMemoryException ex)
             {
                 Utilidades.MostrarUnMensajeError(Properties.Resources.msgErrorImagen, Properties.Resources.msgTituloErrorImagen);
-                log.LogWarn("Se ha agotado la memoria", ex);
+                log.LogError("Se ha agotado la memoria", ex);
             }
             catch (UnauthorizedAccessException ex)
             {
-                log.LogWarn("Error al acceder a la imagen", ex);
+                log.LogError("Error al acceder a la imagen", ex);
                 Utilidades.MostrarUnMensajeError(Properties.Resources.msgErrorImagenPermisos, Properties.Resources.msgErrorTituloImagenPermisos);
             }
             catch (IOException ex)
             {
                 Utilidades.MostrarUnMensajeError(Properties.Resources.msgErrorImagen, Properties.Resources.msgTituloErrorImagen);
-                log.LogWarn("Error al acceder a la imagen", ex);
+                log.LogError("Error al acceder a la imagen", ex);
             }
         }
 
@@ -522,13 +522,13 @@ namespace VistasSorrySliders
             }
             catch (IOException ex)
             {
-                log.LogWarn("Error al acceder a la imagen", ex);
+                log.LogError("Error al acceder a la imagen", ex);
                 Utilidades.MostrarUnMensajeError(Properties.Resources.msgErrorImagen, Properties.Resources.msgTituloErrorImagen);
                 return false;
             }
             catch (UnauthorizedAccessException ex)
             {
-                log.LogWarn("Error al acceder a la imagen", ex);
+                log.LogError("Error al acceder a la imagen", ex);
                 Utilidades.MostrarUnMensajeError(Properties.Resources.msgErrorImagen, Properties.Resources.msgTituloErrorImagen);
                 return false;
             }

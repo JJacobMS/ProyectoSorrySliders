@@ -53,7 +53,7 @@ namespace VistasSorrySliders
             catch (CommunicationException ex)
             {
                 Logger log = new Logger(this.GetType());
-                log.LogError("Error de Comunicación con el Servidor", ex);
+                log.LogWarn("Error de Comunicación con el Servidor", ex);
                 return Constantes.ERROR_CONEXION_SERVIDOR;
             }
             catch (EntitySqlException ex)
@@ -83,7 +83,7 @@ namespace VistasSorrySliders
             catch (CommunicationException ex)
             {
                 resultado = Constantes.ERROR_CONEXION_SERVIDOR;
-                log.LogError("Error de Comunicación con el Servidor", ex);
+                log.LogWarn("Error de Comunicación con el Servidor", ex);
             }
             catch (TimeoutException ex)
             {
@@ -112,7 +112,6 @@ namespace VistasSorrySliders
             if (_tiposNotificacion != null)
             {
                 EnviarInvitacionJugador(cuentaJugadorClickeado);
-                EnviarCorreo(cuentaJugadorClickeado.CorreoElectronico);
             }
         }
 
@@ -140,7 +139,7 @@ namespace VistasSorrySliders
             catch (CommunicationException ex)
             {
                 resultado = Constantes.ERROR_CONEXION_SERVIDOR;
-                log.LogError("Error de Comunicación con el Servidor", ex);
+                log.LogWarn("Error de Comunicación con el Servidor", ex);
             }
             catch (TimeoutException ex)
             {
@@ -193,12 +192,12 @@ namespace VistasSorrySliders
             }
             catch (RegexMatchTimeoutException ex)
             {
-                log.LogWarn("El tiempo de espera para la expresión se ha agotado", ex);
+                log.LogError("El tiempo de espera para la expresión se ha agotado", ex);
                 return false;
             }
             catch (ArgumentException ex)
             {
-                log.LogWarn("Se ha proporcionado un argumento invalido", ex);
+                log.LogError("Se ha proporcionado un argumento invalido", ex);
                 return false;
             }
         }
@@ -242,7 +241,7 @@ namespace VistasSorrySliders
             catch (CommunicationException ex)
             {
                 resultado = Constantes.ERROR_CONEXION_SERVIDOR;
-                log.LogError("Error de Comunicación con el Servidor", ex);
+                log.LogWarn("Error de Comunicación con el Servidor", ex);
             }
             catch (TimeoutException ex)
             {
@@ -261,7 +260,6 @@ namespace VistasSorrySliders
                     break;
                 default:
                     Window.GetWindow(this).Close();
-                    
                     break;
             }
         }
@@ -312,7 +310,7 @@ namespace VistasSorrySliders
             catch (CommunicationException ex)
             {
                 resultado = Constantes.ERROR_CONEXION_SERVIDOR;
-                log.LogError("Error de Comunicación con el Servidor", ex);
+                log.LogWarn("Error de Comunicación con el Servidor", ex);
             }
             catch (TimeoutException ex)
             {
@@ -343,7 +341,7 @@ namespace VistasSorrySliders
             }
             catch (CommunicationException ex)
             {
-                log.LogError("Error de Comunicación con el Servidor", ex);
+                log.LogWarn("Error de Comunicación con el Servidor", ex);
             }
             catch (TimeoutException ex)
             {
@@ -368,7 +366,7 @@ namespace VistasSorrySliders
             catch (CommunicationException ex)
             {
                 resultado = Constantes.ERROR_CONEXION_SERVIDOR;
-                log.LogError("Error de Comunicación con el Servidor", ex);
+                log.LogWarn("Error de Comunicación con el Servidor", ex);
             }
             catch (TimeoutException ex)
             {

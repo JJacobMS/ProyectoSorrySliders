@@ -37,17 +37,17 @@ namespace VistasSorrySliders
             catch (ArgumentException ex)
             {
                 MostrarUnMensajeError(Properties.Resources.msgErrorImagen, Properties.Resources.msgTituloErrorImagen);
-                log.LogWarn("Se ha proporcionado un argumento invalido", ex);
+                log.LogError("Se ha proporcionado un argumento invalido", ex);
             }
             catch (OutOfMemoryException ex)
             {
                 MostrarUnMensajeError(Properties.Resources.msgErrorImagen, Properties.Resources.msgTituloErrorImagen);
-                log.LogWarn("Se ha agotado la memoria", ex);
+                log.LogError("Se ha agotado la memoria", ex);
             }
             catch (IOException ex)
             {
                 MostrarUnMensajeError(Properties.Resources.msgErrorImagen, Properties.Resources.msgTituloErrorImagen);
-                log.LogWarn("Error al acceder a la imagen", ex);
+                log.LogError("Error al acceder a la imagen", ex);
             }
         }
 
@@ -73,17 +73,17 @@ namespace VistasSorrySliders
             catch (ArgumentException ex)
             {
                 MostrarUnMensajeError(Properties.Resources.msgErrorImagen, Properties.Resources.msgTituloErrorImagen);
-                log.LogWarn("Se ha proporcionado un argumento invalido", ex);
+                log.LogError("Se ha proporcionado un argumento invalido", ex);
             }
             catch (OutOfMemoryException ex)
             {
                 MostrarUnMensajeError(Properties.Resources.msgErrorImagen, Properties.Resources.msgTituloErrorImagen);
-                log.LogWarn("Se ha agotado la memoria", ex);
+                log.LogError("Se ha agotado la memoria", ex);
             }
             catch (IOException ex)
             {
                 MostrarUnMensajeError(Properties.Resources.msgErrorImagen, Properties.Resources.msgTituloErrorImagen);
-                log.LogWarn("Error al acceder a la imagen", ex);
+                log.LogError("Error al acceder a la imagen", ex);
             }
 
             return null;
@@ -107,19 +107,19 @@ namespace VistasSorrySliders
             catch (IOException ex)
             {
                 MostrarUnMensajeError(Properties.Resources.msgErrorImagen, Properties.Resources.msgTituloErrorImagen);
-                log.LogWarn("Error al acceder a la imagen", ex);
+                log.LogError("Error al acceder a la imagen", ex);
                 return new byte[0];
             }
             catch (ArgumentException ex)
             {
                 MostrarUnMensajeError(Properties.Resources.msgErrorImagen, Properties.Resources.msgTituloErrorImagen);
-                log.LogWarn("Se ha proporcionado un argumento invalido", ex);
+                log.LogError("Se ha proporcionado un argumento invalido", ex);
                 return new byte[0];
             }
             catch (OutOfMemoryException ex)
             {
                 MostrarUnMensajeError(Properties.Resources.msgErrorImagen, Properties.Resources.msgTituloErrorImagen);
-                log.LogWarn("Se ha agotado la memoria", ex);
+                log.LogError("Se ha agotado la memoria", ex);
                 return new byte[0];
             }
 
@@ -131,7 +131,7 @@ namespace VistasSorrySliders
             try
             {
                 int segundos = 3;
-                string patron = @"^(?=.*[0-9!@#$%^&*()\-=_+.,:;])[A-Za-z0-9!@#$%^&*()\-=_+.,:;]{8,}$";
+                string patron = @"^(?=.*[A-Za-zñÑ])(?=.*\d)(?=.*[!@#$%^&*()\-=_+.,:;])[A-Za-zñÑ\d!@#$%^&*()\-=_+.,:;]{10,}$";
                 TimeSpan tiempoAgotadoPatron = TimeSpan.FromSeconds(segundos);
                 bool correoValidado = Regex.IsMatch(contraseña, patron, RegexOptions.None, tiempoAgotadoPatron);
                 if (correoValidado)
@@ -143,12 +143,7 @@ namespace VistasSorrySliders
             }
             catch (RegexMatchTimeoutException ex)
             {
-                log.LogWarn("El tiempo de espera para la expresión se ha agotado", ex);
-                return false;
-            }
-            catch (Exception ex)
-            {
-                log.LogFatal("Ha ocurrido un error inesperado", ex);
+                log.LogError("El tiempo de espera para la expresión se ha agotado", ex);
                 return false;
             }
         }
@@ -197,8 +192,8 @@ namespace VistasSorrySliders
 
         public static void SalirInicioSesionDesdeVentanaPrincipal(Page pagina)
         {
-            MainWindow ventanaPrincipal = Window.GetWindow(pagina) as MainWindow;
-            ventanaPrincipal?.EliminarProxyLineaAnterior();
+            VentanaPrincipal ventanaPrincipal = Window.GetWindow(pagina) as VentanaPrincipal;
+            ventanaPrincipal?.DesuscribirseCerrarVentana();
 
             MostrarInicioSesion(ventanaPrincipal);
         }
@@ -213,21 +208,33 @@ namespace VistasSorrySliders
 
         public static void MostrarInicioSesion(Window ventanaAnterior)
         {
-            MainWindow ventana = new MainWindow();
+            VentanaPrincipal ventana = new VentanaPrincipal();
             InicioSesionPagina inicio = new InicioSesionPagina();
             ventana.Content = inicio;
 
             ventana.Show();
-            ventanaAnterior.Close();
+            if (ventanaAnterior != null)
+            {
+                ventanaAnterior.Close();
+            }
         }
 
         public static void MostrarInicioSesion()
         {
-            MainWindow ventana = new MainWindow();
+            VentanaPrincipal ventana = new VentanaPrincipal();
             InicioSesionPagina inicio = new InicioSesionPagina();
             ventana.Content = inicio;
 
             ventana.Show();
+        }
+
+        public static void MostrarInicioSesion(Window ventanaAnterior, Window ventanaNueva)
+        {
+            InicioSesionPagina inicio = new InicioSesionPagina();
+            ventanaNueva.Content = inicio;
+
+            ventanaNueva.Show();
+            ventanaAnterior.Close();
         }
     }
 }

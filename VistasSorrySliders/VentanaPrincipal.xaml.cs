@@ -21,24 +21,27 @@ namespace VistasSorrySliders
     /// <summary>
     /// Lógica de interacción para MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : NavigationWindow, IUsuariosEnLineaCallback
+    public partial class VentanaPrincipal : NavigationWindow, IUsuariosEnLineaCallback
     {
         private UsuariosEnLineaClient _proxyLinea;
         private string _correo;
-        
-        public MainWindow()
+
+        public UsuariosEnLineaClient ProxyLinea { get => _proxyLinea; }
+
+        public VentanaPrincipal()
         {
             InitializeComponent();
         }
-
-        public MainWindow(string correo)
+        public VentanaPrincipal(UsuariosEnLineaClient proxyEnLinea, string correo)
         {
             InitializeComponent();
+            _proxyLinea = proxyEnLinea;
             _correo = correo;
         }
-        public void EliminarProxyLineaAnterior()
+
+        public void DesuscribirseCerrarVentana()
         {
-            _proxyLinea = null;
+            Closing -= CerrarVentana;
         }
 
         private void CerrarVentana(object sender, CancelEventArgs e)
@@ -67,7 +70,7 @@ namespace VistasSorrySliders
             catch (CommunicationException ex)
             {
                 Utilidades.MostrarUnMensajeError(Properties.Resources.msgErrorConexion);
-                log.LogError("Error de Comunicación con el Servidor", ex);
+                log.LogWarn("Error de Comunicación con el Servidor", ex);
             }
             catch (TimeoutException ex)
             {
@@ -86,7 +89,7 @@ namespace VistasSorrySliders
             }
             catch (CommunicationException ex)
             {
-                log.LogError("Error de Comunicación con el Servidor", ex);
+                log.LogWarn("Error de Comunicación con el Servidor", ex);
             }
             catch (TimeoutException ex)
             {

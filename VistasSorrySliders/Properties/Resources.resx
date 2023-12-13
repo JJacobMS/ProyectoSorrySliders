@@ -388,7 +388,7 @@
     <value>Hubo un error con la consulta, por favor inténtelo más tarde</value>
   </data>
   <data name="msgErrorContrasenaInvalida" xml:space="preserve">
-    <value>La contraseña debe contar con: Mínimo 8 caracteres, con un número o un carácter especial</value>
+    <value>La contraseña debe contar con: Mínimo 10 caracteres, con una letra, un número y un carácter especial</value>
   </data>
   <data name="msgErrorImagen" xml:space="preserve">
     <value>La imagen no se puede cargar</value>
@@ -501,6 +501,9 @@
   <data name="tbItemNotificaciones" xml:space="preserve">
     <value>NOTIFICACIONES</value>
   </data>
+  <data name="txtBlockActualizarJugadores" xml:space="preserve">
+    <value>Actualizando Jugadores</value>
+  </data>
   <data name="txtBlockAjustes" xml:space="preserve">
     <value>AJUSTES</value>
   </data>
@@ -546,6 +549,9 @@
   <data name="txtBlockEnLinea" xml:space="preserve">
     <value>En línea</value>
   </data>
+  <data name="txtBlockGuardandoPuntuaciones" xml:space="preserve">
+    <value>Guardando puntuaciones....</value>
+  </data>
   <data name="txtBlockJuegoNoValido" xml:space="preserve">
     <value>El juego se está jugando o ya ha terminado</value>
   </data>
@@ -578,6 +584,9 @@
   </data>
   <data name="txtBlockRondaLanzamientoTerminada" xml:space="preserve">
     <value>Ronda de Lanzamiento Terminada</value>
+  </data>
+  <data name="txtBlockRondaPuntuacionesTerminada" xml:space="preserve">
+    <value>Ronda de Puntuaciones Terminada</value>
   </data>
   <data name="txtBlockRondasGanadas" xml:space="preserve">
     <value>RONDAS GANADAS</value>

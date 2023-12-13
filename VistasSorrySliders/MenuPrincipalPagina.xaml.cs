@@ -12,6 +12,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
+using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Markup;
 using System.Windows.Media;
@@ -79,7 +80,7 @@ namespace VistasSorrySliders
             catch (CommunicationException ex)
             {
                 resultado = Constantes.ERROR_CONEXION_SERVIDOR;
-                log.LogError("Error de Comunicación con el Servidor", ex);
+                log.LogWarn("Error de Comunicación con el Servidor", ex);
             }
             catch (TimeoutException ex)
             {
@@ -122,7 +123,7 @@ namespace VistasSorrySliders
         }
         private void IrInicioSesion()
         {
-            MainWindow ventana = Window.GetWindow(this) as MainWindow;
+            VentanaPrincipal ventana = Window.GetWindow(this) as VentanaPrincipal;
             ventana.SalirSistema();
             InicioSesionPagina inicio = new InicioSesionPagina();
             this.NavigationService.Navigate(inicio);
@@ -130,16 +131,13 @@ namespace VistasSorrySliders
         private void ClickMostrarConfiguracionLobby(object sender, RoutedEventArgs e)
         {
             ConfiguracionLobby configuracionLobby = new ConfiguracionLobby(_cuentaUsuario);
-
             this.NavigationService.Navigate(configuracionLobby);
         }
-
         private void ClickMostrarUnirsePartida(object sender, RoutedEventArgs e)
         {
             UnirsePartidaPagina unirsePartida = new UnirsePartidaPagina(_cuentaUsuario);
             this.NavigationService.Navigate(unirsePartida);
         }
-
 
         private void ClickMostrarPuntuaciones(object sender, RoutedEventArgs e)
         {

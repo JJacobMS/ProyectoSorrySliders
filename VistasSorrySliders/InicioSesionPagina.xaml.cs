@@ -22,6 +22,7 @@ namespace VistasSorrySliders
     /// </summary>
     public partial class InicioSesionPagina : Page
     {
+        private InicioSesionClient _proxyInicioSesion;
         public InicioSesionPagina()
         {
             InitializeComponent();
@@ -76,7 +77,7 @@ namespace VistasSorrySliders
                 catch (CommunicationException ex)
                 {
                     resultado = Constantes.ERROR_CONEXION_SERVIDOR;
-                    log.LogError("Error de Comunicación con el Servidor", ex);
+                    log.LogWarn("Error de Comunicación con el Servidor", ex);
                 }
                 catch (TimeoutException ex)
                 {
@@ -113,7 +114,7 @@ namespace VistasSorrySliders
             catch (CommunicationException ex)
             {
                 resultado = Constantes.ERROR_CONEXION_SERVIDOR;
-                log.LogError("Error de Comunicación con el Servidor", ex);
+                log.LogWarn("Error de Comunicación con el Servidor", ex);
             }
             catch (TimeoutException ex)
             {
@@ -163,20 +164,23 @@ namespace VistasSorrySliders
             Logger log = new Logger(this.GetType());
             try
             {
-                bool estaEnLinea;
-                InicioSesionClient proxyInicioSesion = new InicioSesionClient();
-                estaEnLinea = proxyInicioSesion.JugadorEstaEnLinea(correoJugador);
-                if (estaEnLinea)
+                Constantes puedoPasar;
+                _proxyInicioSesion = new InicioSesionClient();
+                puedoPasar = _proxyInicioSesion.JugadorEstaEnLinea(correoJugador);
+                switch (puedoPasar)
                 {
-                    Utilidades.MostrarUnMensajeError(Properties.Resources.txtBlockCuentaYaEnLobby);
-                    return;
+                    case Constantes.OPERACION_EXITOSA_VACIA:
+                        CambiarPantallaMenuPrincipal(correoJugador);
+                        break;
+                    case Constantes.OPERACION_EXITOSA:
+                        Utilidades.MostrarUnMensajeError(Properties.Resources.txtBlockCuentaYaEnLobby);
+                        break;
                 }
-                CambiarPantallaMenuPrincipal(correoJugador);
             }
             catch (CommunicationException ex)
             {
                 Utilidades.MostrarUnMensajeError(Properties.Resources.msgErrorConexion);
-                log.LogError("Error de Comunicación con el Servidor", ex);
+                log.LogWarn("Error de Comunicación con el Servidor", ex);
             }
             catch (TimeoutException ex)
             {
@@ -187,7 +191,7 @@ namespace VistasSorrySliders
 
         private void CambiarPantallaMenuPrincipal(string correoVerificado)
         {
-            MainWindow ventanaPrincipal = Window.GetWindow(this) as MainWindow;
+            VentanaPrincipal ventanaPrincipal = Window.GetWindow(this) as VentanaPrincipal;
             ventanaPrincipal.IndicarCorreoCuenta(correoVerificado);
 
             if (ventanaPrincipal.EntrarSistemaEnLineaMenu())

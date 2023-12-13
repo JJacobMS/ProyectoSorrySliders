@@ -52,6 +52,8 @@ namespace VistasSorrySliders
         private CuentaSet _cuentaUsuario;
         private List<CuentaSet> _listaCuentas;
         private JuegoYLobbyVentana _juegoYLobbyVentana;
+        private List<JugadorGanador> _listaGanadores;
+        private int _contadorAvisarTurno;
         public JuegoPuntuacionesPagina(List<JugadorLanzamiento> jugadores, CuentaSet cuentaUsuario, string codigoPartida, List<CuentaSet> listaCuentas, JuegoYLobbyVentana juegoYLobbyVentana)
         {
             InitializeComponent();
@@ -71,12 +73,12 @@ namespace VistasSorrySliders
             _cuentaUsuario = cuentaUsuario;
             _correoUsuario = cuentaUsuario.CorreoElectronico;
             _jugadoresLanzamiento = jugadores;
-            AgregarProxy();
+            _contadorAvisarTurno = 0;
             InicializarTablero();
             _turnoActualJuego = 0;
             EmpezarTurno(_turnoActualJuego);
         }
-        private void AgregarProxy() 
+        public Constantes AgregarProxy() 
         {
             Logger log = new Logger(this.GetType());
             try
@@ -84,17 +86,19 @@ namespace VistasSorrySliders
                 InstanceContext contexto = new InstanceContext(this);
                 _proxyJuegoPuntuacion = new JuegoPuntuacionClient(contexto);
                 _proxyJuegoPuntuacion.AgregarJugador(_codigoPartida, _correoUsuario);
-                return;
+                return Constantes.OPERACION_EXITOSA;
             }
             catch (CommunicationException ex)
             {
-                log.LogError("Error de Comunicación con el Servidor", ex);
+                Utilidades.MostrarUnMensajeError(Properties.Resources.msgErrorConexion);
+                log.LogWarn("Error de Comunicación con el Servidor", ex);
             }
             catch (TimeoutException ex)
             {
+                Utilidades.MostrarUnMensajeError(Properties.Resources.msgErrorTiempoEsperaServidor);
                 log.LogWarn("Se agoto el tiempo de espera del servidor", ex);
             }
-            Utilidades.SalirHastaInicioSesionDesdeJuegoYLobbyVentana(this);
+            return Constantes.ERROR_CONEXION_SERVIDOR;
         }
         private void AsignarDados()
         {
@@ -304,44 +308,42 @@ namespace VistasSorrySliders
             
             for (int i = 0; i < puntuaciones.Count; i++)
             {
-                _listaBotonAzul[i].Content = 10;//puntuaciones[i];
+                _listaBotonAzul[i].Content = puntuaciones[i];
             }
         }
 
         private void IngresarPuntuacionesRojo(List<int> puntuaciones)
         {
-            
             for (int i = 0; i < puntuaciones.Count; i++)
             {
-                _listaBotonRojo[i].Content = 10;//puntuaciones[i];
+                _listaBotonRojo[i].Content = puntuaciones[i];
             }
         }
         private void IngresarPuntuacionesVerde(List<int> puntuaciones)
         {
-            
             for (int i = 0; i < puntuaciones.Count; i++)
             {
-                _listaBotonVerde[i].Content = 10;// puntuaciones[i];
+                _listaBotonVerde[i].Content = puntuaciones[i];
             }
         }
         private void IngresarPuntuacionesAmarillo(List<int> puntuaciones)
         {
-            
             for (int i = 0; i < puntuaciones.Count; i++)
             {
-                _listaBotonAmarillo[i].Content = 10;// puntuaciones[i];
+                _listaBotonAmarillo[i].Content = puntuaciones[i];
             }
         }
         private void MouseLeftButtonDownMoverPeon(object sender, MouseButtonEventArgs e)
         {
-            RealizarJugada(sender);
+            _ = RealizarJugada(sender);
         }
-        private async void RealizarJugada(object sender) 
+        private async Task RealizarJugada(object sender) 
         {
             await MoverPeonAsync(sender);
-            if (!ComprobarDadosActuales())
+            if (!ComprobarDadosActuales() && _contadorAvisarTurno==0)
             {
                 NotificarCambiarTurno();
+                _contadorAvisarTurno = _contadorAvisarTurno + 1;
             }
         }
         private async Task MoverPeonAsync(object sender)
@@ -357,17 +359,19 @@ namespace VistasSorrySliders
                     _btnSeleccionado = null;
                     for (int i = 0; i < puntosObtenidos; i++)
                     {
+                        llpSeleccionada.IsEnabled = false;
                         double posicion = ObtenerPosicionFicha(llpSeleccionada.Name);
                         if (posicion < LIMITE_FILAS)
                         {
                             SettearPosicionFicha(llpSeleccionada.Name, posicion + AVANZAR_UNA_FILA);
                             await Task.Delay(1000);
+                            llpSeleccionada.IsEnabled = true;
                         }
                         else
                         {
                             SettearPosicionFicha(llpSeleccionada.Name, POSICION_FINAL_HOME);
                             llpSeleccionada.IsEnabled = false;
-                            
+                            ComprobarGanador();
                             i = puntosObtenidos;
                         }
                     }
@@ -494,20 +498,19 @@ namespace VistasSorrySliders
                 }
                 NotificarCambiarPantalla(_listaPuntuaciones);
             }
+            
         }
-
         private void GuardarGanador() 
         {
             Logger log = new Logger(this.GetType());
             Constantes respuesta;
             try
             {
-                _proxyJuegoPuntuacion.ActualizarGanador(_codigoPartida, _listaPuntuaciones[0].CorreoElectronico, _listaPuntuaciones[0].Posicion);
-                respuesta = Constantes.OPERACION_EXITOSA;
+                respuesta = _proxyJuegoPuntuacion.ActualizarGanador(_codigoPartida, _listaPuntuaciones[0].CorreoElectronico, _listaPuntuaciones[0].Posicion);
             }
             catch (CommunicationException ex)
             {
-                log.LogError("Error de Comunicación con el Servidor", ex);
+                log.LogWarn("Error de Comunicación con el Servidor", ex);
                 respuesta = Constantes.ERROR_CONEXION_SERVIDOR;
             }
             catch (TimeoutException ex)
@@ -515,21 +518,8 @@ namespace VistasSorrySliders
                 log.LogWarn("Se agoto el tiempo de espera del servidor", ex);
                 respuesta = Constantes.ERROR_TIEMPO_ESPERA_SERVIDOR;
             }
-            switch (respuesta)
-            {
-                case Constantes.ERROR_CONEXION_SERVIDOR:
-                    Utilidades.SalirHastaInicioSesionDesdeJuegoYLobbyVentana(this);
-                    break;
-                case Constantes.OPERACION_EXITOSA:
-                    break;
-                case Constantes.ERROR_TIEMPO_ESPERA_SERVIDOR:
-                    Utilidades.SalirHastaInicioSesionDesdeJuegoYLobbyVentana(this);
-                    break;
-                default:
-                    Utilidades.MostrarMensajesError(respuesta);
-                    SalirMenuPrincipal();
-                    break;
-            }
+
+            Utilidades.MostrarMensajesError(respuesta);
         }
 
         private bool ComprobarDadosActuales()
@@ -554,6 +544,7 @@ namespace VistasSorrySliders
         {
             if (turnoActual == _turnoJugador)
             {
+                _contadorAvisarTurno = 0;
                 ActivarDados();
                 if (!ComprobarDadosActuales())
                 {
@@ -613,6 +604,7 @@ namespace VistasSorrySliders
         
         public void EmpezarJuegoPuntuacionNuevo(List<JugadorLanzamiento> jugadores) 
         {
+            _contadorAvisarTurno = 0;
             _turnoActualJuego = 0;
             _jugadoresLanzamiento = jugadores;
             InicializarLabels();
@@ -625,12 +617,9 @@ namespace VistasSorrySliders
         {
             foreach (JugadorLanzamiento jugadorLanzamiento in jugadores)
             {
-                foreach (JugadorTurno jugadorTurno in _listaTurnos)
+                foreach (JugadorTurno jugadorTurno in _listaTurnos.Where(jugador => jugador.CorreoJugador.Equals(jugadorLanzamiento.CorreElectronico)))
                 {
-                    if (jugadorTurno.CorreoJugador.Equals(jugadorLanzamiento.CorreElectronico))
-                    {
-                        jugadorTurno.EstaConectado = jugadorLanzamiento.EstaConectado;
-                    }
+                    jugadorTurno.EstaConectado = jugadorLanzamiento.EstaConectado;
                 }
             }
         }
@@ -640,14 +629,14 @@ namespace VistasSorrySliders
             MoverPeonJugador(nombrePeon, puntosObtenidos);
         }
 
-        private async void NotificarCambiarTurno() 
+        private void NotificarCambiarTurno() 
         {
-            await LogicaNotificarCambiarTurno();
+            _ = LogicaNotificarCambiarTurno();
         }
 
         private async Task LogicaNotificarCambiarTurno() 
         {
-            await Task.Delay(1500);
+            await Task.Delay(3000);
             Logger log = new Logger(this.GetType());
             try
             {
@@ -656,10 +645,12 @@ namespace VistasSorrySliders
             }
             catch (CommunicationException ex)
             {
-                log.LogError("Error de Comunicación con el Servidor", ex);
+                Utilidades.MostrarUnMensajeError(Properties.Resources.msgErrorConexion);
+                log.LogWarn("Error de Comunicación con el Servidor", ex);
             }
             catch (TimeoutException ex)
             {
+                Utilidades.MostrarUnMensajeError(Properties.Resources.msgErrorTiempoEsperaServidor);
                 log.LogWarn("Se agoto el tiempo de espera del servidor", ex);
             }
             Utilidades.SalirHastaInicioSesionDesdeJuegoYLobbyVentana(this);
@@ -760,10 +751,12 @@ namespace VistasSorrySliders
             }
             catch (CommunicationException ex)
             {
-                log.LogError("Error de Comunicación con el Servidor", ex);
+                Utilidades.MostrarUnMensajeError(Properties.Resources.msgErrorConexion);
+                log.LogWarn("Error de Comunicación con el Servidor", ex);
             }
             catch (TimeoutException ex)
             {
+                Utilidades.MostrarUnMensajeError(Properties.Resources.msgErrorTiempoEsperaServidor);
                 log.LogWarn("Se agoto el tiempo de espera del servidor", ex);
             } 
             Utilidades.SalirHastaInicioSesionDesdeJuegoYLobbyVentana(this);
@@ -771,17 +764,16 @@ namespace VistasSorrySliders
 
         public void CambiarTurno()
         {
-            LogicaCambiarTurno();
+            _ = LogicaCambiarTurno();
         }
 
-        private async void LogicaCambiarTurno() 
+        private async Task LogicaCambiarTurno() 
         {
             _turnoActualJuego = _turnoActualJuego + 1;
             if (_turnoActualJuego > _listaTurnos.Count - 1)
             {
                 _turnoActualJuego = 0;
                 await CambiarPaginaLanzamiento();
-                //EmpezarTurno(_turnoActualJuego);
             }
             else
             {
@@ -793,8 +785,9 @@ namespace VistasSorrySliders
         {
             JuegoLanzamientoPagina paginaJuego = new JuegoLanzamientoPagina(_listaCuentas, _listaCuentas.Count, _codigoPartida, _cuentaUsuario, this, _juegoYLobbyVentana, _listaTurnos);
             Constantes respuestaInicio = paginaJuego.InicializarConexionYJuego();
+            brdConteoPuntuaciones.Visibility = Visibility.Visible;
             await Task.Delay(5000);
-
+            brdConteoPuntuaciones.Visibility = Visibility.Hidden;
             switch (respuestaInicio)
             {
                 case Constantes.OPERACION_EXITOSA:
@@ -860,57 +853,59 @@ namespace VistasSorrySliders
         }
         private void SalirMenuPrincipal() 
         {
-            try
+            if (Window.GetWindow(this) != null)
             {
                 Window.GetWindow(this).Close();
                 Utilidades.MostrarUnMensajeError(Properties.Resources.msgFaltaJugadores);
             }
-            catch (NullReferenceException ex)
-            {
-                Logger log = new Logger(this.GetType());
-                log.LogInfo("Ventana no está disponible", ex);
-            }
         }
-        private void NotificarCambiarPantalla(List<JugadorGanador> jugadoresGanadores)
+        private void NotificarCambiarPantalla(List<JugadorGanador> listaPuntuaciones)
         {
-            foreach (var item in jugadoresGanadores)
+            int[] arrayPosiciones = new int[listaPuntuaciones.Count];
+            string[] arrayNickname = new string[listaPuntuaciones.Count];
+            for (int i = 0; i < listaPuntuaciones.Count; i++)
             {
-                Console.WriteLine(item.Nickname);
-                Console.WriteLine(item.Posicion);
+                arrayNickname[i] = listaPuntuaciones[i].Nickname;
+                arrayPosiciones[i] = listaPuntuaciones[i].Posicion;
             }
             Logger log = new Logger(this.GetType());
             try
             {
-                _proxyJuegoPuntuacion.NotificarCambiarPagina(_codigoPartida, jugadoresGanadores.ToArray());
+                _proxyJuegoPuntuacion.NotificarCambiarPagina(_codigoPartida, arrayPosiciones, arrayNickname);
                 return;
             }
             catch (CommunicationException ex)
             {
-                log.LogError("Error de Comunicación con el Servidor", ex);
+                Utilidades.MostrarUnMensajeError(Properties.Resources.msgErrorConexion);
+                log.LogWarn("Error de Comunicación con el Servidor", ex);
             }
             catch (TimeoutException ex)
             {
+                Utilidades.MostrarUnMensajeError(Properties.Resources.msgErrorTiempoEsperaServidor);
                 log.LogWarn("Se agoto el tiempo de espera del servidor", ex);
             }
             Utilidades.SalirHastaInicioSesionDesdeJuegoYLobbyVentana(this);
         }
-        private void EliminarDiccionarios() 
+        private bool EliminarDiccionarios() 
         {
             Logger log = new Logger(this.GetType());
             try
             {
                 _proxyJuegoPuntuacion.EliminarDiccionariosJuego(_codigoPartida);
-                return;
+                return true;
             }
             catch (CommunicationException ex)
             {
-                log.LogError("Error de Comunicación con el Servidor", ex);
+                Utilidades.MostrarUnMensajeError(Properties.Resources.msgErrorConexion);
+                log.LogWarn("Error de Comunicación con el Servidor", ex);
             }
             catch (TimeoutException ex)
             {
+                Utilidades.MostrarUnMensajeError(Properties.Resources.msgErrorTiempoEsperaServidor);
                 log.LogWarn("Se agoto el tiempo de espera del servidor", ex);
             }
             Utilidades.SalirHastaInicioSesionDesdeJuegoYLobbyVentana(this);
+            return false;
         }
         private void NotificarEliminarJugadorServidor()
         {
@@ -922,25 +917,38 @@ namespace VistasSorrySliders
             }
             catch (CommunicationException ex)
             {
-                log.LogError("Error de Comunicación con el Servidor", ex);
+                Utilidades.MostrarUnMensajeError(Properties.Resources.msgErrorConexion);
+                log.LogWarn("Error de Comunicación con el Servidor", ex);
             }
             catch (TimeoutException ex)
             {
+                Utilidades.MostrarUnMensajeError(Properties.Resources.msgErrorTiempoEsperaServidor);
                 log.LogWarn("Se agoto el tiempo de espera del servidor", ex);
             }
             throw new CommunicationException();
         }
 
-        public void CambiarPagina(JugadorGanador[] listaGanadores)
+        public void CambiarPagina(int[] arrayPosiciones, string[] arrayNickname)
         {
-            foreach (var item in listaGanadores)
+            AcomodarPosiciones(arrayPosiciones, arrayNickname);
+            if (EliminarDiccionarios())
             {
-                Console.WriteLine(item.Nickname);
-                Console.WriteLine(item.Posicion);
+                _juegoYLobbyVentana.CambiarVentanaGanadores(_listaGanadores);
             }
-            _juegoYLobbyVentana.CambiarVentanaGanadores(listaGanadores.ToList());
         }
+        private void AcomodarPosiciones(int[] arrayPosiciones, string[] arrayNickname) 
+        {
+            _listaGanadores = new List<JugadorGanador>();
 
-        //Pasar puntuaciones
+            for (int i = 0; i < arrayPosiciones.Count(); i++)
+            {
+                JugadorGanador jugador = new JugadorGanador()
+                {
+                    Nickname = arrayNickname[i],
+                    Posicion = arrayPosiciones[i]
+                };
+                _listaGanadores.Add(jugador);
+            }
+        }
     }
 }

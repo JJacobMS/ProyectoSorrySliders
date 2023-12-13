@@ -103,7 +103,7 @@ namespace VistasSorrySliders
             catch (CommunicationException ex)
             {
                 resultado = Constantes.ERROR_CONEXION_SERVIDOR;
-                log.LogError("Error de Comunicación con el Servidor", ex);
+                log.LogWarn("Error de Comunicación con el Servidor", ex);
             }
             catch (TimeoutException ex)
             {
@@ -154,7 +154,7 @@ namespace VistasSorrySliders
             catch (CommunicationException ex)
             {
                 resultado = Constantes.ERROR_CONEXION_SERVIDOR;
-                log.LogError("Error de Comunicación con el Servidor", ex);
+                log.LogWarn("Error de Comunicación con el Servidor", ex);
             }
             catch (TimeoutException ex)
             {
@@ -175,7 +175,8 @@ namespace VistasSorrySliders
 
         private void EntrarLobby(string codigo)
         {
-            JuegoYLobbyVentana lobbyUnirse = new JuegoYLobbyVentana(_cuentaActual, codigo, _esInvitado);
+            VentanaPrincipal ventanaPrincipal = Window.GetWindow(this) as VentanaPrincipal;
+            JuegoYLobbyVentana lobbyUnirse = new JuegoYLobbyVentana(_cuentaActual, codigo, _esInvitado, ventanaPrincipal.ProxyLinea);
             Constantes respuesta = lobbyUnirse.InicializarPaginas();
             switch (respuesta)
             {
@@ -190,13 +191,10 @@ namespace VistasSorrySliders
 
         private void MostrarVentanaLobby(JuegoYLobbyVentana lobbyUnirse)
         {
-            if (lobbyUnirse.EntrarSistemaEnLinea())
-            {
-                MainWindow ventanaPrincipal = (MainWindow)Window.GetWindow(this);
-                ventanaPrincipal.EliminarProxyLineaAnterior();
-                Window.GetWindow(this).Close();
-                lobbyUnirse.Show();
-            }
+            VentanaPrincipal ventanaPrincipal = Window.GetWindow(this) as VentanaPrincipal;
+            ventanaPrincipal.DesuscribirseCerrarVentana();
+            Window.GetWindow(this).Close();
+            lobbyUnirse.Show();
         }
 
         private void MostrarErrorJugadores(int numeroMaximoJugadores)
@@ -244,7 +242,7 @@ namespace VistasSorrySliders
             }
             catch (RegexMatchTimeoutException ex)
             {
-                log.LogWarn("El tiempo de espera para la expresión se ha agotado", ex);
+                log.LogError("El tiempo de espera para la expresión se ha agotado", ex);
                 return false;
             }
         }
@@ -264,6 +262,16 @@ namespace VistasSorrySliders
             }
             MenuPrincipalPagina menu = new MenuPrincipalPagina(_cuentaActual);
             this.NavigationService.Navigate(menu);
+        }
+
+        private void TextChangedTamanoNickname(object sender, TextChangedEventArgs e)
+        {
+            int tamañoMaximoNickname = 25;
+            if (txtBoxNickname.Text.Length > tamañoMaximoNickname)
+            {
+                txtBoxNickname.Text = txtBoxNickname.Text.Substring(0, tamañoMaximoNickname);
+                txtBoxNickname.SelectionStart = txtBoxNickname.Text.Length;
+            }
         }
     }
 }

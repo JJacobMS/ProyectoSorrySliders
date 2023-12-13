@@ -115,7 +115,7 @@ namespace VistasSorrySliders.LogicaJuego
 
         public bool EstaLugarValido(List<Rectangle> LugaresNoValidos)
         {
-            return !LugaresNoValidos.Any(lugarNoValido => IntersectaConRectangulo(lugarNoValido));
+            return !LugaresNoValidos.Exists(lugarNoValido => IntersectaConRectangulo(lugarNoValido));
         }
 
         public int CalcularPuntuacion(Dictionary<Ellipse, int> circulosPuntuaciones)

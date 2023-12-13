@@ -105,7 +105,7 @@ namespace VistasSorrySliders
             }
             catch (CommunicationException ex)
             {
-                log.LogError("Error de Comunicación con el Servidor", ex);
+                log.LogWarn("Error de Comunicación con el Servidor", ex);
                 return Constantes.ERROR_CONEXION_SERVIDOR;
             }
 
@@ -127,7 +127,7 @@ namespace VistasSorrySliders
             catch (CommunicationException ex)
             {
                 Utilidades.MostrarUnMensajeError(Properties.Resources.msgErrorConexion);
-                log.LogError("Error de Comunicación con el Servidor", ex);
+                log.LogWarn("Error de Comunicación con el Servidor", ex);
             }
             catch (TimeoutException ex)
             {
@@ -234,19 +234,22 @@ namespace VistasSorrySliders
                 case 2:
                     listaNoValidos = new List<Rectangle>
                     {
-                        rctPistaAzul, rctPistaRojo
+                        rctPistaAzul, rctPistaRojo,
+                        rctIzquierdaNoValido, rctAbajoNoValido, rctDerechaNoValido, rctArribaNoValido
                     };
                     break;
                 case 3:
                     listaNoValidos = new List<Rectangle>
                     {
-                       rctPistaAmarillo, rctPistaAzul, rctPistaVerde
+                       rctPistaAmarillo, rctPistaAzul, rctPistaVerde,
+                       rctIzquierdaNoValido, rctAbajoNoValido, rctDerechaNoValido, rctArribaNoValido
                     };
                     break;
                 case 4:
                     listaNoValidos = new List<Rectangle>
                     {
-                        rctPistaAmarillo, rctPistaAzul, rctPistaRojo, rctPistaVerde
+                        rctPistaAmarillo, rctPistaAzul, rctPistaRojo, rctPistaVerde, 
+                        rctIzquierdaNoValido, rctAbajoNoValido, rctDerechaNoValido, rctArribaNoValido
                     };
                     break;
                 default:
@@ -270,6 +273,7 @@ namespace VistasSorrySliders
         }
         private void IniciarTurno()
         {
+            CambiarBotonesADeshabilitado();
             JugadorLanzamiento jugadorTurnoActual = _tablero.ListaJugadores[_tablero.TurnoActual];
             PeonLanzamiento peonTurnoActual = jugadorTurnoActual.PeonesLanzamiento[jugadorTurnoActual.PeonTurnoActual];
             Canvas.SetTop(peonTurnoActual.Figura, peonTurnoActual.PosicionPeon.Y);
@@ -353,7 +357,7 @@ namespace VistasSorrySliders
             catch (CommunicationException ex)
             {
                 Utilidades.MostrarUnMensajeError(Properties.Resources.msgErrorConexion);
-                log.LogError("Error de Comunicación con el Servidor", ex);
+                log.LogWarn("Error de Comunicación con el Servidor", ex);
             }
             catch (TimeoutException ex)
             {
@@ -379,7 +383,7 @@ namespace VistasSorrySliders
             catch (CommunicationException ex)
             {
                 Utilidades.MostrarUnMensajeError(Properties.Resources.msgErrorConexion);
-                log.LogError("Error de Comunicación con el Servidor", ex);
+                log.LogWarn("Error de Comunicación con el Servidor", ex);
             }
             catch (TimeoutException ex)
             {
@@ -405,7 +409,7 @@ namespace VistasSorrySliders
             catch (CommunicationException ex)
             {
                 Utilidades.MostrarUnMensajeError(Properties.Resources.msgErrorConexion);
-                log.LogError("Error de Comunicación con el Servidor", ex);
+                log.LogWarn("Error de Comunicación con el Servidor", ex);
             }
             catch (TimeoutException ex)
             {
@@ -435,7 +439,7 @@ namespace VistasSorrySliders
             catch (CommunicationException ex)
             {
                 Utilidades.MostrarUnMensajeError(Properties.Resources.msgErrorConexion);
-                log.LogError("Error de Comunicación con el Servidor", ex);
+                log.LogWarn("Error de Comunicación con el Servidor", ex);
             }
             catch (TimeoutException ex)
             {
@@ -458,15 +462,10 @@ namespace VistasSorrySliders
 
         private void TerminarJuegoFaltaJugadores()
         {
-            try
+            if (Window.GetWindow(this) != null)
             {
                 Window.GetWindow(this).Close();
                 Utilidades.MostrarUnMensajeError(Properties.Resources.msgFaltaJugadores);
-            }
-            catch (NullReferenceException ex)
-            {
-                Logger log = new Logger(this.GetType());
-                log.LogInfo("Ventana no está disponible", ex);
             }
         }
 
@@ -482,7 +481,7 @@ namespace VistasSorrySliders
             catch (CommunicationException ex)
             {
                 Utilidades.MostrarUnMensajeError(Properties.Resources.msgErrorConexion);
-                log.LogError("Error de Comunicación con el Servidor", ex);
+                log.LogWarn("Error de Comunicación con el Servidor", ex);
             }
             catch (TimeoutException ex)
             {
@@ -499,7 +498,7 @@ namespace VistasSorrySliders
             brdConteoPuntuaciones.Visibility = Visibility.Hidden;
             if (_juegoPuntuacionPagina == null)
             {
-                _juegoYLobbyVentana.CambiarFrameLobby(new JuegoPuntuacionesPagina(jugadoresConPuntuaciones, _cuentaUsuario, _codigoPartida, _listaCuentas, _juegoYLobbyVentana));
+                CrearJuegoPuntuaciones(jugadoresConPuntuaciones);
             }
             else 
             {
@@ -507,6 +506,35 @@ namespace VistasSorrySliders
                 _juegoYLobbyVentana.CambiarFrameLobby(_juegoPuntuacionPagina);
             }
             _juegoYLobbyVentana.EliminarContexto -= EliminarContextoJuegoLanzamiento;
+        }
+
+        private void CrearJuegoPuntuaciones(List<JugadorLanzamiento> jugadoresConPuntuaciones)
+        {
+            JuegoPuntuacionesPagina puntuaciones = new JuegoPuntuacionesPagina(jugadoresConPuntuaciones, _cuentaUsuario, _codigoPartida, _listaCuentas, _juegoYLobbyVentana);
+            Constantes respuesta = puntuaciones.AgregarProxy();
+            switch (respuesta)
+            {
+                case Constantes.OPERACION_EXITOSA:
+                    _juegoYLobbyVentana.CambiarFrameLobby(puntuaciones);
+                    break;
+                case Constantes.ERROR_CONEXION_SERVIDOR:
+                    Utilidades.SalirHastaInicioSesionDesdeJuegoYLobbyVentana(this);
+                    break;
+            }
+            
+        }
+
+        private void CambiarBotonesADeshabilitado()
+        {
+            foreach (var botonLanzamientoDirreccion in _botonesLanzarPeonJugador)
+            {
+                botonLanzamientoDirreccion.Value.IsEnabled = false;
+            }
+
+            foreach (var botonesDadoDireccion in _botonesTirarDadoJugador)
+            {
+                botonesDadoDireccion.Value.IsEnabled = false;
+            }
         }
     }
 }
