@@ -234,19 +234,22 @@ namespace VistasSorrySliders
                 case 2:
                     listaNoValidos = new List<Rectangle>
                     {
-                        rctPistaAzul, rctPistaRojo
+                        rctPistaAzul, rctPistaRojo,
+                        rctIzquierdaNoValido, rctAbajoNoValido, rctDerechaNoValido, rctArribaNoValido
                     };
                     break;
                 case 3:
                     listaNoValidos = new List<Rectangle>
                     {
-                       rctPistaAmarillo, rctPistaAzul, rctPistaVerde
+                       rctPistaAmarillo, rctPistaAzul, rctPistaVerde,
+                       rctIzquierdaNoValido, rctAbajoNoValido, rctDerechaNoValido, rctArribaNoValido
                     };
                     break;
                 case 4:
                     listaNoValidos = new List<Rectangle>
                     {
-                        rctPistaAmarillo, rctPistaAzul, rctPistaRojo, rctPistaVerde
+                        rctPistaAmarillo, rctPistaAzul, rctPistaRojo, rctPistaVerde, 
+                        rctIzquierdaNoValido, rctAbajoNoValido, rctDerechaNoValido, rctArribaNoValido
                     };
                     break;
                 default:
@@ -421,7 +424,6 @@ namespace VistasSorrySliders
             JugadorLanzamiento jugadorActual = _tablero.ListaJugadores[_tablero.TurnoActual];
             if (jugadorActual.CorreElectronico.Equals(_correoJugadorActual))
             {
-                Console.WriteLine("ENVIANDO POSICIONES");
                 EnviarTableroPeones(_tablero.ObtenerPosicionPeonesActuales());
             }
         }
@@ -531,7 +533,7 @@ namespace VistasSorrySliders
 
             foreach (var botonesDadoDireccion in _botonesTirarDadoJugador)
             {
-                botonesDadoDireccion.Value.IsEnabled |= false;
+                botonesDadoDireccion.Value.IsEnabled = false;
             }
         }
     }

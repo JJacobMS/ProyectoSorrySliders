@@ -54,7 +54,7 @@
                         </Grid.RowDefinitions>
                         <Label Style="{StaticResource estiloLblDatos}" Margin="5,0,0,0" FontSize="12" VerticalAlignment="Center"
                                Width="120" Content="{x:Static p:Resources.lblNickname}"></Label>
-                        <TextBox Grid.Column="1" Style="{StaticResource estiloTxtBoxDatosAzul}" Name="txtBoxNickname"
+                        <TextBox Grid.Column="1" Style="{StaticResource estiloTxtBoxDatosAzul}" Name="txtBoxNickname" TextChanged="TextChangedTamanoNickname"
                                  Margin="10,0,10,0" FontSize="12"></TextBox>
                         <TextBlock Grid.Row="1" Grid.ColumnSpan="2" Style="{StaticResource estiloTxtBlockErrorUnirsePartida}" Width="250" Visibility="Hidden"
                                    HorizontalAlignment="Center" Name="txtBlockNicknameNoValido" Text="{x:Static p:Resources.txtBlockNicknameNoValido}"></TextBlock>

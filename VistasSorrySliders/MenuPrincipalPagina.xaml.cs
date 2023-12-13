@@ -12,6 +12,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
+using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Markup;
 using System.Windows.Media;
@@ -132,7 +133,6 @@ namespace VistasSorrySliders
             ConfiguracionLobby configuracionLobby = new ConfiguracionLobby(_cuentaUsuario);
             this.NavigationService.Navigate(configuracionLobby);
         }
-
         private void ClickMostrarUnirsePartida(object sender, RoutedEventArgs e)
         {
             UnirsePartidaPagina unirsePartida = new UnirsePartidaPagina(_cuentaUsuario);
