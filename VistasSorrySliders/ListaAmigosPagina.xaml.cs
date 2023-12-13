@@ -112,7 +112,6 @@ namespace VistasSorrySliders
             if (_tiposNotificacion != null)
             {
                 EnviarInvitacionJugador(cuentaJugadorClickeado);
-                EnviarCorreo(cuentaJugadorClickeado.CorreoElectronico);
             }
         }
 
