@@ -313,25 +313,25 @@
     <Resource Include="Fuentes\Prompt-Medium.ttf" />
     <Resource Include="Fuentes\WixMadeforText-Bold.ttf" />
     <Resource Include="Fuentes\WixMadeforText-Regular.ttf" />
-    <None Include="Connected Services\ServicioSorrySliders\item.xsd">
+    <None Include="Connected Services\ServicioSorrySliders\item1.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\ServicioSorrySliders\item5.xsd">
+    <None Include="Connected Services\ServicioSorrySliders\item11.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\ServicioSorrySliders\item51.xsd">
+    <None Include="Connected Services\ServicioSorrySliders\item12.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\ServicioSorrySliders\item52.xsd">
+    <None Include="Connected Services\ServicioSorrySliders\item13.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\ServicioSorrySliders\item53.xsd">
+    <None Include="Connected Services\ServicioSorrySliders\item14.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\ServicioSorrySliders\item54.xsd">
+    <None Include="Connected Services\ServicioSorrySliders\item15.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\ServicioSorrySliders\ServicioComunicacionSorrySliders1.wsdl" />
+    <None Include="Connected Services\ServicioSorrySliders\ServicioComunicacionSorrySliders.wsdl" />
     <None Include="Connected Services\ServicioSorrySliders\VistasSorrySliders.ServicioSorrySliders.Constantes.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
@@ -452,9 +452,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Connected Services\ServicioSorrySliders\item1.disco" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Recursos\informacion.png" />
   </ItemGroup>
   <ItemGroup>
@@ -474,6 +471,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Recursos\puntuaciones.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\ServicioSorrySliders\item.disco" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

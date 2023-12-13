@@ -388,7 +388,7 @@
     <value>Hubo un error con la consulta, por favor inténtelo más tarde</value>
   </data>
   <data name="msgErrorContrasenaInvalida" xml:space="preserve">
-    <value>La contraseña debe contar con: Mínimo 8 caracteres, con un número o un carácter especial</value>
+    <value>Error, la contraseña debe tener mínimo; un número, una letra y un caracter especial (°!"#$%&amp;/()=|¬\¿?-_+{}). Además, debe ser mayor a 10 caracteres</value>
   </data>
   <data name="msgErrorImagen" xml:space="preserve">
     <value>La imagen no se puede cargar</value>

@@ -127,30 +127,28 @@ namespace VistasSorrySliders
 
         public static bool ValidarContraseña(string contraseña)
         {
-            Logger log = new Logger(typeof(Utilidades));
-            try
+            List<char> caracteresEspeciales = new List<char> { '°','!','"','#','$','%','&','/','(',')','=','|','¬',(char)92,'¿','?','-','_','+','{','}' };
+            if (string.IsNullOrEmpty(contraseña))
             {
-                int segundos = 3;
-                string patron = @"^(?=.*[0-9!@#$%^&*()\-=_+.,:;])[A-Za-z0-9!@#$%^&*()\-=_+.,:;]{8,}$";
-                TimeSpan tiempoAgotadoPatron = TimeSpan.FromSeconds(segundos);
-                bool correoValidado = Regex.IsMatch(contraseña, patron, RegexOptions.None, tiempoAgotadoPatron);
-                if (correoValidado)
+                return false;
+            }
+            int numeroCaracteres = 0;
+            for (int i = 0; i < caracteresEspeciales.Count; i++)
+            {
+                if (caracteresEspeciales.Contains(caracteresEspeciales[i]))
                 {
-                    return correoValidado;
+                    numeroCaracteres++;
                 }
-                MostrarUnMensajeError(Properties.Resources.msgErrorContrasenaInvalida, Properties.Resources.msgTituloContraseñaInvalida);
-                return correoValidado;
             }
-            catch (RegexMatchTimeoutException ex)
+            if (numeroCaracteres < 0)
             {
-                log.LogWarn("El tiempo de espera para la expresión se ha agotado", ex);
                 return false;
             }
-            catch (Exception ex)
+            if (!contraseña.Any(char.IsDigit))
             {
-                log.LogFatal("Ha ocurrido un error inesperado", ex);
                 return false;
             }
+            return true;
         }
 
         public static void MostrarMensajesError(Constantes respuesta)
