@@ -89,6 +89,11 @@ namespace VistasSorrySliders
                     btnIniciarPartida.IsEnabled = false;
                 }
             }
+            catch (CommunicationObjectFaultedException ex)
+            {
+                respuesta = Constantes.ERROR_CONEXION_DEFECTUOSA;
+                log.LogError("Se ha perdido la conexión previa", ex);
+            }
             catch (CommunicationException ex)
             {
                 respuesta = Constantes.ERROR_CONEXION_SERVIDOR;
@@ -115,6 +120,7 @@ namespace VistasSorrySliders
                     break;
                 case Constantes.ERROR_TIEMPO_ESPERA_SERVIDOR:
                 case Constantes.ERROR_CONEXION_SERVIDOR:
+                case Constantes.ERROR_CONEXION_DEFECTUOSA:
                     throw new CommunicationException();
             }
             throw new EntitySqlException();
@@ -180,6 +186,11 @@ namespace VistasSorrySliders
                 UnirsePartidaClient proxyUnirsePartida = new UnirsePartidaClient();
                 (respuesta, _partidaActual) = proxyUnirsePartida.RecuperarPartida(codigoPartida);
             }
+            catch (CommunicationObjectFaultedException ex)
+            {
+                respuesta = Constantes.ERROR_CONEXION_DEFECTUOSA;
+                log.LogError("Se ha perdido la conexión previa", ex);
+            }
             catch (CommunicationException ex)
             {
                 respuesta = Constantes.ERROR_CONEXION_SERVIDOR;
@@ -202,6 +213,7 @@ namespace VistasSorrySliders
                     break;
                 case Constantes.ERROR_TIEMPO_ESPERA_SERVIDOR:
                 case Constantes.ERROR_CONEXION_SERVIDOR:
+                case Constantes.ERROR_CONEXION_DEFECTUOSA:
                     throw new CommunicationException();
             }
             throw new EntitySqlException();
@@ -285,6 +297,10 @@ namespace VistasSorrySliders
                 _proxyLobby.EntrarPartida(_codigoPartida, _cuentaUsuario.CorreoElectronico);
                 return;
             }
+            catch (CommunicationObjectFaultedException ex)
+            {
+                log.LogError("Se ha perdido la conexión previa", ex);
+            }
             catch (CommunicationException ex)
             {
                 log.LogError("Error de Comunicación con el Servidor", ex);
@@ -352,9 +368,14 @@ namespace VistasSorrySliders
                 _proxyLobby.ComprobarJugadoresExistentes(_codigoPartida);
                 return true;
             }
+            catch (CommunicationObjectFaultedException ex)
+            {
+                Utilidades.MostrarUnMensajeError(Properties.Resources.msgErrorIdentificarJugadores);
+                log.LogError("Se ha perdido la conexión previa", ex);
+            }
             catch (CommunicationException ex)
             {
-                Utilidades.MostrarUnMensajeError("Hubo un error al identificar los jugadores, es necesario iniciar sesión nuevamente");
+                Utilidades.MostrarUnMensajeError(Properties.Resources.msgEstadoDefectuoso);
                 log.LogError("Error de Comunicación con el Servidor", ex);
             }
             catch (TimeoutException ex)
@@ -374,6 +395,11 @@ namespace VistasSorrySliders
             {
                 _proxyLobby.IniciarPartida(_codigoPartida);
                 return;
+            }
+            catch (CommunicationObjectFaultedException ex)
+            {
+                Utilidades.MostrarUnMensajeError(Properties.Resources.msgEstadoDefectuoso);
+                log.LogError("Se ha perdido la conexión previa", ex);
             }
             catch (CommunicationException ex)
             {
@@ -433,6 +459,11 @@ namespace VistasSorrySliders
                 _proxyLobby.SalirPartida(_codigoPartida);
                 _juegoYLobbyVentana.EliminarContexto -= SalirLobbyServidor;
                 return;
+            }
+            catch (CommunicationObjectFaultedException ex)
+            {
+                Utilidades.MostrarUnMensajeError(Properties.Resources.msgEstadoDefectuoso);
+                log.LogError("Se ha perdido la conexión previa", ex);
             }
             catch (CommunicationException ex)
             {

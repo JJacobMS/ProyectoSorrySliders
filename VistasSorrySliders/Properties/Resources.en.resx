@@ -387,6 +387,9 @@
   <data name="msgErrorContrasenaInvalida" xml:space="preserve">
     <value>Error, password must have minimum; a number, a letter and a special character (°!"#$%&amp;/()=|¬\¿?-_+{}). Additionally, it must be greater than 10 characters</value>
   </data>
+  <data name="msgErrorIdentificarJugadores" xml:space="preserve">
+    <value>There's been an error trying to identify players, it's necesary to start a new session</value>
+  </data>
   <data name="msgErrorImagen" xml:space="preserve">
     <value>The image cannot be loaded</value>
   </data>
@@ -401,6 +404,9 @@
   </data>
   <data name="msgErrorTituloImagenPermisos" xml:space="preserve">
     <value>No permissions for the file</value>
+  </data>
+  <data name="msgEstadoDefectuoso" xml:space="preserve">
+    <value>There's been an error trying to send information to the server, try again later</value>
   </data>
   <data name="msgExpulsadoTitulo" xml:space="preserve">
     <value>EXPELLED FROM THE GAME</value>

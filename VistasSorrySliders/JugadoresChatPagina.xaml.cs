@@ -77,6 +77,11 @@ namespace VistasSorrySliders
                 _juegoYLobbyVentana.EliminarContexto -= RemoverCallbacks;
                 return;
             }
+            catch (CommunicationObjectFaultedException ex)
+            {
+                Utilidades.MostrarUnMensajeError(Properties.Resources.msgEstadoDefectuoso);
+                log.LogError("Se ha perdido la conexión previa", ex);
+            }
             catch (CommunicationException ex)
             {
                 Utilidades.MostrarUnMensajeError(Properties.Resources.msgErrorConexion);
@@ -102,6 +107,11 @@ namespace VistasSorrySliders
                 _proxyChat.IngresarAlChat(codigoPartida, _cuentaUsuario.CorreoElectronico);
                 return;
             }
+            catch (CommunicationObjectFaultedException ex)
+            {
+                Utilidades.MostrarUnMensajeError(Properties.Resources.msgEstadoDefectuoso);
+                log.LogError("Se ha perdido la conexión previa", ex);
+            }
             catch (CommunicationException ex)
             {
                 Utilidades.MostrarUnMensajeError(Properties.Resources.msgErrorConexion);
@@ -126,12 +136,19 @@ namespace VistasSorrySliders
                     _proxyChat.ChatJuego(codigoPartida, _cuentaUsuario.Nickname, txtBoxMensajeChat.Text);
 
                 }
+                catch (CommunicationObjectFaultedException ex)
+                {
+                    Utilidades.MostrarUnMensajeError(Properties.Resources.msgEstadoDefectuoso);
+                    log.LogError("Se ha perdido la conexión previa", ex);
+                }
                 catch (CommunicationException ex)
                 {
+                    Utilidades.MostrarUnMensajeError(Properties.Resources.msgErrorConexion);
                     log.LogError("Error de Comunicación con el Servidor", ex);
                 }
                 catch (TimeoutException ex)
                 {
+                    Utilidades.MostrarUnMensajeError(Properties.Resources.msgErrorTiempoEsperaServidor);
                     log.LogWarn("Se agoto el tiempo de espera del servidor", ex);
                 }
                 txtBoxMensajeChat.Text = "";
@@ -195,12 +212,19 @@ namespace VistasSorrySliders
             {
                 _proxyChat.ExpulsarJugadorPartida(_partida.CodigoPartida.ToString(), jugador.CorreoElectronico);
             }
+            catch (CommunicationObjectFaultedException ex)
+            {
+                Utilidades.MostrarUnMensajeError(Properties.Resources.msgEstadoDefectuoso);
+                log.LogError("Se ha perdido la conexión previa", ex);
+            }
             catch (CommunicationException ex)
             {
+                Utilidades.MostrarUnMensajeError(Properties.Resources.msgErrorConexion);
                 log.LogError("Error de Comunicación con el Servidor", ex);
             }
             catch (TimeoutException ex)
             {
+                Utilidades.MostrarUnMensajeError(Properties.Resources.msgErrorTiempoEsperaServidor);
                 log.LogWarn("Se agoto el tiempo de espera del servidor", ex);
             }
         }

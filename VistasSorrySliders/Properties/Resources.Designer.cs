@@ -880,6 +880,15 @@ namespace VistasSorrySliders.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Hubo un error al identificar los jugadores, es necesario iniciar sesión nuevamente.
+        /// </summary>
+        public static string msgErrorIdentificarJugadores {
+            get {
+                return ResourceManager.GetString("msgErrorIdentificarJugadores", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a La imagen no se puede cargar.
         /// </summary>
         public static string msgErrorImagen {
@@ -921,6 +930,15 @@ namespace VistasSorrySliders.Properties {
         public static string msgErrorTituloImagenPermisos {
             get {
                 return ResourceManager.GetString("msgErrorTituloImagenPermisos", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Hubo un error al intentar enviar información al servidor, inténtelo de nuevo.
+        /// </summary>
+        public static string msgEstadoDefectuoso {
+            get {
+                return ResourceManager.GetString("msgEstadoDefectuoso", resourceCulture);
             }
         }
         

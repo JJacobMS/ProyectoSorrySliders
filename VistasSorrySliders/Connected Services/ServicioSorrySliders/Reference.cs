@@ -34,6 +34,9 @@ namespace VistasSorrySliders.ServicioSorrySliders {
         
         [System.Runtime.Serialization.EnumMemberAttribute()]
         ERROR_TIEMPO_ESPERA_SERVIDOR = 5,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        ERROR_CONEXION_DEFECTUOSA = 6,
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]

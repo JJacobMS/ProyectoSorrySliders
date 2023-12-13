@@ -167,6 +167,9 @@ namespace VistasSorrySliders
                 case Constantes.ERROR_TIEMPO_ESPERA_SERVIDOR:
                     MostrarUnMensajeError(Properties.Resources.msgErrorTiempoEsperaServidor);
                     break;
+                case Constantes.ERROR_CONEXION_DEFECTUOSA:
+                    MostrarUnMensajeError(Properties.Resources.msgEstadoDefectuoso);
+                    break;
             }
         }
 

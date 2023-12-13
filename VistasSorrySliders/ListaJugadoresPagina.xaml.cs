@@ -122,6 +122,11 @@ namespace VistasSorrySliders
                     return true;
                 }
             }
+            catch (CommunicationObjectFaultedException ex)
+            {
+                resultado = Constantes.ERROR_CONEXION_DEFECTUOSA;
+                log.LogError("Se ha perdido la conexión previa", ex);
+            }
             catch (CommunicationException ex)
             {
                 resultado = Constantes.ERROR_CONEXION_SERVIDOR;
@@ -157,6 +162,11 @@ namespace VistasSorrySliders
                     MostrarJugadores();
                     return;
                 }
+            }
+            catch (CommunicationObjectFaultedException ex)
+            {
+                resultado = Constantes.ERROR_CONEXION_DEFECTUOSA;
+                log.LogError("Se ha perdido la conexión previa", ex);
             }
             catch (CommunicationException ex)
             {
@@ -195,6 +205,11 @@ namespace VistasSorrySliders
                     return true;
                 }
             }
+            catch (CommunicationObjectFaultedException ex)
+            {
+                resultado = Constantes.ERROR_CONEXION_DEFECTUOSA;
+                log.LogError("Se ha perdido la conexión previa", ex);
+            }
             catch (CommunicationException ex)
             {
                 resultado = Constantes.ERROR_CONEXION_SERVIDOR;
@@ -229,6 +244,11 @@ namespace VistasSorrySliders
                     _cuentasSolicitudesPendientes = listaPendientes.ToList();
                     return true;
                 }
+            }
+            catch (CommunicationObjectFaultedException ex)
+            {
+                resultado = Constantes.ERROR_CONEXION_DEFECTUOSA;
+                log.LogError("Se ha perdido la conexión previa", ex);
             }
             catch (CommunicationException ex)
             {
@@ -301,6 +321,11 @@ namespace VistasSorrySliders
                     return true;
                 }
             }
+            catch (CommunicationObjectFaultedException ex)
+            {
+                resultado = Constantes.ERROR_CONEXION_DEFECTUOSA;
+                log.LogError("Se ha perdido la conexión previa", ex);
+            }
             catch (CommunicationException ex)
             {
                 resultado = Constantes.ERROR_CONEXION_SERVIDOR;
@@ -340,6 +365,11 @@ namespace VistasSorrySliders
                     MostrarNotificaciones();
                     return true;
                 }
+            }
+            catch (CommunicationObjectFaultedException ex)
+            {
+                resultado = Constantes.ERROR_CONEXION_DEFECTUOSA;
+                log.LogError("Se ha perdido la conexión previa", ex);
             }
             catch (CommunicationException ex)
             {
@@ -442,6 +472,10 @@ namespace VistasSorrySliders
             {
                 _proxyNotificar.EliminarProxy(_cuentaUsuario.CorreoElectronico);
             }
+            catch (CommunicationObjectFaultedException ex)
+            {
+                log.LogError("Se ha perdido la conexión previa", ex);
+            }
             catch (CommunicationException ex)
             {
                 log.LogError("Error de Comunicación con el Servidor", ex);
@@ -522,6 +556,11 @@ namespace VistasSorrySliders
                 };
                 resultado = _proxyAmigos.GuardarNotificacion(notificacionNueva);
             }
+            catch (CommunicationObjectFaultedException ex)
+            {
+                resultado = Constantes.ERROR_CONEXION_DEFECTUOSA;
+                log.LogError("Se ha perdido la conexión previa", ex);
+            }
             catch (CommunicationException ex)
             {
                 resultado = Constantes.ERROR_CONEXION_SERVIDOR;
@@ -557,6 +596,11 @@ namespace VistasSorrySliders
             {
                 resultado = _proxyAmigos.BanearJugador(_cuentaUsuario.CorreoElectronico ,cuentaJugador.CorreoElectronico);
             }
+            catch (CommunicationObjectFaultedException ex)
+            {
+                resultado = Constantes.ERROR_CONEXION_DEFECTUOSA;
+                log.LogError("Se ha perdido la conexión previa", ex);
+            }
             catch (CommunicationException ex)
             {
                 resultado = Constantes.ERROR_CONEXION_SERVIDOR;
@@ -586,6 +630,11 @@ namespace VistasSorrySliders
             try
             {
                 resultado = _proxyAmigos.EliminarBaneo(_cuentaUsuario.CorreoElectronico, cuentaJugador.CorreoElectronico);
+            }
+            catch (CommunicationObjectFaultedException ex)
+            {
+                resultado = Constantes.ERROR_CONEXION_DEFECTUOSA;
+                log.LogError("Se ha perdido la conexión previa", ex);
             }
             catch (CommunicationException ex)
             {
@@ -617,7 +666,12 @@ namespace VistasSorrySliders
             try 
             {
                 resultado = _proxyAmigos.GuardarAmistad(notificacion.CorreoElectronicoDestinatario, notificacion.CorreoElectronicoRemitente);
-            } 
+            }
+            catch (CommunicationObjectFaultedException ex)
+            {
+                resultado = Constantes.ERROR_CONEXION_DEFECTUOSA;
+                log.LogError("Se ha perdido la conexión previa", ex);
+            }
             catch (CommunicationException ex) 
             {
                 resultado = Constantes.ERROR_CONEXION_SERVIDOR;
@@ -649,6 +703,11 @@ namespace VistasSorrySliders
             try
             {
                 resultado = _proxyAmigos.EliminarNotificacionJugador(_cuentaUsuario.CorreoElectronico, notificacion.IdNotificacion);
+            }
+            catch (CommunicationObjectFaultedException ex)
+            {
+                resultado = Constantes.ERROR_CONEXION_DEFECTUOSA;
+                log.LogError("Se ha perdido la conexión previa", ex);
             }
             catch (CommunicationException ex)
             {
@@ -688,6 +747,11 @@ namespace VistasSorrySliders
             {
                 resultado = _proxyAmigos.EliminarAmistad(_cuentaUsuario.CorreoElectronico, cuentaAmigo.CorreoElectronico);
             }
+            catch (CommunicationObjectFaultedException ex)
+            {
+                resultado = Constantes.ERROR_CONEXION_DEFECTUOSA;
+                log.LogError("Se ha perdido la conexión previa", ex);
+            }
             catch (CommunicationException ex)
             {
                 resultado = Constantes.ERROR_CONEXION_SERVIDOR;
@@ -721,6 +785,10 @@ namespace VistasSorrySliders
             try
             {
                 _proxyAmigos.NotificarUsuario(correoJugadorNotificado);
+            }
+            catch (CommunicationObjectFaultedException ex)
+            {
+                log.LogError("Se ha perdido la conexión previa", ex);
             }
             catch (CommunicationException ex)
             {
