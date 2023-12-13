@@ -209,7 +209,9 @@ namespace VistasSorrySliders
         {
             if (correoElectronico.Equals(_cuentaUsuario.CorreoElectronico))
             {
-                Utilidades.SalirHastaInicioSesionDesdeJuegoYLobbyVentana(this);
+                _juegoYLobbyVentana.DesuscribirseDeCerrarVentana();
+                _juegoYLobbyVentana.IrMenuUsuario();
+                Window.GetWindow(this).Close();
                 Utilidades.MostrarMensajeInformacion(Properties.Resources.msgExpulsarJugador, Properties.Resources.msgExpulsadoTitulo);
             }
             else

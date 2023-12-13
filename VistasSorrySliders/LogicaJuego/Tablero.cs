@@ -84,14 +84,11 @@ namespace VistasSorrySliders.LogicaJuego
 
         public void CambiarEstadosJugadores(List<JugadorTurno> jugadoresTurno)
         {
-            foreach (JugadorTurno jugadorPuntuacion in jugadoresTurno)
+            for (int numeroJugador = 0; numeroJugador < jugadoresTurno.Count; numeroJugador++)
             {
-                foreach (JugadorLanzamiento jugadorLanzamiento in ListaJugadores)
+                if (ListaJugadores[numeroJugador].CorreElectronico.Equals(jugadoresTurno[numeroJugador].CorreoJugador))
                 {
-                    if (jugadorPuntuacion.CorreoJugador.Equals(jugadorLanzamiento.CorreElectronico))
-                    {
-                        jugadorLanzamiento.EstaConectado = jugadorPuntuacion.EstaConectado;
-                    }
+                    ListaJugadores[numeroJugador].EstaConectado = jugadoresTurno[numeroJugador].EstaConectado;
                 }
             }
         }
@@ -184,7 +181,7 @@ namespace VistasSorrySliders.LogicaJuego
         private void FinalizarTurno()
         {
             _temporizadorPeonesMovimiento.Stop();
-            Task.Delay(2000).Wait();
+            Task.Delay(3000).Wait();
             FinalizarMovimientoPeones?.Invoke();            
         }
 

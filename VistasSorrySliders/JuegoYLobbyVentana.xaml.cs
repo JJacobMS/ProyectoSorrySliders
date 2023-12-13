@@ -193,7 +193,6 @@ namespace VistasSorrySliders
                 InicioSesionPagina inicio = new InicioSesionPagina();
                 ventanaPrincipal.Content = inicio;
             }
-
             ventanaPrincipal.Show();
         }
         

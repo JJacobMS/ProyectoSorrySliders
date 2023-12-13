@@ -263,5 +263,15 @@ namespace VistasSorrySliders
             MenuPrincipalPagina menu = new MenuPrincipalPagina(_cuentaActual);
             this.NavigationService.Navigate(menu);
         }
+
+        private void TextChangedTamanoNickname(object sender, TextChangedEventArgs e)
+        {
+            int tamañoMaximoNickname = 25;
+            if (txtBoxNickname.Text.Length > tamañoMaximoNickname)
+            {
+                txtBoxNickname.Text = txtBoxNickname.Text.Substring(0, tamañoMaximoNickname);
+                txtBoxNickname.SelectionStart = txtBoxNickname.Text.Length;
+            }
+        }
     }
 }
