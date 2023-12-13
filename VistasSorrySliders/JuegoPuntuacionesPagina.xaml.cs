@@ -53,7 +53,7 @@ namespace VistasSorrySliders
         private List<CuentaSet> _listaCuentas;
         private JuegoYLobbyVentana _juegoYLobbyVentana;
         private List<JugadorGanador> _listaGanadores;
-        private int _contadorAvisarTurno = 0;
+        private int _contadorAvisarTurno;
         public JuegoPuntuacionesPagina(List<JugadorLanzamiento> jugadores, CuentaSet cuentaUsuario, string codigoPartida, List<CuentaSet> listaCuentas, JuegoYLobbyVentana juegoYLobbyVentana)
         {
             InitializeComponent();
@@ -73,6 +73,7 @@ namespace VistasSorrySliders
             _cuentaUsuario = cuentaUsuario;
             _correoUsuario = cuentaUsuario.CorreoElectronico;
             _jugadoresLanzamiento = jugadores;
+            _contadorAvisarTurno = 0;
             InicializarTablero();
             _turnoActualJuego = 0;
             EmpezarTurno(_turnoActualJuego);
@@ -307,32 +308,29 @@ namespace VistasSorrySliders
             
             for (int i = 0; i < puntuaciones.Count; i++)
             {
-                _listaBotonAzul[i].Content = 3;//puntuaciones[i];
+                _listaBotonAzul[i].Content = puntuaciones[i];
             }
         }
 
         private void IngresarPuntuacionesRojo(List<int> puntuaciones)
         {
-            
             for (int i = 0; i < puntuaciones.Count; i++)
             {
-                _listaBotonRojo[i].Content = 3;//puntuaciones[i];
+                _listaBotonRojo[i].Content = puntuaciones[i];
             }
         }
         private void IngresarPuntuacionesVerde(List<int> puntuaciones)
         {
-            
             for (int i = 0; i < puntuaciones.Count; i++)
             {
-                _listaBotonVerde[i].Content = 3;// puntuaciones[i];
+                _listaBotonVerde[i].Content = puntuaciones[i];
             }
         }
         private void IngresarPuntuacionesAmarillo(List<int> puntuaciones)
         {
-            
             for (int i = 0; i < puntuaciones.Count; i++)
             {
-                _listaBotonAmarillo[i].Content = 3;// puntuaciones[i];
+                _listaBotonAmarillo[i].Content = puntuaciones[i];
             }
         }
         private void MouseLeftButtonDownMoverPeon(object sender, MouseButtonEventArgs e)

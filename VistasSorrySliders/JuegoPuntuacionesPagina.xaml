@@ -246,9 +246,9 @@
                     <Border x:Name="brdConteoPuntuaciones" Width="140" Height="140" BorderThickness="8" BorderBrush="#2E0437" CornerRadius="20" 
                             Background="#F0D8FA" Visibility="Hidden" Grid.RowSpan="3" Grid.ColumnSpan="3" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="10">
                         <StackPanel VerticalAlignment="Center">
-                            <TextBlock Foreground="#2E0437" FontSize="18" Style="{StaticResource estiloTxtBlockCambioRonda}" Text="{x:Static p:Resources.txtBlockRondaPuntuacionesTerminada}"></TextBlock>
+                            <TextBlock Style="{StaticResource estiloTxtBlockCambioRonda}" Text="{x:Static p:Resources.txtBlockRondaPuntuacionesTerminada}"></TextBlock>
                             <Image Height="35" Source="/Recursos/puntuaciones.png"/>
-                            <TextBlock Foreground="#2E0437" FontSize="13" Style="{StaticResource estiloTxtBlockCambioRonda}" Text="{x:Static p:Resources.txtBlockGuardandoPuntuaciones}"></TextBlock>
+                            <TextBlock FontSize="13" Style="{StaticResource estiloTxtBlockCambioRonda}" Text="{x:Static p:Resources.txtBlockGuardandoPuntuaciones}"></TextBlock>
                         </StackPanel>
                     </Border>
                 </Grid>

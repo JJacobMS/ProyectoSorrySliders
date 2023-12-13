@@ -234,8 +234,8 @@
     </Style>
 
     <Style x:Key="estiloTxtBlockCambioRonda" TargetType="TextBlock">
-        <Setter Property="Foreground" Value="#B26C1A"/>
-        <Setter Property="FontSize" Value="32"/>
+        <Setter Property="Foreground" Value="#2E0437"/>
+        <Setter Property="FontSize" Value="18"/>
         <Setter Property="TextWrapping" Value="Wrap"/>
         <Setter Property="TextAlignment" Value="Center"/>
         <Setter Property="FontFamily" Value="{StaticResource FuentesTitulo}"/>
