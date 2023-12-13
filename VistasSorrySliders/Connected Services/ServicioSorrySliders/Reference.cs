@@ -1405,16 +1405,16 @@ namespace VistasSorrySliders.ServicioSorrySliders {
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/ILobby/SalirPartida")]
         System.Threading.Tasks.Task SalirPartidaAsync(string uid);
         
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/ILobby/IniciarPartida")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILobby/IniciarPartida", ReplyAction="http://tempuri.org/ILobby/IniciarPartidaResponse")]
         void IniciarPartida(string uid);
         
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/ILobby/IniciarPartida")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILobby/IniciarPartida", ReplyAction="http://tempuri.org/ILobby/IniciarPartidaResponse")]
         System.Threading.Tasks.Task IniciarPartidaAsync(string uid);
         
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/ILobby/ComprobarJugadoresExistentes")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILobby/ComprobarJugadoresExistentes", ReplyAction="http://tempuri.org/ILobby/ComprobarJugadoresExistentesResponse")]
         void ComprobarJugadoresExistentes(string uid);
         
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/ILobby/ComprobarJugadoresExistentes")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILobby/ComprobarJugadoresExistentes", ReplyAction="http://tempuri.org/ILobby/ComprobarJugadoresExistentesResponse")]
         System.Threading.Tasks.Task ComprobarJugadoresExistentesAsync(string uid);
     }
     

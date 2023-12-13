@@ -223,8 +223,14 @@
   <wsdl:message name="ILobby_IniciarPartida_InputMessage">
     <wsdl:part name="parameters" element="tns:IniciarPartida" />
   </wsdl:message>
+  <wsdl:message name="ILobby_IniciarPartida_OutputMessage">
+    <wsdl:part name="parameters" element="tns:IniciarPartidaResponse" />
+  </wsdl:message>
   <wsdl:message name="ILobby_ComprobarJugadoresExistentes_InputMessage">
     <wsdl:part name="parameters" element="tns:ComprobarJugadoresExistentes" />
+  </wsdl:message>
+  <wsdl:message name="ILobby_ComprobarJugadoresExistentes_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ComprobarJugadoresExistentesResponse" />
   </wsdl:message>
   <wsdl:message name="ILobby_JugadorEntroPartida_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:JugadorEntroPartida" />
@@ -568,9 +574,11 @@
     </wsdl:operation>
     <wsdl:operation name="IniciarPartida">
       <wsdl:input wsaw:Action="http://tempuri.org/ILobby/IniciarPartida" message="tns:ILobby_IniciarPartida_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ILobby/IniciarPartidaResponse" message="tns:ILobby_IniciarPartida_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="ComprobarJugadoresExistentes">
       <wsdl:input wsaw:Action="http://tempuri.org/ILobby/ComprobarJugadoresExistentes" message="tns:ILobby_ComprobarJugadoresExistentes_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ILobby/ComprobarJugadoresExistentesResponse" message="tns:ILobby_ComprobarJugadoresExistentes_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="JugadorEntroPartida">
       <wsdl:output wsaw:Action="http://tempuri.org/ILobby/JugadorEntroPartida" message="tns:ILobby_JugadorEntroPartida_OutputCallbackMessage" />
@@ -912,12 +920,18 @@
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="ComprobarJugadoresExistentes">
       <soap12:operation soapAction="http://tempuri.org/ILobby/ComprobarJugadoresExistentes" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="JugadorEntroPartida">
       <soap12:operation soapAction="http://tempuri.org/ILobby/JugadorEntroPartida" style="document" />

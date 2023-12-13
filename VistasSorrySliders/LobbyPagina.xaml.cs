@@ -318,7 +318,6 @@ namespace VistasSorrySliders
 
         private void ClickIniciarPartida(object sender, RoutedEventArgs e)
         {
-            //SWITCH -JACOB
             if (_cuentas.Length == _partidaActual.CantidadJugadores && txtBoxHost.Text == _cuentaUsuario.Nickname)
             {
                 btnIniciarPartida.IsEnabled = false;
@@ -355,7 +354,7 @@ namespace VistasSorrySliders
             }
             catch (CommunicationException ex)
             {
-                Utilidades.MostrarUnMensajeError(Properties.Resources.msgErrorConexion);
+                Utilidades.MostrarUnMensajeError("Hubo un error al identificar los jugadores, es necesario iniciar sesión nuevamente");
                 log.LogError("Error de Comunicación con el Servidor", ex);
             }
             catch (TimeoutException ex)
@@ -363,7 +362,8 @@ namespace VistasSorrySliders
                 Utilidades.MostrarUnMensajeError(Properties.Resources.msgErrorTiempoEsperaServidor);
                 log.LogWarn("Se agoto el tiempo de espera del servidor", ex);
             }
-            IrMenuPrincipal();
+
+            Utilidades.SalirHastaInicioSesionDesdeJuegoYLobbyVentana(this);
             return false;
         }
 
