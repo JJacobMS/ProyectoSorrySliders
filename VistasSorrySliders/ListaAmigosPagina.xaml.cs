@@ -111,7 +111,8 @@ namespace VistasSorrySliders
             CuentaSet cuentaJugadorClickeado = RecuperarCuentaListItem((ListBoxItem)sender);
             if (_tiposNotificacion != null)
             {
-                EnviarInvitacionJugador(cuentaJugadorClickeado);                
+                EnviarInvitacionJugador(cuentaJugadorClickeado);
+                EnviarCorreo(cuentaJugadorClickeado.CorreoElectronico);
             }
         }
 
@@ -125,7 +126,7 @@ namespace VistasSorrySliders
 
             return (CuentaSet)botonJugador.CommandParameter;
         }
-        //Cambiar Enviar Correo a Servidor
+
         private void EnviarCorreo(string correoDestinatario)
         {
             Logger log = new Logger(this.GetType());
@@ -146,18 +147,19 @@ namespace VistasSorrySliders
                 resultado = Constantes.ERROR_TIEMPO_ESPERA_SERVIDOR;
                 log.LogWarn("Se agoto el tiempo de espera del servidor", ex);
             }
+
             switch (resultado)
             {
                 case Constantes.OPERACION_EXITOSA:
                     Utilidades.MostrarMensajeInformacion(Properties.Resources.msgInvitacionExitosa);
                     break;
                 case Constantes.OPERACION_EXITOSA_VACIA:
-                    Utilidades.MostrarUnMensajeError(Properties.Resources.msgNotificacionGuardarError);
-                    break;
                 case Constantes.ERROR_CONSULTA:
-                    Utilidades.MostrarUnMensajeError(Properties.Resources.msgNotificacionGuardarError);
+                    Utilidades.MostrarUnMensajeError(Properties.Resources.msgErroEnviarCorreo);
                     break;
-                default:
+                case Constantes.ERROR_CONEXION_SERVIDOR:
+                case Constantes.ERROR_TIEMPO_ESPERA_SERVIDOR:
+                    Utilidades.MostrarMensajesError(resultado);
                     break;
             }
         }
@@ -216,6 +218,7 @@ namespace VistasSorrySliders
         private void CargarJugadores(string informacionJugador)
         {
             Constantes resultado;
+            Constantes resultadoBaneados = Constantes.OPERACION_EXITOSA;
             List<CuentaSet> jugadoresLista = new List<CuentaSet>();
             List<CuentaSet> jugadoresBaneados = new List<CuentaSet>();
             Logger log = new Logger(this.GetType());
@@ -223,13 +226,13 @@ namespace VistasSorrySliders
             {
                 CuentaSet[] cuentasBusqueda;
                 (resultado, cuentasBusqueda) = _proxyAmigos.RecuperarJugadoresCuenta(informacionJugador, _cuenta.CorreoElectronico);
-                
+
                 if (resultado == Constantes.OPERACION_EXITOSA)
                 {
                     jugadoresLista = cuentasBusqueda.ToList();
                     CuentaSet[] cuentasBaneadas;
-                    (resultado, cuentasBaneadas) = _proxyAmigos.RecuperarBaneados(_cuenta.CorreoElectronico);
-                    if (cuentasBaneadas != null)
+                    (resultadoBaneados, cuentasBaneadas) = _proxyAmigos.RecuperarBaneados(_cuenta.CorreoElectronico);
+                    if (resultadoBaneados == Constantes.OPERACION_EXITOSA)
                     {
                         jugadoresBaneados = cuentasBaneadas.ToList();
                     }
@@ -246,7 +249,8 @@ namespace VistasSorrySliders
                 resultado = Constantes.ERROR_TIEMPO_ESPERA_SERVIDOR;
                 log.LogWarn("Se agoto el tiempo de espera del servidor", ex);
             }
-
+            Utilidades.MostrarMensajesError(resultado);
+            Utilidades.MostrarMensajesError(resultadoBaneados);
             switch (resultado)
             {
                 case Constantes.OPERACION_EXITOSA:
@@ -257,7 +261,6 @@ namespace VistasSorrySliders
                     break;
                 default:
                     Window.GetWindow(this).Close();
-                    Utilidades.MostrarMensajesError(resultado);
                     break;
             }
         }
@@ -271,12 +274,10 @@ namespace VistasSorrySliders
                 {
                     DataContext = cuenta
                 };
-                foreach (CuentaSet jugadorBaneado in jugadoresBaneados)
+
+                if (jugadoresBaneados.Exists(jugadorBaneado => jugadorBaneado.CorreoElectronico.Equals(cuenta.CorreoElectronico)))
                 {
-                    if (jugadorBaneado.CorreoElectronico.Equals(cuenta.CorreoElectronico))
-                    {
-                        lstBoxItemCuenta.IsEnabled = false;
-                    }
+                    lstBoxItemCuenta.IsEnabled = false;
                 }
                 
                 lstBoxJugadores.Items.Add(lstBoxItemCuenta);
@@ -393,6 +394,16 @@ namespace VistasSorrySliders
             {
                 txtBoxCorreoInvitacion.Text = txtBoxCorreoInvitacion.Text.Substring(0, tamañoMaximoCorreo);
                 txtBoxCorreoInvitacion.SelectionStart = txtBoxCorreoInvitacion.Text.Length;
+            }
+        }
+
+        private void TextChangedTamanoBuscador(object sender, TextChangedEventArgs e)
+        {
+            int tamañoMaximoCorreo = 100;
+            if (txtBoxBuscadorJugadores.Text.Length > tamañoMaximoCorreo)
+            {
+                txtBoxBuscadorJugadores.Text = txtBoxBuscadorJugadores.Text.Substring(0, tamañoMaximoCorreo);
+                txtBoxBuscadorJugadores.SelectionStart = txtBoxBuscadorJugadores.Text.Length;
             }
         }
     }

@@ -8,17 +8,6 @@
       mc:Ignorable="d" 
       d:DesignHeight="576" d:DesignWidth="614">
 
-    <Page.Resources>
-        <Style x:Key="estiloTxtBlockCambioRonda" TargetType="TextBlock">
-            <Setter Property="Foreground" Value="#B26C1A"/>
-            <Setter Property="FontSize" Value="32"/>
-            <Setter Property="TextWrapping" Value="Wrap"/>
-            <Setter Property="TextAlignment" Value="Center"/>
-            <Setter Property="FontFamily" Value="{StaticResource FuentesTitulo}"/>
-            <Setter Property="Margin" Value="10"/>
-        </Style>
-    </Page.Resources>
-
     <Grid>
         <Grid.Background>
             <ImageBrush ImageSource="/Recursos/TableroLanzamientoFondo.png"></ImageBrush>
@@ -29,6 +18,15 @@
                     <ImageBrush ImageSource="/Recursos/tableroCuatro.png"/>
                 </Border.Background>
                 <Canvas x:Name="cnvEspacioJuego">
+                    <Rectangle Name="rctPistaAzul" Height="210" Width="84" Fill="Transparent" HorizontalAlignment="Center" VerticalAlignment="Top" Canvas.Top="359" Canvas.Left="265"/>
+                    <Rectangle Name="rctPistaRojo" Height="210" Width="84" Fill="Transparent" HorizontalAlignment="Left" VerticalAlignment="Center" Canvas.Top="0" Canvas.Left="266"/>
+                    <Rectangle Name="rctPistaAmarillo" Height="78" Width="228" Fill="Transparent" HorizontalAlignment="Center" VerticalAlignment="Center" Canvas.Top="246" Canvas.Left="0"/>
+                    <Rectangle Name="rctPistaVerde" Height="78" Width="225" Fill="Transparent" HorizontalAlignment="Left" VerticalAlignment="Center" Canvas.Top="246" Canvas.Left="388"/>
+                    <Rectangle Name="rctIzquierdaNoValido" Height="570" Width="220" Fill="Transparent" HorizontalAlignment="Center" VerticalAlignment="Top" Canvas.Top="0" Canvas.Left="0"/>
+                    <Rectangle Name="rctAbajoNoValido" Height="203" Width="613" Fill="Transparent" HorizontalAlignment="Center" VerticalAlignment="Center" Canvas.Top="367" Canvas.Left="0"/>
+                    <Rectangle Name="rctDerechaNoValido" Height="554" Width="217" Fill="Transparent" HorizontalAlignment="Center" VerticalAlignment="Top" Canvas.Top="0" Canvas.Left="396"/>
+                    <Rectangle Name="rctArribaNoValido" Height="203" Width="613" Fill="Transparent" HorizontalAlignment="Center" VerticalAlignment="Center" Canvas.Top="0" Canvas.Left="0"/>
+
                     <Canvas x:Name="cnvEspacioAmarillo">
                         <Button Name="btnLanzarPeonAmarillo" Style="{StaticResource estiloBtnTableroAmarillo}" IsEnabled="False" Click="ClickLanzarPeon" Canvas.Left="134" Canvas.Top="129" HorizontalAlignment="Left" VerticalAlignment="Center" Content="{x:Static p:Resources.btnLanzarPeon}"></Button>
                         <Button Name="btnTirarDadoAmarillo" Style="{StaticResource estiloBtnTableroAmarillo}" IsEnabled="False" Click="ClickDetenerDado" Canvas.Left="133" Canvas.Top="169" Content="{x:Static p:Resources.btnTirarDado}"></Button>
@@ -80,23 +78,18 @@
                     <Rectangle Name="rctParedAzulIzquierdaDos" Height="152" Width="18" Fill="Transparent" HorizontalAlignment="Left" VerticalAlignment="Center" Canvas.Top="209" Canvas.Left="210"/>
                     <Rectangle Name="rctParedRojaDerechaDos" Height="152" Width="20" Fill="Transparent" HorizontalAlignment="Left" VerticalAlignment="Center" Canvas.Top="209" Canvas.Left="388"/>
 
-                    <Rectangle Name="rctPistaAzul" Height="210" Width="84" Fill="Transparent" HorizontalAlignment="Center" VerticalAlignment="Top" Canvas.Top="359" Canvas.Left="265"/>
-                    <Rectangle Name="rctPistaRojo" Height="210" Width="84" Fill="Transparent" HorizontalAlignment="Left" VerticalAlignment="Center" Canvas.Top="0" Canvas.Left="266"/>
-                    <Rectangle Name="rctPistaAmarillo" Height="78" Width="228" Fill="Transparent" HorizontalAlignment="Center" VerticalAlignment="Center" Canvas.Top="246" Canvas.Left="0"/>
-                    <Rectangle Name="rctPistaVerde" Height="78" Width="225" Fill="Transparent" HorizontalAlignment="Left" VerticalAlignment="Center" Canvas.Top="246" Canvas.Left="388"/>
-
                     <Ellipse Name="llpPuntuacion1" Height="169" Width="169" Canvas.Left="222" Canvas.Top="201" HorizontalAlignment="Left" VerticalAlignment="Top"></Ellipse>
                     <Ellipse Name="llpPuntuacion2" Fill="Transparent" Height="105" Width="114" Canvas.Left="251" Canvas.Top="233" HorizontalAlignment="Center" VerticalAlignment="Center"></Ellipse>
                     <Ellipse Name="llpPuntuacion3" Fill="Transparent" Height="74" Width="80" Canvas.Left="268" Canvas.Top="248" HorizontalAlignment="Left" VerticalAlignment="Center"></Ellipse>
                     <Ellipse Name="llpPuntuacion4" Fill="Transparent" Height="43" Width="48" Canvas.Left="284" Canvas.Top="264" HorizontalAlignment="Left" VerticalAlignment="Center"></Ellipse>
                     <Ellipse Name="llpPuntuacion5" Fill="Transparent" Height="20" Width="21" Canvas.Left="298" Canvas.Top="275" HorizontalAlignment="Center" VerticalAlignment="Center"></Ellipse>
 
-                    <Border x:Name="brdConteoPuntuaciones" Width="250" Height="250" BorderThickness="10" BorderBrush="#B26C1A" CornerRadius="20" 
-                            Canvas.Left="183" Canvas.Top="160" Background="#FFF4A7" Visibility="Hidden" Canvas.ZIndex="2">
+                    <Border x:Name="brdConteoPuntuaciones" Width="180" Height="180" BorderThickness="10" BorderBrush="#2E0437" CornerRadius="20" 
+                            Canvas.Left="410" Canvas.Top="370" Background="#F0D8FA" Visibility="Hidden" Canvas.ZIndex="2" >
                         <StackPanel VerticalAlignment="Center">
-                            <TextBlock Style="{StaticResource estiloTxtBlockCambioRonda}" Text="{x:Static p:Resources.txtBlockRondaLanzamientoTerminada}"></TextBlock>
-                            <Image Height="50" Source="/Recursos/peon.png"/>
-                            <TextBlock FontSize="20" Style="{StaticResource estiloTxtBlockCambioRonda}" Text="{x:Static p:Resources.txtBlockContandoPuntuaciones}"></TextBlock>
+                            <TextBlock FontSize="24" Style="{StaticResource estiloTxtBlockCambioRonda}" Text="{x:Static p:Resources.txtBlockRondaLanzamientoTerminada}"></TextBlock>
+                            <Image Height="35" Source="/Recursos/peon.png"/>
+                            <TextBlock FontSize="17" Style="{StaticResource estiloTxtBlockCambioRonda}" Text="{x:Static p:Resources.txtBlockContandoPuntuaciones}"></TextBlock>
                         </StackPanel>
                     </Border>
                 </Canvas>

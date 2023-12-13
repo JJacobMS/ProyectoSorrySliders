@@ -8,6 +8,16 @@
       mc:Ignorable="d" 
       d:DesignHeight="576" d:DesignWidth="615"
       Title="LobbyPagina">
+
+    <Page.Resources>
+        <Style TargetType="TextBlock" x:Key="estiloTxtBlockPartidaComenzando">
+            <Setter Property="FontSize" Value="40"/>
+            <Setter Property="FontFamily" Value="{StaticResource FuentesTitulo}"/>
+            <Setter Property="TextWrapping" Value="Wrap"/>
+            <Setter Property="TextAlignment" Value="Center"/>
+            <Setter Property="Margin" Value="8"/>
+        </Style>
+    </Page.Resources>
     
     <Grid>
         <Grid.Background>
@@ -23,8 +33,9 @@
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
-                    <Button x:Name="btnIniciarPartida" VerticalAlignment="Center" Grid.Column="0" Grid.Row="3" Width="225" 
-                            Height="35" Content="{x:Static p:Resources.btnIniciarPartida}" Style="{StaticResource estiloBtnCrearCuenta}" Click="ClickIniciarPartida"/>
+
+                    <Button x:Name="btnIniciarPartida" VerticalAlignment="Center" Grid.Column="0" Grid.Row="3" Width="225" IsEnabled="False"
+                            Height="35" Content="{x:Static p:Resources.btnIniciarPartida}" Style="{StaticResource estiloBtnCrearCuenta}" Click="ClickIniciarPartida" HorizontalAlignment="Left" Margin="178,0,0,0"/>
                     <Grid x:Name="grdJugadores" Grid.Column="0" Grid.Row="2" Height="190" Width="500" Margin="5">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="70"/>
@@ -113,8 +124,27 @@
                     </Border>
                 </Grid>
             </Viewbox>
-            
         </Border>
-
+        <Border Height="250" Width="250" HorizontalAlignment="Center" VerticalAlignment="Center" BorderThickness="8" Name="brdComenzarPartida" Visibility="Hidden"
+                BorderBrush="#042437" CornerRadius="50">
+            <Border.Background>
+                <LinearGradientBrush>
+                    <GradientStop Offset="0.6" Color="#C4E2F4"/>
+                    <GradientStop Offset="1.4" Color="#E1F0F8"/>
+                </LinearGradientBrush>
+            </Border.Background>
+            <StackPanel VerticalAlignment="Center">
+                <TextBlock Style="{StaticResource estiloTxtBlockPartidaComenzando}" Text="{x:Static p:Resources.txtBlockCambiandoPartida}"></TextBlock>
+                <Image Source="/Recursos/iniciarPartida.png" Height="100" Width="100"/>
+            </StackPanel>
+        </Border>
+        <Border Height="75" Width="155" HorizontalAlignment="Left" VerticalAlignment="Bottom" BorderThickness="5" Name="brdActualizarJugadores" Visibility="Hidden"
+        BorderBrush="#033B20" CornerRadius="20" Margin="25" Background="#D0FACE">
+            <StackPanel VerticalAlignment="Center" Orientation="Horizontal" HorizontalAlignment="Center">
+                <Image Source="/Recursos/recargar.png" Height="30" Width="30" Margin="15,0,0,0"/>
+                <TextBlock Style="{StaticResource estiloTxtBlockPartidaComenzando}" FontSize="20" Width="100" Height="60"
+                           Text="{x:Static p:Resources.txtBlockActualizarJugadores}"></TextBlock>
+            </StackPanel>
+        </Border>
     </Grid>
 </Page>

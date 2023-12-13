@@ -826,6 +826,15 @@ namespace VistasSorrySliders.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Error al enviar la notificación por correo, inténtelo más tarde.
+        /// </summary>
+        public static string msgErroEnviarCorreo {
+            get {
+                return ResourceManager.GetString("msgErroEnviarCorreo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Error al cargar la imagen del avatar por defecto.
         /// </summary>
         public static string msgErrorAvatarDefault {
@@ -862,7 +871,7 @@ namespace VistasSorrySliders.Properties {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a La contraseña debe contar con: Mínimo 8 caracteres, con un número o un carácter especial.
+        ///   Busca una cadena traducida similar a Error, la contraseña debe tener mínimo; un número, una letra y un caracter especial (°!&quot;#$%&amp;/()=|¬\¿?-_+{}). Además, debe ser mayor a 10 caracteres.
         /// </summary>
         public static string msgErrorContrasenaInvalida {
             get {
@@ -925,7 +934,7 @@ namespace VistasSorrySliders.Properties {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a El host del juego lo ha expulsado de la partida.
+        ///   Busca una cadena traducida similar a Ha expulsado de la partida.
         /// </summary>
         public static string msgExpulsarJugador {
             get {
@@ -1204,11 +1213,29 @@ namespace VistasSorrySliders.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Actualizando Jugadores.
+        /// </summary>
+        public static string txtBlockActualizarJugadores {
+            get {
+                return ResourceManager.GetString("txtBlockActualizarJugadores", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a AJUSTES.
         /// </summary>
         public static string txtBlockAjustes {
             get {
                 return ResourceManager.GetString("txtBlockAjustes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Comenzando Partida....
+        /// </summary>
+        public static string txtBlockCambiandoPartida {
+            get {
+                return ResourceManager.GetString("txtBlockCambiandoPartida", resourceCulture);
             }
         }
         
@@ -1330,6 +1357,15 @@ namespace VistasSorrySliders.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Guardando puntuaciones.....
+        /// </summary>
+        public static string txtBlockGuardandoPuntuaciones {
+            get {
+                return ResourceManager.GetString("txtBlockGuardandoPuntuaciones", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a El juego se está jugando o ya ha terminado.
         /// </summary>
         public static string txtBlockJuegoNoValido {
@@ -1429,6 +1465,15 @@ namespace VistasSorrySliders.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Ronda de Puntuaciones Terminada.
+        /// </summary>
+        public static string txtBlockRondaPuntuacionesTerminada {
+            get {
+                return ResourceManager.GetString("txtBlockRondaPuntuacionesTerminada", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a RONDAS GANADAS.
         /// </summary>
         public static string txtBlockRondasGanadas {
@@ -1452,6 +1497,15 @@ namespace VistasSorrySliders.Properties {
         public static string txtBlockUnirsePartida {
             get {
                 return ResourceManager.GetString("txtBlockUnirsePartida", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a pack://application:,,,/Recursos/avatarPredefinido.jpg.
+        /// </summary>
+        public static string uriAvatarPorDefecto {
+            get {
+                return ResourceManager.GetString("uriAvatarPorDefecto", resourceCulture);
             }
         }
         

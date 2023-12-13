@@ -1161,6 +1161,51 @@ namespace VistasSorrySliders.ServicioSorrySliders {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="PeonesTablero", Namespace="http://schemas.datacontract.org/2004/07/DatosSorrySliders")]
+    [System.SerializableAttribute()]
+    public partial class PeonesTablero : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Collections.Generic.Dictionary<int, System.ValueTuple<double, double>[]> PeonesActualmenteTableroField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.Generic.Dictionary<int, System.ValueTuple<double, double>[]> PeonesActualmenteTablero {
+            get {
+                return this.PeonesActualmenteTableroField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.PeonesActualmenteTableroField, value) != true)) {
+                    this.PeonesActualmenteTableroField = value;
+                    this.RaisePropertyChanged("PeonesActualmenteTablero");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServicioSorrySliders.IInicioSesion")]
     public interface IInicioSesion {
@@ -1178,10 +1223,10 @@ namespace VistasSorrySliders.ServicioSorrySliders {
         System.Threading.Tasks.Task<VistasSorrySliders.ServicioSorrySliders.Constantes> VerificarContrasenaDeCuentaAsync(VistasSorrySliders.ServicioSorrySliders.CuentaSet cuentaPorVerificar);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IInicioSesion/JugadorEstaEnLinea", ReplyAction="http://tempuri.org/IInicioSesion/JugadorEstaEnLineaResponse")]
-        bool JugadorEstaEnLinea(string jugadorCorreo);
+        VistasSorrySliders.ServicioSorrySliders.Constantes JugadorEstaEnLinea(string jugadorCorreo);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IInicioSesion/JugadorEstaEnLinea", ReplyAction="http://tempuri.org/IInicioSesion/JugadorEstaEnLineaResponse")]
-        System.Threading.Tasks.Task<bool> JugadorEstaEnLineaAsync(string jugadorCorreo);
+        System.Threading.Tasks.Task<VistasSorrySliders.ServicioSorrySliders.Constantes> JugadorEstaEnLineaAsync(string jugadorCorreo);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -1227,11 +1272,11 @@ namespace VistasSorrySliders.ServicioSorrySliders {
             return base.Channel.VerificarContrasenaDeCuentaAsync(cuentaPorVerificar);
         }
         
-        public bool JugadorEstaEnLinea(string jugadorCorreo) {
+        public VistasSorrySliders.ServicioSorrySliders.Constantes JugadorEstaEnLinea(string jugadorCorreo) {
             return base.Channel.JugadorEstaEnLinea(jugadorCorreo);
         }
         
-        public System.Threading.Tasks.Task<bool> JugadorEstaEnLineaAsync(string jugadorCorreo) {
+        public System.Threading.Tasks.Task<VistasSorrySliders.ServicioSorrySliders.Constantes> JugadorEstaEnLineaAsync(string jugadorCorreo) {
             return base.Channel.JugadorEstaEnLineaAsync(jugadorCorreo);
         }
     }
@@ -1365,6 +1410,12 @@ namespace VistasSorrySliders.ServicioSorrySliders {
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/ILobby/IniciarPartida")]
         System.Threading.Tasks.Task IniciarPartidaAsync(string uid);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/ILobby/ComprobarJugadoresExistentes")]
+        void ComprobarJugadoresExistentes(string uid);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/ILobby/ComprobarJugadoresExistentes")]
+        System.Threading.Tasks.Task ComprobarJugadoresExistentesAsync(string uid);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -1431,6 +1482,14 @@ namespace VistasSorrySliders.ServicioSorrySliders {
         public System.Threading.Tasks.Task IniciarPartidaAsync(string uid) {
             return base.Channel.IniciarPartidaAsync(uid);
         }
+        
+        public void ComprobarJugadoresExistentes(string uid) {
+            base.Channel.ComprobarJugadoresExistentes(uid);
+        }
+        
+        public System.Threading.Tasks.Task ComprobarJugadoresExistentesAsync(string uid) {
+            return base.Channel.ComprobarJugadoresExistentesAsync(uid);
+        }
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -1472,6 +1531,12 @@ namespace VistasSorrySliders.ServicioSorrySliders {
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IUnirsePartida/EliminarCuentaProvisional")]
         System.Threading.Tasks.Task EliminarCuentaProvisionalAsync(string correoElectronico);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IUnirsePartida/SalirJuegoCompleto")]
+        void SalirJuegoCompleto(string uid, string correo);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IUnirsePartida/SalirJuegoCompleto")]
+        System.Threading.Tasks.Task SalirJuegoCompletoAsync(string uid, string correo);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -1547,6 +1612,14 @@ namespace VistasSorrySliders.ServicioSorrySliders {
         
         public System.Threading.Tasks.Task EliminarCuentaProvisionalAsync(string correoElectronico) {
             return base.Channel.EliminarCuentaProvisionalAsync(correoElectronico);
+        }
+        
+        public void SalirJuegoCompleto(string uid, string correo) {
+            base.Channel.SalirJuegoCompleto(uid, correo);
+        }
+        
+        public System.Threading.Tasks.Task SalirJuegoCompletoAsync(string uid, string correo) {
+            return base.Channel.SalirJuegoCompletoAsync(uid, correo);
         }
     }
     
@@ -2181,6 +2254,12 @@ namespace VistasSorrySliders.ServicioSorrySliders {
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IJuegoLanzamiento/NotificarFinalizarLanzamiento")]
         System.Threading.Tasks.Task NotificarFinalizarLanzamientoAsync(string codigoPartida, string correo);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IJuegoLanzamiento/NotificarPosicionFichasFinales")]
+        void NotificarPosicionFichasFinales(string codigoPartida, string correo, VistasSorrySliders.ServicioSorrySliders.PeonesTablero peones);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IJuegoLanzamiento/NotificarPosicionFichasFinales")]
+        System.Threading.Tasks.Task NotificarPosicionFichasFinalesAsync(string codigoPartida, string correo, VistasSorrySliders.ServicioSorrySliders.PeonesTablero peones);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -2197,6 +2276,10 @@ namespace VistasSorrySliders.ServicioSorrySliders {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IJuegoLanzamiento/JugadoresListosParaSiguienteTurno", ReplyAction="http://tempuri.org/IJuegoLanzamiento/JugadoresListosParaSiguienteTurnoResponse")]
         void JugadoresListosParaSiguienteTurno();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IJuegoLanzamiento/CambiarPosicionPeonesTableroYContinuar", ReplyAction="http://tempuri.org/IJuegoLanzamiento/CambiarPosicionPeonesTableroYContinuarRespon" +
+            "se")]
+        void CambiarPosicionPeonesTableroYContinuar(VistasSorrySliders.ServicioSorrySliders.PeonesTablero peones);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -2265,6 +2348,14 @@ namespace VistasSorrySliders.ServicioSorrySliders {
         
         public System.Threading.Tasks.Task NotificarFinalizarLanzamientoAsync(string codigoPartida, string correo) {
             return base.Channel.NotificarFinalizarLanzamientoAsync(codigoPartida, correo);
+        }
+        
+        public void NotificarPosicionFichasFinales(string codigoPartida, string correo, VistasSorrySliders.ServicioSorrySliders.PeonesTablero peones) {
+            base.Channel.NotificarPosicionFichasFinales(codigoPartida, correo, peones);
+        }
+        
+        public System.Threading.Tasks.Task NotificarPosicionFichasFinalesAsync(string codigoPartida, string correo, VistasSorrySliders.ServicioSorrySliders.PeonesTablero peones) {
+            return base.Channel.NotificarPosicionFichasFinalesAsync(codigoPartida, correo, peones);
         }
     }
     
@@ -2372,10 +2463,10 @@ namespace VistasSorrySliders.ServicioSorrySliders {
         System.Threading.Tasks.Task<VistasSorrySliders.ServicioSorrySliders.Constantes> ActualizarGanadorAsync(string uid, string correoElectronico, int posicion);
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IJuegoPuntuacion/NotificarCambiarPagina")]
-        void NotificarCambiarPagina(string uid);
+        void NotificarCambiarPagina(string uid, int[] arrayPosiciones, string[] arrayNickname);
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IJuegoPuntuacion/NotificarCambiarPagina")]
-        System.Threading.Tasks.Task NotificarCambiarPaginaAsync(string uid);
+        System.Threading.Tasks.Task NotificarCambiarPaginaAsync(string uid, int[] arrayPosiciones, string[] arrayNickname);
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IJuegoPuntuacion/EliminarDiccionariosJuego")]
         void EliminarDiccionariosJuego(string uid);
@@ -2397,7 +2488,7 @@ namespace VistasSorrySliders.ServicioSorrySliders {
         void EliminarTurnoJugador(string correoElectronico);
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IJuegoPuntuacion/CambiarPagina")]
-        void CambiarPagina();
+        void CambiarPagina(int[] arrayPosiciones, string[] arrayNickname);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -2468,12 +2559,12 @@ namespace VistasSorrySliders.ServicioSorrySliders {
             return base.Channel.ActualizarGanadorAsync(uid, correoElectronico, posicion);
         }
         
-        public void NotificarCambiarPagina(string uid) {
-            base.Channel.NotificarCambiarPagina(uid);
+        public void NotificarCambiarPagina(string uid, int[] arrayPosiciones, string[] arrayNickname) {
+            base.Channel.NotificarCambiarPagina(uid, arrayPosiciones, arrayNickname);
         }
         
-        public System.Threading.Tasks.Task NotificarCambiarPaginaAsync(string uid) {
-            return base.Channel.NotificarCambiarPaginaAsync(uid);
+        public System.Threading.Tasks.Task NotificarCambiarPaginaAsync(string uid, int[] arrayPosiciones, string[] arrayNickname) {
+            return base.Channel.NotificarCambiarPaginaAsync(uid, arrayPosiciones, arrayNickname);
         }
         
         public void EliminarDiccionariosJuego(string uid) {

@@ -12,6 +12,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
+using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Markup;
 using System.Windows.Media;
@@ -88,8 +89,6 @@ namespace VistasSorrySliders
             }
             switch (resultado)
             {
-                case Constantes.OPERACION_EXITOSA:
-                    return;
                 case Constantes.OPERACION_EXITOSA_VACIA:
                     Utilidades.MostrarUnMensajeError(Properties.Resources.msgDatosCuentaVacia);
                     break;
@@ -124,7 +123,7 @@ namespace VistasSorrySliders
         }
         private void IrInicioSesion()
         {
-            MainWindow ventana = Window.GetWindow(this) as MainWindow;
+            VentanaPrincipal ventana = Window.GetWindow(this) as VentanaPrincipal;
             ventana.SalirSistema();
             InicioSesionPagina inicio = new InicioSesionPagina();
             this.NavigationService.Navigate(inicio);
@@ -132,16 +131,13 @@ namespace VistasSorrySliders
         private void ClickMostrarConfiguracionLobby(object sender, RoutedEventArgs e)
         {
             ConfiguracionLobby configuracionLobby = new ConfiguracionLobby(_cuentaUsuario);
-
             this.NavigationService.Navigate(configuracionLobby);
         }
-
         private void ClickMostrarUnirsePartida(object sender, RoutedEventArgs e)
         {
             UnirsePartidaPagina unirsePartida = new UnirsePartidaPagina(_cuentaUsuario);
             this.NavigationService.Navigate(unirsePartida);
         }
-
 
         private void ClickMostrarPuntuaciones(object sender, RoutedEventArgs e)
         {
@@ -153,7 +149,7 @@ namespace VistasSorrySliders
                     this.NavigationService.Navigate(tablero);
                     break;
                 case Constantes.ERROR_CONEXION_SERVIDOR:
-                    Utilidades.SalirInicioSesionDesdeVentanaPrincipal(Window.GetWindow(this), this);
+                    Utilidades.SalirInicioSesionDesdeVentanaPrincipal(this);
                     break;
             }
         }

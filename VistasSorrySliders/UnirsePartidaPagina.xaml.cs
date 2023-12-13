@@ -121,7 +121,7 @@ namespace VistasSorrySliders
                     break;
                 case Constantes.ERROR_CONEXION_SERVIDOR:
                 case Constantes.ERROR_TIEMPO_ESPERA_SERVIDOR:
-                    Utilidades.SalirInicioSesionDesdeVentanaPrincipal(Window.GetWindow(this), this);
+                    Utilidades.SalirInicioSesionDesdeVentanaPrincipal(this);
                     break;
             }
         }
@@ -175,7 +175,8 @@ namespace VistasSorrySliders
 
         private void EntrarLobby(string codigo)
         {
-            JuegoYLobbyVentana lobbyUnirse = new JuegoYLobbyVentana(_cuentaActual, codigo, _esInvitado);
+            VentanaPrincipal ventanaPrincipal = Window.GetWindow(this) as VentanaPrincipal;
+            JuegoYLobbyVentana lobbyUnirse = new JuegoYLobbyVentana(_cuentaActual, codigo, _esInvitado, ventanaPrincipal.ProxyLinea);
             Constantes respuesta = lobbyUnirse.InicializarPaginas();
             switch (respuesta)
             {
@@ -183,20 +184,17 @@ namespace VistasSorrySliders
                     MostrarVentanaLobby(lobbyUnirse);
                     break;
                 case Constantes.ERROR_CONEXION_SERVIDOR:
-                    Utilidades.SalirInicioSesionDesdeVentanaPrincipal(Window.GetWindow(this), this);
+                    Utilidades.SalirInicioSesionDesdeVentanaPrincipal(this);
                     break;
             }
         }
 
         private void MostrarVentanaLobby(JuegoYLobbyVentana lobbyUnirse)
         {
-            if (lobbyUnirse.EntrarSistemaEnLinea())
-            {
-                MainWindow ventanaPrincipal = (MainWindow)Window.GetWindow(this);
-                ventanaPrincipal.EliminarProxyLineaAnterior();
-                Window.GetWindow(this).Close();
-                lobbyUnirse.Show();
-            }
+            VentanaPrincipal ventanaPrincipal = Window.GetWindow(this) as VentanaPrincipal;
+            ventanaPrincipal.DesuscribirseCerrarVentana();
+            Window.GetWindow(this).Close();
+            lobbyUnirse.Show();
         }
 
         private void MostrarErrorJugadores(int numeroMaximoJugadores)
@@ -264,6 +262,16 @@ namespace VistasSorrySliders
             }
             MenuPrincipalPagina menu = new MenuPrincipalPagina(_cuentaActual);
             this.NavigationService.Navigate(menu);
+        }
+
+        private void TextChangedTamanoNickname(object sender, TextChangedEventArgs e)
+        {
+            int tamañoMaximoNickname = 25;
+            if (txtBoxNickname.Text.Length > tamañoMaximoNickname)
+            {
+                txtBoxNickname.Text = txtBoxNickname.Text.Substring(0, tamañoMaximoNickname);
+                txtBoxNickname.SelectionStart = txtBoxNickname.Text.Length;
+            }
         }
     }
 }

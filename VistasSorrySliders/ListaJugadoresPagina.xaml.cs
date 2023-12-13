@@ -257,7 +257,7 @@ namespace VistasSorrySliders
 
             EliminarDuplicados();
 
-            if (_listaTodasCuentasBuscadas != null && _listaTodasCuentasBuscadas.Count() > 0)
+            if (_listaTodasCuentasBuscadas != null && _listaTodasCuentasBuscadas.Any())
             {
                 foreach (CuentaSet cuenta in _listaTodasCuentasBuscadas)
                 {
@@ -413,62 +413,22 @@ namespace VistasSorrySliders
 
         private bool EsCuentaBaneada(CuentaSet cuentaComparar)
         {
-            if (_baneados != null)
-            {
-                foreach (CuentaSet cuenta in _baneados)
-                {
-                    if (cuenta.CorreoElectronico.Equals(cuentaComparar.CorreoElectronico))
-                    {
-                        return true;
-                    }
-                }
-            }
-            return false;
+            return _baneados?.Exists(cuenta => cuenta.CorreoElectronico.Equals(cuentaComparar.CorreoElectronico)) ?? false;
         }
 
         private bool EsNotificacionCuentaBaneada(NotificacionSet notificacion)
         {
-            if (_baneados != null)
-            {
-                foreach (CuentaSet cuenta in _baneados)
-                {
-                    if (cuenta.CorreoElectronico.Equals(notificacion.CorreoElectronicoRemitente))
-                    {
-                        return true;
-                    }
-                }
-            }
-            return false;
+            return _baneados?.Exists(cuenta => cuenta.CorreoElectronico.Equals(notificacion.CorreoElectronicoRemitente)) ?? false;
         }
 
         private bool EsCuentaAmigo(CuentaSet cuentaComparar)
         {
-            if (_amigos != null)
-            {
-                foreach (CuentaSet cuenta in _amigos)
-                {
-                    if (cuenta.CorreoElectronico.Equals(cuentaComparar.CorreoElectronico))
-                    {
-                        return true;
-                    }
-                }
-            }
-            return false;
+            return _amigos?.Exists(cuenta => cuenta.CorreoElectronico.Equals(cuentaComparar.CorreoElectronico)) ?? false;
         }
 
         private bool EsPendienteRecibida(CuentaSet cuentaComparar)
         {
-            if (_cuentasSolicitudesPendientes != null)
-            {
-                foreach (CuentaSet cuenta in _cuentasSolicitudesPendientes)
-                {
-                    if (cuenta.CorreoElectronico.Equals(cuentaComparar.CorreoElectronico))
-                    {
-                        return true;
-                    }
-                }
-            }
-            return false;
+            return _cuentasSolicitudesPendientes?.Exists(cuenta => cuenta.CorreoElectronico.Equals(cuentaComparar.CorreoElectronico)) ?? false;
         }
 
         private void ClickRegresarMenu(object sender, RoutedEventArgs e)
@@ -532,12 +492,15 @@ namespace VistasSorrySliders
 
         private void PreviewMouseDownRechazarNotificacion(object sender, MouseButtonEventArgs e)
         {
-            Button btnEliminarNotificacion = sender as Button;
-            NotificacionSet notificacion = btnEliminarNotificacion.CommandParameter as NotificacionSet;
-            EliminarNotificacion(notificacion, false);
+            EliminarNotificacionDelJugador(sender);
         }
 
         private void PreviewMouseDownEliminarNotificacionPartida(object sender, MouseButtonEventArgs e)
+        {
+            EliminarNotificacionDelJugador(sender);
+        }
+
+        private void EliminarNotificacionDelJugador(object sender)
         {
             Button btnEliminarNotificacion = sender as Button;
             NotificacionSet notificacion = btnEliminarNotificacion.CommandParameter as NotificacionSet;
@@ -572,7 +535,7 @@ namespace VistasSorrySliders
             switch (resultado)
             {
                 case Constantes.OPERACION_EXITOSA:
-                    MostrarMensaje(Properties.Resources.msgSolicitudAmistadEnviada);
+                    _ = MostrarMensaje(Properties.Resources.msgSolicitudAmistadEnviada);
                     NotificarUsuario(cuentaJugador.CorreoElectronico);
                     RecargarPantalla();
                     return;
@@ -607,7 +570,7 @@ namespace VistasSorrySliders
             switch (resultado)
             {
                 case Constantes.OPERACION_EXITOSA:
-                    MostrarMensaje(Properties.Resources.msgBanearJugador);
+                    _ = MostrarMensaje(Properties.Resources.msgBanearJugador);
                     RecargarPantalla();
                     return;
                 default:
@@ -637,7 +600,7 @@ namespace VistasSorrySliders
             switch (resultado)
             {
                 case Constantes.OPERACION_EXITOSA:
-                    MostrarMensaje(Properties.Resources.msgEliminarBaneoJugador);
+                    _ = MostrarMensaje(Properties.Resources.msgEliminarBaneoJugador);
                     RecargarPantalla();
                     break;
                 default:
@@ -668,7 +631,7 @@ namespace VistasSorrySliders
             switch (resultado)
             {
                 case Constantes.OPERACION_EXITOSA:
-                    MostrarMensaje(Properties.Resources.msgAceptarNotificacion);
+                    _ = MostrarMensaje(Properties.Resources.msgAceptarNotificacion);
                     EliminarNotificacion(notificacion, true);
                     return;
                 default:
@@ -702,7 +665,7 @@ namespace VistasSorrySliders
                 case Constantes.OPERACION_EXITOSA:
                     if (!esEliminarDesdeAmistad)
                     {
-                        MostrarMensaje(Properties.Resources.msgEliminarNotificacion);
+                        _ = MostrarMensaje(Properties.Resources.msgEliminarNotificacion);
                     }
                     NotificarUsuario(notificacion.CorreoElectronicoRemitente);
                     RecargarPantalla();
@@ -738,7 +701,7 @@ namespace VistasSorrySliders
             switch (resultado)
             {
                 case Constantes.OPERACION_EXITOSA:
-                    MostrarMensaje(Properties.Resources.msgEliminarAmigo);
+                    _ = MostrarMensaje(Properties.Resources.msgEliminarAmigo);
                     NotificarUsuario(cuentaAmigo.CorreoElectronico);
                     RecargarPantalla();
                     return;
@@ -812,19 +775,29 @@ namespace VistasSorrySliders
 
         private void BuscarJugadores()
         {
-            string informacionJugador = txtBlockBuscador.Text;
+            string informacionJugador = txtBoxBuscador.Text;
             if (!string.IsNullOrWhiteSpace(informacionJugador))
             {
                 RecuperarJugadoresEspecificos(informacionJugador);
             }
         }
 
-        private async void MostrarMensaje(string mensaje)
+        private async Task MostrarMensaje(string mensaje)
         {
             txtBlockMensaje.Text = mensaje;
             brdMensaje.Visibility = Visibility.Visible;
             await Task.Delay(2500);
             brdMensaje.Visibility = Visibility.Hidden;
+        }
+
+        private void TextChangedBuscadorJugadores(object sender, TextChangedEventArgs e)
+        {
+            int tamañoMaximoCorreo = 100;
+            if (txtBoxBuscador.Text.Length > tamañoMaximoCorreo)
+            {
+                txtBoxBuscador.Text = txtBoxBuscador.Text.Substring(0, tamañoMaximoCorreo);
+                txtBoxBuscador.SelectionStart = txtBoxBuscador.Text.Length;
+            }
         }
     }
 }

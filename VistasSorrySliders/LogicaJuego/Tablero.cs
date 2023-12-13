@@ -15,9 +15,6 @@ namespace VistasSorrySliders.LogicaJuego
 {
     public class Tablero
     {
-        public int NumeroJugadores;
-        public int TurnoActual;
-
         public const int ESPACIO_COLOCAR_FICHAS = 40;
         public const int NUMERO_PEONES_POR_JUGADOR = 4;
         public const int TAMANO_PEON = 12;
@@ -28,19 +25,22 @@ namespace VistasSorrySliders.LogicaJuego
         public const int ANCHO_TABLERO = 615;
         public const int ALTO_TABLERO = 615;
 
-        public List<JugadorLanzamiento> ListaJugadores;
-        public List<PeonLanzamiento> ListaPeonesTablero;
-        public List<Rectangle> ListaObstaculos;
-        public List<Rectangle> ListaLugaresNoValidos;
-        public Dictionary<Ellipse, int> ListaPuntuaciones;
-        public Dictionary<Direccion, ImageBrush> ColorPorJugador;
-        public Dictionary<Direccion, Point> PosicionInicioJugadores;
-        public Dictionary<Direccion, Point> PosicionLanzamientoInicial;
-        public Dictionary<Direccion, (Point, Point)> PosicionDados;
-
         protected DispatcherTimer _temporizadorDado;
         protected DispatcherTimer _temporizadorLinea;
         protected DispatcherTimer _temporizadorPeonesMovimiento;
+
+        public List<JugadorLanzamiento> ListaJugadores { get; set; }
+        public List<PeonLanzamiento> ListaPeonesTablero { get; set; }
+        public List<Rectangle> ListaObstaculos { get; set; }
+        public List<Rectangle> ListaLugaresNoValidos { get; set; }
+        public Dictionary<Ellipse, int> ListaPuntuaciones { get; set; }
+        public Dictionary<Direccion, ImageBrush> ColorPorJugador { get; set; }
+        public Dictionary<Direccion, Point> PosicionInicioJugadores { get; set; }
+        public Dictionary<Direccion, Point> PosicionLanzamientoInicial { get; set; }
+        public Dictionary<Direccion, (Point, Point)> PosicionDados { get; set; }
+        public int TurnoActual { get; set; }
+        public int NumeroJugadores { get; set; }
+        private bool _juegoTerminadoPorFaltaJugadores;
 
         public event Action IniciarJuego;
         public event Action<int, int> MostrarPotenciaLanzamiento;
@@ -53,6 +53,7 @@ namespace VistasSorrySliders.LogicaJuego
         public Tablero(List<CuentaSet> listaJugadores, List<Rectangle> obstaculos,
             List<Rectangle> noValidos, Dictionary<Ellipse, int> listaPuntuaciones)
         {
+            _juegoTerminadoPorFaltaJugadores = false;
             NumeroJugadores = listaJugadores.Count;
             TurnoActual = 0;
             ListaObstaculos = obstaculos;
@@ -79,6 +80,32 @@ namespace VistasSorrySliders.LogicaJuego
             _temporizadorPeonesMovimiento = new DispatcherTimer();
             _temporizadorPeonesMovimiento.Tick += IniciarMovimientoPeones;
             _temporizadorPeonesMovimiento.Interval = TimeSpan.FromMilliseconds(50);
+        }
+
+        public void CambiarEstadosJugadores(List<JugadorTurno> jugadoresTurno)
+        {
+            for (int numeroJugador = 0; numeroJugador < jugadoresTurno.Count; numeroJugador++)
+            {
+                if (ListaJugadores[numeroJugador].CorreElectronico.Equals(jugadoresTurno[numeroJugador].CorreoJugador))
+                {
+                    ListaJugadores[numeroJugador].EstaConectado = jugadoresTurno[numeroJugador].EstaConectado;
+                }
+            }
+        }
+        public void ComprobarJugadoresRestantes()
+        {
+            int jugadoresEnLinea = 0;
+            foreach (JugadorLanzamiento jugador in ListaJugadores)
+            {
+                if (jugador.EstaConectado)
+                {
+                    jugadoresEnLinea++;
+                }
+            }
+            if (jugadoresEnLinea <= 1)
+            {
+                AcabarJuegoFaltaJugadores?.Invoke();
+            }
         }
         private void AsignarLugaresJugadores(List<CuentaSet> listaJugadores)
         {
@@ -154,8 +181,56 @@ namespace VistasSorrySliders.LogicaJuego
         private void FinalizarTurno()
         {
             _temporizadorPeonesMovimiento.Stop();
-            Task.Delay(2500).Wait();
+            Task.Delay(3000).Wait();
             FinalizarMovimientoPeones?.Invoke();            
+        }
+
+        public PeonesTablero ObtenerPosicionPeonesActuales()
+        {
+            PeonesTablero peones = new PeonesTablero();
+            Dictionary<int, (double, double)[]> peonesActuales = new Dictionary<int, (double, double)[]>();
+            for (int i = 0; i < NumeroJugadores; i++)
+            {
+                int numeroPeones = (ListaJugadores[i].PeonTurnoActual < NUMERO_PEONES_POR_JUGADOR) ? ListaJugadores[i].PeonTurnoActual + 1 : ListaJugadores[i].PeonTurnoActual;
+                (double, double)[] peonesJugador = new (double, double)[numeroPeones];
+
+                for (int j = 0; j < numeroPeones; j++)
+                {
+                    if (ListaPeonesTablero.Contains(ListaJugadores[i].PeonesLanzamiento[j]))
+                    {
+                        (double posicionX, double posicionY) = ListaJugadores[i].PeonesLanzamiento[j].RecuperarPosicionPeon();
+                        peonesJugador[j].Item1 = posicionX;
+                        peonesJugador[j].Item2 = posicionY;
+                    }
+                    else
+                    {
+                        peonesJugador[j].Item1 = -1;
+                        peonesJugador[j].Item2 = -1;
+                    }
+                }
+                peonesActuales.Add(i, peonesJugador);
+            }
+            peones.PeonesActualmenteTablero = peonesActuales;
+
+            return peones;
+        }
+        public void ModificarPosicionPeones(PeonesTablero peones)
+        {
+            Dictionary<int, (double, double)[]> peonesActuales = peones.PeonesActualmenteTablero;
+
+            for (int numeroJugador = 0; numeroJugador < peonesActuales.Count; numeroJugador++)
+            {
+                for (int numeroPeon = 0; numeroPeon < peonesActuales[numeroJugador].Length; numeroPeon++)
+                {
+                    (double posicionX, double posicionY) = peonesActuales[numeroJugador][numeroPeon];
+                    if (posicionX != -1 && posicionY != -1)
+                    {
+                        PeonLanzamiento peon = ListaJugadores[numeroJugador].PeonesLanzamiento[numeroPeon];
+                        Canvas.SetLeft(peon.Figura, posicionX);
+                        Canvas.SetTop(peon.Figura, posicionY);
+                    }
+                }
+            }
         }
 
         public void DesconectarJugador(string correoElectronico)
@@ -191,13 +266,16 @@ namespace VistasSorrySliders.LogicaJuego
 
             AumentarTurnoActual(NumeroJugadores);
 
-            if (ListaJugadores[TurnoActual].PeonTurnoActual < NUMERO_PEONES_POR_JUGADOR)
+            if (!_juegoTerminadoPorFaltaJugadores)
             {
-                IniciarTurno();
-            }
-            else
-            {
-                RecolectarPuntuacionesTablero();
+                if (ListaJugadores[TurnoActual].PeonTurnoActual < NUMERO_PEONES_POR_JUGADOR)
+                {
+                    IniciarTurno();
+                }
+                else
+                {
+                    RecolectarPuntuacionesTablero();
+                }
             }
         }
 
@@ -205,6 +283,7 @@ namespace VistasSorrySliders.LogicaJuego
         {
             if (numeroJugadoresTotales <= 1)
             {
+                _juegoTerminadoPorFaltaJugadores = true;
                 AcabarJuegoFaltaJugadores?.Invoke();
             }
             TurnoActual = (TurnoActual + 1 >= NumeroJugadores) ? 0 : TurnoActual + 1;
@@ -217,6 +296,11 @@ namespace VistasSorrySliders.LogicaJuego
 
         public void IniciarTurno()
         {
+            ValidarJugadorInicio();
+            if (_juegoTerminadoPorFaltaJugadores)
+            {
+                return;
+            }
             JugadorLanzamiento jugadorTurnoActual = ListaJugadores[TurnoActual];
             PeonLanzamiento peonTurnoActual = jugadorTurnoActual.PeonesLanzamiento[jugadorTurnoActual.PeonTurnoActual];
             int posicionX = Convert.ToInt32(PosicionLanzamientoInicial[jugadorTurnoActual.DireccionJugador].X);
@@ -228,6 +312,14 @@ namespace VistasSorrySliders.LogicaJuego
             IniciarJuego?.Invoke();
             _temporizadorDado.Start();
 
+        }
+        private void ValidarJugadorInicio()
+        {
+            JugadorLanzamiento jugadorTurnoActual = ListaJugadores[TurnoActual];
+            if (!jugadorTurnoActual.EstaConectado)
+            {
+                AumentarTurnoActual(NumeroJugadores);
+            }
         }
         public int RetornarDado()
         {
@@ -288,7 +380,6 @@ namespace VistasSorrySliders.LogicaJuego
         {
             foreach (JugadorLanzamiento jugador in ListaJugadores)
             {
-                Logger log = new Logger(this.GetType());
                 jugador.CalcularPuntajePeonesTablero(ListaPuntuaciones, ListaPeonesTablero);
             }
             PasarPuntuacionesJuego?.Invoke(ListaJugadores);

@@ -369,6 +369,9 @@
   <data name="msgEliminarNotificacion" xml:space="preserve">
     <value>Notification has been removed</value>
   </data>
+  <data name="msgErroEnviarCorreo" xml:space="preserve">
+    <value>Error sending notification by email, please try again later</value>
+  </data>
   <data name="msgErrorAvatarDefault" xml:space="preserve">
     <value>Error loading default avatar image</value>
   </data>
@@ -382,7 +385,7 @@
     <value>There's been an error with the query, please try later</value>
   </data>
   <data name="msgErrorContrasenaInvalida" xml:space="preserve">
-    <value>Password must have: Minimum of 8 characters with one number or one special character</value>
+    <value>Error, password must have minimum; a number, a letter and a special character (°!"#$%&amp;/()=|¬\¿?-_+{}). Additionally, it must be greater than 10 characters</value>
   </data>
   <data name="msgErrorImagen" xml:space="preserve">
     <value>The image cannot be loaded</value>
@@ -403,7 +406,7 @@
     <value>EXPELLED FROM THE GAME</value>
   </data>
   <data name="msgExpulsarJugador" xml:space="preserve">
-    <value>The game host has banned you from the game</value>
+    <value>You've been banned from the game</value>
   </data>
   <data name="msgFaltaJugadores" xml:space="preserve">
     <value>All other players have left the game. The game will end</value>
@@ -495,8 +498,14 @@
   <data name="tbItemNotificaciones" xml:space="preserve">
     <value>NOTIFICATIONS</value>
   </data>
+  <data name="txtBlockActualizarJugadores" xml:space="preserve">
+    <value>Updating Players</value>
+  </data>
   <data name="txtBlockAjustes" xml:space="preserve">
     <value>SETTINGS</value>
+  </data>
+  <data name="txtBlockCambiandoPartida" xml:space="preserve">
+    <value>Starting game...</value>
   </data>
   <data name="txtBlockCodigoNoValido" xml:space="preserve">
     <value>Invalid code</value>
@@ -537,6 +546,9 @@
   <data name="txtBlockEnLinea" xml:space="preserve">
     <value>Online</value>
   </data>
+  <data name="txtBlockGuardandoPuntuaciones" xml:space="preserve">
+    <value>Saving Scores</value>
+  </data>
   <data name="txtBlockJuegoNoValido" xml:space="preserve">
     <value>Game is being played or has already ended</value>
   </data>
@@ -569,6 +581,9 @@
   </data>
   <data name="txtBlockRondaLanzamientoTerminada" xml:space="preserve">
     <value>Launch Round Completed</value>
+  </data>
+  <data name="txtBlockRondaPuntuacionesTerminada" xml:space="preserve">
+    <value>Scoring Round Completed</value>
   </data>
   <data name="txtBlockRondasGanadas" xml:space="preserve">
     <value>ROUNDS WON</value>
