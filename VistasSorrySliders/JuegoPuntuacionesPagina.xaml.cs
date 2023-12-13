@@ -53,7 +53,7 @@ namespace VistasSorrySliders
         private List<CuentaSet> _listaCuentas;
         private JuegoYLobbyVentana _juegoYLobbyVentana;
         private List<JugadorGanador> _listaGanadores;
-        private int _contadorAvisarTurno = 0;
+        private int _contadorAvisarTurno;
         public JuegoPuntuacionesPagina(List<JugadorLanzamiento> jugadores, CuentaSet cuentaUsuario, string codigoPartida, List<CuentaSet> listaCuentas, JuegoYLobbyVentana juegoYLobbyVentana)
         {
             InitializeComponent();
@@ -73,12 +73,12 @@ namespace VistasSorrySliders
             _cuentaUsuario = cuentaUsuario;
             _correoUsuario = cuentaUsuario.CorreoElectronico;
             _jugadoresLanzamiento = jugadores;
-            AgregarProxy();
+            _contadorAvisarTurno = 0;
             InicializarTablero();
             _turnoActualJuego = 0;
             EmpezarTurno(_turnoActualJuego);
         }
-        private void AgregarProxy() 
+        public Constantes AgregarProxy() 
         {
             Logger log = new Logger(this.GetType());
             try
@@ -86,17 +86,19 @@ namespace VistasSorrySliders
                 InstanceContext contexto = new InstanceContext(this);
                 _proxyJuegoPuntuacion = new JuegoPuntuacionClient(contexto);
                 _proxyJuegoPuntuacion.AgregarJugador(_codigoPartida, _correoUsuario);
-                return;
+                return Constantes.OPERACION_EXITOSA;
             }
             catch (CommunicationException ex)
             {
+                Utilidades.MostrarUnMensajeError(Properties.Resources.msgErrorConexion);
                 log.LogError("Error de Comunicación con el Servidor", ex);
             }
             catch (TimeoutException ex)
             {
+                Utilidades.MostrarUnMensajeError(Properties.Resources.msgErrorTiempoEsperaServidor);
                 log.LogWarn("Se agoto el tiempo de espera del servidor", ex);
             }
-            Utilidades.SalirHastaInicioSesionDesdeJuegoYLobbyVentana(this);
+            return Constantes.ERROR_CONEXION_SERVIDOR;
         }
         private void AsignarDados()
         {
@@ -306,32 +308,29 @@ namespace VistasSorrySliders
             
             for (int i = 0; i < puntuaciones.Count; i++)
             {
-                _listaBotonAzul[i].Content = 3;//puntuaciones[i];
+                _listaBotonAzul[i].Content = puntuaciones[i];
             }
         }
 
         private void IngresarPuntuacionesRojo(List<int> puntuaciones)
         {
-            
             for (int i = 0; i < puntuaciones.Count; i++)
             {
-                _listaBotonRojo[i].Content = 3;//puntuaciones[i];
+                _listaBotonRojo[i].Content = puntuaciones[i];
             }
         }
         private void IngresarPuntuacionesVerde(List<int> puntuaciones)
         {
-            
             for (int i = 0; i < puntuaciones.Count; i++)
             {
-                _listaBotonVerde[i].Content = 3;// puntuaciones[i];
+                _listaBotonVerde[i].Content = puntuaciones[i];
             }
         }
         private void IngresarPuntuacionesAmarillo(List<int> puntuaciones)
         {
-            
             for (int i = 0; i < puntuaciones.Count; i++)
             {
-                _listaBotonAmarillo[i].Content = 3;// puntuaciones[i];
+                _listaBotonAmarillo[i].Content = puntuaciones[i];
             }
         }
         private void MouseLeftButtonDownMoverPeon(object sender, MouseButtonEventArgs e)
@@ -667,10 +666,12 @@ namespace VistasSorrySliders
             }
             catch (CommunicationException ex)
             {
+                Utilidades.MostrarUnMensajeError(Properties.Resources.msgErrorConexion);
                 log.LogError("Error de Comunicación con el Servidor", ex);
             }
             catch (TimeoutException ex)
             {
+                Utilidades.MostrarUnMensajeError(Properties.Resources.msgErrorTiempoEsperaServidor);
                 log.LogWarn("Se agoto el tiempo de espera del servidor", ex);
             }
             Utilidades.SalirHastaInicioSesionDesdeJuegoYLobbyVentana(this);
@@ -771,10 +772,12 @@ namespace VistasSorrySliders
             }
             catch (CommunicationException ex)
             {
+                Utilidades.MostrarUnMensajeError(Properties.Resources.msgErrorConexion);
                 log.LogError("Error de Comunicación con el Servidor", ex);
             }
             catch (TimeoutException ex)
             {
+                Utilidades.MostrarUnMensajeError(Properties.Resources.msgErrorTiempoEsperaServidor);
                 log.LogWarn("Se agoto el tiempo de espera del servidor", ex);
             } 
             Utilidades.SalirHastaInicioSesionDesdeJuegoYLobbyVentana(this);
@@ -792,7 +795,6 @@ namespace VistasSorrySliders
             {
                 _turnoActualJuego = 0;
                 await CambiarPaginaLanzamiento();
-                //EmpezarTurno(_turnoActualJuego);
             }
             else
             {
@@ -804,8 +806,9 @@ namespace VistasSorrySliders
         {
             JuegoLanzamientoPagina paginaJuego = new JuegoLanzamientoPagina(_listaCuentas, _listaCuentas.Count, _codigoPartida, _cuentaUsuario, this, _juegoYLobbyVentana, _listaTurnos);
             Constantes respuestaInicio = paginaJuego.InicializarConexionYJuego();
+            brdConteoPuntuaciones.Visibility = Visibility.Visible;
             await Task.Delay(5000);
-
+            brdConteoPuntuaciones.Visibility = Visibility.Hidden;
             switch (respuestaInicio)
             {
                 case Constantes.OPERACION_EXITOSA:
@@ -871,15 +874,10 @@ namespace VistasSorrySliders
         }
         private void SalirMenuPrincipal() 
         {
-            try
+            if (Window.GetWindow(this) != null)
             {
                 Window.GetWindow(this).Close();
                 Utilidades.MostrarUnMensajeError(Properties.Resources.msgFaltaJugadores);
-            }
-            catch (NullReferenceException ex)
-            {
-                Logger log = new Logger(this.GetType());
-                log.LogInfo("Ventana no está disponible", ex);
             }
         }
         private void NotificarCambiarPantalla(List<JugadorGanador> listaPuntuaciones)
@@ -889,10 +887,7 @@ namespace VistasSorrySliders
             for (int i = 0; i < listaPuntuaciones.Count; i++)
             {
                 arrayNickname[i] = listaPuntuaciones[i].Nickname;
-                Console.WriteLine(arrayNickname[i]);
                 arrayPosiciones[i] = listaPuntuaciones[i].Posicion;
-                Console.WriteLine(arrayPosiciones[i]);
-
             }
             Logger log = new Logger(this.GetType());
             try
@@ -902,31 +897,36 @@ namespace VistasSorrySliders
             }
             catch (CommunicationException ex)
             {
+                Utilidades.MostrarUnMensajeError(Properties.Resources.msgErrorConexion);
                 log.LogError("Error de Comunicación con el Servidor", ex);
             }
             catch (TimeoutException ex)
             {
+                Utilidades.MostrarUnMensajeError(Properties.Resources.msgErrorTiempoEsperaServidor);
                 log.LogWarn("Se agoto el tiempo de espera del servidor", ex);
             }
             Utilidades.SalirHastaInicioSesionDesdeJuegoYLobbyVentana(this);
         }
-        private void EliminarDiccionarios() 
+        private bool EliminarDiccionarios() 
         {
             Logger log = new Logger(this.GetType());
             try
             {
                 _proxyJuegoPuntuacion.EliminarDiccionariosJuego(_codigoPartida);
-                return;
+                return true;
             }
             catch (CommunicationException ex)
             {
+                Utilidades.MostrarUnMensajeError(Properties.Resources.msgErrorConexion);
                 log.LogError("Error de Comunicación con el Servidor", ex);
             }
             catch (TimeoutException ex)
             {
+                Utilidades.MostrarUnMensajeError(Properties.Resources.msgErrorTiempoEsperaServidor);
                 log.LogWarn("Se agoto el tiempo de espera del servidor", ex);
             }
             Utilidades.SalirHastaInicioSesionDesdeJuegoYLobbyVentana(this);
+            return false;
         }
         private void NotificarEliminarJugadorServidor()
         {
@@ -938,10 +938,12 @@ namespace VistasSorrySliders
             }
             catch (CommunicationException ex)
             {
+                Utilidades.MostrarUnMensajeError(Properties.Resources.msgErrorConexion);
                 log.LogError("Error de Comunicación con el Servidor", ex);
             }
             catch (TimeoutException ex)
             {
+                Utilidades.MostrarUnMensajeError(Properties.Resources.msgErrorTiempoEsperaServidor);
                 log.LogWarn("Se agoto el tiempo de espera del servidor", ex);
             }
             throw new CommunicationException();
@@ -950,8 +952,10 @@ namespace VistasSorrySliders
         public void CambiarPagina(int[] arrayPosiciones, string[] arrayNickname)
         {
             AcomodarPosiciones(arrayPosiciones, arrayNickname);
-            EliminarDiccionarios();
-            _juegoYLobbyVentana.CambiarVentanaGanadores(_listaGanadores);
+            if (EliminarDiccionarios())
+            {
+                _juegoYLobbyVentana.CambiarVentanaGanadores(_listaGanadores);
+            }
         }
         private void AcomodarPosiciones(int[] arrayPosiciones, string[] arrayNickname) 
         {
@@ -959,8 +963,6 @@ namespace VistasSorrySliders
 
             for (int i = 0; i < arrayPosiciones.Count(); i++)
             {
-                Console.WriteLine(arrayPosiciones[i]);
-                Console.WriteLine(arrayNickname[i]);
                 JugadorGanador jugador = new JugadorGanador()
                 {
                     Nickname = arrayNickname[i],

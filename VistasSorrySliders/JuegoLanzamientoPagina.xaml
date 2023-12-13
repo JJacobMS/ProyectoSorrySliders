@@ -8,17 +8,6 @@
       mc:Ignorable="d" 
       d:DesignHeight="576" d:DesignWidth="614">
 
-    <Page.Resources>
-        <Style x:Key="estiloTxtBlockCambioRonda" TargetType="TextBlock">
-            <Setter Property="Foreground" Value="#B26C1A"/>
-            <Setter Property="FontSize" Value="32"/>
-            <Setter Property="TextWrapping" Value="Wrap"/>
-            <Setter Property="TextAlignment" Value="Center"/>
-            <Setter Property="FontFamily" Value="{StaticResource FuentesTitulo}"/>
-            <Setter Property="Margin" Value="10"/>
-        </Style>
-    </Page.Resources>
-
     <Grid>
         <Grid.Background>
             <ImageBrush ImageSource="/Recursos/TableroLanzamientoFondo.png"></ImageBrush>
@@ -91,12 +80,12 @@
                     <Ellipse Name="llpPuntuacion4" Fill="Transparent" Height="43" Width="48" Canvas.Left="284" Canvas.Top="264" HorizontalAlignment="Left" VerticalAlignment="Center"></Ellipse>
                     <Ellipse Name="llpPuntuacion5" Fill="Transparent" Height="20" Width="21" Canvas.Left="298" Canvas.Top="275" HorizontalAlignment="Center" VerticalAlignment="Center"></Ellipse>
 
-                    <Border x:Name="brdConteoPuntuaciones" Width="250" Height="250" BorderThickness="10" BorderBrush="#B26C1A" CornerRadius="20" 
-                            Canvas.Left="183" Canvas.Top="160" Background="#FFF4A7" Visibility="Hidden" Canvas.ZIndex="2">
+                    <Border x:Name="brdConteoPuntuaciones" Width="180" Height="180" BorderThickness="10" BorderBrush="#2E0437" CornerRadius="20" 
+                            Canvas.Left="410" Canvas.Top="370" Background="#F0D8FA" Visibility="Hidden" Canvas.ZIndex="2" >
                         <StackPanel VerticalAlignment="Center">
-                            <TextBlock Style="{StaticResource estiloTxtBlockCambioRonda}" Text="{x:Static p:Resources.txtBlockRondaLanzamientoTerminada}"></TextBlock>
-                            <Image Height="50" Source="/Recursos/peon.png"/>
-                            <TextBlock FontSize="20" Style="{StaticResource estiloTxtBlockCambioRonda}" Text="{x:Static p:Resources.txtBlockContandoPuntuaciones}"></TextBlock>
+                            <TextBlock FontSize="24" Style="{StaticResource estiloTxtBlockCambioRonda}" Text="{x:Static p:Resources.txtBlockRondaLanzamientoTerminada}"></TextBlock>
+                            <Image Height="35" Source="/Recursos/peon.png"/>
+                            <TextBlock FontSize="17" Style="{StaticResource estiloTxtBlockCambioRonda}" Text="{x:Static p:Resources.txtBlockContandoPuntuaciones}"></TextBlock>
                         </StackPanel>
                     </Border>
                 </Canvas>

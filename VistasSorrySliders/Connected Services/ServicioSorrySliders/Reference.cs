@@ -1410,6 +1410,12 @@ namespace VistasSorrySliders.ServicioSorrySliders {
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/ILobby/IniciarPartida")]
         System.Threading.Tasks.Task IniciarPartidaAsync(string uid);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/ILobby/ComprobarJugadoresExistentes")]
+        void ComprobarJugadoresExistentes(string uid);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/ILobby/ComprobarJugadoresExistentes")]
+        System.Threading.Tasks.Task ComprobarJugadoresExistentesAsync(string uid);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -1476,6 +1482,14 @@ namespace VistasSorrySliders.ServicioSorrySliders {
         public System.Threading.Tasks.Task IniciarPartidaAsync(string uid) {
             return base.Channel.IniciarPartidaAsync(uid);
         }
+        
+        public void ComprobarJugadoresExistentes(string uid) {
+            base.Channel.ComprobarJugadoresExistentes(uid);
+        }
+        
+        public System.Threading.Tasks.Task ComprobarJugadoresExistentesAsync(string uid) {
+            return base.Channel.ComprobarJugadoresExistentesAsync(uid);
+        }
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -1517,6 +1531,12 @@ namespace VistasSorrySliders.ServicioSorrySliders {
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IUnirsePartida/EliminarCuentaProvisional")]
         System.Threading.Tasks.Task EliminarCuentaProvisionalAsync(string correoElectronico);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IUnirsePartida/SalirJuegoCompleto")]
+        void SalirJuegoCompleto(string uid, string correo);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IUnirsePartida/SalirJuegoCompleto")]
+        System.Threading.Tasks.Task SalirJuegoCompletoAsync(string uid, string correo);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -1592,6 +1612,14 @@ namespace VistasSorrySliders.ServicioSorrySliders {
         
         public System.Threading.Tasks.Task EliminarCuentaProvisionalAsync(string correoElectronico) {
             return base.Channel.EliminarCuentaProvisionalAsync(correoElectronico);
+        }
+        
+        public void SalirJuegoCompleto(string uid, string correo) {
+            base.Channel.SalirJuegoCompleto(uid, correo);
+        }
+        
+        public System.Threading.Tasks.Task SalirJuegoCompletoAsync(string uid, string correo) {
+            return base.Channel.SalirJuegoCompletoAsync(uid, correo);
         }
     }
     
@@ -2346,12 +2374,6 @@ namespace VistasSorrySliders.ServicioSorrySliders {
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IUsuariosEnLinea/SalirDelSistema")]
         System.Threading.Tasks.Task SalirDelSistemaAsync(string jugadorCorreo);
-        
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IUsuariosEnLinea/SalirJuegoCompleto")]
-        void SalirJuegoCompleto(string uid, string correo);
-        
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IUsuariosEnLinea/SalirJuegoCompleto")]
-        System.Threading.Tasks.Task SalirJuegoCompletoAsync(string uid, string correo);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -2403,14 +2425,6 @@ namespace VistasSorrySliders.ServicioSorrySliders {
         
         public System.Threading.Tasks.Task SalirDelSistemaAsync(string jugadorCorreo) {
             return base.Channel.SalirDelSistemaAsync(jugadorCorreo);
-        }
-        
-        public void SalirJuegoCompleto(string uid, string correo) {
-            base.Channel.SalirJuegoCompleto(uid, correo);
-        }
-        
-        public System.Threading.Tasks.Task SalirJuegoCompletoAsync(string uid, string correo) {
-            return base.Channel.SalirJuegoCompletoAsync(uid, correo);
         }
     }
     

@@ -498,6 +498,9 @@
   <data name="tbItemNotificaciones" xml:space="preserve">
     <value>NOTIFICATIONS</value>
   </data>
+  <data name="txtBlockActualizarJugadores" xml:space="preserve">
+    <value>Updating Players</value>
+  </data>
   <data name="txtBlockAjustes" xml:space="preserve">
     <value>SETTINGS</value>
   </data>
@@ -543,6 +546,9 @@
   <data name="txtBlockEnLinea" xml:space="preserve">
     <value>Online</value>
   </data>
+  <data name="txtBlockGuardandoPuntuaciones" xml:space="preserve">
+    <value>Saving Scores</value>
+  </data>
   <data name="txtBlockJuegoNoValido" xml:space="preserve">
     <value>Game is being played or has already ended</value>
   </data>
@@ -575,6 +581,9 @@
   </data>
   <data name="txtBlockRondaLanzamientoTerminada" xml:space="preserve">
     <value>Launch Round Completed</value>
+  </data>
+  <data name="txtBlockRondaPuntuacionesTerminada" xml:space="preserve">
+    <value>Scoring Round Completed</value>
   </data>
   <data name="txtBlockRondasGanadas" xml:space="preserve">
     <value>ROUNDS WON</value>

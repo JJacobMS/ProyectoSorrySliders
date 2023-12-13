@@ -169,7 +169,7 @@ namespace VistasSorrySliders
                 puedoPasar = _proxyInicioSesion.JugadorEstaEnLinea(correoJugador);
                 switch (puedoPasar)
                 {
-                    case Constantes.ERROR_CONEXION_SERVIDOR:
+                    case Constantes.OPERACION_EXITOSA_VACIA:
                         CambiarPantallaMenuPrincipal(correoJugador);
                         break;
                     case Constantes.OPERACION_EXITOSA:
@@ -191,7 +191,7 @@ namespace VistasSorrySliders
 
         private void CambiarPantallaMenuPrincipal(string correoVerificado)
         {
-            MainWindow ventanaPrincipal = Window.GetWindow(this) as MainWindow;
+            VentanaPrincipal ventanaPrincipal = Window.GetWindow(this) as VentanaPrincipal;
             ventanaPrincipal.IndicarCorreoCuenta(correoVerificado);
 
             if (ventanaPrincipal.EntrarSistemaEnLineaMenu())

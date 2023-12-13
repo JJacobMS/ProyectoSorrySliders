@@ -29,7 +29,6 @@ namespace VistasSorrySliders
     {
         private CuentaSet _cuentaUsuario;
         public event Action<MenuPrincipalPagina> CambiarPaginaMenu;
-        private InicioSesionClient _proxyInicioSesion;
 
         public MenuPrincipalPagina()
         {
@@ -123,7 +122,7 @@ namespace VistasSorrySliders
         }
         private void IrInicioSesion()
         {
-            MainWindow ventana = Window.GetWindow(this) as MainWindow;
+            VentanaPrincipal ventana = Window.GetWindow(this) as VentanaPrincipal;
             ventana.SalirSistema();
             InicioSesionPagina inicio = new InicioSesionPagina();
             this.NavigationService.Navigate(inicio);
@@ -131,7 +130,6 @@ namespace VistasSorrySliders
         private void ClickMostrarConfiguracionLobby(object sender, RoutedEventArgs e)
         {
             ConfiguracionLobby configuracionLobby = new ConfiguracionLobby(_cuentaUsuario);
-
             this.NavigationService.Navigate(configuracionLobby);
         }
 
@@ -140,7 +138,6 @@ namespace VistasSorrySliders
             UnirsePartidaPagina unirsePartida = new UnirsePartidaPagina(_cuentaUsuario);
             this.NavigationService.Navigate(unirsePartida);
         }
-
 
         private void ClickMostrarPuntuaciones(object sender, RoutedEventArgs e)
         {
