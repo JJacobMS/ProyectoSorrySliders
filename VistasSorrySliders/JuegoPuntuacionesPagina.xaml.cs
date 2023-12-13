@@ -335,9 +335,9 @@ namespace VistasSorrySliders
         }
         private void MouseLeftButtonDownMoverPeon(object sender, MouseButtonEventArgs e)
         {
-            RealizarJugada(sender);
+            _ = RealizarJugada(sender);
         }
-        private async void RealizarJugada(object sender) 
+        private async Task RealizarJugada(object sender) 
         {
             await MoverPeonAsync(sender);
             if (!ComprobarDadosActuales() && _contadorAvisarTurno==0)
@@ -354,7 +354,6 @@ namespace VistasSorrySliders
                 int puntosObtenidos = ObtenerValorBoton(_btnSeleccionado);
                 if (puntosObtenidos >= 0)
                 {
-                    //Settear enable false todos los demas botones
                     _btnSeleccionado.IsEnabled = false;
                     _btnSeleccionado.BorderBrush = Brushes.Black;
                     _btnSeleccionado = null;
@@ -377,7 +376,6 @@ namespace VistasSorrySliders
                         }
                     }
                     await NotificarJugadores(llpSeleccionada, puntosObtenidos);
-                    //Des settear
                 }
             }
         }
@@ -476,7 +474,6 @@ namespace VistasSorrySliders
 
         private void IngresarRelacionPuntuacion(List<(string, string, int)> listaOrdenada) 
         {
-            Dictionary<int, (string, string, int)[]> diccionarioPuntuaciones = new Dictionary<int, (string, string, int)[]>();
             _listaPuntuaciones = new List<JugadorGanador>();
             for (int i = 0; i < listaOrdenada.Count; i++)
             {
@@ -503,7 +500,6 @@ namespace VistasSorrySliders
             }
             
         }
-
         private void GuardarGanador() 
         {
             Logger log = new Logger(this.GetType());
@@ -635,12 +631,9 @@ namespace VistasSorrySliders
         {
             foreach (JugadorLanzamiento jugadorLanzamiento in jugadores)
             {
-                foreach (JugadorTurno jugadorTurno in _listaTurnos)
+                foreach (JugadorTurno jugadorTurno in _listaTurnos.Where(jugador => jugador.CorreoJugador.Equals(jugadorLanzamiento.CorreElectronico)))
                 {
-                    if (jugadorTurno.CorreoJugador.Equals(jugadorLanzamiento.CorreElectronico))
-                    {
-                        jugadorTurno.EstaConectado = jugadorLanzamiento.EstaConectado;
-                    }
+                    jugadorTurno.EstaConectado = jugadorLanzamiento.EstaConectado;
                 }
             }
         }
@@ -650,9 +643,9 @@ namespace VistasSorrySliders
             MoverPeonJugador(nombrePeon, puntosObtenidos);
         }
 
-        private async void NotificarCambiarTurno() 
+        private void NotificarCambiarTurno() 
         {
-            await LogicaNotificarCambiarTurno();
+            _ = LogicaNotificarCambiarTurno();
         }
 
         private async Task LogicaNotificarCambiarTurno() 
@@ -785,10 +778,10 @@ namespace VistasSorrySliders
 
         public void CambiarTurno()
         {
-            LogicaCambiarTurno();
+            _ = LogicaCambiarTurno();
         }
 
-        private async void LogicaCambiarTurno() 
+        private async Task LogicaCambiarTurno() 
         {
             _turnoActualJuego = _turnoActualJuego + 1;
             if (_turnoActualJuego > _listaTurnos.Count - 1)
