@@ -128,7 +128,7 @@ namespace VistasSorrySliders
         public static bool ValidarContraseña(string contraseña)
         {
             List<char> caracteresEspeciales = new List<char> { '°','!','"','#','$','%','&','/','(',')','=','|','¬',(char)92,'¿','?','-','_','+','{','}' };
-            if (string.IsNullOrEmpty(contraseña))
+            if (string.IsNullOrEmpty(contraseña) || contraseña.Length < 10)
             {
                 return false;
             }
@@ -140,7 +140,7 @@ namespace VistasSorrySliders
                     numeroCaracteres++;
                 }
             }
-            if (numeroCaracteres < 0)
+            if (numeroCaracteres <= 0)
             {
                 return false;
             }

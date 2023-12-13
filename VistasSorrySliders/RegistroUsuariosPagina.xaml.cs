@@ -160,6 +160,7 @@ namespace VistasSorrySliders
                 }
                 else
                 {
+                    Utilidades.MostrarUnMensajeError(Properties.Resources.msgErrorContrasenaInvalida);
                     pssBoxContrasena.Style = estiloPssBoxRojo;
                     validacionCampos = false;
                 }
