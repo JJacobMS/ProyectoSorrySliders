@@ -385,7 +385,7 @@
     <value>There's been an error with the query, please try later</value>
   </data>
   <data name="msgErrorContrasenaInvalida" xml:space="preserve">
-    <value>Password must have: Minimum of 8 characters with one number or one special character</value>
+    <value>Password must have: Minimum of 10 characters with one letter, one number and one special character</value>
   </data>
   <data name="msgErrorImagen" xml:space="preserve">
     <value>The image cannot be loaded</value>

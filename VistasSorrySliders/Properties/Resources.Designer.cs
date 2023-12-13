@@ -871,7 +871,7 @@ namespace VistasSorrySliders.Properties {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a La contraseña debe contar con: Mínimo 8 caracteres, con un número o un carácter especial.
+        ///   Busca una cadena traducida similar a La contraseña debe contar con: Mínimo 10 caracteres, con una letra, un número y un carácter especial.
         /// </summary>
         public static string msgErrorContrasenaInvalida {
             get {
