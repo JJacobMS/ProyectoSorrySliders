@@ -176,7 +176,7 @@ namespace VistasSorrySliders.LogicaJuego
         public void TerminarTurno()
         {
             GenerarLineaMovimiento();
-            if (PeonTurnoActual < 4)
+            if (PeonTurnoActual < Tablero.NUMERO_PEONES_POR_JUGADOR)
             {
                 PeonTurnoActual++;
             }

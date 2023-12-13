@@ -194,20 +194,21 @@ namespace VistasSorrySliders.LogicaJuego
             Dictionary<int, (double, double)[]> peonesActuales = new Dictionary<int, (double, double)[]>();
             for (int i = 0; i < NumeroJugadores; i++)
             {
-                (double, double)[] peonesJugador = new (double, double)[ListaJugadores[i].PeonTurnoActual];
+                int numeroPeones = (ListaJugadores[i].PeonTurnoActual < NUMERO_PEONES_POR_JUGADOR) ? ListaJugadores[i].PeonTurnoActual + 1 : ListaJugadores[i].PeonTurnoActual;
+                (double, double)[] peonesJugador = new (double, double)[numeroPeones];
 
-                for (int j = 0; j < ListaJugadores[i].PeonTurnoActual; j++)
+                for (int j = 0; j < numeroPeones; j++)
                 {
                     if (ListaPeonesTablero.Contains(ListaJugadores[i].PeonesLanzamiento[j]))
                     {
                         (double posicionX, double posicionY) = ListaJugadores[i].PeonesLanzamiento[j].RecuperarPosicionPeon();
                         peonesJugador[j].Item1 = posicionX;
-                        peonesJugador[j].Item1 = posicionY;
+                        peonesJugador[j].Item2 = posicionY;
                     }
                     else
                     {
                         peonesJugador[j].Item1 = -1;
-                        peonesJugador[j].Item1 = -1;
+                        peonesJugador[j].Item2 = -1;
                     }
                 }
                 peonesActuales.Add(i, peonesJugador);

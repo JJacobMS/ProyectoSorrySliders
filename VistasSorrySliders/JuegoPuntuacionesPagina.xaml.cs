@@ -506,8 +506,7 @@ namespace VistasSorrySliders
             Constantes respuesta;
             try
             {
-                _proxyJuegoPuntuacion.ActualizarGanador(_codigoPartida, _listaPuntuaciones[0].CorreoElectronico, _listaPuntuaciones[0].Posicion);
-                respuesta = Constantes.OPERACION_EXITOSA;
+                respuesta = _proxyJuegoPuntuacion.ActualizarGanador(_codigoPartida, _listaPuntuaciones[0].CorreoElectronico, _listaPuntuaciones[0].Posicion);
             }
             catch (CommunicationException ex)
             {
@@ -519,21 +518,8 @@ namespace VistasSorrySliders
                 log.LogWarn("Se agoto el tiempo de espera del servidor", ex);
                 respuesta = Constantes.ERROR_TIEMPO_ESPERA_SERVIDOR;
             }
-            switch (respuesta)
-            {
-                case Constantes.ERROR_CONEXION_SERVIDOR:
-                    Utilidades.SalirHastaInicioSesionDesdeJuegoYLobbyVentana(this);
-                    break;
-                case Constantes.OPERACION_EXITOSA:
-                    break;
-                case Constantes.ERROR_TIEMPO_ESPERA_SERVIDOR:
-                    Utilidades.SalirHastaInicioSesionDesdeJuegoYLobbyVentana(this);
-                    break;
-                default:
-                    Utilidades.MostrarMensajesError(respuesta);
-                    SalirMenuPrincipal();
-                    break;
-            }
+
+            Utilidades.MostrarMensajesError(respuesta);
         }
 
         private bool ComprobarDadosActuales()

@@ -261,7 +261,6 @@ namespace VistasSorrySliders
                     break;
                 default:
                     Window.GetWindow(this).Close();
-                    
                     break;
             }
         }

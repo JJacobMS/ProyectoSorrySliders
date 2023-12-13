@@ -421,6 +421,7 @@ namespace VistasSorrySliders
             JugadorLanzamiento jugadorActual = _tablero.ListaJugadores[_tablero.TurnoActual];
             if (jugadorActual.CorreElectronico.Equals(_correoJugadorActual))
             {
+                Console.WriteLine("ENVIANDO POSICIONES");
                 EnviarTableroPeones(_tablero.ObtenerPosicionPeonesActuales());
             }
         }
