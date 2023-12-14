@@ -402,6 +402,12 @@
   <data name="msgErrorContrasenaInvalida" xml:space="preserve">
     <value>Error, la contraseña debe tener mínimo; un número, una letra y un caracter especial (°!"#$%&amp;/()=|¬\¿?-_+{}). Además, debe ser mayor a 10 caracteres</value>
   </data>
+  <data name="msgErrorEliminarNotificacionEliminada" xml:space="preserve">
+    <value>Hubo un error al eliminar la notificacion, la notificacion ya se encuentra eliminada</value>
+  </data>
+  <data name="msgErrorGuardarPartidaBaseDatos" xml:space="preserve">
+    <value>No se ha posido guardar la partida de la base de datos</value>
+  </data>
   <data name="msgErrorIdentificarJugadores" xml:space="preserve">
     <value>Hubo un error al identificar los jugadores, es necesario iniciar sesión nuevamente</value>
   </data>
@@ -456,6 +462,9 @@
   <data name="msgJugadorHaSidoExpulsado" xml:space="preserve">
     <value>El jugador {0} ha sido expulsado del juego</value>
   </data>
+  <data name="msgNoExisteNotificacion" xml:space="preserve">
+    <value>No existe la notificacion</value>
+  </data>
   <data name="msgNotificacionGuardarError" xml:space="preserve">
     <value>Hubo un error al guardar la notificación, por favor inténtelo más tarde</value>
   </data>
@@ -509,6 +518,9 @@
   </data>
   <data name="msgTituloTamañoImagenError" xml:space="preserve">
     <value>Imagen demasiado grande</value>
+  </data>
+  <data name="msgUsuarioExistente" xml:space="preserve">
+    <value>El usuario ya existe, hubo un error al intentar registrarlo de nuevo</value>
   </data>
   <data name="rnMensajeSolicitudAmistad" xml:space="preserve">
     <value>envío una solicitud de amistad</value>

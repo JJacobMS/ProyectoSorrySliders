@@ -399,6 +399,12 @@
   <data name="msgErrorContrasenaInvalida" xml:space="preserve">
     <value>Error, password must have minimum; a number, a letter and a special character (°!"#$%&amp;/()=|¬\¿?-_+{}). Additionally, it must be greater than 10 characters</value>
   </data>
+  <data name="msgErrorEliminarNotificacionEliminada" xml:space="preserve">
+    <value>There was an error deleting the notification, the notification is already deleted</value>
+  </data>
+  <data name="msgErrorGuardarPartidaBaseDatos" xml:space="preserve">
+    <value>Failed to save the game from the database</value>
+  </data>
   <data name="msgErrorIdentificarJugadores" xml:space="preserve">
     <value>There's been an error trying to identify players, it's necesary to start a new session</value>
   </data>
@@ -453,6 +459,9 @@
   <data name="msgJugadorHaSidoExpulsado" xml:space="preserve">
     <value>Player {0} has been kicked out of the game</value>
   </data>
+  <data name="msgNoExisteNotificacion" xml:space="preserve">
+    <value>The notification does not exist</value>
+  </data>
   <data name="msgNotificacionGuardarError" xml:space="preserve">
     <value>There was an error saving the notification, please try again later</value>
   </data>
@@ -506,6 +515,9 @@
   </data>
   <data name="msgTituloTamañoImagenError" xml:space="preserve">
     <value>Image too big</value>
+  </data>
+  <data name="msgUsuarioExistente" xml:space="preserve">
+    <value>The user already exists, there was an error trying to register the user again</value>
   </data>
   <data name="rnMensajeSolicitudAmistad" xml:space="preserve">
     <value>has sent you a friend request</value>

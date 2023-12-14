@@ -916,6 +916,24 @@ namespace VistasSorrySliders.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Hubo un error al eliminar la notificacion, la notificacion ya se encuentra eliminada.
+        /// </summary>
+        public static string msgErrorEliminarNotificacionEliminada {
+            get {
+                return ResourceManager.GetString("msgErrorEliminarNotificacionEliminada", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a No se ha posido guardar la partida de la base de datos.
+        /// </summary>
+        public static string msgErrorGuardarPartidaBaseDatos {
+            get {
+                return ResourceManager.GetString("msgErrorGuardarPartidaBaseDatos", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Hubo un error al identificar los jugadores, es necesario iniciar sesión nuevamente.
         /// </summary>
         public static string msgErrorIdentificarJugadores {
@@ -1078,6 +1096,15 @@ namespace VistasSorrySliders.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a No existe la notificacion.
+        /// </summary>
+        public static string msgNoExisteNotificacion {
+            get {
+                return ResourceManager.GetString("msgNoExisteNotificacion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Hubo un error al guardar la notificación, por favor inténtelo más tarde.
         /// </summary>
         public static string msgNotificacionGuardarError {
@@ -1236,6 +1263,15 @@ namespace VistasSorrySliders.Properties {
         public static string msgTituloTamañoImagenError {
             get {
                 return ResourceManager.GetString("msgTituloTamañoImagenError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a El usuario ya existe, hubo un error al intentar registrarlo de nuevo.
+        /// </summary>
+        public static string msgUsuarioExistente {
+            get {
+                return ResourceManager.GetString("msgUsuarioExistente", resourceCulture);
             }
         }
         

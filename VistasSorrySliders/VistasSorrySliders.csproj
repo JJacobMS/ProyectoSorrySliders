@@ -313,25 +313,25 @@
     <Resource Include="Fuentes\Prompt-Medium.ttf" />
     <Resource Include="Fuentes\WixMadeforText-Bold.ttf" />
     <Resource Include="Fuentes\WixMadeforText-Regular.ttf" />
+    <None Include="Connected Services\ServicioSorrySliders\item10.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\ServicioSorrySliders\item11.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Connected Services\ServicioSorrySliders\item6.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\ServicioSorrySliders\item61.xsd">
+    <None Include="Connected Services\ServicioSorrySliders\item7.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\ServicioSorrySliders\item62.xsd">
+    <None Include="Connected Services\ServicioSorrySliders\item8.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\ServicioSorrySliders\item63.xsd">
+    <None Include="Connected Services\ServicioSorrySliders\item9.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\ServicioSorrySliders\item64.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Connected Services\ServicioSorrySliders\item65.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Connected Services\ServicioSorrySliders\ServicioComunicacionSorrySliders.wsdl" />
+    <None Include="Connected Services\ServicioSorrySliders\ServicioComunicacionSorrySliders11.wsdl" />
     <None Include="Connected Services\ServicioSorrySliders\VistasSorrySliders.ServicioSorrySliders.Constantes.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
@@ -473,7 +473,7 @@
     <Resource Include="Recursos\puntuaciones.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Connected Services\ServicioSorrySliders\item.disco" />
+    <None Include="Connected Services\ServicioSorrySliders\item11.disco" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

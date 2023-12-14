@@ -265,7 +265,7 @@ namespace VistasSorrySliders
                     Utilidades.MostrarUnMensajeError(Properties.Resources.msgGuardarCuentaError);
                     break;
                 case Constantes.ERROR_CONSULTA:
-                    Utilidades.MostrarUnMensajeError("MensajeNuevo"+"El usuario ya existe, hubo un error al intentar registrarlo de nuevo");
+                    Utilidades.MostrarUnMensajeError(Properties.Resources.msgUsuarioExistente);
                     break;
                 default:
                     Utilidades.MostrarMensajesError(resultado);

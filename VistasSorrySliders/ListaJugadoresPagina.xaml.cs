@@ -696,7 +696,7 @@ namespace VistasSorrySliders
                     EliminarNotificacion(notificacion, true);
                     return;
                 case Constantes.OPERACION_EXITOSA_VACIA:
-                    _ = MostrarMensaje("MensajeNuevo"+"No existe la notificacion");
+                    _ = MostrarMensaje(Properties.Resources.msgNoExisteNotificacion);
                     EliminarNotificacion(notificacion, true);
                     return;
                 default:
@@ -741,7 +741,7 @@ namespace VistasSorrySliders
                     RecargarPantalla();
                     return;
                 case Constantes.OPERACION_EXITOSA_VACIA:
-                    Utilidades.MostrarUnMensajeError("MensajeNuevo"+"Hubo un error al eliminar la notificacion, la notificacion ya se encuentra eliminada");
+                    Utilidades.MostrarUnMensajeError(Properties.Resources.msgErrorEliminarNotificacionEliminada);
                     break;
                 default:
                     Utilidades.MostrarMensajesError(resultado);

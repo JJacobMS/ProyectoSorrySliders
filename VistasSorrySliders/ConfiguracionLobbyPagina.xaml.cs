@@ -104,7 +104,7 @@ namespace VistasSorrySliders
                     CrearVentanaLobby(_cuentaUsuario, codigoPartida);
                     break;
                 case Constantes.OPERACION_EXITOSA_VACIA:
-                    Utilidades.MostrarUnMensajeError("MensajeNuevo"+"No se ha posido guardar la partida de la base de datos");
+                    Utilidades.MostrarUnMensajeError(Properties.Resources.msgErrorGuardarPartidaBaseDatos);
                     break;
                 case Constantes.ERROR_CONEXION_SERVIDOR:
                 case Constantes.ERROR_TIEMPO_ESPERA_SERVIDOR:
