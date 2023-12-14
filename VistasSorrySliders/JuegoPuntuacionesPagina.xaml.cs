@@ -96,7 +96,7 @@ namespace VistasSorrySliders
             catch (CommunicationException ex)
             {
                 Utilidades.MostrarUnMensajeError(Properties.Resources.msgErrorConexion);
-                log.LogError("Error de Comunicación con el Servidor", ex);
+                log.LogWarn("Error de Comunicación con el Servidor", ex);
             }
             catch (TimeoutException ex)
             {
@@ -520,7 +520,7 @@ namespace VistasSorrySliders
             }
             catch (CommunicationException ex)
             {
-                log.LogError("Error de Comunicación con el Servidor", ex);
+                log.LogWarn("Error de Comunicación con el Servidor", ex);
                 respuesta = Constantes.ERROR_CONEXION_SERVIDOR;
             }
             catch (TimeoutException ex)
@@ -661,7 +661,7 @@ namespace VistasSorrySliders
             catch (CommunicationException ex)
             {
                 Utilidades.MostrarUnMensajeError(Properties.Resources.msgErrorConexion);
-                log.LogError("Error de Comunicación con el Servidor", ex);
+                log.LogWarn("Error de Comunicación con el Servidor", ex);
             }
             catch (TimeoutException ex)
             {
@@ -772,7 +772,7 @@ namespace VistasSorrySliders
             catch (CommunicationException ex)
             {
                 Utilidades.MostrarUnMensajeError(Properties.Resources.msgErrorConexion);
-                log.LogError("Error de Comunicación con el Servidor", ex);
+                log.LogWarn("Error de Comunicación con el Servidor", ex);
             }
             catch (TimeoutException ex)
             {
@@ -902,7 +902,7 @@ namespace VistasSorrySliders
             catch (CommunicationException ex)
             {
                 Utilidades.MostrarUnMensajeError(Properties.Resources.msgErrorConexion);
-                log.LogError("Error de Comunicación con el Servidor", ex);
+                log.LogWarn("Error de Comunicación con el Servidor", ex);
             }
             catch (TimeoutException ex)
             {
@@ -927,7 +927,7 @@ namespace VistasSorrySliders
             catch (CommunicationException ex)
             {
                 Utilidades.MostrarUnMensajeError(Properties.Resources.msgErrorConexion);
-                log.LogError("Error de Comunicación con el Servidor", ex);
+                log.LogWarn("Error de Comunicación con el Servidor", ex);
             }
             catch (TimeoutException ex)
             {
@@ -953,7 +953,7 @@ namespace VistasSorrySliders
             catch (CommunicationException ex)
             {
                 Utilidades.MostrarUnMensajeError(Properties.Resources.msgErrorConexion);
-                log.LogError("Error de Comunicación con el Servidor", ex);
+                log.LogWarn("Error de Comunicación con el Servidor", ex);
             }
             catch (TimeoutException ex)
             {

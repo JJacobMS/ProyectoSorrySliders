@@ -55,7 +55,7 @@ namespace VistasSorrySliders
             catch (CommunicationException ex)
             {
                 Logger log = new Logger(this.GetType());
-                log.LogError("Error de Comunicación con el Servidor", ex);
+                log.LogWarn("Error de Comunicación con el Servidor", ex);
                 return Constantes.ERROR_CONEXION_SERVIDOR;
             }
             catch (EntitySqlException ex)
@@ -100,7 +100,7 @@ namespace VistasSorrySliders
             catch (CommunicationException ex)
             {
                 respuesta = Constantes.ERROR_CONEXION_SERVIDOR;
-                log.LogError("Error de Comunicación con el Servidor", ex);
+                log.LogWarn("Error de Comunicación con el Servidor", ex);
             }
             catch (TimeoutException ex)
             {
@@ -197,7 +197,7 @@ namespace VistasSorrySliders
             catch (CommunicationException ex)
             {
                 respuesta = Constantes.ERROR_CONEXION_SERVIDOR;
-                log.LogError("Error de Comunicación con el Servidor", ex);
+                log.LogWarn("Error de Comunicación con el Servidor", ex);
             }
             catch (TimeoutException ex)
             {
@@ -265,7 +265,7 @@ namespace VistasSorrySliders
             catch (CommunicationException ex)
             {
                 Logger log = new Logger(this.GetType());
-                log.LogError("Error de Comunicación con el Servidor", ex);
+                log.LogWarn("Error de Comunicación con el Servidor", ex);
             }
             Utilidades.SalirHastaInicioSesionDesdeJuegoYLobbyVentana(this);
         }
@@ -279,7 +279,7 @@ namespace VistasSorrySliders
             catch (CommunicationException ex)
             {
                 Logger log = new Logger(this.GetType());
-                log.LogError("Error de Comunicación con el Servidor", ex);
+                log.LogWarn("Error de Comunicación con el Servidor", ex);
                 Window.GetWindow(this).Close();
             }
             catch (EntitySqlException ex)
@@ -306,7 +306,7 @@ namespace VistasSorrySliders
             }
             catch (CommunicationException ex)
             {
-                log.LogError("Error de Comunicación con el Servidor", ex);
+                log.LogWarn("Error de Comunicación con el Servidor", ex);
             }
             catch (TimeoutException ex)
             {
@@ -324,7 +324,7 @@ namespace VistasSorrySliders
             catch (CommunicationException ex)
             {
                 Logger log = new Logger(this.GetType());
-                log.LogError("Error de Comunicación con el Servidor", ex);
+                log.LogWarn("Error de Comunicación con el Servidor", ex);
                 Window.GetWindow(this).Close();
             }
             catch (EntitySqlException ex)
@@ -379,8 +379,8 @@ namespace VistasSorrySliders
             }
             catch (CommunicationException ex)
             {
-                Utilidades.MostrarUnMensajeError(Properties.Resources.msgEstadoDefectuoso);
-                log.LogError("Error de Comunicación con el Servidor", ex);
+                Utilidades.MostrarUnMensajeError(Properties.Resources.msgErrorConexion);
+                log.LogWarn("Error de Comunicación con el Servidor", ex);
             }
             catch (TimeoutException ex)
             {
@@ -408,7 +408,7 @@ namespace VistasSorrySliders
             catch (CommunicationException ex)
             {
                 Utilidades.MostrarUnMensajeError(Properties.Resources.msgErrorConexion);
-                log.LogError("Error de Comunicación con el Servidor", ex);
+                log.LogWarn("Error de Comunicación con el Servidor", ex);
             }
             catch (TimeoutException ex)
             {
@@ -450,7 +450,7 @@ namespace VistasSorrySliders
             catch (CommunicationException ex)
             {
                 Logger log = new Logger(this.GetType());
-                log.LogError("Error de Comunicación con el Servidor", ex);
+                log.LogWarn("Error de Comunicación con el Servidor", ex);
             }
             Utilidades.SalirHastaInicioSesionDesdeJuegoYLobbyVentana(this);
         }
@@ -472,7 +472,7 @@ namespace VistasSorrySliders
             catch (CommunicationException ex)
             {
                 Utilidades.MostrarUnMensajeError(Properties.Resources.msgErrorConexion);
-                log.LogError("Error de Comunicación con el Servidor", ex);
+                log.LogWarn("Error de Comunicación con el Servidor", ex);
             }
             catch (TimeoutException ex)
             {

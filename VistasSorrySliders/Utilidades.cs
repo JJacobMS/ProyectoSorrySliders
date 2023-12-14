@@ -37,17 +37,17 @@ namespace VistasSorrySliders
             catch (ArgumentException ex)
             {
                 MostrarUnMensajeError(Properties.Resources.msgErrorImagen, Properties.Resources.msgTituloErrorImagen);
-                log.LogWarn("Se ha proporcionado un argumento invalido", ex);
+                log.LogError("Se ha proporcionado un argumento invalido", ex);
             }
             catch (OutOfMemoryException ex)
             {
                 MostrarUnMensajeError(Properties.Resources.msgErrorImagen, Properties.Resources.msgTituloErrorImagen);
-                log.LogWarn("Se ha agotado la memoria", ex);
+                log.LogError("Se ha agotado la memoria", ex);
             }
             catch (IOException ex)
             {
                 MostrarUnMensajeError(Properties.Resources.msgErrorImagen, Properties.Resources.msgTituloErrorImagen);
-                log.LogWarn("Error al acceder a la imagen", ex);
+                log.LogError("Error al acceder a la imagen", ex);
             }
         }
 
@@ -73,17 +73,17 @@ namespace VistasSorrySliders
             catch (ArgumentException ex)
             {
                 MostrarUnMensajeError(Properties.Resources.msgErrorImagen, Properties.Resources.msgTituloErrorImagen);
-                log.LogWarn("Se ha proporcionado un argumento invalido", ex);
+                log.LogError("Se ha proporcionado un argumento invalido", ex);
             }
             catch (OutOfMemoryException ex)
             {
                 MostrarUnMensajeError(Properties.Resources.msgErrorImagen, Properties.Resources.msgTituloErrorImagen);
-                log.LogWarn("Se ha agotado la memoria", ex);
+                log.LogError("Se ha agotado la memoria", ex);
             }
             catch (IOException ex)
             {
                 MostrarUnMensajeError(Properties.Resources.msgErrorImagen, Properties.Resources.msgTituloErrorImagen);
-                log.LogWarn("Error al acceder a la imagen", ex);
+                log.LogError("Error al acceder a la imagen", ex);
             }
 
             return null;
@@ -107,19 +107,19 @@ namespace VistasSorrySliders
             catch (IOException ex)
             {
                 MostrarUnMensajeError(Properties.Resources.msgErrorImagen, Properties.Resources.msgTituloErrorImagen);
-                log.LogWarn("Error al acceder a la imagen", ex);
+                log.LogError("Error al acceder a la imagen", ex);
                 return new byte[0];
             }
             catch (ArgumentException ex)
             {
                 MostrarUnMensajeError(Properties.Resources.msgErrorImagen, Properties.Resources.msgTituloErrorImagen);
-                log.LogWarn("Se ha proporcionado un argumento invalido", ex);
+                log.LogError("Se ha proporcionado un argumento invalido", ex);
                 return new byte[0];
             }
             catch (OutOfMemoryException ex)
             {
                 MostrarUnMensajeError(Properties.Resources.msgErrorImagen, Properties.Resources.msgTituloErrorImagen);
-                log.LogWarn("Se ha agotado la memoria", ex);
+                log.LogError("Se ha agotado la memoria", ex);
                 return new byte[0];
             }
 
