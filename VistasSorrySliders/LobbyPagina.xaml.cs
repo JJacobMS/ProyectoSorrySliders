@@ -481,5 +481,11 @@ namespace VistasSorrySliders
             }
             throw new CommunicationException();
         }
+
+        public void ComprobarJugadorLobby()
+        {
+            Logger log = new Logger(this.GetType());
+            log.LogInfo("Se encuentra en línea el jugador");
+        }
     }
 }

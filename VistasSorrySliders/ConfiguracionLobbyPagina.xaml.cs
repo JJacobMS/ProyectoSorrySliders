@@ -115,8 +115,7 @@ namespace VistasSorrySliders
 
         private void CrearVentanaLobby(CuentaSet _cuentaUsuario, string codigoPartida) 
         {
-            VentanaPrincipal ventanaPrincipal = Window.GetWindow(this) as VentanaPrincipal;
-            JuegoYLobbyVentana lobbyUnirse = new JuegoYLobbyVentana(_cuentaUsuario, codigoPartida, false, ventanaPrincipal.ProxyLinea);
+            JuegoYLobbyVentana lobbyUnirse = new JuegoYLobbyVentana(_cuentaUsuario, codigoPartida, false);
             Constantes respuesta = lobbyUnirse.InicializarPaginas();
             switch (respuesta)
             {
@@ -131,8 +130,6 @@ namespace VistasSorrySliders
 
         private void MostrarVentanaLobby(JuegoYLobbyVentana lobbyUnirse)
         {
-            VentanaPrincipal ventanaPrincipal = Window.GetWindow(this) as VentanaPrincipal;
-            ventanaPrincipal.DesuscribirseCerrarVentana();
             Window.GetWindow(this).Close();
             lobbyUnirse.Show();
         }
