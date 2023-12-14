@@ -1,154 +1,174 @@
 <?xml version="1.0" encoding="utf-8"?>
-<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/DatosSorrySliders" xmlns:ser="http://schemas.microsoft.com/2003/10/Serialization/" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/DatosSorrySliders" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-  <xs:import schemaLocation="http://localhost:5454/?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
-  <xs:import schemaLocation="http://localhost:5454/?xsd=xsd5" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
-  <xs:simpleType name="Constantes">
-    <xs:restriction base="xs:string">
-      <xs:enumeration value="ERROR_CONEXION_BD" />
-      <xs:enumeration value="ERROR_CONSULTA" />
-      <xs:enumeration value="ERROR_CONEXION_SERVIDOR" />
-      <xs:enumeration value="OPERACION_EXITOSA" />
-      <xs:enumeration value="OPERACION_EXITOSA_VACIA" />
-      <xs:enumeration value="ERROR_TIEMPO_ESPERA_SERVIDOR" />
-    </xs:restriction>
-  </xs:simpleType>
-  <xs:element name="Constantes" nillable="true" type="tns:Constantes" />
-  <xs:complexType name="CuentaSet">
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/System" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/System" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://192.168.100.4:5454/?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/DatosSorrySliders" />
+  <xs:import schemaLocation="http://192.168.100.4:5454/?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+  <xs:import schemaLocation="http://192.168.100.4:5454/?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/ServidorSorrySliders" />
+  <xs:complexType name="ValueTupleOfConstantesstringbase64BinarywTLIru0k">
+    <xs:annotation>
+      <xs:appinfo>
+        <GenericType Name="ValueTupleOf{0}{1}{2}{#}" Namespace="http://schemas.datacontract.org/2004/07/System" xmlns="http://schemas.microsoft.com/2003/10/Serialization/">
+          <GenericParameter Name="Constantes" Namespace="http://schemas.datacontract.org/2004/07/DatosSorrySliders" />
+          <GenericParameter Name="string" Namespace="http://www.w3.org/2001/XMLSchema" />
+          <GenericParameter Name="base64Binary" Namespace="http://www.w3.org/2001/XMLSchema" />
+        </GenericType>
+        <IsValueType xmlns="http://schemas.microsoft.com/2003/10/Serialization/">true</IsValueType>
+      </xs:appinfo>
+    </xs:annotation>
     <xs:sequence>
-      <xs:element minOccurs="0" name="Avatar" nillable="true" type="xs:base64Binary" />
-      <xs:element minOccurs="0" name="Contraseña" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="CorreoElectronico" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="IdUsuario" type="xs:int" />
-      <xs:element minOccurs="0" name="Nickname" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="NotificacionSet" nillable="true" type="tns:ArrayOfNotificacionSet" />
-      <xs:element minOccurs="0" name="NotificacionSet1" nillable="true" type="tns:ArrayOfNotificacionSet" />
-      <xs:element minOccurs="0" name="PartidaSet" nillable="true" type="tns:ArrayOfPartidaSet" />
-      <xs:element minOccurs="0" name="RelacionBaneadosSet" nillable="true" type="tns:ArrayOfRelacionBaneadosSet" />
-      <xs:element minOccurs="0" name="RelacionBaneadosSet1" nillable="true" type="tns:ArrayOfRelacionBaneadosSet" />
-      <xs:element minOccurs="0" name="RelacionPartidaCuentaSet" nillable="true" type="tns:ArrayOfRelacionPartidaCuentaSet" />
-      <xs:element minOccurs="0" name="RelaciónAmigosSet" nillable="true" type="tns:ArrayOfRelaciónAmigosSet" />
-      <xs:element minOccurs="0" name="RelaciónAmigosSet1" nillable="true" type="tns:ArrayOfRelaciónAmigosSet" />
-      <xs:element minOccurs="0" name="UsuarioSet" nillable="true" type="tns:UsuarioSet" />
+      <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/DatosSorrySliders" name="Item1" type="q1:Constantes" />
+      <xs:element name="Item2" nillable="true" type="xs:string" />
+      <xs:element name="Item3" nillable="true" type="xs:base64Binary" />
     </xs:sequence>
   </xs:complexType>
-  <xs:element name="CuentaSet" nillable="true" type="tns:CuentaSet" />
-  <xs:complexType name="ArrayOfNotificacionSet">
+  <xs:element name="ValueTupleOfConstantesstringbase64BinarywTLIru0k" nillable="true" type="tns:ValueTupleOfConstantesstringbase64BinarywTLIru0k" />
+  <xs:complexType name="ValueTupleOfConstantesintW4mnvVr6">
+    <xs:annotation>
+      <xs:appinfo>
+        <GenericType Name="ValueTupleOf{0}{1}{#}" Namespace="http://schemas.datacontract.org/2004/07/System" xmlns="http://schemas.microsoft.com/2003/10/Serialization/">
+          <GenericParameter Name="Constantes" Namespace="http://schemas.datacontract.org/2004/07/DatosSorrySliders" />
+          <GenericParameter Name="int" Namespace="http://www.w3.org/2001/XMLSchema" />
+        </GenericType>
+        <IsValueType xmlns="http://schemas.microsoft.com/2003/10/Serialization/">true</IsValueType>
+      </xs:appinfo>
+    </xs:annotation>
     <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="NotificacionSet" nillable="true" type="tns:NotificacionSet" />
+      <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/DatosSorrySliders" name="Item1" type="q2:Constantes" />
+      <xs:element name="Item2" type="xs:int" />
     </xs:sequence>
   </xs:complexType>
-  <xs:element name="ArrayOfNotificacionSet" nillable="true" type="tns:ArrayOfNotificacionSet" />
-  <xs:complexType name="NotificacionSet">
+  <xs:element name="ValueTupleOfConstantesintW4mnvVr6" nillable="true" type="tns:ValueTupleOfConstantesintW4mnvVr6" />
+  <xs:complexType name="ValueTupleOfConstantesArrayOfCuentaSetalmaccdW">
+    <xs:annotation>
+      <xs:appinfo>
+        <GenericType Name="ValueTupleOf{0}{1}{#}" Namespace="http://schemas.datacontract.org/2004/07/System" xmlns="http://schemas.microsoft.com/2003/10/Serialization/">
+          <GenericParameter Name="Constantes" Namespace="http://schemas.datacontract.org/2004/07/DatosSorrySliders" />
+          <GenericParameter Name="ArrayOfCuentaSet" Namespace="http://schemas.datacontract.org/2004/07/DatosSorrySliders" />
+        </GenericType>
+        <IsValueType xmlns="http://schemas.microsoft.com/2003/10/Serialization/">true</IsValueType>
+      </xs:appinfo>
+    </xs:annotation>
     <xs:sequence>
-      <xs:element minOccurs="0" name="CorreoElectronicoDestinatario" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="CorreoElectronicoRemitente" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="CuentaSet" nillable="true" type="tns:CuentaSet" />
-      <xs:element minOccurs="0" name="CuentaSet1" nillable="true" type="tns:CuentaSet" />
-      <xs:element minOccurs="0" name="IdNotificacion" type="xs:int" />
-      <xs:element minOccurs="0" name="IdTipoNotificacion" nillable="true" type="xs:int" />
-      <xs:element minOccurs="0" name="Mensaje" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="TipoNotificacion" nillable="true" type="tns:TipoNotificacion" />
+      <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/DatosSorrySliders" name="Item1" type="q3:Constantes" />
+      <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/DatosSorrySliders" name="Item2" nillable="true" type="q4:ArrayOfCuentaSet" />
     </xs:sequence>
   </xs:complexType>
-  <xs:element name="NotificacionSet" nillable="true" type="tns:NotificacionSet" />
-  <xs:complexType name="TipoNotificacion">
+  <xs:element name="ValueTupleOfConstantesArrayOfCuentaSetalmaccdW" nillable="true" type="tns:ValueTupleOfConstantesArrayOfCuentaSetalmaccdW" />
+  <xs:complexType name="ValueTupleOfConstantesPartidaSetalmaccdW">
+    <xs:annotation>
+      <xs:appinfo>
+        <GenericType Name="ValueTupleOf{0}{1}{#}" Namespace="http://schemas.datacontract.org/2004/07/System" xmlns="http://schemas.microsoft.com/2003/10/Serialization/">
+          <GenericParameter Name="Constantes" Namespace="http://schemas.datacontract.org/2004/07/DatosSorrySliders" />
+          <GenericParameter Name="PartidaSet" Namespace="http://schemas.datacontract.org/2004/07/DatosSorrySliders" />
+        </GenericType>
+        <IsValueType xmlns="http://schemas.microsoft.com/2003/10/Serialization/">true</IsValueType>
+      </xs:appinfo>
+    </xs:annotation>
     <xs:sequence>
-      <xs:element minOccurs="0" name="IdTipoNotificacion" type="xs:int" />
-      <xs:element minOccurs="0" name="NombreNotificacion" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="NotificacionSet" nillable="true" type="tns:ArrayOfNotificacionSet" />
+      <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/DatosSorrySliders" name="Item1" type="q5:Constantes" />
+      <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/DatosSorrySliders" name="Item2" nillable="true" type="q6:PartidaSet" />
     </xs:sequence>
   </xs:complexType>
-  <xs:element name="TipoNotificacion" nillable="true" type="tns:TipoNotificacion" />
-  <xs:complexType name="ArrayOfPartidaSet">
+  <xs:element name="ValueTupleOfConstantesPartidaSetalmaccdW" nillable="true" type="tns:ValueTupleOfConstantesPartidaSetalmaccdW" />
+  <xs:complexType name="ValueTupleOfConstantesstringW4mnvVr6">
+    <xs:annotation>
+      <xs:appinfo>
+        <GenericType Name="ValueTupleOf{0}{1}{#}" Namespace="http://schemas.datacontract.org/2004/07/System" xmlns="http://schemas.microsoft.com/2003/10/Serialization/">
+          <GenericParameter Name="Constantes" Namespace="http://schemas.datacontract.org/2004/07/DatosSorrySliders" />
+          <GenericParameter Name="string" Namespace="http://www.w3.org/2001/XMLSchema" />
+        </GenericType>
+        <IsValueType xmlns="http://schemas.microsoft.com/2003/10/Serialization/">true</IsValueType>
+      </xs:appinfo>
+    </xs:annotation>
     <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="PartidaSet" nillable="true" type="tns:PartidaSet" />
+      <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/DatosSorrySliders" name="Item1" type="q7:Constantes" />
+      <xs:element name="Item2" nillable="true" type="xs:string" />
     </xs:sequence>
   </xs:complexType>
-  <xs:element name="ArrayOfPartidaSet" nillable="true" type="tns:ArrayOfPartidaSet" />
-  <xs:complexType name="PartidaSet">
+  <xs:element name="ValueTupleOfConstantesstringW4mnvVr6" nillable="true" type="tns:ValueTupleOfConstantesstringW4mnvVr6" />
+  <xs:complexType name="ValueTupleOfConstantesArrayOfTipoNotificacionalmaccdW">
+    <xs:annotation>
+      <xs:appinfo>
+        <GenericType Name="ValueTupleOf{0}{1}{#}" Namespace="http://schemas.datacontract.org/2004/07/System" xmlns="http://schemas.microsoft.com/2003/10/Serialization/">
+          <GenericParameter Name="Constantes" Namespace="http://schemas.datacontract.org/2004/07/DatosSorrySliders" />
+          <GenericParameter Name="ArrayOfTipoNotificacion" Namespace="http://schemas.datacontract.org/2004/07/DatosSorrySliders" />
+        </GenericType>
+        <IsValueType xmlns="http://schemas.microsoft.com/2003/10/Serialization/">true</IsValueType>
+      </xs:appinfo>
+    </xs:annotation>
     <xs:sequence>
-      <xs:element minOccurs="0" name="CantidadJugadores" type="xs:int" />
-      <xs:element minOccurs="0" name="CodigoPartida" type="ser:guid" />
-      <xs:element minOccurs="0" name="CorreoElectronico" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="CuentaSet" nillable="true" type="tns:CuentaSet" />
-      <xs:element minOccurs="0" name="RelacionPartidaCuentaSet" nillable="true" type="tns:ArrayOfRelacionPartidaCuentaSet" />
+      <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/DatosSorrySliders" name="Item1" type="q8:Constantes" />
+      <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/DatosSorrySliders" name="Item2" nillable="true" type="q9:ArrayOfTipoNotificacion" />
     </xs:sequence>
   </xs:complexType>
-  <xs:element name="PartidaSet" nillable="true" type="tns:PartidaSet" />
-  <xs:complexType name="ArrayOfRelacionPartidaCuentaSet">
+  <xs:element name="ValueTupleOfConstantesArrayOfTipoNotificacionalmaccdW" nillable="true" type="tns:ValueTupleOfConstantesArrayOfTipoNotificacionalmaccdW" />
+  <xs:complexType name="ValueTupleOfConstantesArrayOfNotificacionSetalmaccdW">
+    <xs:annotation>
+      <xs:appinfo>
+        <GenericType Name="ValueTupleOf{0}{1}{#}" Namespace="http://schemas.datacontract.org/2004/07/System" xmlns="http://schemas.microsoft.com/2003/10/Serialization/">
+          <GenericParameter Name="Constantes" Namespace="http://schemas.datacontract.org/2004/07/DatosSorrySliders" />
+          <GenericParameter Name="ArrayOfNotificacionSet" Namespace="http://schemas.datacontract.org/2004/07/DatosSorrySliders" />
+        </GenericType>
+        <IsValueType xmlns="http://schemas.microsoft.com/2003/10/Serialization/">true</IsValueType>
+      </xs:appinfo>
+    </xs:annotation>
     <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="RelacionPartidaCuentaSet" nillable="true" type="tns:RelacionPartidaCuentaSet" />
+      <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/DatosSorrySliders" name="Item1" type="q10:Constantes" />
+      <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/DatosSorrySliders" name="Item2" nillable="true" type="q11:ArrayOfNotificacionSet" />
     </xs:sequence>
   </xs:complexType>
-  <xs:element name="ArrayOfRelacionPartidaCuentaSet" nillable="true" type="tns:ArrayOfRelacionPartidaCuentaSet" />
-  <xs:complexType name="RelacionPartidaCuentaSet">
+  <xs:element name="ValueTupleOfConstantesArrayOfNotificacionSetalmaccdW" nillable="true" type="tns:ValueTupleOfConstantesArrayOfNotificacionSetalmaccdW" />
+  <xs:complexType name="ValueTupleOfConstantesUsuarioSetalmaccdW">
+    <xs:annotation>
+      <xs:appinfo>
+        <GenericType Name="ValueTupleOf{0}{1}{#}" Namespace="http://schemas.datacontract.org/2004/07/System" xmlns="http://schemas.microsoft.com/2003/10/Serialization/">
+          <GenericParameter Name="Constantes" Namespace="http://schemas.datacontract.org/2004/07/DatosSorrySliders" />
+          <GenericParameter Name="UsuarioSet" Namespace="http://schemas.datacontract.org/2004/07/DatosSorrySliders" />
+        </GenericType>
+        <IsValueType xmlns="http://schemas.microsoft.com/2003/10/Serialization/">true</IsValueType>
+      </xs:appinfo>
+    </xs:annotation>
     <xs:sequence>
-      <xs:element minOccurs="0" name="CodigoPartida" type="ser:guid" />
-      <xs:element minOccurs="0" name="CorreoElectronico" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="CuentaSet" nillable="true" type="tns:CuentaSet" />
-      <xs:element minOccurs="0" name="IdPartidaCuenta" type="xs:int" />
-      <xs:element minOccurs="0" name="PartidaSet" nillable="true" type="tns:PartidaSet" />
-      <xs:element minOccurs="0" name="Posicion" type="xs:int" />
+      <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/DatosSorrySliders" name="Item1" type="q12:Constantes" />
+      <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/DatosSorrySliders" name="Item2" nillable="true" type="q13:UsuarioSet" />
     </xs:sequence>
   </xs:complexType>
-  <xs:element name="RelacionPartidaCuentaSet" nillable="true" type="tns:RelacionPartidaCuentaSet" />
-  <xs:complexType name="ArrayOfRelacionBaneadosSet">
+  <xs:element name="ValueTupleOfConstantesUsuarioSetalmaccdW" nillable="true" type="tns:ValueTupleOfConstantesUsuarioSetalmaccdW" />
+  <xs:complexType name="ValueTupleOfConstantesArrayOfPuntuacionK_Pmi0k2_P">
+    <xs:annotation>
+      <xs:appinfo>
+        <GenericType Name="ValueTupleOf{0}{1}{#}" Namespace="http://schemas.datacontract.org/2004/07/System" xmlns="http://schemas.microsoft.com/2003/10/Serialization/">
+          <GenericParameter Name="Constantes" Namespace="http://schemas.datacontract.org/2004/07/DatosSorrySliders" />
+          <GenericParameter Name="ArrayOfPuntuacion" Namespace="http://schemas.datacontract.org/2004/07/ServidorSorrySliders" />
+        </GenericType>
+        <IsValueType xmlns="http://schemas.microsoft.com/2003/10/Serialization/">true</IsValueType>
+      </xs:appinfo>
+    </xs:annotation>
     <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="RelacionBaneadosSet" nillable="true" type="tns:RelacionBaneadosSet" />
+      <xs:element xmlns:q14="http://schemas.datacontract.org/2004/07/DatosSorrySliders" name="Item1" type="q14:Constantes" />
+      <xs:element xmlns:q15="http://schemas.datacontract.org/2004/07/ServidorSorrySliders" name="Item2" nillable="true" type="q15:ArrayOfPuntuacion" />
     </xs:sequence>
   </xs:complexType>
-  <xs:element name="ArrayOfRelacionBaneadosSet" nillable="true" type="tns:ArrayOfRelacionBaneadosSet" />
-  <xs:complexType name="RelacionBaneadosSet">
+  <xs:element name="ValueTupleOfConstantesArrayOfPuntuacionK_Pmi0k2_P" nillable="true" type="tns:ValueTupleOfConstantesArrayOfPuntuacionK_Pmi0k2_P" />
+  <xs:complexType name="ArrayOfValueTupleOfdoubledouble">
     <xs:sequence>
-      <xs:element minOccurs="0" name="CorreoElectronicoJugadorBaneado" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="CorreoElectronicoJugadorPrincipal" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="CuentaSet" nillable="true" type="tns:CuentaSet" />
-      <xs:element minOccurs="0" name="CuentaSet1" nillable="true" type="tns:CuentaSet" />
-      <xs:element minOccurs="0" name="IdRelacionBaneados" type="xs:int" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ValueTupleOfdoubledouble" type="tns:ValueTupleOfdoubledouble" />
     </xs:sequence>
   </xs:complexType>
-  <xs:element name="RelacionBaneadosSet" nillable="true" type="tns:RelacionBaneadosSet" />
-  <xs:complexType name="ArrayOfRelaciónAmigosSet">
+  <xs:element name="ArrayOfValueTupleOfdoubledouble" nillable="true" type="tns:ArrayOfValueTupleOfdoubledouble" />
+  <xs:complexType name="ValueTupleOfdoubledouble">
+    <xs:annotation>
+      <xs:appinfo>
+        <GenericType Name="ValueTupleOf{0}{1}{#}" Namespace="http://schemas.datacontract.org/2004/07/System" xmlns="http://schemas.microsoft.com/2003/10/Serialization/">
+          <GenericParameter Name="double" Namespace="http://www.w3.org/2001/XMLSchema" />
+          <GenericParameter Name="double" Namespace="http://www.w3.org/2001/XMLSchema" />
+        </GenericType>
+        <IsValueType xmlns="http://schemas.microsoft.com/2003/10/Serialization/">true</IsValueType>
+      </xs:appinfo>
+    </xs:annotation>
     <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="RelaciónAmigosSet" nillable="true" type="tns:RelaciónAmigosSet" />
+      <xs:element name="Item1" type="xs:double" />
+      <xs:element name="Item2" type="xs:double" />
     </xs:sequence>
   </xs:complexType>
-  <xs:element name="ArrayOfRelaciónAmigosSet" nillable="true" type="tns:ArrayOfRelaciónAmigosSet" />
-  <xs:complexType name="RelaciónAmigosSet">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="CorreoElectronicoJugadorAmigo" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="CorreoElectronicoJugadorPrincipal" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="CuentaSet" nillable="true" type="tns:CuentaSet" />
-      <xs:element minOccurs="0" name="CuentaSet1" nillable="true" type="tns:CuentaSet" />
-      <xs:element minOccurs="0" name="IdRelaciónAmigos" type="xs:int" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="RelaciónAmigosSet" nillable="true" type="tns:RelaciónAmigosSet" />
-  <xs:complexType name="UsuarioSet">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="Apellido" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="CuentaSet" nillable="true" type="tns:ArrayOfCuentaSet" />
-      <xs:element minOccurs="0" name="IdUsuario" type="xs:int" />
-      <xs:element minOccurs="0" name="Nombre" nillable="true" type="xs:string" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="UsuarioSet" nillable="true" type="tns:UsuarioSet" />
-  <xs:complexType name="ArrayOfCuentaSet">
-    <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="CuentaSet" nillable="true" type="tns:CuentaSet" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="ArrayOfCuentaSet" nillable="true" type="tns:ArrayOfCuentaSet" />
-  <xs:complexType name="ArrayOfTipoNotificacion">
-    <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="TipoNotificacion" nillable="true" type="tns:TipoNotificacion" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="ArrayOfTipoNotificacion" nillable="true" type="tns:ArrayOfTipoNotificacion" />
-  <xs:complexType name="PeonesTablero">
-    <xs:sequence>
-      <xs:element xmlns:q1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="PeonesActualmenteTablero" nillable="true" type="q1:ArrayOfKeyValueOfintArrayOfValueTupleOfdoubledoubleU6ho3Bhd" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="PeonesTablero" nillable="true" type="tns:PeonesTablero" />
+  <xs:element name="ValueTupleOfdoubledouble" nillable="true" type="tns:ValueTupleOfdoubledouble" />
 </xs:schema>

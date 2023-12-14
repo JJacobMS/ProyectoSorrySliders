@@ -124,6 +124,11 @@ namespace VistasSorrySliders
                 _proxyLanzamiento.AgregarJugadorJuegoLanzamiento(_codigoPartida, _correoJugadorActual);
                 return;
             }
+            catch (CommunicationObjectFaultedException ex)
+            {
+                Utilidades.MostrarUnMensajeError(Properties.Resources.msgEstadoDefectuoso);
+                log.LogError("Se ha perdido la conexión previa", ex);
+            }
             catch (CommunicationException ex)
             {
                 Utilidades.MostrarUnMensajeError(Properties.Resources.msgErrorConexion);
@@ -354,6 +359,11 @@ namespace VistasSorrySliders
                 _proxyLanzamiento.NotificarFinalizarLanzamiento(_codigoPartida, _correoJugadorActual);
                 return;
             }
+            catch (CommunicationObjectFaultedException ex)
+            {
+                Utilidades.MostrarUnMensajeError(Properties.Resources.msgEstadoDefectuoso);
+                log.LogError("Se ha perdido la conexión previa", ex);
+            }
             catch (CommunicationException ex)
             {
                 Utilidades.MostrarUnMensajeError(Properties.Resources.msgErrorConexion);
@@ -380,6 +390,11 @@ namespace VistasSorrySliders
                 _proxyLanzamiento.NotificarLanzamientoDado(_codigoPartida, _correoJugadorActual, numeroDado);
                 return;
             }
+            catch (CommunicationObjectFaultedException ex)
+            {
+                Utilidades.MostrarUnMensajeError(Properties.Resources.msgEstadoDefectuoso);
+                log.LogError("Se ha perdido la conexión previa", ex);
+            }
             catch (CommunicationException ex)
             {
                 Utilidades.MostrarUnMensajeError(Properties.Resources.msgErrorConexion);
@@ -405,6 +420,11 @@ namespace VistasSorrySliders
             {
                 _proxyLanzamiento.NotificarLanzamientoLinea(_codigoPartida, _correoJugadorActual, posicionX, posicionY);
                 return;
+            }
+            catch (CommunicationObjectFaultedException ex)
+            {
+                Utilidades.MostrarUnMensajeError(Properties.Resources.msgEstadoDefectuoso);
+                log.LogError("Se ha perdido la conexión previa", ex);
             }
             catch (CommunicationException ex)
             {
@@ -435,6 +455,11 @@ namespace VistasSorrySliders
             {
                 _proxyLanzamiento.NotificarPosicionFichasFinales(_codigoPartida, _correoJugadorActual, peones);
                 return;
+            }
+            catch (CommunicationObjectFaultedException ex)
+            {
+                Utilidades.MostrarUnMensajeError(Properties.Resources.msgEstadoDefectuoso);
+                log.LogError("Se ha perdido la conexión previa", ex);
             }
             catch (CommunicationException ex)
             {
@@ -477,6 +502,11 @@ namespace VistasSorrySliders
                 _proxyLanzamiento.EliminarJugadorJuegoLanzamiento(_codigoPartida);
                 _juegoYLobbyVentana.EliminarContexto -= EliminarContextoJuegoLanzamiento;
                 return;
+            }
+            catch (CommunicationObjectFaultedException ex)
+            {
+                Utilidades.MostrarUnMensajeError(Properties.Resources.msgEstadoDefectuoso);
+                log.LogError("Se ha perdido la conexión previa", ex);
             }
             catch (CommunicationException ex)
             {

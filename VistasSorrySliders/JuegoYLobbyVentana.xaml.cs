@@ -103,6 +103,11 @@ namespace VistasSorrySliders
                 UnirsePartidaClient proxy = new UnirsePartidaClient();
                 proxy.SalirJuegoCompleto(_codigoPartida, _cuenta.CorreoElectronico);
             }
+            catch (CommunicationObjectFaultedException ex)
+            {
+                Utilidades.MostrarUnMensajeError(Properties.Resources.msgEstadoDefectuoso);
+                log.LogError("Se ha perdido la conexión previa", ex);
+            }
             catch (CommunicationException ex)
             {
                 Utilidades.MostrarUnMensajeError(Properties.Resources.msgErrorConexion);
@@ -110,7 +115,7 @@ namespace VistasSorrySliders
             }
             catch (TimeoutException ex)
             {
-                Utilidades.MostrarUnMensajeError(Properties.Resources.msgErrorConexion);
+                Utilidades.MostrarUnMensajeError(Properties.Resources.msgErrorTiempoEsperaServidor);
                 log.LogWarn("Se agoto el tiempo de espera del servidor", ex);
             }
         }
@@ -166,6 +171,11 @@ namespace VistasSorrySliders
                 proxyUnirse.SalirDelLobby(_cuenta.CorreoElectronico, _codigoPartida);
                 return;
             }
+            catch (CommunicationObjectFaultedException ex)
+            {
+                Utilidades.MostrarUnMensajeError(Properties.Resources.msgEstadoDefectuoso);
+                log.LogError("Se ha perdido la conexión previa", ex);
+            }
             catch (CommunicationException ex)
             {
                 Utilidades.MostrarUnMensajeError(Properties.Resources.msgErrorConexion);
@@ -173,7 +183,7 @@ namespace VistasSorrySliders
             }
             catch (TimeoutException ex)
             {
-                Utilidades.MostrarUnMensajeError(Properties.Resources.msgErrorConexion);
+                Utilidades.MostrarUnMensajeError(Properties.Resources.msgErrorTiempoEsperaServidor);
                 log.LogWarn("Se agoto el tiempo de espera del servidor", ex);
             }
             throw new CommunicationException();
@@ -205,6 +215,11 @@ namespace VistasSorrySliders
                 proxyRecuperarJugadores.EliminarCuentaProvisional(correoProvisional);
                 return;
             }
+            catch (CommunicationObjectFaultedException ex)
+            {
+                Utilidades.MostrarUnMensajeError(Properties.Resources.msgEstadoDefectuoso);
+                log.LogError("Se ha perdido la conexión previa", ex);
+            }
             catch (CommunicationException ex)
             {
                 Utilidades.MostrarUnMensajeError(Properties.Resources.msgErrorConexion);
@@ -212,7 +227,7 @@ namespace VistasSorrySliders
             }
             catch (TimeoutException ex)
             {
-                Utilidades.MostrarUnMensajeError(Properties.Resources.msgErrorConexion);
+                Utilidades.MostrarUnMensajeError(Properties.Resources.msgErrorTiempoEsperaServidor);
                 log.LogWarn("Se agoto el tiempo de espera del servidor", ex);
             }
             throw new CommunicationException();

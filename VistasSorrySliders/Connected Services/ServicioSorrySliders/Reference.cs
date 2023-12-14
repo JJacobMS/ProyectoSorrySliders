@@ -34,6 +34,9 @@ namespace VistasSorrySliders.ServicioSorrySliders {
         
         [System.Runtime.Serialization.EnumMemberAttribute()]
         ERROR_TIEMPO_ESPERA_SERVIDOR = 5,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        ERROR_CONEXION_DEFECTUOSA = 6,
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -1411,10 +1414,10 @@ namespace VistasSorrySliders.ServicioSorrySliders {
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/ILobby/IniciarPartida")]
         System.Threading.Tasks.Task IniciarPartidaAsync(string uid);
         
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/ILobby/ComprobarJugadoresExistentes")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILobby/ComprobarJugadoresExistentes", ReplyAction="http://tempuri.org/ILobby/ComprobarJugadoresExistentesResponse")]
         void ComprobarJugadoresExistentes(string uid);
         
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/ILobby/ComprobarJugadoresExistentes")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILobby/ComprobarJugadoresExistentes", ReplyAction="http://tempuri.org/ILobby/ComprobarJugadoresExistentesResponse")]
         System.Threading.Tasks.Task ComprobarJugadoresExistentesAsync(string uid);
     }
     

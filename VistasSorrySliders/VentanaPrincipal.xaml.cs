@@ -25,6 +25,7 @@ namespace VistasSorrySliders
     {
         private UsuariosEnLineaClient _proxyLinea;
         private string _correo;
+        private InicioSesionClient _proxyInicio;
 
         public UsuariosEnLineaClient ProxyLinea { get => _proxyLinea; }
 
@@ -101,6 +102,35 @@ namespace VistasSorrySliders
         {
             Logger log = new Logger(this.GetType());
             log.LogInfo("Jugador en línea");
+        }
+
+        public void ComprobarConexionUsuario (string correoElectronico)
+        {
+            Logger log = new Logger(this.GetType());
+            try
+            {
+                Constantes puedoPasar;
+                _proxyInicio = new InicioSesionClient();
+                puedoPasar = _proxyInicio.JugadorEstaEnLinea(correoElectronico);
+                switch (puedoPasar)
+                {
+                    case Constantes.OPERACION_EXITOSA_VACIA:
+                        Utilidades.MostrarInicioSesion();
+                        break;
+                    case Constantes.OPERACION_EXITOSA:
+                        break;
+                }
+            }
+            catch (CommunicationException ex)
+            {
+                Utilidades.MostrarUnMensajeError(Properties.Resources.msgErrorConexion);
+                log.LogError("Error de Comunicación con el Servidor", ex);
+            }
+            catch (TimeoutException ex)
+            {
+                Utilidades.MostrarUnMensajeError(Properties.Resources.msgErrorTiempoEsperaServidor);
+                log.LogWarn("Se agoto el tiempo de espera del servidor", ex);
+            }
         }
     }
 }

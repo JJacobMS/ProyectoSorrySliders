@@ -30,6 +30,7 @@ namespace VistasSorrySliders
         private CuentaSet[] _cuentas;
         private PartidaSet _partidaActual;
         private readonly JuegoYLobbyVentana _juegoYLobbyVentana;
+        private int _juegoIniciado;
 
         public LobbyPagina(CuentaSet cuentaUsuario, string codigoPartida, JuegoYLobbyVentana ventana)
         {
@@ -39,6 +40,7 @@ namespace VistasSorrySliders
 
             _cuentaUsuario = cuentaUsuario;
             _codigoPartida = codigoPartida;
+            _juegoIniciado = 0;
             
         }
 
@@ -82,12 +84,18 @@ namespace VistasSorrySliders
                 (respuesta, _cuentas) = proxyRecuperarJugadores.RecuperarJugadoresLobby(codigoPartida);
                 if (_cuentas.Count() == _partidaActual.CantidadJugadores && _cuentaUsuario.CorreoElectronico == _cuentas[0].CorreoElectronico)
                 {
-                    btnIniciarPartida.IsEnabled = true;
+                    btnIniciarPartida.IsEnabled = (_juegoIniciado == 0);                    
                 }
                 else
                 {
                     btnIniciarPartida.IsEnabled = false;
+                    _juegoIniciado = _juegoIniciado >= 1 ? 0 : _juegoIniciado;
                 }
+            }
+            catch (CommunicationObjectFaultedException ex)
+            {
+                respuesta = Constantes.ERROR_CONEXION_DEFECTUOSA;
+                log.LogError("Se ha perdido la conexión previa", ex);
             }
             catch (CommunicationException ex)
             {
@@ -115,6 +123,7 @@ namespace VistasSorrySliders
                     break;
                 case Constantes.ERROR_TIEMPO_ESPERA_SERVIDOR:
                 case Constantes.ERROR_CONEXION_SERVIDOR:
+                case Constantes.ERROR_CONEXION_DEFECTUOSA:
                     throw new CommunicationException();
             }
             throw new EntitySqlException();
@@ -180,6 +189,11 @@ namespace VistasSorrySliders
                 UnirsePartidaClient proxyUnirsePartida = new UnirsePartidaClient();
                 (respuesta, _partidaActual) = proxyUnirsePartida.RecuperarPartida(codigoPartida);
             }
+            catch (CommunicationObjectFaultedException ex)
+            {
+                respuesta = Constantes.ERROR_CONEXION_DEFECTUOSA;
+                log.LogError("Se ha perdido la conexión previa", ex);
+            }
             catch (CommunicationException ex)
             {
                 respuesta = Constantes.ERROR_CONEXION_SERVIDOR;
@@ -202,6 +216,7 @@ namespace VistasSorrySliders
                     break;
                 case Constantes.ERROR_TIEMPO_ESPERA_SERVIDOR:
                 case Constantes.ERROR_CONEXION_SERVIDOR:
+                case Constantes.ERROR_CONEXION_DEFECTUOSA:
                     throw new CommunicationException();
             }
             throw new EntitySqlException();
@@ -285,6 +300,10 @@ namespace VistasSorrySliders
                 _proxyLobby.EntrarPartida(_codigoPartida, _cuentaUsuario.CorreoElectronico);
                 return;
             }
+            catch (CommunicationObjectFaultedException ex)
+            {
+                log.LogError("Se ha perdido la conexión previa", ex);
+            }
             catch (CommunicationException ex)
             {
                 log.LogWarn("Error de Comunicación con el Servidor", ex);
@@ -318,9 +337,10 @@ namespace VistasSorrySliders
 
         private void ClickIniciarPartida(object sender, RoutedEventArgs e)
         {
-            if (_cuentas.Length == _partidaActual.CantidadJugadores && txtBoxHost.Text == _cuentaUsuario.Nickname)
+            _juegoIniciado++;
+            btnIniciarPartida.IsEnabled = false;
+            if (_cuentas.Length == _partidaActual.CantidadJugadores && txtBoxHost.Text == _cuentaUsuario.Nickname && _juegoIniciado == 1)
             {
-                btnIniciarPartida.IsEnabled = false;
                 _ = InicializarPartidaParaTodos();
             }
         }
@@ -352,6 +372,11 @@ namespace VistasSorrySliders
                 _proxyLobby.ComprobarJugadoresExistentes(_codigoPartida);
                 return true;
             }
+            catch (CommunicationObjectFaultedException ex)
+            {
+                Utilidades.MostrarUnMensajeError(Properties.Resources.msgErrorIdentificarJugadores);
+                log.LogError("Se ha perdido la conexión previa", ex);
+            }
             catch (CommunicationException ex)
             {
                 Utilidades.MostrarUnMensajeError(Properties.Resources.msgErrorConexion);
@@ -362,7 +387,8 @@ namespace VistasSorrySliders
                 Utilidades.MostrarUnMensajeError(Properties.Resources.msgErrorTiempoEsperaServidor);
                 log.LogWarn("Se agoto el tiempo de espera del servidor", ex);
             }
-            IrMenuPrincipal();
+
+            Utilidades.SalirHastaInicioSesionDesdeJuegoYLobbyVentana(this);
             return false;
         }
 
@@ -373,6 +399,11 @@ namespace VistasSorrySliders
             {
                 _proxyLobby.IniciarPartida(_codigoPartida);
                 return;
+            }
+            catch (CommunicationObjectFaultedException ex)
+            {
+                Utilidades.MostrarUnMensajeError(Properties.Resources.msgEstadoDefectuoso);
+                log.LogError("Se ha perdido la conexión previa", ex);
             }
             catch (CommunicationException ex)
             {
@@ -432,6 +463,11 @@ namespace VistasSorrySliders
                 _proxyLobby.SalirPartida(_codigoPartida);
                 _juegoYLobbyVentana.EliminarContexto -= SalirLobbyServidor;
                 return;
+            }
+            catch (CommunicationObjectFaultedException ex)
+            {
+                Utilidades.MostrarUnMensajeError(Properties.Resources.msgEstadoDefectuoso);
+                log.LogError("Se ha perdido la conexión previa", ex);
             }
             catch (CommunicationException ex)
             {

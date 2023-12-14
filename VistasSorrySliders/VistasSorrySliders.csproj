@@ -316,19 +316,19 @@
     <None Include="Connected Services\ServicioSorrySliders\item.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Connected Services\ServicioSorrySliders\item1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\ServicioSorrySliders\item2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\ServicioSorrySliders\item3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\ServicioSorrySliders\item4.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Connected Services\ServicioSorrySliders\item5.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Connected Services\ServicioSorrySliders\item51.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Connected Services\ServicioSorrySliders\item52.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Connected Services\ServicioSorrySliders\item53.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Connected Services\ServicioSorrySliders\item54.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Connected Services\ServicioSorrySliders\ServicioComunicacionSorrySliders1.wsdl" />
@@ -452,9 +452,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Connected Services\ServicioSorrySliders\item1.disco" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Recursos\informacion.png" />
   </ItemGroup>
   <ItemGroup>
@@ -474,6 +471,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Recursos\puntuaciones.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\ServicioSorrySliders\item1.disco" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

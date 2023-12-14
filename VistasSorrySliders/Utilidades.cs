@@ -127,25 +127,28 @@ namespace VistasSorrySliders
 
         public static bool ValidarContraseña(string contraseña)
         {
-            Logger log = new Logger(typeof(Utilidades));
-            try
+            List<char> caracteresEspeciales = new List<char> { '°','!','"','#','$','%','&','/','(',')','=','|','¬',(char)92,'¿','?','-','_','+','{','}' };
+            if (string.IsNullOrEmpty(contraseña) || contraseña.Length < 10)
             {
-                int segundos = 3;
-                string patron = @"^(?=.*[A-Za-zñÑ])(?=.*\d)(?=.*[!@#$%^&*()\-=_+.,:;])[A-Za-zñÑ\d!@#$%^&*()\-=_+.,:;]{10,}$";
-                TimeSpan tiempoAgotadoPatron = TimeSpan.FromSeconds(segundos);
-                bool correoValidado = Regex.IsMatch(contraseña, patron, RegexOptions.None, tiempoAgotadoPatron);
-                if (correoValidado)
-                {
-                    return correoValidado;
-                }
-                MostrarUnMensajeError(Properties.Resources.msgErrorContrasenaInvalida, Properties.Resources.msgTituloContraseñaInvalida);
-                return correoValidado;
-            }
-            catch (RegexMatchTimeoutException ex)
-            {
-                log.LogError("El tiempo de espera para la expresión se ha agotado", ex);
                 return false;
             }
+            int numeroCaracteres = 0;
+            for (int i = 0; i < caracteresEspeciales.Count; i++)
+            {
+                if (caracteresEspeciales.Contains(caracteresEspeciales[i]))
+                {
+                    numeroCaracteres++;
+                }
+            }
+            if (numeroCaracteres <= 0)
+            {
+                return false;
+            }
+            if (!contraseña.Any(char.IsDigit))
+            {
+                return false;
+            }
+            return true;
         }
 
         public static void MostrarMensajesError(Constantes respuesta)
@@ -163,6 +166,9 @@ namespace VistasSorrySliders
                     break;
                 case Constantes.ERROR_TIEMPO_ESPERA_SERVIDOR:
                     MostrarUnMensajeError(Properties.Resources.msgErrorTiempoEsperaServidor);
+                    break;
+                case Constantes.ERROR_CONEXION_DEFECTUOSA:
+                    MostrarUnMensajeError(Properties.Resources.msgEstadoDefectuoso);
                     break;
             }
         }
