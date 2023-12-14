@@ -98,6 +98,19 @@ namespace VistasSorrySliders
             }
 
             Utilidades.MostrarMensajesError(respuesta);
+            switch (respuesta)
+            {
+                case Constantes.OPERACION_EXITOSA:
+                    CrearVentanaLobby(_cuentaUsuario, codigoPartida);
+                    break;
+                case Constantes.OPERACION_EXITOSA_VACIA:
+                    Utilidades.MostrarUnMensajeError("MensajeNuevo"+"No se ha posido guardar la partida de la base de datos");
+                    break;
+                case Constantes.ERROR_CONEXION_SERVIDOR:
+                case Constantes.ERROR_TIEMPO_ESPERA_SERVIDOR:
+                    Utilidades.SalirInicioSesionDesdeVentanaPrincipal(this);
+                    break;
+            }
         }
 
         private void CrearVentanaLobby(CuentaSet _cuentaUsuario, string codigoPartida) 
