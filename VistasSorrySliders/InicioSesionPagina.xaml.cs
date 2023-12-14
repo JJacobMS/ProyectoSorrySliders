@@ -22,7 +22,6 @@ namespace VistasSorrySliders
     /// </summary>
     public partial class InicioSesionPagina : Page
     {
-        private InicioSesionClient _proxyInicioSesion;
         public InicioSesionPagina()
         {
             InitializeComponent();
@@ -125,7 +124,7 @@ namespace VistasSorrySliders
             switch (resultado)
             {
                 case Constantes.OPERACION_EXITOSA:
-                    VerificarUsuarioUnicoSistema(cuentaPorVerificar.CorreoElectronico);
+                    CambiarPantallaMenuPrincipal(cuentaPorVerificar.CorreoElectronico);
                     break;
                 case Constantes.OPERACION_EXITOSA_VACIA:
                     txtBlockContrasenaInvalida.Visibility = Visibility.Visible;
@@ -159,47 +158,14 @@ namespace VistasSorrySliders
             this.NavigationService.Navigate(unirsePaginaInvitado);
         }
 
-        private void VerificarUsuarioUnicoSistema(string correoJugador)
-        {
-            Logger log = new Logger(this.GetType());
-            try
-            {
-                Constantes puedoPasar;
-                _proxyInicioSesion = new InicioSesionClient();
-                puedoPasar = _proxyInicioSesion.JugadorEstaEnLinea(correoJugador);
-                switch (puedoPasar)
-                {
-                    case Constantes.OPERACION_EXITOSA_VACIA:
-                        CambiarPantallaMenuPrincipal(correoJugador);
-                        break;
-                    case Constantes.OPERACION_EXITOSA:
-                        Utilidades.MostrarUnMensajeError(Properties.Resources.txtBlockCuentaYaEnLobby);
-                        break;
-                }
-            }
-            catch (CommunicationException ex)
-            {
-                Utilidades.MostrarUnMensajeError(Properties.Resources.msgErrorConexion);
-                log.LogWarn("Error de Comunicación con el Servidor", ex);
-            }
-            catch (TimeoutException ex)
-            {
-                Utilidades.MostrarUnMensajeError(Properties.Resources.msgErrorTiempoEsperaServidor);
-                log.LogWarn("Se agoto el tiempo de espera del servidor", ex);
-            }
-        }
-
         private void CambiarPantallaMenuPrincipal(string correoVerificado)
         {
             VentanaPrincipal ventanaPrincipal = Window.GetWindow(this) as VentanaPrincipal;
             ventanaPrincipal.IndicarCorreoCuenta(correoVerificado);
 
-            if (ventanaPrincipal.EntrarSistemaEnLineaMenu())
-            {
-                MenuPrincipalPagina menuPrincipal = new MenuPrincipalPagina();
-                menuPrincipal.CambiarPaginaMenu += CambiarPaginaMenu;
-                menuPrincipal.LlamarRecuperarDatosUsuario(correoVerificado);
-            }
+            MenuPrincipalPagina menuPrincipal = new MenuPrincipalPagina();
+            menuPrincipal.CambiarPaginaMenu += CambiarPaginaMenu;
+            menuPrincipal.LlamarRecuperarDatosUsuario(correoVerificado);
         }
 
         private void CambiarPaginaMenu(MenuPrincipalPagina pagina)

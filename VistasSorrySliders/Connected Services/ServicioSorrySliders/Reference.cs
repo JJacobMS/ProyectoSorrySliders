@@ -1224,12 +1224,6 @@ namespace VistasSorrySliders.ServicioSorrySliders {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IInicioSesion/VerificarContrasenaDeCuenta", ReplyAction="http://tempuri.org/IInicioSesion/VerificarContrasenaDeCuentaResponse")]
         System.Threading.Tasks.Task<VistasSorrySliders.ServicioSorrySliders.Constantes> VerificarContrasenaDeCuentaAsync(VistasSorrySliders.ServicioSorrySliders.CuentaSet cuentaPorVerificar);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IInicioSesion/JugadorEstaEnLinea", ReplyAction="http://tempuri.org/IInicioSesion/JugadorEstaEnLineaResponse")]
-        VistasSorrySliders.ServicioSorrySliders.Constantes JugadorEstaEnLinea(string jugadorCorreo);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IInicioSesion/JugadorEstaEnLinea", ReplyAction="http://tempuri.org/IInicioSesion/JugadorEstaEnLineaResponse")]
-        System.Threading.Tasks.Task<VistasSorrySliders.ServicioSorrySliders.Constantes> JugadorEstaEnLineaAsync(string jugadorCorreo);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -1273,14 +1267,6 @@ namespace VistasSorrySliders.ServicioSorrySliders {
         
         public System.Threading.Tasks.Task<VistasSorrySliders.ServicioSorrySliders.Constantes> VerificarContrasenaDeCuentaAsync(VistasSorrySliders.ServicioSorrySliders.CuentaSet cuentaPorVerificar) {
             return base.Channel.VerificarContrasenaDeCuentaAsync(cuentaPorVerificar);
-        }
-        
-        public VistasSorrySliders.ServicioSorrySliders.Constantes JugadorEstaEnLinea(string jugadorCorreo) {
-            return base.Channel.JugadorEstaEnLinea(jugadorCorreo);
-        }
-        
-        public System.Threading.Tasks.Task<VistasSorrySliders.ServicioSorrySliders.Constantes> JugadorEstaEnLineaAsync(string jugadorCorreo) {
-            return base.Channel.JugadorEstaEnLineaAsync(jugadorCorreo);
         }
     }
     
@@ -1432,6 +1418,9 @@ namespace VistasSorrySliders.ServicioSorrySliders {
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/ILobby/HostInicioPartida")]
         void HostInicioPartida();
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/ILobby/ComprobarJugadorLobby")]
+        void ComprobarJugadorLobby();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -2148,6 +2137,18 @@ namespace VistasSorrySliders.ServicioSorrySliders {
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IChat/SalirChatListaJugadores")]
         System.Threading.Tasks.Task SalirChatListaJugadoresAsync(string uid, string correo);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IChat/ReingresarChat", ReplyAction="http://tempuri.org/IChat/ReingresarChatResponse")]
+        VistasSorrySliders.ServicioSorrySliders.Constantes ReingresarChat(string uid, string correo);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IChat/ReingresarChat", ReplyAction="http://tempuri.org/IChat/ReingresarChatResponse")]
+        System.Threading.Tasks.Task<VistasSorrySliders.ServicioSorrySliders.Constantes> ReingresarChatAsync(string uid, string correo);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IChat/ValidarPartidaJugadorExistenteChat", ReplyAction="http://tempuri.org/IChat/ValidarPartidaJugadorExistenteChatResponse")]
+        VistasSorrySliders.ServicioSorrySliders.Constantes ValidarPartidaJugadorExistenteChat(string uid, string correo);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IChat/ValidarPartidaJugadorExistenteChat", ReplyAction="http://tempuri.org/IChat/ValidarPartidaJugadorExistenteChatResponse")]
+        System.Threading.Tasks.Task<VistasSorrySliders.ServicioSorrySliders.Constantes> ValidarPartidaJugadorExistenteChatAsync(string uid, string correo);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -2221,6 +2222,22 @@ namespace VistasSorrySliders.ServicioSorrySliders {
         
         public System.Threading.Tasks.Task SalirChatListaJugadoresAsync(string uid, string correo) {
             return base.Channel.SalirChatListaJugadoresAsync(uid, correo);
+        }
+        
+        public VistasSorrySliders.ServicioSorrySliders.Constantes ReingresarChat(string uid, string correo) {
+            return base.Channel.ReingresarChat(uid, correo);
+        }
+        
+        public System.Threading.Tasks.Task<VistasSorrySliders.ServicioSorrySliders.Constantes> ReingresarChatAsync(string uid, string correo) {
+            return base.Channel.ReingresarChatAsync(uid, correo);
+        }
+        
+        public VistasSorrySliders.ServicioSorrySliders.Constantes ValidarPartidaJugadorExistenteChat(string uid, string correo) {
+            return base.Channel.ValidarPartidaJugadorExistenteChat(uid, correo);
+        }
+        
+        public System.Threading.Tasks.Task<VistasSorrySliders.ServicioSorrySliders.Constantes> ValidarPartidaJugadorExistenteChatAsync(string uid, string correo) {
+            return base.Channel.ValidarPartidaJugadorExistenteChatAsync(uid, correo);
         }
     }
     
@@ -2359,75 +2376,6 @@ namespace VistasSorrySliders.ServicioSorrySliders {
         
         public System.Threading.Tasks.Task NotificarPosicionFichasFinalesAsync(string codigoPartida, string correo, VistasSorrySliders.ServicioSorrySliders.PeonesTablero peones) {
             return base.Channel.NotificarPosicionFichasFinalesAsync(codigoPartida, correo, peones);
-        }
-    }
-    
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServicioSorrySliders.IUsuariosEnLinea", CallbackContract=typeof(VistasSorrySliders.ServicioSorrySliders.IUsuariosEnLineaCallback))]
-    public interface IUsuariosEnLinea {
-        
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IUsuariosEnLinea/EntrarConCuenta")]
-        void EntrarConCuenta(string jugadorCorreo);
-        
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IUsuariosEnLinea/EntrarConCuenta")]
-        System.Threading.Tasks.Task EntrarConCuentaAsync(string jugadorCorreo);
-        
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IUsuariosEnLinea/SalirDelSistema")]
-        void SalirDelSistema(string jugadorCorreo);
-        
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IUsuariosEnLinea/SalirDelSistema")]
-        System.Threading.Tasks.Task SalirDelSistemaAsync(string jugadorCorreo);
-    }
-    
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface IUsuariosEnLineaCallback {
-        
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IUsuariosEnLinea/ComprobarJugador")]
-        void ComprobarJugador();
-    }
-    
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface IUsuariosEnLineaChannel : VistasSorrySliders.ServicioSorrySliders.IUsuariosEnLinea, System.ServiceModel.IClientChannel {
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class UsuariosEnLineaClient : System.ServiceModel.DuplexClientBase<VistasSorrySliders.ServicioSorrySliders.IUsuariosEnLinea>, VistasSorrySliders.ServicioSorrySliders.IUsuariosEnLinea {
-        
-        public UsuariosEnLineaClient(System.ServiceModel.InstanceContext callbackInstance) : 
-                base(callbackInstance) {
-        }
-        
-        public UsuariosEnLineaClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName) : 
-                base(callbackInstance, endpointConfigurationName) {
-        }
-        
-        public UsuariosEnLineaClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName, string remoteAddress) : 
-                base(callbackInstance, endpointConfigurationName, remoteAddress) {
-        }
-        
-        public UsuariosEnLineaClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
-                base(callbackInstance, endpointConfigurationName, remoteAddress) {
-        }
-        
-        public UsuariosEnLineaClient(System.ServiceModel.InstanceContext callbackInstance, System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
-                base(callbackInstance, binding, remoteAddress) {
-        }
-        
-        public void EntrarConCuenta(string jugadorCorreo) {
-            base.Channel.EntrarConCuenta(jugadorCorreo);
-        }
-        
-        public System.Threading.Tasks.Task EntrarConCuentaAsync(string jugadorCorreo) {
-            return base.Channel.EntrarConCuentaAsync(jugadorCorreo);
-        }
-        
-        public void SalirDelSistema(string jugadorCorreo) {
-            base.Channel.SalirDelSistema(jugadorCorreo);
-        }
-        
-        public System.Threading.Tasks.Task SalirDelSistemaAsync(string jugadorCorreo) {
-            return base.Channel.SalirDelSistemaAsync(jugadorCorreo);
         }
     }
     

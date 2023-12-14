@@ -22,21 +22,19 @@ namespace VistasSorrySliders
     /// <summary>
     /// Lógica de interacción para JuegoYLobbyVentana.xaml
     /// </summary>
-    public partial class JuegoYLobbyVentana : Window, IUsuariosEnLineaCallback
+    public partial class JuegoYLobbyVentana : Window
     {
         private LobbyPagina _frameLobby;
         private bool _esInvitado;
         private CuentaSet _cuenta;
         private string _codigoPartida;
-        private UsuariosEnLineaClient _proxyLinea;
 
         public bool EsInvitado { get => _esInvitado; }
 
         public event Action EliminarContexto;
 
-        public JuegoYLobbyVentana(CuentaSet cuenta, string codigoPartida, bool esInvitado, UsuariosEnLineaClient proxyLinea)
+        public JuegoYLobbyVentana(CuentaSet cuenta, string codigoPartida, bool esInvitado)
         {
-            _proxyLinea = proxyLinea;
             _cuenta = cuenta;
             _codigoPartida = codigoPartida;
             _esInvitado = esInvitado;
@@ -83,9 +81,9 @@ namespace VistasSorrySliders
         {
             try
             {
+                SalirCuentaRegistroPartidaBD();
                 EliminarContexto?.Invoke();
                 EliminarDiccionariosRestantes();
-                SalirCuentaRegistroPartidaBD();
                 IrMenuUsuario();
             }
             catch (CommunicationException ex)
@@ -143,7 +141,7 @@ namespace VistasSorrySliders
         }
         private void IrVentanaGanadores(List<JugadorGanador> listaPuntuaciones)
         {
-            VentanaPrincipal ventanaPrincipal = new VentanaPrincipal(_proxyLinea, _cuenta.CorreoElectronico);
+            VentanaPrincipal ventanaPrincipal = new VentanaPrincipal(_cuenta.CorreoElectronico);
             TableroGanadoresPartidaPagina paginaGanadores = new TableroGanadoresPartidaPagina(_cuenta, listaPuntuaciones, _esInvitado);
             ventanaPrincipal.Content = paginaGanadores;
             ventanaPrincipal.Show();
@@ -189,9 +187,26 @@ namespace VistasSorrySliders
             throw new CommunicationException();
         }
 
+        public void SalirMenuPrincipalPorPartidaNoEncontrada()
+        {
+            DesuscribirseDeCerrarVentana();
+            try
+            {
+                SalirCuentaRegistroPartidaBD();
+                IrMenuUsuario();
+            }
+            catch (CommunicationException ex)
+            {
+                Logger log = new Logger(this.GetType());
+                log.LogWarn("Error de Comunicación con el Servidor", ex);
+                Utilidades.MostrarInicioSesion();
+            }
+            Close();
+        }
+
         public void IrMenuUsuario()
         {
-            VentanaPrincipal ventanaPrincipal = new VentanaPrincipal(_proxyLinea, _cuenta.CorreoElectronico);
+            VentanaPrincipal ventanaPrincipal = new VentanaPrincipal(_cuenta.CorreoElectronico);
             if (!_esInvitado)
             {
                 MenuPrincipalPagina menu = new MenuPrincipalPagina(_cuenta);

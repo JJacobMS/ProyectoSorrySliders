@@ -90,7 +90,7 @@ namespace VistasSorrySliders
             }
             catch (CommunicationObjectFaultedException ex)
             {
-                Utilidades.MostrarUnMensajeError(Properties.Resources.msgEstadoDefectuoso);
+                Utilidades.MostrarUnMensajeError(Properties.Resources.msgErrorComunicacionDefectuosaJuego);
                 log.LogWarn("Se ha perdido la conexión previa", ex);
             }
             catch (CommunicationException ex)
@@ -528,8 +528,22 @@ namespace VistasSorrySliders
                 log.LogWarn("Se agoto el tiempo de espera del servidor", ex);
                 respuesta = Constantes.ERROR_TIEMPO_ESPERA_SERVIDOR;
             }
+            switch (respuesta)
+            {
+                case Constantes.OPERACION_EXITOSA:
+                    Utilidades.MostrarMensajeInformacion(Properties.Resources.msgPuntajesGuardadosCorrectamente);
+                    break;
+                case Constantes.ERROR_CONEXION_DEFECTUOSA:
+                    Utilidades.MostrarUnMensajeError(Properties.Resources.msgErrorComunicacionDefectuosaGuardarPuntuaciones);
+                    break;
+                case Constantes.ERROR_CONEXION_BD:
+                    Utilidades.MostrarUnMensajeError(Properties.Resources.msgErrorConexionBDGuardarPuntajes);
+                    break;
+                default:
+                    Utilidades.MostrarMensajesError(respuesta);
+                    break;
 
-            Utilidades.MostrarMensajesError(respuesta);
+            }
         }
 
         private bool ComprobarDadosActuales()
@@ -655,7 +669,7 @@ namespace VistasSorrySliders
             }
             catch (CommunicationObjectFaultedException ex)
             {
-                Utilidades.MostrarUnMensajeError(Properties.Resources.msgEstadoDefectuoso);
+                Utilidades.MostrarUnMensajeError(Properties.Resources.msgErrorComunicacionDefectuosaJuego);
                 log.LogWarn("Se ha perdido la conexión previa", ex);
             }
             catch (CommunicationException ex)
@@ -766,7 +780,7 @@ namespace VistasSorrySliders
             }
             catch (CommunicationObjectFaultedException ex)
             {
-                Utilidades.MostrarUnMensajeError(Properties.Resources.msgEstadoDefectuoso);
+                Utilidades.MostrarUnMensajeError(Properties.Resources.msgErrorComunicacionDefectuosaJuego);
                 log.LogWarn("Se ha perdido la conexión previa", ex);
             }
             catch (CommunicationException ex)
@@ -921,8 +935,8 @@ namespace VistasSorrySliders
             }
             catch (CommunicationObjectFaultedException ex)
             {
-                Utilidades.MostrarUnMensajeError(Properties.Resources.msgEstadoDefectuoso);
                 log.LogWarn("Se ha perdido la conexión previa", ex);
+                Utilidades.MostrarUnMensajeError(Properties.Resources.msgErrorComunicacionDefectuosaSalida);
             }
             catch (CommunicationException ex)
             {
@@ -947,8 +961,8 @@ namespace VistasSorrySliders
             }
             catch (CommunicationObjectFaultedException ex)
             {
-                Utilidades.MostrarUnMensajeError(Properties.Resources.msgEstadoDefectuoso);
                 log.LogWarn("Se ha perdido la conexión previa", ex);
+                Utilidades.MostrarUnMensajeError(Properties.Resources.msgErrorComunicacionDefectuosaSalida);
             }
             catch (CommunicationException ex)
             {

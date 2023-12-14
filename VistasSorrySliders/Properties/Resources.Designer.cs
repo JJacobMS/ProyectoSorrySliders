@@ -700,7 +700,7 @@ namespace VistasSorrySliders.Properties {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Hubo un error al eliminar la solicitud de amistad, por favor inténtelo más tarde.
+        ///   Busca una cadena traducida similar a Hubo un error al eliminar la amistad, esta ya se encuentra eliminada.
         /// </summary>
         public static string msgAmistadEliminarError {
             get {
@@ -853,11 +853,47 @@ namespace VistasSorrySliders.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Hubo un error al enviar la información para guardar las puntuaciones.
+        /// </summary>
+        public static string msgErrorComunicacionDefectuosaGuardarPuntuaciones {
+            get {
+                return ResourceManager.GetString("msgErrorComunicacionDefectuosaGuardarPuntuaciones", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Hubo un error al enviar información a los otros jugadores, comience otra partida de juego.
+        /// </summary>
+        public static string msgErrorComunicacionDefectuosaJuego {
+            get {
+                return ResourceManager.GetString("msgErrorComunicacionDefectuosaJuego", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Hubo un problema al salir de la partida.
+        /// </summary>
+        public static string msgErrorComunicacionDefectuosaSalida {
+            get {
+                return ResourceManager.GetString("msgErrorComunicacionDefectuosaSalida", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Hubo un error de conexión con el servidor.
         /// </summary>
         public static string msgErrorConexion {
             get {
                 return ResourceManager.GetString("msgErrorConexion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Hubo un error con la conexión de base de datos para guardar los puntajes.
+        /// </summary>
+        public static string msgErrorConexionBDGuardarPuntajes {
+            get {
+                return ResourceManager.GetString("msgErrorConexionBDGuardarPuntajes", resourceCulture);
             }
         }
         
@@ -903,6 +939,15 @@ namespace VistasSorrySliders.Properties {
         public static string msgErrorImagenPermisos {
             get {
                 return ResourceManager.GetString("msgErrorImagenPermisos", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Hubo un error al eliminar la notificación, esta ya se encuentra eliminada.
+        /// </summary>
+        public static string msgErrorNotificacionEliminar {
+            get {
+                return ResourceManager.GetString("msgErrorNotificacionEliminar", resourceCulture);
             }
         }
         
@@ -1051,11 +1096,29 @@ namespace VistasSorrySliders.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Su partida no se encuentra en el servidor, no es posible continuar el juego.
+        /// </summary>
+        public static string msgPartidaNoEncontradaServidorJuego {
+            get {
+                return ResourceManager.GetString("msgPartidaNoEncontradaServidorJuego", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Hubo un error al recuperar la partida, por favor inténtelo más tarde.
         /// </summary>
         public static string msgPartidaRecuperarVacia {
             get {
                 return ResourceManager.GetString("msgPartidaRecuperarVacia", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Se guardaron correctamente los puntajes del juego.
+        /// </summary>
+        public static string msgPuntajesGuardadosCorrectamente {
+            get {
+                return ResourceManager.GetString("msgPuntajesGuardadosCorrectamente", resourceCulture);
             }
         }
         

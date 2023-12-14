@@ -144,18 +144,6 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
-  <wsp:Policy wsu:Id="NetTcpBinding_IUsuariosEnLinea_policy">
-    <wsp:ExactlyOne>
-      <wsp:All>
-        <wsrm:RMAssertion xmlns:wsrm="http://schemas.xmlsoap.org/ws/2005/02/rm/policy">
-          <wsrm:InactivityTimeout Milliseconds="600000" />
-          <wsrm:AcknowledgementInterval Milliseconds="200" />
-        </wsrm:RMAssertion>
-        <msb:BinaryEncoding xmlns:msb="http://schemas.microsoft.com/ws/06/2004/mspolicy/netbinary1" />
-        <wsaw:UsingAddressing />
-      </wsp:All>
-    </wsp:ExactlyOne>
-  </wsp:Policy>
   <wsp:Policy wsu:Id="NetTcpBinding_IJuegoPuntuacion_policy">
     <wsp:ExactlyOne>
       <wsp:All>
@@ -189,12 +177,6 @@
   </wsdl:message>
   <wsdl:message name="IInicioSesion_VerificarContrasenaDeCuenta_OutputMessage">
     <wsdl:part name="parameters" element="tns:VerificarContrasenaDeCuentaResponse" />
-  </wsdl:message>
-  <wsdl:message name="IInicioSesion_JugadorEstaEnLinea_InputMessage">
-    <wsdl:part name="parameters" element="tns:JugadorEstaEnLinea" />
-  </wsdl:message>
-  <wsdl:message name="IInicioSesion_JugadorEstaEnLinea_OutputMessage">
-    <wsdl:part name="parameters" element="tns:JugadorEstaEnLineaResponse" />
   </wsdl:message>
   <wsdl:message name="IMenuPrincipal_RecuperarDatosUsuario_InputMessage">
     <wsdl:part name="parameters" element="tns:RecuperarDatosUsuario" />
@@ -237,6 +219,9 @@
   </wsdl:message>
   <wsdl:message name="ILobby_HostInicioPartida_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:HostInicioPartida" />
+  </wsdl:message>
+  <wsdl:message name="ILobby_ComprobarJugadorLobby_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:ComprobarJugadorLobby" />
   </wsdl:message>
   <wsdl:message name="IUnirsePartida_UnirseAlLobby_InputMessage">
     <wsdl:part name="parameters" element="tns:UnirseAlLobby" />
@@ -421,6 +406,18 @@
   <wsdl:message name="IChat_SalirChatListaJugadores_InputMessage">
     <wsdl:part name="parameters" element="tns:SalirChatListaJugadores" />
   </wsdl:message>
+  <wsdl:message name="IChat_ReingresarChat_InputMessage">
+    <wsdl:part name="parameters" element="tns:ReingresarChat" />
+  </wsdl:message>
+  <wsdl:message name="IChat_ReingresarChat_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ReingresarChatResponse" />
+  </wsdl:message>
+  <wsdl:message name="IChat_ValidarPartidaJugadorExistenteChat_InputMessage">
+    <wsdl:part name="parameters" element="tns:ValidarPartidaJugadorExistenteChat" />
+  </wsdl:message>
+  <wsdl:message name="IChat_ValidarPartidaJugadorExistenteChat_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ValidarPartidaJugadorExistenteChatResponse" />
+  </wsdl:message>
   <wsdl:message name="IChat_DevolverMensaje_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:DevolverMensaje" />
   </wsdl:message>
@@ -478,15 +475,6 @@
   <wsdl:message name="IJuegoLanzamiento_CambiarPosicionPeonesTableroYContinuar_InputCallbackMessage">
     <wsdl:part name="parameters" element="tns:CambiarPosicionPeonesTableroYContinuarResponse" />
   </wsdl:message>
-  <wsdl:message name="IUsuariosEnLinea_EntrarConCuenta_InputMessage">
-    <wsdl:part name="parameters" element="tns:EntrarConCuenta" />
-  </wsdl:message>
-  <wsdl:message name="IUsuariosEnLinea_SalirDelSistema_InputMessage">
-    <wsdl:part name="parameters" element="tns:SalirDelSistema" />
-  </wsdl:message>
-  <wsdl:message name="IUsuariosEnLinea_ComprobarJugador_OutputCallbackMessage">
-    <wsdl:part name="parameters" element="tns:ComprobarJugador" />
-  </wsdl:message>
   <wsdl:message name="IJuegoPuntuacion_AgregarJugador_InputMessage">
     <wsdl:part name="parameters" element="tns:AgregarJugador" />
   </wsdl:message>
@@ -541,10 +529,6 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IInicioSesion/VerificarContrasenaDeCuenta" message="tns:IInicioSesion_VerificarContrasenaDeCuenta_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IInicioSesion/VerificarContrasenaDeCuentaResponse" message="tns:IInicioSesion_VerificarContrasenaDeCuenta_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="JugadorEstaEnLinea">
-      <wsdl:input wsaw:Action="http://tempuri.org/IInicioSesion/JugadorEstaEnLinea" message="tns:IInicioSesion_JugadorEstaEnLinea_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IInicioSesion/JugadorEstaEnLineaResponse" message="tns:IInicioSesion_JugadorEstaEnLinea_OutputMessage" />
-    </wsdl:operation>
   </wsdl:portType>
   <wsdl:portType name="IMenuPrincipal">
     <wsdl:operation name="RecuperarDatosUsuario">
@@ -584,6 +568,9 @@
     </wsdl:operation>
     <wsdl:operation name="HostInicioPartida">
       <wsdl:output wsaw:Action="http://tempuri.org/ILobby/HostInicioPartida" message="tns:ILobby_HostInicioPartida_OutputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ComprobarJugadorLobby">
+      <wsdl:output wsaw:Action="http://tempuri.org/ILobby/ComprobarJugadorLobby" message="tns:ILobby_ComprobarJugadorLobby_OutputCallbackMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:portType name="IUnirsePartida">
@@ -730,6 +717,14 @@
     <wsdl:operation name="SalirChatListaJugadores">
       <wsdl:input wsaw:Action="http://tempuri.org/IChat/SalirChatListaJugadores" message="tns:IChat_SalirChatListaJugadores_InputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="ReingresarChat">
+      <wsdl:input wsaw:Action="http://tempuri.org/IChat/ReingresarChat" message="tns:IChat_ReingresarChat_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IChat/ReingresarChatResponse" message="tns:IChat_ReingresarChat_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ValidarPartidaJugadorExistenteChat">
+      <wsdl:input wsaw:Action="http://tempuri.org/IChat/ValidarPartidaJugadorExistenteChat" message="tns:IChat_ValidarPartidaJugadorExistenteChat_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IChat/ValidarPartidaJugadorExistenteChatResponse" message="tns:IChat_ValidarPartidaJugadorExistenteChat_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="DevolverMensaje">
       <wsdl:output wsaw:Action="http://tempuri.org/IChat/DevolverMensaje" message="tns:IChat_DevolverMensaje_OutputCallbackMessage" />
     </wsdl:operation>
@@ -778,17 +773,6 @@
     <wsdl:operation name="CambiarPosicionPeonesTableroYContinuar">
       <wsdl:output wsaw:Action="http://tempuri.org/IJuegoLanzamiento/CambiarPosicionPeonesTableroYContinuar" message="tns:IJuegoLanzamiento_CambiarPosicionPeonesTableroYContinuar_OutputCallbackMessage" />
       <wsdl:input wsaw:Action="http://tempuri.org/IJuegoLanzamiento/CambiarPosicionPeonesTableroYContinuarResponse" message="tns:IJuegoLanzamiento_CambiarPosicionPeonesTableroYContinuar_InputCallbackMessage" />
-    </wsdl:operation>
-  </wsdl:portType>
-  <wsdl:portType name="IUsuariosEnLinea">
-    <wsdl:operation name="EntrarConCuenta">
-      <wsdl:input wsaw:Action="http://tempuri.org/IUsuariosEnLinea/EntrarConCuenta" message="tns:IUsuariosEnLinea_EntrarConCuenta_InputMessage" />
-    </wsdl:operation>
-    <wsdl:operation name="SalirDelSistema">
-      <wsdl:input wsaw:Action="http://tempuri.org/IUsuariosEnLinea/SalirDelSistema" message="tns:IUsuariosEnLinea_SalirDelSistema_InputMessage" />
-    </wsdl:operation>
-    <wsdl:operation name="ComprobarJugador">
-      <wsdl:output wsaw:Action="http://tempuri.org/IUsuariosEnLinea/ComprobarJugador" message="tns:IUsuariosEnLinea_ComprobarJugador_OutputCallbackMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:portType name="IJuegoPuntuacion">
@@ -844,15 +828,6 @@
     </wsdl:operation>
     <wsdl:operation name="VerificarContrasenaDeCuenta">
       <soap12:operation soapAction="http://tempuri.org/IInicioSesion/VerificarContrasenaDeCuenta" style="document" />
-      <wsdl:input>
-        <soap12:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap12:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="JugadorEstaEnLinea">
-      <soap12:operation soapAction="http://tempuri.org/IInicioSesion/JugadorEstaEnLinea" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -940,6 +915,12 @@
     </wsdl:operation>
     <wsdl:operation name="HostInicioPartida">
       <soap12:operation soapAction="http://tempuri.org/ILobby/HostInicioPartida" style="document" />
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ComprobarJugadorLobby">
+      <soap12:operation soapAction="http://tempuri.org/ILobby/ComprobarJugadorLobby" style="document" />
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>
@@ -1260,6 +1241,24 @@
         <soap12:body use="literal" />
       </wsdl:input>
     </wsdl:operation>
+    <wsdl:operation name="ReingresarChat">
+      <soap12:operation soapAction="http://tempuri.org/IChat/ReingresarChat" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ValidarPartidaJugadorExistenteChat">
+      <soap12:operation soapAction="http://tempuri.org/IChat/ValidarPartidaJugadorExistenteChat" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="DevolverMensaje">
       <soap12:operation soapAction="http://tempuri.org/IChat/DevolverMensaje" style="document" />
       <wsdl:output>
@@ -1359,28 +1358,6 @@
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
-      <wsdl:output>
-        <soap12:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-  </wsdl:binding>
-  <wsdl:binding name="NetTcpBinding_IUsuariosEnLinea" type="tns:IUsuariosEnLinea">
-    <wsp:PolicyReference URI="#NetTcpBinding_IUsuariosEnLinea_policy" />
-    <soap12:binding transport="http://schemas.microsoft.com/soap/tcp" />
-    <wsdl:operation name="EntrarConCuenta">
-      <soap12:operation soapAction="http://tempuri.org/IUsuariosEnLinea/EntrarConCuenta" style="document" />
-      <wsdl:input>
-        <soap12:body use="literal" />
-      </wsdl:input>
-    </wsdl:operation>
-    <wsdl:operation name="SalirDelSistema">
-      <soap12:operation soapAction="http://tempuri.org/IUsuariosEnLinea/SalirDelSistema" style="document" />
-      <wsdl:input>
-        <soap12:body use="literal" />
-      </wsdl:input>
-    </wsdl:operation>
-    <wsdl:operation name="ComprobarJugador">
-      <soap12:operation soapAction="http://tempuri.org/IUsuariosEnLinea/ComprobarJugador" style="document" />
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>
@@ -1536,12 +1513,6 @@
       </wsa10:EndpointReference>
     </wsdl:port>
     <wsdl:port name="NetTcpBinding_IJuegoLanzamiento" binding="tns:NetTcpBinding_IJuegoLanzamiento">
-      <soap12:address location="net.tcp://192.168.38.118:5455/ServidorSorrySliders" />
-      <wsa10:EndpointReference>
-        <wsa10:Address>net.tcp://192.168.38.118:5455/ServidorSorrySliders</wsa10:Address>
-      </wsa10:EndpointReference>
-    </wsdl:port>
-    <wsdl:port name="NetTcpBinding_IUsuariosEnLinea" binding="tns:NetTcpBinding_IUsuariosEnLinea">
       <soap12:address location="net.tcp://192.168.38.118:5455/ServidorSorrySliders" />
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://192.168.38.118:5455/ServidorSorrySliders</wsa10:Address>
