@@ -388,7 +388,7 @@
     <value>There was a problem exiting the game</value>
   </data>
   <data name="msgErrorConexion" xml:space="preserve">
-    <value>There has been a connection error with the server</value>
+    <value>There's been an error with the communication to the server, the information wasn't send</value>
   </data>
   <data name="msgErrorConexionBDGuardarPuntajes" xml:space="preserve">
     <value>There was an error with the database connection to save the scores</value>
@@ -427,7 +427,7 @@
     <value>No permissions for the file</value>
   </data>
   <data name="msgEstadoDefectuoso" xml:space="preserve">
-    <value>There's been an error trying to send information to the server, try again later</value>
+    <value>There's been an error trying to send information to the server</value>
   </data>
   <data name="msgExpulsadoTitulo" xml:space="preserve">
     <value>EXPELLED FROM THE GAME</value>

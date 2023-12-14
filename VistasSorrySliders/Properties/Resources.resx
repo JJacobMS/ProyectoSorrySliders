@@ -391,7 +391,7 @@
     <value>Hubo un problema al salir de la partida</value>
   </data>
   <data name="msgErrorConexion" xml:space="preserve">
-    <value>Hubo un error de conexión con el servidor</value>
+    <value>Hubo un error con la comunicación en el servidor, no se pudo enviar la información</value>
   </data>
   <data name="msgErrorConexionBDGuardarPuntajes" xml:space="preserve">
     <value>Hubo un error con la conexión de base de datos para guardar los puntajes</value>
@@ -430,7 +430,7 @@
     <value>Sin permisos para el archivo</value>
   </data>
   <data name="msgEstadoDefectuoso" xml:space="preserve">
-    <value>Hubo un error al intentar enviar información al servidor, inténtelo de nuevo</value>
+    <value>Hubo un error al intentar enviar información al servidor</value>
   </data>
   <data name="msgExpulsadoTitulo" xml:space="preserve">
     <value>EXPULSADO DE LA PARTIDA</value>

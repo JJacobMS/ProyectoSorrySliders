@@ -880,7 +880,7 @@ namespace VistasSorrySliders.Properties {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Hubo un error de conexión con el servidor.
+        ///   Busca una cadena traducida similar a Hubo un error con la comunicación en el servidor, no se pudo enviar la información.
         /// </summary>
         public static string msgErrorConexion {
             get {
@@ -997,7 +997,7 @@ namespace VistasSorrySliders.Properties {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Hubo un error al intentar enviar información al servidor, inténtelo de nuevo.
+        ///   Busca una cadena traducida similar a Hubo un error al intentar enviar información al servidor.
         /// </summary>
         public static string msgEstadoDefectuoso {
             get {
