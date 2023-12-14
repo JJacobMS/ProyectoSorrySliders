@@ -381,8 +381,20 @@
   <data name="msgErrorBaseDatos" xml:space="preserve">
     <value>Hubo un error de conexión con la base de datos</value>
   </data>
+  <data name="msgErrorComunicacionDefectuosaGuardarPuntuaciones" xml:space="preserve">
+    <value>Hubo un error al enviar la información para guardar las puntuaciones</value>
+  </data>
+  <data name="msgErrorComunicacionDefectuosaJuego" xml:space="preserve">
+    <value>Hubo un error al enviar información a los otros jugadores, comience otra partida de juego</value>
+  </data>
+  <data name="msgErrorComunicacionDefectuosaSalida" xml:space="preserve">
+    <value>Hubo un problema al salir de la partida</value>
+  </data>
   <data name="msgErrorConexion" xml:space="preserve">
     <value>Hubo un error de conexión con el servidor</value>
+  </data>
+  <data name="msgErrorConexionBDGuardarPuntajes" xml:space="preserve">
+    <value>Hubo un error con la conexión de base de datos para guardar los puntajes</value>
   </data>
   <data name="msgErrorConsulta" xml:space="preserve">
     <value>Hubo un error con la consulta, por favor inténtelo más tarde</value>
@@ -455,6 +467,9 @@
   </data>
   <data name="msgPartidaRecuperarVacia" xml:space="preserve">
     <value>Hubo un error al recuperar la partida, por favor inténtelo más tarde</value>
+  </data>
+  <data name="msgPuntajesGuardadosCorrectamente" xml:space="preserve">
+    <value>Se guardaron correctamente los puntajes del juego</value>
   </data>
   <data name="msgSolicitudAmistadEnviada" xml:space="preserve">
     <value>Se ha enviado la solicitud de amistad correctamente</value>

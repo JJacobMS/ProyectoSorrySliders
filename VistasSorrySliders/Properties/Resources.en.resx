@@ -378,8 +378,20 @@
   <data name="msgErrorBaseDatos" xml:space="preserve">
     <value>There has been a connection error with the database</value>
   </data>
+  <data name="msgErrorComunicacionDefectuosaGuardarPuntuaciones" xml:space="preserve">
+    <value>There was an error sending the information to save the scores</value>
+  </data>
+  <data name="msgErrorComunicacionDefectuosaJuego" xml:space="preserve">
+    <value>There was an error sending information to other players, start another game match</value>
+  </data>
+  <data name="msgErrorComunicacionDefectuosaSalida" xml:space="preserve">
+    <value>There was a problem exiting the game</value>
+  </data>
   <data name="msgErrorConexion" xml:space="preserve">
     <value>There has been a connection error with the server</value>
+  </data>
+  <data name="msgErrorConexionBDGuardarPuntajes" xml:space="preserve">
+    <value>There was an error with the database connection to save the scores</value>
   </data>
   <data name="msgErrorConsulta" xml:space="preserve">
     <value>There's been an error with the query, please try later</value>
@@ -452,6 +464,9 @@
   </data>
   <data name="msgPartidaRecuperarVacia" xml:space="preserve">
     <value>There was an error recovering the game, please try again later</value>
+  </data>
+  <data name="msgPuntajesGuardadosCorrectamente" xml:space="preserve">
+    <value>Game scores successfully saved</value>
   </data>
   <data name="msgSolicitudAmistadEnviada" xml:space="preserve">
     <value>Friend request has been sent successfully</value>
