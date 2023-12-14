@@ -1,4 +1,5 @@
-﻿using System;
+﻿using log4net;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -465,7 +466,7 @@ namespace VistasSorrySliders
         {
             SalirAlMenu();
         }
-        public void SalirAlMenu() 
+        public void SalirAlMenu()
         {
             Logger log = new Logger(this.GetType());
             try
@@ -484,7 +485,8 @@ namespace VistasSorrySliders
             {
                 log.LogWarn("Se agoto el tiempo de espera del servidor", ex);
             }
-            this.NavigationService.GoBack();
+            MenuPrincipalPagina menu = new MenuPrincipalPagina(_cuentaUsuario);
+            this.NavigationService.Navigate(menu);
         }
 
         private void PreviewMouseDownSolicitudAmistad(object sender, MouseButtonEventArgs e)
@@ -514,7 +516,7 @@ namespace VistasSorrySliders
             Button boton = sender as Button;
             CuentaSet cuentaAmigo = boton.CommandParameter as CuentaSet;
             EliminarAmistad(cuentaAmigo);
-        }
+         }
 
         private void PreviewMouseDownAceptarNotificacion(object sender, MouseButtonEventArgs e)
         {
@@ -688,6 +690,10 @@ namespace VistasSorrySliders
                     _ = MostrarMensaje(Properties.Resources.msgAceptarNotificacion);
                     EliminarNotificacion(notificacion, true);
                     return;
+                case Constantes.OPERACION_EXITOSA_VACIA:
+                    _ = MostrarMensaje("MensajeNuevo"+"No existe la notificacion");
+                    EliminarNotificacion(notificacion, true);
+                    return;
                 default:
                     Utilidades.MostrarMensajesError(resultado);
                     SalirAlMenu();
@@ -730,7 +736,7 @@ namespace VistasSorrySliders
                     RecargarPantalla();
                     return;
                 case Constantes.OPERACION_EXITOSA_VACIA:
-                    Utilidades.MostrarUnMensajeError(Properties.Resources.msgAmistadEliminarError);
+                    Utilidades.MostrarUnMensajeError("MensajeNuevo"+"Hubo un error al eliminar la notificacion, la notificacion ya se encuentra eliminada");
                     break;
                 default:
                     Utilidades.MostrarMensajesError(resultado);
@@ -833,6 +839,7 @@ namespace VistasSorrySliders
 
         public void RecuperarNotificacion()
         {
+            Console.WriteLine("Notificaciones");
             RecargarPantalla();
         }
 
