@@ -572,6 +572,36 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="ReingresarChat">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="uid" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="correo" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ReingresarChatResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q40="http://schemas.datacontract.org/2004/07/DatosSorrySliders" minOccurs="0" name="ReingresarChatResult" type="q40:Constantes" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ValidarPartidaJugadorExistenteChat">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="uid" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="correo" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ValidarPartidaJugadorExistenteChatResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q41="http://schemas.datacontract.org/2004/07/DatosSorrySliders" minOccurs="0" name="ValidarPartidaJugadorExistenteChatResult" type="q41:Constantes" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="DevolverMensaje">
     <xs:complexType>
       <xs:sequence>
@@ -641,7 +671,7 @@
       <xs:sequence>
         <xs:element minOccurs="0" name="codigoPartida" nillable="true" type="xs:string" />
         <xs:element minOccurs="0" name="correo" nillable="true" type="xs:string" />
-        <xs:element xmlns:q40="http://schemas.datacontract.org/2004/07/DatosSorrySliders" minOccurs="0" name="peones" nillable="true" type="q40:PeonesTablero" />
+        <xs:element xmlns:q42="http://schemas.datacontract.org/2004/07/DatosSorrySliders" minOccurs="0" name="peones" nillable="true" type="q42:PeonesTablero" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -695,7 +725,7 @@
   <xs:element name="CambiarPosicionPeonesTableroYContinuar">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q41="http://schemas.datacontract.org/2004/07/DatosSorrySliders" minOccurs="0" name="peones" nillable="true" type="q41:PeonesTablero" />
+        <xs:element xmlns:q43="http://schemas.datacontract.org/2004/07/DatosSorrySliders" minOccurs="0" name="peones" nillable="true" type="q43:PeonesTablero" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -768,7 +798,7 @@
   <xs:element name="ActualizarGanadorResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q42="http://schemas.datacontract.org/2004/07/DatosSorrySliders" minOccurs="0" name="ActualizarGanadorResult" type="q42:Constantes" />
+        <xs:element xmlns:q44="http://schemas.datacontract.org/2004/07/DatosSorrySliders" minOccurs="0" name="ActualizarGanadorResult" type="q44:Constantes" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -776,8 +806,8 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="uid" nillable="true" type="xs:string" />
-        <xs:element xmlns:q43="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="arrayPosiciones" nillable="true" type="q43:ArrayOfint" />
-        <xs:element xmlns:q44="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="arrayNickname" nillable="true" type="q44:ArrayOfstring" />
+        <xs:element xmlns:q45="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="arrayPosiciones" nillable="true" type="q45:ArrayOfint" />
+        <xs:element xmlns:q46="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="arrayNickname" nillable="true" type="q46:ArrayOfstring" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -826,8 +856,8 @@
   <xs:element name="CambiarPagina">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q45="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="arrayPosiciones" nillable="true" type="q45:ArrayOfint" />
-        <xs:element xmlns:q46="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="arrayNickname" nillable="true" type="q46:ArrayOfstring" />
+        <xs:element xmlns:q47="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="arrayPosiciones" nillable="true" type="q47:ArrayOfint" />
+        <xs:element xmlns:q48="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="arrayNickname" nillable="true" type="q48:ArrayOfstring" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

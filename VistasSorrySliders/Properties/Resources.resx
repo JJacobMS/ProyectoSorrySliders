@@ -331,7 +331,7 @@
     <value>No hay amigos</value>
   </data>
   <data name="msgAmistadEliminarError" xml:space="preserve">
-    <value>Hubo un error al eliminar la solicitud de amistad, por favor inténtelo más tarde</value>
+    <value>Hubo un error al eliminar la amistad, esta ya se encuentra eliminada</value>
   </data>
   <data name="msgAmistadGuardarError" xml:space="preserve">
     <value>Hubo un error al enviar la solicitud de amistad, por favor inténtelo más tarde</value>
@@ -399,6 +399,9 @@
   <data name="msgErrorImagenPermisos" xml:space="preserve">
     <value>No se tienen permisos para acceder al archivo</value>
   </data>
+  <data name="msgErrorNotificacionEliminar" xml:space="preserve">
+    <value>Hubo un error al eliminar la notificación, esta ya se encuentra eliminada</value>
+  </data>
   <data name="msgErrorTamañoImagen" xml:space="preserve">
     <value>La imagen supera el límite de 400 KB</value>
   </data>
@@ -446,6 +449,9 @@
   </data>
   <data name="msgNotificacionRecuperar" xml:space="preserve">
     <value>No hay notificaciones pendientes</value>
+  </data>
+  <data name="msgPartidaNoEncontradaServidorJuego" xml:space="preserve">
+    <value>Su partida no se encuentra en el servidor, no es posible continuar el juego</value>
   </data>
   <data name="msgPartidaRecuperarVacia" xml:space="preserve">
     <value>Hubo un error al recuperar la partida, por favor inténtelo más tarde</value>

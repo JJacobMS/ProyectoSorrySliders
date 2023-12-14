@@ -328,7 +328,7 @@
     <value>There are no friends</value>
   </data>
   <data name="msgAmistadEliminarError" xml:space="preserve">
-    <value>There was an error deleting the friend request, please try again later</value>
+    <value>There was an error deleting the friendship, it is already deleted</value>
   </data>
   <data name="msgAmistadGuardarError" xml:space="preserve">
     <value>There was an error sending the friend request, please try again later</value>
@@ -396,6 +396,9 @@
   <data name="msgErrorImagenPermisos" xml:space="preserve">
     <value>You don't have permissions to access the file</value>
   </data>
+  <data name="msgErrorNotificacionEliminar" xml:space="preserve">
+    <value>There was an error deleting the notification, it is now deleted</value>
+  </data>
   <data name="msgErrorTamañoImagen" xml:space="preserve">
     <value>The image exceeds the limit of 400KB</value>
   </data>
@@ -443,6 +446,9 @@
   </data>
   <data name="msgNotificacionRecuperar" xml:space="preserve">
     <value>There are no pending notifications</value>
+  </data>
+  <data name="msgPartidaNoEncontradaServidorJuego" xml:space="preserve">
+    <value>Your game is not on the server, it is not possible to continue the game</value>
   </data>
   <data name="msgPartidaRecuperarVacia" xml:space="preserve">
     <value>There was an error recovering the game, please try again later</value>

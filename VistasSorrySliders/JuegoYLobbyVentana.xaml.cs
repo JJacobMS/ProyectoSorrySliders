@@ -83,9 +83,9 @@ namespace VistasSorrySliders
         {
             try
             {
+                SalirCuentaRegistroPartidaBD();
                 EliminarContexto?.Invoke();
                 EliminarDiccionariosRestantes();
-                SalirCuentaRegistroPartidaBD();
                 IrMenuUsuario();
             }
             catch (CommunicationException ex)
@@ -187,6 +187,23 @@ namespace VistasSorrySliders
                 log.LogWarn("Se agoto el tiempo de espera del servidor", ex);
             }
             throw new CommunicationException();
+        }
+
+        public void SalirMenuPrincipalPorPartidaNoEncontrada()
+        {
+            DesuscribirseDeCerrarVentana();
+            try
+            {
+                SalirCuentaRegistroPartidaBD();
+                IrMenuUsuario();
+            }
+            catch (CommunicationException ex)
+            {
+                Logger log = new Logger(this.GetType());
+                log.LogWarn("Error de Comunicación con el Servidor", ex);
+                Utilidades.MostrarInicioSesion();
+            }
+            Close();
         }
 
         public void IrMenuUsuario()

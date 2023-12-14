@@ -700,7 +700,7 @@ namespace VistasSorrySliders.Properties {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Hubo un error al eliminar la solicitud de amistad, por favor inténtelo más tarde.
+        ///   Busca una cadena traducida similar a Hubo un error al eliminar la amistad, esta ya se encuentra eliminada.
         /// </summary>
         public static string msgAmistadEliminarError {
             get {
@@ -907,6 +907,15 @@ namespace VistasSorrySliders.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Hubo un error al eliminar la notificación, esta ya se encuentra eliminada.
+        /// </summary>
+        public static string msgErrorNotificacionEliminar {
+            get {
+                return ResourceManager.GetString("msgErrorNotificacionEliminar", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a La imagen supera el límite de 400 KB.
         /// </summary>
         public static string msgErrorTamañoImagen {
@@ -1047,6 +1056,15 @@ namespace VistasSorrySliders.Properties {
         public static string msgNotificacionRecuperar {
             get {
                 return ResourceManager.GetString("msgNotificacionRecuperar", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Su partida no se encuentra en el servidor, no es posible continuar el juego.
+        /// </summary>
+        public static string msgPartidaNoEncontradaServidorJuego {
+            get {
+                return ResourceManager.GetString("msgPartidaNoEncontradaServidorJuego", resourceCulture);
             }
         }
         

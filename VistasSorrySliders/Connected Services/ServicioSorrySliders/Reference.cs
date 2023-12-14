@@ -2148,6 +2148,18 @@ namespace VistasSorrySliders.ServicioSorrySliders {
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IChat/SalirChatListaJugadores")]
         System.Threading.Tasks.Task SalirChatListaJugadoresAsync(string uid, string correo);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IChat/ReingresarChat", ReplyAction="http://tempuri.org/IChat/ReingresarChatResponse")]
+        VistasSorrySliders.ServicioSorrySliders.Constantes ReingresarChat(string uid, string correo);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IChat/ReingresarChat", ReplyAction="http://tempuri.org/IChat/ReingresarChatResponse")]
+        System.Threading.Tasks.Task<VistasSorrySliders.ServicioSorrySliders.Constantes> ReingresarChatAsync(string uid, string correo);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IChat/ValidarPartidaJugadorExistenteChat", ReplyAction="http://tempuri.org/IChat/ValidarPartidaJugadorExistenteChatResponse")]
+        VistasSorrySliders.ServicioSorrySliders.Constantes ValidarPartidaJugadorExistenteChat(string uid, string correo);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IChat/ValidarPartidaJugadorExistenteChat", ReplyAction="http://tempuri.org/IChat/ValidarPartidaJugadorExistenteChatResponse")]
+        System.Threading.Tasks.Task<VistasSorrySliders.ServicioSorrySliders.Constantes> ValidarPartidaJugadorExistenteChatAsync(string uid, string correo);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -2221,6 +2233,22 @@ namespace VistasSorrySliders.ServicioSorrySliders {
         
         public System.Threading.Tasks.Task SalirChatListaJugadoresAsync(string uid, string correo) {
             return base.Channel.SalirChatListaJugadoresAsync(uid, correo);
+        }
+        
+        public VistasSorrySliders.ServicioSorrySliders.Constantes ReingresarChat(string uid, string correo) {
+            return base.Channel.ReingresarChat(uid, correo);
+        }
+        
+        public System.Threading.Tasks.Task<VistasSorrySliders.ServicioSorrySliders.Constantes> ReingresarChatAsync(string uid, string correo) {
+            return base.Channel.ReingresarChatAsync(uid, correo);
+        }
+        
+        public VistasSorrySliders.ServicioSorrySliders.Constantes ValidarPartidaJugadorExistenteChat(string uid, string correo) {
+            return base.Channel.ValidarPartidaJugadorExistenteChat(uid, correo);
+        }
+        
+        public System.Threading.Tasks.Task<VistasSorrySliders.ServicioSorrySliders.Constantes> ValidarPartidaJugadorExistenteChatAsync(string uid, string correo) {
+            return base.Channel.ValidarPartidaJugadorExistenteChatAsync(uid, correo);
         }
     }
     

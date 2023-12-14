@@ -110,7 +110,7 @@ namespace VistasSorrySliders
             catch (CommunicationObjectFaultedException ex)
             {
                 Utilidades.MostrarUnMensajeError(Properties.Resources.msgEstadoDefectuoso);
-                log.LogError("Se ha perdido la conexión previa", ex);
+                log.LogWarn("Se ha perdido la conexión previa", ex);
             }
             catch (CommunicationException ex)
             {
@@ -124,36 +124,136 @@ namespace VistasSorrySliders
             }
             throw new CommunicationException();
         }
-
+        private async Task RevivirClienteProxyChat()
+        {
+            await Task.Delay(1500);
+            Logger log = new Logger(this.GetType());
+            Constantes respuesta;
+            try
+            {
+                InstanceContext contexto = new InstanceContext(this);
+                _proxyChat = new ChatClient(contexto);
+                respuesta = _proxyChat.ReingresarChat(_partida.CodigoPartida.ToString(), _cuentaUsuario.CorreoElectronico);
+            }
+            catch (CommunicationObjectFaultedException ex)
+            {
+                respuesta = Constantes.ERROR_CONEXION_DEFECTUOSA;
+                log.LogWarn("Se ha perdido la conexión previa", ex);
+            }
+            catch (CommunicationException ex)
+            {
+                respuesta = Constantes.ERROR_CONEXION_SERVIDOR;
+                log.LogWarn("Error de Comunicación con el Servidor", ex);
+            }
+            catch (TimeoutException ex)
+            {
+                respuesta = Constantes.ERROR_TIEMPO_ESPERA_SERVIDOR;
+                log.LogWarn("Se agoto el tiempo de espera del servidor", ex);
+            }
+            switch (respuesta)
+            {
+                case Constantes.OPERACION_EXITOSA:
+                    HabilitarBotones();
+                    break;
+                case Constantes.OPERACION_EXITOSA_VACIA:
+                    Utilidades.MostrarUnMensajeError(Properties.Resources.msgPartidaNoEncontradaServidorJuego);
+                    _juegoYLobbyVentana.SalirMenuPrincipalPorPartidaNoEncontrada();
+                    break;
+                default:
+                    Utilidades.MostrarMensajesError(respuesta);
+                    Utilidades.SalirHastaInicioSesionDesdeJuegoYLobbyVentana(this);
+                    break;
+            }
+        }
+        private bool PartidaExistenteServidor()
+        {
+            Logger log = new Logger(this.GetType());
+            Constantes respuesta;
+            try
+            {
+                respuesta = _proxyChat.ValidarPartidaJugadorExistenteChat(_partida.CodigoPartida.ToString(), _cuentaUsuario.CorreoElectronico);
+            }
+            catch (CommunicationObjectFaultedException ex)
+            {
+                DeshabilitarBotones();
+                log.LogWarn("Se ha perdido la conexión previa", ex);
+                respuesta = Constantes.ERROR_CONEXION_DEFECTUOSA;
+                _ = RevivirClienteProxyChat();
+            }
+            catch (CommunicationException ex)
+            {
+                DeshabilitarBotones();
+                respuesta = Constantes.ERROR_CONEXION_SERVIDOR;
+                log.LogWarn("Error de Comunicación con el Servidor", ex);
+                _ = RevivirClienteProxyChat();
+            }
+            catch (TimeoutException ex)
+            {
+                DeshabilitarBotones();
+                respuesta = Constantes.ERROR_TIEMPO_ESPERA_SERVIDOR;
+                log.LogWarn("Se agoto el tiempo de espera del servidor", ex);
+            }
+            switch (respuesta)
+            {
+                case Constantes.OPERACION_EXITOSA:
+                    return true;
+                case Constantes.OPERACION_EXITOSA_VACIA:
+                    Utilidades.MostrarUnMensajeError(Properties.Resources.msgPartidaNoEncontradaServidorJuego);
+                    _juegoYLobbyVentana.SalirMenuPrincipalPorPartidaNoEncontrada();
+                    break;
+                case Constantes.ERROR_TIEMPO_ESPERA_SERVIDOR:
+                    Utilidades.MostrarMensajesError(respuesta);
+                    Utilidades.SalirHastaInicioSesionDesdeJuegoYLobbyVentana(this);
+                    break;
+            }
+            return false;
+        }
+        private void DeshabilitarBotones()
+        {
+            btnEnviar.IsEnabled = false;
+            brdReconectando.Visibility = Visibility.Visible;
+            dtGridJugadores.IsEnabled = false;
+        }
+        private void HabilitarBotones()
+        {
+            btnEnviar.IsEnabled = true;
+            brdReconectando.Visibility = Visibility.Collapsed;
+            dtGridJugadores.IsEnabled = true;
+        }
         private void ClickEnviarMensaje(object sender, RoutedEventArgs e)
         {
-            if(txtBoxMensajeChat.Text.Length > 0) 
+            if(!string.IsNullOrWhiteSpace(txtBoxMensajeChat.Text)) 
             {
+                if (!PartidaExistenteServidor())
+                {
+                    return;
+                }
                 Logger log = new Logger(this.GetType());
                 try
                 {
                     string codigoPartida = _partida.CodigoPartida + "";
                     _proxyChat.ChatJuego(codigoPartida, _cuentaUsuario.Nickname, txtBoxMensajeChat.Text);
-
                 }
                 catch (CommunicationObjectFaultedException ex)
                 {
-                    Utilidades.MostrarUnMensajeError(Properties.Resources.msgEstadoDefectuoso);
-                    log.LogError("Se ha perdido la conexión previa", ex);
+                    DeshabilitarBotones();
+                    log.LogWarn("Se ha perdido la conexión previa", ex);
+                    _ = RevivirClienteProxyChat();
                 }
                 catch (CommunicationException ex)
                 {
+                    DeshabilitarBotones();
                     log.LogWarn("Error de Comunicación con el Servidor", ex);
-                    Utilidades.MostrarUnMensajeError(Properties.Resources.msgErrorConexion);
+                    _ = RevivirClienteProxyChat();
                 }
                 catch (TimeoutException ex)
                 {
                     Utilidades.MostrarUnMensajeError(Properties.Resources.msgErrorTiempoEsperaServidor);
                     log.LogWarn("Se agoto el tiempo de espera del servidor", ex);
+                    Utilidades.SalirHastaInicioSesionDesdeJuegoYLobbyVentana(this);
                 }
                 txtBoxMensajeChat.Text = "";
             }
-            
         }
 
         private void ClickSalirPartida(object sender, RoutedEventArgs e)
@@ -207,6 +307,10 @@ namespace VistasSorrySliders
 
         private void EnviarJugadorExpulsado(JugadorLista jugador)
         {
+            if (!PartidaExistenteServidor())
+            {
+                return;
+            }
             Logger log = new Logger(this.GetType());
             try
             {
@@ -214,18 +318,21 @@ namespace VistasSorrySliders
             }
             catch (CommunicationObjectFaultedException ex)
             {
-                Utilidades.MostrarUnMensajeError(Properties.Resources.msgEstadoDefectuoso);
-                log.LogError("Se ha perdido la conexión previa", ex);
+                DeshabilitarBotones();
+                log.LogWarn("Se ha perdido la conexión previa", ex);
+                _ = RevivirClienteProxyChat();
             }
             catch (CommunicationException ex)
             {
-                Utilidades.MostrarUnMensajeError(Properties.Resources.msgErrorConexion);
+                DeshabilitarBotones();
                 log.LogWarn("Error de Comunicación con el Servidor", ex);
+                _ = RevivirClienteProxyChat();
             }
             catch (TimeoutException ex)
             {
                 Utilidades.MostrarUnMensajeError(Properties.Resources.msgErrorTiempoEsperaServidor);
                 log.LogWarn("Se agoto el tiempo de espera del servidor", ex);
+                Utilidades.SalirHastaInicioSesionDesdeJuegoYLobbyVentana(this);
             }
         }
 

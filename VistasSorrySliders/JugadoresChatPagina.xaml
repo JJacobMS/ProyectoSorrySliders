@@ -143,6 +143,13 @@
                                 Style="{StaticResource estiloBtnTableroAzul}" Content="{x:Static p:Resources.btnEnviar}" Click="ClickEnviarMensaje"/>
                     </Grid>
                 </Border>
+                <Border x:Name="brdReconectando" BorderBrush="#5B0F16" BorderThickness="6" Height="65" Width="180" Visibility="Collapsed"
+                        VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="20" CornerRadius="20" Background="#F8D7DA">
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                        <Image Source="/Recursos/recargar.png" Width="40" Margin="0,0,10,0"/>
+                        <TextBlock FontFamily="{StaticResource FuentesTexto}" VerticalAlignment="Center" FontSize="15">Reconectando</TextBlock>
+                    </StackPanel>
+                </Border>
             </Grid>
         </Viewbox>
     </Grid>

@@ -421,6 +421,18 @@
   <wsdl:message name="IChat_SalirChatListaJugadores_InputMessage">
     <wsdl:part name="parameters" element="tns:SalirChatListaJugadores" />
   </wsdl:message>
+  <wsdl:message name="IChat_ReingresarChat_InputMessage">
+    <wsdl:part name="parameters" element="tns:ReingresarChat" />
+  </wsdl:message>
+  <wsdl:message name="IChat_ReingresarChat_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ReingresarChatResponse" />
+  </wsdl:message>
+  <wsdl:message name="IChat_ValidarPartidaJugadorExistenteChat_InputMessage">
+    <wsdl:part name="parameters" element="tns:ValidarPartidaJugadorExistenteChat" />
+  </wsdl:message>
+  <wsdl:message name="IChat_ValidarPartidaJugadorExistenteChat_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ValidarPartidaJugadorExistenteChatResponse" />
+  </wsdl:message>
   <wsdl:message name="IChat_DevolverMensaje_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:DevolverMensaje" />
   </wsdl:message>
@@ -729,6 +741,14 @@
     </wsdl:operation>
     <wsdl:operation name="SalirChatListaJugadores">
       <wsdl:input wsaw:Action="http://tempuri.org/IChat/SalirChatListaJugadores" message="tns:IChat_SalirChatListaJugadores_InputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ReingresarChat">
+      <wsdl:input wsaw:Action="http://tempuri.org/IChat/ReingresarChat" message="tns:IChat_ReingresarChat_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IChat/ReingresarChatResponse" message="tns:IChat_ReingresarChat_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ValidarPartidaJugadorExistenteChat">
+      <wsdl:input wsaw:Action="http://tempuri.org/IChat/ValidarPartidaJugadorExistenteChat" message="tns:IChat_ValidarPartidaJugadorExistenteChat_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IChat/ValidarPartidaJugadorExistenteChatResponse" message="tns:IChat_ValidarPartidaJugadorExistenteChat_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="DevolverMensaje">
       <wsdl:output wsaw:Action="http://tempuri.org/IChat/DevolverMensaje" message="tns:IChat_DevolverMensaje_OutputCallbackMessage" />
@@ -1259,6 +1279,24 @@
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="ReingresarChat">
+      <soap12:operation soapAction="http://tempuri.org/IChat/ReingresarChat" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ValidarPartidaJugadorExistenteChat">
+      <soap12:operation soapAction="http://tempuri.org/IChat/ValidarPartidaJugadorExistenteChat" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="DevolverMensaje">
       <soap12:operation soapAction="http://tempuri.org/IChat/DevolverMensaje" style="document" />
