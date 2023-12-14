@@ -1,18 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
-<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/ServidorSorrySliders" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/ServidorSorrySliders" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-  <xs:complexType name="ArrayOfPuntuacion">
+<xs:schema xmlns:tns="http://schemas.microsoft.com/2003/10/Serialization/Arrays" elementFormDefault="qualified" targetNamespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://192.168.38.235:5454/?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/System" />
+  <xs:complexType name="ArrayOfKeyValueOfintArrayOfValueTupleOfdoubledoubleU6ho3Bhd">
+    <xs:annotation>
+      <xs:appinfo>
+        <IsDictionary xmlns="http://schemas.microsoft.com/2003/10/Serialization/">true</IsDictionary>
+      </xs:appinfo>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="KeyValueOfintArrayOfValueTupleOfdoubledoubleU6ho3Bhd">
+        <xs:complexType>
           <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="Puntuacion" nillable="true" type="tns:Puntuacion" />
+            <xs:element name="Key" type="xs:int" />
+            <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/System" name="Value" nillable="true" type="q1:ArrayOfValueTupleOfdoubledouble" />
           </xs:sequence>
         </xs:complexType>
-  <xs:element name="ArrayOfPuntuacion" nillable="true" type="tns:ArrayOfPuntuacion" />
-  <xs:complexType name="Puntuacion">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="Nickname" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="NumeroPartidasGanadas" type="xs:int" />
-      <xs:element minOccurs="0" name="_nickname" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="_numeroPartidasGanadas" type="xs:int" />
+      </xs:element>
     </xs:sequence>
   </xs:complexType>
-  <xs:element name="Puntuacion" nillable="true" type="tns:Puntuacion" />
+  <xs:element name="ArrayOfKeyValueOfintArrayOfValueTupleOfdoubledoubleU6ho3Bhd" nillable="true" type="tns:ArrayOfKeyValueOfintArrayOfValueTupleOfdoubledoubleU6ho3Bhd" />
+  <xs:complexType name="ArrayOfint">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="int" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfint" nillable="true" type="tns:ArrayOfint" />
+  <xs:complexType name="ArrayOfstring">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="string" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfstring" nillable="true" type="tns:ArrayOfstring" />
 </xs:schema>
