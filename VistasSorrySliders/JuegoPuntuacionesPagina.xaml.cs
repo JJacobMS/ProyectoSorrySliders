@@ -313,7 +313,7 @@ namespace VistasSorrySliders
             
             for (int i = 0; i < puntuaciones.Count; i++)
             {
-                _listaBotonAzul[i].Content = puntuaciones[i];
+                _listaBotonAzul[i].Content = 8;//puntuaciones[i];
             }
         }
 
