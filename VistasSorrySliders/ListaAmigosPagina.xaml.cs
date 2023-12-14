@@ -83,7 +83,7 @@ namespace VistasSorrySliders
             catch (CommunicationObjectFaultedException ex)
             {
                 resultado = Constantes.ERROR_CONEXION_DEFECTUOSA;
-                log.LogError("Se ha perdido la conexión previa", ex);
+                log.LogWarn("Se ha perdido la conexión previa", ex);
             }
             catch (CommunicationException ex)
             {
@@ -145,7 +145,7 @@ namespace VistasSorrySliders
             catch (CommunicationObjectFaultedException ex)
             {
                 resultado = Constantes.ERROR_CONEXION_DEFECTUOSA;
-                log.LogError("Se ha perdido la conexión previa", ex);
+                log.LogWarn("Se ha perdido la conexión previa", ex);
             }
             catch (CommunicationException ex)
             {
@@ -253,7 +253,7 @@ namespace VistasSorrySliders
             catch (CommunicationObjectFaultedException ex)
             {
                 resultado = Constantes.ERROR_CONEXION_DEFECTUOSA;
-                log.LogError("Se ha perdido la conexión previa", ex);
+                log.LogWarn("Se ha perdido la conexión previa", ex);
             }
             catch (CommunicationException ex)
             {
@@ -327,7 +327,7 @@ namespace VistasSorrySliders
             catch (CommunicationObjectFaultedException ex)
             {
                 resultado = Constantes.ERROR_CONEXION_DEFECTUOSA;
-                log.LogError("Se ha perdido la conexión previa", ex);
+                log.LogWarn("Se ha perdido la conexión previa", ex);
             }
             catch (CommunicationException ex)
             {
@@ -363,7 +363,7 @@ namespace VistasSorrySliders
             }
             catch (CommunicationObjectFaultedException ex)
             {
-                log.LogError("Se ha perdido la conexión previa", ex);
+                log.LogWarn("Se ha perdido la conexión previa", ex);
             }
             catch (CommunicationException ex)
             {
@@ -392,7 +392,7 @@ namespace VistasSorrySliders
             catch (CommunicationObjectFaultedException ex)
             {
                 resultado = Constantes.ERROR_CONEXION_DEFECTUOSA;
-                log.LogError("Se ha perdido la conexión previa", ex);
+                log.LogWarn("Se ha perdido la conexión previa", ex);
             }
             catch (CommunicationException ex)
             {

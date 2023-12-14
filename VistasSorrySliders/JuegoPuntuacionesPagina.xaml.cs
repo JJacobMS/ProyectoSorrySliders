@@ -91,7 +91,7 @@ namespace VistasSorrySliders
             catch (CommunicationObjectFaultedException ex)
             {
                 Utilidades.MostrarUnMensajeError(Properties.Resources.msgEstadoDefectuoso);
-                log.LogError("Se ha perdido la conexión previa", ex);
+                log.LogWarn("Se ha perdido la conexión previa", ex);
             }
             catch (CommunicationException ex)
             {
@@ -516,7 +516,7 @@ namespace VistasSorrySliders
             catch (CommunicationObjectFaultedException ex)
             {
                 respuesta = Constantes.ERROR_CONEXION_DEFECTUOSA;
-                log.LogError("Se ha perdido la conexión previa", ex);
+                log.LogWarn("Se ha perdido la conexión previa", ex);
             }
             catch (CommunicationException ex)
             {
@@ -656,7 +656,7 @@ namespace VistasSorrySliders
             catch (CommunicationObjectFaultedException ex)
             {
                 Utilidades.MostrarUnMensajeError(Properties.Resources.msgEstadoDefectuoso);
-                log.LogError("Se ha perdido la conexión previa", ex);
+                log.LogWarn("Se ha perdido la conexión previa", ex);
             }
             catch (CommunicationException ex)
             {
@@ -767,7 +767,7 @@ namespace VistasSorrySliders
             catch (CommunicationObjectFaultedException ex)
             {
                 Utilidades.MostrarUnMensajeError(Properties.Resources.msgEstadoDefectuoso);
-                log.LogError("Se ha perdido la conexión previa", ex);
+                log.LogWarn("Se ha perdido la conexión previa", ex);
             }
             catch (CommunicationException ex)
             {
@@ -897,7 +897,7 @@ namespace VistasSorrySliders
             catch (CommunicationObjectFaultedException ex)
             {
                 Utilidades.MostrarUnMensajeError(Properties.Resources.msgEstadoDefectuoso);
-                log.LogError("Se ha perdido la conexión previa", ex);
+                log.LogWarn("Se ha perdido la conexión previa", ex);
             }
             catch (CommunicationException ex)
             {
@@ -922,7 +922,7 @@ namespace VistasSorrySliders
             catch (CommunicationObjectFaultedException ex)
             {
                 Utilidades.MostrarUnMensajeError(Properties.Resources.msgEstadoDefectuoso);
-                log.LogError("Se ha perdido la conexión previa", ex);
+                log.LogWarn("Se ha perdido la conexión previa", ex);
             }
             catch (CommunicationException ex)
             {
@@ -948,7 +948,7 @@ namespace VistasSorrySliders
             catch (CommunicationObjectFaultedException ex)
             {
                 Utilidades.MostrarUnMensajeError(Properties.Resources.msgEstadoDefectuoso);
-                log.LogError("Se ha perdido la conexión previa", ex);
+                log.LogWarn("Se ha perdido la conexión previa", ex);
             }
             catch (CommunicationException ex)
             {

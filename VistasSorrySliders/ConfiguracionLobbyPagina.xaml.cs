@@ -100,6 +100,9 @@ namespace VistasSorrySliders
             Utilidades.MostrarMensajesError(respuesta);
             switch (respuesta)
             {
+                case Constantes.ERROR_CONEXION_BD:
+                    Utilidades.MostrarUnMensajeError();
+                    break;
                 case Constantes.OPERACION_EXITOSA:
                     CrearVentanaLobby(_cuentaUsuario, codigoPartida);
                     break;
