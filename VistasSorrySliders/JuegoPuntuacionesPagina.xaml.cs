@@ -631,6 +631,7 @@ namespace VistasSorrySliders
             _contadorAvisarTurno = 0;
             _turnoActualJuego = 0;
             _jugadoresLanzamiento = jugadores;
+            AsignarTurno();
             InicializarLabels();
             InicializarDados();
             ActualizarEstadoJugadores(jugadores);

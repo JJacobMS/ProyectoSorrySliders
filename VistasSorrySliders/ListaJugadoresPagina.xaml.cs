@@ -490,8 +490,12 @@ namespace VistasSorrySliders
             {
                 log.LogWarn("Se agoto el tiempo de espera del servidor", ex);
             }
-            MenuPrincipalPagina menu = new MenuPrincipalPagina(_cuentaUsuario);
-            this.NavigationService.Navigate(menu);
+            if (this.NavigationService != null)
+            {
+                MenuPrincipalPagina menu = new MenuPrincipalPagina(_cuentaUsuario);
+                this.NavigationService.Navigate(menu);
+            }
+           
         }
 
         private void PreviewMouseDownSolicitudAmistad(object sender, MouseButtonEventArgs e)

@@ -158,12 +158,12 @@
   </wsp:Policy>
   <wsdl:types>
     <xsd:schema targetNamespace="http://tempuri.org/Imports">
-      <xsd:import schemaLocation="http://192.168.38.235:5454/?xsd=xsd0" namespace="http://tempuri.org/" />
-      <xsd:import schemaLocation="http://192.168.38.235:5454/?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
-      <xsd:import schemaLocation="http://192.168.38.235:5454/?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/DatosSorrySliders" />
-      <xsd:import schemaLocation="http://192.168.38.235:5454/?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/System" />
-      <xsd:import schemaLocation="http://192.168.38.235:5454/?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/ServidorSorrySliders" />
-      <xsd:import schemaLocation="http://192.168.38.235:5454/?xsd=xsd5" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+      <xsd:import schemaLocation="http://192.168.38.118:5454/?xsd=xsd0" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="http://192.168.38.118:5454/?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://192.168.38.118:5454/?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/DatosSorrySliders" />
+      <xsd:import schemaLocation="http://192.168.38.118:5454/?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/System" />
+      <xsd:import schemaLocation="http://192.168.38.118:5454/?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/ServidorSorrySliders" />
+      <xsd:import schemaLocation="http://192.168.38.118:5454/?xsd=xsd5" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="IInicioSesion_VerificarExistenciaCorreoCuenta_InputMessage">
@@ -1447,81 +1447,81 @@
   </wsdl:binding>
   <wsdl:service name="ServicioComunicacionSorrySliders">
     <wsdl:port name="NetTcpBinding_IInicioSesion" binding="tns:NetTcpBinding_IInicioSesion">
-      <soap12:address location="net.tcp://192.168.38.235:5455/ServidorSorrySliders" />
+      <soap12:address location="net.tcp://192.168.38.118:5455/ServidorSorrySliders" />
       <wsa10:EndpointReference>
-        <wsa10:Address>net.tcp://192.168.38.235:5455/ServidorSorrySliders</wsa10:Address>
+        <wsa10:Address>net.tcp://192.168.38.118:5455/ServidorSorrySliders</wsa10:Address>
       </wsa10:EndpointReference>
     </wsdl:port>
     <wsdl:port name="NetTcpBinding_IMenuPrincipal" binding="tns:NetTcpBinding_IMenuPrincipal">
-      <soap12:address location="net.tcp://192.168.38.235:5455/ServidorSorrySliders" />
+      <soap12:address location="net.tcp://192.168.38.118:5455/ServidorSorrySliders" />
       <wsa10:EndpointReference>
-        <wsa10:Address>net.tcp://192.168.38.235:5455/ServidorSorrySliders</wsa10:Address>
+        <wsa10:Address>net.tcp://192.168.38.118:5455/ServidorSorrySliders</wsa10:Address>
       </wsa10:EndpointReference>
     </wsdl:port>
     <wsdl:port name="NetTcpBinding_IRegistroUsuario" binding="tns:NetTcpBinding_IRegistroUsuario">
-      <soap12:address location="net.tcp://192.168.38.235:5455/ServidorSorrySliders" />
+      <soap12:address location="net.tcp://192.168.38.118:5455/ServidorSorrySliders" />
       <wsa10:EndpointReference>
-        <wsa10:Address>net.tcp://192.168.38.235:5455/ServidorSorrySliders</wsa10:Address>
+        <wsa10:Address>net.tcp://192.168.38.118:5455/ServidorSorrySliders</wsa10:Address>
       </wsa10:EndpointReference>
     </wsdl:port>
     <wsdl:port name="NetTcpBinding_ILobby" binding="tns:NetTcpBinding_ILobby">
-      <soap12:address location="net.tcp://192.168.38.235:5455/ServidorSorrySliders" />
+      <soap12:address location="net.tcp://192.168.38.118:5455/ServidorSorrySliders" />
       <wsa10:EndpointReference>
-        <wsa10:Address>net.tcp://192.168.38.235:5455/ServidorSorrySliders</wsa10:Address>
+        <wsa10:Address>net.tcp://192.168.38.118:5455/ServidorSorrySliders</wsa10:Address>
       </wsa10:EndpointReference>
     </wsdl:port>
     <wsdl:port name="NetTcpBinding_IUnirsePartida" binding="tns:NetTcpBinding_IUnirsePartida">
-      <soap12:address location="net.tcp://192.168.38.235:5455/ServidorSorrySliders" />
+      <soap12:address location="net.tcp://192.168.38.118:5455/ServidorSorrySliders" />
       <wsa10:EndpointReference>
-        <wsa10:Address>net.tcp://192.168.38.235:5455/ServidorSorrySliders</wsa10:Address>
+        <wsa10:Address>net.tcp://192.168.38.118:5455/ServidorSorrySliders</wsa10:Address>
       </wsa10:EndpointReference>
     </wsdl:port>
     <wsdl:port name="NetTcpBinding_ICrearLobby" binding="tns:NetTcpBinding_ICrearLobby">
-      <soap12:address location="net.tcp://192.168.38.235:5455/ServidorSorrySliders" />
+      <soap12:address location="net.tcp://192.168.38.118:5455/ServidorSorrySliders" />
       <wsa10:EndpointReference>
-        <wsa10:Address>net.tcp://192.168.38.235:5455/ServidorSorrySliders</wsa10:Address>
+        <wsa10:Address>net.tcp://192.168.38.118:5455/ServidorSorrySliders</wsa10:Address>
       </wsa10:EndpointReference>
     </wsdl:port>
     <wsdl:port name="NetTcpBinding_IListaAmigos" binding="tns:NetTcpBinding_IListaAmigos">
-      <soap12:address location="net.tcp://192.168.38.235:5455/ServidorSorrySliders" />
+      <soap12:address location="net.tcp://192.168.38.118:5455/ServidorSorrySliders" />
       <wsa10:EndpointReference>
-        <wsa10:Address>net.tcp://192.168.38.235:5455/ServidorSorrySliders</wsa10:Address>
+        <wsa10:Address>net.tcp://192.168.38.118:5455/ServidorSorrySliders</wsa10:Address>
       </wsa10:EndpointReference>
     </wsdl:port>
     <wsdl:port name="NetTcpBinding_INotificarJugadores" binding="tns:NetTcpBinding_INotificarJugadores">
-      <soap12:address location="net.tcp://192.168.38.235:5455/ServidorSorrySliders" />
+      <soap12:address location="net.tcp://192.168.38.118:5455/ServidorSorrySliders" />
       <wsa10:EndpointReference>
-        <wsa10:Address>net.tcp://192.168.38.235:5455/ServidorSorrySliders</wsa10:Address>
+        <wsa10:Address>net.tcp://192.168.38.118:5455/ServidorSorrySliders</wsa10:Address>
       </wsa10:EndpointReference>
     </wsdl:port>
     <wsdl:port name="NetTcpBinding_IDetallesCuentaUsuario" binding="tns:NetTcpBinding_IDetallesCuentaUsuario">
-      <soap12:address location="net.tcp://192.168.38.235:5455/ServidorSorrySliders" />
+      <soap12:address location="net.tcp://192.168.38.118:5455/ServidorSorrySliders" />
       <wsa10:EndpointReference>
-        <wsa10:Address>net.tcp://192.168.38.235:5455/ServidorSorrySliders</wsa10:Address>
+        <wsa10:Address>net.tcp://192.168.38.118:5455/ServidorSorrySliders</wsa10:Address>
       </wsa10:EndpointReference>
     </wsdl:port>
     <wsdl:port name="NetTcpBinding_IPuntuacion" binding="tns:NetTcpBinding_IPuntuacion">
-      <soap12:address location="net.tcp://192.168.38.235:5455/ServidorSorrySliders" />
+      <soap12:address location="net.tcp://192.168.38.118:5455/ServidorSorrySliders" />
       <wsa10:EndpointReference>
-        <wsa10:Address>net.tcp://192.168.38.235:5455/ServidorSorrySliders</wsa10:Address>
+        <wsa10:Address>net.tcp://192.168.38.118:5455/ServidorSorrySliders</wsa10:Address>
       </wsa10:EndpointReference>
     </wsdl:port>
     <wsdl:port name="NetTcpBinding_IChat" binding="tns:NetTcpBinding_IChat">
-      <soap12:address location="net.tcp://192.168.38.235:5455/ServidorSorrySliders" />
+      <soap12:address location="net.tcp://192.168.38.118:5455/ServidorSorrySliders" />
       <wsa10:EndpointReference>
-        <wsa10:Address>net.tcp://192.168.38.235:5455/ServidorSorrySliders</wsa10:Address>
+        <wsa10:Address>net.tcp://192.168.38.118:5455/ServidorSorrySliders</wsa10:Address>
       </wsa10:EndpointReference>
     </wsdl:port>
     <wsdl:port name="NetTcpBinding_IJuegoLanzamiento" binding="tns:NetTcpBinding_IJuegoLanzamiento">
-      <soap12:address location="net.tcp://192.168.38.235:5455/ServidorSorrySliders" />
+      <soap12:address location="net.tcp://192.168.38.118:5455/ServidorSorrySliders" />
       <wsa10:EndpointReference>
-        <wsa10:Address>net.tcp://192.168.38.235:5455/ServidorSorrySliders</wsa10:Address>
+        <wsa10:Address>net.tcp://192.168.38.118:5455/ServidorSorrySliders</wsa10:Address>
       </wsa10:EndpointReference>
     </wsdl:port>
     <wsdl:port name="NetTcpBinding_IJuegoPuntuacion" binding="tns:NetTcpBinding_IJuegoPuntuacion">
-      <soap12:address location="net.tcp://192.168.38.235:5455/ServidorSorrySliders" />
+      <soap12:address location="net.tcp://192.168.38.118:5455/ServidorSorrySliders" />
       <wsa10:EndpointReference>
-        <wsa10:Address>net.tcp://192.168.38.235:5455/ServidorSorrySliders</wsa10:Address>
+        <wsa10:Address>net.tcp://192.168.38.118:5455/ServidorSorrySliders</wsa10:Address>
       </wsa10:EndpointReference>
     </wsdl:port>
   </wsdl:service>
